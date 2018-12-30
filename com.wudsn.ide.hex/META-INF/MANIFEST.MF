@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Hex Editor Test
+Bundle-SymbolicName: com.wudsn.ide.hex
+Bundle-Version: 1.6.6
+Bundle-Activator: com.wudsn.ide.hex.HexPlugin
+Bundle-Vendor: WUDSN
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
