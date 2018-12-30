@@ -91,8 +91,7 @@ public final class Apple2DiskImageEditor extends EditorPart {
     }
 
     @Override
-    public void init(IEditorSite site, IEditorInput input)
-	    throws PartInitException {
+    public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 	// Clear fields.
 	File ioFile;
 	IFile iFile;
@@ -179,8 +178,7 @@ public final class Apple2DiskImageEditor extends EditorPart {
 
 	imageManager = new ImageManager(parent.getDisplay());
 	tabFolder = new CTabFolder(parent, SWT.BOTTOM);
-	diskExplorerTab = new DiskExplorerTab(tabFolder, formattedDisks,
-		imageManager, new DummyDiskWindow());
+	diskExplorerTab = new DiskExplorerTab(tabFolder, formattedDisks, imageManager, new DummyDiskWindow());
 	diskMapTabs = new DiskMapTab[formattedDisks.length];
 	for (int i = 0; i < formattedDisks.length; i++) {
 	    if (formattedDisks[i].supportsDiskMap()) {
