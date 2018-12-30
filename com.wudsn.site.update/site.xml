@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="WUDSN IDE Update Site" url="http://www.wudsn.com/update">
+      Central Update Site for WUDSN IDE
+   </description>
+   <feature url="features/com.wudsn.ide.base.feature_1.7.0.201812301213.jar" id="com.wudsn.ide.base.feature" version="1.7.0.201812301213">
+      <category name="General"/>
+   </feature>
+   <feature url="features/com.wudsn.ide.feature_1.7.0.201812301213.jar" id="com.wudsn.ide.feature" version="1.7.0.201812301213">
+      <category name="WUDSN IDE"/>
+   </feature>
+   <category-def name="WUDSN IDE" label="WUDSN IDE">
+      <description>
+         The free integrated Apple II, Atari VCS, Atari 8-bit, C64 and NES development plugin.
+      </description>
+   </category-def>
+   <category-def name="General" label="General Eclipse Enhancements">
+      <description>
+         General Eclipse Enhancements. Do not install if you already have WUDSN IDE installed. WUDSN IDE already contains all features included in this category.
+      </description>
+   </category-def>
+</site>

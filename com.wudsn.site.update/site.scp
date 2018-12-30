@@ -1,0 +1,8 @@
+open sftp://u52906944:wudsn2010@home280969378.1and1-data.host/ -hostkey="ssh-ed25519 256 0d:15:61:04:10:c2:d7:ce:af:55:68:0a:7c:9c:b8:d7"
+
+lcd C:\jac\system\WWW\Sites\www.wudsn.com\update
+cd /www.wudsn.com/update
+
+synchronize -delete remote
+
+exit

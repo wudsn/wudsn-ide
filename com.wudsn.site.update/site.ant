@@ -1,0 +1,65 @@
+<project name="Site" basedir=".">
+
+	<!-- - - - - - - - - - - - - - - - - - 
+	          target: name                      
+	         - - - - - - - - - - - - - - - - - -->
+	<target name="_clean_folder">
+		<echo message="Cleaning ${folder}" />
+		<delete dir="${folder}/features" />
+		<delete dir="${folder}/plugins" />
+		<delete file="${folder}/artifacts.jar" />
+		<delete file="${folder}/content.jar" />
+	</target>
+
+	<target name="_copy_folder">
+		<antcall target="_clean_folder">
+			<param name="folder" value="${target}" />
+		</antcall>
+		<echo message="Copying ${source} to ${target}" />
+		<copy todir="${target}" preservelastmodified="true">
+			<fileset file="${source}/artifacts.jar" />
+			<fileset file="${source}/content.jar" />
+			<fileset file="${source}/site.xml" />
+		</copy>
+		<copy todir="${target}/features" preservelastmodified="true">
+			<fileset file="${source}/features/**" />
+		</copy>
+		<copy todir="${target}/plugins" preservelastmodified="true">
+			<fileset file="${source}/plugins/**" />
+		</copy>
+
+	</target>
+	
+	<target name="clean_daily">
+		<antcall target="_clean_folder">
+			<param name="folder" value="daily" />
+		</antcall>
+		<copy tofile="daily\site.xml" preservelastmodified="true" overwrite="true">
+			<fileset file="daily/site-template.xml" />
+		</copy>
+		<echo>Open daily/site.xml and press "Build All".</echo>
+	</target>
+
+	<target name="publish_daily_to_stable_and_main">
+		<echo>Copying daily to stable and main.</echo>
+		<antcall target="_copy_folder">
+			<param name="source" value="daily" />
+			<param name="target" value="1.7.0" />
+		</antcall>
+		<antcall target="_copy_folder">
+			<param name="source" value="daily" />
+			<param name="target" value="." />
+		</antcall>
+		<antcall target="upload_all" />
+		<echo>Done.</echo>
+	</target>
+
+	<target name="upload_all">
+		<echo>Uploading daily build from ${basedir}\daily.</echo>
+		<exec executable="C:\jac\system\Windows\Tools\NET\WinSCP\WinSCP.com">
+			<arg value="/script=site.scp"/>
+		</exec>
+		<echo>Upload completed.</echo>
+	</target>
+
+</project>
