@@ -1,0 +1,104 @@
+mads 1.9.9 build 23 (22 Jun 14)
+Source: C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari8\MADS\MADS-Example-Outline.asm
+     1 				;	Example source file for MADS
+     2
+     3 = 0001			newlabel = 1
+     4 = D01A			colbak	= $d01a		;Background color
+     5 = 0007			mode	= 1+2*3		;Test mode
+     6
+     7 					ORG $1000	;First implementation section
+     8
+     9 				;	Support for hyperlink navigation to source includes, optionally without default extension
+    10 				;	Absolute and relative file paths are supported.
+    11 					ICL "include/MADS-Reference-Source-Include.asm"	;Source include
+Source: C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari8\MADS\include\MADS-Reference-Source-Include.asm
+     1 				; Test
+     2 					.proc unusedproc ;Unused procedure
+     3 FFFF> 1000-1000> EA		nop
+     4 					.endp
+     5
+     6 1001				org $2000
+     7 2000			included
+     8 2000-2003> 4C 00 00		jmp unknownIncludeLabel
+     9
+    10 					
+    12 2003				ICL "include/MADS-Reference-Source-Include"	;Source include without default extension
+Source: C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari8\MADS\include\MADS-Reference-Source-Include.asm
+     1 				; Test
+     2 2003				.proc unusedproc ;Unused procedure
+     3 2003 EA				nop
+     4 					.endp
+     5
+     6 2004				org $2000
+     7 2000			included
+     8 2000-2002> 4C 00 00		jmp unknownIncludeLabel
+     9
+    10 					
+    13
+    14 				;
+    15 				;;	Support for hyperlink navigation to binary includes.
+    16 				;;	Absolute and relative file paths are supported.
+    17 				;	INS "include/MADS-Reference-Binary-Include.bin"	;Binary include
+    18 				;	.GET "include/MADS-Reference-Binary-Include.bin";Binary get
+    19 				;	.SAV "include/MADS-Reference-Binary-Output.bin",100	;Binary save
+    20 				;
+    21 				;;---------------------------------------------------------------
+    22 				;	.ENUM portb	;Enum definition
+    23 				;rom	= $ff	;Activate ROM
+    24 				;ram	= $fe	;Activate RAM
+    25 				;	.ENDE
+    26 				;
+    27 				;;---------------------------------------------------------------
+    28 				;	.STRUCT element	;Structure definition
+    29 				;index	.byte	;Index of element
+    30 				;address	.word	;Address of element
+    31 				;	.ENDS
+    32 				;
+    33 				;;---------------------------------------------------------------
+    34 				;	.MACRO macro	;Macro definition
+    35 				;inmacro		; Label in macro definition
+    36 				;	.ENDM
+    37 				;
+    38 				;;---------------------------------------------------------------
+    39 				;	.IF SWITCH=1
+    40 				;	
+    41 				;local	.LOCAL		;Local section
+    42 				;inlocal	;Local in local section
+    43 				;	.ENDL
+    44 				;	
+    45 				;pages	.PAGES		;Pages section
+    46 				;	.ENDPG	
+    47 				;
+    48 				;	.PROC proc	;Procedure definition
+    49 				;
+    50 				;	.PROC inproc
+    51 				;	
+    52 				;	.MACRO innermacro
+    53 				;	.ENDM
+    54 				;	
+    55 				;	.ENDP
+    56 				;
+    57 				;	.ENDP
+    58 				;	
+    59 				;repeat	.REPT 1		;Repeat section
+    60 				;	.ENDR
+    61 				;	
+    62 				;	.ENDIF
+    63 				;
+    64 				;;---------------------------------------------------------------
+    65 				;
+    66 				;;	Support for hyperlink navigation to labels, equates,
+    67 				;;	local definitions, macro definitions and procedure definitions.
+    68 				;
+    69 				;	ORG $2000	;Second implementation section
+    70 				;code	jmp main	;Code label
+    71 				;
+    72 				;main	jsr proc	;Label
+    73 				;	lda #0
+    74 				;	sta colbak	;Equate
+    75 				;	macro		;Macro definition
+    76 				;	jsr innerproc	;Prodcure definition from include file
+    77 				;	jsr jac		;Ambigous intifier
+    78 				;
+    79 				;	
+    80 					

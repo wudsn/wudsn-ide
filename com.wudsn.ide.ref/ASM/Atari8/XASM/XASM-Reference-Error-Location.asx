@@ -1,0 +1,10 @@
+;	Error reference source file for XASM
+
+;	@com.wudsn.ide.asm.hardware=ATARI8BIT
+
+	org $2000
+	
+	ICL "include/XASM-Reference-Source-Include"
+	
+	jmp unknownLabel
+

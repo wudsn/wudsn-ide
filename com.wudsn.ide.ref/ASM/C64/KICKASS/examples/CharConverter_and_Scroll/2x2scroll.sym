@@ -1,0 +1,7 @@
+.label scroll_text=$8f3
+.label irq1=$874
+.label scroll_xpos=$8f0
+.label scroll_charNo=$8f2
+.label scroll=$89b
+.label scroll_speed=$8f1
+.label this=$871

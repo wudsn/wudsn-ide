@@ -1,0 +1,5 @@
+xasm 3.1.0
+Label table:
+n       200E DUMMY2
+        2005 LOOP
+        2000 START

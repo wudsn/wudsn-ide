@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            id="com.wudsn.ide.snd.player.SoundFile"
+            name="%com.wudsn.ide.snd.player.SoundFile.name"
+            priority="normal">
+      </content-type>
+      <content-type
+            base-type="com.wudsn.ide.snd.player.SoundFile"
+            file-extensions="cm3, cmc, cmr, cms, dlt, dmc, fc, mpd, mpt, rmt, sap, tm2, tm8, tmc"
+            id="com.wudsn.ide.snd.player.atari8bit.Atari8BitSoundFile"
+            name="%com.wudsn.ide.snd.player.atari8.Atari8BitSoundFile.name"
+            priority="normal">
+      </content-type>
+      <content-type
+            base-type="com.wudsn.ide.snd.player.SoundFile"
+            file-extensions="sid"
+            id="com.wudsn.ide.snd.player.c64.C64SoundFile"
+            name="%com.wudsn.ide.snd.player.c64.C64SoundFile.name"
+            priority="normal">
+      </content-type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.wudsn.ide.snd.editor.SoundEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            icon="icons/sound-editor-16x16.png"
+            id="com.wudsn.ide.snd.editor.SoundEditor"
+            name="%com.wudsn.ide.snd.editor.SoundEditor.name">
+         <contentTypeBinding
+               contentTypeId="com.wudsn.ide.snd.player.atari8bit.Atari8BitSoundFile">
+         </contentTypeBinding>
+         <contentTypeBinding
+               contentTypeId="com.wudsn.ide.snd.player.c64.C64SoundFile">
+         </contentTypeBinding>
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         label="%com.wudsn.ide.asm.editor.AssemblerEditorAssemblerMenu.label"
+         <toolbar
+               id="com.wudsn.ide.snd.editor.SoundEditorToolbar"
+               label="%com.wudsn.ide.snd.editor.SoundEditorToolbar.label">
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="com.wudsn.ide.snd.editor.SoundEditorPlayCommand"
+            name="%com.wudsn.ide.snd.editor.SoundEditorPlayCommand.name">
+      </command>
+   </extension>
+
+</plugin>

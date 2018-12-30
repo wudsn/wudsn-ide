@@ -1,0 +1,294 @@
+------- FILE C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari2600\DASM\original\example.asm LEVEL 1 PASS 3
+      1  10000 ????
+      2  10000 ????						;   EXAMPLE.ASM	 (6502 Microprocessor)
+      3  10000 ????						;
+      4  10000 ????
+      5  10000 ????				       processor	6502
+      6  10000 ????
+      7  10000 ????				       mac	ldax
+      8  10000 ????				       lda	[{1}]
+      9  10000 ????				       ldx	[{1}]+1
+     10  10000 ????				       endm
+     11  10000 ????				       mac	ldaxi
+     12  10000 ????				       lda	#<[{1}]
+     13  10000 ????				       ldx	#>[{1}]
+     14  10000 ????				       endm
+     15  10000 ????				       mac	stax
+     16  10000 ????				       sta	[{1}]
+     17  10000 ????				       stx	[{1}]+1
+     18  10000 ????				       endm
+     19  10000 ????				       mac	pushxy
+     20  10000 ????				       txa
+     21  10000 ????				       pha
+     22  10000 ????				       tya
+     23  10000 ????				       pha
+     24  10000 ????				       endm
+     25  10000 ????				       mac	popxy
+     26  10000 ????				       pla
+     27  10000 ????				       tay
+     28  10000 ????				       pla
+     29  10000 ????				       tax
+     30  10000 ????				       endm
+     31  10000 ????				       mac	inc16
+     32  10000 ????				       inc	{1}
+     33  10000 ????				       bne	.1
+     34  10000 ????				       inc	{1}+1
+     35  10000 ????			    .1
+     36  10000 ????				       endm
+     37  10000 ????
+     38  10000 ????		00 00	    STOP1      equ	%00000000	;CxCTL  1 Stop bit
+     39  10000 ????		00 80	    STOP2      equ	%10000000	;CxCTL  2 Stop bits (WL5:1.5, WL8&par:1)
+     40  10000 ????		00 60	    WL5        equ	%01100000	;CxCTL  Wordlength
+     41  10000 ????		00 40	    WL6        equ	%01000000
+     42  10000 ????		00 20	    WL7        equ	%00100000
+     43  10000 ????		00 00	    WL8        equ	%00000000
+     44  10000 ????		00 10	    RCS        equ	%00010000	;CxCTL  1=Select baud, 0=ext. receiver clk
+     45  10000 ????
+     46  10000 ????		00 00	    B76800     equ	%0000	;CxCTL  Baud rates  (1.2288 Mhz clock)
+     47  10000 ????		00 01	    B75        equ	%0001
+     48  10000 ????		00 02	    B100       equ	%0010
+     49  10000 ????		00 03	    B150       equ	%0011
+     50  10000 ????		00 04	    B200       equ	%0100
+     51  10000 ????		00 05	    B300       equ	%0101
+     52  10000 ????		00 06	    B400       equ	%0110
+     53  10000 ????		00 07	    B600       equ	%0111
+     54  10000 ????		00 08	    B800       equ	%1000
+     55  10000 ????		00 09	    B1200      equ	%1001
+     56  10000 ????		00 0a	    B1600      equ	%1010
+     57  10000 ????		00 0b	    B2400      equ	%1011
+     58  10000 ????		00 0c	    B3200      equ	%1100
+     59  10000 ????		00 0d	    B4800      equ	%1101
+     60  10000 ????		00 0e	    B6400      equ	%1110
+     61  10000 ????		00 0f	    B12800     equ	%1111
+     62  10000 ????
+     63  10000 ????		00 20	    PARODD     equ	%00100000	;CxCMD  Select Parity
+     64  10000 ????		00 60	    PAREVEN    equ	%01100000
+     65  10000 ????		00 a0	    PARMARK    equ	%10100000
+     66  10000 ????		00 e0	    PARSPACE   equ	%11100000
+     67  10000 ????		00 00	    PAROFF     equ	%00000000
+     68  10000 ????
+     69  10000 ????		00 10	    RECECHO    equ	%00010000	;CxCMD  Receiver Echo mode
+     70  10000 ????		00 0c	    TMASK      equ	%00001100
+     71  10000 ????		00 00	    TDISABLE   equ	%00000000	;CxCMD  Transmitter modes
+     72  10000 ????		00 08	    TDISABLER  equ	%00001000	;RTS stays asserted
+     73  10000 ????		00 04	    TENABLE    equ	%00000100
+     74  10000 ????		00 0c	    TBREAK     equ	%00001100	;send break
+     75  10000 ????
+     76  10000 ????		00 02	    UA_IRQDSBL equ	%00000010
+     77  10000 ????		00 01	    DTRRDY     equ	%00000001	;~DTR output is inverted (low)
+     78  10000 ????
+     79  10000 ????		00 01	    SR_PE      equ	%00000001	;CxSTAT  Status
+     80  10000 ????		00 02	    SR_FE      equ	%00000010	;NOTE: writing dummy data causes RESET
+     81  10000 ????		00 04	    SR_OVRUN   equ	%00000100
+     82  10000 ????		00 08	    SR_RDRFULL equ	%00001000
+     83  10000 ????		00 10	    SR_TDREMPTY equ	%00010000
+     84  10000 ????		00 20	    SR_DCD     equ	%00100000
+     85  10000 ????		00 40	    SR_DSR     equ	%01000000
+     86  10000 ????		00 80	    SR_INTPEND equ	%10000000
+     87  10000 ????
+     88  10000 ????
+     89  10000 ????		00 80	    T1_OEPB7   equ	%10000000	;x_ACR
+     90  10000 ????		00 40	    T1_FREERUN equ	%01000000	;T1 free running mode
+     91  10000 ????		00 00	    T1_ONESHOT equ	%00000000
+     92  10000 ????		00 20	    T2_ICPB6   equ	%00100000	;T2 counts pulses on PB6
+     93  10000 ????		00 00	    T2_ONESHOT equ	%00000000	;T2 counts phase2 transitions
+     94  10000 ????		00 00	    SRC_OFF    equ	%00000000	;shift register control
+     95  10000 ????		00 04	    SRC_INT2   equ	%00000100
+     96  10000 ????		00 08	    SRC_INPH2  equ	%00001000
+     97  10000 ????		00 0c	    SRC_INEXT  equ	%00001100
+     98  10000 ????		00 10	    SRC_OUTFR  equ	%00010000	;free running output using T2
+     99  10000 ????		00 14	    SRC_OUTT2  equ	%00010100
+    100  10000 ????		00 18	    SRC_OUTPH2 equ	%00011000
+    101  10000 ????		00 1c	    SRC_OUTEXT equ	%00011100
+    102  10000 ????		00 02	    PBLE       equ	%00000010	;on CB1 transition (in/out).
+    103  10000 ????		00 01	    PALE       equ	%00000001	;on CA1 transition (in).  data retained
+    104  10000 ????
+    105  10000 ????						;x_PCR
+    106  10000 ????		00 00	    CB2_I_NEG  equ	%00000000	;interrupt on neg trans, r/w ORB clears
+    107  10000 ????		00 20	    CB2_I_NEGI equ	%00100000	; same, but r/w ORB does not clear int
+    108  10000 ????		00 40	    CB2_I_POS  equ	%01000000	;interrupt on pos trans, r/w ORB clears
+    109  10000 ????		00 60	    CB2_I_POSI equ	%01100000	; same, but r/w ORB does not clear int
+    110  10000 ????		00 80	    CB2_O_HSHAK equ	%10000000	;CB2=0 on r/w ORB, CB2=1 on CB1 transition
+    111  10000 ????		00 a0	    CB2_O_PULSE equ	%10100000	;CB2=0 for one clock after r/w ORB
+    112  10000 ????		00 c0	    CB2_O_MANLO equ	%11000000	;CB2=0
+    113  10000 ????		00 e0	    CB2_O_MANHI equ	%11100000	;CB2=1
+    114  10000 ????
+    115  10000 ????		00 00	    CA2_I_NEG  equ	%00000000	;interrupt on neg trans, r/w ORA clears
+    116  10000 ????		00 20	    CA2_I_NEGI equ	%00100000	; same, but r/w ORA does not clear int
+    117  10000 ????		00 40	    CA2_I_POS  equ	%01000000	;interrupt on pos trans, r/w ORA clears
+    118  10000 ????		00 60	    CA2_I_POSI equ	%01100000	; same, but r/w ORA does not clear int
+    119  10000 ????		00 80	    CA2_O_HSHAK equ	%10000000	;CA2=0 on r/w ORA, CA2=1 on CA1 transition
+    120  10000 ????		00 a0	    CA2_O_PULSE equ	%10100000	;CA2=0 for one clock after r/w ORA
+    121  10000 ????		00 c0	    CA2_O_MANLO equ	%11000000	;CA2=0
+    122  10000 ????		00 e0	    CA2_O_MANHI equ	%11100000	;CA2=1
+    123  10000 ????
+    124  10000 ????
+    125  10000 ????		00 10	    CB1_THI    equ	%00010000
+    126  10000 ????		00 00	    CB1_TLO    equ	%00000000
+    127  10000 ????		00 01	    CA1_THI    equ	%00000001
+    128  10000 ????		00 00	    CA1_TLO    equ	%00000000
+    129  10000 ????
+    130  10000 ????		00 80	    VIRPEND    equ	%10000000	;x_IFR
+    131  10000 ????		00 80	    IRENABLE   equ	%10000000	;x_IER  1's enable ints  0=no change
+    132  10000 ????		00 00	    IRDISABLE  equ	%00000000	;x_IER  1's disable ints 0=no change
+    133  10000 ????
+    134  10000 ????		00 40	    IRT1       equ	%01000000
+    135  10000 ????		00 20	    IRT2       equ	%00100000
+    136  10000 ????		00 10	    IRCB1      equ	%00010000
+    137  10000 ????		00 08	    IRCB2      equ	%00001000
+    138  10000 ????		00 04	    IRSR       equ	%00000100
+    139  10000 ????		00 02	    IRCA1      equ	%00000010
+    140  10000 ????		00 01	    IRCA2      equ	%00000001
+    141  10000 ????
+    142 Uc010 ????				      seg.u	bss
+    143 U0000					      org	$0000	;RAM (see below)
+    144 U2000					      org	$2000	;unused
+    145 U4000					      org	$4000	;unused
+    146 U4000
+    147 U6000					      org	$6000	;6551 CHANNEL #1
+    148 U6000		       00	   C1DATA     ds	1
+    149 U6001		       00	   C1STAT     ds	1
+    150 U6002		       00	   C1CMD      ds	1
+    151 U6003		       00	   C1CTL      ds	1
+    152 U6004
+    153 U8000					      org	$8000	;6551 CHANNEL #2
+    154 U8000		       00	   C2DATA     ds	1
+    155 U8001		       00	   C2STAT     ds	1
+    156 U8002		       00	   C2CMD      ds	1
+    157 U8003		       00	   C2CTL      ds	1
+    158 U8004
+    159 Ua000					      org	$A000	;6522 (HOST COMM)
+    160 Ua000		       00	   H_ORB      ds	1
+    161 Ua001		       00	   H_ORAHS    ds	1	;with CA2 handshake
+    162 Ua002		       00	   H_DDRB     ds	1
+    163 Ua003		       00	   H_DDRA     ds	1
+    164 Ua004		       00	   H_T1CL     ds	1	;read clears interrupt flag
+    165 Ua005		       00	   H_T1CH     ds	1	;write clears interrupt flag
+    166 Ua006		       00	   H_T1CLL    ds	1
+    167 Ua007		       00	   H_T1CHL    ds	1	;write clears interrupt flag
+    168 Ua008		       00	   H_T2CL     ds	1	;read clears interrupt flag
+    169 Ua009		       00	   H_T2CH     ds	1	;write clears interrupt flag
+    170 Ua00a		       00	   H_SR       ds	1
+    171 Ua00b		       00	   H_ACR      ds	1
+    172 Ua00c		       00	   H_PCR      ds	1
+    173 Ua00d		       00	   H_IFR      ds	1
+    174 Ua00e		       00	   H_IER      ds	1
+    175 Ua00f		       00	   H_ORA      ds	1	;no CA2 handshake
+    176 Ua010
+    177 Uc000					      org	$C000	;6522 (IO COMM)
+    178 Uc000		       00	   I_ORB      ds	1
+    179 Uc001		       00	   I_ORAHS    ds	1	;   (same comments apply)
+    180 Uc002		       00	   I_DDRB     ds	1
+    181 Uc003		       00	   I_DDRA     ds	1
+    182 Uc004		       00	   I_T1CL     ds	1
+    183 Uc005		       00	   I_T1CH     ds	1
+    184 Uc006		       00	   I_T1CLL    ds	1
+    185 Uc007		       00	   I_T1CHL    ds	1
+    186 Uc008		       00	   I_T2CL     ds	1
+    187 Uc009		       00	   I_T2CH     ds	1
+    188 Uc00a		       00	   I_SR       ds	1
+    189 Uc00b		       00	   I_ACR      ds	1
+    190 Uc00c		       00	   I_PCR      ds	1
+    191 Uc00d		       00	   I_IFR      ds	1
+    192 Uc00e		       00	   I_IER      ds	1
+    193 Uc00f		       00	   I_ORA      ds	1
+    194 Uc010
+    195 Uc010
+    196 Uc010
+    197 Uc010							;   --------------------------   ZERO PAGE   -------------------
+    198 U0100 ????				      seg.u	data
+    199 U0000					      org	$00
+    200 U0000
+    201 U0000							;   --------------------------  NORMAL RAM   -------------------
+    202 U0100					      org	$0100
+    203 U0100
+    204 U0100		       20 00	   RAMEND     equ	$2000
+    205 U0100
+    206 U0100							;   --------------------------     CODE      -------------------
+    207 U0100
+    208  f076 ????				      seg	code
+    209  f000					      org	$F000
+    210  f000		       f0 00	   PROMBEG    equ	.
+    211  f000
+    212  f000				   RESET      subroutine
+    213  f000		       78		      sei		;disable interrupts
+    214  f001		       a2 ff		      ldx	#$FF	;reset stack
+    215  f003		       9a		      txs
+    216  f004
+    217  f004		       a9 ff		      lda	#$FF
+    218  f006		       8d 03 a0 	      sta	H_DDRA
+    219  f009		       8d 00 00 	      sta	C1STAT2	;reset 6551#1 (garbage data)
+    220  f00c		       8d 01 80 	      sta	C2STAT	;reset 6551#2
+    221  f00f		       a9 7f		      lda	#$7F	;disable all 6522 interrupts
+    222  f011		       8d 0e a0 	      sta	H_IER
+    223  f014		       8d 0e c0 	      sta	I_IER
+    224  f017
+    225  f017		       a9 10		      lda	#%00010000	;76.8 baud, 8 bits, 1 stop
+    226  f019		       8d 03 60 	      sta	C1CTL
+    227  f01c		       a9 05		      lda	#%00000101	;no parity, enable transmitter & int
+    228  f01e		       8d 02 60 	      sta	C1CMD
+    229  f021		       a9 aa		      lda	#$AA	;begin transmision
+    230  f023		       8d 00 60 	      sta	C1DATA
+    231  f026
+    232  f026		       a9 1f		      lda	#%00011111	;9600 baud, 8 bits, 1 stop
+    233  f028		       8d 03 80 	      sta	C2CTL
+    234  f02b		       a9 05		      lda	#%00000101
+    235  f02d		       8d 02 80 	      sta	C2CMD
+    236  f030		       a9 41		      lda	#$41
+    237  f032		       8d 00 80 	      sta	C2DATA
+    238  f035
+    239  f035		       58		      cli		;enable interrupts
+    240  f036
+    241  f036		       20 3f f0    .1	      jsr	LOAD
+    242  f039		       20 49 f0 	      jsr	SAVE
+    243  f03c		       4c 36 f0 	      jmp	.1
+    244  f03f
+    245  f03f				   LOAD       subroutine
+    246  f03f
+    247  f03f		       a2 00		      ldx	#0
+    248  f041		       8a	   .1	      txa
+    249  f042		       9d 00 05 	      sta	$0500,x
+    250  f045		       e8		      inx
+    251  f046		       d0 f9		      bne	.1
+    252  f048		       60		      rts
+    253  f049
+    254  f049				   SAVE       subroutine
+    255  f049
+    256  f049		       a2 00		      ldx	#0
+    257  f04b		       bd 00 05    .2	      lda	$0500,x
+    258  f04e		       8d 0f a0 	      sta	H_ORA
+    259  f051		       e8		      inx
+    260  f052		       d0 f7		      bne	.2
+    261  f054		       60		      rts
+    262  f055
+    263  f055		       40	   NMI	      rti
+    264  f056
+    265  f056					      subroutine
+    266  f056		       2c 01 60    IRQ	      bit	C1STAT
+    267  f059		       10 0b		      bpl	.1
+    268  f05b		       48		      pha
+    269  f05c		       a9 aa		      lda	#$AA
+    270  f05e		       8d 00 60 	      sta	C1DATA
+    271  f061		       ad 00 60 	      lda	C1DATA
+    272  f064		       68		      pla
+    273  f065		       40		      rti
+    274  f066		       2c 01 80    .1	      bit	C2STAT
+    275  f069		       10 0a		      bpl	.2
+    276  f06b		       48		      pha
+    277  f06c		       a9 41		      lda	#$41
+    278  f06e		       8d 00 80 	      sta	C2DATA
+    279  f071		       ad 00 80 	      lda	C2DATA
+    280  f074		       68		      pla
+    281  f075		       40	   .2	      rti
+    282  f076
+    283  f076							;   VECTOR  ------------------------------------------------
+    284  f076
+    285  10000 ????				       seg	vector
+    286  fffa					      org	$FFFA
+    287  fffa		       55 f0		      dc.w	NMI
+    288  fffc		       00 f0		      dc.w	RESET
+    289  fffe		       56 f0		      dc.w	IRQ
+    290  10000
+    291  10000			00 01 00 00 PROMEND    equ	.
+    292  10000
+    293  10000

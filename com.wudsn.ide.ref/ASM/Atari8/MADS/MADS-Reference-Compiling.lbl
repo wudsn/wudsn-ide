@@ -1,0 +1,18 @@
+xasm 3.0.1
+Label table:
+n       01 EQUATE
+n       00 EXTERN
+n       00 SDX
+n       01 LABEL2
+n       00 ENUM
+n       01 EXTERN
+n       1003 LOCAL1
+n       1003 LOCAL2
+n       1006 PROC1
+n       1006 PROC2
+n       1006 REPEAT1
+n       1006 REPEAT2
+n       00 STRUCT1
+n       01 STRUCT2
+n       10DC VAR1
+n       80 VAR2

@@ -1,0 +1,129 @@
+
+;	WUDSN IDE example ACME source file for Apple II binary file format (".b")
+;	@com.wudsn.ide.asm.hardware=APPLE2
+
+	!cpu 6502
+	!convtab "hiBitAscii.ct"
+
+	*=$1300
+	ldy #$00   ;// init y to zero
+	lda #$C1	;// $C1 = A in the world of apple
+	;// FILL does exactly as it sounds,  it FILLS the screen with the letter "A" ($C1)
+FILL:	sta $400,y
+	sta $500,y
+	sta $600,y
+	sta $700,y
+	iny
+	bne FILL
+	ldx #$00
+	ldy #$16
+LOOP:	lda #$A0	;//Loop is our loop through in the index pointer y.  we start y at $16 or 22
+			;// clearing the screen
+	sta $0400,y	;//row 1
+	sta $0480,y	;// 2
+	sta $0500,y	;// 3
+	sta $0580,y	;//4
+	sta $0600,y	;//5
+	sta $0680,y	;//6
+	sta $0700,y	;//7
+	sta $0780,y	;//8
+	sta $0428,y	;//9
+	sta $04a8,y	;//10
+	sta $0528,y	;//11
+	sta $05a8,y	;//12
+	sta $0628,y	;//13
+	sta $06a8,y	;//14
+	sta $0728,y	;//15
+	sta $07a8,y	;//16
+	sta $0450,y	;//17
+	sta $04D0,y	;//18
+	sta $0550,y	;//19
+	sta $05D0,y	;//20
+	sta $0650,y	;//21
+	sta $06D0,y	;//22
+	dey 		;// decrement pointer
+	bne LOOP	;// check for zero
+	
+	ldx #$00
+	ldy #$00
+	
+MYLOOP:	
+	jsr DRAW
+	cpx #22
+	bne MYLOOP
+	jmp myend
+	
+DRAW:	
+	lda .r1_1,x
+	beq myend
+	sta $0481,y
+	lda .r1_2,x
+	sta $0501,y
+	lda r1_3,x
+	sta $0581,y
+	lda r1_4,x
+	sta $0601,y
+	lda r1_5,x
+	sta $0681,y
+	lda r1_6,x
+	sta $0701,y	;//7
+	lda r1_7,x
+	sta $0781,y	;//8
+	lda r1_8,x
+	sta $0429,y	;//9
+	lda r1_9,x
+	sta $04a9,y	;//10
+	lda r1_10,x
+	sta $0529,y	;//11
+	lda r1_11,x
+	sta $05a9,y	;;//12
+	lda r1_12,x
+	sta $0629,y	;//13
+	lda r1_13,x
+	sta $06a9,y	;//14
+	lda r1_14,x
+	sta $0729,y	;//15
+	lda r1_15,x
+	sta $07a9,y	;//16
+	lda r1_16,x
+	sta $0451,y	;//17
+	lda r1_17,x
+	sta $04D1,y	;//18
+	lda r1_18,x
+	sta $0551,y	;//19
+	lda r1_19,x
+	sta $05D1,y	;//20
+	lda r1_20,x
+	sta $0651,y	;//21
+	lda r1_21,x
+	sta $06D1,y	;//22
+	iny
+	inx
+	rts
+
+myend:	jmp $03d0
+
+	
+.r1_1:!text "       REGION 1       ",$00	
+.r1_2:!text "......^^^~^^^~........",$00
+r1_3:!text "...###.....###........",$00
+r1_4:!text "......###.###.........",$00
+r1_5:!text ".......###.......+++..",$00
+r1_6:!text "..@..............+++..",$00
+r1_7:!text ".................+++..",$00
+r1_8:!text "......................",$00
+r1_9 !text "......................",$00
+r1_10 !text "......................",$00
+r1_11 !text "......................",$00
+r1_12 !text "......................",$00
+r1_13 !text "......................",$00
+r1_14 !text "......................",$00
+r1_15 !text "......................",$00
+r1_16 !text "......................",$00
+r1_17 !text "......................",$00
+r1_18 !text "......................",$00
+r1_19 !text "......................",$00
+r1_20 !text "......................",$00
+r1_21 !text "......................",$00
+r1_22 !text "......................",$00
+	

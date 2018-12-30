@@ -1,0 +1,10 @@
+Author: Jakub Husak
+Name:   Pong $150 bytes, AP version
+Event:  SV2012
+
+Description:
+At the beginning that has to fit into
+256b. However, with score and fonts
+it fits into $150, which is not bad.
+This is the bugfixed after party
+version.

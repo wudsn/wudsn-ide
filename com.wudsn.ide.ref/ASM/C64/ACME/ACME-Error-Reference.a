@@ -1,0 +1,9 @@
+;	Error reference source file for ACME
+
+;	@com.wudsn.ide.asm.hardware=C64
+
+*	= $2000
+	
+	!src "include/ACME-Reference-Source-Include.a"
+	
+	jmp unknownLabel

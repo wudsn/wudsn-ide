@@ -1,0 +1,154 @@
+;	Reference source file for ACME
+
+;	Single line comment
+
+;	Opcodes
+	ADC
+	AND
+	ASL
+	BCC
+	BCS
+	BEQ
+	BIT
+	BMI
+	BNE
+	BPL
+	BRK
+	BVC
+	BVS
+	CLC
+	CLD
+	CLI
+	CLV
+	CMP
+	CPX
+	CPY
+	DEC
+	DEX
+	DEY
+	EOR
+	INC
+	INX
+	INY
+	JMP
+	JSR
+	LDA
+	LDX
+	LDY
+	LSR
+	NOP
+	ORA
+	PHA
+	PHP
+	PLA
+	PLP
+	ROL
+	ROR
+	RTI
+	RTS
+	SBC
+	SEC
+	SED
+	SEI
+	STA
+	STX
+	STY
+	TAX
+	TAY
+	TSX
+	TXA
+	TXS
+
+;	65816 opcodes
+	COP
+	XCE
+
+;	Illegal opcodes
+	ANC
+	ARR
+	ASR
+	DCP
+	DOP
+	ISC
+	JAM
+	LAX
+	RLA
+	RRA
+	SAX
+	SBX
+	SLO
+	SRE
+	TOP
+
+;	Directives
+;	The following directives/pseudo opcodes are described in the file "ACME/docs/AllPOs.txt"
+	 
+;	 Section:   How to insert values
+	!8
+	!by
+	!byte
+	!16
+	!wo
+	!word
+	!24
+	!32
+	!fill
+	!fi
+	!align
+
+;	Section:   How to insert text
+	!convtab "ACME-Convsion-Table.bin"
+	!text
+	!tx
+	!pet
+	!raw
+	!scr
+	!scrxor
+
+;	Section:   Labels
+	!zone
+	!sl "ACME-Save-Labels.txt"
+
+;	 Section:   Flow control
+	!if
+;	}
+	!ifdef
+	!for
+	!set
+	!do
+	!while
+	!until
+	!endoffile
+	!eof
+
+;	Section:   Macro usage
+	!macro test {
+	}
+	
+
+;	Section:   Segment assembly
+	!initmem
+
+;	Section:   Offset assembly
+	!pseudopc
+
+;	Section:   CPU support pseudo opcodes (especially 65816 support)
+	!cpu
+	!al
+	!as
+	!rl
+	!rs
+
+;	Section:   Deprecated pseudo opcodes (they still work at the moment)
+	!cbm
+	!subzone
+	!realpc 
+
+
+;	Hyperlink relevant directives and pseudo opcodes
+;	Section:   File stuff
+	!source "include/ACME-Reference-Source-Include.a"
+	!binary "include/ACME-Reference-Binary-Include.bin"
+	!bin "include/ACME-Reference-Binary-Include.bin"
+
+	!to "include/ACME-Reference-Binary.out"

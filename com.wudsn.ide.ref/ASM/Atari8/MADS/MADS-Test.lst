@@ -1,0 +1,11 @@
+mads 2.0.6 build 58 (28 Jan 17)
+Source: C:\jac\system\Java\Programming\Workspaces\WUDSN-IDE\com.wudsn.ide.ref\ASM\Atari8\MADS\MADS-Test.asm
+     1 					
+     2 					ORG $1000
+     3
+     4
+     5 FFFF> 1000-1001> A7 AB		lax $ab
+     6
+     7 					.ifdef a
+     8 					.error "Test"
+     9 					.endif

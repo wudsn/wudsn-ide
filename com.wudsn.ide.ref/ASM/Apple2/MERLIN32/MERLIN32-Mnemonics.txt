@@ -1,0 +1,231 @@
+; 	Mnemonics collection file for MERLIN32
+;	MERLIN32 is case sensitive for instructions.
+;	MERLIN32 is case sensitive for labels, macros, operand values, variables, equates.
+;	C-sources for MERLIN32 are in ASM\MERLIN32\Source.
+;	Mnemonics have been collected using "grep stricmp * | grep opcode".
+;	Order in this file is the order of the grep result,so future changes can be detected more easily.
+
+; From a65816_Code.c: Directives
+DSK
+LNK 
+SAV
+ERR
+
+; From a65816_Code.c: Pseudo opcodes
+Pseudo
+BLT
+BGE
+
+; From a65816_Code.c: Regular opcodes
+ADC
+AND 
+ASL
+BCC 
+BCS 
+BEQ
+BIT
+BMI
+BNE
+BPL
+BRA (65C02,65816)
+BRK
+BRL (65816)
+BVC
+BVS
+CLC
+CLD
+CLI
+CLV
+CMP
+COP (65816)
+CPX
+CPY
+DEC
+DEX
+DEY
+EOR
+INC
+INX
+INY
+JML (65816)
+JMP
+JSL (65816)
+JSR
+LDA
+LDX
+LDY
+LSR
+MVN (65816)
+MVP (65816)
+NOP
+ORA
+PEA (65816)
+PEI (65816)
+PER (65816)
+PHA
+PHB (65816)
+PHD (65816)
+PHK (65816)
+PHP
+PHX (65C02, 65816)
+PHY (65C02, 65816)
+PLA
+PLB (65816)
+PLD (65816)
+PLP
+PLX (65C02, 65816)
+PLY (65C02, 65816)
+REP (65816)
+ROL
+ROR
+RTI
+RTL (65816)
+RTS
+SBC
+SEC
+SED
+SEI
+SEP (65816)
+STA
+STP (65816)
+STX
+STY
+STZ (65C02,6816)
+TAX
+TAY
+TCD (65816)
+TCS (65816)
+TDC (65816)
+TRB (65C02, 65816)
+TSB (65C02, 65816)
+TSC (65816)
+TSX
+TXA
+TXS
+TXY (65816) 
+TYA
+TYX (65816) 
+WAI (65816)
+WDM (65816)
+XBA (65816)
+XCE (65816)
+
+
+; From a65816_Code.c: Long variants of accumulator and jump opcodes
+ADCL
+ANDL
+CMPL
+EORL
+JMPL
+LDAL
+ORAL
+SBCL
+STAL
+
+// From a65816_Cond.c: Directives
+DO
+IF
+ELSE
+FIN
+LUP
+--^
+
+// From a65816_Data.c: Directives
+DA
+DW
+DDB || Address/Word/Double Byte
+
+DFB
+DB
+
+ADR
+ADRL
+
+HEX
+DS
+ASC 
+DCI 
+INV 
+FLS
+
+STR
+STRL
+
+REV
+CHK
+
+
+// From a65816_File.c: Directives
+PUT
+PUTBIN
+USE
+END
+CHK
+
+
+// From a65816_Line.c: Directives
+ERR
+DAT
+ENT
+EXT
+PMC
+REL
+DO
+IF
+ELSE
+FIN
+DO
+LUP
+--^
+HEX
+MX
+REP
+SEP
+SEC
+XCE
+REL
+OBJ
+ORG
+DUM
+DEND
+ERR
+
+// From a65816_Link.c: Directives
+ char *opcode_link[] = {"DSK","TYP","AUX","XPL","ASM","DS","KND","ALI","LNA","SNA","ORG","BSZ",NULL};      /* Opcode exclusifs au fichier Link */
+
+TYP
+AUX
+XPL
+DSK
+ORG
+ASM
+DS
+KND
+ALI
+LNA
+SNA
+
+
+// From a65816_Lup.c: Directives
+LUP
+--^
+
+// From a65816_Macro.c: Directives
+USE
+MAC
+EOM
+=
+EQU
+<<<
+>>>
+PMC
+
+// From Dc_Library.c: Directives
+EQU
+=
+PEA
+MVN
+MVP
+BRK
+COP
+WDM

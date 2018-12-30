@@ -1,0 +1,41 @@
+#WUDSN IDE Converter Parameters
+#Mon Feb 28 14:51:23 CET 2011
+converterDirection=IMAGE_TO_FILES
+filesConverterParameters.converterId=
+filesConverterParameters.imageAspect.factorX=2
+filesConverterParameters.imageAspect.factorY=2
+filesConverterParameters.displayAspect.factorX=2
+filesConverterParameters.displayAspect.factorY=2
+filesConverterParameters.displayShrinkToFit=false
+filesConverterParameters.displayZoomToFit=true
+filesConverterParameters.sourceFiles=0
+filesConverterParameters.imageFilePath=
+filesConverterParameters.columns=40
+filesConverterParameters.rows=24
+filesConverterParameters.spacingColor.red=0
+filesConverterParameters.spacingColor.green=0
+filesConverterParameters.spacingColor.blue=128
+filesConverterParameters.spacingWidth=0
+filesConverterParameters.palette=HIRES_1
+filesConverterParameters.paletteType=ATARI_DEFAULT
+filesConverterParameters.paletteColors=0
+imageConverterParameters.converterId=com.wudsn.ide.gfx.converter.atari8.LinearBitMapGraphics8Converter
+imageConverterParameters.imageAspect.factorX=1
+imageConverterParameters.imageAspect.factorY=1
+imageConverterParameters.displayAspect.factorX=1
+imageConverterParameters.displayAspect.factorY=1
+imageConverterParameters.displayShrinkToFit=false
+imageConverterParameters.displayZoomToFit=true
+imageConverterParameters.imageFilePath=Raster-640x480.png
+imageConverterParameters.targetFiles=10
+imageConverterParameters.targetFiles.0.path=Raster-640x480.gr8
+imageConverterParameters.targetFiles.1.path=
+imageConverterParameters.targetFiles.2.path=
+imageConverterParameters.targetFiles.3.path=
+imageConverterParameters.targetFiles.4.path=
+imageConverterParameters.targetFiles.5.path=
+imageConverterParameters.targetFiles.6.path=
+imageConverterParameters.targetFiles.7.path=
+imageConverterParameters.targetFiles.8.path=
+imageConverterParameters.targetFiles.9.path=
+imageConverterParameters.script=function convertToFileData(data) {\r\n\tvar bpsl \= (data.getImageDataWidth() + 7) / 8;\r\n\tvar bytes \= []\r\n\tvar offset \= 0;\r\n\tfor (var y \= 0; y < data.getImageDataHeight(); y++) {\r\n\t    for (var x \= 0; x < data.getImageDataWidth(); x \= x + 8) {\r\n\t\tvar b \= 0;\r\n\t\tfor (var p \= 0; p < 8; p++) {\r\n\t\t    var color;\r\n\t\t    color \= data.getPixel(x + p, y);\r\n\t\t    if (color \!\= 0) {\r\n\t\t\tb \= b | 1 << 7 - p;\r\n\t\t    }\r\n\t\t}\r\n\t\tbytes[offset++] \= b;\r\n\t    }\r\n\t}\r\n\tdata.setTargetFileObject(0, bytes);\r\n}

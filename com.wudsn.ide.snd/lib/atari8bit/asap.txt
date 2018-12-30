@@ -1,0 +1,8 @@
+The file "asap.jar" is taken from "asap-3.2.0-java.zip".
+Downloaded from "http://sourceforge.net/projects/asap/files/asap/3.2.0/asap-3.2.0-java.zip/download".
+
+The file "asap-3.2.0-java-src.zip" was provided by Fox.
+It is not included in the build.properties to keep the size at the minimum.
+
+Note: On 2014-09-04 the file were replaces by a special alpha build provided by Fox to have the ".obx" file included.
+

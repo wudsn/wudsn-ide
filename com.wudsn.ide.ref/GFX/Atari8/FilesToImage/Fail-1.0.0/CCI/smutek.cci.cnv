@@ -1,0 +1,33 @@
+#WUDSN IDE Converter Parameters
+#Tue Mar 22 18:38:04 CET 2011
+converterDirection=FILES_TO_IMAGE
+filesConverterParameters.converterId=com.wudsn.ide.gfx.converter.atari8.LinearBitMapCINConverter
+filesConverterParameters.imageAspect.factorX=1
+filesConverterParameters.imageAspect.factorY=1
+filesConverterParameters.displayAspect.factorX=2
+filesConverterParameters.displayAspect.factorY=1
+filesConverterParameters.displayShrinkToFit=false
+filesConverterParameters.displayZoomToFit=true
+filesConverterParameters.sourceFiles=1
+filesConverterParameters.sourceFiles.0.path=smutek.cci
+filesConverterParameters.sourceFiles.0.offset=0
+filesConverterParameters.imageFilePath=smutek.cci.png
+filesConverterParameters.columns=40
+filesConverterParameters.rows=192
+filesConverterParameters.spacingColor.red=0
+filesConverterParameters.spacingColor.green=0
+filesConverterParameters.spacingColor.blue=128
+filesConverterParameters.spacingWidth=0
+filesConverterParameters.palette=TRUE_COLOR
+filesConverterParameters.paletteType=ATARI_DEFAULT
+filesConverterParameters.paletteRGBs=0
+imageConverterParameters.converterId=
+imageConverterParameters.imageAspect.factorX=1
+imageConverterParameters.imageAspect.factorY=1
+imageConverterParameters.displayAspect.factorX=1
+imageConverterParameters.displayAspect.factorY=1
+imageConverterParameters.displayShrinkToFit=false
+imageConverterParameters.displayZoomToFit=true
+imageConverterParameters.imageFilePath=
+imageConverterParameters.targetFiles=0
+imageConverterParameters.script=

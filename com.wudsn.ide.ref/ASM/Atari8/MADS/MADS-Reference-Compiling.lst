@@ -1,0 +1,371 @@
+mads 1.9.9 build 23 (22 Jun 14)
+Source: C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari8\MADS\MADS-Reference-Compiling.asm
+     1 				;	Reference source file for MADS
+     2
+     3 				;	Single line comment
+     4 				//	Single line comment
+     5 				*	Single line comment
+     6
+     7 				/*
+     8 					Multiple lines comment
+     9 				*/
+     9
+    10 					
+    11 					ORG $1000
+    12 					OPT c+
+    13
+    14 				;	6502 Opcodes
+    15 FFFF> 1000-108D> 69 01		ADC #1
+    16 1002 29 01			AND #1
+    17 1004 0A				ASL
+    18 1005 90 FE			BCC *
+    19 1007 B0 FE			BCS *
+    20 1009 F0 FE			BEQ *
+    21 100B 24 01			BIT 1
+    22 100D 30 FE			BMI *
+    23 100F D0 FE			BNE *
+    24 1011 10 FE			BPL *
+    25 1013 00				BRK
+    26 1014 50 FE			BVC *
+    27 1016 70 FE			BVS *
+    28 1018 18				CLC
+    29 1019 D8				CLD
+    30 101A 58				CLI
+    31 101B B8				CLV
+    32 101C C9 01			CMP #1
+    33 101E E0 01			CPX #1
+    34 1020 C0 01			CPY #1
+    35 1022 C6 01			DEC 1
+    36 1024 CA				DEX
+    37 1025 88				DEY
+    38 1026 49 01			EOR #1
+    39 1028 E6 01			INC 1
+    40 102A E8				INX
+    41 102B C8				INY
+    42 102C 4C 2C 10			JMP *
+    43 102F 20 2F 10			JSR *
+    44 1032 A9 01			LDA #1
+    45 1034 A2 01			LDX #1
+    46 1036 A0 01			LDY #1
+    47 1038 4A				LSR
+    48 1039 EA				NOP
+    49 103A 09 01			ORA #1
+    50 103C 48				PHA
+    51 103D 08				PHP
+    52 103E 68				PLA
+    53 103F 28				PLP
+    54 1040 2A				ROL
+    55 1041 6A				ROR
+    56 1042 40				RTI
+    57 1043 60				RTS
+    58 1044 E9 01			SBC #1
+    59 1046 38				SEC
+    60 1047 F8				SED
+    61 1048 78				SEI
+    62 1049 85 01			STA 1
+    63 104B 86 01			STX 1
+    64 104D 84 01			STY 1
+    65 104F AA				TAX
+    66 1050 A8				TAY
+    67 1051 BA				TSX
+    68 1052 8A				TXA
+    69 1053 9A				TXS
+    70
+    71 				;	65816 opcodes
+    72 1054 80 FE			BRA *
+    73 1056 82 FD FF			BRL *
+    74 1059 02 01			COP #1
+    75 105B 3A				DEA
+    76 105C 1A				INA
+    77 105D 5C 5D 10 00			JML *
+    78 1061 22 61 10 00			JSL *
+    79 1065 54 01 01			MVN 1,1
+    80 1068 44 01 01			MVP 1,1
+    81 106B 62 FD FF			PEA *
+    82 				//	PEI *	;	?MISSING iN MADS?
+    83 106E 8B				PHB
+    84 106F 0B				PHD
+    85 1070 4B				PHK
+    86 1071 DA				PHX
+    87 1072 5A				PHY
+    88 1073 AB				PLB 
+    89 1074 2B				PLD
+    90 1075 FA				PLX   
+    91 1076 7A				PLY
+    92 1077 C2 01			REP #1
+    93 1079 6B				RTL
+    94 107A E2 01			SEP #1
+    95 107C DB				STP
+    96 107D 64 01			STZ 1
+    97 107F 5B				TCD
+    98 1080 1B				TCS
+    99 1081 7B				TDC 
+   100 1082 14 01			TRB 1
+   101 1084 04 01			TSB 1
+   102 1086 3B				TSC
+   103 1087 9B				TXY
+   104 1088 BB				TYX
+   105 1089 CB				WAI
+   106 108A 42				WDM
+   107 108B EB				XBA
+   108 108C FB				XCE
+   109
+   110
+   111 				;	Illegal opcodes
+   112
+   113 				;	XASM Directives also supported by MADS
+   114 108D 01				DTA 1
+   115 					IFT 1
+   116 					ELI
+   117 					ELS
+   118 					EIF
+   119 				;	END
+   120
+   121 = 0001			equate	EQU 1
+   122 				;;	ERT "Test Error  ", 2
+   123 108E				ICL "include/MADS-Reference-Source-Include-Compiling.asm"
+Source: C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari8\MADS\include\MADS-Reference-Source-Include-Compiling.asm
+     1 				; Test
+     2
+     3 					.print "Included"
+     3 				Included
+     4
+     5
+     6 					
+   124 108E				ICL "include/MADS-Reference-Source-Include-Compiling"
+Source: C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari8\MADS\include\MADS-Reference-Source-Include-Compiling.asm
+     1 				; Test
+     2
+     3 					.print "Included"
+     3 				Included
+     4
+     5
+     6 					
+   125
+   126 02E2-02E3> 8E 10			INI *
+   127 108E-148D> 00 00 00 00 + 	INS  "include/MADS-Reference-Binary-Include.bin"
+   128 					OPT
+   129 148E				ORG *
+   130 02E0-02E1> 8E 14			RUN *
+   131
+   132 				;	XASM Pseudo Opcodes also supported by MADS
+   133 148E-14ED> 18 69 01		ADD #1
+   134 1491 E6 01 D0 02 E6 02		INW 1
+   135 1497 90 FE			JCC *
+   136 1499 B0 FE			JCS *
+   137 149B F0 FE			JEQ *
+   138 149D 30 FE			JMI *
+   139 149F D0 FE			JNE *
+   140 14A1 10 FE			JPL *
+   141 14A3 50 FE			JVC *
+   142 14A5 70 FE			JVS *
+   143 14A7 A5 01 85 01			MVA 1 1
+   144 14AB A6 01 86 01			MVX 1 1
+   145 14AF A4 01 84 01			MVY 1 1
+   146 14B3 A5 01 85 01 A5 02 + 	MWA 1 1
+   147 14BB A6 01 86 01 A6 02 + 	MWX 1 1
+   148 14C3 A4 01 84 01 A4 02 + 	MWY 1 1
+   149 14CB 90 F6			RCC
+   150 14CD B0 FC			RCS 
+   151 14CF F0 FC			REQ
+   152 14D1 30 FC			RMI
+   153 14D3 D0 FC			RNE
+   154 14D5 10 FC			RPL
+   155 14D7 50 FC			RVC
+   156 14D9 70 FC			RVS
+   157 14DB 90 02			SCC
+   158 14DD B0 02			SCS
+   159 14DF F0 02			SEQ
+   160 14E1 30 02			SMI
+   161 14E3 D0 02			SNE
+   162 14E5 10 03			SPL
+   163 14E7 38 E9 01			SUB #1
+   164 14EA 50 02			SVC
+   165 14EC 70 EE			SVS
+   166
+   167 				;	MADS Directives, XASM style 
+   168 = 0000			extern	EXT .BYTE
+   169 = 0000			sdx	SMB "sdx"
+   170 14EE				BLK N 1
+   171 0001 00 00 19 00 31 00 + 	DTA A(SIN(0,1000,256,0,63))
+   172 0081 0B 08 15 15 13 0C + 	DTA b(RND(0,33,256))
+   173 01,0181				NMB
+   174 0181				RMB
+   175 01,0181				LMB #1
+   176
+   177 				;	MADS Directives, starting with "."
+   178 01,0181 01			.BYTE 1
+   179 01,0182				.HE .ADR label1
+   180 01,0182				.ARRAY label2 [1] .BYTE
+   181 					.AEND
+   182 01,0183				.ALIGN
+   183 01,0200 A5 01 F0 00		#IF .BYTE 1 .AND 1
+   184 					.IF 1
+   185 				// .ELIF ??
+   186 					.ELSEIF
+   187 					.ELSE
+   188 					.BY
+   189 					.BYTE
+   190 					.DB
+   191 					.DEF def
+   192 					.DS 1
+   193 					.DW 1
+   194 					.DWORD 1
+   195 					.ECHO 1
+   196 					
+   197 					.ENDA
+   198 					.ENDE
+   199 					.ENDIF
+   200 					
+   201 01,0204				.ENDT
+   202 01,0204				.ENUM enum
+   203 					.EEND // END ENUM 
+   204 					
+   205 					.IF 1 = 0
+   206 					.ERROR "Test"
+   207 					.ENDIF
+   208 					
+   209 					.MACRO macro1
+   210 					.EXIT
+   211 					.ENDM
+   212
+   213 = 01,0000			.EXTRN extern .BYTE
+   214 01,0204				.FL
+   215 01,0204				.GET "include/MADS-Reference-Binary-Include.bin"
+   216 					.GLOBAL
+   217 					.GLOBL
+   218 01,0204 01			.HE 1 .HI, .LEN proc, 1 .LO, 1 .NOT, 1 .OR 1
+   219
+   220 01,1000 4C 00 10			.LINK "include/MADS-Reference-Link-Include.bin"
+   221 				 
+   222 01,1003			local1	.LOCAL
+   223 					.ENDL
+   224 01,1003			local2	.LOCAL
+   225 					.LEND
+   226
+   227 01,1003 00 00 00			.LONG
+   228 					
+   229 					.MACRO macro2
+   230 					.ENDM
+   231 					.MACRO macro3
+   232 					.MEND
+   233
+   234 01,1006				.PAGES $10
+   235 01,1006				.ENDPG
+   236 01,1006				.PAGES $12
+   237 01,1006				.PGEND
+   238 					
+   239 01,1006				.PROC proc1
+   240 					.ENDP
+   241 01,1006				.PROC proc2
+   242 					.PEND
+	.PRINT
+   244
+   245 					.PUBLIC
+   246  [0000]				.PUT
+	.REG
+   248
+   249 				repeat1	.REPT 1
+   251 					.ENDR
+   251 					.ENDR
+Source: REPT
+Source: C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari8\MADS\MADS-Reference-Compiling.asm
+   252 				repeat2	.REPT 1
+   253 					.REND
+   253 					.REND
+Source: REPT
+Source: C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari8\MADS\MADS-Reference-Compiling.asm
+   254
+   255 01,1006				.SAV "MADS-Reference-Save.bin",1
+   256 01,1006 41			.SB 1
+   257 					.STRUCT struct1
+   258 					.SEND
+   259 					.STRUCT struct2
+   260 					.ENDS
+   261 01,1007 A5 01 C5 01 90 + 	.TEST .BYTE 1>1
+   262 01,100F				.TEND
+   263 01,100F				.USE
+   264 01,100F				.USING
+   265 01,100F				.VAR var1 = 1 .BYTE
+   266 01,100F A5 01 C5 01 90 + 	.WHILE .byte 1>1
+   267 01,1017 4C 0F 10			.WEND
+   268 01,101A A5 01 C5 01 90 + 	.WHILE .byte 1>1
+   269 01,1022 4C 1A 10			.ENDW
+   270 01,1025				.WO
+   271 01,1025 00 00			.WORD 1 .XOR 1
+   272 01,1027				.ZPVAR var2 = 1 .BYTE
+   273
+   274 				;	.RELOC .BYTE 1
+   275 				;symbol	.SYMBOL
+   276 					
+   277
+   278 				;	MADS Pseudo Opcodes, XASM style 
+   279 01,1027 A5 01 D0 08 A5 + 	DEL 1
+   280 01,1035 A5 01 D0 0E A5 + 	DED 1   
+   281 01,1049 A5 01 D0 02 C6 + 	DEW 1
+   282 01,1051 18 A5 01 69 01 + 	ADW 1 #1
+   283 01,105C 38 A5 01 E9 01 + 	SBW 1 #1
+   284 01,1067 48 8A 48 98 48		PHR
+   285 01,106C 68 A8 68 AA 68		PLR 
+   286 01,1071 A5 01 18 69 01 + 	ADB 1 #1
+   287 01,1078 A5 01 38 E9 01 + 	SBB 1 #1
+   288 01,107F E6 01 D0 06 E6 + 	INL 1
+   289 01,1089 E6 01 D0 0A E6 + 	IND 1
+   290 01,1097 A5 01 C9 01		CPB 1 #1
+   291 01,109B A5 02 C9 00 D0 + 	CPW 1 #1
+   292 01,10A5 A5 03 C9 00 D0 + 	CPL 1 #1
+   293 01,10B5 A5 04 C9 00 D0 + 	CPD 1 #1
+   294
+   295 				;	MADS Pseudo Opcodes, starting with "#"
+   296 01,10CB A5 01 F0 04		#IF .BYTE 1
+   297 01,10CF EA				nop
+   298 01,10D0 4C D4 10			#ELSE
+   299 01,10D3 EA				nop
+   300 01,10D4				#END
+   301 01,10D4 A5 01 F0 04		#WHILE .BYTE 1
+   302 01,10D8 EA				nop
+   303 01,10D9 4C D4 10			#END
+   304
+   305
+   306 				;	Hyperlink relevant directives and pseudo opcodes
+   307 01,10DC				ICL 'include/MADS-Reference-Source-Include-Compiling.asm'
+Source: C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari8\MADS\include\MADS-Reference-Source-Include-Compiling.asm
+     1 				; Test
+     2
+     3 					.print "Included"
+     3 				Included
+     4
+     5
+     6 					
+     6 = 01,10DC 01		VAR1
+     6 = 01,0080		VAR2
+   308 01,10DD 00 00 00 00 00 + 	INS 'include/MADS-Reference-Binary-Include.bin'
+   309 01,14DD				.GET 'include/MADS-Reference-Binary-Include.bin'
+   310 				;	.LINK 'MADS-Reference-Link-Include.bin'		;COM format
+   311 01,14DD				.SAV 'MADS-Reference-Save.bin',1
+   312
+   313 01,14DD				ICL "include/MADS-Reference-Source-Include-Compiling"		;Suffix ".asm" appened automatically
+Source: C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari8\MADS\include\MADS-Reference-Source-Include-Compiling.asm
+     1 				; Test
+     2
+     3 					.print "Included"
+     3 				Included
+     4
+     5
+     6 					
+   314 01,14DD				ICL "include/MADS-Reference-Source-Include-Compiling.asm"
+Source: C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari8\MADS\include\MADS-Reference-Source-Include-Compiling.asm
+     1 				; Test
+     2
+     3 					.print "Included"
+     3 				Included
+     4
+     5
+     6 					
+   315 01,14DD 00 00 00 00 00 + 	INS "include/MADS-Reference-Binary-Include.bin"
+   316 01,18DD				.GET "include/MADS-Reference-Binary-Include.bin"
+   317 				;	.LINK "MADS-Reference-Link-Include.bin"		;COM format
+   318 01,18DD				.SAV "include/MADS-Reference-Save.bin",1
+   319
+   320 				;	End block or assembly
+   321 					.EN

@@ -1,0 +1,163 @@
+--- Symbol List (sorted by symbol)
+Audc0                    0015              (R )
+Audc1                    0016              (R )
+Audf0                    0017              (R )
+Audf1                    0018              (R )
+Audv0                    0019              (R )
+Audv1                    001a              (R )
+BottomDelay              0090              (R )
+Cart_Init                f000              (R )
+ChangeNote               f2f4              (R )
+CheckEgg                 f343              (R )
+ColuBK                   0009              (R )
+ColuP0                   0006              (R )
+ColuP1                   0007              (R )
+Colupf                   0008                  
+Common_Init              f006                  
+Ctrlpf                   000a                  
+Cxblpf                   0006                  
+Cxclr                    002c                  
+Cxm0fb                   0004                  
+Cxm0p                    0000                  
+Cxm1fb                   0005                  
+Cxm1p                    0001                  
+Cxp0fb                   0002                  
+Cxp1fb                   0003                  
+Cxppmm                   0007                  
+D1                       f186              (R )
+DelayPTR                 008c              (R )
+DemoInit                 f01f                  
+DoSound                  f29c              (R )
+DoVoice1                 f322              (R )
+DoVoice2                 f311                  
+Down                     f17e              (R )
+EggMode                  009b              (R )
+EggMusic                 009d              (R )
+EggMusic1                f500              (R )
+EggMusic2                f580              (R )
+EggMusic3                f400              (R )
+EggMusic4                f480              (R )
+Enabl                    001f                  
+Enam0                    001d                  
+Enam1                    001e                  
+EndMove                  f172              (R )
+EndSound                 f342              (R )
+FrameCycle               009c              (R )
+GoDown                   f143                  
+GoLeft                   f121              (R )
+GoRight                  f105                  
+GoUp                     f15d              (R )
+GRP0                     001b              (R )
+GRP1                     001c              (R )
+Hmbl                     0024                  
+Hmclr                    002b                  
+Hmm0                     0022                  
+Hmm1                     0023                  
+HMOVE                    002a              (R )
+HMP0                     0020              (R )
+HMP1                     0021              (R )
+HorizontalDir            0096              (R )
+HorizontalPos            0098              (R )
+Inpt0                    0008                  
+Inpt1                    0009                  
+Inpt2                    000a                  
+Inpt3                    000b                  
+Inpt4                    000c                  
+Inpt5                    000d                  
+Intim                    0284              (R )
+IntVectors               fffa              (R )
+IOClear                  f019                  
+IRQ                      fffe                  
+JNDelay                  f21d                  
+L1                       f1cc              (R )
+L2                       f1d0              (R )
+Left                     f1b1              (R )
+LoopCount                008e              (R )
+MoveCount                0091              (R )
+MoveDelay                f0ea              (R )
+MoveHorizontal           f0f8              (R )
+Movement                 f0da              (R )
+MoveVertical             f136              (R )
+NewScreen                f09f              (R )
+NextNote                 f340              (R )
+NMI                      fffa                  
+NoEgg                    f360              (R )
+NoReset                  f0e6              (R )
+Nusiz0                   0004              (R )
+Nusiz1                   0005              (R )
+OverscanDone             f297                  
+OverscanLoop             f292              (R )
+OverscanStart            f28d                  
+Pf0                      000d                  
+Pf1                      000e                  
+Pf2                      000f                  
+R1                       f1a2              (R )
+R2                       f1a6              (R )
+RAMClear                 f011              (R )
+RamEnd                   00ff                  
+RamStart                 0080                  
+Refp0                    000b                  
+Refp1                    000c                  
+Resbl                    0014                  
+Reset                    fffc                  
+Resm0                    0012                  
+Resm1                    0013                  
+Resmp0                   0028                  
+Resmp1                   0029                  
+RESP0                    0010              (R )
+RESP1                    0011              (R )
+Right                    f187              (R )
+RomEnd                   ffff                  
+RomStart                 f000                  
+RotateDir                0093              (R )
+Rsync                    0003                  
+s1                       0080              (R )
+s2                       0082              (R )
+s3                       0084              (R )
+s4                       0086              (R )
+s5                       0088              (R )
+s6                       008a              (R )
+ScreenStart              f209                  
+SetVol1                  f2bc              (R )
+SetVol1a                 f2e1              (R )
+SetVol2                  f2cd              (R )
+SetVol2a                 f2f2              (R )
+SkipFrame                0094              (R )
+SkipMove                 009a              (R )
+SkipSkip                 f0c3                  
+SoundCData               f750              (R )
+SoundFData               f700              (R )
+SoundQ                   0099              (R )
+SoundVData               f7a0              (R )
+StackBottom              00ff                  
+StackTop                 0080                  
+StartSound               f2ff              (R )
+Swacnt                   0281              (R )
+Swbcnt                   0283              (R )
+SWCHA                    0280                  
+SWCHB                    0282              (R )
+T1024t                   0297                  
+Temp                     0092              (R )
+TIAClear                 f00a              (R )
+Tim1t                    0294                  
+Tim64t                   0296              (R )
+Tim8t                    0295                  
+TopDelay                 008f              (R )
+U1                       f17d              (R )
+UP                       f175              (R )
+UseSet1                  f2ad                  
+UseSet2                  f2d2              (R )
+Vblank                   0001              (R )
+VblankLoop               f200              (R )
+Vdelbl                   0027                  
+VdelP0                   0025              (R )
+VdelP1                   0026              (R )
+VerticalDir              0095              (R )
+VerticalPos              0097              (R )
+Vsync                    0000              (R )
+Wsync                    0002              (R )
+X1                       f20c              (R )
+X2                       f213              (R )
+X3                       f244              (R )
+X4                       f282              (R )
+--- End of Symbol List.

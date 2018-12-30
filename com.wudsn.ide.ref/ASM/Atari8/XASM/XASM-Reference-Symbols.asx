@@ -1,0 +1,14 @@
+;	Reference source file for XASM symbols
+
+	org $2000
+
+equate1 equ 1	
+equate2 equ equate1+1
+
+label1	lda #1
+label2	sta $80
+
+
+
+
+	

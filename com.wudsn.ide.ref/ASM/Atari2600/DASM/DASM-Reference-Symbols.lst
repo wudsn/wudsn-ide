@@ -1,0 +1,39 @@
+------- FILE C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari2600\DASM\DASM-Reference-Symbols.asm LEVEL 1 PASS 2
+      1  200b ????						;	Reference source file for DASM symbols
+      2  200b ????
+      3  200b ????				      processor	6502
+      4  200b ????
+      5  200b ????				      mac	m_macro
+      6  200b ????			   m_label1
+      7  200b ????				      lda	#1
+      8  200b ????				      endm
+      9  200b ????
+     10  200b ????	       00 01	   equate1    =	1
+     11  200b ????	       00 02	   equate2    =	equate1+1
+     12  200b ????
+     13  200b ????	       00 02	   equate3    EQU	2
+     14  200b ????	       00 03	   equate4    EQU	equate2+1
+     15  200b ????
+     16  200b ????	       69 6e 67 31 string1    =	"testString1"
+     17  200b ????
+     18  200b ????			   eqm1       eqm	123
+     19  200b ????			   eqm2       eqm	eqm1+1
+     20  200b ????
+     21  200b ????				      set
+     22  2000					      org	$2000
+     23  2000
+     24  2000				   label1
+     25  2000		       a9 01		      lda	#1
+     26  2002				   label2
+     27  2002		       85 80		      sta	$80
+     28  2004
+     29  2004		       20 07 20 	      jsr	SUBROUTINE1
+     30  2007
+     31  2007				   SUBROUTINE1 SUBROUTINE
+     32  2007				   inner1
+     33  2007		       a9 01		      lda	#1
+     34  2009				   inner2
+     35  2009		       85 80		      sta	$80
+     36  200b
+     37  200b
+     38  200b

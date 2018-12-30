@@ -1,0 +1,1182 @@
+------- FILE C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari2600\DASM\boing26.asm LEVEL 1 PASS 2
+      1  10000 ????
+      2  10000 ????						;	@com.wudsn.ide.asm.hardware=ATARI2600
+      3  10000 ????				       processor	6502
+      4  10000 ????
+      5  10000 ????						; TIA (Stella) write-only registers
+      6  10000 ????						;
+      7  10000 ????		00 00	    Vsync      equ	$00
+      8  10000 ????		00 01	    Vblank     equ	$01
+      9  10000 ????		00 02	    Wsync      equ	$02
+     10  10000 ????		00 03	    Rsync      equ	$03
+     11  10000 ????		00 04	    Nusiz0     equ	$04
+     12  10000 ????		00 05	    Nusiz1     equ	$05
+     13  10000 ????		00 06	    ColuP0     equ	$06
+     14  10000 ????		00 07	    ColuP1     equ	$07
+     15  10000 ????		00 08	    Colupf     equ	$08
+     16  10000 ????		00 09	    ColuBK     equ	$09
+     17  10000 ????		00 0a	    Ctrlpf     equ	$0A
+     18  10000 ????		00 0b	    Refp0      equ	$0B
+     19  10000 ????		00 0c	    Refp1      equ	$0C
+     20  10000 ????		00 0d	    Pf0        equ	$0D
+     21  10000 ????		00 0e	    Pf1        equ	$0E
+     22  10000 ????		00 0f	    Pf2        equ	$0F
+     23  10000 ????		00 10	    RESP0      equ	$10
+     24  10000 ????		00 11	    RESP1      equ	$11
+     25  10000 ????		00 12	    Resm0      equ	$12
+     26  10000 ????		00 13	    Resm1      equ	$13
+     27  10000 ????		00 14	    Resbl      equ	$14
+     28  10000 ????		00 15	    Audc0      equ	$15
+     29  10000 ????		00 16	    Audc1      equ	$16
+     30  10000 ????		00 17	    Audf0      equ	$17
+     31  10000 ????		00 18	    Audf1      equ	$18
+     32  10000 ????		00 19	    Audv0      equ	$19
+     33  10000 ????		00 1a	    Audv1      equ	$1A
+     34  10000 ????		00 1b	    GRP0       equ	$1B
+     35  10000 ????		00 1c	    GRP1       equ	$1C
+     36  10000 ????		00 1d	    Enam0      equ	$1D
+     37  10000 ????		00 1e	    Enam1      equ	$1E
+     38  10000 ????		00 1f	    Enabl      equ	$1F
+     39  10000 ????		00 20	    HMP0       equ	$20
+     40  10000 ????		00 21	    HMP1       equ	$21
+     41  10000 ????		00 22	    Hmm0       equ	$22
+     42  10000 ????		00 23	    Hmm1       equ	$23
+     43  10000 ????		00 24	    Hmbl       equ	$24
+     44  10000 ????		00 25	    VdelP0     equ	$25
+     45  10000 ????		00 26	    VdelP1     equ	$26
+     46  10000 ????		00 27	    Vdelbl     equ	$27
+     47  10000 ????		00 28	    Resmp0     equ	$28
+     48  10000 ????		00 29	    Resmp1     equ	$29
+     49  10000 ????		00 2a	    HMOVE      equ	$2A
+     50  10000 ????		00 2b	    Hmclr      equ	$2B
+     51  10000 ????		00 2c	    Cxclr      equ	$2C
+     52  10000 ????						;
+     53  10000 ????						; TIA (Stella) read-only registers
+     54  10000 ????						;
+     55  10000 ????		00 00	    Cxm0p      equ	$00
+     56  10000 ????		00 01	    Cxm1p      equ	$01
+     57  10000 ????		00 02	    Cxp0fb     equ	$02
+     58  10000 ????		00 03	    Cxp1fb     equ	$03
+     59  10000 ????		00 04	    Cxm0fb     equ	$04
+     60  10000 ????		00 05	    Cxm1fb     equ	$05
+     61  10000 ????		00 06	    Cxblpf     equ	$06
+     62  10000 ????		00 07	    Cxppmm     equ	$07
+     63  10000 ????		00 08	    Inpt0      equ	$08
+     64  10000 ????		00 09	    Inpt1      equ	$09
+     65  10000 ????		00 0a	    Inpt2      equ	$0A
+     66  10000 ????		00 0b	    Inpt3      equ	$0B
+     67  10000 ????		00 0c	    Inpt4      equ	$0C
+     68  10000 ????		00 0d	    Inpt5      equ	$0D
+     69  10000 ????						;
+     70  10000 ????						; RAM definitions
+     71  10000 ????						; Note: The system RAM maps in at 0080-00FF and also at 0180-01FF. It is
+     72  10000 ????						; used for variables and the system stack. The programmer must make sure
+     73  10000 ????						; the stack never grows so deep as to overwrite the variables.
+     74  10000 ????						;
+     75  10000 ????		00 80	    RamStart   equ	$0080
+     76  10000 ????		00 ff	    RamEnd     equ	$00FF
+     77  10000 ????		00 ff	    StackBottom equ	$00FF
+     78  10000 ????		00 80	    StackTop   equ	$0080
+     79  10000 ????						;
+     80  10000 ????						; 6532 (RIOT) registers
+     81  10000 ????						;
+     82  10000 ????		02 80	    SWCHA      equ	$0280
+     83  10000 ????		02 81	    Swacnt     equ	$0281
+     84  10000 ????		02 82	    SWCHB      equ	$0282
+     85  10000 ????		02 83	    Swbcnt     equ	$0283
+     86  10000 ????		02 84	    Intim      equ	$0284
+     87  10000 ????		02 94	    Tim1t      equ	$0294
+     88  10000 ????		02 95	    Tim8t      equ	$0295
+     89  10000 ????		02 96	    Tim64t     equ	$0296
+     90  10000 ????		02 97	    T1024t     equ	$0297
+     91  10000 ????						;
+     92  10000 ????						; ROM definitions
+     93  10000 ????						;
+     94  10000 ????		f0 00	    RomStart   equ	$F000
+     95  10000 ????		ff ff	    RomEnd     equ	$FFFF
+     96  10000 ????		ff fa	    IntVectors equ	$FFFA
+     97  10000 ????						;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+     98  10000 ????
+     99  10000 ????		00 80	    s1	       EQU	$80
+    100  10000 ????		00 82	    s2	       EQU	$82
+    101  10000 ????		00 84	    s3	       EQU	$84
+    102  10000 ????		00 86	    s4	       EQU	$86
+    103  10000 ????		00 88	    s5	       EQU	$88
+    104  10000 ????		00 8a	    s6	       EQU	$8A
+    105  10000 ????		00 8c	    DelayPTR   EQU	$8C
+    106  10000 ????		00 8e	    LoopCount  EQU	$8E
+    107  10000 ????		00 8f	    TopDelay   EQU	$8F
+    108  10000 ????		00 90	    BottomDelay EQU	$90
+    109  10000 ????		00 91	    MoveCount  EQU	$91
+    110  10000 ????		00 92	    Temp       EQU	$92
+    111  10000 ????		00 93	    RotateDir  EQU	$93
+    112  10000 ????		00 94	    SkipFrame  EQU	$94
+    113  10000 ????		00 95	    VerticalDir EQU	$95
+    114  10000 ????		00 96	    HorizontalDir EQU	$96
+    115  10000 ????		00 97	    VerticalPos EQU	$97
+    116  10000 ????		00 98	    HorizontalPos EQU	$98
+    117  10000 ????		00 99	    SoundQ     EQU	$99
+    118  10000 ????		00 9a	    SkipMove   EQU	$9a
+    119  10000 ????		00 9b	    EggMode    EQU	$9b
+    120  10000 ????		00 9c	    FrameCycle EQU	$9c
+    121  10000 ????		00 9d	    EggMusic   EQU	$9d
+    122  10000 ????
+    123  10000 ????
+    124  f000					      ORG	$F000
+    125  f000
+    126  f000
+    127  f000				   Cart_Init
+    128  f000		       ea		      nop
+    129  f001		       78		      SEI		; Disable interrupts.:
+    130  f002		       d8		      CLD		; Clear "decimal" mode.
+    131  f003
+    132  f003		       a2 ff		      LDX	#$FF
+    133  f005		       9a		      TXS		; Clear the stack
+    134  f006
+    135  f006				   Common_Init
+    136  f006		       a2 28		      LDX	#$28	; Clear the TIA registers ($04-$2C)
+    137  f008		       a9 00		      LDA	#$00
+    138  f00a				   TIAClear
+    139  f00a		       95 04		      STA	$04,X
+    140  f00c		       ca		      DEX
+    141  f00d		       10 fb		      BPL	TIAClear	; loop exits with X=$FF
+    142  f00f
+    143  f00f		       a2 ff		      LDX	#$FF
+    144  f011				   RAMClear
+    145  f011		       95 00		      STA	$00,X	; Clear the RAM ($FF-$80)
+    146  f013		       ca		      DEX
+    147  f014		       30 fb		      BMI	RAMClear	; loop exits with X=$7F
+    148  f016
+    149  f016		       a2 ff		      LDX	#$FF
+    150  f018		       9a		      TXS		; Reset the stack
+    151  f019
+    152  f019				   IOClear
+    153  f019		       8d 83 02 	      STA	Swbcnt	; console I/O always set to INPUT
+    154  f01c		       8d 81 02 	      STA	Swacnt	; set controller I/O to INPUT
+    155  f01f
+    156  f01f		       a9 01	   DemoInit   LDA	#$01
+    157  f021		       85 25		      STA	VdelP0
+    158  f023		       85 26		      STA	VdelP1
+    159  f025		       a9 03		      LDA	#$03
+    160  f027		       85 04		      STA	Nusiz0
+    161  f029		       85 05		      STA	Nusiz1
+    162  f02b		       a9 36		      LDA	#$36	; a nice shade of red
+    163  f02d		       85 06		      STA	ColuP0
+    164  f02f		       85 07		      STA	ColuP1
+    165  f031		       a9 ff		      LDA	#$ff	; page to get gfx from initially
+    166  f033		       85 81		      STA	s1+1
+    167  f035		       85 83		      STA	s2+1
+    168  f037		       85 85		      STA	s3+1
+    169  f039		       85 87		      STA	s4+1
+    170  f03b		       85 89		      STA	s5+1
+    171  f03d		       85 8b		      STA	s6+1
+    172  f03f		       a9 00		      LDA	#0	; offset in the gfx data
+    173  f041		       85 80		      STA	s1
+    174  f043		       a9 32		      LDA	#50	; offset in the gfx data
+    175  f045		       85 82		      STA	s2
+    176  f047		       a9 64		      LDA	#100	; offset in the gfx data
+    177  f049		       85 84		      STA	s3
+    178  f04b		       a9 96		      LDA	#150	; offset in the gfx data
+    179  f04d		       85 86		      STA	s4
+    180  f04f		       a9 c8		      LDA	#200	; offset in the gfx data
+    181  f051		       85 88		      STA	s5
+    182  f053		       a9 00		      LDA	#0	; vestigial!
+    183  f055		       85 8a		      STA	s6
+    184  f057		       a9 01		      LDA	#$01	; +1 or -1, rotating the ball
+    185  f059		       85 93		      STA	RotateDir
+    186  f05b		       a9 01		      LDA	#$01	; Vertical direction, +1 or -1
+    187  f05d		       85 95		      STA	VerticalDir
+    188  f05f		       a9 01		      LDA	#$01	; Same for horizontal
+    189  f061		       85 96		      STA	HorizontalDir
+    190  f063		       85 99		      STA	SoundQ	; Start out by making a noise
+    191  f065		       a9 01		      LDA	#1
+    192  f067		       85 94		      STA	SkipFrame
+    193  f069		       85 9a		      STA	SkipMove
+    194  f06b		       a9 00		      LDA	#0
+    195  f06d		       85 8f		      STA	TopDelay
+    196  f06f		       85 91		      STA	MoveCount
+    197  f071		       a9 78		      LDA	#120
+    198  f073		       85 90		      STA	BottomDelay
+    199  f075		       a9 f2		      LDA	#$f2
+    200  f077		       85 8d		      STA	DelayPTR+1
+    201  f079		       a9 41		      LDA	#$1d+36	;?????
+    202  f07b		       85 8c		      STA	DelayPTR
+    203  f07d		       85 02		      STA	Wsync
+    204  f07f		       ea		      NOP
+    205  f080		       ea		      NOP
+    206  f081		       ea		      NOP
+    207  f082		       ea		      NOP
+    208  f083		       ea		      NOP
+    209  f084		       ea		      NOP
+    210  f085		       ea		      NOP
+    211  f086		       ea		      NOP
+    212  f087		       ea		      NOP
+    213  f088		       ea		      NOP
+    214  f089		       85 10		      STA	RESP0
+    215  f08b		       85 11		      STA	RESP1
+    216  f08d		       a9 50		      LDA	#$50	;?????
+    217  f08f		       85 21		      STA	HMP1
+    218  f091		       a9 40		      LDA	#$40	;?????
+    219  f093		       85 20		      STA	HMP0
+    220  f095		       85 02		      STA	Wsync
+    221  f097		       85 2a		      STA	HMOVE
+    222  f099		       85 02		      STA	Wsync
+    223  f09b		       a9 0f		      LDA	#$0f
+    224  f09d		       85 09		      STA	ColuBK
+    225  f09f
+    226  f09f				   NewScreen
+    227  f09f		       a9 02		      LDA	#$02
+    228  f0a1		       85 02		      STA	Wsync	; Wait for horizontal sync
+    229  f0a3		       85 01		      STA	Vblank	; Turn on Vblank
+    230  f0a5		       85 00		      STA	Vsync	; Turn on Vsync
+    231  f0a7		       85 02		      STA	Wsync	; Leave Vsync on for 3 lines
+    232  f0a9		       85 02		      STA	Wsync
+    233  f0ab		       85 02		      STA	Wsync
+    234  f0ad		       a9 00		      LDA	#$00
+    235  f0af		       85 00		      STA	Vsync	; Turn Vsync off
+    236  f0b1
+    237  f0b1		       a9 2b		      LDA	#43	; Vblank for 37 lines
+    238  f0b3							; changed from 43 to 53 for 45 lines PAL
+    239  f0b3		       8d 96 02 	      STA	Tim64t	; 43*64intvls=2752=8256colclks=36.2lines
+    240  f0b6
+    241  f0b6		       20 9c f2 	      JSR	DoSound	; was too big to leave inline :P
+    242  f0b9
+    243  f0b9		       e6 9c		      INC	FrameCycle	; we'll use this for color cycling and
+    244  f0bb							; possibly for sound
+    245  f0bb
+    246  f0bb		       c6 94		      DEC	SkipFrame
+    247  f0bd		       d0 1b		      BNE	Movement	; skip the animation most of the time
+    248  f0bf		       a9 03		      LDA	#3	; number of frames to skip
+    249  f0c1		       85 94		      STA	SkipFrame	; if it's zero, reset it
+    250  f0c3
+    251  f0c3		       a5 9b	   SkipSkip   LDA	EggMode	; check for easter egg :)
+    252  f0c5		       c9 00		      CMP	#0	; no? how sad.
+    253  f0c7		       d0 11		      BNE	Movement
+    254  f0c9		       a5 93		      LDA	RotateDir	; which direction to rotate it in?
+    255  f0cb		       18		      CLC
+    256  f0cc		       65 81		      ADC	s1+1	; add that to the gfx page
+    257  f0ce		       09 f8		      ORA	#$F8	; there are only 8 so mask the rest
+    258  f0d0		       85 81		      STA	s1+1
+    259  f0d2		       85 83		      STA	s2+1
+    260  f0d4		       85 85		      STA	s3+1
+    261  f0d6		       85 87		      STA	s4+1
+    262  f0d8		       85 89		      STA	s5+1
+    263  f0da
+    264  f0da
+    265  f0da
+    266  f0da
+    267  f0da		       a9 01	   Movement   LDA	#$1
+    268  f0dc		       2c 82 02 	      BIT	SWCHB	; is someone pushing reset?
+    269  f0df		       d0 05		      BNE	NoReset	; no? how sad.
+    270  f0e1		       85 9b		      STA	EggMode	; set egg mode
+    271  f0e3		       4c ea f0 	      JMP	MoveDelay
+    272  f0e6		       a9 00	   NoReset    LDA	#0
+    273  f0e8		       85 9b		      STA	EggMode	; no select = no easter egg.
+    274  f0ea							; yes, I could have made it harder to find.
+    275  f0ea							; gimme a break, I'm feeling good ;)
+    276  f0ea
+    277  f0ea		       20 43 f3    MoveDelay  JSR	CheckEgg	; override animation if necessary
+    278  f0ed		       a5 9a		      LDA	SkipMove
+    279  f0ef		       e6 9a		      INC	SkipMove
+    280  f0f1		       29 01		      AND	#1	; basically i lamed out and said
+    281  f0f3		       d0 03		      BNE	MoveHorizontal	; "skip every other frame"
+    282  f0f5		       4c 00 f2 	      JMP	VblankLoop
+    283  f0f8
+    284  f0f8		       a5 98	   MoveHorizontal LDA	HorizontalPos	; i couldn't figure out how to use HMOVE
+    285  f0fa		       18		      CLC		; without blowing up yet, so let's glom
+    286  f0fb		       65 96		      ADC	HorizontalDir	; onto the joystick routines
+    287  f0fd		       85 98		      STA	HorizontalPos
+    288  f0ff		       a5 96		      LDA	HorizontalDir
+    289  f101		       c9 00		      CMP	#0
+    290  f103		       30 1c		      BMI	GoLeft
+    291  f105		       20 87 f1    GoRight    JSR	Right
+    292  f108		       a5 98		      LDA	HorizontalPos
+    293  f10a		       c9 70		      CMP	#112	; i also haven't figured out how to make the
+    294  f10c		       d0 28		      BNE	MoveVertical	; sprite go all the way to the right edge!
+    295  f10e		       a5 96		      LDA	HorizontalDir	; since we're not using the 6th copy
+    296  f110		       a9 ff		      LDA	#$FF
+    297  f112		       85 96		      STA	HorizontalDir
+    298  f114		       a9 01		      LDA	#1	; if we're reversing direction, we've hit a wall
+    299  f116		       85 99		      STA	SoundQ	; so make a sound
+    300  f118		       a5 93		      LDA	RotateDir
+    301  f11a		       49 fe		      EOR	#$FE
+    302  f11c		       85 93		      STA	RotateDir	; and change 1 into -1 (255)
+    303  f11e		       4c 36 f1 	      JMP	MoveVertical
+    304  f121		       20 b1 f1    GoLeft     JSR	Left
+    305  f124		       a5 98		      LDA	HorizontalPos
+    306  f126		       c9 01		      CMP	#1
+    307  f128		       d0 0c		      BNE	MoveVertical
+    308  f12a		       a9 01		      LDA	#$01
+    309  f12c		       85 96		      STA	HorizontalDir
+    310  f12e		       85 99		      STA	SoundQ
+    311  f130		       a5 93		      LDA	RotateDir
+    312  f132		       49 fe		      EOR	#$FE
+    313  f134		       85 93		      STA	RotateDir
+    314  f136		       a5 97	   MoveVertical LDA	VerticalPos
+    315  f138		       18		      CLC
+    316  f139		       65 95		      ADC	VerticalDir
+    317  f13b		       85 97		      STA	VerticalPos
+    318  f13d		       a5 95		      LDA	VerticalDir
+    319  f13f		       c9 00		      CMP	#0
+    320  f141		       30 1a		      BMI	GoUp
+    321  f143		       20 7e f1    GoDown     JSR	Down
+    322  f146		       a5 97		      LDA	VerticalPos
+    323  f148		       c9 78		      CMP	#120	; kind of a rough approximation, yeah
+    324  f14a		       d0 26		      BNE	EndMove
+    325  f14c		       a9 ff		      LDA	#$FF
+    326  f14e		       85 95		      STA	VerticalDir
+    327  f150		       a9 01		      LDA	#1
+    328  f152		       85 99		      STA	SoundQ
+    329  f154		       a5 93		      LDA	RotateDir
+    330  f156		       49 fe		      EOR	#$FE
+    331  f158		       85 93		      STA	RotateDir
+    332  f15a		       4c 72 f1 	      JMP	EndMove
+    333  f15d		       20 75 f1    GoUp       JSR	UP
+    334  f160		       a5 97		      LDA	VerticalPos
+    335  f162		       c9 01		      CMP	#1
+    336  f164		       d0 0c		      BNE	EndMove
+    337  f166		       a9 01		      LDA	#$01
+    338  f168		       85 95		      STA	VerticalDir
+    339  f16a		       85 99		      STA	SoundQ
+    340  f16c		       a5 93		      LDA	RotateDir
+    341  f16e		       49 fe		      EOR	#$FE
+    342  f170		       85 93		      STA	RotateDir
+    343  f172		       4c 00 f2    EndMove    JMP	VblankLoop
+    344  f175
+    345  f175
+    346  f175
+    347  f175		       a5 8f	   UP	      LDA	TopDelay
+    348  f177		       f0 04		      BEQ	U1
+    349  f179		       c6 8f		      DEC	TopDelay
+    350  f17b		       e6 90		      INC	BottomDelay
+    351  f17d		       60	   U1	      RTS		; was JMP     VblankLoop
+    352  f17e
+    353  f17e		       a5 90	   Down       LDA	BottomDelay
+    354  f180		       f0 04		      BEQ	D1
+    355  f182		       e6 8f		      INC	TopDelay
+    356  f184		       c6 90		      DEC	BottomDelay
+    357  f186		       60	   D1	      RTS		; was JMP     VblankLoop
+    358  f187
+    359  f187		       a6 91	   Right      LDX	MoveCount
+    360  f189		       e8		      INX
+    361  f18a		       86 91		      STX	MoveCount
+    362  f18c		       e0 03		      CPX	#3
+    363  f18e		       d0 16		      BNE	R2
+    364  f190		       a6 8c		      LDX	DelayPTR
+    365  f192		       ca		      DEX
+    366  f193		       86 8c		      STX	DelayPTR
+    367  f195		       e0 1c		      CPX	#$1c	;?????
+    368  f197		       d0 09		      BNE	R1
+    369  f199		       a9 1d		      LDA	#$1d	;?????
+    370  f19b		       85 8c		      STA	DelayPTR
+    371  f19d		       a9 02		      LDA	#2
+    372  f19f		       85 91		      STA	MoveCount
+    373  f1a1		       60		      RTS		; was JMP     VblankLoop
+    374  f1a2		       a9 00	   R1	      LDA	#0
+    375  f1a4		       85 91		      STA	MoveCount
+    376  f1a6		       a9 f0	   R2	      LDA	#$f0
+    377  f1a8		       85 20		      STA	HMP0
+    378  f1aa		       85 21		      STA	HMP1
+    379  f1ac		       85 02		      STA	Wsync
+    380  f1ae		       85 2a		      STA	HMOVE
+    381  f1b0		       60		      RTS		; was JMP     VblankLoop
+    382  f1b1
+    383  f1b1		       a6 91	   Left       LDX	MoveCount
+    384  f1b3		       ca		      DEX
+    385  f1b4		       86 91		      STX	MoveCount
+    386  f1b6		       e0 ff		      CPX	#$ff
+    387  f1b8		       d0 16		      BNE	L2
+    388  f1ba		       a6 8c		      LDX	DelayPTR
+    389  f1bc		       e8		      INX
+    390  f1bd		       86 8c		      STX	DelayPTR
+    391  f1bf		       e0 42		      CPX	#$1d+37	; indexing into a code segment with a literal - naughty
+    392  f1c1		       d0 09		      BNE	L1
+    393  f1c3		       a9 41		      LDA	#$1d+36	; indexing into a code segment with a literal - naughty
+    394  f1c5		       85 8c		      STA	DelayPTR
+    395  f1c7		       a9 00		      LDA	#0
+    396  f1c9		       85 91		      STA	MoveCount
+    397  f1cb		       60		      RTS		; was JMP     VblankLoop
+    398  f1cc		       a9 02	   L1	      LDA	#2
+    399  f1ce		       85 91		      STA	MoveCount
+    400  f1d0		       a9 10	   L2	      LDA	#$10
+    401  f1d2		       85 20		      STA	HMP0
+    402  f1d4		       85 21		      STA	HMP1
+    403  f1d6		       85 02		      STA	Wsync
+    404  f1d8		       85 2a		      STA	HMOVE
+    405  f1da		       60		      RTS		; was JMP     VblankLoop
+    406  f1db
+    407  f200					      ORG	$F200
+    408  f200				   VblankLoop
+    409  f200		       ad 84 02 	      LDA	Intim
+    410  f203		       d0 fb		      BNE	VblankLoop	; wait for vblank timer
+    411  f205		       85 02		      STA	Wsync	; finish waiting for the current line
+    412  f207		       85 01		      STA	Vblank	; Turn off Vblank
+    413  f209
+    414  f209							;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    415  f209				   ScreenStart
+    416  f209		       a4 8f		      LDY	TopDelay
+    417  f20b		       c8		      INY		;?????
+    418  f20c		       85 02	   X1	      STA	Wsync
+    419  f20e		       88		      DEY
+    420  f20f		       d0 fb		      BNE	X1
+    421  f211		       a0 04		      LDY	#4	;?????
+    422  f213		       88	   X2	      DEY
+    423  f214		       10 fd		      BPL	X2
+    424  f216		       a9 31		      LDA	#49	; 50 pixels high
+    425  f218		       85 8e		      STA	LoopCount
+    426  f21a		       6c 8c 00 	      JMP	(DelayPTR)
+    427  f21d		       c9 c9 c9 c9*JNDelay    .byte.b	$c9,$c9,$c9,$c9,$c9,$c9,$c9,$c9,$c9
+    428  f226		       c9 c9 c9 c9*	      .byte.b	$c9,$c9,$c9,$c9,$c9,$c9,$c9,$c9,$c9
+    429  f22f		       c9 c9 c9 c9*	      .byte.b	$c9,$c9,$c9,$c9,$c9,$c9,$c9,$c9,$c9
+    430  f238		       c9 c9 c9 c9*	      .byte.b	$c9,$c9,$c9,$c9,$c9,$c9,$c9,$c9,$c9,$c9,$c5
+    431  f243		       ea		      NOP
+    432  f244		       ea	   X3	      NOP
+    433  f245		       ea		      NOP
+    434  f246		       ea		      NOP
+    435  f247		       a4 8e		      LDY	LoopCount
+    436  f249		       b1 80		      LDA	(s1),Y
+    437  f24b		       85 1b		      STA	GRP0
+    438  f24d		       b1 82		      LDA	(s2),Y
+    439  f24f		       85 1c		      STA	GRP1
+    440  f251		       b1 84		      LDA	(s3),Y
+    441  f253		       85 1b		      STA	GRP0
+    442  f255							;		  LDA	  (s6),Y
+    443  f255		       a5 00		      lda	$00
+    444  f257		       a9 00		      LDA	#$00
+    445  f259		       85 92		      STA	Temp
+    446  f25b		       b1 88		      LDA	(s5),Y
+    447  f25d		       aa		      TAX
+    448  f25e		       b1 86		      LDA	(s4),Y
+    449  f260		       a4 92		      LDY	Temp
+    450  f262		       85 1c		      STA	GRP1
+    451  f264		       86 1b		      STX	GRP0
+    452  f266		       84 1c		      STY	GRP1
+    453  f268		       85 1b		      STA	GRP0
+    454  f26a		       c6 8e		      DEC	LoopCount
+    455  f26c		       10 d6		      BPL	X3
+    456  f26e		       a9 00		      LDA	#0
+    457  f270		       85 1b		      STA	GRP0
+    458  f272		       85 1c		      STA	GRP1
+    459  f274		       85 1b		      STA	GRP0
+    460  f276		       85 1c		      STA	GRP1
+    461  f278		       ea		      NOP
+    462  f279		       ea		      NOP
+    463  f27a		       ea		      NOP
+    464  f27b		       ea		      NOP
+    465  f27c		       ea		      NOP
+    466  f27d		       ea		      NOP
+    467  f27e		       ea		      NOP
+    468  f27f		       a4 90		      LDY	BottomDelay
+    469  f281		       c8		      INY		;?????
+    470  f282		       85 02	   X4	      STA	Wsync
+    471  f284		       88		      DEY
+    472  f285		       d0 fb		      BNE	X4
+    473  f287		       a9 02		      LDA	#$02
+    474  f289		       85 01		      STA	Vblank
+    475  f28b		       85 02		      STA	Wsync
+    476  f28d							;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    477  f28d		       a9 22	   OverscanStart LDA	#34	;skip 30 lines (overscan)
+    478  f28f		       8d 96 02 	      STA	Tim64t
+    479  f292
+    480  f292				   OverscanLoop
+    481  f292		       ad 84 02 	      LDA	Intim
+    482  f295		       d0 fb		      BNE	OverscanLoop	; wait for Overscan timer
+    483  f297
+    484  f297		       85 02	   OverscanDone STA	Wsync	; finish waiting for the current line
+    485  f299
+    486  f299
+    487  f299		       4c 9f f0 	      JMP	NewScreen
+    488  f29c
+    489  f29c
+    490  f29c							; sound routine
+    491  f29c							;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    492  f29c
+    493  f29c		       a5 9b	   DoSound    LDA	EggMode	; if egg mode is set, we do it differently
+    494  f29e		       c9 00		      CMP	#0
+    495  f2a0		       f0 5d		      BEQ	StartSound
+    496  f2a2		       a5 9d		      LDA	EggMusic
+    497  f2a4		       29 7f		      AND	#$7F	; we're doing 16 bars of 8th notes
+    498  f2a6		       a8		      TAY
+    499  f2a7		       a5 9c		      LDA	FrameCycle
+    500  f2a9		       29 01		      AND	#1
+    501  f2ab		       f0 25		      BEQ	UseSet2
+    502  f2ad		       b9 00 f5    UseSet1    LDA	EggMusic1,Y	; channel 1 notes
+    503  f2b0		       c9 00		      CMP	#0
+    504  f2b2		       f0 08		      BEQ	SetVol1
+    505  f2b4		       85 17		      STA	Audf0
+    506  f2b6		       a9 05		      LDA	#5	; I guess we'll try this for now
+    507  f2b8		       85 15		      STA	Audc0
+    508  f2ba		       a9 03		      LDA	#3
+    509  f2bc		       85 19	   SetVol1    STA	Audv0
+    510  f2be		       b9 80 f5 	      LDA	EggMusic2,Y	; channel 2 notes
+    511  f2c1		       c9 00		      CMP	#0
+    512  f2c3		       f0 08		      BEQ	SetVol2
+    513  f2c5		       85 18		      STA	Audf1
+    514  f2c7		       a9 08		      LDA	#8	; I guess we'll try this for now
+    515  f2c9		       85 16		      STA	Audc1
+    516  f2cb		       a9 05		      LDA	#5	; left hand s/b quieter
+    517  f2cd		       85 1a	   SetVol2    STA	Audv1
+    518  f2cf		       4c f4 f2 	      JMP	ChangeNote
+    519  f2d2		       b9 00 f4    UseSet2    LDA	EggMusic3,Y	; channel 1 notes
+    520  f2d5		       c9 00		      CMP	#0
+    521  f2d7		       f0 08		      BEQ	SetVol1a
+    522  f2d9		       85 17		      STA	Audf0
+    523  f2db		       a9 05		      LDA	#5	; I guess we'll try this for now
+    524  f2dd		       85 15		      STA	Audc0
+    525  f2df		       a9 0f		      LDA	#15
+    526  f2e1		       85 19	   SetVol1a   STA	Audv0
+    527  f2e3		       b9 80 f4 	      LDA	EggMusic4,Y	; channel 2 notes
+    528  f2e6		       c9 00		      CMP	#0
+    529  f2e8		       f0 08		      BEQ	SetVol2a
+    530  f2ea		       85 18		      STA	Audf1
+    531  f2ec		       a9 01		      LDA	#1	; I guess we'll try this for now
+    532  f2ee		       85 16		      STA	Audc1
+    533  f2f0		       a9 0c		      LDA	#12	; left hand s/b quieter
+    534  f2f2		       85 1a	   SetVol2a   STA	Audv1
+    535  f2f4		       a5 9c	   ChangeNote LDA	FrameCycle	; so we can skip every 3, 7 or 15 frames
+    536  f2f6		       29 07		      AND	#$07	; let's try 15
+    537  f2f8		       d0 48		      BNE	EndSound
+    538  f2fa		       c8		      INY
+    539  f2fb		       84 9d		      STY	EggMusic
+    540  f2fd		       d0 43		      BNE	EndSound
+    541  f2ff		       a5 9c	   StartSound LDA	FrameCycle	; so we can skip every 3, 7 or 15 frames
+    542  f301		       29 03		      AND	#$03	; let's try 15
+    543  f303		       d0 3d		      BNE	EndSound
+    544  f305		       a5 99		      LDA	SoundQ	; is there sound to be played?
+    545  f307		       c9 00		      CMP	#0
+    546  f309		       f0 37		      BEQ	EndSound	; no? how sad.
+    547  f30b		       a8		      TAY
+    548  f30c		       c0 01		      CPY	#1	; if it's note #1 we can't do the cheezy echo.
+    549  f30e		       f0 12		      BEQ	DoVoice1
+    550  f310		       88		      DEY
+    551  f311		       b9 00 f7    DoVoice2   LDA	SoundFData,Y	; basically you just set SoundQ to an
+    552  f314		       85 18		      STA	Audf1	; offset and put frequency, control and
+    553  f316		       b9 50 f7 	      LDA	SoundCData,Y	; volume data in the data segment below
+    554  f319		       85 16		      STA	Audc1	; with zero termination.  I was gonna do
+    555  f31b		       b9 a0 f7 	      LDA	SoundVData,Y	; a channel multiplexing music thing
+    556  f31e							; but I'm too lame.
+    557  f31e		       4a		      LSR		; Divide volume in half for the cheezy echo
+    558  f31f		       85 1a		      STA	Audv1
+    559  f321		       c8		      INY
+    560  f322		       b9 00 f7    DoVoice1   LDA	SoundFData,Y	; see above
+    561  f325		       85 17		      STA	Audf0
+    562  f327		       b9 50 f7 	      LDA	SoundCData,Y
+    563  f32a		       85 15		      STA	Audc0
+    564  f32c		       b9 a0 f7 	      LDA	SoundVData,Y
+    565  f32f		       85 19		      STA	Audv0
+    566  f331		       c9 00		      CMP	#0
+    567  f333		       d0 0b		      BNE	NextNote	; if it's not zero there's more
+    568  f335		       85 17		      STA	Audf0
+    569  f337		       85 15		      STA	Audc0
+    570  f339		       85 1a		      STA	Audv1
+    571  f33b		       85 99		      STA	SoundQ	; otherwise we turn off the sound and empty the Q
+    572  f33d		       4c 42 f3 	      JMP	EndSound
+    573  f340		       e6 99	   NextNote   INC	SoundQ
+    574  f342		       60	   EndSound   RTS
+    575  f343
+    576  f343
+    577  f343		       a5 9b	   CheckEgg   LDA	EggMode
+    578  f345		       c9 00		      CMP	#0
+    579  f347		       f0 17		      BEQ	NoEgg	; no egg?  how sad!
+    580  f349		       a5 9c		      LDA	FrameCycle	; hey, it works in adventure
+    581  f34b		       85 06		      STA	ColuP0
+    582  f34d		       85 07		      STA	ColuP1
+    583  f34f		       a9 f6		      LDA	#$F6
+    584  f351		       85 81		      STA	s1+1
+    585  f353		       85 83		      STA	s2+1
+    586  f355		       85 85		      STA	s3+1
+    587  f357		       85 87		      STA	s4+1
+    588  f359		       85 89		      STA	s5+1
+    589  f35b		       a9 01		      LDA	#1
+    590  f35d		       85 99		      STA	SoundQ
+    591  f35f		       60		      RTS
+    592  f360		       a9 36	   NoEgg      LDA	#$36	; otherwise set the color back to the
+    593  f362		       85 06		      STA	ColuP0	; lovely shade of red.  this egg works much
+    594  f364		       85 07		      STA	ColuP1	; more smoothly than I expected.
+    595  f366		       a9 00		      LDA	#0
+    596  f368		       85 9d		      STA	EggMusic
+    597  f36a		       60		      RTS
+    598  f36b
+    599  f36b
+    600  f36b							; egg sound data
+    601  f36b							;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    602  f36b
+    603  f400					      ORG	$F400
+    604  f400				   EggMusic3
+    605  f400		       17 00 17 00*	      .byte.b	23,0,23,0,23,23,0,0
+    606  f408		       17 00 17 00*	      .byte.b	23,0,23,0,23,23,0,0
+    607  f410		       17 00 13 00*	      .byte.b	23,0,19,0,29,0,26,0
+    608  f418		       17 17 17 17*	      .byte.b	23,23,23,23,0,0,0,0
+    609  f420		       16 00 16 00*	      .byte.b	22,0,22,0,22,0,22,0
+    610  f428		       16 00 17 00*	      .byte.b	22,0,23,0,23,0,23,0
+    611  f430		       17 00 1a 00*	      .byte.b	23,0,26,0,26,0,23,0
+    612  f438		       1a 1a 1a 1a*	      .byte.b	26,26,26,26,19,19,19,19
+    613  f440		       17 00 17 00*	      .byte.b	23,0,23,0,23,23,0,0
+    614  f448		       17 00 17 00*	      .byte.b	23,0,23,0,23,23,0,0
+    615  f450		       17 00 13 00*	      .byte.b	23,0,19,0,29,0,26,0
+    616  f458		       17 17 17 17*	      .byte.b	23,23,23,23,0,0,0,0
+    617  f460		       16 00 16 00*	      .byte.b	22,0,22,0,22,0,22,0
+    618  f468		       16 00 17 00*	      .byte.b	22,0,23,0,23,0,23,0
+    619  f470		       13 00 13 00*	      .byte.b	19,0,19,0,22,0,28,0
+    620  f478		       1d 1d 1d 1d*	      .byte.b	29,29,29,29,14,14,14,14
+    621  f480
+    622  f480				   EggMusic4
+    623  f480		       0f 0f 00 00*	      .byte.b	15,15,$00,$00,21,21,$00,$00
+    624  f488		       0f 0f 00 00*	      .byte.b	15,15,$00,$00,21,21,$00,$00
+    625  f490		       0f 0f 00 00*	      .byte.b	15,15,$00,$00,21,21,$00,$00
+    626  f498		       0f 0f 00 00*	      .byte.b	15,15,$00,$00,21,21,$00,$00
+    627  f4a0		       0b 0b 00 00*	      .byte.b	11,11,$00,$00,15,15,$00,$00
+    628  f4a8		       0f 0f 00 00*	      .byte.b	15,15,$00,$00,21,21,$00,$00
+    629  f4b0		       15 15 00 00*	      .byte.b	21,21,$00,$00,13,13,$00,$00
+    630  f4b8		       15 15 00 00*	      .byte.b	21,21,$00,$00,18,18,16,16
+    631  f4c0		       0f 0f 00 00*	      .byte.b	15,15,$00,$00,21,21,$00,$00
+    632  f4c8		       0f 0f 00 00*	      .byte.b	15,15,$00,$00,21,21,$00,$00
+    633  f4d0		       0f 0f 00 00*	      .byte.b	15,15,$00,$00,21,21,$00,$00
+    634  f4d8		       0f 0f 00 00*	      .byte.b	15,15,$00,$00,21,21,$00,$00
+    635  f4e0		       0b 0b 00 00*	      .byte.b	11,11,$00,$00,15,15,$00,$00
+    636  f4e8		       0f 0f 00 00*	      .byte.b	15,15,$00,$00,21,21,$00,$00
+    637  f4f0		       15 15 00 00*	      .byte.b	21,21,$00,$00,13,13,$00,$00
+    638  f4f8		       0f 0f 15 15*	      .byte.b	15,15,21,21,18,18,16,16
+    639  f500
+    640  f500					      ORG	$F500
+    641  f500				   EggMusic1
+    642  f500		       13 00 13 00*	      .byte.b	19,0,19,0,19,19,0,0
+    643  f508		       13 00 13 00*	      .byte.b	19,0,19,0,19,19,0,0
+    644  f510		       13 00 0e 00*	      .byte.b	19,0,14,0,23,0,22,0
+    645  f518		       13 13 13 13*	      .byte.b	19,19,19,19,0,0,0,0
+    646  f520		       11 00 11 00*	      .byte.b	17,0,17,0,17,0,17,0
+    647  f528		       11 00 13 00*	      .byte.b	17,0,19,0,19,0,19,0
+    648  f530		       13 00 14 00*	      .byte.b	19,0,20,0,20,0,17,0
+    649  f538		       13 13 13 13*	      .byte.b	19,19,19,19,15,15,15,15
+    650  f540		       13 00 13 00*	      .byte.b	19,0,19,0,19,19,0,0
+    651  f548		       13 00 13 00*	      .byte.b	19,0,19,0,19,19,0,0
+    652  f550		       13 00 0e 00*	      .byte.b	19,0,14,0,23,0,22,0
+    653  f558		       13 13 13 13*	      .byte.b	19,19,19,19,0,0,0,0
+    654  f560		       11 00 11 00*	      .byte.b	17,0,17,0,17,0,17,0
+    655  f568		       11 00 13 00*	      .byte.b	17,0,19,0,19,0,19,0
+    656  f570		       0f 00 0f 00*	      .byte.b	15,0,15,0,17,0,22,0
+    657  f578		       17 17 17 17*	      .byte.b	23,23,23,23,23,23,23,23
+    658  f580
+    659  f580
+    660  f580				   EggMusic2
+    661  f580		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    662  f588		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    663  f590		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    664  f598		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    665  f5a0		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    666  f5a8		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    667  f5b0		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    668  f5b8		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    669  f5c0		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    670  f5c8		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    671  f5d0		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    672  f5d8		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    673  f5e0		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    674  f5e8		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    675  f5f0		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    676  f5f8		       1c 00 01 00*	      .byte.b	28,0,1,$00,28,0,1,$00
+    677  f600
+    678  f600							; graphics data (boing ball)
+    679  f600							;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    680  f600					      ORG	$F600
+    681  f600							; first column
+    682  f600
+    683  f600		       33 37 3e 3c*	      .byte.b	$33,$37,$3e,$3c,$36,$33,$31,$00
+    684  f608		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$00,$00
+    685  f610		       03 03 03 03*	      .byte.b	$03,$03,$03,$03,$03,$03,$03,$00
+    686  f618		       3f 00 1f 06*	      .byte.b	$3f,$00,$1f,$06,$06,$06,$06,$0e
+    687  f620		       06 00 03 03*	      .byte.b	$06,$00,$03,$03,$01,$00,$01,$03
+    688  f628		       03 00 31 31*	      .byte.b	$03,$00,$31,$31,$31,$3f,$31,$31
+    689  f630		       31 00		      .byte.b	$31,$00
+    690  f632
+    691  f632							; second column
+    692  f632
+    693  f632		       9f 31 31 31*	      .byte.b	$9f,$31,$31,$31,$31,$31,$b1,$00
+    694  f63a		       33 37 3e 33*	      .byte.b	$33,$37,$3e,$33,$31,$31,$3f,$00
+    695  f642		       03 03 03 f3*	      .byte.b	$03,$03,$03,$f3,$03,$03,$fb,$00
+    696  f64a		       ff 00 9e 03*	      .byte.b	$ff,$00,$9e,$03,$01,$1f,$31,$31
+    697  f652		       1f 00 1b bb*	      .byte.b	$1f,$00,$1b,$bb,$f3,$e3,$f3,$bb
+    698  f65a		       1b 00 b1 b1*	      .byte.b	$1b,$00,$b1,$b1,$bf,$b1,$b1,$9b
+    699  f662		       8e 00		      .byte.b	$8e,$00
+    700  f664
+    701  f664							; third column
+    702  f664
+    703  f664		       3e b3 b1 b1*	      .byte.b	$3e,$b3,$b1,$b1,$b1,$b3,$be,$00
+    704  f66c		       9f 31 31 b1*	      .byte.b	$9f,$31,$31,$b1,$b1,$b1,$1f,$00
+    705  f674		       39 73 e3 3b*	      .byte.b	$39,$73,$e3,$3b,$1b,$1b,$f1,$00
+    706  f67c		       ff 00 1e 03*	      .byte.b	$ff,$00,$1e,$03,$81,$9f,$b1,$b1
+    707  f684		       1f 00 1b 1b*	      .byte.b	$1f,$00,$1b,$1b,$5b,$fb,$fb,$b9
+    708  f68c		       18 00 b0 b0*	      .byte.b	$18,$00,$b0,$b0,$bf,$b1,$b1,$31
+    709  f694		       3f 00		      .byte.b	$3f,$00
+    710  f696
+    711  f696							; fourth column
+    712  f696
+    713  f696		       3f 30 b0 b0*	      .byte.b	$3f,$30,$b0,$b0,$b0,$30,$30,$00
+    714  f69e		       3f b1 b1 bf*	      .byte.b	$3f,$b1,$b1,$bf,$b1,$b1,$3f,$00
+    715  f6a6		       f3 1b 1b 1b*	      .byte.b	$f3,$1b,$1b,$1b,$1b,$1b,$f3,$00
+    716  f6ae		       ff 00 1e 03*	      .byte.b	$ff,$00,$1e,$03,$81,$9f,$b1,$b1
+    717  f6b6		       1f 00 19 1b*	      .byte.b	$1f,$00,$19,$1b,$f8,$19,$1b,$b3
+    718  f6be		       e1 00 30 30*	      .byte.b	$e1,$00,$30,$30,$3f,$b1,$b1,$b1
+    719  f6c6		       3f 00		      .byte.b	$3f,$00
+    720  f6c8
+    721  f6c8							; fifth column
+    722  f6c8
+    723  f6c8		       63 63 7f 63*	      .byte.b	$63,$63,$7f,$63,$63,$36,$1c,$00
+    724  f6d0		       00 80 80 00*	      .byte.b	$00,$80,$80,$00,$80,$80,$00,$00
+    725  f6d8		       18 18 58 f8*	      .byte.b	$18,$18,$58,$f8,$f8,$b8,$18,$00
+    726  f6e0		       ff 00 20 00*	      .byte.b	$ff,$00,$20,$00,$90,$98,$9c,$8e
+    727  f6e8		       0e 00 f0 18*	      .byte.b	$0e,$00,$f0,$18,$18,$f0,$00,$30
+    728  f6f0		       e0 00 0c 0c*	      .byte.b	$e0,$00,$0c,$0c,$0c,$9e,$b3,$b3
+    729  f6f8		       33 00		      .byte.b	$33,$00
+    730  f6fa
+    731  f6fa							; sound data (bounce noise)
+    732  f6fa							;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    733  f700					      ORG	$F700
+    734  f700		       1f 19 1a 1b*SoundFData .byte.b	$1f,$19,$1a,$1b,$1c,$1d,$1e,$1f
+    735  f750					      ORG	$F750
+    736  f750		       07 06 06 06*SoundCData .byte.b	$07,$06,$06,$06,$06,$06,$06,$06
+    737  f7a0					      ORG	$F7A0
+    738  f7a0		       0f 0b 0a 08*SoundVData .byte.b	$0f,$0b,$0a,$08,$06,$04,$02,$00
+    739  f7a8
+    740  f7a8
+    741  f800					      ORG	$F800
+    742  f800							; first column
+    743  f800
+    744  f800		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$00,$00
+    745  f808		       01 01 03 06*	      .byte.b	$01,$01,$03,$06,$06,$0d,$03,$23
+    746  f810		       23 23 23 27*	      .byte.b	$23,$23,$23,$27,$47,$46,$48,$f8
+    747  f818		       38 38 38 3c*	      .byte.b	$38,$38,$38,$3c,$3c,$3c,$3c,$3d
+    748  f820		       19 01 21 20*	      .byte.b	$19,$01,$21,$20,$10,$10,$18,$08
+    749  f828		       0c 0d 01 00*	      .byte.b	$0c,$0d,$01,$00,$00,$00,$00,$00
+    750  f830		       00 00		      .byte.b	$00,$00
+    751  f832
+    752  f832							; second column
+    753  f832
+    754  f832		       00 00 03 03*	      .byte.b	$00,$00,$03,$03,$0e,$0e,$8e,$8e
+    755  f83a		       9f 1f 18 00*	      .byte.b	$9f,$1f,$18,$00,$60,$e0,$e0,$e0
+    756  f842		       e0 e0 e3 ef*	      .byte.b	$e0,$e0,$e3,$ef,$9f,$1f,$1f,$1f
+    757  f84a		       1f 0f 0f 0f*	      .byte.b	$1f,$0f,$0f,$0f,$0e,$10,$38,$f8
+    758  f852		       f8 fc fc fc*	      .byte.b	$f8,$fc,$fc,$fc,$fe,$fe,$79,$60
+    759  f85a		       40 e0 e0 f0*	      .byte.b	$40,$e0,$e0,$f0,$78,$3c,$1d,$08
+    760  f862		       00 00		      .byte.b	$00,$00
+    761  f864
+    762  f864							; third column
+    763  f864
+    764  f864		       00 40 78 3e*	      .byte.b	$00,$40,$78,$3e,$1f,$0f,$06,$08
+    765  f86c		       3c fc fc fe*	      .byte.b	$3c,$fc,$fc,$fe,$fe,$7f,$7e,$78
+    766  f874		       60 40 c0 c0*	      .byte.b	$60,$40,$c0,$c0,$c0,$e0,$e0,$e0
+    767  f87c		       e1 e7 ff 0f*	      .byte.b	$e1,$e7,$ff,$0f,$0f,$0f,$0f,$07
+    768  f884		       07 07 02 04*	      .byte.b	$07,$07,$02,$04,$3c,$fc,$fe,$fe
+    769  f88c		       fe 7e 7f 38*	      .byte.b	$fe,$7e,$7f,$38,$00,$70,$f8,$78
+    770  f894		       1c 0e		      .byte.b	$1c,$0e
+    771  f896
+    772  f896							; fourth column
+    773  f896
+    774  f896		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$98,$fc,$1e,$1f
+    775  f89e		       0f 07 03 00*	      .byte.b	$0f,$07,$03,$00,$0e,$7e,$fe,$7f
+    776  f8a6		       7f 7f 3f 3f*	      .byte.b	$7f,$7f,$3f,$3f,$3f,$3c,$00,$60
+    777  f8ae		       e0 e0 e0 e0*	      .byte.b	$e0,$e0,$e0,$e0,$f0,$f0,$f0,$f1
+    778  f8b6		       ff cf 0f 0f*	      .byte.b	$ff,$cf,$0f,$0f,$07,$07,$07,$06
+    779  f8be		       08 38 f0 f1*	      .byte.b	$08,$38,$f0,$f1,$72,$70,$60,$60
+    780  f8c6		       40 00		      .byte.b	$40,$00
+    781  f8c8
+    782  f8c8							; fifth column
+    783  f8c8
+    784  f8c8		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$00,$00
+    785  f8d0		       80 d0 b8 18*	      .byte.b	$80,$d0,$b8,$18,$18,$0c,$0c,$06
+    786  f8d8		       06 06 84 9c*	      .byte.b	$06,$06,$84,$9c,$7c,$7c,$7c,$3c
+    787  f8e0		       3c 3c 3e 3e*	      .byte.b	$3c,$3c,$3e,$3e,$3c,$22,$42,$c2
+    788  f8e8		       c2 c4 c4 c4*	      .byte.b	$c2,$c4,$c4,$c4,$c0,$88,$f0,$60
+    789  f8f0		       c0 c0 80 80*	      .byte.b	$c0,$c0,$80,$80,$00,$00,$00,$00
+    790  f8f8		       00 00		      .byte.b	$00,$00
+    791  f8fa
+    792  f8fa
+    793  f900					      ORG	$F900
+    794  f900
+    795  f900							; first column
+    796  f900
+    797  f900		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$00,$00
+    798  f908		       01 01 02 06*	      .byte.b	$01,$01,$02,$06,$04,$0b,$17,$27
+    799  f910		       27 27 07 0f*	      .byte.b	$27,$27,$07,$0f,$4f,$4e,$40,$b0
+    800  f918		       70 70 30 30*	      .byte.b	$70,$70,$30,$30,$30,$30,$38,$39
+    801  f920		       3f 27 07 23*	      .byte.b	$3f,$27,$07,$23,$01,$11,$11,$00
+    802  f928		       08 09 03 01*	      .byte.b	$08,$09,$03,$01,$00,$00,$00,$00
+    803  f930		       00 00		      .byte.b	$00,$00
+    804  f932
+    805  f932							; second column
+    806  f932
+    807  f932		       00 00 01 01*	      .byte.b	$00,$00,$01,$01,$18,$1c,$dc,$9c
+    808  f93a		       3c 3c 3b 61*	      .byte.b	$3c,$3c,$3b,$61,$01,$81,$81,$81
+    809  f942		       81 81 83 8f*	      .byte.b	$81,$81,$83,$8f,$ff,$7f,$7f,$7f
+    810  f94a		       3f 3f 3f 3f*	      .byte.b	$3f,$3f,$3f,$3f,$3e,$20,$00,$e0
+    811  f952		       e0 e0 f0 f0*	      .byte.b	$e0,$e0,$f0,$f0,$f8,$f8,$ff,$e3
+    812  f95a		       81 81 c0 e0*	      .byte.b	$81,$81,$c0,$e0,$f0,$78,$3f,$10
+    813  f962		       00 00		      .byte.b	$00,$00
+    814  f964
+    815  f964							; third column
+    816  f964
+    817  f964		       00 01 c0 fc*	      .byte.b	$00,$01,$c0,$fc,$7e,$3f,$1e,$00
+    818  f96c		       30 f0 f8 f8*	      .byte.b	$30,$f0,$f8,$f8,$f8,$fc,$fd,$fb
+    819  f974		       e3 81 01 01*	      .byte.b	$e3,$81,$01,$01,$00,$00,$00,$00
+    820  f97c		       81 87 9f 7f*	      .byte.b	$81,$87,$9f,$7f,$7f,$3f,$3f,$3f
+    821  f984		       1f 1f 1e 08*	      .byte.b	$1f,$1f,$1e,$08,$30,$f0,$f0,$f8
+    822  f98c		       f8 f8 fc fb*	      .byte.b	$f8,$f8,$fc,$fb,$61,$41,$f0,$f8
+    823  f994		       1c 00		      .byte.b	$1c,$00
+    824  f996
+    825  f996							; fourth column
+    826  f996
+    827  f996		       00 80 60 18*	      .byte.b	$00,$80,$60,$18,$00,$7c,$7c,$3e
+    828  f99e		       3f 1f 1f 0c*	      .byte.b	$3f,$1f,$1f,$0c,$08,$78,$fc,$fc
+    829  f9a6		       fc fe fe fe*	      .byte.b	$fc,$fe,$fe,$fe,$ff,$fc,$60,$00
+    830  f9ae		       80 80 80 c0*	      .byte.b	$80,$80,$80,$c0,$c0,$c0,$c0,$c1
+    831  f9b6		       ef df 1f 1f*	      .byte.b	$ef,$df,$1f,$1f,$1f,$1f,$1f,$1e
+    832  f9be		       10 21 e1 e1*	      .byte.b	$10,$21,$e1,$e1,$e3,$e4,$e0,$c0
+    833  f9c6		       80 00		      .byte.b	$80,$00
+    834  f9c8
+    835  f9c8							; fifth column
+    836  f9c8
+    837  f9c8		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$00,$00
+    838  f9d0		       00 90 b8 38*	      .byte.b	$00,$90,$b8,$38,$38,$1c,$1c,$0e
+    839  f9d8		       0e 0e 00 19*	      .byte.b	$0e,$0e,$00,$19,$f8,$f8,$f8,$f8
+    840  f9e0		       f8 f8 f8 fc*	      .byte.b	$f8,$f8,$f8,$fc,$ff,$66,$06,$86
+    841  f9e8		       86 84 8c 0c*	      .byte.b	$86,$84,$8c,$0c,$0c,$00,$60,$c0
+    842  f9f0		       c0 80 80 00*	      .byte.b	$c0,$80,$80,$00,$00,$00,$00,$00
+    843  f9f8		       00 00		      .byte.b	$00,$00
+    844  f9fa
+    845  f9fa
+    846  f9fa
+    847  f9fa							;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    848  fa00					      ORG	$FA00
+    849  fa00							; first column
+    850  fa00
+    851  fa00		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$00,$00
+    852  fa08		       01 02 06 04*	      .byte.b	$01,$02,$06,$04,$08,$0b,$17,$2f
+    853  fa10		       2f 0f 0f 0e*	      .byte.b	$2f,$0f,$0f,$0e,$5e,$5f,$10,$a0
+    854  fa18		       60 60 60 60*	      .byte.b	$60,$60,$60,$60,$60,$60,$60,$31
+    855  fa20		       37 2f 0f 07*	      .byte.b	$37,$2f,$0f,$07,$07,$03,$13,$01
+    856  fa28		       01 09 03 01*	      .byte.b	$01,$09,$03,$01,$00,$00,$00,$00
+    857  fa30		       00 00		      .byte.b	$00,$00
+    858  fa32
+    859  fa32							; second column
+    860  fa32
+    861  fa32		       00 00 00 03*	      .byte.b	$00,$00,$00,$03,$18,$38,$38,$38
+    862  fa3a		       38 78 7f e7*	      .byte.b	$38,$78,$7f,$e7,$87,$07,$07,$07
+    863  fa42		       07 03 00 0c*	      .byte.b	$07,$03,$00,$0c,$7c,$fc,$fc,$fe
+    864  fa4a		       fe fe fe fe*	      .byte.b	$fe,$fe,$fe,$fe,$ff,$60,$40,$80
+    865  fa52		       80 c0 c0 c0*	      .byte.b	$80,$c0,$c0,$c0,$e0,$e0,$e7,$ef
+    866  fa5a		       87 03 83 81*	      .byte.b	$87,$03,$83,$81,$c1,$60,$33,$0b
+    867  fa62		       00 00		      .byte.b	$00,$00
+    868  fa64
+    869  fa64							; third column
+    870  fa64
+    871  fa64		       00 06 c1 f0*	      .byte.b	$00,$06,$c1,$f0,$f8,$7c,$7f,$30
+    872  fa6c		       20 c0 e0 e0*	      .byte.b	$20,$c0,$e0,$e0,$e0,$f0,$f1,$f7
+    873  fa74		       e7 87 07 07*	      .byte.b	$e7,$87,$07,$07,$03,$03,$03,$03
+    874  fa7c		       00 06 1e fe*	      .byte.b	$00,$06,$1e,$fe,$fe,$ff,$ff,$ff
+    875  fa84		       7f 7f 7e 78*	      .byte.b	$7f,$7f,$7e,$78,$00,$c0,$e0,$e0
+    876  fa8c		       f0 f0 f0 ff*	      .byte.b	$f0,$f0,$f0,$ff,$e7,$83,$c1,$e1
+    877  fa94		       f1 10		      .byte.b	$f1,$10
+    878  fa96
+    879  fa96							; fourth column
+    880  fa96
+    881  fa96		       00 00 80 60*	      .byte.b	$00,$00,$80,$60,$10,$70,$f8,$fc
+    882  fa9e		       fc 7e 3f 3c*	      .byte.b	$fc,$7e,$3f,$3c,$10,$60,$e0,$f0
+    883  faa6		       f0 f0 f8 f8*	      .byte.b	$f0,$f0,$f8,$f8,$fc,$ff,$e3,$83
+    884  faae		       03 01 01 01*	      .byte.b	$03,$01,$01,$01,$01,$01,$01,$00
+    885  fab6		       0e be 7e 7e*	      .byte.b	$0e,$be,$7e,$7e,$7e,$7e,$7e,$3f
+    886  fabe		       31 03 c3 c3*	      .byte.b	$31,$03,$c3,$c3,$c2,$e4,$e0,$e0
+    887  fac6		       c0 00		      .byte.b	$c0,$00
+    888  fac8
+    889  fac8							; fifth column
+    890  fac8
+    891  fac8		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$80,$40
+    892  fad0		       30 00 70 f0*	      .byte.b	$30,$00,$70,$f0,$78,$78,$38,$3c
+    893  fad8		       3c 1e 18 11*	      .byte.b	$3c,$1e,$18,$11,$f1,$f1,$f1,$f1
+    894  fae0		       f1 f0 f0 f8*	      .byte.b	$f1,$f0,$f0,$f8,$fa,$e6,$8e,$0e
+    895  fae8		       0c 0c 0c 0c*	      .byte.b	$0c,$0c,$0c,$0c,$18,$10,$40,$c0
+    896  faf0		       80 80 00 00*	      .byte.b	$80,$80,$00,$00,$00,$00,$00,$00
+    897  faf8		       00 00		      .byte.b	$00,$00
+    898  fafa
+    899  fafa
+    900  fb00					      ORG	$FB00
+    901  fb00
+    902  fb00							; first column
+    903  fb00
+    904  fb00		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$00,$01
+    905  fb08		       01 02 06 04*	      .byte.b	$01,$02,$06,$04,$09,$12,$1e,$0e
+    906  fb10		       1e 1c 1c 1c*	      .byte.b	$1e,$1c,$1c,$1c,$1c,$3d,$33,$03
+    907  fb18		       c3 c3 c3 41*	      .byte.b	$c3,$c3,$c3,$41,$41,$61,$61,$60
+    908  fb20		       66 7f 0f 0f*	      .byte.b	$66,$7f,$0f,$0f,$0f,$07,$07,$03
+    909  fb28		       03 00 07 03*	      .byte.b	$03,$00,$07,$03,$01,$00,$00,$00
+    910  fb30		       00 00		      .byte.b	$00,$00
+    911  fb32
+    912  fb32							; second column
+    913  fb32
+    914  fb32		       00 00 01 03*	      .byte.b	$00,$00,$01,$03,$01,$11,$70,$70
+    915  fb3a		       70 70 e7 ff*	      .byte.b	$70,$70,$e7,$ff,$9f,$1f,$1f,$1f
+    916  fb42		       1f 1f 1c 10*	      .byte.b	$1f,$1f,$1c,$10,$70,$f0,$f0,$f0
+    917  fb4a		       f8 f8 f8 f8*	      .byte.b	$f8,$f8,$f8,$f8,$f9,$e7,$c3,$03
+    918  fb52		       03 01 01 01*	      .byte.b	$03,$01,$01,$01,$80,$80,$87,$df
+    919  fb5a		       bf 1f 0f 87*	      .byte.b	$bf,$1f,$0f,$87,$c3,$61,$33,$13
+    920  fb62		       00 00		      .byte.b	$00,$00
+    921  fb64
+    922  fb64							; third column
+    923  fb64
+    924  fb64		       00 02 e3 e1*	      .byte.b	$00,$02,$e3,$e1,$f0,$f0,$f9,$f3
+    925  fb6c		       c3 01 81 80*	      .byte.b	$c3,$01,$81,$80,$80,$80,$c1,$c7
+    926  fb74		       df 9f 1f 1f*	      .byte.b	$df,$9f,$1f,$1f,$1f,$0f,$0f,$0f
+    927  fb7c		       0e 00 18 f8*	      .byte.b	$0e,$00,$18,$f8,$f8,$f8,$fc,$fc
+    928  fb84		       fc fc ff f9*	      .byte.b	$fc,$fc,$ff,$f9,$c1,$01,$00,$80
+    929  fb8c		       80 c0 e0 e7*	      .byte.b	$80,$c0,$e0,$e7,$ef,$87,$07,$c3
+    930  fb94		       f3 32		      .byte.b	$f3,$32
+    931  fb96
+    932  fb96							; fourth column
+    933  fb96
+    934  fb96		       00 00 c0 f0*	      .byte.b	$00,$00,$c0,$f0,$62,$41,$e0,$f0
+    935  fb9e		       f8 fc fe fd*	      .byte.b	$f8,$fc,$fe,$fd,$70,$00,$80,$c0
+    936  fba6		       c0 c0 e0 e0*	      .byte.b	$c0,$c0,$e0,$e0,$e0,$f3,$ef,$8f
+    937  fbae		       0f 0f 0f 07*	      .byte.b	$0f,$0f,$0f,$07,$07,$07,$07,$02
+    938  fbb6		       0c 3c fc fc*	      .byte.b	$0c,$3c,$fc,$fc,$fc,$fc,$fc,$fd
+    939  fbbe		       f3 47 87 87*	      .byte.b	$f3,$47,$87,$87,$86,$8e,$c8,$d0
+    940  fbc6		       80 00		      .byte.b	$80,$00
+    941  fbc8
+    942  fbc8							; fifth column
+    943  fbc8
+    944  fbc8		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$80,$c0
+    945  fbd0		       70 20 60 e0*	      .byte.b	$70,$20,$60,$e0,$f0,$f0,$f8,$78
+    946  fbd8		       78 7c 3a 23*	      .byte.b	$78,$7c,$3a,$23,$c3,$c3,$c3,$c1
+    947  fbe0		       e1 e1 e1 e1*	      .byte.b	$e1,$e1,$e1,$e1,$e2,$fe,$9c,$1c
+    948  fbe8		       1c 1c 3c 38*	      .byte.b	$1c,$1c,$3c,$38,$38,$30,$48,$90
+    949  fbf0		       90 a0 40 00*	      .byte.b	$90,$a0,$40,$00,$00,$00,$00,$00
+    950  fbf8		       00 00		      .byte.b	$00,$00
+    951  fbfa
+    952  fbfa
+    953  fbfa							;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    954  fc00					      ORG	$FC00
+    955  fc00							; first column
+    956  fc00
+    957  fc00		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$00,$00
+    958  fc08		       02 00 01 01*	      .byte.b	$02,$00,$01,$01,$0b,$12,$0c,$18
+    959  fc10		       18 18 38 38*	      .byte.b	$18,$18,$38,$38,$38,$31,$3f,$4f
+    960  fc18		       87 c7 c7 47*	      .byte.b	$87,$c7,$c7,$47,$47,$47,$47,$46
+    961  fc20		       44 5c 1e 1e*	      .byte.b	$44,$5c,$1e,$1e,$0e,$0f,$0f,$07
+    962  fc28		       07 02 06 03*	      .byte.b	$07,$02,$06,$03,$01,$00,$00,$00
+    963  fc30		       00 00		      .byte.b	$00,$00
+    964  fc32
+    965  fc32							; second column
+    966  fc32
+    967  fc32		       00 00 01 03*	      .byte.b	$00,$00,$01,$03,$07,$23,$61,$61
+    968  fc3a		       e1 e1 c6 de*	      .byte.b	$e1,$e1,$c6,$de,$be,$3f,$3f,$3f
+    969  fc42		       3f 3f 3c 30*	      .byte.b	$3f,$3f,$3c,$30,$40,$c0,$c0,$c0
+    970  fc4a		       c0 c0 e0 e0*	      .byte.b	$c0,$c0,$e0,$e0,$e1,$ff,$df,$0f
+    971  fc52		       0f 07 07 07*	      .byte.b	$0f,$07,$07,$07,$03,$03,$04,$9e
+    972  fc5a		       fe 3f 1f 1f*	      .byte.b	$fe,$3f,$1f,$1f,$8f,$47,$24,$0f
+    973  fc62		       01 00		      .byte.b	$01,$00
+    974  fc64
+    975  fc64							; third column
+    976  fc64
+    977  fc64		       00 08 07 83*	      .byte.b	$00,$08,$07,$83,$c0,$e0,$f1,$ff
+    978  fc6c		       c7 07 07 03*	      .byte.b	$c7,$07,$07,$03,$03,$01,$00,$06
+    979  fc74		       1f 7f 7f 7f*	      .byte.b	$1f,$7f,$7f,$7f,$7f,$7f,$7f,$3f
+    980  fc7c		       3e 38 20 e0*	      .byte.b	$3e,$38,$20,$e0,$e0,$e0,$e0,$f0
+    981  fc84		       f0 f0 f1 ff*	      .byte.b	$f0,$f0,$f1,$ff,$c7,$07,$03,$03
+    982  fc8c		       03 01 01 86*	      .byte.b	$03,$01,$01,$86,$9f,$9f,$0f,$87
+    983  fc94		       e3 3c		      .byte.b	$e3,$3c
+    984  fc96
+    985  fc96							; fourth column
+    986  fc96
+    987  fc96		       00 00 80 f0*	      .byte.b	$00,$00,$80,$f0,$e6,$43,$c1,$c0
+    988  fc9e		       e0 e0 f0 fb*	      .byte.b	$e0,$e0,$f0,$fb,$f3,$83,$03,$01
+    989  fca6		       01 01 00 80*	      .byte.b	$01,$01,$00,$80,$80,$83,$df,$bf
+    990  fcae		       3f 3f 3f 3f*	      .byte.b	$3f,$3f,$3f,$3f,$1f,$1f,$1f,$1e
+    991  fcb6		       10 20 e0 f0*	      .byte.b	$10,$20,$e0,$f0,$f0,$f0,$f0,$f1
+    992  fcbe		       ff cf 0e 0e*	      .byte.b	$ff,$cf,$0e,$0e,$0e,$0e,$88,$80
+    993  fcc6		       40 00		      .byte.b	$40,$00
+    994  fcc8
+    995  fcc8							; fifth column
+    996  fcc8
+    997  fcc8		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$80,$c0
+    998  fcd0		       f0 60 40 c0*	      .byte.b	$f0,$60,$40,$c0,$e0,$e0,$f0,$f0
+    999  fcd8		       f8 f8 fe e6*	      .byte.b	$f8,$f8,$fe,$e6,$07,$03,$83,$83
+   1000  fce0		       83 83 83 83*	      .byte.b	$83,$83,$83,$83,$82,$dc,$bc,$38
+   1001  fce8		       78 78 78 78*	      .byte.b	$78,$78,$78,$78,$70,$78,$08,$90
+   1002  fcf0		       30 20 40 00*	      .byte.b	$30,$20,$40,$00,$00,$00,$00,$00
+   1003  fcf8		       00 00		      .byte.b	$00,$00
+   1004  fcfa
+   1005  fcfa
+   1006  fd00					      ORG	$FD00
+   1007  fd00
+   1008  fd00							; first column
+   1009  fd00
+   1010  fd00		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$00,$00
+   1011  fd08		       00 00 01 01*	      .byte.b	$00,$00,$01,$01,$03,$14,$08,$18
+   1012  fd10		       18 10 30 30*	      .byte.b	$18,$10,$30,$30,$30,$31,$6f,$5f
+   1013  fd18		       8f 8f 8f 0f*	      .byte.b	$8f,$8f,$8f,$0f,$0f,$0f,$0f,$4e
+   1014  fd20		       48 58 38 38*	      .byte.b	$48,$58,$38,$38,$1c,$1c,$0e,$0e
+   1015  fd28		       0e 06 04 02*	      .byte.b	$0e,$06,$04,$02,$01,$00,$00,$00
+   1016  fd30		       00 00		      .byte.b	$00,$00
+   1017  fd32
+   1018  fd32							; second column
+   1019  fd32
+   1020  fd32		       00 00 00 03*	      .byte.b	$00,$00,$00,$03,$07,$23,$23,$43
+   1021  fd3a		       c3 c3 84 9c*	      .byte.b	$c3,$c3,$84,$9c,$fc,$7c,$7c,$7c
+   1022  fd42		       7c fc ff f1*	      .byte.b	$7c,$fc,$ff,$f1,$81,$01,$81,$81
+   1023  fd4a		       80 80 80 80*	      .byte.b	$80,$80,$80,$80,$81,$9f,$bf,$3f
+   1024  fd52		       3f 3f 1f 1f*	      .byte.b	$3f,$3f,$1f,$1f,$1f,$0f,$08,$18
+   1025  fd5a		       7c fc 7e 3e*	      .byte.b	$7c,$fc,$7e,$3e,$1f,$1f,$04,$0e
+   1026  fd62		       01 00		      .byte.b	$01,$00
+   1027  fd64
+   1028  fd64							; third column
+   1029  fd64
+   1030  fd64		       00 0c 0f 07*	      .byte.b	$00,$0c,$0f,$07,$83,$81,$c1,$ef
+   1031  fd6c		       df 1f 0f 0f*	      .byte.b	$df,$1f,$0f,$0f,$0f,$07,$06,$00
+   1032  fd74		       1c 7c fc fc*	      .byte.b	$1c,$7c,$fc,$fc,$fe,$fe,$fe,$ff
+   1033  fd7c		       fe f8 e0 00*	      .byte.b	$fe,$f8,$e0,$00,$00,$80,$80,$80
+   1034  fd84		       c0 c0 e1 e7*	      .byte.b	$c0,$c0,$e1,$e7,$df,$1f,$0f,$0f
+   1035  fd8c		       0f 07 07 00*	      .byte.b	$0f,$07,$07,$00,$1c,$fe,$3e,$0f
+   1036  fd94		       85 7c		      .byte.b	$85,$7c
+   1037  fd96
+   1038  fd96							; fourth column
+   1039  fd96
+   1040  fd96		       00 00 00 c0*	      .byte.b	$00,$00,$00,$c0,$fe,$8f,$07,$83
+   1041  fd9e		       81 c0 e0 e3*	      .byte.b	$81,$c0,$e0,$e3,$ff,$8f,$0f,$07
+   1042  fda6		       07 03 03 03*	      .byte.b	$07,$03,$03,$03,$01,$02,$1e,$7e
+   1043  fdae		       fe fe fe 7f*	      .byte.b	$fe,$fe,$fe,$7f,$7f,$7f,$7f,$7e
+   1044  fdb6		       70 00 c0 c0*	      .byte.b	$70,$00,$c0,$c0,$c0,$c0,$c0,$c1
+   1045  fdbe		       ee de 1e 1c*	      .byte.b	$ee,$de,$1e,$1c,$1c,$1e,$1c,$10
+   1046  fdc6		       20 00		      .byte.b	$20,$00
+   1047  fdc8
+   1048  fdc8							; fifth column
+   1049  fdc8
+   1050  fdc8		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$80,$c0
+   1051  fdd0		       e0 e0 08 80*	      .byte.b	$e0,$e0,$08,$80,$80,$c4,$c0,$e2
+   1052  fdd8		       e0 f0 f6 ee*	      .byte.b	$e0,$f0,$f6,$ee,$0e,$06,$06,$06
+   1053  fde0		       06 07 07 07*	      .byte.b	$06,$07,$07,$07,$05,$19,$78,$f8
+   1054  fde8		       f0 f2 f0 f0*	      .byte.b	$f0,$f2,$f0,$f0,$f0,$f8,$90,$30
+   1055  fdf0		       20 40 40 80*	      .byte.b	$20,$40,$40,$80,$00,$00,$00,$00
+   1056  fdf8		       00 00		      .byte.b	$00,$00
+   1057  fdfa
+   1058  fdfa
+   1059  fdfa
+   1060  fdfa
+   1061  fdfa							;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   1062  fdfa							;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   1063  fe00					      ORG	$FE00
+   1064  fe00							; first column
+   1065  fe00
+   1066  fe00		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$00,$01
+   1067  fe08		       01 03 03 07*	      .byte.b	$01,$03,$03,$07,$07,$04,$08,$10
+   1068  fe10		       10 30 30 31*	      .byte.b	$10,$30,$30,$31,$21,$20,$6f,$5f
+   1069  fe18		       9f 9f 9f 1f*	      .byte.b	$9f,$9f,$9f,$1f,$1f,$1f,$1f,$4e
+   1070  fe20		       48 50 30 38*	      .byte.b	$48,$50,$30,$38,$18,$1c,$0c,$0e
+   1071  fe28		       0e 07 04 00*	      .byte.b	$0e,$07,$04,$00,$00,$00,$00,$00
+   1072  fe30		       00 00		      .byte.b	$00,$00
+   1073  fe32
+   1074  fe32							; second column
+   1075  fe32
+   1076  fe32		       00 00 01 03*	      .byte.b	$00,$00,$01,$03,$07,$07,$47,$cf
+   1077  fe3a		       cf 8f 88 18*	      .byte.b	$cf,$8f,$88,$18,$78,$f8,$f8,$f8
+   1078  fe42		       f8 fc ff f3*	      .byte.b	$f8,$fc,$ff,$f3,$83,$03,$03,$01
+   1079  fe4a		       01 01 01 01*	      .byte.b	$01,$01,$01,$01,$00,$9f,$bf,$7f
+   1080  fe52		       7f 3f 3f 3f*	      .byte.b	$7f,$3f,$3f,$3f,$1f,$1f,$18,$10
+   1081  fe5a		       78 fc fc 7e*	      .byte.b	$78,$fc,$fc,$7e,$3e,$1f,$0c,$00
+   1082  fe62		       00 00		      .byte.b	$00,$00
+   1083  fe64
+   1084  fe64							; third column
+   1085  fe64
+   1086  fe64		       00 3c 9e 8f*	      .byte.b	$00,$3c,$9e,$8f,$07,$83,$80,$8f
+   1087  fe6c		       ff 3f 1f 1f*	      .byte.b	$ff,$3f,$1f,$1f,$1f,$0f,$0e,$08
+   1088  fe74		       18 78 f8 f8*	      .byte.b	$18,$78,$f8,$f8,$fc,$fc,$fc,$fc
+   1089  fe7c		       ff f9 e1 01*	      .byte.b	$ff,$f9,$e1,$01,$01,$00,$00,$00
+   1090  fe84		       80 80 81 87*	      .byte.b	$80,$80,$81,$87,$ff,$3f,$1f,$1f
+   1091  fe8c		       0f 0f 0f 00*	      .byte.b	$0f,$0f,$0f,$00,$18,$7c,$3e,$1e
+   1092  fe94		       0f 06		      .byte.b	$0f,$06
+   1093  fe96
+   1094  fe96							; fourth column
+   1095  fe96
+   1096  fe96		       00 00 00 80*	      .byte.b	$00,$00,$00,$80,$fe,$8f,$07,$03
+   1097  fe9e		       03 81 c0 c3*	      .byte.b	$03,$81,$c0,$c3,$ef,$9f,$1f,$0f
+   1098  fea6		       0f 0f 07 07*	      .byte.b	$0f,$0f,$07,$07,$03,$00,$1c,$7c
+   1099  feae		       fc fe fe fe*	      .byte.b	$fc,$fe,$fe,$fe,$fe,$fe,$fe,$ff
+   1100  feb6		       f1 41 81 81*	      .byte.b	$f1,$41,$81,$81,$81,$81,$81,$c0
+   1101  febe		       ce fc 3c 3c*	      .byte.b	$ce,$fc,$3c,$3c,$3c,$38,$38,$30
+   1102  fec6		       20 00		      .byte.b	$20,$00
+   1103  fec8
+   1104  fec8							; fifth column
+   1105  fec8
+   1106  fec8		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$00,$80
+   1107  fed0		       c0 f0 88 08*	      .byte.b	$c0,$f0,$88,$08,$80,$84,$c4,$c2
+   1108  fed8		       c2 e0 e6 ee*	      .byte.b	$c2,$e0,$e6,$ee,$0e,$0e,$0e,$0e
+   1109  fee0		       0e 0f 0f 07*	      .byte.b	$0e,$0f,$0f,$07,$05,$19,$70,$f0
+   1110  fee8		       f0 f0 f0 f0*	      .byte.b	$f0,$f0,$f0,$f0,$e4,$e8,$b0,$30
+   1111  fef0		       60 40 c0 80*	      .byte.b	$60,$40,$c0,$80,$00,$00,$00,$00
+   1112  fef8		       00 00		      .byte.b	$00,$00
+   1113  fefa
+   1114  fefa
+   1115  ff00					      ORG	$FF00
+   1116  ff00							; first column
+   1117  ff00
+   1118  ff00		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$00,$00
+   1119  ff08		       00 01 01 03*	      .byte.b	$00,$01,$01,$03,$07,$04,$01,$31
+   1120  ff10		       31 31 21 21*	      .byte.b	$31,$31,$21,$21,$61,$60,$4e,$fe
+   1121  ff18		       3e 1e 1e 1e*	      .byte.b	$3e,$1e,$1e,$1e,$1f,$1f,$1f,$1e
+   1122  ff20		       18 10 30 30*	      .byte.b	$18,$10,$30,$30,$18,$18,$1c,$0c
+   1123  ff28		       0e 0f 00 00*	      .byte.b	$0e,$0f,$00,$00,$00,$00,$00,$00
+   1124  ff30		       00 00		      .byte.b	$00,$00
+   1125  ff32
+   1126  ff32							; second column
+   1127  ff32
+   1128  ff32		       00 00 03 03*	      .byte.b	$00,$00,$03,$03,$07,$07,$87,$cf
+   1129  ff3a		       8f 8f 88 10*	      .byte.b	$8f,$8f,$88,$10,$70,$f0,$f0,$f8
+   1130  ff42		       f8 f8 fb f7*	      .byte.b	$f8,$f8,$fb,$f7,$87,$07,$07,$07
+   1131  ff4a		       03 03 03 03*	      .byte.b	$03,$03,$03,$03,$02,$1e,$3e,$fe
+   1132  ff52		       fe 7f 7f 7f*	      .byte.b	$fe,$7f,$7f,$7f,$3f,$3f,$38,$00
+   1133  ff5a		       60 f0 f8 7c*	      .byte.b	$60,$f0,$f8,$7c,$3c,$1e,$0c,$0c
+   1134  ff62		       00 00		      .byte.b	$00,$00
+   1135  ff64
+   1136  ff64							; third column
+   1137  ff64
+   1138  ff64		       00 20 fe 8f*	      .byte.b	$00,$20,$fe,$8f,$07,$07,$02,$8e
+   1139  ff6c		       be 7f 3f 3f*	      .byte.b	$be,$7f,$3f,$3f,$3f,$1f,$1e,$18
+   1140  ff74		       00 70 f0 f0*	      .byte.b	$00,$70,$f0,$f0,$f0,$f8,$f8,$f8
+   1141  ff7c		       fd fb e3 03*	      .byte.b	$fd,$fb,$e3,$03,$03,$03,$01,$01
+   1142  ff84		       01 01 00 07*	      .byte.b	$01,$01,$00,$07,$bf,$7f,$7f,$3f
+   1143  ff8c		       3f 1f 1f 08*	      .byte.b	$3f,$1f,$1f,$08,$10,$78,$7c,$1e
+   1144  ff94		       0f 00		      .byte.b	$0f,$00
+   1145  ff96
+   1146  ff96							; fourth column
+   1147  ff96
+   1148  ff96		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$dc,$be,$0f,$07
+   1149  ff9e		       03 01 81 83*	      .byte.b	$03,$01,$81,$83,$cf,$bf,$3f,$1f
+   1150  ffa6		       1f 1f 0f 0f*	      .byte.b	$1f,$1f,$0f,$0f,$0f,$04,$18,$78
+   1151  ffae		       f8 fc fc fc*	      .byte.b	$f8,$fc,$fc,$fc,$fc,$fc,$fc,$fd
+   1152  ffb6		       f3 c3 03 03*	      .byte.b	$f3,$c3,$03,$03,$03,$03,$83,$82
+   1153  ffbe		       8c bc 7c 38*	      .byte.b	$8c,$bc,$7c,$38,$39,$38,$38,$60
+   1154  ffc6		       40 00		      .byte.b	$40,$00
+   1155  ffc8
+   1156  ffc8							; fifth column
+   1157  ffc8
+   1158  ffc8		       00 00 00 00*	      .byte.b	$00,$00,$00,$00,$00,$00,$00,$80
+   1159  ffd0		       c0 f0 98 08*	      .byte.b	$c0,$f0,$98,$08,$08,$84,$84,$86
+   1160  ffd8		       c2 c2 c4 fe*	      .byte.b	$c2,$c2,$c4,$fe,$1e,$1e,$1e,$1e
+   1161  ffe0		       0e 0e 0e 0e*	      .byte.b	$0e,$0e,$0e,$0e,$0d,$11,$70,$f2
+   1162  ffe8		       e2 e2 e0 e0*	      .byte.b	$e2,$e2,$e0,$e0,$e0,$c8,$b0,$30
+   1163  fff0		       60 40 c0 80*	      .byte.b	$60,$40,$c0,$80,$00,$00,$00,$00
+   1164  fff8		       00 00		      .byte.b	$00,$00
+   1165  fffa
+   1166  fffa
+   1167  fffa
+   1168  fffa
+   1169  fffa
+   1170  fffa
+   1171  fffa
+   1172  fffa							;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+   1173  fffa							;
+   1174  fffa							; Set up the 6502 interrupt vector table
+   1175  fffa							;
+   1176  fffa					      ORG	IntVectors
+   1177  fffa		       00 f0	   NMI	      .word.w	Cart_Init
+   1178  fffc		       00 f0	   Reset      .word.w	Cart_Init
+   1179  fffe		       00 f0	   IRQ	      .word.w	Cart_Init
+   1180  10000
+   1181  10000							;		END

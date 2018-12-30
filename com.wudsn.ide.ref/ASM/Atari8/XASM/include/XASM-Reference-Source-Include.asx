@@ -1,0 +1,10 @@
+; Test
+unusedproc ;Unused procedure
+	nop
+	rts
+
+	org $2000
+included
+	jmp unknownIncludeLabel
+
+	

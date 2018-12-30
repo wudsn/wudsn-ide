@@ -1,0 +1,208 @@
+------- FILE C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari2600\DASM\original\suite6502.asm LEVEL 1 PASS 1
+      1  0000 ????
+      2  0000 ????						;   TEST ADDRESSING MODES
+      3  0000 ????
+      4  0000 ????				      processor	6502
+      5  0000 ????
+      6  0000					      org	0
+      7  0000
+      8  0000		       69 01		      adc	#1
+      9  0002		       65 01		      adc	1
+     10  0004		       75 01		      adc	1,x
+     11  0006		       79 01 00 	      adc	1,y	;absolute
+     12  0009		       6d e8 03 	      adc	1000
+     13  000c		       7d e8 03 	      adc	1000,x
+     14  000f		       79 e8 03 	      adc	1000,y
+     15  0012		       61 01		      adc	(1,x)
+     16  0014		       71 01		      adc	(1),y
+     17  0016
+     18  0016		       29 01		      and	#1
+     19  0018		       25 01		      and	1
+     20  001a		       35 01		      and	1,x
+     21  001c		       39 01 00 	      and	1,y	;absolute
+     22  001f		       2d e8 03 	      and	1000
+     23  0022		       3d e8 03 	      and	1000,x
+     24  0025		       39 e8 03 	      and	1000,y
+     25  0028		       21 01		      and	(1,x)
+     26  002a		       31 01		      and	(1),y
+     27  002c
+     28  002c		       0a		      asl
+     29  002d		       06 01		      asl	1
+     30  002f		       16 01		      asl	1,x
+     31  0031		       0e e8 03 	      asl	1000
+     32  0034		       1e e8 03 	      asl	1000,x
+     33  0037
+     34  0037		       90 fe		      bcc	.
+     35  0039		       b0 fe		      bcs	.
+     36  003b		       f0 fe		      beq	.
+     37  003d		       24 01		      bit	1
+     38  003f		       2c e8 03 	      bit	1000
+     39  0042		       30 fe		      bmi	.
+     40  0044		       d0 fe		      bne	.
+     41  0046		       10 fe		      bpl	.
+     42  0048		       00		      brk
+     43  0049		       50 fe		      bvc	.
+     44  004b		       70 fe		      bvs	.
+     45  004d		       18		      clc
+     46  004e		       d8		      cld
+     47  004f		       58		      cli
+     48  0050		       b8		      clv
+     49  0051
+     50  0051		       c9 01		      cmp	#1
+     51  0053		       c5 01		      cmp	1
+     52  0055		       d5 01		      cmp	1,x
+     53  0057		       d9 01 00 	      cmp	1,y	;absolute
+     54  005a		       cd e8 03 	      cmp	1000
+     55  005d		       dd e8 03 	      cmp	1000,x
+     56  0060		       d9 e8 03 	      cmp	1000,y
+     57  0063		       c1 01		      cmp	(1,x)
+     58  0065		       d1 01		      cmp	(1),y
+     59  0067
+     60  0067		       e0 01		      cpx	#1
+     61  0069		       e4 01		      cpx	1
+     62  006b		       ec e8 03 	      cpx	1000
+     63  006e
+     64  006e		       c0 01		      cpy	#1
+     65  0070		       c4 01		      cpy	1
+     66  0072		       cc e8 03 	      cpy	1000
+     67  0075
+     68  0075		       c6 01		      dec	1
+     69  0077		       d6 01		      dec	1,x
+     70  0079		       ce e8 03 	      dec	1000
+     71  007c		       de e8 03 	      dec	1000,x
+     72  007f
+     73  007f		       ca		      dex
+     74  0080		       88		      dey
+     75  0081
+     76  0081		       49 01		      eor	#1
+     77  0083		       45 01		      eor	1
+     78  0085		       55 01		      eor	1,x
+     79  0087		       59 01 00 	      eor	1,y	;absolute
+     80  008a		       4d e8 03 	      eor	1000
+     81  008d		       5d e8 03 	      eor	1000,x
+     82  0090		       59 e8 03 	      eor	1000,y
+     83  0093		       41 01		      eor	(1,x)
+     84  0095		       51 01		      eor	(1),y
+     85  0097
+     86  0097		       e6 01		      inc	1
+     87  0099		       f6 01		      inc	1,x
+     88  009b		       ee e8 03 	      inc	1000
+     89  009e		       fe e8 03 	      inc	1000,x
+     90  00a1
+     91  00a1		       e8		      inx
+     92  00a2		       c8		      iny
+     93  00a3
+     94  00a3		       4c 01 00 	      jmp	1	;absolute
+     95  00a6		       4c e8 03 	      jmp	1000
+     96  00a9		       6c 01 00 	      jmp	(1)	;absolute
+     97  00ac		       6c e8 03 	      jmp	(1000)
+     98  00af
+     99  00af		       20 01 00 	      jsr	1	;absolute
+    100  00b2		       20 e8 03 	      jsr	1000
+    101  00b5
+    102  00b5		       a9 01		      lda	#1
+    103  00b7		       a5 01		      lda	1
+    104  00b9		       b5 01		      lda	1,x
+    105  00bb		       b9 01 00 	      lda	1,y	;absolute
+    106  00be		       ad e8 03 	      lda	1000
+    107  00c1		       bd e8 03 	      lda	1000,x
+    108  00c4		       b9 e8 03 	      lda	1000,y
+    109  00c7		       a1 01		      lda	(1,x)
+    110  00c9		       b1 01		      lda	(1),y
+    111  00cb
+    112  00cb		       a2 01		      ldx	#1
+    113  00cd		       a6 01		      ldx	1
+    114  00cf		       b6 01		      ldx	1,y
+    115  00d1		       ae e8 03 	      ldx	1000
+    116  00d4		       be e8 03 	      ldx	1000,y
+    117  00d7
+    118  00d7		       a0 01		      ldy	#1
+    119  00d9		       a4 01		      ldy	1
+    120  00db		       b4 01		      ldy	1,x
+    121  00dd		       ac e8 03 	      ldy	1000
+    122  00e0		       bc e8 03 	      ldy	1000,x
+    123  00e3
+    124  00e3		       4a		      lsr
+    125  00e4		       46 01		      lsr	1
+    126  00e6		       56 01		      lsr	1,x
+    127  00e8		       4e e8 03 	      lsr	1000
+    128  00eb		       5e e8 03 	      lsr	1000,x
+    129  00ee
+    130  00ee		       ea		      nop
+    131  00ef
+    132  00ef		       09 01		      ora	#1
+    133  00f1		       05 01		      ora	1
+    134  00f3		       15 01		      ora	1,x
+    135  00f5		       19 01 00 	      ora	1,y	;absolute
+    136  00f8		       0d e8 03 	      ora	1000
+    137  00fb		       1d e8 03 	      ora	1000,x
+    138  00fe		       19 e8 03 	      ora	1000,y
+    139  0101		       01 01		      ora	(1,x)
+    140  0103		       11 01		      ora	(1),y
+    141  0105
+    142  0105		       48		      pha
+    143  0106		       08		      php
+    144  0107		       68		      pla
+    145  0108		       28		      plp
+    146  0109
+    147  0109		       2a		      rol
+    148  010a		       26 01		      rol	1
+    149  010c		       36 01		      rol	1,x
+    150  010e		       2e e8 03 	      rol	1000
+    151  0111		       3e e8 03 	      rol	1000,x
+    152  0114
+    153  0114		       6a		      ror
+    154  0115		       66 01		      ror	1
+    155  0117		       76 01		      ror	1,x
+    156  0119		       6e e8 03 	      ror	1000
+    157  011c		       7e e8 03 	      ror	1000,x
+    158  011f
+    159  011f		       40		      rti
+    160  0120		       60		      rts
+    161  0121
+    162  0121		       e9 01		      sbc	#1
+    163  0123		       e5 01		      sbc	1
+    164  0125		       f5 01		      sbc	1,x
+    165  0127		       f9 01 00 	      sbc	1,y	;absolute
+    166  012a		       ed e8 03 	      sbc	1000
+    167  012d		       fd e8 03 	      sbc	1000,x
+    168  0130		       f9 e8 03 	      sbc	1000,y
+    169  0133		       e1 01		      sbc	(1,x)
+    170  0135		       f1 01		      sbc	(1),y
+    171  0137
+    172  0137		       38		      sec
+    173  0138		       f8		      sed
+    174  0139		       78		      sei
+    175  013a
+    176  013a		       85 01		      sta	1
+    177  013c		       95 01		      sta	1,x
+    178  013e		       99 01 00 	      sta	1,y	;absolute
+    179  0141		       8d e8 03 	      sta	1000
+    180  0144		       9d e8 03 	      sta	1000,x
+    181  0147		       99 e8 03 	      sta	1000,y
+    182  014a		       81 01		      sta	(1,x)
+    183  014c		       91 01		      sta	(1),y
+    184  014e
+    185  014e		       86 01		      stx	1
+    186  0150		       96 01		      stx	1,y
+    187  0152		       8e e8 03 	      stx	1000
+    188  0155
+    189  0155		       84 01		      sty	1
+    190  0157		       94 01		      sty	1,x
+    191  0159		       8c e8 03 	      sty	1000
+    192  015c
+    193  015c		       aa		      tax
+    194  015d		       a8		      tay
+    195  015e		       ba		      tsx
+    196  015f		       8a		      txa
+    197  0160		       9a		      txs
+    198  0161		       98		      tya
+    199  0162
+    200  0162							; illegal opcode additions
+    201  0162
+    202  0162		       b3 01		      lax	(1),y
+    203  0164		       04 00		      nop	0
+    204  0166
+    205  0166
+    206  0166
+    207  0166

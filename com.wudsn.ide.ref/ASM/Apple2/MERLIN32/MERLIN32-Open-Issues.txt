@@ -1,0 +1,139 @@
+Contacts in Group Merlin32:
+===========================
+
+"Antoine Vignau" <rigreco.grc@gmail.com>
+"Brendan Robert" <brendan.robert@gmail.com>
+"Durant Pierre" <pierre.durant@gmail.com> on MacOS X
+"Olivier Zardini" (author of Merlin32)
+"Peter Dell" <Peter.Dell@web.de>
+"Riccardo Greco" <antoine@brutaldeluxe>
+"Steve Palm" <n9yty@n9yty.com>
+ 
+TODOs in WUDSN IDE
+==================
+T0: Release yet unlisted video tutorial.
+T1: Continue reading PDF.
+    Status: Currently on p. 9.
+T2: Complete analysis of supported instructions and opcodes.
+    Status: Done.
+T2: Complete creation of initial MERLIN32 compiler and registration via extension point.
+    Status: Done. Except for the documentation, see requirement R1.
+T2: Complete creation of initial reference source of all instructions and opcodes.
+    Status: Done. All 3 CPU levels 6502, 65C02 and 65816 can be selected in the preferences now. Included in "Merlin2-Compiler.xml".
+T3: Parse Error output
+    Status: Requires requirement R4, see below.
+
+------+------------------------------+-------------+----+---------+------+-----------------------+-------------------------------------------------------------------
+ Line | # File                  Line | Line Type   | MX |  Reloc  | Size | Address   Object Code |  Source Code                                                      
+------+------------------------------+-------------+----+---------+------+-----------------------+-------------------------------------------------------------------
+    1 |  1 Merlin32-Example.s      1 | Empty       | ?? |         |   -1 | 00/FFFF               |                                  
+    2 |  1 Merlin32-Example.s      2 | Unknown    | ?? |         |   -1 | 00/FFFF               |             absd                 
+    3 |  1 Merlin32-Example.s      3 | Unknown    | ?? |         |   -1 | 00/FFFF               |             ower                 
+    4 |  1 Merlin32-Example.s      4 | Unknown    | ?? |         |   -1 | 00/FFFF               |             12                   
+------+------------------------------+-------------+----+---------+------+-----------------------+-------------------------------------------------------------------
+T4: Insert binary into DSK image.
+    Status: Requires requirement R3, see below.
+T5: Allow "_" as visual separator in % binary numbers
+T6: Why is PUTBIN not recognized as binary include (context menu missing)
+T7: Why is ** not recognized as comment line start?
+T8: Detect hex numbers without prefix, HEX A8A8A8A8A8A8A8A8
+T9: Implement parseLine
+
+Questions towards MERIN32:
+==========================
+
+
+Requirements for smaller extensions in MERLIN32:
+================================================
+Download: http://www.brutaldeluxe.fr/products/crossdevtools/merlin/
+
+R1: PDF should be in Documentation folder of standard download, so it cab be opened from the IDE
+R2: Output folder should be specifiable via command line option; that's a standard feature of the IDE 
+R3: Output file name should be specifiable via commend line option, esp. because the file extension controls further processing like insertion into a DSK file
+ => [Error] Unknown line '	absd' in source file 'Merlin32-Example.s' (line 2). File paths in error messages should be absolute, that's also important for other editors like UltraEdit, Notepad++
+R4: Macros folder specification should be an optional parameter; if possible use use ${assemblerFolderPath}\Library as default.
+    Aim of WUDSN IDE is that everything works with minimum configuration effort for the initial setup with the assemblers standard distribution..
+    Alternative: IDE: have ${assemblerFolderPath} for ${assemblerFolderPath}\Library, so default parameter can be used.
+    But that incurs quite some additional code & documentation I'd like to avoid.
+R5: Quotes missing around file names are an issue to detecting the file name.
+
+Other Issues:
+=============
+
+I1: Exception under Java 8 / Mac OS X
+I se you don#t give up, that's good. I'm truely sorry but my job is killing me and my Atari time still.
+Nullpointer during startup, hm.. Only a breakpoint at  org.eclipse.oomph.setup.ui.SetupUIPlugin.performStartup will tell what goes wrong there.
+And sources for the Eclipse classes will be required.
+This definitively screams for a screen sharing seesion since there's no way of getting up the same environment here.
+ 
+- Peter.
+ 
+Gesendet: Dienstag, 02. August 2016 um 11:49 Uhr
+
+Finally I found the solution. INstall PDE as a new softawre in eclipse. So  I follow you video  but on 3:17, when I run the configurations, I receive a message and the new eclipse IDE opened as an empty « package explorer »
+here is the message:
+ 
+Java HotSpot(TM) 64-Bit Server VM warning: ignoring option MaxPermSize=128m; support was removed in 8.0
+!SESSION 2016-08-02 11:43:59.573 -----------------------------------------------
+eclipse.buildId=4.6.0.I20160606-1100
+java.version=1.8.0_25
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.platform.ide
+Command-line arguments:  -product org.eclipse.platform.ide -data /Users/pierredurant/Documents/Eclipse_Projects/../runtime-WUDSN-IDE -dev file:/Users/pierredurant/Documents/Eclipse_Projects/.metadata/.plugins/org.eclipse.pde.core/WUDSN-IDE/dev.properties -os macosx -ws cocoa -arch x86_64 -consoleLog
+ 
+!ENTRY org.eclipse.core.net 1 0 2016-08-02 11:44:08.209
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [bundleresource://489.fwk1532756055:1/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [bundleresource://489.fwk1532756055:2/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [ch.qos.logback.classic.util.ContextSelectorStaticBinder]
+11:44:13.186 [Worker-4] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+ 
+!ENTRY org.eclipse.oomph.setup.ui 2 0 2016-08-02 11:44:15.722
+!MESSAGE java.lang.NullPointerException
+!STACK 0
+java.lang.NullPointerException
+at org.eclipse.oomph.setup.ui.SetupUIPlugin.performStartup(SetupUIPlugin.java:379)
+at org.eclipse.oomph.setup.ui.SetupUIPlugin.access$4(SetupUIPlugin.java:350)
+at org.eclipse.oomph.setup.ui.SetupUIPlugin$1$1.run(SetupUIPlugin.java:247)
+at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+ 
+---
+Q4: Tells the assembler to ignore the rest of the source code (including Labels). => In this or in ally files (i.e. end assembly)
+Q5: Ignored means they are recgonized correctly?
+     "commands which are not supported are the ones linked to the Merlin 16+ editor, the interaction during assembly or the formatting of the listing :
+AST : send a line of ASTerisks
+CYC : calcule and print CYCle times for the code
+DAT : DATe stamp assembly listing
+EXP : macro EXPand control
+KBD : define label from KeyBoarD
+LST : LiSTing control
+LSTDO : LiSTDO OFF areas of code
+PAG : new PAGe
+PAU : PAUse
+SW : SWeet 16 opcodes
+TTL : define TiTLe heading
+SKP : SKiP lines
+TR : TRuncate control
+EXD : define a label as Direct Page EXternal to the current REL Segment. You can use EXT instead of EXD.
+
+And what is "ANOP, XC, LONGA, LONGI?
+
+char *directive_list[] = 
+{
+  "ANOP","ORG","PUT","PUTBIN",         /* PUTBIN n'existe pas dans Merlin 16+ */
+  "START","END",
+  "DUM","DEND",
+  "MX","XC","LONGA","LONGI",
+  "USE","USING",
+  "REL","DSK","LNK","SAV",
+  "TYP",
+  "IF","DO","ELSE","FIN",
+  "LUP","--^",
+  "ERR","DAT",
+  "AST","CYC","EXP","LST","LSTDO","PAG","TTL","SKP","TR","KBD","PAU","SW","USR",   /* On ne fait rien avec ces Directives */
+  NULL
+};
+

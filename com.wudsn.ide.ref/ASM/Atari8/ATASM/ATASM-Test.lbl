@@ -1,0 +1,4 @@
+xasm 3.0.1
+Label table:
+n       2005 LOOP
+n       2000 START

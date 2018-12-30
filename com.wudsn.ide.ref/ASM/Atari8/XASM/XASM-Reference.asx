@@ -1,0 +1,124 @@
+;	Reference source file for XASM
+
+;	Single line comment
+|	Single line comment
+*	Single line comment
+
+;	6502 Opcodes
+	ADC
+	AND
+	ASL
+	BCC
+	BCS
+	BEQ
+	BIT
+	BMI
+	BNE
+	BPL
+	BRK
+	BVC
+	BVS
+	CLC
+	CLD
+	CLI
+	CLV
+	CMP
+	CPX
+	CPY
+	DEC
+	DEX
+	DEY
+	EOR
+	INC
+	INX
+	INY
+	JMP
+	JSR
+	LDA
+	LDX
+	LDY
+	LSR
+	NOP
+	ORA
+	PHA
+	PHP
+	PLA
+	PLP
+	ROL
+	ROR
+	RTI
+	RTS
+	SBC
+	SEC
+	SED
+	SEI
+	STA
+	STX
+	STY
+	TAX
+	TAY
+	TSX
+	TXA
+	TXS
+
+;	65816 opcodes
+
+;	Illegal opcodes
+
+;	Directives
+	DTA
+	EIF
+	ELI
+	ELS
+	END
+	EQU
+	ERT
+	ICL
+	IFT
+	INI
+	INS
+	OPT
+	ORG
+	RUN
+
+;	Pseudo Opcodes
+	ADD
+	INW
+	JCC
+	JCS
+	JEQ
+	JMI
+	JNE
+	JPL
+	JVC
+	JVS
+	MVA
+	MVX
+	MVY
+	MWA
+	MWX
+	MWY
+	RCC
+	RCS
+	REQ
+	RMI
+	RNE
+	RPL
+	RVC
+	RVS
+	SCC
+	SCS
+	SEQ
+	SMI
+	SNE
+	SPL
+	SUB
+	SVC
+	SVS
+	
+	
+;	Hyperlink relevant directives and pseudo opcodes
+	ICL 'include/XASM-Reference-Source-Include'		;Suffix ".asx" appened automatically
+	ICL 'include/XASM-Reference-Source-Include.asx'
+	INS 'include/XASM-Reference-Binary-Include.bin'
+

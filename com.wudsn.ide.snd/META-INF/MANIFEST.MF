@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: WUDSN IDE Sound Plugin
+Bundle-SymbolicName: com.wudsn.ide.snd;singleton:=true
+Bundle-Version: 1.7.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: com.wudsn.ide.snd.SoundPlugin
+Require-Bundle: org.eclipse.osgi,
+ org.eclipse.ui.editors,
+ com.wudsn.ide.base,
+ org.eclipse.core.runtime,
+ org.eclipse.ui,
+ org.eclipse.jface.text,
+ org.eclipse.ui.ide,
+ org.eclipse.core.resources
+Bundle-ClassPath: .,
+ lib/atari8bit/asap.jar,
+ lib/c64/jsidplay2.jar
+Bundle-Vendor: Peter Dell

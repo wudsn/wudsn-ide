@@ -1,0 +1,6 @@
+.label irq1=$4031
+.label Place_Sprites=$406e
+.label cubeCoords=$4100 {
+}
+.label frameNr=$404b
+.label InitSprites=$404c

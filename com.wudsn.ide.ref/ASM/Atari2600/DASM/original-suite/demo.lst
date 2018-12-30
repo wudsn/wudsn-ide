@@ -1,0 +1,113 @@
+------- FILE C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari2600\DASM\original\demo.asm LEVEL 1 PASS 1
+      1  0000 ????						;;;
+      2  0000 ????						;
+      3  0000 ????						;   Some useful macros and techniques
+      4  0000 ????						;
+      5  0000 ????				      processor	6502
+      6  0000 ????
+      7  0000 ????						;;;
+      8  0000 ????				      mac	hexdig
+      9  0000 ????
+     10  0000 ????				      if	[{1}] <= 9
+     11  0000 ????				      dc.b	'0 + [{1}]
+     12  0000 ????				      else
+     13  0000 ????				      dc.b	'a + [{1}] - 10
+     14  0000 ????				      endif
+     15  0000 ????
+     16  0000 ????				      endm
+     17  0000 ????						;;;
+     18  0000 ????				      mac	hexnum
+     19  0000 ????
+     20  0000 ????				      if	[{1}] >= $10
+     21  0000 ????				      hexnum	[{1}] >> 4
+     22  0000 ????				      endif
+     23  0000 ????				      hexdig	[{1}] & $0F
+     24  0000 ????
+     25  0000 ????				      endm
+     26  0000 ????						;;;
+     27  0000 ????
+     28  0000					      org	0
+      0  0000					      hexnum	$123ab
+      1  0000
+      2  0000					      if	[$123ab] >= $10
+      0  0000					      hexnum	[$123ab] >> 4
+      1  0000
+      2  0000					      if	[[$123ab] >> 4] >= $10
+      0  0000					      hexnum	[[$123ab] >> 4] >> 4
+      1  0000
+      2  0000					      if	[[[$123ab] >> 4] >> 4] >= $10
+      0  0000					      hexnum	[[[$123ab] >> 4] >> 4] >> 4
+      1  0000
+      2  0000					      if	[[[[$123ab] >> 4] >> 4] >> 4] >= $10
+      0  0000					      hexnum	[[[[$123ab] >> 4] >> 4] >> 4] >> 4
+      1  0000
+      2  0000				  -	      if	[[[[[$123ab] >> 4] >> 4] >> 4] >> 4] >= $10
+      3  0000				  -	      hexnum	[[[[[$123ab] >> 4] >> 4] >> 4] >> 4] >> 4
+      4  0000					      endif
+      0  0000					      hexdig	[[[[[$123ab] >> 4] >> 4] >> 4] >> 4] & $0F
+      1  0000
+      2  0000					      if	[[[[[[$123ab] >> 4] >> 4] >> 4] >> 4] & $0F] <= 9
+      3  0000		       31		      dc.b	'0 + [[[[[[$123ab] >> 4] >> 4] >> 4] >> 4] & $0F]
+      4  0001				  -	      else
+      5  0001				  -	      dc.b	'a + [[[[[[$123ab] >> 4] >> 4] >> 4] >> 4] & $0F] - 10
+      6  0001					      endif
+      7  0001
+      6  0001
+      4  0001					      endif
+      0  0001					      hexdig	[[[[$123ab] >> 4] >> 4] >> 4] & $0F
+      1  0001
+      2  0001					      if	[[[[[$123ab] >> 4] >> 4] >> 4] & $0F] <= 9
+      3  0001		       32		      dc.b	'0 + [[[[[$123ab] >> 4] >> 4] >> 4] & $0F]
+      4  0002				  -	      else
+      5  0002				  -	      dc.b	'a + [[[[[$123ab] >> 4] >> 4] >> 4] & $0F] - 10
+      6  0002					      endif
+      7  0002
+      6  0002
+      4  0002					      endif
+      0  0002					      hexdig	[[[$123ab] >> 4] >> 4] & $0F
+      1  0002
+      2  0002					      if	[[[[$123ab] >> 4] >> 4] & $0F] <= 9
+      3  0002		       33		      dc.b	'0 + [[[[$123ab] >> 4] >> 4] & $0F]
+      4  0003				  -	      else
+      5  0003				  -	      dc.b	'a + [[[[$123ab] >> 4] >> 4] & $0F] - 10
+      6  0003					      endif
+      7  0003
+      6  0003
+      4  0003					      endif
+      0  0003					      hexdig	[[$123ab] >> 4] & $0F
+      1  0003
+      2  0003				  -	      if	[[[$123ab] >> 4] & $0F] <= 9
+      3  0003				  -	      dc.b	'0 + [[[$123ab] >> 4] & $0F]
+      4  0003					      else
+      5  0003		       61		      dc.b	'a + [[[$123ab] >> 4] & $0F] - 10
+      6  0004					      endif
+      7  0004
+      6  0004
+      4  0004					      endif
+      0  0004					      hexdig	[$123ab] & $0F
+      1  0004
+      2  0004				  -	      if	[[$123ab] & $0F] <= 9
+      3  0004				  -	      dc.b	'0 + [[$123ab] & $0F]
+      4  0004					      else
+      5  0004		       62		      dc.b	'a + [[$123ab] & $0F] - 10
+      6  0005					      endif
+      7  0005
+      6  0005
+     30  0005
+     31  0005							;;;;
+     32  0005							;
+     33  0005							;	Using an uninitialised segment to create C-like 'struct's.
+     34  0005							;	(idea taken from IBM-370 assembler style "dummy segments")
+     35  0005
+     36 U0000 ????				      seg.u	node
+     37 U0000					      org	0
+     38 U0000
+     39 U0000		       00 00	   s_next     ds.b	2	; a node has a pointer to the next one
+     40 U0002		       00 00	   s_data     ds.b	2	; and 2 bytes of data
+     41 U0004		       00 00 00    s_more     ds.b	3	; and 3 bytes of something more
+     42 U0007
+     43  0000 ????				      seg	code
+     44  0000 ????
+     45  0000 ????	       00 2a	   ptr	      equ	42	; dummy value
+C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\ASM\Atari2600\DASM\original\demo.asm (46): error: Origin Reverse-indexed.
+Aborting assembly

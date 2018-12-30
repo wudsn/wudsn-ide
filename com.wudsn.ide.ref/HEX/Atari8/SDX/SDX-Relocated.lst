@@ -1,0 +1,462 @@
+mads 1.9.9 build 23 (22 Jun 14)
+Source: C:\Users\D025328\Documents\Eclipse\workspace.jac\com.wudsn.ide.ref\HEX\Atari8\SDX\SDX-Relocated.asm
+     1 = 0000			S_ADDIZ  SMB 'S_ADDIZ'
+     2 = 0000			INSTALL  SMB 'INSTALL'
+     3 = 0000			U_GONOFF SMB 'U_GONOFF'
+     4 = 0000			I_GETTD  SMB 'I_GETTD'
+     5 = 0000			COMTAB   SMB 'COMTAB'
+     6
+     7 				* Atari OS
+     8 = 0012			RTCLOK   EQU $0012
+     9 = 0043			FMSZPG   EQU $0043
+    10 = 0080			LOMEM    EQU $0080
+    11 = 0224			VVBLKD   EQU $0224
+    12 = 0230			SDLSTL   EQU $0230
+    13 = 0231			SDLSTH   EQU $0231
+    14 = 02B6			INVFLG   EQU $02B6
+    15 = 02BE			SHFLOK   EQU $02BE
+    16 = D301			PORTB    EQU $D301
+    17 = E45C			SETVBLV  EQU $E45C
+    18 = E462			XITVBV   EQU $E462
+    19
+    20 				* Adresy SDX
+    21 = 0701			S_VER    EQU $0701
+    22 = 07F7			JEXTSW   EQU $07F7
+    23
+    24  FE FF 01 00		         BLK RELOC MAIN
+    25
+    26 0000,0034> AD 01 07	         LDA S_VER     ;Ustalenie wersji SDX
+    27 0003 29 0F		         AND #$0F
+    28 0005 09 30		         ORA #$30
+    29 0007 8D F7 01		         STA DSDXVER+2 ;revision
+    30 000A AD 01 07		         LDA S_VER
+    31 000D 4A			         LSR @
+    32 000E 4A			         LSR @
+    33 000F 4A			         LSR @
+    34 0010 4A			         LSR @
+    35 0011 09 30		         ORA #$30
+    36 0013 8D F5 01		         STA DSDXVER   ;ver no.
+    37
+    38 				;         LDA PORTB
+    39 				;         PHA
+    40 				;         AND #$FE
+    41 				;         STA PORTB     ;wylaczenie OSa
+    42
+    43 				;         LDY #$05
+    44 				;L05A1    LDA L05CC,Y   ;przepisanie 2 skokow
+    45 				;         STA $FFC6,Y
+    46 				;         DEY
+    47 				;         BPL L05A1
+    48 				;         PLA
+    49 				;         STA PORTB
+    50
+    51 0016 AD 32 00		         LDA VTDMAIN
+    52 0019 AE 33 00		         LDX VTDMAIN+1
+    53 001C 20 00 00		         JSR S_ADDIZ    ;dodanie po resecie
+    54
+    55 001F A2 0A		         LDX #$0A
+    56 0021 8E ED 02		         STX COUNTVBL
+    57 0024 A9 00		         LDA #$00
+    58 0026 8D EB 02		         STA CLKFAIL
+    59 0029 8D EE 02		         STA ST_ONOFF
+    60 002C CE 00 00		         DEC INSTALL
+    61
+    62 002F 4C 3F 00		         JMP PROCPARM
+    63
+    64 0032 34 00		VTDMAIN  DTA V(TDMAIN)
+    65
+    66 				;L05CC    JMP L05E4
+    67 				;         JMP L0649
+    68
+    69 				************************
+    70 0034 FE FF 02 02		         BLK RELOC EXTENDED   ; $5D2
+    71
+    72 0034,028F> A9 00		TDMAIN   LDA #$00         ;przy resecie
+    73 0036 8D EB 02		         STA CLKFAIL
+    74 0039 AC EE 02		         LDY ST_ONOFF
+    75 003C 4C 49 00		         JMP CHKONOFF
+    76
+    77 003F 20 00 00		PROCPARM JSR U_GONOFF     ;C=ON/OFF, U_FAIL
+    78 0042 A9 00		         LDA #$00
+    79 0044 2A			         ROL @            ;zlapanie C
+    80 0045 A8			         TAY
+    81 0046 8C EE 02		         STY ST_ONOFF
+    82
+    83 0049 C0 00		CHKONOFF CPY #$00
+    84 004B F0 0B		         BEQ TURNOFF
+    85
+    86 				* Wlacz TD
+    87 004D AC 9F 00		         LDY PTDVBPRO
+    88 0050 AE A0 00		         LDX PTDVBPRO+1
+    89 0053 20 9A 00		         JSR CHGVBLK
+    90 0056 18			         CLC
+    91 0057 60			         RTS
+    92
+    93 				* Wylacz TD
+    94 0058 A0 62		TURNOFF  LDY <XITVBV
+    95 005A A2 E4		         LDX >XITVBV
+    96 005C 20 9A 00		         JSR CHGVBLK
+    97
+    98 005F AD 30 02		         LDA SDLSTL   ;Przywroc jesli
+    99 0062 CD A1 00		         CMP PNEWDL   ;te same adresy
+   100 0065 D0 31		         BNE XTURNOFF ;DL
+   101 0067 AD 31 02		         LDA SDLSTH
+   102 006A CD A2 00		         CMP PNEWDL+1
+   103 006D D0 29		         BNE XTURNOFF
+   104
+   105 006F 38			         SEC          ;Przywrocenie
+   106 0070 AD E7 01		         LDA ADROLDDL ;starej DL
+   107 0073 E9 03		         SBC #$03
+   108 0075 8D 30 02		         STA SDLSTL
+   109 0078 85 43		         STA FMSZPG
+   110 007A AD E8 01		         LDA ADROLDDL+1
+   111 007D E9 00		         SBC #$00
+   112 007F 8D 31 02		         STA SDLSTH
+   113 0082 85 44		         STA FMSZPG+1
+   114
+   115 0084 A0 06		         LDY #$06
+   116 0086 B1 43		NEXTDLB  LDA (FMSZPG),Y
+   117 0088 C8			         INY            ;Szukamy
+   118 0089 C9 41		         CMP #$41       ;JMP+VBLK
+   119 008B D0 F9		         BNE NEXTDLB
+   120 008D AD 30 02		         LDA SDLSTL     ;Przepisujemy
+   121 0090 91 43		         STA (FMSZPG),Y ;z niego
+   122 0092 C8			         INY            ;adres
+   123 0093 AD 31 02		         LDA SDLSTH     ;poczatku DL
+   124 0096 91 43		         STA (FMSZPG),Y
+   125 0098 18			XTURNOFF CLC
+   126 0099 60			         RTS
+   127
+   128 				* Zmiana wektora VB
+   129 009A A9 07		CHGVBLK  LDA #07       ;VVBLKD
+   130 009C 4C 5C E4		         JMP SETVBLV
+   131
+   132 				;         LDA RTCLOK+2
+   133 				;WAITCLK  CMP RTCLOK+2
+   134 				;         BEQ WAITCLK
+   135 				;         STY VVBLKD
+   136 				;         STX VVBLKD+1
+   137 				;         RTS
+   138
+   139 009F 67 02		PTDVBPRO DTA V(TDVBPROC)
+   140 00A1 E0 01		PNEWDL   DTA V(NEWDL)
+   141
+   142 				************************
+   143 00A3 2C EB 02		PREPINFO BIT CLKFAIL
+   144 00A6 10 02		         BPL L0650
+   145 00A8 38			         SEC
+   146 00A9 60			         RTS
+   147
+   148 00AA CE EB 02		L0650    DEC CLKFAIL
+   149 00AD 8E CF 01		         STX PUTCHAR+2  ;Zapamietanie adresu
+   150 00B0 8C CE 01		         STY PUTCHAR+1  ;info
+   151 00B3 20 00 00		         JSR I_GETTD
+   152 00B6 90 04		         BCC TIMEDATE
+   153 00B8 EE EB 02		         INC CLKFAIL    ;Gdy nie da sie odczytac zegara
+   154 00BB 60			         RTS
+   155
+   156 				* Przygotowanie daty i czasu
+   157
+   158 00BC AD 0F 00		TIMEDATE LDA COMTAB+$0F ;rok
+   159 00BF 38			         SEC
+   160 00C0 E9 54		         SBC #84
+   161 00C2 B0 02		         BCS SKIPY2K ;Y2K
+   162 00C4 69 64		         ADC #$64    ;Y2K
+   163 00C6 8D D2 00		SKIPY2K  STA YEARIDX+1
+   164 00C9 48			         PHA         ;Y2K
+   165 00CA 29 03		         AND #$03    ;Y2K
+   166 00CC A8			         TAY         ;Y2K
+   167 00CD 68			         PLA         ;Y2K
+   168 00CE 4A			         LSR @
+   169 00CF 4A			         LSR @
+   170 00D0 38			         SEC         ;Y2K CLC
+   171 00D1 69 00		YEARIDX  ADC #$00
+   172 00D3 6D 0D 00		         ADC COMTAB+$0D ;dzien
+   173 00D6 AE 0E 00		         LDX COMTAB+$0E ;mies
+   174 00D9 7D 62 01		         ADC MONTHOFS-1,X
+   175
+   176 00DC C0 00		         CPY #$00    ;Y2K
+   177 00DE D0 02		         BNE SKIPY2K1        ;Y2K
+   178 00E0 E0 03		         CPX #$03    ;Y2K
+   179 00E2 E9 07		SKIPY2K1 SBC #$07    ;Y2K
+   180 00E4 B0 FC		         BCS SKIPY2K1 ;Y2K
+   181 00E6 69 08		         ADC #$08    ;Y2K
+   182
+   183 				         ;Y2K TAY
+   184 				         ;Y2K LDA COMTAB+$0F
+   185 				         ;Y2K AND #$03
+   186 				         ;Y2K BNE L0685
+   187 				         ;Y2K CPX #$03
+   188 				         ;Y2K BCC L0686
+   189 				;Y2K L0685    INY
+   190 				;Y2K L0686    TYA
+   191 				;Y2K L0687    CMP #$07
+   192 				;Y2K          BCC L068F
+   193 				;Y2K          SBC #$07
+   194 				;Y2K          BCS L0687
+   195 				;Y2K L068F    ADC #$02  ;i mamy w A numer dnia tygodnia
+   196 00E8 48			         PHA
+   197
+   198 00E9 A0 00		         LDY #$00  ;Zaczynamy drukowanie od poz.0
+   199
+   200 00EB 20 D2 01		         JSR PRNSEP
+   201 00EE AD BE 02		         LDA SHFLOK
+   202 00F1 F0 03		         BEQ SMALL
+   203 00F3 A9 41		         LDA #'A'
+   204 00F5 2C			         DTA B($2C)
+   205 00F6 A9 61		SMALL    LDA #'a'
+   206 00F8 AE B6 02		         LDX INVFLG
+   207 00FB F0 02		         BEQ NORMAL
+   208 00FD 09 80		         ORA #$80     ;zrob inverse
+   209 00FF 20 CD 01		NORMAL   JSR PUTCHAR
+   210 0102 20 D2 01		         JSR PRNSEP
+   211
+   212 0105 68			         PLA       ;W A nr dnia tygodnia
+   213 0106 AA			         TAX
+   214 0107 BD 6E 01		         LDA DAY1-1,X
+   215 010A 20 CD 01		         JSR PUTCHAR
+   216 010D BD 75 01		         LDA DAY2-1,X
+   217 0110 20 CD 01		         JSR PUTCHAR
+   218 0113 BD 7C 01		         LDA DAY3-1,X
+   219 0116 20 CD 01		         JSR PUTCHAR
+   220 0119 20 D5 01		         JSR PRNSPACE
+   221 011C AD 0D 00		         LDA COMTAB+$D ;dzien
+   222 011F 20 AB 01		         JSR L075C
+   223 0122 20 DB 01		         JSR PRNMINUS
+   224 0125 AE 0E 00		         LDX COMTAB+$E ;mies
+   225 0128 BD 83 01		         LDA MONTH1-1,X
+   226 012B 20 CD 01		         JSR PUTCHAR
+   227 012E BD 8F 01		         LDA MONTH2-1,X
+   228 0131 20 CD 01		         JSR PUTCHAR
+   229 0134 BD 9B 01		         LDA MONTH3-1,X
+   230 0137 20 CD 01		         JSR PUTCHAR
+   231 013A 20 DB 01		         JSR PRNMINUS
+   232 013D AD 0F 00		         LDA COMTAB+$F ;rok
+   233 0140 20 A8 01		         JSR L0759
+   234
+   235 0143 20 D2 01		         JSR PRNSEP
+   236 0146 AD 10 00		         LDA COMTAB+$10 ;hh
+   237 0149 20 AB 01		         JSR L075C
+   238 014C 20 D8 01		         JSR PRNCOLON
+   239 014F AD 11 00		         LDA COMTAB+$11 ;mm
+   240 0152 20 A8 01		         JSR L0759
+   241 0155 20 D8 01		         JSR PRNCOLON
+   242 0158 AD 12 00		         LDA COMTAB+$12 ;ss
+   243 015B 20 A8 01		         JSR L0759
+   244
+   245 015E 18			         CLC
+   246 015F EE EB 02		         INC CLKFAIL
+   247 0162 60			         RTS
+   248
+   249 0163 00 03 03 06 01 04	MONTHOFS DTA B($00,$03,$03,$06,$01,$04)
+   250 0169 06 02 05 00 03 05	         DTA B($06,$02,$05,$00,$03,$05)
+   251
+   252 				* Polskie
+   253 				;DAY1     DTA C'SNPWSCP'
+   254 				;DAY2     DTA C'oiotrzi'
+   255 				;DAY3     DTA C'benoowa'
+   256 				;MONTH1   DTA C'SLMKMCLSWPLG'
+   257 				;MONTH2   DTA C'tuawaziirair'
+   258 				;MONTH3   DTA C'ytrijepezzsu'
+   259
+   260 				* Angielskie
+   261 016F 53 53 4D 54 57 54 + DAY1     DTA C'SSMTWTF'
+   262 0176 61 75 6F 75 65 68 + DAY2     DTA C'auouehr'
+   263 017D 79 6E 6E 65 64 75 + DAY3     DTA C'ynnedui'
+   264 0184 4A 46 4D 41 4D 4A + MONTH1   DTA C'JFMAMJJASOND'
+   265 0190 61 65 61 70 61 75 + MONTH2   DTA C'aeapauuuecoe'
+   266 019C 6E 62 72 72 79 6E + MONTH3   DTA C'nbrrynlgptvc'
+   267
+   268 01A8 A2 FF		L0759    LDX #$FF
+   269 01AA 2C			         DTA B($2C) ; Bit
+   270 01AB A2 00		L075C    LDX #$00
+   271 01AD 8E EC 02		L075E    STX STORAGE+$29
+   272 01B0 A2 FF		         LDX #$FF
+   273 01B2 38			         SEC
+   274 01B3 E8			L0764    INX
+   275 01B4 E9 0A		         SBC #$0A
+   276 01B6 B0 FB		         BCS L0764
+   277 01B8 69 0A		         ADC #$0A
+   278 01BA 48			         PHA
+   279 01BB 8A			         TXA
+   280 01BC D0 07		         BNE L0776
+   281 01BE 2C EC 02		         BIT STORAGE+$29
+   282 01C1 30 02		         BMI L0776
+   283 01C3 09 10		         ORA #$10
+   284 01C5 20 CB 01		L0776    JSR L077C
+   285 01C8 68			         PLA
+   286 01C9 29 0F		         AND #$0F
+   287 01CB 49 30		L077C    EOR #$30
+   288 01CD 99 FF FF		PUTCHAR  STA $FFFF,Y
+   289 01D0 C8			         INY
+   290 01D1 60			         RTS
+   291
+   292 01D2 A9 7C		PRNSEP   LDA #'|'
+   293 01D4 2C			         DTA B($2C)
+   294 01D5 A9 20		PRNSPACE LDA #' '
+   295 01D7 2C			         DTA B($2C)
+   296 01D8 A9 3A		PRNCOLON LDA #':'
+   297 01DA 2C			         DTA B($2C)
+   298 01DB A9 2D		PRNMINUS LDA #'-'
+   299 01DD 18			L078B    CLC
+   300 01DE 90 ED		         BCC PUTCHAR
+   301
+   302 01E0 70 70		NEWDL    DTA B($70,$70)
+   303 01E2 30 42		         DTA B($30,$42)
+   304 01E4 C3 02		         DTA V(STORAGE)
+   305 01E6 01			         DTA B($01)
+   306 01E7 00 00		ADROLDDL DTA V($0000)
+   307
+   308 01E9 53 70 61 72 74 61 + TDLINE   DTA C'SpartaDOS X '
+   309 01F5 34 2E 32		DSDXVER  DTA C'4.2'
+   310 01F8 00 00 00 00		TDLINFO  DTA B($00,$00,$00,$00)
+   311 01FC 00 00 00 00		         DTA B($00,$00,$00,$00)
+   312 0200 00 00 00 00		         DTA B($00,$00,$00,$00)
+   313 0204 00 00 00 00		         DTA B($00,$00,$00,$00)
+   314 0208 00 00 00 00		         DTA B($00,$00,$00,$00)
+   315 020C 00 00 00 00		         DTA B($00,$00,$00,$00)
+   316 0210 00 00		         DTA B($00,$00)
+   317
+   318 0212 F8 01		PTDLINFO DTA V(TDLINFO)
+   319
+   320 				* Co 30 VBLK
+   321 0214 AD 01 D3		DOTDLINE LDA PORTB
+   322 0217 48			         PHA
+   323 0218 AD EA FF		         LDA COMTAB-$16 ;Indeks banku pamieci EXT
+   324 021B 20 F7 07		         JSR JEXTSW     ;Przelaczenie na niego
+   325
+   326 021E AE 13 02		         LDX PTDLINFO+1
+   327 0221 AC 12 02		         LDY PTDLINFO
+   328 0224 20 A3 00		         JSR PREPINFO
+   329
+   330 0227 A2 00		         LDX #$00
+   331 0229 A9 0F		         LDA #$0F
+   332 022B A0 00		         LDY #$00
+   333 022D 20 41 02		         JSR MOV2STOR
+   334 0230 A9 19		         LDA #$19
+   335 0232 A0 0F		         LDY #$0F
+   336 0234 20 41 02		         JSR MOV2STOR
+   337 				;         LDA #$80
+   338 				;         STA STORAGE+$27
+   339 0237 68			         PLA
+   340 0238 8D 01 D3		         STA PORTB    ;Przywrocenie ustawienia pamieci
+   341 023B 60			         RTS
+   342
+   343 023C C9 80		CHKINV   CMP #$80
+   344 023E 90 14		         BCC L07FD  ;mala!
+   345
+   346 0240 00			TMPCHAR  DTA B(0)
+   347
+   348 				* Przepisanie bajtow do STORAGE + zmiana kodow
+   349 0241 48			MOV2STOR PHA
+   350 0242 B9 E9 01		         LDA TDLINE,Y
+   351 0245 8D 40 02		         STA TMPCHAR
+   352 0248 29 7F		         AND #$7F
+   353 024A C9 60		         CMP #$60
+   354 024C B0 06		         BCS L07FD   ;mala litera?
+   355 024E E9 1F		L07F7    SBC #$1F
+   356 0250 B0 02		         BCS L07FD
+   357 0252 69 60		         ADC #$60
+   358 0254 2C 40 02		L07FD    BIT TMPCHAR
+   359 0257 30 02		         BMI CHSCREEN
+   360 0259 09 80		         ORA #$80    ;ustaw inv.
+   361 025B 9D C3 02		CHSCREEN STA STORAGE,X
+   362 025E C8			         INY
+   363 025F E8			         INX
+   364 0260 68			         PLA
+   365 0261 38			         SEC
+   366 0262 E9 01		         SBC #$01
+   367 0264 D0 DB		         BNE MOV2STOR
+   368 0266 60			         RTS
+   369
+   370 0267 D8			TDVBPROC CLD
+   371 0268 CE ED 02		         DEC COUNTVBL
+   372 026B D0 53		         BNE XTDVBPRO  ;Czy licznik sie wyzerowal
+   373
+   374 026D A9 19		         LDA #25 ;30       ;Licznik od nowa
+   375 026F 8D ED 02		         STA COUNTVBL
+   376
+   377 0272 20 14 02		         JSR DOTDLINE
+   378
+   379 0275 AD 30 02		         LDA SDLSTL    ;Czy zmieniono DL ?
+   380 0278 CD A1 00		         CMP PNEWDL
+   381 027B D0 08		         BNE DLCHANGE
+   382 027D AD 31 02		         LDA SDLSTH
+   383 0280 CD A2 00		         CMP PNEWDL+1
+   384 0283 F0 3B		         BEQ XTDVBPRO
+   385
+   386 0285 A5 80		DLCHANGE LDA LOMEM     ;To gdy zmieniono DL
+   387 0287 48			         PHA           ;Zapamietanie LOMEM
+   388 0288 A5 81		         LDA LOMEM+1   ;(bedzie uzywane jako TMP)
+   389 028A 48			         PHA
+   390
+   391 028B AD 30 02		         LDA SDLSTL    ;Przygotowanie DL
+   392 028E 85 80		         STA LOMEM
+   393 0290 18			         CLC
+   394 0291 69 03		         ADC #$03
+   395 0293 8D E7 01		         STA ADROLDDL  ;Zmiana adresu skoku
+   396 0296 AD 31 02		         LDA SDLSTH    ;na nowa DL
+   397 0299 85 81		         STA LOMEM+1
+   398 029B 69 00		         ADC #$00
+   399 029D 8D E8 01		         STA ADROLDDL+1
+   400
+   401 02A0 A0 06		         LDY #$06
+   402 02A2 B1 80		NEWDLBYT LDA (LOMEM),Y
+   403 02A4 C8			         INY           ;Szukamy
+   404 02A5 C9 41		         CMP #$41      ;JMP+VBLK w Y
+   405 02A7 D0 F9		         BNE NEWDLBYT
+   406
+   407 02A9 AD A1 00		         LDA PNEWDL    ;i przepisujemy adres naszej DL
+   408 02AC 8D 30 02		         STA SDLSTL    ;do rejestru
+   409 02AF 91 80		         STA (LOMEM),Y ;i do skoku
+   410 02B1 C8			         INY
+   411 02B2 AD A2 00		         LDA PNEWDL+1
+   412 02B5 8D 31 02		         STA SDLSTH
+   413 02B8 91 80		         STA (LOMEM),Y
+   414
+   415 02BA 68			         PLA           ;Przywracamy poprzednie MEMLO
+   416 02BB 85 81		         STA LOMEM+1
+   417 02BD 68			         PLA
+   418 02BE 85 80		         STA LOMEM
+   419 02C0 4C 62 E4		XTDVBPRO JMP XITVBV
+   420
+   421 				************************
+   422
+   423 02C3 FE FF 03 80 C3 02 +          BLK EMPTY $2C MAIN ; Num:2 Mem:$80
+   424 = 02C3			STORAGE  EQU *-$2C
+   425 = 02EB			CLKFAIL  EQU STORAGE+$28    ; licznik blednych odczytow zegara
+   426 = 02ED			COUNTVBL EQU STORAGE+$2A    ; licznik przerwan VBLK
+   427 = 02EE			ST_ONOFF EQU STORAGE+$2B    ; stan ON/OFF
+   428
+   429 02EF FD FF 03 00 00 FE +          BLK UPDATE ADDRESS
+   429 02EF FE 02 03 03 0D 5D + 
+   429 02EF FC			
+   429 02EF FD FF 02 00 00 FE + 
+   429 02EF FE 02 09 11 03 03 + 
+   429 02EF FC			
+   429 02EF FD FF 01 00 00 FE + 
+   429 02EF FC			
+   430 02EF			         BLK UPDATE SYMBOLS
+   430 02EF FB FF 53 5F 41 44 + S_ADDIZ 
+   430 02EF FE 01 1D		
+   430 02EF FC			
+   430 02EF FB FF 49 4E 53 54 + INSTALL 
+   430 02EF FE 01 2D		
+   430 02EF FC			
+   430 02EF FB FF 55 5F 47 4F + U_GONOFF
+   430 02EF FE 02 0C		
+   430 02EF FC			
+   430 02EF FB FF 49 5F 47 45 + I_GETTD 
+   430 02EF FE 02 80		
+   430 02EF FC			
+   430 02EF FB FF 43 4F 4D 54 + COMTAB  
+   430 02EF FE 02 89 17 03 46 + 
+   430 02EF FC			
+   431 02EF			         BLK UPDATE NEW PROCPARM '@TD2'
+   431 02EF FC FF 02 3F 00	
+   431 02EF 40 54 44 32 20 20 + @TD2    
+   432 02EF			         BLK UPDATE NEW PREPINFO 'I_FMTTD'
+   432 02EF FC FF 02 A3 00	
+   432 02EF 49 5F 46 4D 54 54 + I_FMTTD 
+   433
+   434 				         END

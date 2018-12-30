@@ -1,0 +1,16 @@
+The file "jsidplay2.jar" is taken from "jsidplay2-2.5.zip".
+Downloaded from "http://sourceforge.net/projects/jsidplay2/files/jsidplay2/2.5.1/".
+The version 2.5.x is the last version with binary compatibility to Java 1.6 (class file version 50.0).
+Version 3.0 requires Java 1.7 or even Java 1.8.
+The following not required folders have been deleted from the ".jar" file to save space:
+- "applet" (UI version) 
+- "c64jukebox" (minimum applet version)
+- "hardsid*" (hardware card)
+- "netsiddev"(network device).
+
+The file "jsidplay2-src.zip" is created from the GNU tarball for the 2.5 branch.
+Downloaded from "http://jsidplay2.cvs.sourceforge.net/viewvc/jsidplay2/jsidplay2/src/?pathrev=JSIDPLAY2_2_5Branch".
+It is not included in the build.properties to keep the size at the minimum.
+
+Last updated on 2014-08-23.
+

@@ -1,0 +1,42 @@
+#WUDSN IDE Converter Parameters
+#Mon Jun 04 23:43:49 CEST 2012
+converterDirection=IMAGE_TO_FILES
+filesConverterParameters.converterId=
+filesConverterParameters.imageAspect.factorX=1
+filesConverterParameters.imageAspect.factorY=1
+filesConverterParameters.displayAspect.factorX=1
+filesConverterParameters.displayAspect.factorY=1
+filesConverterParameters.displayShrinkToFit=false
+filesConverterParameters.displayZoomToFit=true
+filesConverterParameters.sourceFiles=0
+filesConverterParameters.imageFilePath=
+filesConverterParameters.columns=40
+filesConverterParameters.rows=24
+filesConverterParameters.spacingColor.red=0
+filesConverterParameters.spacingColor.green=0
+filesConverterParameters.spacingColor.blue=128
+filesConverterParameters.spacingWidth=0
+filesConverterParameters.palette=HIRES_1
+filesConverterParameters.paletteType=ATARI_DEFAULT
+filesConverterParameters.paletteRGBs=0
+imageConverterParameters.converterId=com.wudsn.ide.gfx.converter.atari2600.AsymetricalPlayfieldConverter
+imageConverterParameters.imageAspect.factorX=1
+imageConverterParameters.imageAspect.factorY=1
+imageConverterParameters.displayAspect.factorX=1
+imageConverterParameters.displayAspect.factorY=1
+imageConverterParameters.displayShrinkToFit=false
+imageConverterParameters.displayZoomToFit=true
+imageConverterParameters.imageFilePath=ISO-Scroll.png
+imageConverterParameters.targetFiles=10
+imageConverterParameters.targetFiles.0.path=
+imageConverterParameters.targetFiles.1.path=
+imageConverterParameters.targetFiles.2.path=
+imageConverterParameters.targetFiles.3.path=
+imageConverterParameters.targetFiles.4.path=
+imageConverterParameters.targetFiles.5.path=
+imageConverterParameters.targetFiles.6.path=
+imageConverterParameters.targetFiles.7.path=
+imageConverterParameters.targetFiles.8.path=
+imageConverterParameters.targetFiles.9.path=
+imageConverterParameters.useDefaultScript=true
+imageConverterParameters.script=function convertToFileData(data) {\r\n\tvar lineHeight \= 5; // Height of a single text line\r\n\tvar lineSpacing \= 1; // Space between two text lines\r\n\tvar lineFullHeight \= lineHeight + lineSpacing; // Full height of a text line\r\n\tvar lines \= java.lang.Math.floor((data.getImageDataHeight() + lineHeight) / lineFullHeight); // Number of text lines\r\n\tvar scanLines \= lines * lineHeight;\r\n\tvar columnOffsets\= [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5];\r\n\tvar columnBits   \= [0x10,0x20,0x40,0x80,0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01,0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80,0x10,0x20,0x40,0x80,0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01,0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80];\r\n\tvar bytes \= [];\r\n\tvar offset \= 0;\r\n\r\n\tfor (var l \= 0; l < lines; l \= l + 1) {\r\n\t\tvar y \= l * lineFullHeight;\r\n\t\tfor (var m \= 0; m < lineHeight; m++) {\r\n\t\t\tvar b \= [0,0,0,0,0,0];\r\n\t    \t\tfor (var x \= 0; x < data.getImageDataWidth() && x < 40; x \= x + 1) {\r\n\t\t\t    \tvar color;\r\n\r\n\t\t\t\tif (y+m < data.getImageDataHeight()){\r\n\t\t\t  \t  \tcolor \= data.getPixel(x, y + m);\r\n\t\t\t\t} else {\r\n\t\t\t\t\tcolor \= 0;\r\n\t\t\t\t}\r\n\r\n\t\t\t    \tif (color \!\= 0) {\r\n\t\t\t\t\tvar o \= columnOffsets[x];\r\n\t\t\t\t\tb[o] \= b[o] | columnBits[x];\r\n\t\t\t    \t}\r\n\t\t\t}\r\n\t\t\tbytes[offset+scanLines*0] \= b[0];\r\n\t\t\tbytes[offset+scanLines*1] \= b[1];\r\n\t\t\tbytes[offset+scanLines*2] \= b[2];\r\n\t\t\tbytes[offset+scanLines*3] \= b[3];\r\n\t\t\tbytes[offset+scanLines*4] \= b[4];\r\n\t\t\tbytes[offset+scanLines*5] \= b[5];\r\n\t\t\toffset \=offset + 1;\r\n\t\t}\r\n\t}\r\n\tdata.setTargetFileObject(0, bytes);\r\n}
