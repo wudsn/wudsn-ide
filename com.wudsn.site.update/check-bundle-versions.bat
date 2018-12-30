@@ -1,7 +1,7 @@
 @echo off
 setlocal
 set PATH=%PATH%;C:\jac\bin\wbin
-cd C:\jac\system\Java\Programming\Workspaces\WUDSN-IDE
+cd C:\jac\system\Java\Programming\Repositories\WUDSN-IDE
 
 call :check com.wudsn.ide.asm
 call :check com.wudsn.ide.asm.compilers
