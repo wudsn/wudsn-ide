@@ -1,7 +1,0 @@
-.sourcemode on
-.echo
-.echo "Loading executable..."
-.echo
-bc *
-.onexerun .echo "Launching executable..."
-bp `C:\Users\D025328\Documents\Eclipse\workspace.ext\net.sourceforge.atari-action\JAC\compiler\COMPILER-DEF.asm:177`
