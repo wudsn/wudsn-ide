@@ -1,0 +1,2375 @@
+
+<!-- saved from url=(0055)https://alienbill.com/2600/101/docs/stella.html#ednotes -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>
+			Stella Programmer's Guide (Unofficial HTML version)
+		</title>
+	</head>
+	<body>
+	<center>
+		<h2>
+STELLA<br>
+PROGRAMMER'S<br>
+GUIDE<br>
+		</h2>
+by Steve Wright 12/03/79<p>
+Reconstructed by Charles Sinnett 6/11/93<br>
+   Email: cas@mentor.cc.purdue.edu</p><p>
+HTMLified by B. Watson 9/14/2001<br>
+Email: atari@hardcoders.org<br>
+<i><a href="https://alienbill.com/2600/101/docs/stella.html#ednotes">(Editor's notes --BW)</a></i>
+	</p></center>
+
+<p>
+
+</p><h3>TABLE OF CONTENTS</h3>
+<ul>
+<li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tvprot">TELEVISION PROTOCOL</a>
+	<ul>
+	<li>
+         <a href="https://alienbill.com/2600/101/docs/diagram1.gif">Diagram 1 - Atari TV Frame</a>
+	</li></ul>
+</li><li><a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog">The TIA (as seen by the programmer)</a>
+	<ul>
+	<li>
+			<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog1.0">1.0 General Description</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog2.0">2.0 The Registers</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog3.0">3.0 Synchronization</a>
+		<ul>
+		<li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog3.1">3.1 Horizontal Timing</a>
+		</li><li>
+
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog3.2">3.2 Microprocessor Synchronization</a>
+		</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog3.3">3.3 Vertical timing</a>
+		</li></ul>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog4.0">4.0 Color and Luminosity</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog5.0">5.0 Playfield</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog6.0">6.0 The Moveable Objects Graphics</a>
+		<ul>
+		<li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog6.1">6.1 Missile Graphics (M0, M1)</a>
+		</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog6.2">6.2 Ball Graphics (BL)</a>
+		</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog6.3">6.3 Player Graphics (P0, P1)</a>
+		</li></ul>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog7.0">7.0 Horizontal Positioning</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog8.0">8.0 Horizontal Motion</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog9.0">9.0 Object Priorities</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog10.0">10.0 Collisions</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog11.0">11.0 Sound</a>
+		<ul>
+		<li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog11.1">11.1 Tone</a>
+		</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog11.2">11.2 Frequency</a>
+		</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog11.3">11.3 Volume</a>
+		</li></ul>
+	</li><li>
+
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog12.0">12.0 Input Ports</a>
+		<ul>
+		<li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog12.1">12.1 Dumped Input Ports (INPT0 thru INPT3)</a>
+		</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tiaprog12.2">12.2  Latched Input Ports (INPT4, INPT5)</a>
+		</li></ul>
+	</li></ul>
+</li><li>
+
+THE PIA (6532)
+	<ul>
+	<li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#pia1.0">1.0 General</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#pia2.0">2.0 Interval timer</a>
+		<ul>
+		<li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#pia2.1">2.1 Setting the timer</a>
+		</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#pia2.2">2.2 Reading the timer</a>
+		</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#pia2.3">2.3 When the timer reaches zero</a>
+		</li></ul>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#pia3.0">3.0 RAM</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#pia4.0">4.0 The I/O ports</a>
+		<ul>
+		<li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#pia4.1">4.1 Port B - Console Switches (read only)</a>
+		</li></ul>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#pia5.0">5.0 Port A - Hand Controllers</a>
+		<ul>
+		<li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#pia5.1">5.1 Setting for input or output</a>
+		</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#pia5.2">5.2 Inputting and Outputting</a>
+		</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#pia5.3">5.3 Joystick Controllers</a>
+		</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#pia5.4">5.4 Paddle (pot) controllers</a>
+		</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#pia5.5">5.5 Keyboard controllers</a>
+		</li></ul>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#pia6.0">6.0 Address summary table</a>
+	</li></ul>
+
+</li><li>
+
+
+<a href="https://alienbill.com/2600/101/docs/stella.html#palsecam">PAL/SECAM CONVERSIONS</a>
+	<ul>
+	<li>
+          PAL
+	</li><li>
+          SECAM
+	</li></ul>
+
+</li><li>
+
+<a href="https://alienbill.com/2600/101/docs/stella.html#tia1a">
+TIA 1A - TELEVISION INTERFACE ADAPTOR (MODEL 1A)</a>
+	<ul>
+	<li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tia1agen">
+          GENERAL DESCRIPTION</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tia1adet">
+          DETAILED DESCRIPTION</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tia1a1">1. Data and addressing</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tia1a2">2. Synchronization</a>
+		<ul>
+		<li>
+                    A. Horizontal Timing
+		</li><li>
+                    B. Vertical Timing
+		</li><li>
+                    C. Composite Sync
+		</li><li>
+                    D. Microprocessor Synchronization
+		</li></ul>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tia1a3">3. Playfield graphics Register</a>
+		<ul>
+		<li>
+                    A. Description
+		</li><li>
+                    B. Normal Serial Output
+		</li><li>
+                    C. Reflected Serial Output
+		</li><li>
+                    D. Timing Constraints
+		</li></ul>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tia1a4">4. Horizontal Position Counters</a>
+		<ul>
+		<li>
+                    A. Description
+		</li><li>
+
+                    B. Ball position Counter
+		</li><li>
+                    C. Player Position Counters
+		</li><li>
+                    D. Missile Position Counters
+		</li></ul>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tia1a5">5. Horizontal Motion Registers</a>
+		<ul>
+		<li>
+                    A. General Description
+		</li><li>
+                    B. Timing constraints
+		</li></ul>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tia1a6">6. Moving Object Graphics Registers</a>
+		<ul>
+		<li>
+                 A. General Description
+		</li><li>
+                 B. Missile Graphics
+		</li><li>
+                 C. Player Graphics
+		</li><li>
+                 D. Vertical Delay
+		</li><li>
+                 E. Ball Graphics
+		</li></ul>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tia1a7">7. Collision Detection Latches</a>
+		<ul>
+		<li>
+                 A. Definitions
+		</li><li>
+                 B. Reading  Collision
+		</li><li>
+                 C. Reset
+		</li></ul>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tia1a8">8. Input ports</a>
+		<ul>
+		<li>
+                 A. General Description
+		</li><li>
+                 B. Dumped  Input Ports (I0 through I3)
+		</li><li>
+                 C. Latched Input ports (I4, I5)
+		</li></ul>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tia1a8.5">8.5 Priority Encoder</a>
+		<ul>
+		<li>
+                 A. Purpose
+		</li><li>
+                 B. Priority Assignment
+		</li><li>
+                 C. Priority Control
+		</li></ul>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tia1a9">9. Color Luminance Registers</a>
+		<ul>
+		<li>
+                 A. Description
+		</li><li>
+                 B. Multiplexing
+		</li></ul>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tia1a10">10. Color Phase Shifter</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#tia1a11">11. Audio Circuits</a>
+		<ul>
+		<li>
+                 A. Frequency Select
+		</li><li>
+                 B. Noise-Tone Generator
+		</li><li>
+                 C. Volume Select
+		</li></ul>
+
+
+</li></ul>
+		<i>(These images are links to external files. --BW)</i>
+<ul>
+	<li>
+         <a href="https://alienbill.com/2600/101/docs/figure1.gif">Figure 1. Vertical Delay</a>
+	</li><li>
+         <a href="https://alienbill.com/2600/101/docs/figure2.gif">Figure 2. Synchronization<br>
+         Figure 3. Color-Luminance</a>
+	</li><li>
+         <a href="https://alienbill.com/2600/101/docs/figure4.gif">Figure 4. Typical Horizontal Motion Circuit</a>
+	</li><li>
+         <a href="https://alienbill.com/2600/101/docs/figure5.gif">Figure 5. Playfield Graphics</a>
+	</li><li>
+         <a href="https://alienbill.com/2600/101/docs/figure6.gif">Figure 6. Collision Detection</a>
+	</li><li>
+         <a href="https://alienbill.com/2600/101/docs/figure7.gif">Figure 7. Audio Circuit</a>
+	</li><li>
+         <a href="https://alienbill.com/2600/101/docs/figure8.gif">Figure 8. Input Ports</a>
+	</li><li>
+         <a href="https://alienbill.com/2600/101/docs/figure9.gif">Figure 9. Game System</a>
+	</li></ul>
+
+</li><li>
+
+<a href="https://alienbill.com/2600/101/docs/stella.html#W">Write Address Detailed Functions</a>
+	<ul>
+	<li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#WSYNC">WSYNC (wait for sync)</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#RSYNC">RSYNC (reset sync)</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#VSYNC">VSYNC</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#VBLANK">VBLANK</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#PJ">PF0 (PF1, PF2)</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#PLAYFIELD">PLAYFIELD REGISTERS SERIAL OUTPUT</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#CTRLPF">CTRLPF</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#NUSIZ">NUSIZ0 (NUSIZ1)</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#RESP">RESP0 (RESP1, RESM0, RESM1, RESBL)</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#RESMP">RESMP0 (RESMP1)</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#HMOVE">HMOVE</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#HMCLR">HMCLR</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#HMP">HMP0 (HMP1, HMM0, HMM1, HMBL)</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#ENAM">ENAM0 (ENAM1, ENABL)</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#GRP">GRP0 (GRP1)</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#REFP">REFP0 (REFP1)</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#VDELP">VDELP0 (VDELP1, VDELBL)</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#CXCLR">CXCLR</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#COLUP">COLUP0 (COLUP1, COLUPF, COLUBK)</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#AUDF">AUDF0 (AUDF1)</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#AUDC">AUDC0 (AUDC1)</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#AUDV">AUDV0 (AUDV1)</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#wsummary">WRITE ADDRESS SUMMARY</a>
+	</li><li>
+<a href="https://alienbill.com/2600/101/docs/stella.html#rsummary">READ ADDRESS SUMMARY</a>
+
+	</li></ul>
+
+<hr>
+<i>(These documents are in separate files, to help speed
+loading of this page... Ghods know it already takes forever! --BW)</i>
+	<ul>
+	<li>
+<a href="https://alienbill.com/2600/101/docs/diagram2.gif">
+TIA O0..02 AND LUM TIMING</a>
+</li><li>
+<a href="https://alienbill.com/2600/101/docs/diagram3.gif">
+TIA WRITE TIMING CHARACTERISTICS</a>
+</li><li>
+<a href="https://alienbill.com/2600/101/docs/diagram4.gif">
+TIA READ TIMING CHARACTERISTICS</a>
+</li><li>
+<a href="https://alienbill.com/2600/101/docs/diagram5.gif">
+TIA COMP-SYN AND READY TIMING</a>
+</li><li>
+<a href="https://alienbill.com/2600/101/docs/diagram6.gif">
+RSYNC, RES0O, H01, H02, SHB, 02, 0O</a>
+</li><li>
+<a href="https://alienbill.com/2600/101/docs/diagram7.gif">
+TIA RSYNC AND BLANK AND READY TIMING</a>
+	</li></ul>
+</li></ul>
+
+<hr>
+
+
+<a name="tvprot"></a>
+<h3>TELEVISION PROTOCOL</h3><p>
+       (The TV picture according to Atari)<br>
+</p><blockquote>
+
+For the purposes of Stella programming, a single television "frame" consists
+of 262 horizontal lines, and each line is divided by 228 clock counts
+(3.58MHz).  The actual TV picture is drawn line by line from the top down
+60 times a second, and actaully consists of only a portion of the entire
+"frame" (see diag. #1).  A typical frame will consists of 3 vertical sync
+(VSYNC) lines*, 37 vertical blank (VBLANK) lines, 192 TV picture lines,
+and 30 overscan lines.  Atari's research has shown that this pattern will
+work on all types of TV sets.  Each scan lines starts with 68 clock counts of
+horizontal blank (not seen on the TV screen) followed by 160 clock counts to
+fully scan one line of TV picture.  When the electron beam reaches the end
+of a scan line, it returns to the left side of the screen, waits for the 68
+horizontal blank clock counts, and proceeds to draw the next line below.
+<p>
+All horizontal timing is taken care of by hardware, but the microprocessor
+must "manually" control vertical timing to signal the start of the next
+frame.  When the last line of the previous frame is detected, the
+microprocessor must generate 3 lines of VSYNC, 37 lines of VBLANK, 192
+lines of actual TV picture, and 30 lines of overscan.  Fortunately, both
+VSYNC and VBLANK can simply be turned on and off at the appropriate
+times, freeing the microprocessor for other activities during their execution.
+
+</p><p>
+* (to signal the TV set to start a new frame)
+
+</p><p>
+The actual TV picture is drawn one line at a time by having the
+microprocessor enter the data for that line into the Television Interface
+Adaptor (TIA) chip, which then converts the data into video signals.  The
+TIA can only have data in it that pertains to the line being currently drawn,
+so the microprocessor must be "one step ahead" of the electron beam on each
+line.  Since one microprocessor machine cycle occurs every 3 clock counts,
+the programmer has only 76 machine cycles per line (228/3 = 76) to
+construct the actual picture (actually less because the microprocessor must
+be ahead of the raster).  To allow more time for the software, it is customary
+(but not required) to update the TIA every two scan lines.  The portion of
+the program that constructs this TV picture is referred to as the "Kernel", as
+it is the essence or kernel of the game.
+
+</p><p>
+In general, the remaining 70 scan lines (3 for VSYNC, 37 for VBLANK, and
+30 for overscan) will provides 5,320 machine cycles (70 lines x 76 machine
+cycles) for housekeeping and game logic.  Such activities as calculating the
+new position of a player, updating the score, and checking for new inputs
+are typically done during this time.
+
+</p><p>
+
+<a href="https://alienbill.com/2600/101/docs/diagram1.gif">Diagram 1 - Atari TV Frame</a>
+</p></blockquote>
+<hr>
+
+<a name="tiaprog"></a>
+<h3>The TIA (as seen by the programmer)</h3><p>
+
+<a name="tiaprog1.0"></a>
+1.0 General Description</p><p>
+</p><blockquote>
+The TIA is a custom IC designed to create the TV picture and sound from
+the instructions sent to it by the microprocessor.  It converts the 8 bit
+parallel data from the microprocessor into signals that are sent to video
+modulation circuits which combine and shape those signals to be compatible
+with ordinary TV reception.  A "playfield" and 5 moveable objects can be
+created and manipulated by software.
+<p>
+A playfield consisting of walls, clouds, barriers, and other seldom moved
+objects can be created over a colored background.  The 5 moveable objects
+can be positioned anywhere, and consists of 2 players, 2 missiles, and a ball.
+The playfield, players, missiles, and ball are created and manipulated by a
+series of registers in the TIA that the microprocessor can address and write
+into.  Each type of object has certain defined capabilities.  For example, a
+player can be moved with one instruction, but the playfield must be
+completely re-drawn in order to make it "move".
+</p><p>
+Color and luminosity (brightness) can be assigned to the background,
+playfield, and 5 moveable objects.  Sound can also be generated  and
+controlled for volume, pitch, and type of sound.  Collisions between the
+various  objects on the TV screen are detected by the TIA and can be read by
+the microprocessor .  Input ports  which can be read by the microprocessor
+give the status of some of the various hand held controllers.
+</p><p>
+</p></blockquote>
+<a name="tiaprog2.0"></a>
+2.0 The Registers
+<p>
+</p><blockquote>
+All instructions to the TIA are achieved by addressing and writing to
+various registers in the chip.  A key point to remember is data written in a
+register is latched an retained until altered by another write operation into
+that register.  For example, if the color register for a player is set for red,
+that player will be red every time it is drawn until that color register is
+changed.  All of the registers are addressed by the microprocessor as part of
+the overall RAM/ROM memory space.
+<p>
+All registers have fixed address locations and pre-assigned address names for handy
+reference.  Many registers do not use all 8 data bits, and some registers are used to
+"strobe" or trigger events.  A "strobe" register executes its function the instant it is
+written to (the data written is ignored).  The only registers the microprocessor can read
+are the collision registers and input port registers.  These registers are conveniently
+arranged so that the data bits of interest always appear as data bits 6 or 7 for easy access.
+</p><p>
+
+</p></blockquote>
+
+<a name="tiaprog3.0"></a>
+3.0 Synchronization<p>
+</p><p>
+</p><blockquote>
+   <a name="tiaprog3.1"></a>
+3.1 Horizontal Timing
+	<blockquote>
+       When the electron beam scans across the TV screen and reaches the right
+       edge, it must be turned off and moved back to the left edge of the screen to
+       begin the next scan line. The TIA takes care of this automatically,
+       independent of the microprocessor.  A 3.58 MHz oscillator generates clock
+       pulses called "color clocks" which go into a pulse counter in the TIA.  This
+       counter allows 160 color clocks for the beam to reach the right edge, then
+       generates a horizontal sync signal (HSYNC) to return the beam to the left
+       edge.  It also generates the signal to turn the beam off (horizontal blanking)
+       during its return time of 68 color clocks.  Total round trip for the electron
+       beam is 160 + 68 = 228 color clocks.  Again, all the horizontal timing is
+       taken care of by the TIA without assistance from the microprocessor.
+<p>
+	</p></blockquote>
+   <a name="tiaprog3.2"></a>
+3.2 Microprocessor Synchronization
+	<blockquote>
+       The microprocessor's clock is the 3.58 MHz oscillator divided by 3, so one
+       machine cycle is 3 color clocks.  Therefore, one complete scan line of 228
+       color clocks allows only 76 machine cycles (228/3 = 76) per scan line.  The
+       microprocessor must be synchronized with the TIA on a line-by-line basis,
+       but program loops and branches take unpredictable lengths of time.  To
+       solve this software sync. problem, the programmer can use the <a href="https://alienbill.com/2600/101/docs/stella.html#WSYNC">WSYNC</a>
+       (Wait for SYNC) strobe register.  Simply writing to the WSYNC causes the
+       microprocessor to halt until the electron beam reaches the right edge of the
+       screen, then the microprocessor resumes operation at the beginning of the
+       68 color clocks for horizontal blanking.  Since the TIA latches all
+       instructions until altered by another write operation, it could be updated
+       every 2 or 3 lines.  The advantage is the programmer gains more time to
+       execute software, but at a price paid with lower vertical resolution in the
+       graphics.
+<p>
+       NOTE:  WSYNC and all the following addresses' bit structures are itemized
+       in the TIA hardware manual.  The purpose of this document is to make
+       them understandable.
+</p><p>
+	</p></blockquote>
+   <a name="tiaprog3.3"></a>
+3.3 Vertical timing
+	<blockquote>
+       When the electron beam has scanned 262 lines, the TV set must be signaled
+       to blank the beam and position it at the top of the screen to start a new
+       frame.  This signal is called vertical sync, and the TIA must transmit this
+       signal for at least 3 scan lines.  This is accomplished by writing a "1" in D1
+       of <a href="https://alienbill.com/2600/101/docs/stella.html#VSYNC">VSYNC</a> to turn it on, count at least 2 scan lines, then write a "0" to D1 of
+       VSYNC to turn it off.
+<p>
+       To physically turn the beam off during its repositioning time, the TV set
+       needs 37 scan lines of vertical blanks signal from the TIA.  This is
+       accomplished by writing a "1" in D1 of <a href="https://alienbill.com/2600/101/docs/stella.html#VBLANK">VBLANK</a> to turn it on, count 37
+       lines, then write a "0" to D1 of VBLANK to turn it off.  The microprocessor
+       is of course free to execute other software during the vertical timing
+       commands, VSYNC and VBLANK.
+</p><p>
+	</p></blockquote>
+</blockquote>
+<a name="tiaprog4.0"></a>
+4.0 Color and Luminosity
+<p>
+</p><blockquote>
+       Color and luminosity can be assigned to the background (BK), playfield
+       (PF), ball (BL), player 0 (P0), player 1(P1), missile 0 (M0), and missile 1
+       (M1).  There are only four color-lum registers for these 7 objects, so the
+       objects are paired to share the same register according to the following list:
+<p>
+</p><blockquote>
+<table border="1">
+	<tbody><tr>
+<td>color-lum register</td>       <td>Objects colored</td></tr>
+<tr><td>COLUMP0</td>                  <td>P0, M0 (player 0, missile 0)</td></tr>
+<tr><td>COLUMP1</td>                  <td>P1, M1 (player 1, missile 1)</td></tr>
+<tr><td>COLUMPF</td>                  <td>PF, BL (playfield, ball)</td></tr>
+<tr><td>COLUMBK</td>                  <td>BK (background)</td></tr>
+</tbody></table>
+</blockquote>
+<p>
+       For example, if the <a href="https://alienbill.com/2600/101/docs/stella.html#COLUP">COLUMP0</a> register is set for light red, both P0 and M0
+       will be light red when drawn.
+</p><p>
+       A color-lum register is set for both color and luminosity by writing a single 7
+       bit instruction to that register.  Four of the bits select one of the 16
+       available colors, and the other 3 bits select one of 8 levels of luminosity
+       (brightness).  The specific codes required to create specific color and lum are
+       listed in the Detailed Address List of the TIA hardware manual.  As with all
+       registers (except the "strobe" registers), the data written to them is latched
+       until altered by another write operation.
+</p><p>
+<i>(These registers are referred to here as COLUMxx, but everywhere else
+they are COLUxx, including later in this document. --BW)</i>
+</p></blockquote>
+<a name="tiaprog5.0"></a>
+5.0 Playfield
+<p>
+</p><blockquote>
+       The <a href="https://alienbill.com/2600/101/docs/stella.html#PF">PF</a> register is used to create a playfield of walls, clouds, barriers, etc., that are
+       seldom moved.  This low resolution register is written into to draw the left half of the
+       TV screen only.  The right half of the screen is drawn by software selection of whether a
+       duplication or a reflection of the right half.
+<p>
+       The PF register is 20 bits wide, so the 20 bits are written into 3 addresses:
+       PF0, PF1, and PF2.  PF0 is only 4 bits wide and constructs the first 4 "bits"
+       of the playfield, starting at the left edge of the TV screen.  PF1 constructs
+       the next 8 "bits", and PF2 the last 8 bits" which end at the center of the
+       screen.  The PF register is scanned from left  to right and where a "1" is
+       found the PF color is drawn, and where a "0" is found, the BK color is
+       drawn.  To clear the playfield, obviously zeros must be written into PF0,
+       PF1, and PF2.
+</p><p>
+       To make the right half of the playfield into a duplication or copy of the left
+       half, a "0" is written to D0 of the <a href="https://alienbill.com/2600/101/docs/stella.html#CTRLPF">CTLPF</a> (control playfield) register.
+       Writing a "1" will cause the reflection to be displayed.
+</p></blockquote>
+<p>
+<a name="tiaprog6.0"></a>
+6.0 The Moveable Objects Graphics
+</p><blockquote>
+<p>
+       All 5 moveable objects (P0, M0, P1, M1, BL) can be assigned a horizontal
+       location on the screen and moved left or right relative to their location.
+       Vertical positions, however, are treated in an entirely different manner.  In
+       principle, these objects appear at whatever scan lines their graphics
+       registers are enabled.  For example, let us assume the ball is to be
+       positioned vertically in the center of the screen.  The screen has 192 scan
+       lines and we want the ball to be 2 scan lines "thick".  The ball graphics
+       would be disabled until scan line 96, enabled for 2 scan lines, then disabled
+       for the rest of the frame.  Each type of object (players, missiles, and ball)
+       has its own characteristics and limitations.
+</p><p>
+</p></blockquote>
+   <a name="tiaprog6.1"></a>
+6.1 Missile Graphics (M0, M1)
+<blockquote>
+       The two missile graphics registers will draw a missile on any scan line by
+       writing a "1" to the one bit enable missile registers (<a href="https://alienbill.com/2600/101/docs/stella.html#ENAM">ENAM0</a>, ENAM1).
+       Writing a "0" to these registers will disable the graphics.  The missiles' left
+       edge is positioned by a horizontal position register, but the right edge is a
+       function of how wide the missile is make.  Width of a missile is controlled by
+       writing into bits D4 and D5 of the number-size registers (<a href="https://alienbill.com/2600/101/docs/stella.html#NUSIZ">NUSIZ0</a>,
+       NUSIZ1).  This has the effect of "stretching" the missile out over 1,2,4, or 8
+       color clock counts (a full scan line is 160 color clocks).
+<p>
+</p></blockquote>
+   <a name="tiaprog6.2"></a>
+6.2 Ball Graphics (BL)
+<blockquote>
+       The ball graphics register works just like the missile registers.  Writing a
+       "1" to the enable ball register (<a href="https://alienbill.com/2600/101/docs/stella.html#ENABL">ENABL</a>) enables the ball graphics until the
+       register is disabled.  The ball can also be "stretched" to widths of 1, 2, 4, or 8
+       color clock counts by writing to bits D4 and D5 of the <a href="https://alienbill.com/2600/101/docs/stella.html#CTRLPF">CTRLPF</a> register.
+<p>
+       The ball can also be vertically delayed one can line.  For example, if the ball
+       graphics were enabled on scan line 95, it could be delayed to not display on
+       the screen until scan line 96 by writing a "1" to D0 of the vertical delay
+       (<a href="https://alienbill.com/2600/101/docs/stella.html#VDELP">VDELBL</a>) register.  The reason for having a vertical delay capability is
+       because most programs will update the TIA every 2 lines.  This confines all
+       vertical movements  of objects to 2 scan line "jumps".  The use of vertical
+       delay allows the objects to move one scan line at a time.
+</p><p>
+</p></blockquote>
+   <a name="tiaprog6.3"></a>
+6.3 Player Graphics (P0, P1)
+<blockquote>
+       The player graphics are the most sophisticated of all the moveable objects.
+       They have all the capabilities of the missile and ball graphics, plus three
+       move capabilities.  Players can take on a "shape" such as a man or an
+       airplane, and the player can easily be flipped over horizontally to display
+       the mirror image (reflection) instead of the original image, plus multiple
+       copies of the players can be created.
+<p>
+       The player graphics are drawn line-by-line like all other graphics.  The
+       difference here is each scan line of the player is 8 "bits" wide, whereas the
+       missiles and ball are one "bit" wide.  Therefore, a player can be though of as
+       being drawn of graph paper 8 squares wide and as tall as desired.  To "color
+       in the squares" of this imaginary graph paper, 8 data bits are written into
+       the players graphics registers (<a href="https://alienbill.com/2600/101/docs/stella.html#GRP">GP0</a>, GP1).  This 8 bit register is scanned
+       from D7 to D0, and wherever a "1" is found that "square" gets the players'
+       color (from the color-lum register) and where a "0" is found that "square"
+       gets the background color.  To position a player vertically, simply leave all
+       "0's" in the graphics registers (GP0, GP1) until the electron beam is on the
+       scan line desired, write to the graphics register line-by-line describing the
+       player, then write all "0's" to turn off the players' graphics until the end of
+       that frame.
+</p><p>
+       To display a mirror image (reflection) instead of the original figure, write a
+       "1" to D3 of the one bit reflection register (<a href="https://alienbill.com/2600/101/docs/stella.html#REFP">REFP0</a>, REFP1).  A "0" written to
+       these registers restores the original figure.
+</p><p>
+       Multiple copies of players as well as their size are controlled by writing 3
+       bits (D0, D1, D2) into the number-size registers (<a href="https://alienbill.com/2600/101/docs/stella.html#NUSIZ">NUSIZ0</a>, NUSIZ1).  These
+       three bits select from 1 to 3 copies of the player, spacing of those copies, as
+       well as the size of the player (each "square" of the player can be 1, 2, or 4
+       clocks wide).  Whenever multiple copies are selected, the TIA automatically
+       creates the same number of copies of the missile for that player.  Again, the
+       specifics of all this are laid out in the TIA hardware manual.
+</p><p>
+       Vertical delay for the players works exactly like the ball by writing a "1" to
+       D0 in the players' vertical delay registers (<a href="https://alienbill.com/2600/101/docs/stella.html#VDELP">VDELP0</a>, VDELP1).  Writing a
+       "0" to these locations disables the vertical delay.
+</p><p>
+</p></blockquote>
+<a name="tiaprog7.0"></a>
+7.0 Horizontal Positioning
+<blockquote>
+<p>
+       The horizontal position of each object is set by writing to its associated reset
+       register (<a href="https://alienbill.com/2600/101/docs/stella.html#RESP">RESP0</a>, RESP1, <a href="https://alienbill.com/2600/101/docs/stella.html#RESM">RESM0</a>, RESM1, <a href="https://alienbill.com/2600/101/docs/stella.html#RESBL">RESBL</a>) which are all "strobe"
+       registers (they trigger their function as soon as they are addressed).  That
+       causes the object to be positioned wherever  the electron bean was in its
+       sweep across the screen when the register was reset.  for example, if the
+       electron beam was 60 color clocks into a scan line when RESP0 was written
+       to, player 0 would be positioned 60 color clocks "in" on the next scan line.
+       Whether or not P0 is actually drawn on the screen is a function of the data
+       in the <a href="https://alienbill.com/2600/101/docs/stella.html#GRP">GP0</a> register, but if it were drawn, it would show up at 60.  Resets to
+       these registers anywhere during horizontal blanking will position objects at
+       the left edge of the screen (color clock 0).  Since there are 3 color clocks per
+       machine cycle, and it can take up to 5 machine cycles to write the register,
+       the programmer is confined to positioning the objects at 15 color clock
+       intervals across the screen.  This "course" positioning is "fine tuned" by the
+       Horizontal Motion, explained in section 8.0.
+</p><p>
+       Missiles have an additional positioning command.  Writing a "1" to D1 of
+       the reset missile-to-player register (<a href="https://alienbill.com/2600/101/docs/stella.html#RESMP">RESMP0</a>, RESMP1) disables that
+       missiles' graphics (turns it off) and repositions it horizontally to the center
+       of its associated player.  Until a "0" is written to the register, the missile's
+       horizontal position is locked to the center of its player in preparation to be
+       fired again.
+</p><p>
+</p></blockquote>
+<a name="tiaprog8.0"></a>
+8.0 Horizontal Motion
+<blockquote>
+<p>
+       Horizontal motion allows the programmer to move any of the 5 graphics
+       objects relative to their current horizontal position.  Each object has a 4 bit
+       horizontal motion register (<a href="https://alienbill.com/2600/101/docs/stella.html#HMP">HMP0</a>, HMP1, <a href="https://alienbill.com/2600/101/docs/stella.html#HMM">HMM0</a>, HMM1, <a href="https://alienbill.com/2600/101/docs/stella.html#HMBL">HMBL</a>) that can
+       be loaded with a value in the range of +7 to -8 (negative values are
+       expressed in two's complement from).  This motion is not executed until the
+       <a href="https://alienbill.com/2600/101/docs/stella.html#HMOVE">HMOVE</a> register is written to, at which time all motion registers move their
+       respective objects.  Objects can be moved repeatedly by simply executing
+       HMOVE.  Any object that is not to move must have a 0 in its motion
+       register.  With the horizontal positioning command confined to positioning
+       objects at 15 color clock intervals, the motion registers fills in the gaps by
+       moving objects +7 to -8 color clocks.  Objects can not be placed at any color
+       clock position across the screen.  All 5 motion registers can be set to zero
+       simultaneously by writing to the horizontal motion clear register (<a href="https://alienbill.com/2600/101/docs/stella.html#HMCLR">HMCLR</a>).
+</p><p>
+       There are timing constraints for the HMOVE command.  The HMOVE
+       command must immediately follow a <a href="https://alienbill.com/2600/101/docs/stella.html#WSYNC">WSYNC</a> (Wait for SYNC) to insure the
+       HMOVE operation occurs during horizontal blanking.  This is to allow
+       sufficient time for the motion registers to do their thing before the electron
+       beam starts drawing the next scan line.  Also, for mysterious internal
+       hardware considerations, the motion registers should not be modified for at
+       least 24 machine cycles after an HMOVE command.
+</p><p>
+</p></blockquote>
+<a name="tiaprog9.0"></a>
+9.0 Object Priorities
+<blockquote>
+<p>
+       Each object is assigned a priority so when any two objects overlap the one
+       with the highest priority will appear to move in front of the other.  To
+       simplify hardware logic, the missiles have the same priority as their
+       associated player, and the ball has the same priority as the playfield.  The
+       background, of course, has the lowest priority.  The following table
+       illustrates the normal (default) priority assignments.
+</p><p>
+</p><blockquote>
+<table border="1">
+<tbody><tr><td>Priority</td>                           <td>Objects</td></tr>
+<tr><td>1</td>                              <td>P0, M0</td></tr>
+<tr><td>2</td>                              <td>P1, M1</td></tr>
+<tr><td>3</td>                              <td>BL, PF</td></tr>
+<tr><td>4</td>                              <td>BK</td></tr>
+</tbody></table>
+</blockquote>
+<p>
+       This priority assignment means that players and missiles will move in front
+       of the playfield.  To make the players and missiles move behind the
+       playfield, a "1" must be written to D2 of the <a href="https://alienbill.com/2600/101/docs/stella.html#CTRLPF">CTRLPF</a> register.  The
+       following table illustrates how the priorities are affected:
+</p><p>
+</p><blockquote>
+<table border="1">
+<tbody><tr><td>Priority</td>                           <td>Objects</td></tr>
+<tr><td>1</td>                              <td>BL, PF</td></tr>
+<tr><td>2</td>                              <td>P0, M0</td></tr>
+<tr><td>3</td>                              <td>P1, M1</td></tr>
+<tr><td>4</td>                              <td>BK</td></tr>
+</tbody></table>
+</blockquote>
+<p>
+       One more priority control is available to be used for displaying the score.
+       When a "1" is written to D1 of the CTRLPF register, the left half of the
+       playfield takes on the color of player 0, and the right half the color of player
+       1.  The game score can now be displayed using the <a href="https://alienbill.com/2600/101/docs/stella.html#PF">PF</a> graphics register, and
+       the score will be in the same color as its associated player.
+</p><p>
+</p></blockquote>
+<a name="tiaprog10.0"></a>
+10.0 Collisions
+<blockquote>
+<p>
+       The TIA detects collisions between any of the 6 objects it generates (the
+       playfield and 5 moveable objects).  There are 15 possible two-object
+       collisions which are stored in 15 one bit latches.  Each collision register
+       contains two of these latches which are read by the microprocessor on D6
+       and D7 of the data bus for easy access.  A "1" on the data line indicates the
+       collision it records has occurred.  The collision registers could be read at any
+       time but is usually done during vertical blank after all possible collisions
+       have occurred.  The collision registers are all reset simultaneously by
+       writing to the collision reset register (<a href="https://alienbill.com/2600/101/docs/stella.html#CXCLR">CXCLR</a>).
+</p><p>
+</p></blockquote>
+<a name="tiaprog11.0"></a>
+11.0 Sound
+<blockquote>
+<p>
+       There are two audio circuits for generating sound.  They are identical but
+       completely independent and can be operated simultaneously to produce
+       sound effects through the TV speaker.  Each audio circuit has three
+       registers that control a noise-tone generator (what kind of sound), a
+       frequency selection (high or low pitch of the sound), and a volume control.
+</p><p>
+   <a name="tiaprog11.1"></a>
+11.1 Tone
+	</p><blockquote>
+       The noise-tone generator is controlled by writing to the 4 bit audio control
+       registers (<a href="https://alienbill.com/2600/101/docs/stella.html#AUDC">AUDC0</a>, AUDC1).  The values written cause different kinds of
+       sounds to be generated.  Some are pure tones like a flute, others have
+       various "noise" content like a rocket motor or explosion.  Even though the
+       TIA hardware manual lists the sounds created by each value, some
+       experimentation will be necessary to find "your sound".
+<p>
+	</p></blockquote>
+   <a name="tiaprog11.2"></a>
+11.2 Frequency
+	<blockquote>
+        Frequency selection is controlled by writing to a 5 bit audio frequency
+       register (<a href="https://alienbill.com/2600/101/docs/stella.html#AUDF">AUDF0</a>, AUDF1).  The value written is used to divide a 30KHz
+       reference frequency creating higher or lower pitch of whatever type of sound
+       is created by the noise-tone generator.  By combining the pure tones
+       available from the noise-tone generator with frequency selection a wide
+       range of tones can be generated.
+<p>
+	</p></blockquote>
+   <a name="tiaprog11.3"></a>
+11.3 Volume
+	<blockquote>
+       Volume is controlled by writing to a 4 bit audio volume register (<a href="https://alienbill.com/2600/101/docs/stella.html#AUDV">AUDV0</a>,
+       AUDV1).  Writing 0 to these registers turns sound off completely, and
+       writing any value up to 15 increases the volume accordingly.
+<p>
+	</p></blockquote>
+</blockquote>
+<a name="tiaprog12.0"></a>
+12.0 Input Ports
+	<blockquote>
+<p>
+       There are six input ports whose logic states can be read on D7 by reading
+       the input port addresses (INPT0, thru INPT5).  These six ports are divided
+       into two types, "dumped" and "latched".
+</p><p>
+   <a name="tiaprog12.1"></a>
+12.1 Dumped Input Ports (INPT0 thru INPT3)
+	</p><blockquote>
+       These four ports are used to read up to four paddle controllers.  Each paddle controller
+       contains an adjustable pot controlled by the knob on the controller.  The output of the
+       pot is used to charge a capacitor in the console, and when the capacitor is charged the
+       input port goes HI.  The microprocessor discharges this capacitor by writing a "1" to D7
+       of <a href="https://alienbill.com/2600/101/docs/stella.html#VBLANK">VBLANK</a> then measures the time it takes to detect a logic one at that port.  This
+       information can be used to position objects on the screen based on the position of the
+       knob on the paddle controller.
+<p>
+	</p></blockquote>
+   <a name="tiaprog12.2"></a>
+12.2  Latched Input Ports (INPT4, INPT5)
+	<blockquote>
+       These two ports have latches that are both enabled by writing a "1" or
+       disabled by writing a "0" to D6 of <a href="https://alienbill.com/2600/101/docs/stella.html#VBLANK">VBLANK</a>.  When disabled the
+       microprocessor reads the logic level of the port directly.  When enabled, the
+       latch is set for logic one and remains that way until its port goes LO.  When
+       the port goes LO the latch goes LO and remains that way regardless of what
+       the port does.  The trigger buttons of the joystick controllers connect to
+       these ports.
+<p>
+	</p></blockquote>
+</blockquote>
+<hr>
+<a name="pia"></a>
+<h3>THE PIA (6532)</h3>
+<p>
+<a name="pia1.0"></a>
+1.0 General
+</p><p>
+</p><blockquote>
+       The PIA chip is an off-the-shelf 6532 Peripheral Interface Adaptor which
+       has three functions:  a programmable timer, 128 bytes of RAM, and two 8
+       bit parallel I/O ports.
+<p>
+</p></blockquote>
+<a name="pia2.0"></a>
+2.0 Interval timer
+<blockquote>
+<p>
+       The PIA uses the same clock as the microprocessor so that one PIA cycle
+       occurs for each machine cycle.  The PIA can be set for one of four different
+       "intervals", where each interval is some multiple of the clock (and therefore
+       machine cycles).  A value from 1 to 255 is loaded into the PIA which will be
+       decremented by one at each interval.  The timer can now be read by the
+       microprocessor to determine elapsed time for timing various software
+       operations and keep them synchronized with the hardware (TIA chip).
+</p><p>
+   <a name="pia2.1"></a>
+2.1 Setting the timer
+	</p><blockquote>
+       The timer is set by writing a value or count (from 1 to 255) to the address of
+       the desired interval setting according to the following table :
+<p>
+</p><blockquote>
+<table border="1">
+<tbody><tr><td>Hex Address</td>    <td>Interval</td>            <td> Mnemonic</td></tr>
+<tr><td>294</td>             <td>1 clock</td>         <td>TIM1T</td></tr>
+<tr><td>295</td>             <td>8 clocks</td>        <td>TIM8T</td></tr>
+<tr><td>296</td>             <td>64 clocks</td>       <td>TIM64T</td></tr>
+<tr><td>297</td>             <td>1024 clocks</td>     <td>T1024T</td></tr>
+</tbody></table>
+</blockquote>
+<p>
+       For example, if the value of 100 were written to TIM64T (HEX address 296)
+       the timer would decrement to 0 in 6400 clocks (64 clocks per interval x 100
+       intervals) which would also be 6400 microprocessor machine cycles.
+</p><p>
+	</p></blockquote>
+   <a name="pia2.2"></a>
+2.2 Reading the timer
+	<blockquote>
+       The timer may be read any number of times after it is loaded of course, but
+       the programmer is usually interested in whether or not the timer has
+       reached 0.  The timer is read by reading INTIM at hex address 284.
+<p>
+	</p></blockquote>
+   <a name="pia2.3"></a>
+2.3 When the timer reaches zero
+	<blockquote>
+       The PIA decrements the value or count loaded into it once each interval
+       until it reaches 0.  It holds that 0 counts for one interval, then the counter
+       flips to FF(HEX) and decrements once each clock cycle, rather than once per
+       interval.  The purpose of this feature is to allow the programmer to
+       determine how long ago the timer zeroed out in the event the timer was
+       read after it passed zero.
+	</blockquote>
+</blockquote>
+<p>
+<a name="pia3.0"></a>
+3.0 RAM
+</p><p>
+</p><blockquote>
+       The PIA has 128 bytes of RAM located in the Stella memory map from HEX
+       address 80 to FF.  The microprocessor stack is normally located from FF on
+       down, and variables are normally located from 80 on up (hoping the two
+       never meet).
+<p>
+</p></blockquote>
+<a name="pia4.0"></a>
+4.0 The I/O ports
+<blockquote>
+<p>
+       The two ports (Port A and Port B) are 8 bits wide and can be set for either
+       input or output.  Port A is used to interface to carious hand-held controllers
+       but Port B is dedicated to reading the status of the Stella console switches.
+</p><p>
+   <a name="pia4.1"></a>
+4.1 Port B - Console Switches (read only)
+</p><blockquote>
+       Port B is hardwired to be an input port only that is read by addressing
+       SWCHB (HEX 282) to determine the status of all the console switches
+       according to the following table:
+<p>
+	</p><blockquote>
+<table border="1">
+<tbody><tr><td>Data Bit</td>    <td>Switch</td>     <td>Bit Meaning</td></tr>
+<tr><td>D7</td>      <td>P1 difficulty</td>  <td>0 = amateur (B), 1 = pro (A)</td></tr>
+<tr><td>D6</td>      <td>P0 difficulty</td>  <td>0 = amateur (B), 1 = pro (A)</td></tr>
+<tr><td>D5/D4</td>     <td colspan="2">(not used)</td></tr>
+<tr><td>D3</td>      <td>color - B/W</td>    <td>0 = B/W, 1 = color</td></tr>
+<tr><td>D2</td>      <td colspan="2">(not used)</td></tr>
+<tr><td>D1</td>      <td>game select</td>    <td>0 = switch pressed</td></tr>
+<tr><td>D0</td>      <td>game reset</td>   <td>0 = switch pressed</td></tr>
+</tbody></table>
+	</blockquote>
+</blockquote>
+<p>
+</p></blockquote>
+<a name="pia5.0"></a>
+5.0 Port A - Hand Controllers
+<blockquote>
+<p>
+       Port A is under full software control to be configured as an input or an
+       output port.  It can then be used to read or control various hand-head
+       controllers with the data bits defined differently depending on the type of
+       controller used.
+</p><p>
+   <a name="pia5.1"></a>
+5.1 Setting for input or output
+	</p><blockquote>
+       Port A has an 8 bit wide Data Direction Register (DDR) that is written to at
+       SWACNT (HEX 281) to set each individual pin of Port A to either input or
+       output.  The Port A pins are labeled PA0 thru PA7, and writing a "0" to a
+       pins' DDR bit sets that pin as input, and a "1" sets it as an output.  For
+       example, writing all 0's to SWACNT (the DDR for Port A) sets PA0 thru
+       PA7 (all 8 pins of Port A) as inputs. If F0 (11110000) were written to
+       SWACNT then PA7, PA6, PA5 &amp; PA4 would be outputs, and PA3, PA2, PA1
+       &amp; PA0 would be inputs.
+	</blockquote>
+<p>
+   <a name="pia5.2"></a>
+5.2 Inputting and Outputting
+	</p><blockquote>
+       Once the DDR has set the pins of Port A for input or output they may be
+       read or written to by addressing SWCHA (HEX 280).
+	</blockquote>
+<p>
+   <a name="pia5.3"></a>
+5.3 Joystick Controllers
+	</p><blockquote>
+       Two joysticks can be read by configuring the entire port as input and
+       reading the data at SWCHA according to the following table:
+<p>
+</p><blockquote>
+<table border="1">
+<tbody><tr><td>Data Bit</td><td>Direction</td><td>Player</td></tr>
+<tr><td>D7</td><td>right</td><td>P0</td></tr>
+<tr><td>D6</td><td>left</td><td>P0</td></tr>
+<tr><td>D5</td><td>down</td><td>P0</td></tr>
+<tr><td>D4</td><td>up</td><td>P0</td></tr>
+<tr><td>D3</td><td>right</td><td>P1</td></tr>
+<tr><td>D2</td><td>left</td><td>P1</td></tr>
+<tr><td>D1</td><td>down</td><td>P1</td></tr>
+<tr><td>D0</td><td>up</td><td>P1</td></tr>
+</tbody></table>
+                     (P0 = left player, P1 = right player)
+<p>
+</p></blockquote>
+       A "0" in a data bit indicates the joystick has been moved to close that
+       switch.  All "1's" in a player's nibble indicates that joystick is not moving.
+<p>
+	</p></blockquote>
+	<a name="pia5.4"></a>
+   5.4 Paddle (pot) controllers
+	<blockquote>
+       Only the paddle triggers are read from the PIA.  The paddles themselves
+       are read at INP0 thru INPT3 of the TIA.  The paddle triggers can be read at
+       SWCHA according to the following table :
+<p>
+</p><blockquote>
+<table border="1">
+<tbody><tr><td>Data Bit</td>            <td>Paddle #</td></tr>
+<tr><td>D7</td>                     <td>P0</td></tr>
+<tr><td>D6</td>                     <td>P1</td></tr>
+<tr><td>D5/D4</td>                  <td>(not used)</td></tr>
+<tr><td>D3</td>                     <td>P2</td></tr>
+<tr><td>D2</td>                     <td>P3</td></tr>
+<tr><td>D1/D0</td>                  <td>(not used)</td></tr>
+</tbody></table>
+	</blockquote>
+<p>
+	</p></blockquote>
+   <a name="pia5.5"></a>
+5.5 Keyboard controllers
+	<blockquote>
+       The keyboard controller has 12 buttons arranged into 4 rows and 3 columns.
+       A signal is sent to a row, then the columns are checked to see if a button is
+       pushed, then the next row is signaled and all columns sensed, etc. until the
+       entire keyboard is scanned and sensed.  The PIA sends the signals to the
+       rows, and the columns are sensed by reading INPT0, INPT1, and INPT4 of
+       the TIA.  With Port A configured as an output port, the data bits will send a
+       signal to the keyboard controller rows according to the following table :
+<p>
+</p><blockquote>
+<table border="1">
+<tbody><tr><td>Data Bit</td><td>Keyboard Row</td><td>Player</td></tr>
+<tr><td>D7</td><td>bottom</td><td>P0</td></tr>
+<tr><td>D6</td><td>third</td><td>P0</td></tr>
+<tr><td>D5</td><td>second</td><td>P0</td></tr>
+<tr><td>D4</td><td>top</td><td>P0</td></tr>
+<tr><td>D3</td><td>bottom</td><td>P1</td></tr>
+<tr><td>D2</td><td>third</td><td>P1</td></tr>
+<tr><td>D1</td><td>second</td><td>P1</td></tr>
+<tr><td>D0</td><td>top</td><td>P1</td></tr>
+</tbody></table>
+(P0 = left player, P1 = right player)
+<p>
+       NOTE : a delay of 400 microseconds is necessary between writing to this
+       port and reading the TIA input ports.
+</p></blockquote>
+	</blockquote>
+</blockquote>
+<p>
+<a name="pia6.0"></a>
+6.0 Address summary table
+</p><p>
+</p><blockquote>
+<table border="1">
+<tbody><tr><td>Hex Address</td>  <td>Mnemonic</td>        <td>Purpose</td></tr>
+<tr><td>280</td>  <td>SWCHA</td>                  <td>Port A; input or output (read or write)</td></tr>
+<tr><td>281</td>  <td>SWACNT</td>                 <td>Port A DDR, 0= input, 1=output</td></tr>
+<tr><td>282</td>  <td>SWCHB</td>                  <td>Port B; console switches (read only)</td></tr>
+<tr><td>283</td>  <td>SWBCNT</td>                 <td>Port B DDR (hardwired as input)</td></tr>
+<tr><td>284</td>  <td>INTIM</td>                  <td>Timer output (read only)</td></tr>
+<tr><td>294</td>  <td>TIM1T</td>                  <td>set 1 clock interval (838 nsec/interval)</td></tr>
+<tr><td>295</td>  <td>TIM8T</td>                  <td>set 8 clock interval (6.7 usec/interval)</td></tr>
+<tr><td>296</td>  <td>TIM64T</td>                 <td>set 64 clock interval (53.6 usec/interval)</td></tr>
+<tr><td>297</td>  <td>T1024T</td>                 <td>set 1024 clock interval (858.2 usec/interval)</td></tr>
+</tbody></table>
+<p>
+       NOTE: one clock is also one microprocessor machine cycle
+</p></blockquote>
+<hr>
+<p>
+<a name="palsecam"></a>
+</p><h3>PAL/SECAM CONVERSIONS</h3>
+<p>
+PAL
+</p><blockquote>
+1. The number of scan lines, and therefore the frame time increases from
+       NTSC to PAL according to the following table:
+<p>
+</p><blockquote>
+<table border="1" width="60%">
+	<tbody><tr>
+		<td colspan="3" align="right">NTSC</td>
+		<td colspan="2" align="right">PAL</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="right">scanlines</td>
+		<td align="right">microseconds</td>
+		<td align="right">scanlines</td>
+		<td align="right">microseconds</td>
+	</tr>
+	<tr>
+		<td align="left" width="40%">VBLANK</td>
+		<td align="right" width="15%">40</td>
+		<td align="right" width="15%">2548</td>
+		<td align="right" width="15%">48</td>
+		<td align="right" width="15%">3085</td>
+	</tr>
+	<tr>
+		<td align="left" width="40%">KERNEL</td>
+		<td align="right">192</td>
+		<td align="right">12228</td>
+		<td align="right">228</td>
+		<td align="right">14656</td>
+	</tr>
+	<tr>
+		<td align="left" width="40%">OVERSCAN</td>
+		<td align="right">30</td>
+		<td align="right">1910</td>
+		<td align="right">36</td>
+		<td align="right">2314</td>
+	</tr>
+	<tr>
+		<td align="left" width="40%">FRAME</td>
+		<td align="right">262</td>
+		<td align="right">16686</td>
+		<td align="right">312</td>
+		<td align="right">20055</td>
+	</tr>
+</tbody></table>
+</blockquote>
+
+<p>
+       2. Sounds will drop a little in pitch (frequency) because of a slower crystal
+       clock.  Some sounds may need the <a href="https://alienbill.com/2600/101/docs/stella.html#AUDF">AUDF0</a>/AUDF1 touched up.
+</p><p>
+       3. PAL operates at 50 Hz compared to NTSC 60Hz, a 17% reduction.  If
+       game play speed is based on frames per second, it will slow down by 17%.
+       This can be disastrous for most skill/action carts.  If the NTSC version is
+       designed with 2 byte fractional addition techniques (or anything not based
+       on frames per second) to move objects, then PAL conversion can be as
+       simple as changing the fraction tables, avoiding major surgery on the
+       program.
+</p><p>
+</p></blockquote>
+SECAM
+<blockquote>
+1. SECAM is a little weird.  It takes the PAL software, but the console
+       color/black &amp; white switch is hardwired as black &amp; white.  Therefore, it
+       reads the PAL black &amp; white tables in software and assigns a fixed color to
+       each lum of black &amp; white according to the following table:
+<p>
+</p><blockquote>
+<table border="1">
+<tbody><tr><td>Lum</td> <td>Color</td></tr>
+<tr><td>0</td> <td>Black</td></tr>
+<tr><td>2</td> <td>Blue</td></tr>
+<tr><td>4</td> <td>Red</td></tr>
+<tr><td>6</td> <td>Magenta</td></tr>
+<tr><td>8</td> <td>green</td></tr>
+<tr><td>A</td> <td>cyan</td></tr>
+<tr><td>C</td> <td>yellow</td></tr>
+<tr><td>E</td> <td>white</td></tr>
+</tbody></table>
+</blockquote>
+<p>
+       There is a trap here:  the manual is the same for NTSC, PAL, &amp; SECAM.
+       This means that the descriptions for black &amp; white must jive between NTSC
+       &amp; PAL.  If you make major changes to PAL black &amp; white to achieve good
+       SECAM color, NTSC black &amp; white must be made similar.
+</p><p>
+       2. PAL sounds work fine on SECAM with one exception: when a sound is to
+       be turned off, it must be done by setting <a href="https://alienbill.com/2600/101/docs/stella.html#AUDV">AUDV0</a>/AUDV1 to 0, not by setting
+       <a href="https://alienbill.com/2600/101/docs/stella.html#AUDC">AUDC0</a>/AUDC1 to 0.  Otherwise, you get an obnoxious background sound.
+</p><p>
+</p></blockquote>
+<hr>
+<a name="tia1a"></a>
+<h3>TIA 1A - TELEVISION INTERFACE ADAPTOR (MODEL 1A)</h3>
+<p>
+<a name="tia1agen"></a>
+GENERAL DESCRIPTION
+</p><p>
+</p><blockquote>
+       The TIA is an MOS integrated circuit designed to interface between an
+       eight (8) bit microprocessor and a television video modulator and to convert
+       eight (8) bit parallel data into serial outputs for the color, luminosity, and
+       composite sync required by a video modulator.
+<p>
+       This circuit operates on a line by line basis, always outputting the same
+       information every television line unless new data is written into it by the
+       microprocessor.
+</p><p>
+       A hardware sync counter produces horizontal sync timing independent of
+       the microprocessor. Vertical sync timing is supplied to this circuit by the
+       microprocessor and combined into composite sync.
+</p><p>
+       Horizontal position counters are used to trigger the serial output of five (5)
+       horizontally movable objects; two players, two missiles and a ball. The
+       microprocessor can add or subtract from these position counters to move
+       these objects right or left.
+</p><p>
+       The microprocessor determines all vertical position and motion by writing
+       zeros or ones into object registers before each appropriate horizontal line.
+</p><p>
+       Walls, clouds and other seldom moved objects are produced by a low
+       resolution data register called the playfield register.
+</p><p>
+       A fifteen (15) bit collision register detects all fifteen possible two object
+       collisions between these six (6) objects (five moveable and one playfield).
+       This collision register can be read and reset by the microprocessor. Six input
+       ports are also provided on this chip that can be read by the microprocessor.
+       These input ports and the collision register are the only chip addresses that
+       can be read by the microprocessor. All other addresses are write only.
+</p><p>
+       Color luminosity registers are included that can be programmed by the
+       microprocessor with eight (8) luminosity and fifteen (15) color values. A
+       digital phase shifter is included on this chip to provide a single color output
+       with fifteen (15) phase angles.
+</p><p>
+       Two (2) independent audio generating circuits are included, each with
+       programmable frequency, noise content, and volume control registers.
+</p><p>
+</p></blockquote>
+<a name="tia1adet"></a>
+DETAILED DESCRIPTION
+<blockquote>
+<p>
+<a name="tia1a1"></a>
+1. Data and addressing
+</p><p>
+	</p><blockquote>
+       Registers on this chip are addressed by the microprocessor as part of its
+       overall RAM-ROM memory space.  The attached table of read-write
+       addresses summarizes the addressable functions.  There are no registers
+       that are both read and write.  Some addresses however are both read and
+       write, with write data going into one register and read data returning from
+       a different register.
+<p>
+       If the read-write line is low, the data bits indicated in this table will be
+       written into the addressed write location when the 02 clock goes from high
+       to low.  Some registers are eight bits wide, some only one bit, and some
+       (strobes) have no bits, performing only control functions (such as resets)
+       when their address is written.
+</p><p>
+       If the read-write line is high, the addressed location can be read by the
+       microprocessor on data lines 6 and 7 while the 02 clock is high.
+</p><p>
+       The addresses given in the table refer only to the six (6) real address lines.
+       If any of the four (4) chip select lines are used for addressing, the addresses
+       must be modified accordingly.
+</p><p>
+	</p></blockquote>
+<a name="tia1a2"></a>
+2. Synchronization
+	<blockquote>
+<p>
+   A. Horizontal Timing
+	</p><blockquote>
+       A hardware counter on this chip produces all horizontal timing (such as
+       sync, blank, burst) independent of the microprocessor,  This counter is
+       driven from an external 3.58 Mhz oscillator and has a total count of 228.
+       Blank is decoded as 68 counts and sync and color burst as 16 counts.
+	</blockquote>
+<p>
+   B. Vertical Timing
+	</p><blockquote>
+       There are one bit, addressable registers on this chip for vertical sync and
+       vertical blank.  The timing for these functions is established by the
+       microprocessor by writing zero or one into these bits. (<a href="https://alienbill.com/2600/101/docs/stella.html#VSYNC">VSYNC</a>, <a href="https://alienbill.com/2600/101/docs/stella.html#VBLANK">VBLANK</a> )
+	</blockquote>
+<p>
+   C. Composite Sync
+	</p><blockquote>
+       Horizontal sync and the output of the vertical sync bit are combined
+       together to produce composite sync.  This composite sync signal drives a
+       chip output pad to an external composite video resistor network.
+	</blockquote>
+<p>
+   D. Microprocessor Synchronization
+	</p><blockquote>
+       The 3.58 MHz oscillator also clocks a divide by three counter on this chip
+       whose output (1.19 Mhz) is buffered to drive an output pad called 00.  This
+       pad provides the input phase zero clock to the microprocessor which then
+       produces the system 02 clock (1.19 Mhz).
+       Software program loops require different lengths of time to run depending
+       on branch decisions made within the program.  Additional synchronization
+       between the software and hardware. This is done with a one bit latch called
+       <a href="https://alienbill.com/2600/101/docs/stella.html#WSYNC">WSYNC</a> (wait for sync).  When the microprocessor finishes a routine such
+       as loading registers for a horizontal line, or computing new vertical
+       locations during vertical blank, it can address WSYNC, setting this latch
+       high.  When this latch is high, it drives an output pad to zero connected to
+       the microprocessor ready line (RDY). A zero on this line causes the
+       microprocessor to halt and wait.  As shown in figure 2, WSYNC latch is
+       automatically reset to zero by the leading edge of the next horizontal blank
+       timing signal, releasing the RDY line, allowing the microprocessor to begin
+       its computation and register writing for this horizontal television line or
+       line pair.
+<p>
+	</p></blockquote>
+	</blockquote>
+<a name="tia1a3"></a>
+3. Playfield graphics Register
+<p>
+	</p><blockquote>
+   A. Description
+	<blockquote>
+       Objects such as walls, clouds, and score) which are not required to move, are
+       written into a 20 bit register called the playfield register. This register
+       (Figure 5) is loaded from the data bus by three separate write addresses
+       (<a href="https://alienbill.com/2600/101/docs/stella.html#PF">PF0</a>, PFl, PF2).  Playfield may be loaded at any time. To clear the playfield,
+       zeros must be written into all three addresses.
+<p>
+	</p></blockquote>
+   B. Normal Serial Output
+	<blockquote>
+       The playfield register is automatically scanned (and converted to serial
+       output) by a bi-directional shift register clocked at a rate which spreads the
+       twenty (20) bits out over the left half of a horizontal line. This scanning is
+       initiated by the end of horizontal blank (left edge of television screen).
+       Normally the same scan is then repeated, duplicating the same twenty (20)
+       bit sequence over the right half of the horizontal line.
+<p>
+	</p></blockquote>
+   C. Reflected Serial Output
+	<blockquote>
+       A reflected playfield may be requested by writing a one into bit zero of the
+       playfield control register (<a href="https://alienbill.com/2600/101/docs/stella.html#CTRLPF">CTRLPF</a>).  When this bit is true the scanning
+       shift register will scan the opposite direction during the right half of the
+       horizontal line, reversing the twenty (20) bit sequence.
+<p>
+	</p></blockquote>
+   D. Timing Constraints
+	<blockquote>
+       Even though the playfield bytes (<a href="https://alienbill.com/2600/101/docs/stella.html#PF">PF0</a>, PFl, PF2) may be written to any time,
+       if one of them is changed while being serially scanned, part of the new value
+       may both show up on the television horizontal line.
+<p>
+	</p></blockquote>
+</blockquote>
+<a name="tia1a4"></a>
+4. Horizontal Position Counters
+	<blockquote>
+<p>
+   A. Description
+		</p><blockquote>
+       The playfield is a fixed graphics register, always starting its serial output
+       when triggered by the beginning of each television line.  This chip also
+       includes five "moveable" graphics registers, whose serial outputs are
+       triggered by five separate horizontal position counters every time these
+       counters pass through zero count. These position counters are clocked
+       continuously during the unblanked portion of every horizontal line and
+       their count length is exactly equal to the normal number of clocks supplied
+       to them during this time. They will therefore pass through zero at the same
+       time during each horizontal television line and the triggered outputs will
+       have no horizontal motion. A typical horizontal counter is shown in figure 4.
+<p>
+       If extra clocks are supplied to these counters (or normal clocks suppressed)
+       the zero crossing time will shift and the object will have moved left (extra
+       clocks) or right (fewer clocks).  Some position counters have extra decoders
+       (in addition to a zero decode) to trigger multiple copies of the same object
+       across a horizontal line.
+</p><p>
+       All position counters can be reset to zero count by the microprocessor at any
+       time, by a write instruction to the reset addresses (<a href="https://alienbill.com/2600/101/docs/stella.html#RESBL">RESBL</a>, <a href="https://alienbill.com/2600/101/docs/stella.html#RESM">RESM0</a>, RESMl,
+       <a href="https://alienbill.com/2600/101/docs/stella.html#RESP">RESP0</a>, RESPl). If reset occurs during horizontal blank, the object will
+       appear at the left side of the television screen.  Properly timed resets may
+       position an object at any horizontal location consistent with the
+       microprocessor cycle time.
+</p><p>
+		</p></blockquote>
+   B. Ball position Counter
+		<blockquote>
+       The ball position counter has only the zero crossing decode and therefore
+       cannot trigger multiple copies of the ball graphics.
+<p>
+		</p></blockquote>
+   C. Player Position Counters
+		<blockquote>
+       Each player position counter has three decodes in addition to the zero
+       crossing decode.  These decodes are controlled by bits 0,1,2 of the number
+       size control registers (<a href="https://alienbill.com/2600/101/docs/stella.html#NUSIZ">NUSIZ0</a>, NUSIZ1), and trigger 1,2, or 3 copies of the
+       player (at various spacings) across a horizontal line as shown on page <a href="https://alienbill.com/2600/101/docs/stella.html#NUSIZ">___</a>.
+       These same control bits are used for the decodes on the missile position
+       counter, insuring an equal number of players and missiles.
+		</blockquote>
+   D. Missile Position Counters
+		<blockquote>
+       Missile position counters are identical to player position counters except
+       that they have another type of reset in addition to the previously discussed
+       horizontal position reset.  These extra reset addresses (<a href="https://alienbill.com/2600/101/docs/stella.html#RESMP">RESMP0</a>, RESMP1)
+       write data bit 1 into a one bit register whose output is used to position the
+       missile (horizontally) directly on top of its corresponding player, and to
+       disable the missile serial output.
+<p>
+		</p></blockquote>
+		</blockquote>
+<a name="tia1a5"></a>
+5. Horizontal Motion Registers
+<p>
+		</p><blockquote>
+   A. General Description
+		<blockquote>
+       There are five write only registers on this chip that contain the horizontal
+       motion values for each of the five moving objects. A typical horizontal
+       motion register is shown in figure 4 . The data bus (bits 4 through 7) is
+       written into these addresses (<a href="https://alienbill.com/2600/101/docs/stella.html#HMP">HMP0</a>, HMPl, <a href="https://alienbill.com/2600/101/docs/stella.html#HMM">HMM0</a>, HMMl, <a href="https://alienbill.com/2600/101/docs/stella.html#HMBL">HMBL</a>) to load
+       these registers with motion values. These registers supply extra (or fewer)
+       clocks to the horizontal position counters only when commanded to do so by
+       an <a href="https://alienbill.com/2600/101/docs/stella.html#HMOVE">HMOVE</a> address from the microprocessor. These registers may all be
+       cleared to zero (no motion) simultaneously by an <a href="https://alienbill.com/2600/101/docs/stella.html#HMCLR">HMCLR</a> command from
+       the microprocessor, or individually by loading zeros into each register.
+       These registers are each four bits in length and may be loaded with positive
+       (left motion), negative (right motion) or zero (no motion) values. Negative
+       values are represented in twos complement format.
+<p>
+		</p></blockquote>
+   B. Timing constraints
+		<blockquote>
+       These registers may be loaded or cleared at almost any  time. The motion
+       values they contain will be used only when an HMOVE command is
+       addressed, and then all five motion values will be used simultaneously into
+       all five horizontal position counters once. The only timing constraint on this
+       operation involves the <a href="https://alienbill.com/2600/101/docs/stella.html#HMOVE">HMOVE</a> command.  The HMOVE command must be
+       located in the microprocessor program immediately after a wait for sync
+       (WSYNC) command. This assures that the HMOVE operation begins at the
+       leading edge of horizontal blank, and has the full blank time to supply extra
+       or fewer clocks to the horizontal position counters. These registers should
+       not be modified for at least 24 Computer cycles after the HMOVE command.
+<p>
+		</p></blockquote>
+		</blockquote>
+<a name="tia1a6"></a>
+6. Moving Object Graphics Registers
+<p>
+		</p><blockquote>
+   A. General Description
+		<blockquote>
+       There are five graphics registers for moving objects on this chip. These
+       graphics registers are loaded (written) in parallel by the microprocessor and
+       like the playfield register are scanned and converted to serial output.
+       Unlike the playfield register, which is always scanned beginning at the left
+       side of each horizontal line, moving object graphics registers are scanned
+       only when triggered by a start decode from their horizontal position
+       counter.  A typical graphics register is shown in figure 4 .
+<p>
+		</p></blockquote>
+   B. Missile Graphics
+		<blockquote>
+       The graphics registers for both missiles are identical and very simple. They
+       each consist of a one bit register called missile enable (<a href="https://alienbill.com/2600/101/docs/stella.html#ENAM">ENAM0</a>, ENAM1).
+       This graphics bit is scanned (outputted) only when triggered by its
+       corresponding position counter. There are control bits (bits 4, 5, of <a href="https://alienbill.com/2600/101/docs/stella.html#NUSIZ">NUSIZ0</a>,
+       NUSIZ1) that can stretch this single graphics bit out over widths of 1, 2, 4,
+       or 8 clocks of horizontal line time. (A full line is 160 clocks).
+<p>
+		</p></blockquote>
+   C. Player Graphics
+		<blockquote>
+       The graphics registers for both players are identical and are rather complex.
+       They each consist of eight bit parallel registers (<a href="https://alienbill.com/2600/101/docs/stella.html#GRP">GRP0</a>, GRP1) and a bi-
+       directional parallel to serial scan counter that converts the parallel data
+       into serial output.  A one bit control register (<a href="https://alienbill.com/2600/101/docs/stella.html#REFP">REFP0</a>, REFP1) determines
+       the direction (reflection) of the parallel to serial scan, outputing either D7
+       through D0, or D0 though D7.  This allows reflection (horizontal flipping) of
+       player serial graphics data without having to flip the microprocessor data.
+<p>
+       The clock into the scan counter can be controlled (three bits of <a href="https://alienbill.com/2600/101/docs/stella.html#NUSIZ">NUSIZ0</a> and
+       NUSIZ1) to slow the scan rate and stretch the eight bits of serial graphics
+       out over widths of 8, 16, or 32 clocks of horizontal line time. These same
+       control bits are used in the player-missile motion counters to control
+       multiple copies, so only three player widths ( scan
+       rates) are available.
+</p><p>
+		</p></blockquote>
+   D. Vertical Delay
+		<blockquote>
+       Each of the player graphics registers actually consists of two 8 bit parallel
+       registers.  The first (<a href="https://alienbill.com/2600/101/docs/stella.html#GRP">GRP0</a>, GRP1) is loaded (written) from the
+       microprocessor 8 bit data bus.  The second is automatically loaded from the
+       output of the first.  The reason for this is a complex subject called vertical
+       delay.  A large amount of microprocessor time is required to generate
+       player, missile and playfield graphics (table look up, masking, comparisons,
+       etc.) and load these into this chip's registers.  For most game programs this
+       time is just too large to fit into one horizontal line time. In fact for most
+       games it will barely fit into two line times (127 microseconds). Therefore,
+       individual graphics registers are loaded (written) every two lines, and used
+       twice for serial output between loads.  This type of programing will
+       obviously limit the vertical height resolution of objects to multiples of two
+       lines. It also will limit the resolution of vertical motion to two lines jumps.
+       Nothing can be done about the vertical height resolution; however, vertical
+       motion can be resolved to a single line by addition of a second graphics
+       register that is automatically parallel loaded from the output of the first,
+       one line time after the first was loaded from the data bus.  This second
+       graphics register output is therefore always delayed vertically by one line. A
+       control bit called vertical delay (<a href="https://alienbill.com/2600/101/docs/stella.html#VDELP">VDEL0</a>, VDEL1) selects which of these two
+       registers is to be used for serial output. If this control bit is set by the
+       microprocessor between picture frames, the object will be moved down
+       (delayed) by one line during the next frame.  In most programming
+       applications player 0 graphics and player 1 graphics are loaded (written)
+       alternately, during the blank time just prior to each line as shown in (figure
+       1).  Since <a href="https://alienbill.com/2600/101/docs/stella.html#GRP">GRP0</a> and GRP1 addresses from the microprocessor alternate,
+       they are delayed by one line from each other. The GRP0 address decode can
+       therefore be used to load the delayed graphics register for player 1, and
+       GRP1 likewise to load the delayed graphics register for player 0. The two
+       vertical delay bits (<a href="https://alienbill.com/2600/101/docs/stella.html#VDELP">VDEL0</a>, VDELl) then select delayed or undelayed
+       registers for player 0 and player 1 as serial outputs.
+<p>
+		</p></blockquote>
+   E. Ball Graphics
+		<blockquote>
+       The ball graphics register is almost identical to the missile graphics
+       register.  It also consists of a single enable bit (<a href="https://alienbill.com/2600/101/docs/stella.html#ENABL">ENABL</a>) whose output is
+       triggered by the ball position counter.  It also has two control bits (bits 4, 5
+       of <a href="https://alienbill.com/2600/101/docs/stella.html#CTRLPF">CTRLPF</a>) that can stretch this single graphics bit out over widths of 1, 2,
+       4, or 8 clocks of horizontal line time.  Unlike the missile graphics; however,
+       the ball graphics register has capability for vertical delay similar to the
+       player graphics.  A second graphics (enable) bit is alternately loaded from
+       the output of the first, one line after the first was loaded from the data bus.
+       A ball vertical delay bit (<a href="https://alienbill.com/2600/101/docs/stella.html#VDELBL">VDELBL</a>) selects which of these two graphics bits
+       is used for the ball serial output. The first graphics bit (ENABL) should be
+       loaded during the same horizontal blank time as player 0 (<a href="https://alienbill.com/2600/101/docs/stella.html#GRP">GRP0</a>), because
+       GRP1 is used to load the second enable bit from the output of the first on
+       alternate lines.
+<p>
+		</p></blockquote>
+		</blockquote>
+<a name="tia1a7"></a>
+7. Collision Detection Latches
+<p>
+		</p><blockquote>
+   A. Definitions
+		<blockquote>
+       The serial outputs from all the graphics registers represent real time
+       horizontal location of objects on the television screen. If any of these outputs
+       occur at the same time, they will overlap (collide) on the screen.  There are
+       six objects generated on this chip (five moving and playfield) allowing
+       fifteen possible two object collisions. These overlaps (collisions) are detected
+       by fifteen "and" gates whenever they occur, and are stored in fifteen
+       individual latch register bits, as shown in figure 6.
+<p>
+		</p></blockquote>
+   B. Reading  Collision
+		<blockquote>
+       The microprocessor can read these fifteen collision bits on data lines 6 and 7
+       by addressing them two at a time. This could be done at any time but is
+       usually done between frames (during vertical blank) after all possible
+       collisions have serially occurred.
+<p>
+		</p></blockquote>
+   C. Reset
+		<blockquote>
+       All collision bits are reset simultaneously by the microprocessor using the
+       reset address <a href="https://alienbill.com/2600/101/docs/stella.html#CXCLR">CXCLR</a>. This is usually done near the end of vertical blank,
+       after collisions have been tested.
+<p>
+		</p></blockquote>
+		</blockquote>
+<p>
+<a name="tia1a8"></a>
+8. Input ports
+</p><p>
+		</p><blockquote>
+   A. General Description
+		<blockquote>
+       There are 6 input ports on this chip whose logic state may be read on data
+       line 7 with read addresses <a href="https://alienbill.com/2600/101/docs/stella.html#INPT">INPT0</a> through INPT5.  These 6 ports are
+       divided into two types, "dumped" and "latched".  See Figure 8.
+<p>
+		</p></blockquote>
+   B. Dumped  Input Ports (I0 through I3)
+		<blockquote>
+       These 4 input ports are normally used to read paddle position from an
+       external potentiometer-capacitor circuit.  In order to discharge these
+       capacitors each of these input ports has a large transistor, which may be
+       turned on (grounding the input ports) by writing into bit 7 of the register
+       <a href="https://alienbill.com/2600/101/docs/stella.html#VBLANK">VBLANK</a>. When this control bit is cleared the potentiometers begin to
+       recharge the capacitors and the microprocessor measures the time required
+       to detect a logic 1 at each input port.
+<p>
+       As long as bit 7 of register VBLANK is zero, these four ports are general
+       purpose high impedance input ports. When this bit is a 1 these ports are
+       grounded.
+</p><p>
+		</p></blockquote>
+   C. Latched Input ports (I4, I5)
+		<blockquote>
+       These two input ports have latches which can be enabled or disabled by
+       writing into bit 6 of register VBLANK.
+<p>
+       When disabled, these latches are removed from the circuit completely and
+       these ports become two general purpose input ports, whose present logic
+       state can be read directly by the microprocessor.
+</p><p>
+       When enabled, these latches will store negative (zero logic level) signals
+       appearing on these two input ports, and the input port addresses will read
+       the latches instead of the input ports.
+</p><p>
+       When first enabled these latches will remain positive as long as the input
+       ports remain positive (logic one). A zero input port signal will clear a latch
+       value to zero, where it will remain (even after the port returns positive)
+       until disabled. Both latches may be simultaneously disabled by writing a
+       zero into bit 6 of register <a href="https://alienbill.com/2600/101/docs/stella.html#VBLANK">VBLANK</a>.
+</p><p>
+		</p></blockquote>
+		</blockquote>
+<a name="tia1a8.5"></a>
+8.5 Priority Encoder
+<p>
+		</p><blockquote>
+   A. Purpose
+		<blockquote>
+       As discussed in the section on collisions, simultaneous serial outputs from
+       the graphics registers represent overlap on the television screen.  In order to
+       have color-luminosity values assigned to individual objects it is necessary to
+       establish priorities between objects when overlapped. The priority encoder
+       is shown in figure 3.
+<p>
+		</p></blockquote>
+   B. Priority Assignment
+		<blockquote>
+       The lack of any objects results in a color-lum value called the background.
+       The background (BK) has lowest priority and only appears when no objects
+       are outputing.  In order to simplify the logic, each missile is given the same
+       color-lum value and priority as its corresponding player (P0, M0) and the
+       ball is given the same color-lum value and priority as the playfield (PF, BL).
+<p>
+       The following table illustrates the normal priority assignment:
+</p><p>
+</p><blockquote>
+<table border="1">
+<tbody><tr><td>Highest Priority</td><td> P0, M0</td></tr>
+<tr><td>Second Highest</td><td> P1, M1</td></tr>
+<tr><td>Third Highest</td><td> PF, BL</td></tr>
+<tr><td>Lowest Priority</td><td> BK</td></tr>
+</tbody></table>
+</blockquote>
+<p>
+       Objects with higher priority will appear to move in front of objects with
+       lower priority. Players will therefore move in front of playfield (clouds,
+       walls, etc.).
+</p><p>
+		</p></blockquote>
+   C. Priority Control
+		<blockquote>
+       There are two playfield control bits that affect priority, one called playfield
+       priority (PFP) (bit 2 of <a href="https://alienbill.com/2600/101/docs/stella.html#CTRLPF">CTRLPF</a>) and one called score (bit 1 of CTRLPF).
+       When a one is written into the PFP bit the priority assignment is modified
+       as shown below.
+<p>
+</p><blockquote>
+<table border="1">
+<tbody><tr><td>Highest Priority</td><td> PF, BL</td></tr>
+<tr><td>Second Highest</td><td> P0, M0</td></tr>
+<tr><td>Third Highest</td><td> P1, M1</td></tr>
+<tr><td>Lowest Priority</td><td> BK</td></tr>
+</tbody></table>
+</blockquote>
+<p>
+       Players will then move behind playfield (clouds, wall, etc.).  When a one is
+       written into the score control bit, the playfield is forced to take the color-lum
+       of player 0 in the left half of the screen and player 1 in the right half of the
+       screen.  This is used when displaying score and identifies the score with the
+       correct player.  The priority encoder produces 4 register select lines shown
+       in figure 3) that are mutually exclusive.  These 4 lines select either
+       background, player 0, player 1 or playfield, and only one of them can be
+       true at a time.
+</p><p>
+		</p></blockquote>
+		</blockquote>
+<a name="tia1a9"></a>
+9. Color Luminance Registers
+<p>
+		</p><blockquote>
+   A. Description
+		<blockquote>
+       There are four registers (shown in figure 3) that contain color-lum codes.
+       Four bits of color code and three its of luminance code may be written into
+       each of these registers (<a href="https://alienbill.com/2600/101/docs/stella.html#COLUP">COLUP0</a>, COLUP1, COLUPF, COLUBK) by the
+       microprocessor at any time. These codes (representing 16 color values and 8
+       luminance values) are given in the Detailed Address List.
+<p>
+		</p></blockquote>
+   B. Multiplexing
+		<blockquote>
+       The serial graphics output from all six objects is examined by the priority
+       encoder which activates one of the four select lines into a 4 x 7 multiplexer.
+       This multiplexer (shown in figure 3) then selects one of the four color-lum
+       registers as a 7 line output.  Three of these lines are binary coded
+       luminosity and go directly to chip output pads. The other four lines go to the
+       color phase shifter.
+<p>
+		</p></blockquote>
+		</blockquote>
+<a name="tia1a10"></a>
+10. Color Phase Shifter
+<p>
+		</p><blockquote>
+       This portion of the chip (shown in figure 3) produces a reference color
+       output (color burst) during horizontal blank and then during the unblanked
+       portion of the line it produces a color output shifted in phase with respect to
+       the color burst.  The amount of phase shift determines the color and is
+       selected by the four color code lines from the Color-lum multiplexer.  Binary
+       code 0 selects no color. Code 1 selects gold (same phase as color burst).
+       Codes 2 (0010) through 15 (1111) shift the phase from zero through almost
+       360 degrees allowing selection of 15 total colors around the television color
+       wheel.
+<p>
+		</p></blockquote>
+<a name="tia1a11"></a>
+11. Audio Circuits
+<p>
+		</p><blockquote>
+       Two audio circuits are incorporated on this chip.  They are identical and
+       completely independent, although their outputs could be combined
+       externally into one speaker.  Each audio circuit consists of parts described
+       below, and in figure 7.
+<p>
+   A. Frequency Select
+		</p><blockquote>
+       Clock pulses (at approximately 30 KHz) from the horizontal sync counter
+       pass through a divide by N circuit which is controlled by the output code
+       from a five bit frequency register (<a href="https://alienbill.com/2600/101/docs/stella.html#AUDF">AUDF</a>).  This register can be loaded
+       (written) by the microprocessor at any time, and causes the 30 KHz clocks
+       to be divided by 1 (code 00000) through 32 (code 11111).  This produces
+       pulses that are digitally adjustable from approximately 30 KHz to 1 KHz
+       and are used to clock the noise-tone generator.
+		</blockquote>
+   B. Noise-Tone Generator
+		<blockquote>
+       This circuit contains a nine bit shift counter which may be controlled by the
+       output code from a four bit audio control register(<a href="https://alienbill.com/2600/101/docs/stella.html#AUDC">AUDC</a>), and is clocked by
+       the frequency select circuit.  The control register can be loaded by the
+       microprocessor at any time, and selects different shift counter feedback taps
+       and count lengths to produce a variety of noise and tone qualities.
+<p>
+		</p></blockquote>
+   C. Volume Select
+		<blockquote>
+       The shift counter output is used to drive the audio output pad through four
+       driver transistors that are graduated in size. Each transistor is twice as
+       large as the previous one and is enable by one bit from the audio volume
+       register (<a href="https://alienbill.com/2600/101/docs/stella.html#AUDV">AUDV</a>).  This audio volume register may be loaded by the
+       microprocessor at any time.  As binary codes 0 through 15 are loaded, the
+       pad drive transistors are enabled in a binary sequence.  The shift counter
+       output therefore can pull down on the audio output pad with 16 selectable
+       impedance levels.
+		</blockquote>
+		</blockquote>
+<p>
+</p><hr>
+<p>
+<a href="https://alienbill.com/2600/101/docs/figure1.gif">Figure 1. Vertical Delay</a></p><p>
+<a href="https://alienbill.com/2600/101/docs/figure2.gif">Figure 2. Synchronization<br>Figure 3. Color-Luminance</a></p><p>
+<a href="https://alienbill.com/2600/101/docs/figure4.gif">Figure 4. Typical Horizontal Motion Circuit</a></p><p>
+<a href="https://alienbill.com/2600/101/docs/figure5.gif">Figure 5. Playfield Graphics</a></p><p>
+<a href="https://alienbill.com/2600/101/docs/figure6.gif">Figure 6. Collision Detection</a></p><p>
+<a href="https://alienbill.com/2600/101/docs/figure7.gif">Figure 7. Audio Circuit</a></p><p>
+<a href="https://alienbill.com/2600/101/docs/figure8.gif">Figure 8. Input Ports</a></p><p>
+<a href="https://alienbill.com/2600/101/docs/figure9.gif">Figure 9. Game System</a></p><p>
+</p><p>
+</p><hr>
+<p>
+<a name="W"></a>
+</p><h3>Write Address Detailed Functions</h3>
+<p>
+<a name="WSYNC"></a>
+WSYNC (wait for sync)
+</p><blockquote>
+       This address halts microprocessor by clearing RDY latch to zero.  RDY is set true again
+       by the leading edge of horizontal blank.
+<p>
+       Data bits not used
+</p></blockquote>
+<a name="RSYNC"></a>
+RSYNC (reset sync)
+<blockquote>
+       This address resets the horizontal sync counter to define the beginning of horizontal
+       blank time, and is used in chip testing.
+<p>
+       Data bits not used.
+</p></blockquote>
+<a name="VSYNC"></a>
+VSYNC
+<blockquote>
+This address controls vertical sync time by writing D1 into the VSYNC latch
+<blockquote>
+<table border="1">
+<tbody><tr><td colspan="2">D1</td></tr>
+<tr><td>0</td><td>Stop vertical sync</td></tr>
+<tr><td>1</td><td>Start vertical sync</td></tr>
+</tbody></table>
+</blockquote>
+</blockquote>
+<a name="VBLANK"></a>
+VBLANK
+<blockquote>
+       This address controls vertical blank and the latches and dumping transistors on the input
+       ports by writing into bits D7, D6 and D1 of the VBLANK register.
+<blockquote>
+<table border="1">
+<tbody><tr><td>Data Bit</td><td>Value</td><td>Effect</td></tr>
+<tr><td rowspan="2">D1</td><td>0</td><td>Stop vert. blank</td></tr>
+<tr><td>1</td><td>Start vert. blank</td></tr>
+<tr><td rowspan="2">D6</td><td>0</td><td>Disable INPT4, INPT5 latches</td></tr>
+<tr><td>1</td><td>Enable INPT4, INPT5 latches</td></tr>
+<tr><td rowspan="2">D7</td><td>0</td><td>Remove INPT1,2,3,6 dump path to ground</td></tr>
+<tr><td>1</td><td>Dump INPT1,2,3,6 to ground</td></tr>
+</tbody></table>
+       Note : Disable latches (D6 = 0) also resets latches to logic true
+</blockquote>
+</blockquote>
+<a name="PJ"></a>
+PF0 (PF1, PF2)
+<blockquote>
+       These addresses are used to write into playfield registers
+<blockquote>
+<table border="1">
+<tbody><tr><td>PF0</td><td>D7</td><td>D6</td><td>D5</td><td>D4</td><td colspan="4">(not used)</td></tr>
+<tr><td>PF1</td><td>D7</td><td>D6</td><td>D5</td><td>D4</td><td>D3</td><td>D2</td><td>D1</td><td>D0</td></tr>
+<tr><td>PF2</td><td>D7</td><td>D6</td><td>D5</td><td>D4</td><td>D3</td><td>D2</td><td>D1</td><td>D0</td></tr>
+</tbody></table>
+</blockquote>
+</blockquote>
+<a name="PLAYFIELD"></a>
+   PLAYFIELD REGISTERS SERIAL OUTPUT
+<blockquote>
+<table border="1">
+<tbody><tr><td colspan="6">1 horizontal line ( 160 clocks)</td><td>Playfield Reflect Control</td></tr>
+<tr><td>4..7</td><td> 7......0</td><td> 0......7</td><td> 4..7</td><td> 7......0</td><td> 0......7</td><td rowspan="3"> REF = 0</td></tr>
+<tr><td>PF0</td><td>PF1</td><td>PF2</td><td>PF0</td><td>PF1</td><td>PF2</td></tr>
+<tr><td colspan="6" align="center">center</td></tr>
+</tbody></table>
+<table border="1">
+<tbody><tr><td>4..7</td><td> 7......0</td><td> 0......7</td><td> 7......0</td><td> 0......7</td><td> 7..4</td><td rowspan="2"> REF = 1</td></tr>
+<tr><td>PF0</td><td>   PF1</td><td>        PF2</td><td>          PF2</td><td>           PF1</td><td>      PF0</td></tr>
+</tbody></table>
+<p>
+       each bit = 4 clocks
+</p></blockquote>
+<a name="CTRLPF"></a>
+CTRLPF
+<blockquote>
+       This address is used to write into the playfield control register
+(a logic 1 causes action as described below)
+<blockquote>
+<table border="1">
+<tbody><tr><td>D0</td><td>REF (reflect playfield)</td></tr>
+<tr><td>D1</td><td>SCORE (left half of playfield gets color of player 0, right half gets color of player</td></tr>
+<tr><td>D2</td><td>PFP (playfield gets priority over players so they can move behind the playfield)</td></tr>
+<tr><td>D4</td><td rowspan="2">Ball Size (see next table)</td></tr>
+<tr><td>D5</td></tr>
+</tbody></table>
+<p>
+
+       D4 &amp; D5 = BALL SIZE
+<table border="1">
+<tbody><tr><td>D5</td><td>D4</td><td>Width</td></tr>
+<tr><td>0</td><td>0</td><td>1 clock</td></tr>
+<tr><td>0</td><td>1</td><td>2 clocks</td></tr>
+<tr><td>1</td><td>0</td><td>4 clocks</td></tr>
+<tr><td>1</td><td>1</td><td>8 clocks</td></tr>
+</tbody></table>
+</p></blockquote>
+</blockquote>
+<a name="NUSIZ"></a>
+NUSIZ0 (NUSIZ1)
+<blockquote>
+       These addresses control the number and size of players and missiles.
+<blockquote>
+       Missile Size
+<table border="1">
+<tbody><tr><td>D5</td><td>D4</td><td>Width</td></tr>
+<tr><td>0</td><td>0</td><td>1 clock</td></tr>
+<tr><td>0</td><td>1</td><td>2 clocks</td></tr>
+<tr><td>1</td><td>0</td><td>4 clocks</td></tr>
+<tr><td>1</td><td>1</td><td>8 clocks</td></tr>
+</tbody></table>
+<p>
+Player-Missile number &amp; player size
+<table border="1">
+<tbody><tr><td>D2</td><td>D1</td><td>D0</td><td colspan="9">1/2 television line (80 clocks)<br>8 clocks per square</td><td>Description</td></tr>
+<tr><td>0</td><td>0</td><td>0</td>
+<td width="20">X</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td>one copy</td></tr>
+<tr><td>0</td><td>0</td><td>1</td>
+<td width="20">X</td>
+<td width="20">&nbsp;</td>
+<td width="20">X</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td>two copies - close</td></tr>
+<tr><td>0</td><td>1</td><td>0</td>
+<td>X</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">X</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td>two copies - med</td></tr>
+<tr><td>0</td><td>1</td><td>1</td>
+<td width="20">X</td>
+<td width="20">&nbsp;</td>
+<td width="20">X</td>
+<td width="20">&nbsp;</td>
+<td width="20">X</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td>three copies - close</td></tr>
+<tr><td>1</td><td>0</td><td>0</td>
+<td width="20">X</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">X</td>
+<td>two copies - wide</td></tr>
+<tr><td>1</td><td>0</td><td>1</td>
+
+<td width="20">X</td>
+<td width="20">X</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">double size player</td></tr>
+<tr><td>1</td><td>1</td><td>0</td>
+
+<td width="20">X</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">X</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">X</td>
+<td>3 copies medium</td></tr>
+<tr><td>1</td><td>1</td><td>1</td>
+
+<td width="20">X</td>
+<td width="20">X</td>
+<td width="20">X</td>
+<td width="20">X</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td width="20">&nbsp;</td>
+<td>quad sized player</td></tr>
+</tbody></table>
+</p></blockquote>
+</blockquote>
+<a name="RESP"></a>
+<a name="RESM"></a>
+<a name="RESBL"></a>
+RESP0 (RESP1, RESM0, RESM1, RESBL)
+<blockquote>
+       These addresses are used to reset players, missiles and the ball.  The object will begin its
+       serial graphics at the time of a horizontal line at which the reset address occurs.
+<p>
+       No data bits are used
+</p></blockquote>
+<a name="RESMP"></a>
+RESMP0 (RESMP1)
+<blockquote>
+       These addresses are used to reset the horiz. location of a missile to the center of its
+       corresponding player.  As long as this control bit is true (1) the missile will remain
+       locked to the center of its player and the missile graphics will be disabled.  When a
+       zero is written into this location, the missile is enabled, and can be moved independently
+       from the player.
+<p>
+</p><blockquote>
+       D1 = RESMP (missile-player reset)
+</blockquote>
+</blockquote>
+<a name="HMOVE"></a>
+HMOVE
+<blockquote>
+       This address causes the horizontal motion register values to be acted upon during the
+       horizontal blank time in which it occurs.  It must occur at the beginning of horiz. blank in
+       order to allow time for generation of extra clock pulses into the horizontal position
+       counters if motion is desired this command must immediately follow a WSYNC
+       command in the program.
+<p>
+       No data bits are used.
+</p></blockquote>
+<a name="HMCLR"></a>
+HMCLR
+<blockquote>
+This address clears all horizontal motion registers to zero (no motion).
+       No data bits are used.
+</blockquote>
+<a name="HMP"></a>
+<a name="HMM"></a>
+<a name="HMBL"></a>
+HMP0 (HMP1, HMM0, HMM1, HMBL)
+<blockquote>
+       These addresses write data (horizontal motion values) into the horizontal motion
+       registers.  These registers will cause horizontal motion only when commanded to do so
+       by the horiz. move command HMOVE.
+       The motion values are coded as shown below :
+<blockquote>
+<table border="1">
+<tbody><tr><td>D7</td><td>D6</td><td>D5</td><td>D4</td><td>Clocks</td><td>Effect</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>1</td><td>+7</td><td rowspan="7">Move left indicated number of clocks</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>0</td><td>+6</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>1</td><td>+5</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>0</td><td>+4</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>1</td><td>+3</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>0</td><td>+2</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>1</td><td>+1</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>No Motion</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>-1</td><td rowspan="8">Move right indicated number of clocks</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>0</td><td>-2</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>1</td><td>-3</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>0</td><td>-4</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>1</td><td>-5</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>0</td><td>-6</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>1</td><td>-7</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td><td>-8</td></tr>
+</tbody></table>
+</blockquote>
+       WARNING : These motion registers should not be modified during the 24 computer
+       cycles immediately following an HMOVE command.  Unpredictable motion values may
+       result.
+</blockquote>
+<a name="ENAM"></a>
+<a name="ENABL"></a>
+ENAM0 (ENAM1, ENABL)
+<blockquote>
+       These addresses write D1 into the 1 bit missile or ball graphics registers.
+<blockquote>
+<table border="1">
+<tbody><tr><td colspan="2">D1</td></tr>
+<tr><td>0</td><td>Disables object</td></tr>
+<tr><td>1</td><td>Enables object</td></tr>
+</tbody></table>
+</blockquote>
+</blockquote>
+<a name="GRP"></a>
+GRP0 (GRP1)
+<blockquote>
+       These addresses write data into the player graphics registers.
+<blockquote>
+<table border="1">
+<tbody><tr><td>D7</td><td>D6</td><td>D5</td><td>D4</td><td>D3</td><td>D2</td><td>D1</td><td>D0</td></tr>
+<tr><td colspan="8">Graphics Data</td></tr>
+</tbody></table>
+</blockquote>
+       Note: serial output begins with D7, unless REFP0 (REFP1) = 1
+</blockquote>
+<a name="REFP"></a>
+REFP0 (REFP1)
+<blockquote>
+       These addesses write D3 into the 1 bit player reflect registers
+<blockquote>
+<table border="1">
+<tbody><tr><td colspan="2">D3</td></tr>
+<tr><td>0</td><td>no reflect, D7 of GRPx on left</td></tr>
+<tr><td>1</td><td>reflect, D0 of GRPx on left</td></tr>
+</tbody></table>
+</blockquote>
+</blockquote>
+<a name="VDELP"></a>
+<a name="VDELBL"></a>
+VDELP0 (VDELP1, VDELBL)
+<blockquote>
+       These addresses write D0 into the 1 bit vertical delay registers, to delay players or ball by
+       one vertical line.<p>
+</p><blockquote>
+<table border="1">
+<tbody><tr><td colspan="2">D0</td></tr>
+<tr><td>0</td><td>no delay</td></tr>
+<tr><td>1</td><td>delay</td></tr>
+</tbody></table>
+</blockquote>
+</blockquote>
+<a name="CXCLR"></a>
+CXCLR
+<blockquote>
+This adderess clears all collision latches to zero (no collision).
+       No data bits are used.
+</blockquote>
+<a name="COLUP"></a>
+COLUP0 (COLUP1, COLUPF, COLUBK)
+<blockquote>
+       These addresses write data into the player, playfield, and background color-luminance
+       registers
+<p>
+</p><blockquote>
+<table border="1">
+<tbody><tr><td>COLOR</td><td>D7</td><td>D6</td><td>D5</td><td>D4</td><td>D3</td><td>D2</td><td>D1</td><td>LUM</td></tr>
+<tr><td>grey - gold</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>black</td></tr>
+<tr><td>&nbsp;</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>dark grey</td></tr>
+<tr><td>orange, brt-org</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>&nbsp;</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>grey</td></tr>
+<tr><td>pink - purple</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>&nbsp;</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>purp-blue, blue</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>light grey</td></tr>
+<tr><td>&nbsp;</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>white</td></tr>
+<tr><td>blue - lt. blue</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>&nbsp;</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>torq. - grn. blue</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>&nbsp;</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>grn. - yel. grn.</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>&nbsp;</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>org. grn - lt org.</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td>&nbsp;</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+</tbody></table>
+</blockquote>
+</blockquote>
+<a name="AUDF"></a>
+AUDF0 (AUDF1)
+<blockquote>
+       These addresses write data into the audio frequency divider registers.
+<p>
+</p><blockquote>
+<table border="1">
+<tbody><tr><td>D4</td><td> D3</td><td> D2</td><td> D1</td><td> D0</td><td> 30KHz divided by</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>no division</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>divide by 2</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>divide by 3</td></tr>
+<tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>divide by 31</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>divide by 32</td></tr>
+</tbody></table>
+</blockquote>
+</blockquote>
+<a name="AUDC"></a>
+AUDC0 (AUDC1)
+<blockquote>
+       These addresses write data into the audio control registers which control the noise
+       content and additional division of the audio output.
+<p>
+</p><blockquote>
+<table border="1">
+<tbody><tr><td>D3</td><td> D2</td><td> D1</td><td> D0</td><td> Type of noise or division</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>set to 1</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>1</td><td>4 bit poly</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>0</td><td>div 15 -&gt; 4 bit poly</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>1</td><td>5 bit poly -&gt; 4 bit poly</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>0</td><td>div 2 : pure tone</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>1</td><td>div 2 : pure tone</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>0</td><td>div 31 : pure tone</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>1</td><td>5 bit poly -&gt; div 2</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td><td>9 bit poly (white noise)</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>1</td><td>5 bit poly</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>0</td><td>div 31 : pure tone</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>1</td><td>set last 4 bits to 1</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>0</td><td>div 6 : pure tone</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>1</td><td>div 6 : pure tone</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>0</td><td>div 93 : pure tone</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>5 bit poly div 6</td></tr>
+</tbody></table>
+</blockquote>
+</blockquote>
+<a name="AUDV"></a>
+AUDV0 (AUDV1)
+<blockquote>
+       These addresses write data into the audio volume registers which set the pull down
+       impedance driving the audio output pads.
+<p>
+</p><blockquote>
+<table border="1">
+<tbody><tr><td>D3</td><td> D2</td><td> D1</td><td> D0</td><td> Audio Output Pull down current</td></tr>
+<tr><td>0</td><td>      0</td><td>      0</td><td>      0</td><td>      No output current</td></tr>
+<tr><td>0</td><td>      0</td><td>      0</td><td>      1</td><td>      lowest</td></tr>
+<tr><td>0</td><td>      0</td><td>      1</td><td>      0</td></tr>
+<tr><td>...</td><td>    ...</td><td>    ...</td><td>    ...</td></tr>
+<tr><td>1</td><td>      1</td><td>      1</td><td>      0</td></tr>
+<tr><td>1</td><td>      1</td><td>      1</td><td>      1</td><td>      highest</td></tr>
+</tbody></table>
+</blockquote>
+</blockquote>
+<p>
+</p><hr>
+<p>
+<a name="wsummary"></a>
+</p><h3>TIA WRITE ADDRESS SUMMARY</h3>
+<blockquote>
+<table border="1">
+<tbody><tr><td>6-bit Address</td><td>Address Name</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td><td>Function</td></tr>
+<tr><td>00</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#VSYNC">VSYNC</a>     </td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>.</td><td>  vertical sync set-clear</td></tr>
+<tr><td>01</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#VBLANK">VBLANK</a>    </td><td>1</td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>.</td><td>  vertical blank set-clear</td></tr>
+<tr><td>02</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#WSYNC">WSYNC</a>     </td><td colspan="8" align="center">strobe</td><td>  wait for leading edge of horizontal blank</td></tr>
+<tr><td>03</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#RSYNC">RSYNC</a>     </td><td colspan="8" align="center">strobe</td><td>  reset horizontal sync counter</td></tr>
+<tr><td>04</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#NUSIZ">NUSIZ0</a>    </td><td>.</td><td>.</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>  number-size player-missile 0</td></tr>
+<tr><td>05</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#NUSIZ">NUSIZ1</a>    </td><td>.</td><td>.</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>  number-size player-missile 1</td></tr>
+<tr><td>06</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#COLUP">COLUP0</a>    </td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>.</td><td>  color-lum player 0</td></tr>
+<tr><td>07</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#COLUP">COLUP1</a>    </td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>.</td><td>  color-lum player 1</td></tr>
+<tr><td>08</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#COLUP">COLUPF</a>    </td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>.</td><td>  color-lum playfield</td></tr>
+<tr><td>09</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#COLUP">COLUBK</a>    </td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>.</td><td>  color-lum background</td></tr>
+<tr><td>0A</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#CTRLPF">CTRLPF</a>    </td><td>.</td><td>.</td><td>1</td><td>1</td><td>.</td><td>1</td><td>1</td><td>1</td><td>  control playfield ball size &amp; collisions</td></tr>
+<tr><td>0B</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#REFP">REFP0</a>     </td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>.</td><td>.</td><td>.</td><td>  reflect player 0</td></tr>
+<tr><td>0C</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#REFP">REFP1</a>     </td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>.</td><td>.</td><td>.</td><td>  reflect player 1</td></tr>
+<tr><td>0D</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#PF">PF0</a>       </td><td>1</td><td>1</td><td>1</td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>  playfield register byte 0</td></tr>
+<tr><td>0E</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#PF">PF1</a>       </td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>  playfield register byte 1</td></tr>
+<tr><td>0F</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#PF">PF2</a>       </td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>  playfield register byte 2</td></tr>
+<tr><td>10</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#RESP">RESP0</a>     </td><td colspan="8" align="center">strobe</td><td>  reset player 0</td></tr>
+<tr><td>11</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#RESP">RESP1</a>     </td><td colspan="8" align="center">strobe</td><td>  reset player 1</td></tr>
+<tr><td>12</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#RESM">RESM0</a>     </td><td colspan="8" align="center">strobe</td><td>  reset missile 0</td></tr>
+<tr><td>13</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#RESM">RESM1</a>     </td><td colspan="8" align="center">strobe</td><td>  reset missile 1</td></tr>
+<tr><td>14</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#RESBL">RESBL</a>     </td><td colspan="8" align="center">strobe</td><td>  reset ball</td></tr>
+<tr><td>15</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#AUDC">AUDC0</a>     </td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>1</td><td>1</td><td>1</td><td>  audio control 0</td></tr>
+<tr><td>16</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#AUDC">AUDC1</a>     </td><td>.</td><td>.</td><td>.</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>  audio control 1</td></tr>
+<tr><td>17</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#AUDF">AUDF0</a>     </td><td>.</td><td>.</td><td>.</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>  audio frequency 0</td></tr>
+<tr><td>18</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#AUDF">AUDF1</a>     </td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>1</td><td>1</td><td>1</td><td>  audio frequency 1</td></tr>
+<tr><td>19</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#AUDV">AUDV0</a>     </td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>1</td><td>1</td><td>1</td><td>  audio volume 0</td></tr>
+<tr><td>1A</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#AUDV">AUDV1</a>     </td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>1</td><td>1</td><td>1</td><td>  audio volume 1</td></tr>
+<tr><td>1B</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#GRP">GRP0</a>      </td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>  graphics player 0</td></tr>
+<tr><td>1C</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#GRP">GRP1</a>      </td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>  graphics player 1</td></tr>
+<tr><td>1D</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#ENAM">ENAM0</a>     </td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>.</td><td>  graphics (enable) missile 0</td></tr>
+<tr><td>1E</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#ENAM">ENAM1</a>     </td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>.</td><td>  graphics (enable) missile 1</td></tr>
+<tr><td>1F</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#ENABL">ENABL</a>     </td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>.</td><td>  graphics (enable) ball</td></tr>
+<tr><td>20</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#HMP">HMP0</a>      </td><td>1</td><td>1</td><td>1</td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>  horizontal motion player 0</td></tr>
+<tr><td>21</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#HMP">HMP1</a>      </td><td>1</td><td>1</td><td>1</td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>  horizontal motion player 1</td></tr>
+<tr><td>22</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#HMM">HMM0</a>      </td><td>1</td><td>1</td><td>1</td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>  horizontal motion missile 0</td></tr>
+<tr><td>23</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#HMM">HMM1</a>      </td><td>1</td><td>1</td><td>1</td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>  horizontal motion missile 1</td></tr>
+<tr><td>24</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#HMBL">HMBL</a>      </td><td>1</td><td>1</td><td>1</td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>  horizontal motion ball</td></tr>
+<tr><td>25</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#VDELP">VDELP0</a>    </td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>  vertical delay player 0</td></tr>
+<tr><td>26</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#VDELP">VDELP1</a>    </td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>  vertical delay player 1</td></tr>
+<tr><td>27</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#VDELBL">VDELBL</a>    </td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>  vertical delay ball</td></tr>
+<tr><td>28</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#RESMP">RESMP0</a>    </td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>.</td><td>  reset missile 0 to player 0</td></tr>
+<tr><td>29</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#RESMP">RESMP1</a>    </td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>1</td><td>.</td><td>  reset missile 1 to player 1</td></tr>
+<tr><td>2A</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#HMOVE">HMOVE</a>     </td><td colspan="8" align="center">strobe</td><td>  apply horizontal motion</td></tr>
+<tr><td>2B</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#HMCLR">HMCLR</a>     </td><td colspan="8" align="center">strobe</td><td>  clear horizontal motion registers</td></tr>
+<tr><td>2C</td><td><a href="https://alienbill.com/2600/101/docs/stella.html#CXCLR">CXCLR</a>     </td><td colspan="8" align="center">strobe</td><td>  clear collision latches</td></tr>
+</tbody></table>
+</blockquote>
+<p>
+</p><hr>
+<p>
+<a name="rsummary"></a>
+</p><h3>TIA READ ADDRESS SUMMARY</h3>
+
+<blockquote>
+<table border="1">
+<tbody><tr><td>6-bit Address</td><td>Address Name   </td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td><td>  Function</td><td>D7</td><td>D6</td></tr>
+<tr><td>0</td><td>CXM0P     </td><td>1</td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>  read collision     </td><td>M0 P1    </td><td>M0 P0</td></tr>
+<tr><td>1</td><td>CXM1P     </td><td>1</td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>  read collision     </td><td>M1 P0    </td><td>M1 P1</td></tr>
+<tr><td>2</td><td>CXP0FB    </td><td>1</td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>  read collision     </td><td>P0 PF    </td><td>P0 BL</td></tr>
+<tr><td>3</td><td>CXP1FB    </td><td>1</td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>  read collision     </td><td>P1 PF    </td><td>P1 BL</td></tr>
+<tr><td>4</td><td>CXM0FB    </td><td>1</td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>  read collision     </td><td>M0 PF    </td><td>M0 BL</td></tr>
+<tr><td>5</td><td>CXM1FB    </td><td>1</td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>  read collision     </td><td>M1 PF    </td><td>M1 BL</td></tr>
+<tr><td>6</td><td>CXBLPF    </td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>  read collision     </td><td>BL PF    </td><td>unused</td></tr>
+<tr><td>7</td><td>CXPPMM    </td><td>1</td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>  read collision     </td><td>P0 P1    </td><td>M0 M1</td></tr>
+<tr><td>8</td><td>INPT0     </td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td colspan="3">  read pot port</td></tr>
+<tr><td>9</td><td>INPT1     </td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td colspan="3">  read pot port</td></tr>
+<tr><td>A</td><td>INPT2     </td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td colspan="3">  read pot port</td></tr>
+<tr><td>B</td><td>INPT3     </td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td colspan="3">  read pot port</td></tr>
+<tr><td>C</td><td>INPT4     </td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td colspan="3">  read input</td></tr>
+<tr><td>D</td><td>INPT5     </td><td>1</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td>.</td><td colspan="3">  read input</td></tr>
+</tbody></table>
+           Note : I0, I2, I2, I3 can be grounded
+           under software control.
+           I4, I5 can be converted to latched
+           inputs under software control
+</blockquote>
+<p>
+<i>(For PIA I/O addresses, see section <a href="https://alienbill.com/2600/101/docs/stella.html#pia6.0">6,0</a> --BW)</i>
+</p><p>
+</p><hr>
+<p>
+<a name="ednotes"></a>
+Editor's Notes</p><p>
+<i>(This section is *not* part of the manual, so you can ignore it if
+you want! --BW)</i>
+</p><blockquote>
+I did this HTML version of the Stella Programming Guide for a couple of
+reasons:
+<ul>
+<li>
+The existing PDF version is great, but I really hate having to use a PDF
+reader to read it. HTML is (supposedly) cross-platform, and since I already
+keep 10-15 browser windows open at any given time, I'd rather use the same
+GUI for reading the Stella docs as I do for everything else that's graphical.
+</li><li>
+The existing plain-text version I found is ok, but it's missing all the
+diagrams (of course), and some of the text formatting is a bit strange.
+</li><li>
+I tried numerous programs that claim to convert PDF (or PostScript) to HTML,
+but they all produced ugly, unusable results.
+</li><li>
+I wanted internal links in the document, such as the table of contents. The
+existing PDF version doesn't seem to have them. The next version of this
+document will probably have links to external `how-to' docs, with code
+snippets and such.
+</li><li>
+The Stella/Atari development community are some of the nicest people I've
+ever met, and this is my attempt to give back to the community in some small
+way.
+</li><li>
+Finally, I needed an excuse to procrastinate... my poor 2600 game is in a
+nasty state of disrepair, and I'm at the point where I'd be better starting
+from scratch. Taking a break from 6502 asm and writing in a `language' like
+HTML gives me a much-needed breather.
+</li></ul>
+<p>
+The original PDF version has a few typos. I don't know if those are in the
+original paper version, or mistakes in the transcription, but I fixed as many
+of them as I could find (most of them were silly, like <i>it's</i> instead of
+<i>its</i>, or <i>sidable</i> for <i>disable</i>). Also, I didn't try to
+format the tables exactly as they appear in the PDF version, since HTML isn't
+much good for that sort of thing anyway. I did my best to preserve the content,
+but took a few liberties with the presentation.</p><p>
+
+Although I have tried to avoid it, I'm sure I introduced a few errors and
+typos of my own. If anybody spots one, let me know, and I'll fix it ASAP.</p><p>
+
+As far as copyright goes, who knows what the official, legal status of the
+Stella Programmer's Guide is? I sure don't. But this HTML version is free for
+anyone to use and/or redistribute, as much as the original version is. If
+you modify this version, I'd really appreciate it if you'd clearly mark your
+new version as modified. Better yet, if you fix some of my mistakes, show me
+what I did wrong so I can learn from them!</p><p>
+
+I looked at this in Netscape 4.7, Opera 5.0b6, and Konqueror 2.1 on Linux, and IE 5.0 on Win98; it looks OK on all of them.
+If you have any problems with the HTML formatting, please let me know. I tried to
+use `bog standard' HTML as much as possible, so it should work OK on any
+browser, on any OS, but if it doesn't, I'll fix it the best I am able.</p><p>
+
+B. Watson<br>
+atari@hardcoders.org<br>
+09/15/2001<br>
+
+</p></blockquote></blockquote></body></html>

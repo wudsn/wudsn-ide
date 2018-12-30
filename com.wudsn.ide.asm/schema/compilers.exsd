@@ -1,0 +1,197 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="com.wudsn.ide.asm" xmlns="http://www.w3.org/2001/XMLSchema">
+<annotation>
+      <appInfo>
+         <meta.schema plugin="com.wudsn.ide.asm" id="compilers" name="Compilers"/>
+      </appInfo>
+      <documentation>
+         This extension point allows for adding new 6502 assembler compilers to the WUDSN IDE.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <annotation>
+         <appInfo>
+            <meta.element />
+         </appInfo>
+      </annotation>
+      <complexType>
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="compiler"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute translatable="true"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="compiler">
+      <complexType>
+         <choice>
+            <sequence>
+               <element ref="supportedCPU" minOccurs="1" maxOccurs="unbounded"/>
+            </sequence>
+            <sequence>
+            </sequence>
+         </choice>
+         <attribute name="id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The technical id of the compiler. Must consist of lower case letters or digits.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Translatable name of the compiler. Typically contains only upper case letters.
+               </documentation>
+               <appInfo>
+                  <meta.attribute translatable="true"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The name of the compiler class.
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn="com.wudsn.ide.asm.compiler.Compiler:"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="version" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Supported (minimum) version of the compiler. All compiler directives and major compiler features up to this version have been incorporated into this version of WUDSN IDE.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="homePageURL" type="string">
+            <annotation>
+               <documentation>
+                  The absolute URL pointing to the homepage of the compiler where the latest version can be downloaded.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="helpFilePaths" type="string">
+            <annotation>
+               <documentation>
+                  The relative paths to the help documents. Multiple paths are separated by comma. Each path is evluated based on the absolute path of the compiler executable in the preferences.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="defaultParameters" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The default compiler parameters which are use if not other parameters are specified in the preferences.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="defaultHardware" use="required">
+            <annotation>
+               <documentation>
+                  The default hardware which is assumed, if no source annotation is found.
+               </documentation>
+            </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="APPLE2">
+                  </enumeration>
+                  <enumeration value="ATARI2600">
+                  </enumeration>
+                  <enumeration value="ATARI7800">
+                  </enumeration>
+                  <enumeration value="ATARI8BIT">
+                  </enumeration>
+                  <enumeration value="C64">
+                  </enumeration>
+                  <enumeration value="NES">
+                  </enumeration>
+                  <enumeration value="TEST">
+                  </enumeration>
+               </restriction>
+            </simpleType>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="supportedCPU">
+      <complexType>
+         <attribute name="cpu">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="MOS6502">
+                  </enumeration>
+                  <enumeration value="MOS6502_ILLEGAL">
+                  </enumeration>
+                  <enumeration value="MOS65C02">
+                  </enumeration>
+                  <enumeration value="MOS6502_DTV">
+                  </enumeration>
+                  <enumeration value="MOS65816">
+                  </enumeration>
+               </restriction>
+            </simpleType>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="since"/>
+      </appInfo>
+      <documentation>
+         WUDSN IDE 1.1.0
+      </documentation>
+   </annotation>
+
+
+   <annotation>
+      <appInfo>
+         <meta.section type="apiinfo"/>
+      </appInfo>
+      <documentation>
+         To implement this extension point, you have to create a sub-class of com.wudsn.ide.asm.compiler.Compiler, a sub-class of com.wudsn.ide.asm.compiler.parser.CompilerSourceParser and a sub-class of com.wudsn.ide.asm.compiler.CompilerLogParser. In the constructor of the compiler you have to set the source parser instance. In the &quot;createLogParser&quot; method of the compiler you have to create a new instance of the corresponding log parser.
+      </documentation>
+   </annotation>
+
+
+   <annotation>
+      <appInfo>
+         <meta.section type="copyright"/>
+      </appInfo>
+      <documentation>
+         (c) 2009 Peter Dell
+      </documentation>
+   </annotation>
+
+</schema>

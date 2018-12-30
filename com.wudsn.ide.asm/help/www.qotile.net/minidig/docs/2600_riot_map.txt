@@ -1,0 +1,140 @@
+--------------------------------
+RIOT Addresses: names taken from
+Atari VCS Stella Documentation
+--------------------------------
+$0280 = (RIOT $00) - SWCHA  (read/write)
+$0281 = (RIOT $01) - SWACNT (read/write)
+$0282 = (RIOT $02) - SWCHB  (read/write) (*)
+$0283 = (RIOT $03) - SWBCNT (read/write) (*)
+$0284 = (RIOT $04) - INTIM (read), edge detect control (write)
+$0285 = (RIOT $05) - read interrupt flag (read), edge detect control (write)
+$0286 = (RIOT $06) - INTIM (read), edge detect control (write)
+$0287 = (RIOT $07) - read interrupt flag (read), edge detect control (write)
+$0288 = (RIOT $08) - SWCHA  (read/write)
+$0289 = (RIOT $09) - SWACNT (read/write)
+$028A = (RIOT $0A) - SWCHB  (read/write) (*)
+$028B = (RIOT $0B) - SWBCNT (read/write) (*)
+$028C = (RIOT $0C) - INTIM (read) , edge detect control (write)
+$028D = (RIOT $0D) - read interrupt flag (read), edge detect control (write)
+$028E = (RIOT $0E) - INTIM (read) , edge detect control (write)
+$028F = (RIOT $0F) - read interrupt flag (read), edge detect control (write)
+$0290 = (RIOT $10) - SWCHA  (read/write)
+$0291 = (RIOT $11) - SWACNT (read/write)
+$0292 = (RIOT $12) - SWCHB  (read/write) (*)
+$0293 = (RIOT $13) - SWBCNT (read/write) (*)
+$0294 = (RIOT $14) - INTIM (read), TIM1T (write)
+$0295 = (RIOT $15) - read interrupt flag (read), TIM8T (write)
+$0296 = (RIOT $16) - INTIM (read), TIM64T (write)
+$0297 = (RIOT $17) - read interrupt flag (read), TIM1024T (write)
+$0298 = (RIOT $18) - SWCHA  (read/write)
+$0299 = (RIOT $19) - SWACNT (read/write)
+$029A = (RIOT $1A) - SWCHB  (read/write) (*)
+$029B = (RIOT $1B) - SWBCNT (read/write) (*)
+$029C = (RIOT $1C) - INTIM (read), TIM1T (write)
+$029D = (RIOT $1D) - read interrupt flag (read), TIM8T (write)
+$029E = (RIOT $1E) - INTIM (read), TIM64T (write)
+$029F = (RIOT $1F) - read interrupt flag (read), TIM1024T (write)
+
+(*) The Stella documentation states that Port B is hardwired for input
+    only.  In reality, Port B is fully configurable.  Configuring Port B
+    as an output, however, will cause direct hardware conflicts with the
+    console switches.  DO NOT ATTEMPT THIS.
+
+------------------------------------------------------------------------------
+
+**********************
+* RIOT Documentation *
+**********************
+
+---------------------------------------
+RIOT Addressing Notes for the Atari VCS
+---------------------------------------
+A12 is connected to /CS2 (Chip Select 2 - active low)
+A7 is connected to CS1  (Chip Select 1 - active high)
+A9 is connected to /RS  (RAM Select - active low)
+A11, A10, and A8 are not connected to the RIOT
+
+-------------------------------------
+$0080 - $00FF = RIOT RAM (read/write)
+-------------------------------------
+$0080 - $00FF = RIOT RAM, Addresses $00-$7F
+
+---------------------------------------------
+$0280 - $029F = RIOT Read Addresses (not RAM)
+---------------------------------------------
+$0280 = (RIOT $00) - Read DRA
+$0281 = (RIOT $01) - Read DDRA
+$0282 = (RIOT $02) - Read DRB
+$0283 = (RIOT $03) - Read DDRB
+$0284 = (RIOT $04) - Read timer, disable interrupt (2)
+$0285 = (RIOT $05) - Read interrupt flag
+$0286 = (RIOT $06) - Read timer, disable interrupt (2)
+$0287 = (RIOT $07) - Read interrupt flag
+$0288 = (RIOT $08) - Read DRA
+$0289 = (RIOT $09) - Read DDRA
+$028A = (RIOT $0A) - Read DRB
+$028B = (RIOT $0B) - Read DDRB
+$028C = (RIOT $0C) - Read timer, enable interrupt (2)
+$028D = (RIOT $0D) - Read interrupt flag
+$028E = (RIOT $0E) - Read timer, enable interrupt (2)
+$028F = (RIOT $0F) - Read interrupt flag
+$0290 = (RIOT $10) - Read DRA
+$0291 = (RIOT $11) - Read DDRA
+$0292 = (RIOT $12) - Read DRB
+$0293 = (RIOT $13) - Read DDRB
+$0294 = (RIOT $14) - Read timer, disable interrupt (2)
+$0295 = (RIOT $15) - Read interrupt flag
+$0296 = (RIOT $16) - Read timer, disable interrupt (2)
+$0297 = (RIOT $17) - Read interrupt flag
+$0298 = (RIOT $18) - Read DRA
+$0299 = (RIOT $19) - Read DDRA
+$029A = (RIOT $1A) - Read DRB
+$029B = (RIOT $1B) - Read DDRB
+$029C = (RIOT $1C) - Read timer, enable interrupt (2)
+$029D = (RIOT $1D) - Read interrupt flag
+$029E = (RIOT $1E) - Read timer, enable interrupt (2)
+$029F = (RIOT $1F) - Read interrupt flag
+
+----------------------------------------------
+$0280 - $029F = RIOT Write Addresses (not RAM)
+----------------------------------------------
+$0280 = (RIOT $00) - Write DRA
+$0281 = (RIOT $01) - Write DDRA
+$0282 = (RIOT $02) - Write DRB
+$0283 = (RIOT $03) - Write DDRB
+$0284 = (RIOT $04) - Write edge detect control - negative edge, disable int (1)
+$0285 = (RIOT $05) - Write edge detect control - positive edge, disable int (1)
+$0286 = (RIOT $06) - Write edge detect control - negative edge, enable int (1)
+$0287 = (RIOT $07) - Write edge detect control - positive edge, enable int (1)
+$0288 = (RIOT $08) - Write DRA
+$0289 = (RIOT $09) - Write DDRA
+$028A = (RIOT $0A) - Write DRB
+$028B = (RIOT $0B) - Write DDRB
+$028C = (RIOT $0C) - Write edge detect control - negative edge, disable int (1)
+$028D = (RIOT $0D) - Write edge detect control - positive edge, disable int (1)
+$028E = (RIOT $0E) - Write edge detect control - negative edge, enable int (1)
+$028F = (RIOT $0F) - Write edge detect control - positive edge, enable int (1)
+$0290 = (RIOT $10) - Write DRA
+$0291 = (RIOT $11) - Write DDRA
+$0292 = (RIOT $12) - Write DRB
+$0293 = (RIOT $13) - Write DDRB
+$0294 = (RIOT $14) - Write timer (div by 1)    - disable int (2)
+$0295 = (RIOT $15) - Write timer (div by 8)    - disable int (2)
+$0296 = (RIOT $16) - Write timer (div by 64)   - disable int (2)
+$0297 = (RIOT $17) - Write timer (div by 1024) - disable int (2)
+$0298 = (RIOT $18) - Write DRA
+$0299 = (RIOT $19) - Write DDRA
+$029A = (RIOT $1A) - Write DRB
+$029B = (RIOT $1B) - Write DDRB
+$029C = (RIOT $1C) - Write timer (div by 1)    - enable int (2)
+$029D = (RIOT $1D) - Write timer (div by 8)    - enable int (2)
+$029E = (RIOT $1E) - Write timer (div by 64)   - enable int (2)
+$029F = (RIOT $1F) - Write timer (div by 1024) - enable int (2)
+
+(1) A0 = 0 for negative edge detect
+    A0 = 1 for positive edge detect
+    A1 = 0 to disable interrupt from PA7 to /IRQ
+    A1 = 1 to enable  interrupt from PA7 to /IRQ
+
+(2) A3 = 0 to disable interrupt from timer to /IRQ
+    A3 = 1 to enable  interrupt from timer to /IRQ

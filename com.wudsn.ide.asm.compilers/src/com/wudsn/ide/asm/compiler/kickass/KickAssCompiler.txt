@@ -1,0 +1,52 @@
+		    if (title.equals(name)) {
+			int index = name.indexOf("_");
+			String opcode;
+			String addressing;
+			if (index >= 0) {
+			    opcode = name.substring(0, index);
+
+			    addressing = name.substring(index + 1);
+			} else {
+			    index=name.length();
+			    opcode = name;
+			    addressing = "";
+			}
+
+			StringBuilder result = new StringBuilder("Opcode ");
+			for (int i = 0; i < index; i++) {
+			    result.append("_");
+			    result.append(opcode.charAt(i));
+			}
+			if (addressing.equals("ABS")) {
+			    result.append(" _a_b_solute");
+			} else if (addressing.equals("ABSX")) {
+			    result.append(" _a_b_solute,_x");
+			} else if (addressing.equals("ABSY")) {
+			    result.append(" _a_b_solute,_y");
+			} else if (addressing.equals("IMM")) {
+			    result.append(" #_i_m_mediate");
+			} else if (addressing.equals("IZPX")) {
+			    result.append(" (_indirect _zero_page,_x)");
+			} else if (addressing.equals("IZPY")) {
+			    result.append(" (_indirect _zero_page),_y");
+			} else if (addressing.equals("ZP")) {
+			    result.append(" _zero_page");
+			} else if (addressing.equals("ZPX")) {
+			    result.append(" _zero_page,_x");
+			} else if (addressing.equals("ZPY")) {
+			    result.append(" _zero_page,_y");
+			}else if (addressing.equals("REL")) {
+			    result.append(" _r_e_lative");
+			}  else if (addressing.equals("IND")) {
+			    result.append(" (_i_n_direct)");
+			} else if (addressing.equals("")) {
+			} else {
+			    throw new RuntimeException(
+				    "Unknown addressing mode " + addressing);
+			}
+			title = result.toString();
+		    }
+		    System.out.println("	<constant cpu=\"" + cpuString
+			    + "\" name=\"" + name + "\" title=\"" + title
+			    + "\"/>");
+		}

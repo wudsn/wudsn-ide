@@ -1,0 +1,712 @@
+**************************************************************
+**************************************************************
+*                                                            *
+* ATARI 2600 ADVANCED PROGRAMMING GUIDE                      *
+*                                                            *
+* Updated 05-21-04                                           *
+* Compiled and edited by Paul Slocum                         *
+* Written by the Atari 2600 programming community            *
+*                                                            *
+* version 1.0 / 05-19-04 / first release                     *
+* version 1.1 / 05-21-04 / added multi-sprite trick          *
+*                                                            *
+**************************************************************
+**************************************************************
+
+This guide is intended to be a supplement to the standard Stella Programmer's 
+Guide.  Some of the sections assume a working knowledge of 6502 assembly and 
+Atari 2600 registers.
+
+If you would like to write new sections or update existing sections of this 
+document, contact me: paul at treewave dot com
+
+
+
+**************************************************************
+**************************************************************
+*                                                            *
+* TABLE OF CONTENTS                                          *
+*                                                            *
+**************************************************************
+**************************************************************
+
+- Bankswitching
+- BRK Subroutine Trick
+- Checking the Number of Scanlines
+- Constant Cycle Count to Avoid WSYNC
+- Counting Down when Looping
+- Illegal Opcodes
+- Insurance Against Too Many VBlank/Overscan Cycles
+- Multi-Sprite Trick
+- Paddles
+- Showing Missiles/Ball using PHP
+- Skipdraw
+- Sound and Music
+- Using BRK with RESXX
+- Wasting Cycles
+- HMOVE Timing Chart
+
+
+==============================================================
+==============================================================
+Bankswitching
+==============================================================
+==============================================================
+
+For a bankswitching reference you'll want Kevin Horton's sizes.txt reference:
+http://www.tripoint.org/kevtris/files/sizes.txt
+
+One thing you'll probably want to know for any kind of bankswitching is the RORG 
+assembler directive.  RORG is like ORG except it only affects the way label 
+addresses are handled, not where the code is placed in the ROM.  So let's say 
+you're working on an 8K ROM.  The first bank will start with ORG $1000 and all 
+the code and data for the first bank will follow.  At the start of the second 4K 
+bank, you'll want:
+
+	ORG $2000
+	RORG $1000
+
+If you don't use RORG, all your label addresses in the second bank will be in 
+the $2000-$2FFF range which won't work.  With RORG, they will continue to 
+address the $1000-$1FFF range.
+
+Here's a basic template for doing F8 bankswitching.  This can easily be modified 
+to work with similar bankswitching methods (F4,F6,etc).  This code allows you to 
+call "Bank2Subroutine" from bank 1 using jsr CallBank2Subroutine.
+
+  ;------------------------------------
+  ;This code in bank 1
+  ;Switches to bank 2 where the subroutine it called.
+      org $1FE0
+  CallBank2Subroutine
+      ldx $1FF9	  ; switch to bank 2
+      nop         ; 1FE3 jsr Bank2Subroutine
+      nop         ; .
+      nop         ; .
+      nop         ; 1FE6 lda $1FF8  (Switch back to bank 1)        
+      nop         ; .
+      nop         ; .
+      rts
+
+  ;------------------------------------
+  ;This code in bank 2:
+  ;Calls the subroutine and returns to bank 1
+      org $2FE3
+      rorg $1FE3
+
+      jsr Bank2Subroutine
+      ldx $1FF8    ;(Switch back to bank 1)        
+
+
+It's good practice to assume that your multi-bank ROM could start up in any bank
+.  In each bank, set up the startup vector so it points to code that switches to 
+the correct startup bank and then jumps to the start of your program.
+
+
+
+==============================================================
+==============================================================
+BRK Subroutine Trick
+--------------------------------------------------------------
+Mark Lesser, Thomas Jentzch
+==============================================================
+==============================================================
+
+Thomas found this trick in Mark Lesser's Lord of the Rings prototype:  You can 
+use BRK to call a subroutine that needs to be called often and save ROM space.  
+If you aren't familiar with BRK, it pushes the flags and PC on the stack and 
+jumps to wherever the vector $FFFE is pointing.
+
+Thomas found BRK commands like this scattered through Lord of the Rings:
+
+    brk
+    .byte $0e        ; id-byte
+    lda    $e3       ; <- here we will continue
+    ora    #$04
+  
+And the BRK vector was pointing to this routine:
+
+BrkRoutine:
+    plp             ; remove flags from stack (not needed)
+    tsx             ; load x with stackpointer
+    inx             ; x++
+    dec    $00,x    ; adjust return address
+    lda    ($00,x)  ; read break-id...
+    tay             ; ...and store in y
+Subroutine:
+    [subroutine code...]
+    rts       
+
+So it ended up being the equivalent of passing a value to a subroutine similar 
+to this:
+
+   ldy     #value
+   jsr     Subroutine
+
+But it saves 3 bytes with each call and the overhead is only 8 bytes.
+After only 3 subroutine calls (Lord of the Rings has about 20) you are saving 
+ROM space.
+
+In the case of Lord of the Rings, the subroutine was sound related code that 
+selected the sound effect to be played based on a priority system.
+
+
+
+==============================================================
+==============================================================
+Checking the Number of Scanlines
+--------------------------------------------------------------
+Eckhard Strolberg
+==============================================================
+==============================================================
+
+You'll want to verify that your program is drawing the desired number of 
+scanlines (around 262 NTSC and 312 PAL) and is not varying that number while 
+running.  To do this, use the Z26 emulator in video modeo 9.  While Z26 is 
+running, press ALT-9 to enter this mode which will display the number of 
+scanlines in the upper right corner.  The -v9 switch will start Z26 in this 
+mode.
+
+
+
+==============================================================
+==============================================================
+Constant Cycle Count to Avoid WSYNC
+--------------------------------------------------------------
+==============================================================
+==============================================================
+
+Normally you use STA WSYNC towards the end of each scanline in the kernal to 
+stay in sync with the TV.  But by carefully programming your kernal so each line 
+consistently takes exactly 76 cycles, you can avoid using STA WSYNC at all in 
+your kernal loop.  This will save you at least 3 cycles per scanline.
+
+
+
+==============================================================
+==============================================================
+Counting Down When Looping
+--------------------------------------------------------------
+==============================================================
+==============================================================
+
+Have loops count down whenever possible since this can save a lot of cycles and 
+a little bit of ROM too.
+
+------------------------------------------
+
+  Counting up requires a compare:
+
+      ldx #0
+  Loop
+      [your code...]
+      inx
+      cpx #20
+      bne Loop
+
+------------------------------------------
+
+  Counting down allows you to get rid of the compare:
+
+      ldx #20
+  Loop
+      [your code...]
+      dex
+      bne Loop
+
+
+
+==============================================================
+==============================================================
+Illegal Opcodes
+--------------------------------------------------------------
+Thomas Jentzch
+==============================================================
+==============================================================
+
+These are the most commonly used illegal opcodes in 2600 programming and are 
+considered safe.
+
+Decrement and Compare:
+  Decrements the memory location and compares it to the accumulator.
+    DCP      Opcode:$C3       M <- (M)-1, (A-M) -> NZC   (Ind,X)          2/8
+
+Double NOP:
+  No operation command that takes 3 cycles and uses two bytes.
+    DOP      Opcode:$04       [no operation]             (Z-Page)         2/3
+
+Load A and X:
+  Loads both A and X with the memory.
+    LAX      Opcode:$AF       A <- M, X <- M             (Absolute)       3/4
+
+
+
+==============================================================
+==============================================================
+Insurance Against Too Many VBLANK/Overscan Cycles
+--------------------------------------------------------------
+Paul Slocum
+==============================================================
+==============================================================
+
+It's difficult to make sure that there is no unusual case where your game logic 
+in VBlank and Overscan will use too many cycles and cause the number of 
+scanlines in a frame to fluctuate.  To insure against this problem, pad your 
+VBlank and Overscan with a few STA WSYNCs to add extra cycles during development
+.  Optimize your game so that it runs fine with these in.  Then when the game is 
+finished and ready for release, comment out those extra WSYNCs.  This is also an 
+easy way to estimate how much time you have left in VBlank and Overscan: keep 
+adding WSYNCs (each line is 76 cycles) until the screen jumps.
+
+
+
+==============================================================
+==============================================================
+The Multi-Sprite Trick
+--------------------------------------------------------------
+Christopher Tumber
+Todo: Add ASCII Images
+==============================================================
+==============================================================
+
+The multi-sprite trick is a technique which allows a programmer to put more sprites on a scanline than would normally be 
+allowable. Using this trick, up to 18 [?] sprites may be displayed on a scanline.
+
+This trick may be used with Player0, Player1, Missile0 and/or Missile1 in any combination. The most common use is with 
+P0 and P1 to create a row of sprites.
+
+There are important limitations with this trick. This trick essentially allows you to create more than the normal limit 
+of 3 copies of a sprite. However, in doing so you probably will not have time to change the bitmap, colour or size of the 
+sprite (as applicable). So the kinds of displays created with this technique will usually be repetitive patterns.
+
+The trick is accomplished by first setting NUSIZ0 and/or NUSIZ1 to display 2 or more copies of the sprites you want to 
+display [Is the exact setting significant?]. Your program then must strobe RESP0, RESP1, RESM0 and/or RESM1 repeatedly. 
+If this is timed correctly so that it occurs after the first copy is drawn but before the second then the TIA is tricked 
+into thinking it's just started drawing sprites and contiues drawing the sprite as if it's the first copy. You just 
+continue this for every copy you need.
+
+The tightest formation of sprites possible with this trick is:
+
+[image]
+
+which is done by the following code:
+
+
+sta RESP0
+sta RESP1
+sta RESP0
+sta RESP1
+sta RESP0
+sta RESP1
+sta RESP0
+sta RESP1
+sta RESP0
+sta RESP1
+
+However, this formation has one problem in that the last sprite on a row is shifted one pixel to the left. There is no 
+known soloution to this problem. If you can work this "glitch" into your game (for example as part of an asynchronous
+display) then you can use this layout. If not, the closest "stable" formation is:
+
+[image]
+
+which is done by the following code:
+
+sta RESP0,x
+sta RESP1,x
+sta RESP0,x
+sta RESP1,x
+sta RESP0,x
+sta RESP1,x
+sta RESP0,x
+sta RESP1,x
+sta RESP0,x
+sta RESP1,x
+
+or
+
+sta.w RESP0
+sta.w RESP1
+sta.w RESP0
+sta.w RESP1
+sta.w RESP0
+sta.w RESP1
+sta.w RESP0
+sta.w RESP1
+sta.w RESP0
+sta.w RESP1
+
+The ,x and .w in this example are "dummies". They're only used to increased the length of time taken by each instruction 
+by 1 cycle. The tradeoff being that the former requires the X register be set to zero and the latter results in slightly 
+larger code.
+
+If you need to turn off some of the sprites, you can do this by simply skipping their spot by inserting a dummy command. 
+For example:
+
+[image]
+
+sta RESP0
+sta RESP1
+sta Dummy
+sta RESP1
+sta RESP0
+sta Dummy
+sta RESP0
+sta RESP1
+sta RESP0
+sta RESP1
+
+Where Dummy is an unsued (or scratch or temporary) RAM location.
+
+This trick is quite easy to use to generate static displays. However, if you want a fully dynamic display things get
+considerably more complicated.
+
+Since there is no time available while drawing the sprites to do any calculations, if you want a variable number of 
+sprites on and off you must predetermine which sprites to display. A simple way to do this is to create a subroutine
+for every possible combination of on/off sprites. Then your program just needs to call the appropriate subroutine.
+The problem with this approach is that if you have a lot of sprites, the number of subroutines becomes very large.
+An alternative method is to place you drawing routine in RAM, adjusted for the current display - In the above example,
+copy all the STA RESP0 and STA RESP1 commands into RAM and then where sprites don't appear, substitue in a dummy RAM 
+location for the relevant RESP0 or RESP1.
+
+One thing you must be aware of if you are allowing individual sprites to be switched on and off. There are a number
+of cominations which you must treat as an exception. They cannot be displayed using the general display as above.
+For example, if either RESP0 or RESP1 needs to display only 1 copy of a sprite (because all other copies are off)
+then you must reset NUSIZ0/NUSIZ1. This would also be the case when two copies of a sprite are set too far apart
+for the second STA RESPn to occur before a "normal" copy is drawn.
+
+In addition, these sprites are not positioned vertically like normal sprites. Rather their position is determined by which
+display cycle the first STA RESPn or RESPMn occurs. So if you want to be able to reposition your sprites verically,
+you will either need to add more subroutines (as above) or adjust your RAM routine further. Or some combination of the
+two. Space Instigators uses a different subroutine for each possible vertical position, copies that routine into RAM
+and then modifies the STA RESPn commands to turn off dead Instigators. The new, single scanline repositioning routine may
+be of help here, however the multi-sprite trick tends to use up so much of your scanline time that if you're
+trying to do other things (ie: display other sprites) on that scanline you may not have the luxury of enough
+cycles for general purpose positioning code.
+
+The multi-sprite trick has a side effect in that the formation of sprites is shifted [?exact number?] pixels right
+as compared to where a normal sprite would appear with an STA RESPn at that cycle. This results in a left margin 
+that's not at the left edge of the screen. "Illegal" HMOVE/HMMn combination tricks may be used to fix this but with a
+corresponding increase in complexity.
+
+[Some more example code here]
+
+References: The multi-sprite trick was originally used in Galaxian and was pioneered by Eckhard Stolberg, John 
+Saeger, Erik Mooney and Thomas Jentzsch. Search Stella List under "Grid demo","trick18","trick12" and "inv3".
+
+
+==============================================================
+==============================================================
+Paddles
+--------------------------------------------------------------
+Thomas Jentzch
+ Todo: Explain and include how to discharge cap
+==============================================================
+==============================================================
+
+Assumes Y is your kernal line counter.
+
+          lda INPT0               ;3
+          bmi paddles1            ;2 or 3
+          .byte $2c               ;1    bit abs opcode
+ paddles1:
+          sty padVal1             ;3
+
+
+
+==============================================================
+==============================================================
+Showing Missiles/Ball using PHP
+==============================================================
+==============================================================
+
+This trick is originally from Combat and is probably the most efficient way to 
+display the missiles and/or ball.  This trick just requires that you don't use 
+the stack during your kernal.  Recall that:
+
+  ENABL = $1F
+  ENAM1 = $1E
+  ENAM0 = $1D
+
+In this example I'll show how to use the trick for both missiles.  You can 
+easily adapt it for the ball too.  To set the trick up, before your kernal save 
+the stack pointer and set the top of the stack to ENAM1+1.
+
+  tsx                    ; Transfer stack pointer to X
+  stx SavedStackPointer  ; Store it in RAM
+  ldx #ENAM1+1		
+  txs                    ; Set the top of the stack to ENAM1+1
+
+Now during the kernal you can compare your scanline counter to your missile 
+position register and this will set the zero flag in the processor.  Then to 
+enable/disable the missile for that scanline, just push the processor flags onto 
+the stack.  The ENAxx registers use bit 1 to enable/disable which corresponds 
+with the zero flag in the processor, so the enable/disable will be automatic.  
+It takes few cycles and doesn't vary the number of cycles depending on the 
+result like branching usually does.
+
+  ; On each line of your the kernal...
+  cpy MissilePos1        ; Assumes Y is your kernal line counter
+  php
+  cpy MissilePos0
+  php
+
+Then before you do it again, somewhere on each scanline you need to pull off the 
+stack again using two PLA's or PLP's, or you can manually reset the stack 
+pointer with ldx #ENAM1+1, txs.
+
+After your kernal, restore the stack pointer:
+
+  ldx SavedStackPointer
+  txs
+
+
+==============================================================
+==============================================================
+Skipdraw
+--------------------------------------------------------------
+Thomas Jentzch
+ Todo: Explain and clean up
+==============================================================
+==============================================================
+
+The best way, i knew until now, was (if y contains linecounter):
+
+  tya                   ; 2
+; sec                   ; 2) <- this can sometimes be avoided
+  sbc SpriteEnd         ; 3
+  adc #SPRITEHEIGHT     ; 2
+  bcx .skipDraw         ; 2 = 9-11 cycles
+  ...
+
+---------- or ---------
+
+If you like using illegal opcodes, you can use dcp (dec,cmp) here:
+
+  lda #SPRITEHEIGHT     ; 2
+  dcp SpriteEnd         ; 5     initial value has to be adjusted
+  bcx .skipDraw         ; 2 = 9
+  ...
+
+Advantages:
+- state of carry flag doesn't matter anymore (may save 2 cycles)
+- a remains constant, could be useful for a 2nd sprite
+- you could use the content of SpriteEnd instead of y for accesing sprite data
+
+;==================================
+;An Example:
+;
+   ; skipDraw routine for right player
+   TXA                          ; 2 A-> Current scannline
+   SEC                          ; 2 Set Carry
+   SBC slowP1YCoordFromBottom+1 ; 3 
+   ADC #SPRITEHEIGHT+1          ; 2 calc if sprite is drawn
+   BCC skipDrawRight            ; 2/3 To skip or not to skip?
+   TAY                          ; 2
+   lda P1Graphic,y              ; 4
+continueRight:
+   STA GRP0     
+
+;----- this part outside of kernel
+
+skipDrawRight        ; 3 from BCC
+   LDA #0            ; 2
+   BEQ continueRight ; 3 Return...
+
+
+
+==============================================================
+==============================================================
+Sound and Music
+--------------------------------------------------------------
+==============================================================
+==============================================================
+
+Atari 2600 Music Programming Guide and music driver code:
+
+http://qotile.net/sequencer.html
+
+Eckhard Strolberg's Frequency and Waveform Guide:
+
+http://buerger.metropolis.de/estolberg
+
+
+
+==============================================================
+==============================================================
+Using BRK with RESXX
+--------------------------------------------------------------
+Eckhard Strolberg
+==============================================================
+==============================================================
+
+(I'm not sure what you'd do with this trick but it's pretty interesting.  Maybe 
+somebody will figure out how to use it.)
+
+Pole Position puts the stack pointer over the RESxx registers and then does a 
+BRK. There are three write cycles in a BRK instruction, so the three position 
+registers for the objects that make up the road in PP, get accessed in three 
+consecutive cycles. This is how PP managed to get the road to meet so closely in 
+the horizon.
+
+
+
+==============================================================
+==============================================================
+Wasting Cycles
+--------------------------------------------------------------
+Christopher Tumbler, Chris Wilkson, Andrew Davie
+==============================================================
+==============================================================
+
+These are the most efficient ways to waste processor cycles.  
+
+Note that locations $2D-$3F do nothin and aren't decoded, and so they are used 
+often here.  In some bankswitching schemes this could cause problems though.
+
+-----------------
+1 Cycle (0 or 1 byte)
+    .w  (Change a zero page instruction to absolute, adds 1 byte of code)
+    ,x  (Change a zero page or absolute instruction to an indexed instruction.
+	 Make sure x=0.  Can also use Y)
+-----------------
+2 Cycles (1 byte)
+    nop
+-----------------
+3 Cycles (2 bytes)
+    sta $2D
+    - or -
+    lda $2D
+    - or -
+    dop (Double NOP illegal opcode)
+-----------------
+4 Cycles (2 bytes)
+    nop
+    nop
+-----------------
+5 Cycles (2 bytes)
+    dec $2D
+    - or -
+    sta $1800,X  ; asssumes you can write to ROM without problems
+-----------------
+6 Cycles (2 bytes)
+    lda ($80,X)  ; assumes possible reads from 0-$7f have no effect
+
+6 Cycles (3 bytes)
+    nop
+    nop
+    nop
+-----------------
+7 Cycles (2 bytes, need 1 byte free on stack)
+    pha
+    pla
+-----------------
+8 Cycles (3 bytes)
+    lda ($80,X)  ; assumes possible reads from 0-$7f have no effect
+    nop
+-----------------
+9 Cycles (3 bytes, need 1 byte free on stack)
+    pha
+    pla
+    nop
+
+9 Cycles (4 bytes)
+    dec $2D
+    nop
+    nop
+-----------------
+10 Cycles (4 bytes)
+    dec $2D
+    dec $2D
+    - or -
+    rol $80
+    rol $80 ; leaves $80 unchanged
+-----------------
+11 Cycles (4 bytes)
+    ASSUMING we can safely write to ROM and have nothing disasterous...
+    STA $8000,X
+    LDA ($80,X)        ; assumes possible reads from 0-$7f have no effect
+-----------------
+12 Cycles (3 bytes, need 2 bytes free on stack)
+    jsr return
+    ; somewhere else
+  return:   
+    rts
+-----------------
+12 Cycles (4 bytes)
+    LDA ($80,X)        ; assumes possible reads from 0-$7f have no effect
+    LDA ($80,X)        ; assumes possible reads from 0-$7f have no effect
+
+Also:
+You can use PHA/PHP (1 byte 3 cycles) or PLA/PLP (1 byte 4 cycles) alone but 
+you have to be carefull not to mess up your stack (PLP/PHA would be usefull if 
+you have no stack!
+
+
+
+==============================================================
+==============================================================
+HMOVE Timing Chart
+--------------------------------------------------------------
+Brad Mott
+==============================================================
+==============================================================
+
+Typically HMOVE is executed right after WSYNC, but hitting HMOVE at other times 
+during the line has effects that can sometimes be useful.  It's possible to move 
+objects without the black HMOVE bars and/or move objects farther than would 
+normally be possible with HMPx registers.  This test was performed using player 
+graphics, but will probably work with the ball and missiles as well.
+
+
+     HMPx values
+     0   1   2   3   4   5   6   7   8   9   a   b   c   d   e   f     
+Cyc
+10   0  -1  -2  -2  -2  -2  -2  -2   8   7   6   5   4   3   2   1  ** HBLANK
+11   0  -1  -1  -1  -1  -1  -1  -1   8   7   6   5   4   3   2   1     HBLANK
+12   0   0   0   0   0   0   0   0   8   7   6   5   4   3   2   1     HBLANK
+13   1   1   1   1   1   1   1   1   8   7   6   5   4   3   2   1     HBLANK
+14   1   1   1   1   1   1   1   1   8   7   6   5   4   3   2   1  ** HBLANK
+15   2   2   2   2   2   2   2   2   8   7   6   5   4   3   2   2     HBLANK
+16   3   3   3   3   3   3   3   3   8   7   6   5   4   3   3   3     HBLANK
+17   4   4   4   4   4   4   4   4   8   7   6   5   4   4   4   4     HBLANK
+18   4   4   4   4   4   4   4   4   8   7   6   5   4   4   4   4  ** HBLANK
+19   5   5   5   5   5   5   5   5   8   7   6   5   5   5   5   5     HBLANK
+20   6   6   6   6   6   6   6   6   8   7   6   6   6   6   6   6     HBLANK
+21   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0     
+22   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0     
+ .
+ .
+53   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0     
+54   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0     
+55   0   0   0   0   0   0   0  -1   0   0   0   0   0   0   0   0     
+56   0   0   0   0   0   0  -1  -2   0   0   0   0   0   0   0   0     
+57   0   0   0   0   0  -1  -2  -3   0   0   0   0   0   0   0   0     
+58   0   0   0   0   0  -1  -2  -3   0   0   0   0   0   0   0   0   **
+59   0   0   0   0  -1  -2  -3  -4   0   0   0   0   0   0   0   0  
+60   0   0   0  -1  -2  -3  -4  -5   0   0   0   0   0   0   0   0
+61   0   0  -1  -2  -3  -4  -5  -6   0   0   0   0   0   0   0   0
+62   0   0  -1  -2  -3  -4  -5  -6   0   0   0   0   0   0   0   0  **
+63   0  -1  -2  -3  -4  -5  -6  -7   0   0   0   0   0   0   0   0
+64  -1  -2  -3  -4  -5  -6  -7  -8   0   0   0   0   0   0   0   0
+65  -2  -3  -4  -5  -6  -7  -8  -9   0   0   0   0   0   0   0  -1
+66  -2  -3  -4  -5  -6  -7  -8  -9   0   0   0   0   0   0   0  -1  **
+67  -3  -4  -5  -6  -7  -8  -9 -10   0   0   0   0   0   0  -1  -2 
+68  -4  -5  -6  -7  -8  -9 -10 -11   0   0   0   0   0  -1  -2  -3
+69  -5  -6  -7  -8  -9 -10 -11 -12   0   0   0   0  -1  -2  -3  -4
+70  -5  -6  -7  -8  -9 -10 -11 -12   0   0   0   0  -1  -2  -3  -4  **
+71  -6  -7  -8  -9 -10 -11 -12 -13   0   0   0  -1  -2  -3  -4  -5
+72  -7  -8  -9 -10 -11 -12 -13 -14   0   0  -1  -2  -3  -4  -5  -6 
+73  -8  -9 -10 -11 -12 -13 -14 -15   0  -1  -2  -3  -4  -5  -6  -7
+74  -8  -9 -10 -11 -12 -13 -14 -15   0  -1  -2  -3  -4  -5  -6  -7  **
+75   0  -1  -2  -3  -4  -5  -6  -7   8   7   6   5   4   3   2   1     HBLANK
+76   0  -1  -2  -3  -4  -5  -6  -7   8   7   6   5   4   3   2   1     HBLANK
+77   0  -1  -2  -3  -4  -5  -6  -7   8   7   6   5   4   3   2   1     HBLANK
+78   0  -1  -2  -3  -4  -5  -6  -7   8   7   6   5   4   3   2   1     HBLANK
+79   0  -1  -2  -3  -4  -5  -6  -7   8   7   6   5   4   3   2   1     HBLANK
+80   0  -1  -2  -3  -4  -5  -6  -6   8   7   6   5   4   3   2   1     HBLANK
+81   0  -1  -2  -3  -4  -5  -5  -5   8   7   6   5   4   3   2   1     HBLANK
+82   0  -1  -2  -3  -4  -5  -5  -5   8   7   6   5   4   3   2   1  ** HBLANK
+83   0  -1  -2  -3  -4  -4  -4  -4   8   7   6   5   4   3   2   1     HBLANK
+84   0  -1  -2  -3  -3  -3  -3  -3   8   7   6   5   4   3   2   1     HBLANK
+85   0  -1  -2  -2  -2  -2  -2  -2   8   7   6   5   4   3   2   1     HBLANK
+( table repeats at this point)

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<instructionset completionProposalAutoActivationCharacters="!" singleLineCommentDelimiters=";" multipleLinesCommentDelimiters="" stringDelimiterCharacters="&quot;" blockDefinitionCharacters="" identifiersCaseSensitive="false"
+	identifierStartCharacters="*!_äöüßÄÖÜABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" identifierPartCharacters="_äöüßÄÖÜABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" identifierSeparatorCharacter=""
+	labelDefinitionSuffixCharacter="" macroUsagePrefixCharacter="" instructionsCaseSensitive="false" sourceIncludeDefaultExtension="">
+
+
+	<!-- The following directives/pseudo opcodes are described in the file "ACME/docs/AllPOs.txt" -->
+
+	<!-- Section: How to insert values -->
+	<directive cpus="*" name="!8" title="Insert _8-bit values" type="DIRECTIVE" proposal="!8 _"/>
+	<directive cpus="*" name="!BY" title="Insert _b_yte values" type="DIRECTIVE" proposal="!BY _"/>
+	<directive cpus="*" name="!BYTE" title="Insert _b_y_t_e values" type="DIRECTIVE" proposal="!BYTE _"/>
+	<directive cpus="*" name="!16" title="Insert _1_6-bit values" type="DIRECTIVE" proposal="!16 _"/>
+	<directive cpus="*" name="!WO" title="Insert _w_ord values" type="DIRECTIVE" proposal="!WO _"/>
+	<directive cpus="*" name="!WORD" title="Insert _w_o_r_d values" type="DIRECTIVE" proposal="!WORD _"/>
+	<directive cpus="*" name="!24" title="Insert _2_4-bit values" type="DIRECTIVE" proposal="!24 _"/>
+	<directive cpus="*" name="!32" title="Insert _3_2-bit values" type="DIRECTIVE" proposal="!32 _"/>
+	<directive cpus="*" name="!FILL" title="_F_i_l_l amount of memory with value" type="DIRECTIVE" proposal="!FILL _"/>
+	<directive cpus="*" name="!FI" title="_F_ill amount of memory with value" type="DIRECTIVE" proposal="!FILL _"/>
+	<directive cpus="*" name="!ALIGN" title="_A_l_i_g_n program counter" type="DIRECTIVE" proposal="!ALIGN _"/>
+
+	<!-- Section: How to insert text -->
+	<directive cpus="*" name="!CONVTAB" title="Set text _c_o_n_version _t_a_ble" type="BINARY_INCLUDE_DIRECTIVE" proposal="!CONVTAB _"/>
+	<directive cpus="*" name="!TEXT" title="Output _t_e_x_t" type="DIRECTIVE" proposal="!TEXT _"/>
+	<directive cpus="*" name="!TX" title="Output _te_xt using current conversion table" type="DIRECTIVE" proposal="!TX _"/>
+	<directive cpus="*" name="!PET" title="Output text using _P_e_tSCII characters" type="DIRECTIVE" proposal="!PET _"/>
+	<directive cpus="*" name="!RAW" title="Output text as _r_a_w without conversion" type="DIRECTIVE" proposal="!RAW _"/>
+	<directive cpus="*" name="!SCR" title="Ouput text using _s_c_reen conversion table" type="DIRECTIVE" proposal="!SCR _"/>
+	<directive cpus="*" name="!SCRXOR" title="Output text using _s_c_reen conversion table and _X_O_R " type="DIRECTIVE" proposal="!SCRXOR _"/>
+
+	<!-- Section: File stuff -->
+	<directive cpus="*" name="!TO" title="Define output file to compile _t_o" type="BINARY_OUTPUT_DIRECTIVE" proposal="!TO &quot;_&quot;"/>
+	<directive cpus="*" name="!SOURCE" title="Assemble another _s_o_u_r_c_e file" type="SOURCE_INCLUDE_DIRECTIVE" proposal="!SOURCE &quot;_&quot;"/>
+	<directive cpus="*" name="!SRC" title="Assemble another _sou_r_ce file" type="SOURCE_INCLUDE_DIRECTIVE" proposal="!SRC &quot;_&quot;"/>
+	<directive cpus="*" name="!BINARY" title="Insert _b_i_n_a_r_y file" type="BINARY_INCLUDE_DIRECTIVE" proposal="!BINARY &quot;_&quot;"/>
+	<directive cpus="*" name="!BIN" title="Insert _b_i_nary file" type="BINARY_INCLUDE_DIRECTIVE" proposal="!BIN &quot;_&quot;"/>
+
+	<!-- Section: Labels -->
+	<directive cpus="*" name="!ZONE" title="Begin new _z_o_n_e of local labels" type="DIRECTIVE" proposal="!ZONE_"/>
+	<directive cpus="*" name="!ZN" title="Begin new _zo_ne of local labels" type="DIRECTIVE" proposal="!ZN_"/>
+	<directive cpus="*" name="!SL" title="_Save _labels" type="BINARY_INCLUDE_DIRECTIVE" proposal="!SL &quot;_&quot;"/>
+
+	<!-- Section: Flow control -->
+	<directive cpus="*" name="!IF" title="_I_f" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal="!IF _ {\n}"/>
+	<directive cpus="*" name="}" title="End section" type="END_SECTION_DIRECTIVE" proposal="}_"/>
+	<directive cpus="*" name="!IFDEF" title="_I_f label _d_e_fined" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal="!IFDEF _ {\n}"/>
+	<directive cpus="*" name="!FOR" title="_F_o_r loop" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal="!FOR _ {\n}"/>
+	<directive cpus="*" name="!SET" title="_S_e_t label value" type="DIRECTIVE" proposal="!SET _"/>
+	<directive cpus="*" name="!DO" title="_D_o loop" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal="!DO _ {\n}"/>
+	<directive cpus="*" name="!WHILE" title="_W_h_i_l_e condition of a DO loop" type="DIRECTIVE" proposal="!WHILE _ {\n}"/>
+	<directive cpus="*" name="!UNTIL" title="_U_n_t_i_l condition of a DO loop" type="DIRECTIVE" proposal="!UNTIL  _ {\n}"/>
+	<directive cpus="*" name="!ENDOFFILE" title="_E_n_d _o_f source _f_i_l_e" type="DIRECTIVE" proposal="!ENDOFFILE_"/>
+	<directive cpus="*" name="!EOF" title="_End _of source _file" type="DIRECTIVE" proposal="!EOF_"/>
+
+	<!-- Section: Macro usage -->
+	<directive cpus="*" name="!MACRO" title="Define _m_a_c_r_o" type="BEGIN_MACRO_DEFINITION_SECTION_DIRECTIVE" proposal="!MACRO _ {\n}"/>
+
+	<!-- Section: Segment assembly -->
+	<directive cpus="*" name="!INITMEM" title="_I_n_i_tialize _m_e_mory" type="DIRECTIVE" proposal="!INITMEM_"/>
+
+	<!-- Section: Offset assembly -->
+	<directive cpus="*" name="!PSEUDOPC" title="Set _p_s_e_u_d_o _program _counter" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal="!PSEUDOPC _ {\n}"/>
+
+	<!-- Section: CPU support pseudo opcodes (especially 65816 support) -->
+	<directive cpus="*" name="!CPU" title="Set _C_P_U type" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal="!CPU _"/>
+	<pseudoopcode cpus="MOS65816" name="!AL" title="Set _accumulator _long mode" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal="!AL_"/>
+	<pseudoopcode cpus="MOS65816" name="!AS" title="Set _accumulator _short mode" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal="!AS_"/>
+	<pseudoopcode cpus="MOS65816" name="!RL" title="Set _register _long mode" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal="!RL_"/>
+	<pseudoopcode cpus="MOS65816" name="!RS" title="Set _register _short mode" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal="!RS_"/>
+
+	<!-- Section: Deprecated pseudo opcodes (they still work at the moment) -->
+	<directive cpus="*" name="!CBM" title="Set text conversion table to _C_B_M (deprecated)" type="DIRECTIVE" proposal="!CBM_"/>
+	<directive cpus="*" name="!SUBZONE" title="Begin new _s_u_b _z_o_n_e of local labels (deprecated)" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal="!SUBZONE _ {\n}"/>
+	<directive cpus="*" name="!REALPC" title="Restore _r_e_a_l _program _counter (deprecated)" type="DIRECTIVE" proposal="!REALPC_"/>
+
+	<illegalopcode cpus="MOS6502_ILLEGAL" name="ANC" title="_A_nd byte with accumulator and set _carry" proposal="ANC _" flags="N,Z,C" addressing="Immediate"/>
+	<illegalopcode cpus="MOS6502_ILLEGAL" name="ARR" title="_And byte with accumulator then _rotate one bit _right in accumulator" proposal="ARR _" flags="N,V,Z,C" addressing="Immediate"/>
+	<illegalopcode cpus="MOS6502_ILLEGAL" name="ASR" title="_And byte with accumulator then logical _shift _right in accumulator" proposal="ASR _" flags="N,V,Z,C" addressing="Immediate"/>
+	<illegalopcode cpus="MOS6502_ILLEGAL" name="DCP" title="_De_crement memory by one and com_pare with memory" proposal="DCP _" flags="C" addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y;(Indirect,X); (Indirect),Y"/>
+	<illegalopcode cpus="MOS6502_ILLEGAL" name="DOP" title="_Double N_O_P" proposal="DOP_" flags="-" addressing="Implied; Immediate; Zero Page; Zero Page,X"/>
+	<illegalopcode cpus="MOS6502_ILLEGAL" name="ISC" title="_Increase memory by one, then _subtract memory from accumulator (with _carry)" proposal="ISC _" flags="N,V,Z,C"
+		addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y;(Indirect,X); (Indirect),Y"/>
+	<illegalopcode cpus="MOS6502_ILLEGAL" name="JAM" title="_J_a_m processor, i.e. stop program counter" proposal="JAM_" flags="-" addressing="Implied"/>
+	<illegalopcode cpus="MOS6502_ILLEGAL" name="LAX" title="_Load _accumulator and _X register with memory" proposal="LAX _" flags="N,Z" addressing="Zero Page; Zero Page,Y; Absolute; Absolute,Y;(Indirect,X);(Indirect),Y"/>
+	<illegalopcode cpus="MOS6502_ILLEGAL" name="RLA" title="_Rotate one bit _left in memory, then and _accumulator with memory" proposal="RLA _" flags="N,Z,C" addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y;(Indirect,X); (Indirect),Y"/>
+	<illegalopcode cpus="MOS6502_ILLEGAL" name="RRA" title="_Rotate one bit _right in memory, then add memory to _accumulator (with carry)" proposal="RRA _" flags="N,V,Z,C"
+		addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y;(Indirect,X); (Indirect),Y"/>
+	<illegalopcode cpus="MOS6502_ILLEGAL" name="SAX" title="_Store _accumulator anded with _X register" proposal="SAX _" flags="N,Z" addressing="Zero Page;Zero Page,Y;(Indirect,X);Absolute"/>
+	<illegalopcode cpus="MOS6502_ILLEGAL" name="SBX" title="_Su_btract byte from _X register (without borrow) after anding X register with accumulator" proposal="SBX _" flags="N,Z,C" addressing="Immediate"/>
+	<illegalopcode cpus="MOS6502_ILLEGAL" name="SLO" title="_Shift _left one bit in memory, then _or accumulator with memory" proposal="SLO _" flags="N,Z,C" addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y; (Indirect,X); (Indirect),Y"/>
+	<illegalopcode cpus="MOS6502_ILLEGAL" name="SRE" title="_Shift _right one bit in memory, then _eor accumulator with memory" proposal="SRE _" flags="N,Z,C" addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y;(Indirect,X);(Indirect),Y"/>
+	<illegalopcode cpus="MOS6502_ILLEGAL" name="TOP" title="_Triple N_O_P" proposal="TOP_" flags="-" addressing="Implied; Absolute; Absolute,X"/>
+
+</instructionset>

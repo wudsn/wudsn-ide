@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: WUDSN IDE Assembler Test Compilers Plug-in
+Bundle-SymbolicName: com.wudsn.ide.asm.compilers.test;singleton:=true
+Bundle-Version: 1.7.0.qualifier
+Bundle-Vendor: Peter Dell
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Localization: plugin
+Require-Bundle: com.wudsn.ide.asm
+Bundle-ActivationPolicy: lazy

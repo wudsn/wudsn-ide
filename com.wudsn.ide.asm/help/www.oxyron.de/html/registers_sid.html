@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+<META NAME="keywords" CONTENT="sid, 6581, 6582, 8580, commodore, registers">
+<META NAME="author" CONTENT="Graham">
+<TITLE>SID reference</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" LINK="#4040FF">
+
+<P><FONT SIZE="+2">SID 6581/8580 (Sound Interface Device) reference</FONT></P>
+
+<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="2" WIDTH="720">
+<CAPTION><FONT SIZE="+1">SID register set:</FONT></CAPTION>
+<TR>
+<TH WIDTH="11%"><FONT SIZE="-1">&nbsp;</FONT></TH>
+<TH WIDTH="9%"><FONT SIZE="-1">&nbsp;</FONT></TH>
+<TH WIDTH="10%"><FONT SIZE="-1">7</FONT></TH>
+<TH WIDTH="10%"><FONT SIZE="-1">6</FONT></TH>
+<TH WIDTH="10%"><FONT SIZE="-1">5</FONT></TH>
+<TH WIDTH="10%"><FONT SIZE="-1">4</FONT></TH>
+<TH WIDTH="10%"><FONT SIZE="-1">3</FONT></TH>
+<TH WIDTH="10%"><FONT SIZE="-1">2</FONT></TH>
+<TH WIDTH="10%"><FONT SIZE="-1">1</FONT></TH>
+<TH WIDTH="10%"><FONT SIZE="-1">0</FONT></TH>
+</TR>
+
+<TR>
+<TD><FONT SIZE="-1">$D400 (W)</FONT></TD><TD><FONT SIZE="-1">FREQLO1</FONT></TD>
+<TD COLSPAN="8" ALIGN="CENTER"><FONT SIZE="-1">Channel 1 Frequency Low-Byte</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D401 (W)</FONT></TD><TD><FONT SIZE="-1">FREQHI1</FONT></TD>
+<TD COLSPAN="8" ALIGN="CENTER"><FONT SIZE="-1">Channel 1 Frequency High-Byte</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D402 (W)</FONT></TD><TD><FONT SIZE="-1">PWLO1</FONT></TD>
+<TD COLSPAN="8" ALIGN="CENTER"><FONT SIZE="-1">Channel 1 Pulse Width (PW7-0)</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D403 (W)</FONT></TD><TD><FONT SIZE="-1">PWHI1</FONT></TD>
+<TD COLSPAN="4" BGCOLOR="#E0E0E0" ALIGN="CENTER"><FONT SIZE="-1">unused</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Channel 1 Pulse Width (PW11-8)</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D404 (W)</FONT></TD><TD><FONT SIZE="-1">CR1</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">NOISE</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">PULSE</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">SAW</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">TRI</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">TEST</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">RING</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">SYNC</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">GATE</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D405 (W)</FONT></TD><TD><FONT SIZE="-1">AD1</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Channel 1 Attack</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Channel 1 Decay</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D406 (W)</FONT></TD><TD><FONT SIZE="-1">SR1</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Channel 1 Sustain</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Channel 1 Release</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D407 (W)</FONT></TD><TD><FONT SIZE="-1">FREQLO2</FONT></TD>
+<TD COLSPAN="8" ALIGN="CENTER"><FONT SIZE="-1">Channel 2 Frequency Low-Byte</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D408 (W)</FONT></TD><TD><FONT SIZE="-1">FREQHI2</FONT></TD>
+<TD COLSPAN="8" ALIGN="CENTER"><FONT SIZE="-1">Channel 2 Frequency High-Byte</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D409 (W)</FONT></TD><TD><FONT SIZE="-1">PWLO2</FONT></TD>
+<TD COLSPAN="8" ALIGN="CENTER"><FONT SIZE="-1">Channel 2  Pulse Width (PW7-0)</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D40A (W)</FONT></TD><TD><FONT SIZE="-1">PWHI2</FONT></TD>
+<TD COLSPAN="4" BGCOLOR="#E0E0E0" ALIGN="CENTER"><FONT SIZE="-1">unused</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Channel 2  Pulse Width (PW11-8)</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D40B (W)</FONT></TD><TD><FONT SIZE="-1">CR2</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">NOISE</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">PULSE</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">SAW</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">TRI</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">TEST</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">RING</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">SYNC</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">GATE</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D40C (W)</FONT></TD><TD><FONT SIZE="-1">AD2</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Channel 2 Attack</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Channel 2 Decay</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D40D (W)</FONT></TD><TD><FONT SIZE="-1">SR2</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Channel 2 Sustain</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Channel 2 Release</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D40E (W)</FONT></TD><TD><FONT SIZE="-1">FREQLO3</FONT></TD>
+<TD COLSPAN="8" ALIGN="CENTER"><FONT SIZE="-1">Channel 3 Frequency Low-Byte</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D40F (W)</FONT></TD><TD><FONT SIZE="-1">FREQHI3</FONT></TD>
+<TD COLSPAN="8" ALIGN="CENTER"><FONT SIZE="-1">Channel 3 Frequency High-Byte</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D410 (W)</FONT></TD><TD><FONT SIZE="-1">PWLO3</FONT></TD>
+<TD COLSPAN="8" ALIGN="CENTER"><FONT SIZE="-1">Channel 3 Pulse Width (PW7-0)</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D411 (W)</FONT></TD><TD><FONT SIZE="-1">PWHI3</FONT></TD>
+<TD COLSPAN="4" BGCOLOR="#E0E0E0" ALIGN="CENTER"><FONT SIZE="-1">unused</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Channel 3  Pulse Width (PW11-8)</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D412 (W)</FONT></TD><TD><FONT SIZE="-1">CR3</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">NOISE</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">PULSE</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">SAW</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">TRI</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">TEST</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">RING</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">SYNC</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">GATE</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D413 (W)</FONT></TD><TD><FONT SIZE="-1">AD3</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Channel 3 Attack</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Channel 3 Decay</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D414 (W)</FONT></TD><TD><FONT SIZE="-1">SR3</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Channel 3 Sustain</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Channel 3 Release</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D415 (W)</FONT></TD><TD><FONT SIZE="-1">FCLO</FONT></TD>
+<TD COLSPAN="5" BGCOLOR="#E0E0E0" ALIGN="CENTER"><FONT SIZE="-1">unused</FONT></TD>
+<TD COLSPAN="3" ALIGN="CENTER"><FONT SIZE="-1">Filter Cutoff Low (FC2-FC0)</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D416 (W)</FONT></TD><TD><FONT SIZE="-1">FCHI</FONT></TD>
+<TD COLSPAN="8" ALIGN="CENTER"><FONT SIZE="-1">Filter Cutoff High (FC10-FC3)</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D417 (W)</FONT></TD><TD><FONT SIZE="-1">Res/Filt</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Filter Resonance</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">Filt Ex</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">Filt 3</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">Filt 2</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">Filt 1</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D418 (W)</FONT></TD><TD><FONT SIZE="-1">Mode/Vol</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">Chan 3 Off</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">High Pass</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">Band Pass</FONT></TD>
+<TD ALIGN="CENTER"><FONT SIZE="-1">Low Pass</FONT></TD>
+<TD COLSPAN="4" ALIGN="CENTER"><FONT SIZE="-1">Volume</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D419 (R)</FONT></TD><TD><FONT SIZE="-1">POTX</FONT></TD>
+<TD COLSPAN="8" ALIGN="CENTER"><FONT SIZE="-1">Potentiometer X</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D41A (R)</FONT></TD><TD><FONT SIZE="-1">POTY</FONT></TD>
+<TD COLSPAN="8" ALIGN="CENTER"><FONT SIZE="-1">Potentiometer Y</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D41B (R)</FONT></TD><TD><FONT SIZE="-1">OSC3</FONT></TD>
+<TD COLSPAN="8" ALIGN="CENTER"><FONT SIZE="-1">Channel 3 Oscillator</FONT></TD>
+</TR>
+<TR>
+<TD><FONT SIZE="-1">$D41C (R)</FONT></TD><TD><FONT SIZE="-1">ENV3</FONT></TD>
+<TD COLSPAN="8" ALIGN="CENTER"><FONT SIZE="-1">Channel 3 Envelope</FONT></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+<FONT SIZE="+1">Frequency:</FONT><BR>
+<BR>
+The frequency registers of the SID are written with a 16 bit value which is added to the oscillator every
+clock cycle. Calculating a frequency register value for a given frequency can be done using these formulas:<BR>
+<BR>
+<TT>PAL:&nbsp;&nbsp;x = f * (18*2^24)/17734475</TT> (0 - 3848 Hz)<BR>
+<TT>NTSC:&nbsp;x = f * (14*2^24)/14318318</TT> (0 - 3995 Hz)<BR>
+<BR>
+<BR>
+<FONT SIZE="+1">Waveforms:</FONT><BR>
+<BR>
+The SID offers four basic waveforms which can be selected by the control register of each channel.<BR>
+<BR>
+<TABLE>
+<TR>
+<TD><A HREF="http://en.wikipedia.org/wiki/Triangle_wave">Triangle</A>:</TD><TD><IMG src="../pics/triangle.gif" alt="Triangle" border="0"></TD>
+</TR>
+<TR><TD>&nbsp;</TD><TD></TD></TR>
+<TR>
+<TD><A HREF="http://en.wikipedia.org/wiki/Sawtooth_wave">Sawtooth</A>:</TD><TD><IMG src="../pics/sawtooth.gif" alt="Sawtooth" border="0"></TD>
+</TR>
+<TR><TD>&nbsp;</TD><TD></TD></TR>
+<TR>
+<TD><A HREF="http://en.wikipedia.org/wiki/Pulse_wave">Pulse</A>:</TD><TD><IMG src="../pics/pulse.gif" alt="Pulse" border="0"></TD>
+</TR>
+<TR><TD>&nbsp;</TD><TD></TD></TR>
+<TR>
+<TD>Noise:</TD><TD><IMG src="../pics/noise.gif" alt="Noise" border="0"></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+<FONT SIZE="+1">Pulse width:</FONT><BR>
+<BR>
+The pulse waveform offers additional control via the 12 bit pulse width registers which are available for
+every channel. A value of $800 will result in a <A HREF="http://en.wikipedia.org/wiki/Square_wave">square wave</A>.<BR>
+<BR>
+<TABLE>
+<TR>
+<TD>$400</TD><TD><IMG src="../pics/pulse1.gif" alt="Pulse width 25%" border="0"></TD>
+</TR>
+<TR><TD>&nbsp;</TD><TD></TD></TR>
+<TR>
+<TD>$800</TD><TD><IMG src="../pics/pulse2.gif" alt="Pulse width 50%" border="0"></TD>
+</TR>
+<TR><TD>&nbsp;</TD><TD></TD></TR>
+<TR>
+<TD>$C00</TD><TD><IMG src="../pics/pulse3.gif" alt="Pulse width 75%" border="0"></TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+<FONT SIZE="+1">Noise waveform LFSR:</FONT><BR>
+<BR>
+The noise waveform of the SID is generated by a simple 23 bit <A HREF="http://en.wikipedia.org/wiki/Linear_feedback_shift_register">LFSR</A>. On shifting, bit 0 is filled with bit 22 EXOR bit 17.<BR>
+Unlike the other waveforms, the noise waveform does not use the topmost 8 bits for output. The 8 bits of the noise waveform
+are assembled from bits 20, 18, 14, 11, 9, 5, 2 and 0 of the oscillator.<BR>
+<BR>
+<BR>
+<FONT SIZE="+1">Playing a sound:</FONT><BR>
+<BR>
+1. Set frequency and <A HREF="http://en.wikipedia.org/wiki/ADSR_envelope#ADSR_envelope">ADSR</A>, and in case you use the pulse wave also set the pulse width.<BR>
+2. Set the waveform and the GATE bit in the control register. Setting the gate bit will start the ADSR envelope generator.<BR>
+3. Wait for as long as you wish the note to be played.<BR>
+4. Clear gate bit. This will start the release phase of the ADSR.<BR>
+<BR>
+<BR>
+&copy; 2009-2012 Graham
+</BODY></HTML>

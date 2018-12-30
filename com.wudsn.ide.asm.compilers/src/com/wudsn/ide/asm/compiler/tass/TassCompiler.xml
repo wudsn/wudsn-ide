@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- Instruction set for TASS compiler -->
+<instructionset
+	completionProposalAutoActivationCharacters="."
+	singleLineCommentDelimiters=";"
+	multipleLinesCommentDelimiters=""
+	stringDelimiterCharacters="&quot;"
+	blockDefinitionCharacters=""
+	identifiersCaseSensitive="false"
+	identifierStartCharacters="?@_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+	identifierPartCharacters="_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+	identifierSeparatorCharacter="."
+	labelDefinitionSuffixCharacter=""
+	macroUsagePrefixCharacter=""
+	instructionsCaseSensitive="false"
+	sourceIncludeDefaultExtension="">
+
+
+</instructionset>

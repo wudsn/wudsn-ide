@@ -1,0 +1,500 @@
+
+Here you can find the answers to some frequently asked questions. If your question is not answered here, please have a look at
+the video tutorials or contact me.
+<ul>
+	<li>
+		<a href="#Installation">Installation</a>
+		<ul>
+			<li>
+				<a href="#FAQEclipseInstallation">How to I install Eclipse at all?</a>
+			</li>
+			<li>
+				<a href="#FAQEclipseInstallationWin7">When I try to start Eclipse is get and error like "Failed to load the JNI shared library 'C:\Program Files
+					(x86)\Java\jre6\bin\client\jvm.dll'". What is wrong?
+				</a>
+			</li>
+			<li>
+				<a href="#FAQWUDSNInstallationUpdateSite">Why is WUDSN IDE not available via the update site?</a>
+			</li>
+			<li>
+				<a href="#FAQWUDSNInstallationUpdateSiteBlocked">Why do I get "Unable to read repository at ... Read timed out" when accessing the update site?</a>
+			</li>
+			<li>
+				<a href="#FAQEclipseUserGuide">How to I use Eclipse at all?</a>
+			</li>
+			<li>
+				<a href="#FAQWUDSNInstallationPreferencesNotVisible">Why is the "Assembler" section not visible in the preferences ?</a>
+			</li>
+		</ul>
+	</li>
+	<li>
+		<a href="#Configuration">Configuration</a>
+		<ul>
+			<li>
+				<a href="#FAQFileAssociations">How to I associate my source file extensions with the correct editor?</a>
+			</li>
+			<li>
+				<a href="#FAQHardwareAnnotation">Why do I have to put ;@com.wudsn.ide.asm.hardware=...in the source file?</a>
+			</li>
+			<li>
+				<a href="#FAQProblemsView">Why do I see wrong messages in the "Problems" view?</a>
+			</li>
+		</ul>
+	</li>
+	<li>
+		<a href="#Editing">Editing</a>
+		<ul>
+			<li>
+				<a href="#FAQEclipseSpeed">Why is editing sometimes slow or even everything is blocked showing the wait cursor?</a>
+			</li>
+			<li>
+				<a href="#FAQSourceVersionControl">Is there support for source version control?</a>
+			</li>
+			<li>
+				<a href="#FAQBlockSelectionMode">Is there support for block selection mode?</a>
+			</li>
+			<li>
+				<a href="#FAQContentAssist">Why does CTRL-Space not open content assist?</a>
+			</li>
+			<li>
+				<a href="#FAQCtrlShiftShortcuts">Why do CTRL-SHIFT-0/9 and other key combinations not work?</a>
+			</li>
+		</ul>
+	</li>
+	<li>
+		<a href="#Compiling">Compiling</a>
+		<ul>
+			<li>
+				<a href="#FAQPrimaryCompiler">Why is MADS the primary compiler?</a>
+			</li>
+			<li>
+				<a href="#FAQPrimaryCompilerExample">Why do I get the error "No ORG defined" when compiling the example from the tutorial?</a>
+			</li>
+			<li>
+				<a href="#FAQErrorsFromIncludeFiles">Why are the errors and warnings from an include file assigned to the main source file in the problems view?</a>
+			</li>
+			<li>
+				<a href="#FAQATASMtoMADSConversion">How to I convert an ATASM source for to MADS format?</a>
+			</li>
+			<li>
+				<a href="#FAQATASMSegments">How does ATASM generate segments in executable files?</a>
+			</li>
+			<li>
+				<a href="#FAQROMImages">How do I compile into ROM images?</a>
+			</li>
+			<li>
+				<a href="#FAQDiskImages">How do I compile into disk images?</a>
+			</li>
+			<li>
+				<a href="#FAQRunMakefile">How to run a makefile script instead of an emulator?</a>
+			</li>
+		</ul>
+	</li>
+	<li>
+		<a href="#Emulation">Emulation</a>
+		<ul>
+			<li>
+				<a href="#FAQOtherEmulators">How can I use other emulators?</a>
+			</li>
+		</ul>
+	</li>
+</ul>
+<h3 id="Installation">Installation</h3>
+<div id="FAQEclipseInstallation">
+	<h4>How to I install Eclipse at all?</h4>
+	<p>
+		If you are not familiar with Eclipse at all, make sure that you have installed the
+		<b>Eclipse platform distribution</b>
+		only - without Java or J2EE tools. This distribution is much smaller (normally around 50-70 MB instead of 170 MD) and will not
+		confuse you with tons of features and buttons you do not need at all. See the section "Installing Eclipse" on the tab
+		"Installation" for the required steps. If you use Windows, you can use one of the zero installation distributions of WUDSN IDE
+		which are linked on the tab "Installation". They are simply ".zip" archives that already contain Eclipse and everything else."
+	</p>
+</div>
+<div id="FAQEclipseInstallationWin7">
+	<h4>When I try to start Eclipse is get an error like "Failed to load the JNI shared library 'C:\Program Files
+		(x86)\Java\jre6\bin\client\jvm.dll'". What is wrong?
+	</h4>
+	<p> The Eclipse version and the Java version on your system are not compatible. The Eclipse is not pure Java, but uses platform
+		specific native libraries to run and debug Java efficiently. For example you must install the 64-bit version Java (JRE or JDK)
+		if you want to use the 64-bit version of the Eclipse. This is a frequent issue under Windows 7, because be default there is
+		only the 32-bit version of Java installed. See the section "Installing Eclipse" on the tab "Installation" for the required
+		steps.
+	</p>
+</div>
+<div id="FAQEclipseUserGuide">
+	<h4>How to I use Eclipse at all?</h4>
+	<p> Start the build-in help of Eclipse via the menu "Help/Help Content" and read the section "Workbench User Guide".
+	</p>
+	<img src="productions/java/ide/faq/ide-workbench-user-guide.png" alt="Workbench user guide"/>
+</div>
+<div id="FAQWUDSNInstallationUpdateSite">
+	<h4>Why is WUDSN IDE not available via the update site?</h4>
+	<p> Most likely you typed in the wrong update site URL, for example using "wusdn" instead of "wudsn". The correct URL is
+		"http://www.wudsn.com/update". In addition you should disable the checkbox "Hide items that are already installed", so you see
+		what really is there. See the section "Installing WUDSN IDE" the tab "Installation" for the required steps.
+	</p>
+	<img src="productions/java/ide/faq/ide-update-site.png" alt="Installation dialog with update site"/>
+</div>
+<div id="FAQWUDSNInstallationUpdateSiteBlocked">
+	<h4>Why do I get "Unable to read repository at ... Read timed out" when accessing the update site?</h4>
+	<p> This error message indicates the the Eclipse program is somehow blocked from accessing the site. If you are behind a proxy
+		server, check the general proxy server setttings in the Eclipse preferences. If you use a firewall or internet security tool,
+		make sure "Eclipse.exe", "java.exe", "javaw.exe" or the corresponding program on your host platform are allowed to cannot to
+		the internet. Maybe you have to change the settings, so you are prompted to allow access interactively.
+	</p>
+</div>
+<div id="FAQWUDSNInstallationPreferencesNotVisible">
+	<h4>Why is the "Assembler" section not visible in the preferences?</h4>
+	<p>
+		If the WUDSN IDE specific sections and features are not visible after a successful installation, you are probably using an
+		outdated Java version. For example Java 1.6 is
+		<a href="http://www.oracle.com/technetwork/java/eol-135779.html" target="_blank">out of maintenance since 2013/02</a>
+		. This seems to be a common problem on Mac OS X even in Mavericks (10.9), which still uses Java 1.6 by default. Make sure you
+		have at least the Java version that is mentioned in the installation section for the IDE installed and that Eclipse is
+		actually started using that version.
+	</p>
+</div>
+<h3 id="Configuration">Configuration</h3>
+<div id="FAQProblemsView">
+	<h4>Why do I see wrong messages in the "Problems" view?</h4>
+	<p> The default configuration of the "Problems" view show all error from all files in the current project. While this is a good
+		default for Java programming, it does not fit at all for compiling single independent assembler files. Therefore you have to
+		configure the "Problems" view accordingly. See the section "Installing Eclipse" on the tab "Installation" for the required
+		steps.
+	</p>
+</div>
+<div id="FAQFileAssociations">
+	<h4>How to I associate my source file extensions with the correct editor?</h4>
+	<p>
+		The IDE support many different compilers and provides a specialized editor for each of them. Typically you have some preferred
+		source file extension (".asm" or ".a") and a preferred compiler. The procedure to associate the file extension with the editor
+		via the preferences is described in this video tutorial
+		<a href="http://www.youtube.com/watch?v=QgQOle36hRA">WUDSN IDE Tutorial 3: Setting up Editors and File Extensions correctly</a>
+		.
+	</p>
+</div>
+<div id="FAQHardwareAnnotation">
+	<h4>Why do I have to put ;@com.wudsn.ide.asm.hardware=...in the source file?</h4>
+	<p> The association with the file extension with the editor for your compiler (that is done in the preferences, see before)
+		does not determine for which platform you want to create output. Therefore this additional annotation in the main source file
+		is required used to tell the IDE which is the target platform. It is used to fine the correct compiler and emulator setting,
+		which can be different per platform. Every compiler has a default platform (see the online help in the IDE) but can also be
+		used to every other platform. Therefore you have to specify the target platform in the main source file, if you use a
+		non-default platform.
+	</p>
+</div>
+<h3 id="Editing">Editing</h3>
+<div id="FAQEclipseSpeed">
+	<h4>Why is editing sometimes slow or even everything is blocked showing the wait cursor?</h4>
+	<p>The core of WUDSN IDE uses the Eclipse Platform Runtime only and does not require any additional plugins. It starts and runs
+		very fast with that configuration and I personally used it one daily basis. So if you experience performance problems, try to
+		download and run the zero installation distribution of WUDSN IDE. Performance problem they are very likely caused by
+		additional plugins or themes installed. Often these plugins are not only slow, but broken. Check the ".metadata/.log" file in
+		the workspace folder. In some Eclipse versions, this is also available via "Window/Show View.../Error Log".
+	</p>
+</div>
+<div id="FAQSourceVersionControl">
+	<h4>Is there support for source version control?</h4>
+	<p> Yes, there are several plugins available to connect Eclipse to CVS or subversion. Also the "Local History" feature is
+		installed by default. You can configure it in the preferences. It automatically records all changes to the source file and
+		let's you compare versions in-place.
+	</p>
+	<img src="productions/java/ide/faq/ide-version-control.gif" alt="Source version control"/>
+</div>
+<div id="FAQBlockSelectionMode">
+	<h4>Is there support for block selection mode?</h4>
+	<p> Yes, there is a toolbar button and the shortcut "ALT+SHIFT+A" to toggle block selection mode in all text editors. This can
+		be very useful for adding and removing common prefixes such as line numbers.
+	</p>
+	<img src="productions/java/ide/faq/ide-editor-toggle-block-selection-mode.png" alt="Toggle block selection mode"/>
+	<p> In case the toolbar button is not visible, you have to set it to visible via the menu entry "Customize Perspective" in the
+		context menu of the main toolbar. In the customizing dialog you have to activate the commend group "Editor Presentation" and
+		then the toolbar entries you want to see.
+	</p>
+	<img src="productions/java/ide/faq/ide-editor-block-selection-mode-toolbar.gif" alt="Toggle block selection mode"/>
+</div>
+<div id="FAQContentAssist">
+	<h4>Why does CTRL-Space not open content assist?</h4>
+	<p> There is a known key conflict when using Messenger Plus Live! v4.85.0.386 with Microsoft Messenger 2009 on Windows 7
+		Ultimate. This may also occur in other version of course. Justin Payne has provided the following description of the solution.
+	</p>
+	<ol>
+		<li>Start up and log into MS Messenger.</li>
+		<li>From the main window, hit the ALT key to bring up the main menu and select "Plus! | Preferences &amp; Options". 
+		</li>
+		<li>From the Preferences Windows, Select the Messenger tab and uncheck "Activate Messenger Lock with a system-wide shortcut"
+			OR change the value in it's text box to something other than "CTRL + Space"
+		</li>
+		<li>Select OK button.</li>
+	</ol>
+	<div id="FAQCtrlShiftShortcuts">
+		<h4>Why do CTRL-SHIFT-0/9 and other key combinations not work?</h4>
+		<p> You probably have another program outside of Eclipse that has already captured these keys or key combinations. A frequent
+			problem is the Windows Input Methods Editor (IME) which is used to switch keyboard layouts. For example if you are using
+			multiple keyboard layouts, the CTRL-Space is mapped to allow you to cycle between the different keyboard regional layouts.
+			You should probably be aware of how to turn the feature off since you're probably using this features, but if you don't...
+		</p>
+		<p>Windows 7</p>
+		<ol>
+			<li>Within "Windows Control Panel", open "Region and Settings".</li>
+			<li>Select the "Keyboard and Languages" tab, select "Change Keyboards...".</li>
+			<li>In the "Text Services and Input Languages" windows, select "Advanced Key Settings".</li>
+			<li>In the "Hot Keys for input languages" list box, select "Between input languages" and then select "Change Key Sequence..."
+			</li>
+			<li>In the "Change Key Sequence" window, choose another radio button other than the one next to CTRL+Shift. At best you
+				choose "(None)".
+			</li>
+			<li>Click OK until you closed all popup windows.</li>
+		</ol>
+		<p>Windows 10</p>
+		<ol>
+			<li> Open "Control Panel\Clock, Language, and Region\Language\Advanced settings.</li>
+			<li>Click "Change Language bar hot keys".</li>
+			<li> Set all key sequences to "(None)".</li>
+			<li>Click OK until you closed all popup windows.</li>
+		</ol>
+		<p>
+			Of course, this is Windows 7/10 and we know how Microsoft loves to change their layouts and names, but for fact this option
+			is available back to Windows XP.
+			<br/>
+			<img src="productions/java/ide/faq/windows-text-services-and-input-languages.png" alt="Configure Windows IME hot keys"/>
+		</p>
+	</div>
+	<h3 id="Compiling">Compiling</h3>
+	<div id="FAQPrimaryCompiler">
+		<h4>Why is MADS the primary compiler?</h4>
+		<p> When I started with WUDSN IDE, ATASM was the first supported compiler. The reason was simple: 90% of my sources are in
+			ATASM format. ATASM is very comprehensive and fast. Its capabilities to define constants an byte sequence is very complete
+			(".BYTE", ".WORD", ".DBYTE", ".FLOAT", ."SBYTE" for ATASCII, ".CBYTE" for terminated strings, separate offset for all
+			constants). Over time additional platform compilers haven been added and support for them will be completed step by step.
+			When the support for MADS was rather complete, I found that it is the most powerful compiler I have ever seen and used. The
+			support for ".PROC/.ENDPROC" has revolutionized the way I write assembler code now. It allows logical structuring and
+			visibility control without any runtime overhead. At the same time MADS is compatible to MAC/65 and XASM and even ATASM
+			sources can be adapted to MADS with a few minor changes described below. Therefore MADS is the primary compiler since WUDSN
+			IDE version 1.6.0.
+		</p>
+	</div>
+	<div id="FAQPrimaryCompilerExample">
+		<h4>Why do I get the error "No ORG defined" when compiling the example from the tutorial?</h4>
+		<p> Since WUDSN IDE version 1.6.0 MADS is the primary compiler which is registered for the file extensions ".asm" upon
+			installation. You are trying to run the code example for version 1.5.0 or before, which is in ATASM format. Therefore you can
+			either
+		</p>
+		<ul>
+			<li>
+				adapt the source to be in MADS format as described in
+				<a href="#FAQATASMtoMADSConversion">How to I convert an ATASM source for to MADS format?</a>
+				, this is the recommended way
+			</li>
+			<li>open the source with the ATASM editor using "Open With..." in the context menu of the Project Explorer</li>
+			<li>
+				change the default editor for the file extension ".asm" in the preferences for "File Associations" as described in the video
+				tutorial
+				<a href="http://www.youtube.com/watch?v=QgQOle36hRA&amp;hd=1" target="_blank">Part 3: Setting up Editors and File Extensions
+					correctly
+				</a>
+				.
+			</li>
+		</ul>
+	</div>
+	<div id="FAQErrorsFromIncludeFiles">
+		<h4>Why are the errors and warnings from an include file assigned to the main source file in the problems view?</h4>
+		<p> You use a case-insensitive file system and have used different upper or lower case writing in the source include statement
+			than in the actual file system. For example you have written "ICL 'example.asm'" for a file named "Example.asm" on the file
+			system. In Eclipse the file names of all resources are treated as case-sensitive, even if the underlying file system is
+			case-insensitive. Therefore the file name issued by the compiler will no match with the file name of the source include. As a
+			fall-back, the IDE assigns the error message to the main source file. To fix this, you have to adapt the spelling of the file
+			name in the source include statement.
+		</p>
+	</div>
+	<div id="FAQATASMtoMADSConversion">
+		<h4>How to I convert an ATASM source for to MADS format?</h4>
+		<p> Because both ATASM and MADS syntax are based on the MAC/65 syntax, there are not really many differences. Therefore manual
+			conversion using "Find/Replace (CTRL-F)" is very easy.
+		</p>
+		<ul>
+			<li>Replace the origin definition "* = address" by "ORG address".</li>
+			<li>Replace ".INCLUDE" by "ICL" for source includes.</li>
+			<li>Replace ".INCBIN" by "INS" for binary includes.</li>
+			<li>Replace "* = $2E0;.WORD address" by "RUN address" to specify the run address.</li>
+			<li>Replace "* = $2E2;.WORD address" by "INI address" to specify the init address.</li>
+			<li>Check the quotes of ".BYTE" and "DTA" statements. In MADS, single quotes result in ASCII codes, double quotes in ATARI
+				screen codes.
+			</li>
+			<li>Remove all ".BANK" statements. While ATASM sorts and merges all segments within one bank statement, MADS simply uses the
+				order of segments as defined in the source file. Every "ORG" statement automatically generates new file segment.
+			</li>
+		</ul>
+	</div>
+	<div id="FAQATASMSegments">
+		<h4>How does ATASM generate segments in executable files?</h4>
+		<p> A helpful feature for small projects is that by default ATASM sorts the segments by address and warns if the same address
+			is overwritten by code or data. Since version 1.05 the ".BANK" directive is available, which allows you to create COM files
+			with "INITAD" segments and arbitrary segment counts. If you don't use the ".BANK" directive, ATASM will sort the segments by
+			their address and will put consecutive blocks into a single segment by default. While this saves some bytes, it might be
+			confusing if you are used to other assemblers. Note that you have to use the ".SET 6" directive to set the assembler origin
+			offset in every bank if you use it in one of the banks.
+		</p>
+		<div style="font-family: courier, monospace;font-size: 13px;">
+			; Bank 0
+			<br/>
+			.bank
+			<br/>
+			.set 6,0
+			<br/>
+			* = $8000
+			<br/>
+			start lda #0
+			<br/>
+			jmp *
+			<br/>
+			<br/>
+			; Bank 1
+			<br/>
+			.bank .set 6,0
+			<br/>
+			* = $2e0
+			<br/>
+			.word start;
+			<br/>
+			<br/>
+			; Bank 2
+			<br/>
+			.bank
+			<br/>
+			.set 6,$4300-$C000
+			<br/>
+			* = $C000
+			<br/>
+			lda #1
+			<br/>
+			sta label+1
+			<br/>
+			label lda #2
+			<br/>
+			jmp *
+			<br/>
+		</div>
+	</div>
+	<div id="FAQROMImages">
+		<h4>How do I compile into ROM images?</h4>
+		<p> Plain ROM Images do not have header bytes by default, or at least they do not have the same header bytes as executable
+			files. In order to create raw object files without headers, compiler specific options have to be used. Some cases are listed
+			below. See the manual of the specific compiler for more details.
+		</p>
+		<ul>
+			<li>
+				ACME: Use the compiler parameter "
+				<b>-f plain</b>
+				" instead of "-f cbm" (default) to switch to "plain" mode without header
+			</li>
+			<li>
+				ATASM: Extend the compiler parameter "-o${outputFilePath}" to "
+				<b>-r</b>
+				-o${outputFilePath}" to switch to "raw" mode without header
+			</li>
+			<li>
+				MADS: Use "
+				<b>OPT h-f+</b>
+				" at the very beginning of the source file disables header and enabled "fill" mode, i.e. no segments are created if there
+				are gaps in the object code
+			</li>
+		</ul>
+	</div>
+	<div id="FAQDiskImages">
+		<h4>How do I compile into disk images?</h4>
+		<h5>Atari 8-bit</h5>
+		<p>
+			For Atari 8-bit, the ATASM compiler has dedicated parameter to write the executable file directly into ".ATR" or ".XFD" disk
+			images. The disk image must be formatted with Atari DOS 2.0S, Atari DOS DOS 2.5 or a compatible DOS. All Atari 8-bit disk
+			formats can be created using the "dir2atr.exe" tool of the
+			<a href="http://www.horus.com/~hias/atari/" target="_blank">AtariSIO tools</a>
+			by Matthias Reichl (hias). The tool can create a complete disk image with arbitrary DOS (Atari DOS 2.5, MyDos, SpartaDOS) and
+			size based on a folder which contains "DOS.SYS", "DUP.SYS" (or the equivalent files of the respective DOS) and all other
+			files requires. I have packaged an example including the "dir2atr" tool, a batch script to call the tool and the emulator and
+			the "files" folder in this
+			<a href="productions/java/ide/downloads/makefiles.zip" target="_blank">archive</a>
+			. Unpack the archive to your output folder. Double-click "makefile.bat" to see how the disk image is created and started.
+			Read section
+			<a href="#FAQRunMakefile">How to run a makefile script instead of an emulator?</a>
+			for the details how to configure the call to "makefile.bat". For productive usage you should of course put the "hias" folder
+			into a central location and use the most recent version from hias' site. For MacOS X users, the download also contains a
+			"makefile.sh" script and MacOS X binaries of Matthias Reichl's tools. The binaries have been provided by Fredrick Holst
+			(freetz) and you can find the latest versions on his
+			<a href="http://frederik.hol.st/atari/8-bit/AtariSIO4Mac/" target="_blank">web site</a>
+			.
+		</p>
+		<h5>Apple II</h5>
+		<p>
+			For Apple II, WUDSN IDE automatically generates a bootable AppleDos 3.3 disk image with extension ".dsk" if one of the
+			predefined emulators is used for execution. If you want to use another DOS or disk size or if you want to but more files into
+			the disk after compilation, you can use the command line version of
+			<a href="applecommander.cvs.sourceforge.net" target="_blank">AppleCommander</a>
+			to achieve this. Create a makefile script and configured it as described in
+			<a href="#FAQRunMakefile">How to run a makefile script instead of an emulator?</a>
+			. In case of Apple Disk images always remember using the correct the file content/load/run address. The IDE needs to know the
+			load address of an executable file in order to store this information in the directory entry. To detect the load address from
+			the executable file, the IDE evaluate the file extension. Supported extensions are ".b", ".prg" and ".xex". Here's the logic
+			begin the built in disk image creation:
+		</p>
+		<ul>
+			<li>
+				File extension ".b"
+				<br/>
+				// AppleDos 3.3 binary file: start-lo,start-hi,length-lo,length-hi,data
+				<br/>
+				address = getWord(outputFileContent, 0);length = length - 4;content = getData(outputFileContent, 4);
+				<br/>
+			</li>
+			<li>
+				File extension ".prg" and length > 2
+				<br/>
+				// C64 program file: start-lo,start-hi,data
+				<br/>
+				address = getWord(outputFileContent, 0);length = length - 2;content = getData(outputFileContent, 2);
+				<br/>
+			</li>
+			<li>
+				File extension ".xex" and length > 6 and (getWord(outputFileContent, 0) &amp; 0xffff) == 0xffff)
+				<br/>
+				// AtariDOS 2.5 binary file:$ff,$ff,start-lo,start-hi,end-lo,end-hi,data
+				<br/>
+				address = getWord(outputFileContent, 2);length = length - 6;content = getData(outputFileContent, 6);
+				<br/>
+			</li>
+		</ul>
+		<h5>Other hardwares</h5>
+		<p>
+			If you find a tool similar to "dir2atr.exe" for the Atari 8-bit or "AppleCommander" for the Apple II, you can use create your
+			own script an run it as described in
+			<a href="#FAQRunMakefile">How to run a makefile script instead of an emulator?</a>
+			.
+		</p>
+	</div>
+	<div id="FAQRunMakefile">
+		<h4>How can I run a makefile or script instead of an emulator?</h4>
+		<p>
+			Sometimes it is useful to run a makefile script instead of the emulator, for example if the output file shall be combined
+			with other files into a single ATR file. To execute a such a script select "User Defined Application" as the "Default
+			Application to open Output File". Specify the path to the shell as "Path to Application". In the command line you can then
+			use the standard variables to start the shell, pass the name of the script and pass the file path of the compiled output
+			file. Since the working directory at the time of execution is the output folder of the compiler you must place the script
+			file there or you must specify the script file with its absolute path. If you are using Windows and "cmd.exe" as shell, you
+			must specify "/c" before the name of the script to prevent "cmd.exe" from remaining as process after the script has finished.
+			The resulting command line is "${runnerExecutablePath} /c makefile.bat ${outputFilePath}", assuming "makefile.bat" is located
+			in the output folder". See
+			<a href="#FAQDiskImages">How do I compile into disk images?</a>
+			for the example how to use this for compiling complete disk images.
+		</p>
+		<img src="productions/java/ide/faq/ide-assembler-preferences-compilers-makefile.png" alt="Configure makefile script"/>
+	</div>
+	<h3 id="Emulation">Emulation</h3>
+	<div id="FAQOtherEmulators">
+		<h4>How can I use other emulators?</h4>
+		<p> You can "re-use" the existing tabs and simply specify another emulators' executable. If you use "User Defined
+			Application", you can specify whatever you want. When using "User Defined Application", no disk image is created or updated.
+			You can use this setting to have you own script which put the executable file onto a disk image of your choice using
+			additional tools like "dir2atr.exe" or "AppleCommander" for example.
+		</p>
+	</div>

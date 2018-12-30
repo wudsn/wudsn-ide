@@ -1,0 +1,42 @@
+<html>
+<head><title>Cheat sheet for creating video screen shots - Do not format the source!</title></head>
+<body id="body">
+<div id="mainDiv">
+</div>
+</body>
+
+<script>
+	function video(title,videoId){
+	var html;
+	html=document.getElementById('mainDiv').innerHTML;
+
+    var width=336;
+    var height=288;
+    var line = '<div>';
+    line = line+title+'(videoId)<br/>';
+    line = line.replace('videoId', videoId);
+	line = line +'<object style=\"height: '+width+'px; width: '+height+'x\">';
+	line = line +'	<param name=\"movie" value=\"http://www.youtube.com/v/videoId?version=3&feature=player_detailpage\">'
+	line = line +'	<param name=\"allowFullScreen\" value=\"true\">'
+	line = line +'	<param name=\"allowScriptAccess\" value=\"always\">'
+	line = line +'	<embed src=\"http://www.youtube.com/v/videoId?version=3&feature=player_detailpage\" type=\"application/x-shockwave-flash\" allowfullscreen=\"true\" allowScriptAccess=\"always\" width=\"'+width+'\" height=\"'+height+'\">'
+	line = line +'</object><div/><br/>';
+	line = line.replace('videoId', videoId);
+	line = line.replace('videoId', videoId);
+	html = html + line;
+	document.getElementById('mainDiv').innerHTML=html;
+	}
+
+
+	video('Part 1: Introduction, Installation and Use' , '36MFqY55yR0',0);
+	video('Part 2: Setting up Perspective, Views and Editors','fJ24OiGA8wY');
+	video('Part 3: Setting up Editors and File Extensions correctly', 'QgQOle36hRA');
+	video('Part 4: Syntax highlighting and Content Assist','d1kPdMVeJL0');
+	video('Part 5: Working with Projects, Folders and Files', 'AdrkxVVCEzI');
+	video('Part 6: Content Outline and Navigation - the Heart of the IDE', 'VHmnvsOaW1M');
+	video('Part 7: New Features in version 1.6.0', 'fnA_xg_XIRc');
+	video('Part 8: New Features in version 1.6.2', 'ok2zJM-J3hw');
+	video('Part 9: Source Level Debugging', 'uljtoXE8EZI');
+</script>
+
+</html>

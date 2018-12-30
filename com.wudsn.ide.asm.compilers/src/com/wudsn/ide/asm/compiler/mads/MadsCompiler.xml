@@ -1,0 +1,909 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<instructionset
+	completionProposalAutoActivationCharacters=".#"
+	singleLineCommentDelimiters="; * //"
+	multipleLinesCommentDelimiters="/* */"
+	stringDelimiterCharacters="'&quot;"
+	blockDefinitionCharacters=""
+	identifiersCaseSensitive="false"
+	identifierStartCharacters="?@_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+	identifierPartCharacters="_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+	identifierSeparatorCharacter="."
+	labelDefinitionSuffixCharacter=""
+	macroUsagePrefixCharacter=""
+	instructionsCaseSensitive="false"
+	sourceIncludeDefaultExtension="asm">
+
+	<opcode cpus="MOS65816" name="DEA" title="_D_ecrement _accumulator by one" proposal="DEA_" modes="imp=$3a"/>
+	<opcode cpus="MOS65816" name="INA" title="_I_ncrement _accumulator by one" proposal="INA_" modes="imp=$1a"/>
+
+	<!-- XASM Directives also supported by MADS -->
+	<directive
+		cpus="*"
+		name="DTA"
+		title="Define _da_t_a"
+		type="DIRECTIVE"
+		proposal="DTA _"/>
+	<directive
+		cpus="*"
+		name="EIF"
+		title="_End _i_f"
+		type="BEGIN_FOLDING_BLOCK_DIRECTIVE"
+		proposal="EIF_"/>
+	<directive
+		cpus="*"
+		name="ELI"
+		title="_E_lse _if"
+		type="END_FOLDING_BLOCK_DIRECTIVE"
+		proposal="ELI _"/>
+	<directive
+		cpus="*"
+		name="ELS"
+		title="_E_l_se"
+		type="DIRECTIVE"
+		proposal="ELS _"/>
+	<directive
+		cpus="*"
+		name="END"
+		title="_E_n_d block or assembly"
+		type="END_SECTION_DIRECTIVE"
+		proposal="END_"/>
+	<directive
+		cpus="*"
+		name="EQU"
+		title="Set _e_q_uate"
+		type="DIRECTIVE"
+		proposal="EQU _"/>
+	<directive
+		cpus="*"
+		name="ERT"
+		title="_E_rror if _true"
+		type="DIRECTIVE"
+		proposal="ERT _"/>
+	<directive
+		cpus="*"
+		name="ICL"
+		title="_In_c_lude another source file"
+		type="SOURCE_INCLUDE_DIRECTIVE"
+		proposal="ICL &quot;_&quot;"/>
+	<directive
+		cpus="*"
+		name="IFT"
+		title="_I_f _true"
+		type="BEGIN_FOLDING_BLOCK_DIRECTIVE"
+		proposal="IFT _\nEIF"/>
+	<directive
+		cpus="*"
+		name="INI"
+		title="Set _i_n_it address"
+		type="DIRECTIVE"
+		proposal="INI _"/>
+	<directive
+		cpus="*"
+		name="INS"
+		title="_I_n_sert contents of file"
+		type="BINARY_INCLUDE_DIRECTIVE"
+		proposal="INS &quot;_&quot;"/>
+	<directive
+		cpus="*"
+		name="OPT"
+		title="Set assembly _o_p_tions"
+		type="DIRECTIVE"
+		proposal="OPT _"/>
+	<directive
+		cpus="*"
+		name="ORG"
+		title="Set _o_ri_gin"
+		type="BEGIN_IMPLEMENTATION_SECTION_DIRECTIVE"
+		proposal="ORG _"/>
+	<directive
+		cpus="*"
+		name="RUN"
+		title="Set _r_u_n address"
+		type="DIRECTIVE"
+		proposal="RUN _"/>
+
+	<!-- XASM Pseudo Opcodes also supported by MADS -->
+	<pseudoopcode
+		cpus="*"
+		name="ADD"
+		title="_A_d_d to accumulator without carry"
+		proposal="ADD _"/>
+	<pseudoopcode
+		cpus="*"
+		name="INW"
+		title="_I_ncrement _word by one"
+		proposal="INW _"/>
+	<pseudoopcode
+		cpus="*"
+		name="JCC"
+		title="_Jump if _carry _clear"
+		proposal="JCC _"/>
+	<pseudoopcode
+		cpus="*"
+		name="JCS"
+		title="_Jump if _carry _set"
+		proposal="JCS _"/>
+	<pseudoopcode
+		cpus="*"
+		name="JEQ"
+		title="_Jump if _e_qual / zero"
+		proposal="JEQ _"/>
+	<pseudoopcode
+		cpus="*"
+		name="JMI"
+		title="_Jump if _m_inus"
+		proposal="JMI _"/>
+	<pseudoopcode
+		cpus="*"
+		name="JNE"
+		title="_Jump if _not _equal / zero"
+		proposal="JNE _"/>
+	<pseudoopcode
+		cpus="*"
+		name="JPL"
+		title="_Jump if _p_lus"
+		proposal="JPL _"/>
+	<pseudoopcode
+		cpus="*"
+		name="JVC"
+		title="_Jump if o_verflow _clear"
+		proposal="JVC _"/>
+	<pseudoopcode
+		cpus="*"
+		name="JVS"
+		title="_Jump if o_verflow _set"
+		proposal="JVS _"/>
+	<pseudoopcode
+		cpus="*"
+		name="MVA"
+		title="_Mo_ve byte using _accumulator"
+		proposal="MVA _"/>
+	<pseudoopcode
+		cpus="*"
+		name="MVX"
+		title="_Mo_ve byte using _X register"
+		proposal="MVX _"/>
+	<pseudoopcode
+		cpus="*"
+		name="MVY"
+		title="_Mo_ve byte using _Y register"
+		proposal="MVY _"/>
+	<pseudoopcode
+		cpus="*"
+		name="MWA"
+		title="_Move _word using _accumulator"
+		proposal="MWA _"/>
+	<pseudoopcode
+		cpus="*"
+		name="MWX"
+		title="_Move _word using _X register"
+		proposal="MWX _"/>
+	<pseudoopcode
+		cpus="*"
+		name="MWY"
+		title="_Move _word using _Y register"
+		proposal="MWY _"/>
+	<pseudoopcode
+		cpus="*"
+		name="RCC"
+		title="_Repeat if _carry _clear"
+		proposal="RCC _"/>
+	<pseudoopcode
+		cpus="*"
+		name="RCS"
+		title="_Repeat if _carry _set"
+		proposal="RCS _"/>
+	<pseudoopcode
+		cpus="*"
+		name="REQ"
+		title="_Repeat if _e_qual / zero"
+		proposal="REQ _"/>
+	<pseudoopcode
+		cpus="*"
+		name="RMI"
+		title="_Repeat if _m_inus"
+		proposal="RMI _"/>
+	<pseudoopcode
+		cpus="*"
+		name="RNE"
+		title="_Repeat if _not _equal / zero"
+		proposal="RNE _"/>
+	<pseudoopcode
+		cpus="*"
+		name="RPL"
+		title="_Repeat if _p_lus"
+		proposal="RPL _"/>
+	<pseudoopcode
+		cpus="*"
+		name="RVC"
+		title="_Repeat if o_verflow _clear"
+		proposal="RVC _"/>
+	<pseudoopcode
+		cpus="*"
+		name="RVS"
+		title="_Repeat if o_verflow _set"
+		proposal="RVS _"/>
+	<pseudoopcode
+		cpus="*"
+		name="SCC"
+		title="_Skip if _carry _clear"
+		proposal="SCC _"/>
+	<pseudoopcode
+		cpus="*"
+		name="SCS"
+		title="_Skip if _carry _set"
+		proposal="SCS _"/>
+	<pseudoopcode
+		cpus="*"
+		name="SEQ"
+		title="_Skip if _e_qual / zero"
+		proposal="SEQ _"/>
+	<pseudoopcode
+		cpus="*"
+		name="SMI"
+		title="_Skip if _m_inus"
+		proposal="SMI _"/>
+	<pseudoopcode
+		cpus="*"
+		name="SNE"
+		title="_Skip if _not _equal / zero"
+		proposal="SNE _"/>
+	<pseudoopcode
+		cpus="*"
+		name="SPL"
+		title="_Skip if _p_lus"
+		proposal="SPL _"/>
+	<pseudoopcode
+		cpus="*"
+		name="SUB"
+		title="_S_u_btract from accumulator without carry"
+		proposal="SUB _"/>
+	<pseudoopcode
+		cpus="*"
+		name="SVC"
+		title="_Skip if o_verflow _clear"
+		proposal="SVC _"/>
+	<pseudoopcode
+		cpus="*"
+		name="SVS"
+		title="_Skip if o_verflow _set"
+		proposal="SVS _"/>
+
+
+	<!-- MADS Directives, XASM style -->
+	<directive
+		cpus="*"
+		name="BLK"
+		title="_B_loc_k"
+		type="DIRECTIVE"
+		proposal="BLK _"/>
+	<directive
+		cpus="*"
+		name="EXT"
+		title="Define _E_x_ternal label"
+		type="DIRECTIVE"
+		proposal="EXT _"/>
+	<directive
+		cpus="*"
+		name="LMB"
+		title="_Load _memory _bank"
+		type="DIRECTIVE"
+		proposal="LMB _"/>
+	<directive
+		cpus="*"
+		name="NMB"
+		title="_Next _memory _bank"
+		type="DIRECTIVE"
+		proposal="NMB_"/>
+	<directive
+		cpus="*"
+		name="RMB"
+		title="_Reset _memory _bank"
+		type="DIRECTIVE"
+		proposal="RMB_"/>
+	<directive
+		cpus="*"
+		name="RND"
+		title="Generate _ra_n_dom number"
+		type="DIRECTIVE"
+		proposal="RND(_)"/>
+	<directive
+		cpus="*"
+		name="SIN"
+		title="Generate _s_i_nus table"
+		type="DIRECTIVE"
+		proposal="SIN(_)"/>
+	<directive
+		cpus="*"
+		name="SMB"
+		title="_Sy_m_bol"
+		type="DIRECTIVE"
+		proposal="SMB &quot;_&quot;"/>
+
+	<!-- MADS Directives, starting with "." -->
+	<directive
+		cpus="*"
+		name=".ADR"
+		title="_A_dd_ress of label"
+		type="DIRECTIVE"
+		proposal=".ADR _"/>
+	<directive
+		cpus="*"
+		name=".AEND"
+		title="_Array definition _e_n_d"
+		type="END_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".AEND_"/>
+	<directive
+		cpus="*"
+		name=".ALIGN"
+		title="_A_l_i_g_n memory"
+		type="DIRECTIVE"
+		proposal=".ALIGN _"/>
+	<directive
+		cpus="*"
+		name=".AND"
+		title="Logical _a_n_d"
+		type="DIRECTIVE"
+		proposal=".AND _"/>
+	<directive
+		cpus="*"
+		name=".ARRAY"
+		title="Define _a_r_r_a_y"
+		type="BEGIN_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".ARRAY _\n.ENDA"/>
+	<directive
+		cpus="*"
+		name=".BY"
+		title="Define _b_ytes"
+		type="DIRECTIVE"
+		proposal=".BY _"/>
+	<directive
+		cpus="*"
+		name=".BYTE"
+		title="Define _b_y_t_es"
+		type="DIRECTIVE"
+		proposal=".BYTE _"/>
+	<directive
+		cpus="*"
+		name=".DB"
+		title="_Define _bytes"
+		type="DIRECTIVE"
+		proposal=".DB _"/>
+	<directive
+		cpus="*"
+		name=".DEF"
+		title="_D_e_fine label"
+		type="DIRECTIVE"
+		proposal=".DEF _"/>
+	<directive
+		cpus="*"
+		name=".DS"
+		title="_Define _space"
+		type="DIRECTIVE"
+		proposal=".DS _"/>
+	<directive
+		cpus="*"
+		name=".DW"
+		title="_Define _words"
+		type="DIRECTIVE"
+		proposal=".DW _"/>
+	<directive
+		cpus="*"
+		name=".DWORD"
+		title="Define _double _w_o_r_ds"
+		type="DIRECTIVE"
+		proposal=".DWORD _"/>
+	<directive
+		cpus="*"
+		name=".ECHO"
+		title="_E_c_h_o string or value"
+		type="DIRECTIVE"
+		proposal=".ECHO _"/>
+	<directive
+		cpus="*"
+		name=".EEND"
+		title="_Enumeration definition _e_n_d"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".EEND_"/>
+	<directive
+		cpus="*"
+		name=".ELIF"
+		title="_E_lse _i_f"
+		type="DIRECTIVE"
+		proposal=".ELIF _"/>
+	<directive
+		cpus="*"
+		name=".ELSE"
+		title="_E_l_s_e"
+		type="DIRECTIVE"
+		proposal=".ELSE_"/>
+	<directive
+		cpus="*"
+		name=".ELSEIF"
+		title="_E_l_s_e _i_f"
+		type="DIRECTIVE"
+		proposal=".ELSEIF _"/>
+	<directive
+		cpus="*"
+		name=".EN"
+		title="_E_nd block or assembly"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".EN_"/>
+	<directive
+		cpus="*"
+		name=".END"
+		title="_E_n_d block or assembly"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".END_"/>
+	<directive
+		cpus="*"
+		name=".ENDA"
+		title="_E_n_d _array definition"
+		type="END_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".ENDA_"/>
+	<directive
+		cpus="*"
+		name=".ENDE"
+		title="_E_n_d _enumeration definition"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".ENDE_"/>
+	<directive
+		cpus="*"
+		name=".ENDIF"
+		title="_E_n_d _i_f"
+		type="END_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".ENDIF_"/>
+	<directive
+		cpus="*"
+		name=".ENDL"
+		title="_E_n_d _local block"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".ENDL_"/>
+	<directive
+		cpus="*"
+		name=".ENDM"
+		title="_E_n_d _macro definition"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".ENDM_"/>
+	<directive
+		cpus="*"
+		name=".ENDP"
+		title="_E_n_d _procedure definition"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".ENDP_"/>
+	<directive
+		cpus="*"
+		name=".ENDPG"
+		title="_E_n_d _pa_ges block"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".ENDPG_"/>
+	<directive
+		cpus="*"
+		name=".ENDR"
+		title="_E_n_d _repeat block"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".ENDR_"/>
+	<directive
+		cpus="*"
+		name=".ENDS"
+		title="_E_n_d _struct definition"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".ENDS_"/>
+	<directive
+		cpus="*"
+		name=".ENDT"
+		title="_E_n_d _test block"
+		type="END_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".ENDT_"/>
+	<directive
+		cpus="*"
+		name=".ENDW"
+		title="_E_n_d _while block"
+		type="END_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".ENDW_"/>
+	<directive
+		cpus="*"
+		name=".ENUM"
+		title="Define _e_n_u_meration"
+		type="BEGIN_ENUM_DEFINITION_SECTION_DIRECTIVE"
+		proposal=".ENUM _"/>
+	<directive
+		cpus="*"
+		name=".ERROR"
+		title="Generate _e_r_r_o_r"
+		type="DIRECTIVE"
+		proposal=".ERROR _"/>
+	<directive
+		cpus="*"
+		name=".EXIT"
+		title="_E_x_i_t macro"
+		type="DIRECTIVE"
+		proposal=".EXIT_"/>
+	<directive
+		cpus="*"
+		name=".EXTRN"
+		title="Define _e_x_te_r_nal label"
+		type="DIRECTIVE"
+		proposal=".EXTRN _"/>
+	<directive
+		cpus="*"
+		name=".FL"
+		title="Define _f_loats"
+		type="DIRECTIVE"
+		proposal=".FL _"/>
+	<directive
+		cpus="*"
+		name=".GET"
+		title="_G_e_t file content"
+		type="BINARY_INCLUDE_DIRECTIVE"
+		proposal=".GET &quot;_&quot;"/>
+	<directive
+		cpus="*"
+		name=".GLOBAL"
+		title="Define _g_l_o_b_a_l label"
+		type="DIRECTIVE"
+		proposal=".GLOBAL _"/>
+	<directive
+		cpus="*"
+		name=".GLOBL"
+		title="Define _g_l_o_ba_l label"
+		type="DIRECTIVE"
+		proposal=".GLOBL _"/>
+	<directive
+		cpus="*"
+		name=".HE"
+		title="Define _h_ex bytes"
+		type="DIRECTIVE"
+		proposal=".HE _"/>
+	<directive
+		cpus="*"
+		name=".HI"
+		title="_H_igh byte"
+		type="DIRECTIVE"
+		proposal=".HI _"/>
+	<directive
+		cpus="*"
+		name=".IF"
+		title="_I_f"
+		type="BEGIN_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".IF _\n.ENDIF"/>
+	<directive
+		cpus="*"
+		name=".IFDEF"
+		title="_I_f symbol _d_e_fined"
+		type="BEGIN_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".IFDEF _\n.ENDIF"/>
+	<directive
+		cpus="*"
+		name=".IFNDEF"
+		title="_I_f symbol _not _d_e_fined"
+		type="BEGIN_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".IFNDEF _\n.ENDIF"/>
+	<directive
+		cpus="*"
+		name=".LEN"
+		title="_L_e_ngth of label"
+		type="DIRECTIVE"
+		proposal=".LEN _"/>
+	<directive
+		cpus="*"
+		name=".LEND"
+		title="_Local block _e_n_d"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".LEND_"/>
+	<directive
+		cpus="*"
+		name=".LINK"
+		title="_L_i_n_k"
+		type="BINARY_INCLUDE_DIRECTIVE"
+		proposal=".LINK &quot;_&quot;"/>
+	<directive
+		cpus="*"
+		name=".LO"
+		title="_L_ow byte"
+		type="DIRECTIVE"
+		proposal=".LO _"/>
+	<directive
+		cpus="*"
+		name=".LOCAL"
+		title="Begin _l_o_c_a_l block"
+		type="BEGIN_LOCAL_SECTION_DIRECTIVE"
+		proposal=".LOCAL _\n.ENDL"/>
+	<directive
+		cpus="*"
+		name=".LONG"
+		title="Define _l_o_n_gs"
+		type="DIRECTIVE"
+		proposal=".LONG _"/>
+	<directive
+		cpus="*"
+		name=".MACRO"
+		title="Define _m_a_c_r_o"
+		type="BEGIN_MACRO_DEFINITION_SECTION_DIRECTIVE"
+		proposal=".MACRO _\n.ENDM"/>
+	<directive
+		cpus="*"
+		name=".MEND"
+		title="_Macro definition _e_n_d"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".MEND_"/>
+	<directive
+		cpus="*"
+		name=".NOT"
+		title="Logical _n_o_t"
+		type="DIRECTIVE"
+		proposal=".NOT _"/>
+	<directive
+		cpus="*"
+		name=".OR"
+		title="Logical _o_r"
+		type="DIRECTIVE"
+		proposal=".OR _"/>
+	<directive
+		cpus="*"
+		name=".PAGES"
+		title="Begin _p_a_g_e_s block"
+		type="BEGIN_PAGES_SECTION_DIRECTIVE"
+		proposal=".PAGES _\n.ENDPG"/>
+	<directive
+		cpus="*"
+		name=".PEND"
+		title="_Procedure definition _e_n_d"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".PEND_"/>
+	<directive
+		cpus="*"
+		name=".PGEND"
+		title="_Pa_ges block _e_n_d"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".PGEND_"/>
+	<directive
+		cpus="*"
+		name=".PRINT"
+		title="_P_r_i_n_t string or value"
+		type="DIRECTIVE"
+		proposal=".PRINT &quot;_&quot;"/>
+	<directive
+		cpus="*"
+		name=".PROC"
+		title="Define _p_r_o_cedure"
+		type="BEGIN_PROCEDURE_DEFINITION_SECTION_DIRECTIVE"
+		proposal=".PROC _\nRTS\n.ENDP"/>
+	<directive
+		cpus="*"
+		name=".PUBLIC"
+		title="Define _p_u_b_l_i_c label"
+		type="DIRECTIVE"
+		proposal=".PUBLIC _"/>
+	<directive
+		cpus="*"
+		name=".PUT"
+		title="_P_u_t file content"
+		type="DIRECTIVE"
+		proposal=".PUT _"/>
+	<directive
+		cpus="*"
+		name=".REG"
+		title="_R_e_gister"
+		type="DIRECTIVE"
+		proposal=".REG_"/>
+	<directive
+		cpus="*"
+		name=".RELOC"
+		title="_R_e_l_o_cate"
+		type="DIRECTIVE"
+		proposal=".RELOC _"/>
+	<directive
+		cpus="*"
+		name=".REND"
+		title="_Repeat block _e_n_d"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".REND_"/>
+	<directive
+		cpus="*"
+		name=".REPT"
+		title="Begin _R_e_pea_t block"
+		type="BEGIN_REPEAT_SECTION_DIRECTIVE"
+		proposal=".REPT _\n.ENDR"/>
+	<directive
+		cpus="*"
+		name=".SAV"
+		title="_S_a_ve file content"
+		type="BINARY_OUTPUT_DIRECTIVE"
+		proposal=".SAV &quot;_&quot;"/>
+	<directive
+		cpus="*"
+		name=".SB"
+		title="Define _screen _bytes"
+		type="DIRECTIVE"
+		proposal=".SB _"/>
+	<directive
+		cpus="*"
+		name=".SEND"
+		title="_Structure definition _e_n_d"
+		type="END_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".SEND_"/>
+	<directive
+		cpus="*"
+		name=".STRUCT"
+		title="Define_s_t_r_u_c_t"
+		type="BEGIN_STRUCTURE_DEFINITION_SECTION_DIRECTIVE"
+		proposal=".STRUCT _\n.ENDS"/>
+	<directive
+		cpus="*"
+		name=".SYMBOL"
+		title="_S_y_m_b_o_l"
+		type="DIRECTIVE"
+		proposal=".SYMBOL _"/>
+	<directive
+		cpus="*"
+		name=".TEND"
+		title="_Test block _e_n_d"
+		type="END_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".TEND_"/>
+	<directive
+		cpus="*"
+		name=".TEST"
+		title="Begin _t_e_s_t block"
+		type="BEGIN_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".TEST _\n.ENDT"/>
+	<directive
+		cpus="*"
+		name=".USE"
+		title="_U_s_e local block"
+		type="DIRECTIVE"
+		proposal=".USE _"/>
+	<directive
+		cpus="*"
+		name=".USING"
+		title="_U_s_i_n_g local block"
+		type="DIRECTIVE"
+		proposal=".USING _"/>
+	<directive
+		cpus="*"
+		name=".VAR"
+		title="Define _v_a_riables"
+		type="DIRECTIVE"
+		proposal=".VAR_"/>
+	<directive
+		cpus="*"
+		name=".WEND"
+		title="_While block _e_n_d"
+		type="END_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".WEND _"/>
+	<directive
+		cpus="*"
+		name=".WHILE"
+		title="Begin _w_h_i_l_e block"
+		type="BEGIN_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".WHILE _\n.ENDW"/>
+	<directive
+		cpus="*"
+		name=".WO"
+		title="Define _w_ords"
+		type="DIRECTIVE"
+		proposal=".WO _"/>
+	<directive
+		cpus="*"
+		name=".WORD"
+		title="Define _w_o_r_ds"
+		type="DIRECTIVE"
+		proposal=".WORD _"/>
+	<directive
+		cpus="*"
+		name=".XOR"
+		title="Logical e_xclusive _o_r"
+		type="DIRECTIVE"
+		proposal=".XOR _"/>
+	<directive
+		cpus="*"
+		name=".ZPVAR"
+		title="Define _zero _page _v_a_riables"
+		type="DIRECTIVE"
+		proposal=".ZPVAR _"/>
+
+	<!-- MADS Pseudo Opcodes, XASM style -->
+	<pseudoopcode
+		cpus="*"
+		name="ADB"
+		title="_A_dd _byte"
+		proposal="ADB _"/>
+	<pseudoopcode
+		cpus="*"
+		name="ADW"
+		title="_A_dd _word"
+		proposal="ADW _"/>
+	<pseudoopcode
+		cpus="*"
+		name="CPB"
+		title="_Com_pare _byte"
+		proposal="CPB _"/>
+	<pseudoopcode
+		cpus="*"
+		name="CPD"
+		title="_Com_pare _double word"
+		proposal="CPD _"/>
+	<pseudoopcode
+		cpus="*"
+		name="CPL"
+		title="_Com_pare _long "
+		proposal="CPL _"/>
+	<pseudoopcode
+		cpus="*"
+		name="CPW"
+		title="_Com_pare _word"
+		proposal="CPW _"/>
+	<pseudoopcode
+		cpus="*"
+		name="DED"
+		title="_D_ecrement _double word"
+		proposal="DED _"/>
+	<pseudoopcode
+		cpus="*"
+		name="DEL"
+		title="_D_ecrement _long"
+		proposal="DEL _"/>
+	<pseudoopcode
+		cpus="*"
+		name="DEW"
+		title="_D_ecrement _word"
+		proposal="DEW _"/>
+	<pseudoopcode
+		cpus="*"
+		name="IND"
+		title="_I_ncrement _double word"
+		proposal="IND _"/>
+	<pseudoopcode
+		cpus="*"
+		name="INL"
+		title="_I_ncrement _long"
+		proposal="INL _"/>
+	<pseudoopcode
+		cpus="*"
+		name="PHR"
+		title="_Pus_h _registers"
+		proposal="PHR _"/>
+	<pseudoopcode
+		cpus="*"
+		name="PLR"
+		title="_Pu_ll _registrers"
+		proposal="PLR _"/>
+	<pseudoopcode
+		cpus="*"
+		name="SBB"
+		title="_Su_btract _byte"
+		proposal="SBB _"/>
+	<pseudoopcode
+		cpus="*"
+		name="SBW"
+		title="_Su_bstract _word"
+		proposal="SBW _"/>
+
+	<!-- MADS Pseudo Opcodes, starting with "#" -->
+	<pseudoopcode
+		cpus="*"
+		name="#ELSE"
+		title="Begin #_E_L_S_E block"
+		proposal="#ELSE_"/>
+	<pseudoopcode
+		cpus="*"
+		name="#END"
+		title="_E_n_d #IF or #WHILE block"
+		type="END_FOLDING_BLOCK_DIRECTIVE"
+		proposal="#END_"/>
+	<pseudoopcode
+		cpus="*"
+		name="#IF"
+		title="Begin #_I_F block"
+		type="BEGIN_FOLDING_BLOCK_DIRECTIVE"
+		proposal="#IF _\n#END"/>
+	<pseudoopcode
+		cpus="*"
+		name="#WHILE"
+		title="Begin #_W_H_I_L_E block"
+		type="BEGIN_FOLDING_BLOCK_DIRECTIVE"
+		proposal="#WHILE _\n#END"/>
+
+</instructionset>
+

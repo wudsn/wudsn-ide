@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+ <extension
+       point="org.eclipse.ui.preferencePages">
+    <page
+          category="com.wudsn.ide.asm.preferences.AssemblerPreferencesPage"
+          class="com.wudsn.ide.asm.preferences.test.AssemblerPreferencesTestCompilersPage"
+          id="com.wudsn.ide.asm.preferences.test.AssemblerPreferencesTestCompilersPage"
+          name="%com.wudsn.ide.asm.preferences.test.AssemblerPreferencesTestCompilersPage.name">
+    </page>
+ </extension>
+	<extension point="com.wudsn.ide.asm.compilers">
+		<compiler
+        class="com.wudsn.ide.asm.compiler.test.TestCompiler"
+        defaultParameters="-o${outputFilePath} ${sourceFilePath}"
+        defaultHardware="TEST"
+        homePageURL="http://www.wudsn.com"
+        id="test"
+        name="%com.wudsn.ide.asm.compiler.test.TestCompiler.name"
+        version="none">
+     <supportedCPU
+           cpu="MOS6502">
+     </supportedCPU>
+     <supportedCPU
+           cpu="MOS6502_ILLEGAL">
+     </supportedCPU>
+		</compiler>
+
+	</extension>
+
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type base-type="com.wudsn.ide.asm.editor.AssemblerSourceFile"
+			file-extensions="asm" id="com.wudsn.ide.asm.editor.test.TestSourceFile"
+			name="%com.wudsn.ide.asm.editor.test.TestSourceFile.name" priority="normal">
+		</content-type>
+	</extension>
+
+	<extension point="org.eclipse.ui.editors">
+		<editor class="com.wudsn.ide.asm.editor.test.TestEditor"
+			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+			default="false" extensions="asm" icon="icons/editor-test-16x16.gif"
+			id="com.wudsn.ide.asm.editor.test.TestEditor" name="%com.wudsn.ide.asm.editor.test.TestEditor.name">
+			<contentTypeBinding contentTypeId="com.wudsn.ide.asm.editor.test.TestSourceFile">
+			</contentTypeBinding>
+		</editor>
+	</extension>
+ <extension
+       point="com.wudsn.ide.asm.runners">
+    <runner
+          defaultCommandLine="${runnerExecutablePath} ${outputFilePath}"
+          hardware="TEST"
+          id="runner1"
+          name="%com.wudsn.ide.asm.runner.test.runner1.name">
+    </runner>
+    <runner
+          defaultCommandLine="${runnerExecutablePath} ${outputFilePath}"
+          hardware="TEST"
+          id="runner2"
+          name="%com.wudsn.ide.asm.runner.test.runner2.name">
+    </runner>
+ </extension>
+
+</plugin>

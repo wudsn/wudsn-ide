@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<instructionset
+	completionProposalAutoActivationCharacters="."
+	singleLineCommentDelimiters=";"
+	multipleLinesCommentDelimiters=""
+	stringDelimiterCharacters="&quot;"
+	blockDefinitionCharacters=""
+	identifiersCaseSensitive="false"
+	identifierStartCharacters="?@_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+	identifierPartCharacters="_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+	identifierSeparatorCharacter="."
+	labelDefinitionSuffixCharacter=""
+	macroUsagePrefixCharacter=""
+	instructionsCaseSensitive="false"
+	sourceIncludeDefaultExtension="">
+
+	<directive
+		cpus="*"
+		name=".AND"
+		title="Logical _a_n_d"
+		type="DIRECTIVE"
+		proposal=".AND _"/>
+	<directive
+		cpus="*"
+		name=".BANK"
+		title="Start a new _b_a_n_k"
+		type="DIRECTIVE"
+		proposal=".BANK_"/>
+	<directive
+		cpus="*"
+		name=".BANKNUM"
+		title="Current _b_a_n_k _n_u_mber"
+		type="DIRECTIVE"
+		proposal=".BANKNUM_"/>
+	<directive
+		cpus="*"
+		name=".BYTE"
+		title="Define _b_y_t_es"
+		type="DIRECTIVE"
+		proposal=".BYTE _"/>
+	<directive
+		cpus="*"
+		name=".CBYTE"
+		title="Define _character _b_y_t_es"
+		type="DIRECTIVE"
+		proposal=".CBYTE _"/>
+	<directive
+		cpus="*"
+		name=".DBYTE"
+		title="Define _double _b_y_t_es"
+		type="DIRECTIVE"
+		proposal=".DBYTE _"/>
+	<directive
+		cpus="*"
+		name=".DEF"
+		title="Determine if label is _d_e_fined"
+		type="DIRECTIVE"
+		proposal=".DEF _"/>
+	<directive
+		cpus="*"
+		name=".DC"
+		title="_Define _constant storage"
+		type="DIRECTIVE"
+		proposal=".DC _"/>
+	<directive
+		cpus="*"
+		name=".DS"
+		title="_Define _storage"
+		type="DIRECTIVE"
+		proposal=".DS _"/>
+	<directive
+		cpus="*"
+		name=".ELSE"
+		title="_E_l_s_e"
+		type="DIRECTIVE"
+		proposal=".ELSE_"/>
+	<directive
+		cpus="*"
+		name=".END"
+		title="_E_n_d assembly"
+		type="DIRECTIVE"
+		proposal=".END_"/>
+	<directive
+		cpus="*"
+		name=".ENDIF"
+		title="_E_n_d of _I_F"
+		type="END_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".ENDIF_"/>
+	<directive
+		cpus="*"
+		name=".ENDM"
+		title="_E_n_d of _macro"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".ENDM_"/>
+	<directive
+		cpus="*"
+		name=".ENDR"
+		title="_E_n_d of _repeat block"
+		type="END_SECTION_DIRECTIVE"
+		proposal=".ENDR_"/>
+	<directive
+		cpus="*"
+		name=".ERROR"
+		title="Generate _e_r_r_o_r"
+		type="DIRECTIVE"
+		proposal=".ERROR &quot;_&quot; _"/>
+	<directive
+		cpus="*"
+		name=".FLOAT"
+		title="Define _f_l_o_a_ting point number"
+		type="DIRECTIVE"
+		proposal=".FLOAT _"/>
+	<directive
+		cpus="*"
+		name=".IF"
+		title="_I_f"
+		type="BEGIN_FOLDING_BLOCK_DIRECTIVE"
+		proposal=".IF _\n.ENDIF"/>
+	<directive
+		cpus="*"
+		name=".INCBIN"
+		title="_I_n_clude _b_i_nary file"
+		type="BINARY_INCLUDE_DIRECTIVE"
+		proposal=".INCBIN &quot;_&quot;"/>
+	<directive
+		cpus="*"
+		name=".INCLUDE"
+		title="_I_n_c_l_u_d_e source file"
+		type="SOURCE_INCLUDE_DIRECTIVE"
+		proposal=".INCLUDE &quot;_&quot;"/>
+	<directive
+		cpus="*"
+		name=".LOCAL"
+		title="Start new _l_o_c_a_l label region"
+		type="DIRECTIVE"
+		proposal=".LOCAL_"/>
+	<directive
+		cpus="*"
+		name=".MACRO"
+		title="Define _m_a_c_r_o"
+		type="BEGIN_MACRO_DEFINITION_SECTION_DIRECTIVE"
+		proposal=".MACRO _\n.ENDM _"/>
+	/>
+	<directive
+		cpus="*"
+		name=".NOT"
+		title="Logical _n_o_t"
+		type="DIRECTIVE"
+		proposal=".NOT _"/>
+	<directive
+		cpus="*"
+		name=".OPT"
+		title="Set or clear compiler _o_p_tions"
+		type="DIRECTIVE"
+		proposal=".OPT _"/>
+	<directive
+		cpus="*"
+		name=".OR"
+		title="Logical _o_r"
+		type="DIRECTIVE"
+		proposal=".OR _"/>
+	<directive
+		cpus="*"
+		name=".PAGE"
+		title="Set _p_a_g_e options"
+		type="DIRECTIVE"
+		proposal=".PAGE _"/>
+	<directive
+		cpus="*"
+		name=".REF"
+		title="Determine if label has been _r_e_ferenced"
+		type="DIRECTIVE"
+		proposal=".REF _"/>
+	<directive
+		cpus="*"
+		name=".REPT"
+		title="Begin _R_e_pea_t block"
+		type="BEGIN_REPEAT_SECTION_DIRECTIVE"
+		proposal=".REPT _\n.ENDR"/>
+	<directive
+		cpus="*"
+		name=".SBYTE"
+		title="Define _screen _b_y_t_es"
+		type="DIRECTIVE"
+		proposal=".SBYTE _"/>
+	<directive
+		cpus="*"
+		name=".SET"
+		title="_S_e_t compiler offset"
+		type="DIRECTIVE"
+		proposal=".SET _"/>
+	<directive
+		cpus="*"
+		name=".TAB"
+		title="Set _t_a_b size"
+		type="DIRECTIVE"
+		proposal=".TAB _"/>
+	<directive
+		cpus="*"
+		name=".TITLE"
+		title="Set page _t_i_t_l_e"
+		type="DIRECTIVE"
+		proposal=".TITLE _"/>
+	<directive
+		cpus="*"
+		name=".WARN"
+		title="Generate _w_a_r_ning"
+		type="DIRECTIVE"
+		proposal=".WARN &quot;_&quot;"/>
+	<directive
+		cpus="*"
+		name=".WORD"
+		title="Define _w_o_r_ds"
+		type="DIRECTIVE"
+		proposal=".WORD _"/>
+
+	<pseudoopcode
+		cpus="*"
+		name="BGE"
+		title="_Branch _greater than or _equal"
+		proposal="BGE _"/>
+	<pseudoopcode
+		cpus="*"
+		name="BLT"
+		title="_Branch _less _than"
+		proposal="BLT _"/>
+
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="ANC"
+		title="_A_nd byte with accumulator and set _carry"
+		proposal="ANC _"
+		flags="N,Z,C"
+		addressing="Immediate"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="ARR"
+		title="_And byte with accumulator then _rotate one bit _right in accumulator"
+		proposal="ARR _"
+		flags="N,V,Z,C"
+		addressing="Immediate"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="ATX"
+		title="_And byte with accumulator, then _transfer accumulator to _X register"
+		proposal="ATX _"
+		flags="N,Z"
+		addressing="Immediate"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="AXS"
+		title="_And _X register with accumulator and store result in X register, then _subtract byte from X register (without borrow)"
+		proposal="AXS _"
+		flags="N,Z,C"
+		addressing="Immediate"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="AX7"
+		title="_And _X register with accumulator then and result with _7 and store in memory"
+		proposal="AX7 _"
+		flags="-"
+		addressing="Absolute,Y ;(Indirect),Y"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="AXE"
+		title="_And _X register with accumulator but _exact operation unknown"
+		proposal="AXE _"
+		addressing="Immediate"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="DCP"
+		title="_De_crement memory by one and com_pare with memory"
+		proposal="DCP _"
+		flags="C"
+		addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y;(Indirect,X); (Indirect),Y"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="ISB"
+		title="_Increase memory by one, then _subtract memory from accumulator (with _borrow)"
+		proposal="ISB _"
+		flags="N,V,Z,C"
+		addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y;(Indirect,X); (Indirect),Y"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="JAM"
+		title="_J_a_m processor, i.e. stop program counter"
+		proposal="JAM_"
+		flags="-"
+		addressing="Implied"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="LAS"
+		title="_Load _accumulator, X register and _stack pointer with with memory anded stack pointer"
+		proposal="LAS _"
+		flags="N,Z"
+		addressing="Absolute,Y"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="LAX"
+		title="_Load _accumulator and _X register with memory"
+		proposal="LAX _"
+		flags="N,Z"
+		addressing="Zero Page; Zero Page,Y; Absolute; Absolute,Y;(Indirect,X);(Indirect),Y"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="RLA"
+		title="_Rotate one bit _left in memory, then and _accumulator with memory"
+		proposal="RLA _"
+		flags="N,Z,C"
+		addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y;(Indirect,X); (Indirect),Y"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="RRA"
+		title="_Rotate one bit _right in memory, then add memory to _accumulator (with carry)"
+		proposal="RRA _"
+		flags="N,V,Z,C"
+		addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y;(Indirect,X); (Indirect),Y"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="SAX"
+		title="_Store _accumulator anded with _X register"
+		proposal="SAX _"
+		flags="N,Z"
+		addressing="Zero Page;Zero Page,Y;(Indirect,X);Absolute"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="SLO"
+		title="_Shift _left one bit in memory, then _or accumulator with memory"
+		proposal="SLO _"
+		flags="N,Z,C"
+		addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y; (Indirect,X); (Indirect),Y"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="SRE"
+		title="_Shift _right one bit in memory, then _eor accumulator with memory"
+		proposal="SRE _"
+		flags="N,Z,C"
+		addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y;(Indirect,X);(Indirect),Y"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="SXA"
+		title="_Store _X register _anded with high byte of the target address of the argument +1"
+		proposal="SXA _"
+		flags="-"
+		addressing="Absolute,Y"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="SYA"
+		title="_Store _Y register _anded with high byte of the target address of the argument +1"
+		proposal="SYA _"
+		flags="-"
+		addressing="Absolute,x"/>
+	<illegalopcode
+		cpus="MOS6502_ILLEGAL"
+		name="XAS"
+		title="Transfer _X register anded with _accumulator in stack pointer, then and stack pointer with the high byte of the target address of the argument +1. _Store result in memory."
+		proposal="XAS _"
+		flags="-"
+		addressing="Absolute,Y"/>
+
+</instructionset>
