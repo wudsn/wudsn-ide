@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+             <content-type
+          file-extensions="dsk, po, nib"
+          id="com.wudsn.ide.dsk.apple2.Apple2DiskImageFile"
+          name="%com.wudsn.ide.dsk.apple2.Apple2DiskImageFile.name"
+          priority="normal">
+    </content-type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+   <editor
+          class="com.wudsn.ide.dsk.apple2.Apple2DiskImageEditor"
+          default="false"
+          icon="icons/editor-apple2-disk-image.gif"
+          id="com.wudsn.ide.dsk.apple2.Apple2DiskImageEditor"
+          name="%com.wudsn.ide.dsk.apple2.Apple2DiskImageEditor.name">
+       <contentTypeBinding
+             contentTypeId="com.wudsn.ide.dsk.apple2.Apple2DiskImageFile">
+       </contentTypeBinding>
+    </editor>
+
+   </extension>
+
+</plugin>
