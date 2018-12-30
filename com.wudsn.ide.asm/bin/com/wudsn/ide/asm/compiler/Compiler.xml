@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- Common 6502 opcodes used by all compilers -->
+<!-- See http://www.65xx.com/wdc/documentation/w65c816s.pdf for the description of the 16bit opcodes. -->
+<!-- http://www.westerndesigncenter.com/wdc/datasheets/Programmanual.pdf -->
+
+
+<opcodes>
+
+
+	<!-- Common legal 6502 opcodes used by all compilers -->
+	<!-- 6502 addressing modes: imm, zp, zpx, zpy, izx, izy, abs, abx, aby, ind, rel -->
+	<!-- 65816 addressing modes: sr,dp,dpx,dpy,idp,idx,idy,idl,idly,isy,abl,alx,ind,iax,ial,rell,bm -->
+
+	<opcode cpus="MOS6502*,MOS65816" name="ADC" title="_A_dd to accumulator with _carry" proposal="ADC _" modes="imm=$69,zp=$65,zpx=$75,izx=$61,izy=$71,abs=$6d,abx=$7d,aby=$79"/>
+	<opcode cpus="MOS6502*,MOS65816" name="AND" title="Binary _a_n_d with accumulator" proposal="AND _" modes="imm=$29,zp=$25,zpx=$35,izx=$21,izy=$31,abs=$2d,abx=$3d,aby=$39"/>
+	<opcode cpus="MOS6502*,MOS65816" name="ASL" title="_Arithmetic _shift _left" proposal="ASL_" modes="imp=$0a,zp=$06,zpx=$16,abs=$0e,abx=$1e"/>
+	<opcode cpus="MOS6502*,MOS65816" name="BCC" title="_Branch on _carry _clear" proposal="BCC _" modes="rel=$90"/>
+	<opcode cpus="MOS6502*,MOS65816" name="BCS" title="_Branch on _carry _set" proposal="BCS _" modes="rel=$b0"/>
+	<opcode cpus="MOS6502*,MOS65816" name="BEQ" title="_Branch on result _e_qual / zero" proposal="BEQ _" modes="rel=$f0"/>
+	<opcode cpus="MOS6502*,MOS65816" name="BIT" title="Test _b_i_ts in memory with accumulator" proposal="BIT _ " modes="zp=$24,abs=$2c"/>
+	<opcode cpus="MOS6502*,MOS65816" name="BMI" title="_Branch on result _m_inus" proposal="BMI _" modes="rel=$30"/>
+	<opcode cpus="MOS6502*,MOS65816" name="BNE" title="_Branch on result _not _equal / zero" proposal="BNE _" modes="rel=$d0"/>
+	<opcode cpus="MOS6502*,MOS65816" name="BPL" title="_Branch on result _p_lus" proposal="BPL _" modes="rel=$10"/>
+	<opcode cpus="MOS6502*,MOS65816" name="BRK" title="Forced _b_rea_k" proposal="BRK_" modes="imp=$00"/>
+	<opcode cpus="MOS6502*,MOS65816" name="BVC" title="_Branch on o_verflow _clear" proposal="BVC _" modes="rel=$50"/>
+	<opcode cpus="MOS6502*,MOS65816" name="BVS" title="_Branch on o_verflow _set" proposal="BVS _" modes="rel=$70"/>
+	<opcode cpus="MOS6502*,MOS65816" name="CLC" title="_C_lear _carry flag" proposal="CLC_" modes="imp=$18"/>
+	<opcode cpus="MOS6502*,MOS65816" name="CLD" title="_C_lear _decimal mode" proposal="CLD_" modes="imp=$d8"/>
+	<opcode cpus="MOS6502*,MOS65816" name="CLI" title="_C_lear _interrupt disable bit" proposal="CLI_" modes="imp=$58"/>
+	<opcode cpus="MOS6502*,MOS65816" name="CLV" title="_C_lear o_verflow flag" proposal="CLV_" modes="imp=$b8"/>
+	<opcode cpus="MOS6502*,MOS65816" name="CMP" title="_Co_m_pare with accumulator" proposal="CMP _" modes="imm=$c9,zp=$c5,zpx=$d5,izx=$c1,izy=$d1,abs=$cd,abx=$dd,aby=$d9"/>
+	<opcode cpus="MOS6502*,MOS65816" name="CPX" title="_Com_pare with _X register" proposal="CPX _" modes="imm=$e0,zp=$e4,abs=$ec"/>
+	<opcode cpus="MOS6502*,MOS65816" name="CPY" title="_Com_pare with _Y register" proposal="CPY _" modes="imm=$c0,zp=$c4,abs=$cc"/>
+	<opcode cpus="MOS6502*,MOS65816" name="DEC" title="_D_e_crement memory by one" proposal="DEC _" modes="zp=$c6,zpx=$d6,abs=$ce,abx=$de"/>
+	<opcode cpus="MOS6502*,MOS65816" name="DEX" title="_D_ecrement _X register by one" proposal="DEX_" modes="imp=$ca"/>
+	<opcode cpus="MOS6502*,MOS65816" name="DEY" title="_D_ecrement _Y register by one" proposal="DEY_" modes="imp=$88"/>
+	<opcode cpus="MOS6502*,MOS65816" name="EOR" title="Binary _exclusive-_o_r with accumulator" proposal="EOR _" modes="imm=$49,zp=$45,zpx=$55,izx=$41,izy=$51,abs=$4d,abx=$5d,aby=$59"/>
+	<opcode cpus="MOS6502*,MOS65816" name="INC" title="_I_n_crement memory by one" proposal="INC _" modes="zp=$e6,zpx=$f6,abs=$ee,abx=$fe"/>
+	<opcode cpus="MOS6502*,MOS65816" name="INX" title="_I_ncrement _X register by one" proposal="INX_" modes="imp=$e8"/>
+	<opcode cpus="MOS6502*,MOS65816" name="INY" title="_I_ncrement _Y register by one" proposal="INY_" modes="imp=$c8"/>
+	<opcode cpus="MOS6502*,MOS65816" name="JMP" title="_Ju_m_p to new address" proposal="JMP _" modes="abs=$4c,ind=$6c,iax=$7c[MOS65C02;MOS65816]"/>
+	<opcode cpus="MOS6502*,MOS65816" name="JSR" title="_Jump to _sub _routine" proposal="JSR _" modes="abs=$20"/>
+	<opcode cpus="MOS6502*,MOS65816" name="LDA" title="_Loa_d _accumulator" proposal="LDA _" modes="imm=$a9,zp=$a5,zpx=$b5,izx=$a1,izy=$b1,abs=$ad,abx=$bd,aby=$b9"/>
+	<opcode cpus="MOS6502*,MOS65816" name="LDX" title="_Loa_d _X register" proposal="LDX _" modes="imm=$a2,zp=$a6,zpy=$b6,abs=$ae,aby=$be"/>
+	<opcode cpus="MOS6502*,MOS65816" name="LDY" title="_Loa_d _Y register" proposal="LDY _" modes="imm=$a0,zp=$a4,zpx=$b4,abs=$ac,abx=$bc"/>
+	<opcode cpus="MOS6502*,MOS65816" name="LSR" title="_Logical _shift _right" proposal="LSR_" modes="imp=$4a,zp=$46,zpx=$56,abs=$4e,abx=$5e"/>
+	<opcode cpus="MOS6502*,MOS65816" name="NOP" title="_No _o_peration" proposal="NOP_" modes="imp=$ea"/>
+	<opcode cpus="MOS6502*,MOS65816" name="ORA" title="Binary _o_r with _accumulator" proposal="ORA _" modes="imm=$09,zp=$05,zpx=$15,izx=$01,izy=$11,abs=$0d,abx=$1d,aby=$19"/>
+	<opcode cpus="MOS6502*,MOS65816" name="PHA" title="_Pus_h _accumulator on stack" proposal="PHA_" modes="imp=$48"/>
+	<opcode cpus="MOS6502*,MOS65816" name="PHP" title="_Pus_h _processor status register on stack" proposal="PHP_" modes="imp=$08"/>
+	<opcode cpus="MOS6502*,MOS65816" name="PLA" title="_Pul_l _accumulator from stack" proposal="PLA_" modes="imp=$68"/>
+	<opcode cpus="MOS6502*,MOS65816" name="PLP" title="_Pul_l _processor status register from stack" proposal="PLP_" modes="imp=$28"/>
+	<opcode cpus="MOS6502*,MOS65816" name="ROL" title="_R_otate one bit _left" proposal="ROL _" modes="imp=$2a,zp=$26,zpx=$36,abs=$2e,abx=$3e"/>
+	<opcode cpus="MOS6502*,MOS65816" name="ROR" title="_R_otate one bit _right" proposal="ROR _" modes="imp=$6a,zp=$66,zpx=$76,abs=$6e,abx=$7e"/>
+	<opcode cpus="MOS6502*,MOS65816" name="RTI" title="_Re_turn from _interrupt" proposal="RTI_" modes="imp=$40"/>
+	<opcode cpus="MOS6502*,MOS65816" name="RTS" title="_Re_turn from _sub routine" proposal="RTS_" modes="imp=$60"/>
+	<opcode cpus="MOS6502*,MOS65816" name="SBC" title="_Su_btract from accumulator with _carry" proposal="SBC _" modes="imm=$e9,zp=$e5,zpx=$f5,izx=$e1,izy=$f1,abs=$ed,abx=$ed,aby=$e9"/>
+	<opcode cpus="MOS6502*,MOS65816" name="SEC" title="_S_et _carry flag" proposal="SEC_" modes="imp=$38"/>
+	<opcode cpus="MOS6502*,MOS65816" name="SED" title="_S_et _decimal mode" proposal="SED_" modes="imp=$f8"/>
+	<opcode cpus="MOS6502*,MOS65816" name="SEI" title="_S_et _interrupt disable status" proposal="SEI_" modes="imp=$78"/>
+	<opcode cpus="MOS6502*,MOS65816" name="STA" title="_S_tore _accumulator in memory" proposal="STA _" modes="zp=$85,zpx=$95,izx=$81,izy=$91,abs=$8d,abx=$9d,aby=$99"/>
+	<opcode cpus="MOS6502*,MOS65816" name="STX" title="_S_tore _X register in memory" proposal="STX _" modes="zp=$86,zpy=$96,abs=$8e"/>
+	<opcode cpus="MOS6502*,MOS65816" name="STY" title="_S_tore _Y register in memory" proposal="STY _" modes="zp=$84,zpx=$94,abs=$8c"/>
+	<opcode cpus="MOS6502*,MOS65816" name="TAX" title="_Transfer _accumulator to _X register" proposal="TAX_" modes="imp=$aa"/>
+	<opcode cpus="MOS6502*,MOS65816" name="TAY" title="_Transfer _accumulator to _Y register" proposal="TAY_" modes="imp=$a8"/>
+	<opcode cpus="MOS6502*,MOS65816" name="TSX" title="_Transfer _stack pointer to _X register" proposal="TSX_" modes="imp=$ba"/>
+	<opcode cpus="MOS6502*,MOS65816" name="TXA" title="_Transfer _X register to _accumulator" proposal="TXA_" modes="imp=$8a"/>
+	<opcode cpus="MOS6502*,MOS65816" name="TXS" title="_Transfer _X register to _stack pointer" proposal="TXS_" modes="imp=$9a"/>
+	<opcode cpus="MOS6502*,MOS65816" name="TYA" title="_Transfer _Y register to _accumulator" proposal="TYA_" modes="imp=$98"/>
+
+
+	<!-- Common legal 65C02 opcodes used by all compilers -->
+	<opcode cpus="MOS65C02,MOS65816" name="BRA" title="_B_ranch _always" proposal="BRA _" modes="rel=$80"/>
+	<opcode cpus="MOS65C02,MOS65816" name="PHX" title="_Pus_h _X register on stack" proposal="PHX_" modes="imp=$da"/>
+	<opcode cpus="MOS65C02,MOS65816" name="PHY" title="_Pus_h _Y register on stack" proposal="PHY_" modes="imp=$5a"/>
+	<opcode cpus="MOS65C02,MOS65816" name="PLX" title="_Pul_l _X register from stack" proposal="PLX_" modes="imp=$fa"/>
+	<opcode cpus="MOS65C02,MOS65816" name="PLY" title="_Pul_l _Y register from stack" proposal="PLY_" modes="imp=$7a"/>
+	<opcode cpus="MOS65C02,MOS65816" name="STP" title="_S_to_p the clock" proposal="STP_" modes="imp=$db"/>
+	<opcode cpus="MOS65C02,MOS65816" name="STZ" title="_S_tore _zero in memory" proposal="STZ _" modes="zp=$64,zpx=$74,abs=$9c,abx=$9e"/>
+	<opcode cpus="MOS65C02,MOS65816" name="TRB" title="_Test and _reset _bit" proposal="TRB _" modes="zp=$14"/>
+	<opcode cpus="MOS65C02,MOS65816" name="TSB" title="_Test and _set _bit" proposal="TSB _" modes="zp=$04,abs=$0c"/>
+	<opcode cpus="MOS65C02,MOS65816" name="WAI" title="_W_ait for _interrupt" proposal="WAI_" modes="imp=$cb"/>
+
+	<!-- Common legal W65816 opcodes used by all compilers -->
+	<opcode cpus="MOS65816" name="BRL" title="_B_ranch always _long" proposal="BRL _" modes="rel=$82"/>
+	<opcode cpus="MOS65816" name="COP" title="_C_o_processor" proposal="COP _" modes="imp=$02"/>
+	<opcode cpus="MOS65816" name="JML" title="_Ju_mp _long" proposal="JML _" modes="abl=$5c,ial=$7c"/>
+	<opcode cpus="MOS65816" name="JSL" title="_Jump _subroutine _long" proposal="JSL _" modes="abl=$22,iax=$fc"/>
+	<opcode cpus="MOS65816" name="MVN" title="Block _mo_ve _negative" proposal="MVN _" modes="bm=$54"/>
+	<opcode cpus="MOS65816" name="MVP" title="Block _mo_ve _positive" proposal="MVP _" modes="bm=$44"/>
+	<opcode cpus="MOS65816" name="PEA" title="_Push _effective _address on stack" proposal="PEA _" modes="abs=$f4"/>
+	<opcode cpus="MOS65816" name="PEI" title="_Push _effective _indirect address on stack" proposal="PEI _" modes="idp=$d4"/>
+	<opcode cpus="MOS65816" name="PER" title="_Push _effective _relative address on stack" proposal="PER _" modes="rell=$62"/>
+	<opcode cpus="MOS65816" name="PHB" title="_Pus_h data _bank register on stack" proposal="PHB_" modes="imp=$8b"/>
+	<opcode cpus="MOS65816" name="PHD" title="_Pus_h _direct register on stack" proposal="PHD_" modes="imp=$0b"/>
+	<opcode cpus="MOS65816" name="PHK" title="_Pus_h program ban_k register on stack" proposal="PHK_" modes="imp=$4b"/>
+	<opcode cpus="MOS65816" name="PLB" title="_Pul_l data _bank register from stack" proposal="PLB_" modes="imp=$ab"/>
+	<opcode cpus="MOS65816" name="PLD" title="_Pul_l _direct register from stack" proposal="PLD_" modes="imp=$2b"/>
+	<opcode cpus="MOS65816" name="REP" title="_R_eset _processor status bits" proposal="REP_" modes="imm=$c2"/>
+	<opcode cpus="MOS65816" name="RTL" title="_Re_turn from subroutine _long" proposal="RTL_" modes="imp=$6b"/>
+	<opcode cpus="MOS65816" name="SEP" title="_S_et _processor status bits" proposal="SEP _" modes="imm=$e2"/>
+	<opcode cpus="MOS65816" name="TCD" title="_Transfer _C accumulator to _direct register" proposal="TCD_" modes="imp=$5b"/>
+	<opcode cpus="MOS65816" name="TCS" title="_Transfer _C accumulator to _stack pointer" proposal="TCS_" modes="imp=$1b"/>
+	<opcode cpus="MOS65816" name="TDC" title="_Transfer _direct register to _C accumulator" proposal="TDC_" modes="imp=$7b"/>
+	<opcode cpus="MOS65816" name="TSC" title="_Transfer _stack pointer to _C accumulator" proposal="TSC_" modes="imp=$3b"/>
+	<opcode cpus="MOS65816" name="TXY" title="_Transfer _X register to _Y register" proposal="TXY_" modes="imp=$9b"/>
+	<opcode cpus="MOS65816" name="TYX" title="_Transfer _Y register to _X register" proposal="TYX_" modes="imp=$bb"/>
+	<opcode cpus="MOS65816" name="WDM" title="Reserved by _W_D_M for future use" proposal="WDM_" modes="imp=$42"/>
+	<opcode cpus="MOS65816" name="XBA" title="E_xchange _B and _A accumulator" proposal="XBA_" modes="imp=$eb"/>
+	<opcode cpus="MOS65816" name="XCE" title="E_xchange _carry and _emulation Bits" proposal="XCE _" modes="imp=$fb"/>
+</opcodes>
+

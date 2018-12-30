@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Local Testing, Not Part of Features
+Bundle-SymbolicName: com.wudsn.ide.tst;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: com.wudsn.ide.tst.Activator
+Bundle-Vendor: WUDSN
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.jface.text,
+ org.eclipse.ui.editors,
+ org.eclipse.core.resources,
+ org.eclipse.ui.workbench,
+ org.eclipse.ui.ide;bundle-version="3.9.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy; exclude:="com.wudsn.ide.tst.contenttypes"
