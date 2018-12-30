@@ -1,0 +1,1 @@
+The method getAtariRGBColor(int) is undefined for the type PaletteTypeUtilitycom.wudsn.ide.base.common.HexUtility.getLongValueHexString( com.wudsn.ide.gfx.model.PaletteTypeUtility.getAtariRGBColor(0xff));

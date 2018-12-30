@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="converters" name="Converters" schema="schema/com.wudsn.ide.gfx.converters.exsd"/>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="com.wudsn.ide.gfx.editor.GraphicsEditorOpenCommand"
+            name="%com.wudsn.ide.gfx.editor.GraphicsEditorOpenCommand.name">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.wudsn.ide.gfx.editor.GraphicsEditorOpenCommandHandler"
+            commandId="com.wudsn.ide.gfx.editor.GraphicsEditorOpenCommand">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=com.wudsn.ide.base.editor.hex.HexEditorOpenCommand">
+         <command
+               commandId="com.wudsn.ide.gfx.editor.GraphicsEditorOpenCommand"
+               id="com.wudsn.ide.gfx.editor.GraphicsEditorOpenCommand"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <or>
+                  <with
+                        variable="activeMenuSelection">
+                     <iterate
+                           ifEmpty="false"
+                           operator="or">
+                        <instanceof
+                              value="org.eclipse.core.resources.IFile">
+                        </instanceof>
+                     </iterate>
+                  </with>
+                  <with
+                        variable="activeMenuEditorInput">
+                     <iterate
+                           ifEmpty="false"
+                           operator="or">
+                        <instanceof
+                              value="org.eclipse.ui.IFileEditorInput">
+                        </instanceof>
+                     </iterate>
+                  </with>
+               </or>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            file-extensions="bmp, ico, gif, jpg, png, cnv"
+            id="com.wudsn.ide.gfx.converter.GraphicsFile"
+            name="%com.wudsn.ide.gfx.converter.GraphicsFile.name"
+            priority="normal">
+      </content-type>
+      <content-type
+            base-type="com.wudsn.ide.gfx.converter.GraphicsFile"
+            file-extensions="ap3, apc, chr, cci, cin, cpr, fnt, ghg, gr8, gr9, hip, hr, hr2, mcp, ilc, inp, int, mic, pic, plm, rip, sxs, tip"
+            id="com.wudsn.ide.gfx.converter.atari8.Atari8GraphicsFile"
+            name="%com.wudsn.ide.gfx.converter.atari8.Atari8GraphicsFile.name"
+            priority="normal">
+      </content-type>
+      <content-type
+            base-type="com.wudsn.ide.gfx.converter.GraphicsFile"
+            file-extensions="64c, chr, fnt, spr"
+            id="com.wudsn.ide.gfx.converter.c64.C64GraphicsFile"
+            name="%com.wudsn.ide.gfx.converter.c64.C64GraphicsFile.name"
+            priority="normal">
+      </content-type>
+      <content-type
+            base-type="com.wudsn.ide.gfx.converter.GraphicsFile"
+            file-extensions="hgr"
+            id="com.wudsn.ide.gfx.converter.apple2.AppleIIGraphicsFile"
+            name="%com.wudsn.ide.gfx.converter.apple2.AppleIIGraphicsFile.name"
+            priority="normal">
+      </content-type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.wudsn.ide.gfx.editor.GraphicsEditor"
+            contributorClass="org.eclipse.ui.part.EditorActionBarContributor"
+            default="true"
+            extensions="bmp, ico, gif, jpg, png, cnv"
+            icon="icons/graphics-editor-16x16.gif"
+            id="com.wudsn.ide.gfx.editor.GraphicsEditor"
+            name="%com.wudsn.ide.gfx.editor.GraphicsEditor.name">
+         <contentTypeBinding
+               contentTypeId="com.wudsn.ide.gfx.converter.GraphicsFile">
+         </contentTypeBinding>
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            id="com.wudsn.ide.gfx.editor.GraphicsCategory"
+            name="%com.wudsn.ide.gfx.editor.GraphicsCategory.name">
+      </category>
+      <view
+            allowMultiple="false"
+            category="com.wudsn.ide.gfx.editor.GraphicsCategory"
+            class="com.wudsn.ide.gfx.editor.ImageView"
+            icon="icons/graphics-editor-16x16.gif"
+            id="com.wudsn.ide.gfx.editor.ImageView"
+            name="%com.wudsn.ide.gfx.editor.ImageView.name"
+            restorable="true">
+      </view>
+      <view
+            allowMultiple="false"
+            category="com.wudsn.ide.gfx.editor.GraphicsCategory"
+            class="com.wudsn.ide.gfx.editor.ImagePaletteView"
+            icon="icons/graphics-editor-16x16.gif"
+            id="com.wudsn.ide.gfx.editor.ImagePaletteView"
+            name="%com.wudsn.ide.gfx.editor.ImagePaletteView.name"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="com.wudsn.ide.gfx.converters">
+               <converterGroup
+                     name="Generic">
+      <converter
+            id="com.wudsn.ide.gfx.converter.generic.CharSet1x1HiresConverter"
+            name="Char Set 1x1 - Hires"
+            sourceFileExtensions="64c, chr, fnt"
+            targetImageDisplayAspect="1x1"
+            targetImagePaletteSize="2">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharSetConverter.CHAR_SET_FILE">
+         </sourceFile>
+         <targetFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharSetConverter.CHAR_SET_FILE">
+         </targetFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.generic.CharSet1x1MultiColorConverter"
+            name="Char Set 1x1 - Multi Color"
+            targetImagePaletteSize="4"
+            targetImageDisplayAspect="2x1">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharSetConverter.CHAR_SET_FILE">
+         </sourceFile>
+         <targetFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharSetConverter.CHAR_SET_FILE">
+         </targetFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.generic.CharSet2x1HiresConverter"
+            name="Char Set 2x1 - Hires"
+            sourceFileExtensions="64c, chr, fnt"
+            targetImageDisplayAspect="1x1"
+            targetImagePaletteSize="2">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharSetConverter.CHAR_SET_FILE">
+         </sourceFile>
+         <targetFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharSetConverter.CHAR_SET_FILE">
+         </targetFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.generic.CharSet2x2HiresConverter"
+            name="Char Set 2x2 - Hires"
+            sourceFileExtensions="sxs"
+            targetImageDisplayAspect="1x1"
+            targetImagePaletteSize="2">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharSetConverter.CHAR_SET_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.generic.CharSet2x2MultiColorConverter"
+            name="Char Set 2x2 - MultiColor"
+            targetImagePaletteSize="4"
+            targetImageDisplayAspect="2x1">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharSetConverter.CHAR_SET_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.generic.CharMapHiresConverter"
+            name="Char Map - Hires"
+            targetImageDisplayAspect="1x1"
+            targetImagePaletteSize="2">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharSetConverter.CHAR_SET_FILE">
+         </sourceFile>
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharMapConverter.CHAR_MAP_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.generic.CharMapMultiColorConverter"
+            name="Char Map - Multi Color"
+            targetImageDisplayAspect="2x1"
+            targetImagePaletteSize="4">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharSetConverter.CHAR_SET_FILE">
+         </sourceFile>
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharMapConverter.CHAR_MAP_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.generic.TiledBitMapHiresConverter"
+            name="Tiled Bitmap - Hires"
+            targetImageDisplayAspect="1x1"
+            targetImagePaletteSize="2">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.TiledBitMapConverter.VIDEO_RAM_FILE">
+         </sourceFile>
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.TiledBitMapConverter.COLOR_RAM_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.generic.TiledBitMapMultiColorConverter"
+            name="Tiled Bitmap - Multi Color"
+            targetImageDisplayAspect="2x1"
+            targetImagePaletteSize="4">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.TiledBitMapConverter.VIDEO_RAM_FILE">
+         </sourceFile>
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.TiledBitMapConverter.COLOR_RAM_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.generic.TiledBitMap2x2MultiColorConverter"
+            name="Tiled Bitmap 2x2 - Multi Color"
+            targetImageDisplayAspect="2x1"
+            targetImagePaletteSize="16">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.TiledBitMapConverter.VIDEO_RAM_FILE">
+         </sourceFile>
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.TiledBitMapConverter.COLOR_RAM_FILE">
+         </sourceFile>
+      </converter>
+                  </converterGroup>
+                  <converterGroup
+                        name="Apple II">
+                     <converter
+                           id="com.wudsn.ide.gfx.converter.apple2.HiresGraphicsConverter"
+                           name="Apple II - HGR"
+                           sourceFileExtensions="hgr"
+                           targetImageDisplayAspect="1x1"
+                           targetImagePaletteSize="6">
+                        <targetFile
+                              label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+                        </targetFile>
+                        <sourceFile
+                              label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+                        </sourceFile>
+                     </converter>
+                  </converterGroup>
+                  <converterGroup
+                        name="Atari 2600">
+                     <converter
+                           id="com.wudsn.ide.gfx.converter.atari2600.AsymetricalPlayfieldConverter"
+                           name="Atari 2600 - Asymetrical Playfield"
+                           sourceFileExtensions="bin"
+                           targetImageDisplayAspect="4x1"
+                           targetImagePaletteSize="2">
+                        <sourceFile
+                              label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+                        </sourceFile>
+                        <targetFile
+                              label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+                        </targetFile>
+                     </converter>
+                  </converterGroup>
+                  <converterGroup
+                        name="Atari 8-bit">
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapAP3Converter"
+            name="Atari 8-bit - AP3"
+            sourceFileExtensions="ap3"
+            targetImageDisplayAspect="4x1"
+            targetImagePaletteSize="0">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapAPACConverter"
+            name="Atari 8-bit - APAC"
+            sourceFileExtensions="apc"
+            targetImageDisplayAspect="4x2"
+            targetImagePaletteSize="0">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+         <targetFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </targetFile>
+      </converter>
+                     <converter
+                           id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapAPCConverter"
+                           name="Atari 8-bit - APC"
+                           sourceFileExtensions="apc, plm"
+                           targetImageDisplayAspect="4x2"
+                           targetImagePaletteSize="0">
+                        <sourceFile
+                              label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+                        </sourceFile>
+                     </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapCINConverter"
+            name="Atari 8-bit - CCI/CIN"
+            sourceFileExtensions="cci, cin"
+            targetImageDisplayAspect="2x1"
+            targetImagePaletteSize="0">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+      </converter>
+                     <converter
+                           id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapCPRConverter"
+                           name="Atari 8-bit - CPR"
+                           sourceFileExtensions="cpr"
+                           targetImageDisplayAspect="1x1"
+                           targetImagePaletteSize="4">
+                        <sourceFile
+                              label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+                        </sourceFile>
+                     </converter>
+                     <converter
+                           id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapGHGConverter"
+                           name="Atari 8-bit - GHG"
+                           sourceFileExtensions="ghg"
+                           targetImageDisplayAspect="1x1"
+                           targetImagePaletteSize="2">
+                        <sourceFile
+                              label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+                        </sourceFile>
+                     </converter>
+                     <converter
+                           id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapGraphics8Converter"
+                           name="Atari 8-bit - Graphics 8"
+                           sourceFileExtensions="gr8"
+                           targetImageDisplayAspect="1x1"
+                           targetImagePaletteSize="2">
+                        <sourceFile
+                              label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+                        </sourceFile>
+                        <targetFile
+                              label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+                        </targetFile>
+                     </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapGraphics9Converter"
+            name="Atari 8-bit - Graphics 9"
+            sourceFileExtensions="gr9"
+            targetImageDisplayAspect="4x1"
+            targetImagePaletteSize="16">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+         <targetFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </targetFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapGraphics10Converter"
+            name="Atari 8-bit - Graphics 10"
+            targetImageDisplayAspect="4x1"
+            targetImagePaletteSize="16">
+         <targetFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </targetFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.CharMapGraphics12Converter"
+            name="Atari 8-bit - Graphics 12"
+            targetImageDisplayAspect="2x1"
+            targetImagePaletteSize="5">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharSetConverter.CHAR_SET_FILE">
+         </sourceFile>
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharMapConverter.CHAR_MAP_FILE">
+         </sourceFile>
+         <targetFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharMapConverter.CHAR_SET_FILE">
+         </targetFile>
+         <targetFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharMapConverter.CHAR_MAP_FILE">
+         </targetFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapGraphics15Converter"
+            name="Atari 8-bit - Graphics 15"
+            targetImageDisplayAspect="2x1"
+            targetImagePaletteSize="4">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+         <targetFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </targetFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapHIPConverter"
+            name="Atari 8-bit - HIP"
+            sourceFileExtensions="hip"
+            targetImageDisplayAspect="2x1"
+            targetImagePaletteSize="0">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapHRConverter"
+            name="Atari 8-bit - HR"
+            sourceFileExtensions="hr"
+            targetImageDisplayAspect="1x1"
+            targetImagePaletteSize="4">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapHR2Converter"
+            name="Atari 8-bit - HR2"
+            sourceFileExtensions="hr2"
+            targetImageDisplayAspect="1x1"
+            targetImagePaletteSize="4">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapILCConverter"
+            name="Atari 8-bit - ILC"
+            sourceFileExtensions="ilc"
+            targetImageDisplayAspect="4x1"
+            targetImagePaletteSize="0">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapINPConverter"
+            name="Atari 8-bit - INP"
+            sourceFileExtensions="inp"
+            targetImageDisplayAspect="2x1"
+            targetImagePaletteSize="8">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapRIPConverter"
+            name="Atari 8-bit - RIP"
+            sourceFileExtensions="rip"
+            targetImageDisplayAspect="2x1"
+            targetImagePaletteSize="0">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapTIPConverter"
+            name="Atari 8-bit - TIP"
+            sourceFileExtensions="tip"
+            targetImageDisplayAspect="1x1"
+            targetImagePaletteSize="0">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapINTConverter"
+            name="Atari 8-bit - INT"
+            sourceFileExtensions="int"
+            targetImageDisplayAspect="2x1"
+            targetImagePaletteSize="8">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapKoalaConverter"
+            name="Atari 8-bit - Koala"
+            sourceFileExtensions="pic"
+            targetImageDisplayAspect="2x1"
+            targetImagePaletteSize="4">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapMCPConverter"
+            name="Atari 8-bit - MCP"
+            sourceFileExtensions="mcp"
+            targetImageDisplayAspect="2x1"
+            targetImagePaletteSize="8">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapMicroPainterConverter"
+            name="Atari 8-bit - Micropainter"
+            sourceFileExtensions="mic"
+            targetImageDisplayAspect="2x1"
+            targetImagePaletteSize="4">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+      </converter>
+            </converterGroup>
+                  <converterGroup
+                        name="C64">
+      <converter
+            id="com.wudsn.ide.gfx.converter.c64.SpriteHiresConverter"
+            name="C64 - Sprites - Hires"
+            sourceFileExtensions="spr"
+            targetImageDisplayAspect="1x1"
+            targetImagePaletteSize="2">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.c64.SpriteHiresConverter.SPRITE_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.c64.SpriteMultiColorConverter"
+            name="C64 - Sprites - Multi Color"
+            targetImagePaletteSize="4"
+            targetImageDisplayAspect="2x1">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.c64.SpriteHiresConverter.SPRITE_FILE">
+         </sourceFile>
+      </converter>
+      </converterGroup>
+                  <converterGroup
+                        name="Atari ST">
+                     <converter
+                           id="com.wudsn.ide.gfx.converter.atarist.InterleavedBitMap4Planes"
+                           name="Atari ST - Interleaved Bitmap (4 Planes)"
+                           sourceFileExtensions="sts"
+                           targetImageDisplayAspect="1x1"
+                           targetImagePaletteSize="16">
+                        <sourceFile
+                              label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+                        </sourceFile>
+                     </converter>
+                  </converterGroup>
+ 
+   </extension>
+
+</plugin>
