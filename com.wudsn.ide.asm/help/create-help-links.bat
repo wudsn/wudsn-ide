@@ -15,7 +15,7 @@ set REPOSITORY=C:\jac\system\Java\Programming\Repositories\WUDSN-IDE
 set SITE=C:\jac\system\WWW\Sites\www.wudsn.com
 set SYMBOLIC_LINK=%REPOSITORY%\com.wudsn.ide.asm\help\productions\java\ide
 set REAL_FOLDER=%SITE%\productions\java\ide
-echo on
+
 rmdir %SYMBOLIC_LINK%
 mklink /D %SYMBOLIC_LINK% %REAL_FOLDER%
 pause
