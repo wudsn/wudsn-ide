@@ -1,5 +1,5 @@
 #WUDSN IDE Converter Parameters
-#Wed Aug 08 19:35:39 CEST 2012
+#Tue Jan 01 12:50:14 CET 2019
 converterDirection=IMAGE_TO_FILES
 filesConverterParameters.converterId=com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapGraphics8Converter
 filesConverterParameters.imageAspect.factorX=1
@@ -47,4 +47,4 @@ imageConverterParameters.targetFiles.7.path=
 imageConverterParameters.targetFiles.8.path=
 imageConverterParameters.targetFiles.9.path=
 imageConverterParameters.useDefaultScript=true
-imageConverterParameters.script=function convertToFileData(data) {\r\n\tvar bpsl \= (data.getImageDataWidth() + 7) / 8;\r\n\tvar bytes \= []\r\n\tvar offset \= 0;\r\n\tfor (var y \= 0; y < data.getImageDataHeight(); y++) {\r\n\t    for (var x \= 0; x < data.getImageDataWidth(); x \= x + 8) {\r\n\t\t\tvar b \= 0;\r\n\t\t\tfor (var p \= 0; p < 8; p++) {\r\n\t\t\t    var color;\r\n\t\t\t    color \= data.getPixel(x + p, y);\r\n\t\t\t    if (color \!\= 0) {\r\n\t\t\t\t\tb \= b | 1 << 7 - p;\r\n\t\t\t    }\r\n\t\t\t}\r\n\t\t\tbytes[offset++] \= b;\r\n\t    }\r\n\t}\r\n\tdata.setTargetFileObject(0, bytes);\r\n}
+imageConverterParameters.script=function convertToFileData(data) {\r\n\tvar bpsl \= (data.getImageDataWidth() + 7) / 8;\r\n\tvar bytes \= [];\r\n\tvar offset \= 0;\r\n\tfor (var y \= 0; y < data.getImageDataHeight(); y++) {\r\n\t    for (var x \= 0; x < data.getImageDataWidth(); x \= x + 8) {\r\n\t\t\tvar b \= 0;\r\n\t\t\tfor (var p \= 0; p < 8; p++) {\r\n\t\t\t    var color;\r\n\t\t\t    color \= data.getPixel(x + p, y);\r\n\t\t\t    if (color \!\= 0) {\r\n\t\t\t\t\tb \= b | 1 << 7 - p;\r\n\t\t\t    }\r\n\t\t\t}\r\n\t\t\tbytes[offset++] \= b;\r\n\t    }\r\n\t}\r\n\tdata.setTargetFileObject(0, bytes);\r\n}
