@@ -55,7 +55,7 @@
 	</target>
 
 	<target name="upload_all">
-		<echo>Uploading daily build from ${basedir}\daily.</echo>
+		<echo>Uploading builds from ${basedir}.</echo>
 		<exec executable="C:\jac\system\Windows\Tools\NET\WinSCP\WinSCP.com">
 			<arg value="/script=site.scp"/>
 		</exec>
