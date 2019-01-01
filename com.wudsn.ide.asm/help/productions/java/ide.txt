@@ -1,1 +1,1 @@
-This "ide" folder is only symbolic link.
+This "ide" folder is only a symbolic link.
