@@ -50,13 +50,15 @@ enum HexEditorCharacterSet {
 	// http://www2.bitstream.net/~marksim/atarimac
 	private final static String ATARI_FONT_PATH = "fonts/atari8/AtariClassic-Regular.ttf";
 	private final static String ATARI_FONT_NAME = "Atari Classic";
-	private final static String ATARI_INT_FONT_PATH = "fonts/atari8/AtariClassicInt-Regular.ttf";
-	private final static String ATARI_INT_FONT_NAME = "Atari Classic Int";
 	private final static int ATARI_FONT_SIZE = 6;
+	private final static int ATARI_FONT_BASE = 0xe000;
+	private final static int ATARI_INT_FONT_BASE = 0xe100;
 
 	private final static String C64_FONT_PATH = "fonts/c64/C64Classic-Regular.ttf";
 	private final static String C64_FONT_NAME = "C64 Classic";
 	private final static int C64_FONT_SIZE = 6;
+	private final static int C64_UPPER_FONT_BASE = 0x0100;
+	private final static int C64_LOWER_FONT_BASE = 0x0200;
 
 	private static Map<HexEditorCharacterSet, Data> instanceMap;
 	private static Map<String, Font> fontMap;
@@ -109,39 +111,37 @@ enum HexEditorCharacterSet {
 			fontPath = ATARI_FONT_PATH;
 			fontName = ATARI_FONT_NAME;
 			fontSize = ATARI_FONT_SIZE;
-			result.setIdentityMapping();
+			result.setIdentityMapping(ATARI_FONT_BASE);
 			break;
 		    case ATARI_ATASCII_SCREEN_CODE:
 			fontPath = ATARI_FONT_PATH;
 			fontName = ATARI_FONT_NAME;
 			fontSize = ATARI_FONT_SIZE;
-			result.setAtariScreenCodeMapping();
+			result.setAtariScreenCodeMapping(ATARI_FONT_BASE);
 			break;
 		    case ATARI_INTERNATIONAL:
-			fontPath = ATARI_INT_FONT_PATH;
-			fontName = ATARI_INT_FONT_NAME;
+			fontPath = ATARI_FONT_PATH;
+			fontName = ATARI_FONT_NAME;
 			fontSize = ATARI_FONT_SIZE;
-			result.setIdentityMapping();
+			result.setIdentityMapping(ATARI_INT_FONT_BASE);
 			break;
 		    case ATARI_INTERNATIONAL_SCREEN_CODE:
-			fontPath = ATARI_INT_FONT_PATH;
-			fontName = ATARI_INT_FONT_NAME;
+			fontPath = ATARI_FONT_PATH;
+			fontName = ATARI_FONT_NAME;
 			fontSize = ATARI_FONT_SIZE;
-			result.setAtariScreenCodeMapping();
+			result.setAtariScreenCodeMapping(ATARI_INT_FONT_BASE);
 			break;
 		    case C64_PETSCII_UPPER_CASE:
 			fontPath = C64_FONT_PATH;
 			fontName = C64_FONT_NAME;
 			fontSize = C64_FONT_SIZE;
-			result.setIdentityMapping();
+			result.setIdentityMapping(C64_UPPER_FONT_BASE);
 			break;
 		    case C64_PETSCII_LOWER_CASE:
 			fontPath = C64_FONT_PATH;
 			fontName = C64_FONT_NAME;
 			fontSize = C64_FONT_SIZE;
-			for (int i = 0; i < 256; i++) {
-			    result.characterMapping[i] = (char) (0x200 + i);
-			}
+			result.setIdentityMapping(C64_LOWER_FONT_BASE);
 			break;
 		    default:
 			throw new IllegalArgumentException("Unsupported font type " + type + ".");
@@ -196,13 +196,13 @@ enum HexEditorCharacterSet {
 	    return result;
 	}
 
-	private void setIdentityMapping() {
+	private void setIdentityMapping(int base) {
 	    for (int i = 0; i < 256; i++) {
-		characterMapping[i] = (char) (0x100 + i);
+		characterMapping[i] = (char) (base + i);
 	    }
 	}
 
-	private void setAtariScreenCodeMapping() {
+	private void setAtariScreenCodeMapping(int base) {
 	    for (int i = 0; i < 256; i++) {
 		int charValue = i & 0x7f;
 		if (charValue < 0x40) {
@@ -210,10 +210,10 @@ enum HexEditorCharacterSet {
 		} else if (charValue < 0x60) {
 		    charValue = charValue - 0x40;
 		}
-		if (i > 0x80) {
+		if (i >= 0x80) {
 		    charValue |= 0x80;
 		}
-		characterMapping[i] = (char) (0x100 + charValue);
+		characterMapping[i] = (char) (base + charValue);
 	    }
 	}
 
