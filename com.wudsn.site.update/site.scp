@@ -1,6 +1,6 @@
 open sftp://%IONOS_USER%:%IONOS_PASSWORD%@home280969378.1and1-data.host/ -hostkey="ssh-ed25519 256 0d:15:61:04:10:c2:d7:ce:af:55:68:0a:7c:9c:b8:d7"
 
-lcd C:\jac\system\WWW\Sites\www.wudsn.com\update
+lcd C:\jac\system\Java\Programming\Repositories\WUDSN-IDE\com.wudsn.site.update
 cd /www.wudsn.com/update
 
 synchronize -delete remote
