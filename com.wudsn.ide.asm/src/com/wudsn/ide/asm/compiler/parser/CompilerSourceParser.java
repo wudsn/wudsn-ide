@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2009 - 2014 <a href="http://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -261,7 +261,7 @@ public abstract class CompilerSourceParser {
 	}
 
 	/**
-	 * Enhances the file path of an include, for example add a default extension
+	 * Enhances the file path of an include, for example adds a default extension
 	 * for source includes.
 	 * 
 	 * @param type
@@ -458,7 +458,7 @@ public abstract class CompilerSourceParser {
 		}
 
 		// Ensure every persistent file is parsed only once to prevent infinite
-		// recursions cause by circular includes. Non-persistent files cannot
+		// recursions caused by circular includes. Non-persistent files cannot
 		// cause recursions since they cannot be included yet.
 		if (compilerSourceFile.getDocumentFile() != null) {
 			String key = compilerSourceFile.getDocumentFile().getPath();
@@ -507,7 +507,7 @@ public abstract class CompilerSourceParser {
 		for (int lineNumber = 0; lineNumber < lines; lineNumber++) {
 
 			/**
-			 * Part 1: Parse line segments from line strin.
+			 * Part 1: Parse line segments from line string.
 			 */
 
 			int symbolOffset = 0;

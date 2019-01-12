@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2009 - 2014 <a href="http://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -79,8 +79,8 @@ public abstract class Compiler {
      * @param exitValue
      *            The exit code of the compiler process.
      * @return <code>true</code> if the exit code represents success (only
-     *         information and warning messages) or a failure (at least one error
-     *         message).
+     *         information and warning messages) or a failure (at least one
+     *         error message).
      * 
      * @since 1.7.0
      */
