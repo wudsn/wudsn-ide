@@ -18,7 +18,6 @@
  */
 package com.wudsn.ide.snd.player.atari8;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -34,8 +33,6 @@ import net.sf.asap.ASAP;
 import net.sf.asap.ASAPInfo;
 import net.sf.asap.ASAPMusicRoutine;
 import net.sf.asap.ASAPWriter;
-import net.sf.asap.ByteWriter;
-import net.sf.asap.StringConsumer;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
@@ -63,6 +60,9 @@ import com.wudsn.ide.snd.player.SoundPlayerListener;
 public final class ASAPPlayer extends SoundPlayer {
 
     private final ASAP asap;
+
+    private static final int MAX_EXTENSIONS = 10;
+    private static final int MAX_EXPORT_SIZE = 655636;
 
     // Module binary is not in the base class because other players only work on
     // the input stream and do not expose it at all. Is it also not purely local
@@ -157,20 +157,17 @@ public final class ASAPPlayer extends SoundPlayer {
 	}
 
 	final List<FileType> supportedExportFileTypes = new ArrayList<FileType>();
-	ASAPWriter.enumSaveExts(new StringConsumer() {
-
-	    @Override
-	    public void run(String extension) {
-		// ASAP uses lower-case extensions without dot
-		extension = "." + extension;
-		FileType fileType = FileType.getInstanceByExtension(extension);
-		if (fileType == null) {
-		    throw new RuntimeException("Unknown file extension '" + extension + "'.");
-		}
-		supportedExportFileTypes.add(fileType);
-
+	String[] extensions = new String[MAX_EXTENSIONS]; //
+	int numberOfExtensions = ASAPWriter.getSaveExts(extensions, asap.getInfo(), module, module.length);
+	for (int i = 0; i < numberOfExtensions; i++) {
+	    String extension = "." + extensions[i];
+	    FileType fileType = FileType.getInstanceByExtension(extension);
+	    if (fileType == null) {
+		throw new RuntimeException("Unknown file extension '" + extension + "'.");
 	    }
-	}, asap.getInfo(), module, module.length);
+	    supportedExportFileTypes.add(fileType);
+
+	}
 	info.setSupportedExportFileTypes(supportedExportFileTypes);
 	info.channels = asapInfo.getChannels();
 	info.songs = asapInfo.getSongs();
@@ -205,51 +202,43 @@ public final class ASAPPlayer extends SoundPlayer {
 	if (!isLoaded()) {
 	    throw new IllegalStateException("No module loaded");
 	}
-	final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	ByteWriter byteWriter = new ByteWriter() {
-
-	    @Override
-	    public void run(int b) {
-		baos.write(b);
-
-	    }
-	};
-
-	// Writes the given module in a possibly different file format.
-	//
-	// @param string targetFilename Output filename, used to determine the
-	// format.
-	// @param ByteWriter w Receives output file contents.
-	// @param ASAPInfo info File information got from the source file with
-	// data updated for the output file.
-	// @param byte[] module Contents of the source file.
-	// @param int moduleLen Length of the source file.
-	// @param bool tag Display information (xex output only).
 
 	// The file name must have a least one character before the dot.
 	String asapFile = "DUMMY" + fileType.getExtension().toUpperCase();
 	ASAPInfo asapInfo = asap.getInfo();
 	int oldMusicAddress = asapInfo.getMusicAddress();
-	try {
-	    // Change the music address in case it is changeable.
-	    if (fileType.isMusicAddressChangeable()) {
-		asapInfo.setMusicAddress(musicAddress);
-	    }
-	    ASAPWriter.write(asapFile, byteWriter, asapInfo, module, moduleLen, false);
-	} finally {
-	    // Change the music address back in case it was changed.
-	    if (fileType.isMusicAddressChangeable()) {
-		asapInfo.setMusicAddress(oldMusicAddress);
-	    }
-	    try {
-
-		baos.close();
-	    } catch (IOException ignore) {
-
-	    }
+	byte[] output = new byte[MAX_EXPORT_SIZE];
+	ASAPWriter asapWriter = new ASAPWriter();
+	int outputOffset = 0;
+	asapWriter.setOutput(output, outputOffset, output.length);
+	// Change the music address in case it is changeable.
+	if (fileType.isMusicAddressChangeable()) {
+	    asapInfo.setMusicAddress(musicAddress);
 	}
+	/**
+	 * Writes the given module in a possibly different file format.
+	 * 
+	 * @param targetFilename
+	 *            Output filename, used to determine the format.
+	 * @param info
+	 *            File information got from the source file with data
+	 *            updated for the output file.
+	 * @param module
+	 *            Contents of the source file.
+	 * @param moduleLen
+	 *            Length of the source file.
+	 * @param tag
+	 *            Display information (xex output only).
+	 */
 
-	return baos.toByteArray();
+	outputOffset = asapWriter.write(asapFile, asapInfo, module, moduleLen, false);
+	// Change the music address back in case it was changed.
+	if (fileType.isMusicAddressChangeable()) {
+	    asapInfo.setMusicAddress(oldMusicAddress);
+	}
+	byte[] result = new byte[outputOffset];
+	System.arraycopy(output, 0, result, 0, outputOffset);
+	return result;
     }
 
     @Override
