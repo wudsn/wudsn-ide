@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -29,30 +29,26 @@ public class CharSet2x2MultiColorConverter extends CharSetConverter {
 
     @Override
     public void convertToImageDataSize(FilesConverterData data) {
-	data.setImageDataWidth((data.getParameters().getColumns())
-		* (8 + data.getParameters().getSpacingWidth()));
-	data.setImageDataHeight((data.getParameters().getRows())
-		* (16 + data.getParameters().getSpacingWidth()));
+	data.setImageDataWidth((data.getParameters().getColumns()) * (8 + data.getParameters().getSpacingWidth()));
+	data.setImageDataHeight((data.getParameters().getRows()) * (16 + data.getParameters().getSpacingWidth()));
     }
 
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int offset = 0;
 	int xpixels = 8 + data.getParameters().getSpacingWidth();
 	int ypixels = 16 + data.getParameters().getSpacingWidth();
 
-	for (int y1 = 0; y1 < data.getParameters().getRows() ; y1++) {
-	    for (int x1 = 0; x1 < data.getParameters().getColumns() ; x1++) {
+	for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
+	    for (int x1 = 0; x1 < data.getParameters().getColumns(); x1++) {
 		for (int cy = 0; cy < 2; cy++) {
 		    for (int cx = 0; cx < 2; cx++) {
 			for (int y2 = 0; y2 < 8; y2++) {
-			    int b = data.getSourceFileByte(CHAR_SET_FILE,
-				    offset++);
+			    int b = data.getSourceFileByte(CHAR_SET_FILE, offset++);
 			    if (b < 0) {
 				return true;
 			    }

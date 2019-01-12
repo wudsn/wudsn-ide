@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -37,8 +37,7 @@ import com.wudsn.ide.gfx.model.Aspect;
  * 
  * @author Peter Dell
  */
-public final class ConverterDefinition implements
-	Comparable<ConverterDefinition> {
+public final class ConverterDefinition implements Comparable<ConverterDefinition> {
 
     // Id
     private String id;
@@ -68,8 +67,7 @@ public final class ConverterDefinition implements
      */
     final void setId(String id) {
 	if (id == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'id' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'id' must not be null.");
 	}
 	this.id = id;
     }
@@ -95,8 +93,7 @@ public final class ConverterDefinition implements
      */
     final void setName(String name) {
 	if (name == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'name' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'name' must not be null.");
 	}
 	this.name = name;
     }
@@ -146,8 +143,7 @@ public final class ConverterDefinition implements
      */
     public final boolean isSourceFileExtensionSupported(String fileExtension) {
 	if (fileExtension == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'fileExtension' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'fileExtension' must not be null.");
 	}
 
 	return sourceFileExtensions.contains(fileExtension);
@@ -178,9 +174,8 @@ public final class ConverterDefinition implements
      */
     public final int getTargetImagePaletteSize() {
 	if (targetImagePaletteSize < 0) {
-	    throw new IllegalStateException(
-		    "Field 'targetImagePaletteSize' must not be negative. Specified value is "
-			    + targetImagePaletteSize + ".");
+	    throw new IllegalStateException("Field 'targetImagePaletteSize' must not be negative. Specified value is "
+		    + targetImagePaletteSize + ".");
 	}
 	return targetImagePaletteSize;
     }
@@ -193,12 +188,10 @@ public final class ConverterDefinition implements
      */
     final void setTargetImageDisplayAspect(Aspect targetImageDisplayAspect) {
 	if (targetImageDisplayAspect == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'targetImageDisplayAspect' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'targetImageDisplayAspect' must not be null.");
 	}
 	if (!targetImageDisplayAspect.isValid()) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'targetImageDisplayAspect' must not be invalid.");
+	    throw new IllegalArgumentException("Parameter 'targetImageDisplayAspect' must not be invalid.");
 	}
 	this.targetImageDisplayAspect = targetImageDisplayAspect;
     }
@@ -210,8 +203,7 @@ public final class ConverterDefinition implements
      */
     public final Aspect getTargetImageDisplayAspect() {
 	if (targetImageDisplayAspect == null) {
-	    throw new IllegalStateException(
-		    "Field 'targetImageDisplayAspect' must not be empty.");
+	    throw new IllegalStateException("Field 'targetImageDisplayAspect' must not be empty.");
 	}
 	return targetImageDisplayAspect;
     }
@@ -222,11 +214,9 @@ public final class ConverterDefinition implements
      * @param sourceFileDefinition
      *            The source file definition, not <code>null</code>.
      */
-    final void addSourceFileDefinition(
-	    ConverterSourceFileDefinition sourceFileDefinition) {
+    final void addSourceFileDefinition(ConverterSourceFileDefinition sourceFileDefinition) {
 	if (sourceFileDefinition == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'sourceFileDefinition' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'sourceFileDefinition' must not be null.");
 	}
 	sourceFileDefinitions.add(sourceFileDefinition);
     }
@@ -247,11 +237,9 @@ public final class ConverterDefinition implements
      * @param targetFileDefinition
      *            The target file definition, not <code>null</code>.
      */
-    final void addTargetFileDefinition(
-	    ConverterTargetFileDefinition targetFileDefinition) {
+    final void addTargetFileDefinition(ConverterTargetFileDefinition targetFileDefinition) {
 	if (targetFileDefinition == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'targetFileDefinition' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'targetFileDefinition' must not be null.");
 	}
 	targetFileDefinitions.add(targetFileDefinition);
     }
@@ -270,13 +258,11 @@ public final class ConverterDefinition implements
     @Override
     public final int compareTo(ConverterDefinition o) {
 	if (o == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'o' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'o' must not be null.");
 	}
 	if (name == null || o.name == null) {
 	    if (name == null) {
-		throw new IllegalStateException(
-			"Field 'name' must not be null for this or for argument.");
+		throw new IllegalStateException("Field 'name' must not be null for this or for argument.");
 	    }
 	}
 	return name.compareTo(o.name);

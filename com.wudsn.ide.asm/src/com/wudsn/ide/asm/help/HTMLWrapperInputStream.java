@@ -37,28 +37,22 @@ final class HTMLWrapperInputStream extends InputStream {
     private InputStream innerInputStream;
     private InputStream suffixInputStream;
 
-    public HTMLWrapperInputStream(String prefix, String suffix,
-	    InputStream inputStream) {
+    public HTMLWrapperInputStream(String prefix, String suffix, InputStream inputStream) {
 	if (prefix == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'prefix' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'prefix' must not be null.");
 	}
 	if (suffix == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'suffix' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'suffix' must not be null.");
 	}
 	if (inputStream == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'inputStream' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'inputStream' must not be null.");
 	}
 
 	try {
-	    prefixInputStream = new ByteArrayInputStream(
-		    prefix.getBytes("UTF-8"));
+	    prefixInputStream = new ByteArrayInputStream(prefix.getBytes("UTF-8"));
 
 	    innerInputStream = inputStream;
-	    suffixInputStream = new ByteArrayInputStream(
-		    suffix.getBytes("UTF-8"));
+	    suffixInputStream = new ByteArrayInputStream(suffix.getBytes("UTF-8"));
 	} catch (UnsupportedEncodingException ex) {
 	    throw new RuntimeException(ex);
 	}
@@ -72,7 +66,7 @@ final class HTMLWrapperInputStream extends InputStream {
 	if (prefixInputStream != null) {
 	    result = prefixInputStream.read();
 	    if (result != -1) {
-//		System.out.print((char)result);
+		// System.out.print((char)result);
 
 		return result;
 	    }
@@ -82,7 +76,7 @@ final class HTMLWrapperInputStream extends InputStream {
 	if (innerInputStream != null) {
 	    result = innerInputStream.read();
 	    if (result != -1) {
-//		System.out.print((char)result);
+		// System.out.print((char)result);
 		return result;
 	    }
 	    innerInputStream = null;
@@ -91,7 +85,7 @@ final class HTMLWrapperInputStream extends InputStream {
 	if (suffixInputStream != null) {
 	    result = suffixInputStream.read();
 	    if (result != -1) {
-//		System.out.print((char)result);
+		// System.out.print((char)result);
 
 		return result;
 	    }

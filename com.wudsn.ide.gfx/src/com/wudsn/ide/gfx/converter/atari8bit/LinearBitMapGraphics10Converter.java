@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -37,8 +37,7 @@ public class LinearBitMapGraphics10Converter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int offset = 0;

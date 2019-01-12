@@ -125,11 +125,12 @@ public interface SoundInfo {
     public boolean isInitFulltime();
 
     public int getPlayerAddress();
-    
+
     /**
-     * Gets the music address or <code>-1</code> if the moduls type does not have one.
-     * @return 
-     * TODO 
+     * Gets the music address or <code>-1</code> if the moduls type does not
+     * have one.
+     * 
+     * @return TODO
      */
     public int getMusicAddress();
 

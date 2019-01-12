@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -81,8 +81,7 @@ public final class ConverterData {
 
     public void setConverterMode(ConverterMode value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	this.converterMode = value;
     }
@@ -92,13 +91,11 @@ public final class ConverterData {
     }
 
     public boolean isValidFile() {
-	return isValid()
-		&& (converterMode == ConverterMode.RAW_FILE || converterMode == ConverterMode.CNV);
+	return isValid() && (converterMode == ConverterMode.RAW_FILE || converterMode == ConverterMode.CNV);
     }
 
     public boolean isValidImage() {
-	return isValid()
-		&& (converterMode == ConverterMode.RAW_IMAGE || converterMode == ConverterMode.CNV);
+	return isValid() && (converterMode == ConverterMode.RAW_IMAGE || converterMode == ConverterMode.CNV);
     }
 
     public boolean isValidConversion() {
@@ -121,8 +118,7 @@ public final class ConverterData {
 	case IMAGE_TO_FILES:
 	    return imageConverterData;
 	default:
-	    throw new IllegalStateException("Unknown converter direction "
-		    + parameters.getConverterDirection() + ".");
+	    throw new IllegalStateException("Unknown converter direction " + parameters.getConverterDirection() + ".");
 	}
     }
 

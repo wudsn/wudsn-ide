@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -32,21 +32,17 @@ public class TiledBitMap2x2MultiColorConverter extends TiledBitMapConverter {
 
     @Override
     public void convertToImageDataSize(FilesConverterData data) {
-	data.setImageDataWidth(data.getParameters().getColumns()
-		* (8 + data.getParameters().getSpacingWidth()));
-	data.setImageDataHeight(data.getParameters().getRows()
-		* (16 + data.getParameters().getSpacingWidth()));
+	data.setImageDataWidth(data.getParameters().getColumns() * (8 + data.getParameters().getSpacingWidth()));
+	data.setImageDataHeight(data.getParameters().getRows() * (16 + data.getParameters().getSpacingWidth()));
     }
 
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
-	int[] colors = new int[] { 0x191d19, 0xfcf9fc, 0x933a4c, 0xb6fafa,
-		0xd27ded, 0x6acf6f, 0x4f44d8, 0xfbfb8b, 0xd89c5b, 0x7f5307,
-		0xef839f, 0x575753, 0xa3a7a7, 0xb7ffbbf, 0xa397ff, 0xefe9e7 };
+	int[] colors = new int[] { 0x191d19, 0xfcf9fc, 0x933a4c, 0xb6fafa, 0xd27ded, 0x6acf6f, 0x4f44d8, 0xfbfb8b,
+		0xd89c5b, 0x7f5307, 0xef839f, 0x575753, 0xa3a7a7, 0xb7ffbbf, 0xa397ff, 0xefe9e7 };
 
 	for (int i = 0; i < 16; i++) {
 	    int r = (colors[i] >> 16) & 0xff;
@@ -72,10 +68,8 @@ public class TiledBitMap2x2MultiColorConverter extends TiledBitMapConverter {
 		color_ram_offset = tile * 2;
 		for (int y2 = 0; y2 < 2; y2++) {
 		    for (int x2 = 0; x2 < 2; x2++) {
-			int v = data.getSourceFileByte(VIDEO_RAM_FILE,
-				video_ram_offset + y2 * 2 + x2);
-			int c = data.getSourceFileByte(COLOR_RAM_FILE,
-				color_ram_offset + y2);
+			int v = data.getSourceFileByte(VIDEO_RAM_FILE, video_ram_offset + y2 * 2 + x2);
+			int c = data.getSourceFileByte(COLOR_RAM_FILE, color_ram_offset + y2);
 			if (v >= 0 && c >= 0) {
 			    cell_colors[1] = (v >> 4) & 0xf;
 			    cell_colors[2] = (v >> 0) & 0xf;
@@ -93,8 +87,7 @@ public class TiledBitMap2x2MultiColorConverter extends TiledBitMapConverter {
 			}
 
 			for (int y3 = 0; y3 < 8; y3++) {
-			    int b = data.getSourceFileByte(BIT_MAP_FILE,
-				    bitmap_offset++);
+			    int b = data.getSourceFileByte(BIT_MAP_FILE, bitmap_offset++);
 			    if (b < 0) {
 				return true;
 			    }

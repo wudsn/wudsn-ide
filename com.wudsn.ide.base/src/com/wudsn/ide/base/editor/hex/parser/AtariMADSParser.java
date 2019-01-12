@@ -28,7 +28,8 @@ import com.wudsn.ide.base.editor.hex.HexEditorContentOutlineTreeObject;
 import com.wudsn.ide.base.editor.hex.HexEditorParser;
 
 /**
- * All parsing in here is based on the format description in the MADS online documentation.
+ * All parsing in here is based on the format description in the MADS online
+ * documentation.
  * 
  * @author Peter Dell
  */
@@ -77,7 +78,7 @@ public class AtariMADSParser extends HexEditorParser {
 				HexUtility.getLongValueHexString(startAddress, 4),
 				HexUtility.getLongValueHexString(endAddress, 4),
 				HexUtility.getByteValueHexString(config));
-			
+
 			treeObject = printHeader(contentBuilder, offset, headerText);
 			offset = printBytes(treeObject, contentBuilder, offset, offset + 15, true, 0);
 

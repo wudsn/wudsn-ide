@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -31,15 +31,12 @@ import com.wudsn.ide.base.common.StringUtility;
  * 
  * @author Peter Dell
  */
-public final class TextEditorSortLinesNumericCommandHandler extends
-	TextEditorSortLinesCommandHandler {
+public final class TextEditorSortLinesNumericCommandHandler extends TextEditorSortLinesCommandHandler {
 
     private static final class NumericComparator implements Comparator<String> {
 
-	private static final Double MAXIMUM = new Double(
-		Double.POSITIVE_INFINITY);
-	private static final Pattern numericPattern = Pattern
-		.compile("[-+]?([0-9]*\\.)?[0-9]+([eE][-+]?[0-9]+)?"); //$NON-NLS-1$
+	private static final Double MAXIMUM = new Double(Double.POSITIVE_INFINITY);
+	private static final Pattern numericPattern = Pattern.compile("[-+]?([0-9]*\\.)?[0-9]+([eE][-+]?[0-9]+)?"); //$NON-NLS-1$
 
 	public NumericComparator() {
 

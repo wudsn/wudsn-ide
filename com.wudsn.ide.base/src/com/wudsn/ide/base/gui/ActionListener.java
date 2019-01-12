@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -21,15 +21,17 @@ package com.wudsn.ide.base.gui;
 
 /**
  * Consumers of {@link Action} have to implement this interface.
+ * 
  * @author Peter Dell
- *
+ * 
  */
 public interface ActionListener {
 
     /**
      * Perform the operation associated with an action.
      * 
-     * @param action The action, not <code>null</code>.
+     * @param action
+     *            The action, not <code>null</code>.
      */
     public void performAction(Action action);
 }

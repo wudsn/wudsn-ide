@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -19,7 +19,6 @@
 
 package com.wudsn.ide.gfx.model;
 
-
 public enum PaletteType {
-   TRUE_COLOR, ATARI_DEFAULT, ATARI_REAL, ATARI_XFORMER, C64_NORMAL, C64_PAL,
+    TRUE_COLOR, ATARI_DEFAULT, ATARI_REAL, ATARI_XFORMER, C64_NORMAL, C64_PAL,
 }

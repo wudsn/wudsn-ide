@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -35,8 +35,7 @@ public class LinearBitMapCPRConverter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	if (bytes.length < 3) {
@@ -44,33 +43,27 @@ public class LinearBitMapCPRConverter extends LinearBitMapConverter {
 	}
 
 	byte[] unpackedImage = new byte[7684];
-	boolean result = Atari8BitUtility.unpackKoala(bytes, 1, bytes.length - 1,
-		bytes[0] & 0xff, unpackedImage);
+	boolean result = Atari8BitUtility.unpackKoala(bytes, 1, bytes.length - 1, bytes[0] & 0xff, unpackedImage);
 	return result;
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	byte[] unpackedImage = new byte[7684];
-	boolean result = Atari8BitUtility.unpackKoala(bytes, 1, bytes.length - 1,
-		bytes[0] & 0xff, unpackedImage);
+	boolean result = Atari8BitUtility.unpackKoala(bytes, 1, bytes.length - 1, bytes[0] & 0xff, unpackedImage);
 	if (!result) {
 	    return;
 	}
 
 	RGB[] paletteColors;
-	paletteColors = PaletteUtility.getPaletteColors(
-		PaletteType.ATARI_DEFAULT, Palette.HIRES_1, null);
+	paletteColors = PaletteUtility.getPaletteColors(PaletteType.ATARI_DEFAULT, Palette.HIRES_1, null);
 	setImageSizeAndPalette(data, 40, 192, Palette.HIRES_1, paletteColors);
     }
 
@@ -83,8 +76,7 @@ public class LinearBitMapCPRConverter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	byte[] bytes = data.getSourceFileBytes(BIT_MAP_FILE);
@@ -93,8 +85,7 @@ public class LinearBitMapCPRConverter extends LinearBitMapConverter {
 	}
 
 	byte[] unpackedImage = new byte[7680];
-	boolean result = Atari8BitUtility.unpackKoala(bytes, 1, bytes.length - 1,
-		bytes[0] & 0xff, unpackedImage);
+	boolean result = Atari8BitUtility.unpackKoala(bytes, 1, bytes.length - 1, bytes[0] & 0xff, unpackedImage);
 
 	if (!result) {
 	    return false;

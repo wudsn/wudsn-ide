@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -42,13 +42,11 @@ public abstract class CompilerSourceParserLineCallback {
      */
     protected CompilerSourceParserLineCallback(String filePath, int lineNumber) {
 	if (filePath == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'filePath' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'filePath' must not be null.");
 	}
 	if (lineNumber < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'lineNumber' must not be negative. Specified value is "
-			    + lineNumber + ".");
+	    throw new IllegalArgumentException("Parameter 'lineNumber' must not be negative. Specified value is "
+		    + lineNumber + ".");
 	}
 	this.filePath = filePath;
 	this.lineNumber = lineNumber;
@@ -76,10 +74,8 @@ public abstract class CompilerSourceParserLineCallback {
     }
 
     // Most of the parameters are currently not used by the consumer.
-    public abstract void processLine(CompilerSourceParser compilerSourceParser,
-	    CompilerSourceFile compilerSourceFile, int lineNumber,
-	    int startOffset, int symbolOffset, boolean instructionFound,
-	    int instructionOffset, String instruction, int operandOffset,
-	    CompilerSourceParserTreeObject section);
+    public abstract void processLine(CompilerSourceParser compilerSourceParser, CompilerSourceFile compilerSourceFile,
+	    int lineNumber, int startOffset, int symbolOffset, boolean instructionFound, int instructionOffset,
+	    String instruction, int operandOffset, CompilerSourceParserTreeObject section);
 
 }

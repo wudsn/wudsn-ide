@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2016 <a href="http://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2016 <a href="http://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 

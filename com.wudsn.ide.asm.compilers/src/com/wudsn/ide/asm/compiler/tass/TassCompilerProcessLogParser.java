@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -65,8 +65,7 @@ final class TassCompilerProcessLogParser extends CompilerProcessLogParser {
 		includeFile = "";
 	    } else {
 		include = true;
-		includeFile = line.substring(3, matcher.end() - matcher.start()
-			- 7);
+		includeFile = line.substring(3, matcher.end() - matcher.start() - 7);
 	    }
 	    index = matcher.end();
 	    String lineNumberLine = errorLog.substring(index);
@@ -104,8 +103,7 @@ final class TassCompilerProcessLogParser extends CompilerProcessLogParser {
 
 	    if (include) {
 		if (lineNumber >= 0) {
-		    message = includeFile + " line " + lineNumber + ": "
-			    + message;
+		    message = includeFile + " line " + lineNumber + ": " + message;
 		} else {
 		    message = includeFile + ": " + message;
 		}
@@ -114,8 +112,7 @@ final class TassCompilerProcessLogParser extends CompilerProcessLogParser {
 	    message = message.trim();
 
 	    // Message mapping.
-	    if (severity == IMarker.SEVERITY_WARNING
-		    && message.startsWith("Using bank")) {
+	    if (severity == IMarker.SEVERITY_WARNING && message.startsWith("Using bank")) {
 		severity = IMarker.SEVERITY_INFO;
 	    }
 	    markerAvailable = true;

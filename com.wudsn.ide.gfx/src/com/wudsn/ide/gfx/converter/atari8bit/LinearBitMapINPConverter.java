@@ -41,22 +41,18 @@ public class LinearBitMapINPConverter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	return bytes.length == 16004 || bytes.length == 16052;
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	PaletteMapper paletteMapper = new Atari8BitPaletteMapper();
@@ -67,15 +63,11 @@ public class LinearBitMapINPConverter extends LinearBitMapConverter {
 	paletteColors[6] = paletteMapper.getRGB(bytes[16003] & 0xfe);
 
 	// Compute mixed interlace colors.
-	paletteColors[1] = RBGUtility.combineRGB(paletteColors[0],
-		paletteColors[2]);
-	paletteColors[3] = RBGUtility.combineRGB(paletteColors[2],
-		paletteColors[4]);
-	paletteColors[5] = RBGUtility.combineRGB(paletteColors[4],
-		paletteColors[6]);
+	paletteColors[1] = RBGUtility.combineRGB(paletteColors[0], paletteColors[2]);
+	paletteColors[3] = RBGUtility.combineRGB(paletteColors[2], paletteColors[4]);
+	paletteColors[5] = RBGUtility.combineRGB(paletteColors[4], paletteColors[6]);
 
-	setImageSizeAndPalette(data, 40, 200, Palette.MULTI_MANUAL,
-		paletteColors);
+	setImageSizeAndPalette(data, 40, 200, Palette.MULTI_MANUAL, paletteColors);
     }
 
     @Override
@@ -87,8 +79,7 @@ public class LinearBitMapINPConverter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int offset = 0;

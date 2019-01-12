@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -45,8 +45,7 @@ public final class SequencedProperties extends Properties {
     @Override
     public synchronized Object put(Object key, Object value) {
 	if (propertyNames.contains(key)) {
-	    throw new IllegalArgumentException("Value for key '" + key
-		    + "' already added.");
+	    throw new IllegalArgumentException("Value for key '" + key + "' already added.");
 	}
 	propertyNames.add(key);
 	return super.put(key, value);

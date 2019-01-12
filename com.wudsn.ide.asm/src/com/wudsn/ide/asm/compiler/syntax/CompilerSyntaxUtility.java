@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -46,8 +46,7 @@ public final class CompilerSyntaxUtility {
      */
     public static String getTypeImagePath(Instruction instruction) {
 	if (instruction == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'instruction' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'instruction' must not be null.");
 	}
 	String path;
 
@@ -66,8 +65,7 @@ public final class CompilerSyntaxUtility {
 		path = "instruction-type-pseudo-opcode-16x16.gif";
 		break;
 	    default:
-		throw new IllegalStateException("Unknown opcode type "
-			+ opcode.getType() + ".");
+		throw new IllegalStateException("Unknown opcode type " + opcode.getType() + ".");
 	    }
 
 	}
@@ -100,8 +98,7 @@ public final class CompilerSyntaxUtility {
 		text = Texts.COMPILER_SYNTAX_PSEUDO_OPCODE;
 		break;
 	    default:
-		throw new IllegalStateException("Unknown opcode type "
-			+ opcode.getType() + ".");
+		throw new IllegalStateException("Unknown opcode type " + opcode.getType() + ".");
 	    }
 
 	}

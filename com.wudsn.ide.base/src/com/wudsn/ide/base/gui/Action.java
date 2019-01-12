@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -44,13 +44,10 @@ public final class Action implements SelectionListener {
      */
     public Action(int id, ActionListener actionListener) {
 	if (id < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'id' must not be negative. Specified value is "
-			    + id + ".");
+	    throw new IllegalArgumentException("Parameter 'id' must not be negative. Specified value is " + id + ".");
 	}
 	if (actionListener == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'actionListener' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'actionListener' must not be null.");
 	}
 	this.id = id;
 	this.actionListener = actionListener;

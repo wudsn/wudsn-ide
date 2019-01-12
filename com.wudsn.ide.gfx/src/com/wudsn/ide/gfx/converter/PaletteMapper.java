@@ -117,7 +117,7 @@ public abstract class PaletteMapper {
      *            The 8-bit green value
      * @param b
      *            The 8-bit blue value
-
+     * 
      * @return The palette index, or <code>-1</code> is there is not
      *         corresponding palette index.
      */

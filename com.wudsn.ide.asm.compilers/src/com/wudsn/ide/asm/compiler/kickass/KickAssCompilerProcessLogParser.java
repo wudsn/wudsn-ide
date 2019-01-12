@@ -85,8 +85,7 @@ final class KickAssCompilerProcessLogParser extends CompilerProcessLogParser {
 			index = line.indexOf(',');
 			if (index > 8) {
 
-			    String lineNumberString = line.substring(8,
-				    index);
+			    String lineNumberString = line.substring(8, index);
 
 			    try {
 				lineNumber = Integer.parseInt(lineNumberString);

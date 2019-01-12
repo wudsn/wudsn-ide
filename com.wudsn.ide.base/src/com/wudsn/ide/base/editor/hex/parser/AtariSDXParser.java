@@ -114,7 +114,7 @@ public class AtariSDXParser extends HexEditorParser {
 			int blockEnd = getBlockEnd(offset);
 			offset = printBytes(treeObject, contentBuilder, offset, blockEnd, true, 0);
 		    } else if (header == UPDATE_SYMBOLS_HEADER) {
-			String symbolName=getSymbolName(offset+2);
+			String symbolName = getSymbolName(offset + 2);
 			int blockLength = getFileContentWord(offset + 10);
 
 			String headerText = TextUtility.format(Texts.HEX_EDITOR_ATARI_SDX_UPDATE_SYMBOLS_BLOCK_HEADER,
@@ -128,7 +128,7 @@ public class AtariSDXParser extends HexEditorParser {
 		    } else if (header == DEFINE_SYMBOLS_HEADER) {
 			int blockNumber = getFileContentByte(offset + 2);
 			int blockOffset = getFileContentWord(offset + 3);
-			String  symbolName=getSymbolName(offset+5);
+			String symbolName = getSymbolName(offset + 5);
 
 			String headerText = TextUtility.format(Texts.HEX_EDITOR_ATARI_SDX_DEFINE_SYMBOLS_BLOCK_HEADER,
 				NumberUtility.getLongValueDecimalString(blockNumber),
@@ -183,7 +183,7 @@ public class AtariSDXParser extends HexEditorParser {
 	}
 	return blockEnd;
     }
-    
+
     private String getSymbolName(int offset) {
 	StringBuffer buffer = new StringBuffer(8);
 	for (int i = 0; i < 8; i++) {

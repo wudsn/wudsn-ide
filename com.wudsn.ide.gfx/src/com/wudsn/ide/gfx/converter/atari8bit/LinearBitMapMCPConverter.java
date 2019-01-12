@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -36,22 +36,18 @@ public class LinearBitMapMCPConverter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	return bytes.length == 16008;
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	PaletteMapper paletteMapper = new Atari8BitPaletteMapper();
@@ -70,13 +66,11 @@ public class LinearBitMapMCPConverter extends LinearBitMapConverter {
 	// Compute mixed interlace colors.
 	for (int x1 = 0; x1 < 4; x1++) {
 	    for (int x2 = 0; x2 < 4; x2++) {
-		paletteColors[x1 * 4 + x2] = RBGUtility.combineRGB(
-			palette1Colors[x1], palette2Colors[x2]);
+		paletteColors[x1 * 4 + x2] = RBGUtility.combineRGB(palette1Colors[x1], palette2Colors[x2]);
 	    }
 	}
 
-	setImageSizeAndPalette(data, 40, 200, Palette.MULTI_MANUAL,
-		paletteColors);
+	setImageSizeAndPalette(data, 40, 200, Palette.MULTI_MANUAL, paletteColors);
     }
 
     @Override
@@ -88,8 +82,7 @@ public class LinearBitMapMCPConverter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int offset = 0;

@@ -33,8 +33,7 @@ public class LinearBitMapAPCConverter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	// 7680 bytes of bitmap, optionally 40 bytes of text in ATASCII screen
 	// code
@@ -42,15 +41,12 @@ public class LinearBitMapAPCConverter extends LinearBitMapConverter {
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	setImageSizeAndPalette(data, 40, 96, Palette.TRUE_COLOR, null);
 
@@ -65,8 +61,7 @@ public class LinearBitMapAPCConverter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int columns = data.getParameters().getColumns();

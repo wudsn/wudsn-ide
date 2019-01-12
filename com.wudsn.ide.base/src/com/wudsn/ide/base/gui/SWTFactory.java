@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -51,11 +51,9 @@ public final class SWTFactory {
      *            .
      * @return The new composite with a grid layout, not <code>null</code>.
      */
-    public static Composite createComposite(Composite parent, int columns,
-	    int hspan, int style) {
+    public static Composite createComposite(Composite parent, int columns, int hspan, int style) {
 	if (parent == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'parent' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
 	}
 	Composite composite = new Composite(parent, SWT.NONE);
 	GridLayout gridLayout = new GridLayout(columns, false);
@@ -84,15 +82,12 @@ public final class SWTFactory {
      *            The fill style of the composite {@link GridData}.
      * @return The new composite with a grid layout, not <code>null</code>.
      */
-    public static Group createGroup(Composite parent, String text, int columns,
-	    int hspan, int fill) {
+    public static Group createGroup(Composite parent, String text, int columns, int hspan, int fill) {
 	if (parent == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'parent' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
 	}
 	if (text == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'text' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'text' must not be null.");
 	}
 	Group group = new Group(parent, SWT.NONE);
 	GridLayout layout = new GridLayout(columns, true);
@@ -117,13 +112,11 @@ public final class SWTFactory {
     @SuppressWarnings("unused")
     public static void createLabels(Composite composite, int number) {
 	if (composite == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'composite' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'composite' must not be null.");
 	}
 	if (number < 1) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'number' must not be positive. Specified value is "
-			    + number + ".");
+	    throw new IllegalArgumentException("Parameter 'number' must not be positive. Specified value is " + number
+		    + ".");
 	}
 	for (int i = 0; i < number; i++) {
 	    new Label(composite, SWT.NONE);

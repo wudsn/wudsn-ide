@@ -2,7 +2,6 @@ package com.wudsn.ide.gfx.converter.atari8bit;
 
 import com.wudsn.ide.gfx.converter.PaletteMapper;
 
-
 /**
  * Copyright (C) 2009 - 2014 <a href="http://www.wudsn.com" target="_top">Peter
  * Dell</a>
@@ -31,10 +30,9 @@ public final class Atari8BitPaletteMapper extends PaletteMapper {
 
     public Atari8BitPaletteMapper() {
 	super(256);
-//	loadPalette("default.act");
+	// loadPalette("default.act");
 	loadPalette("laoo.act");
-//	loadPalette("real.act");
-
+	// loadPalette("real.act");
 
     }
 

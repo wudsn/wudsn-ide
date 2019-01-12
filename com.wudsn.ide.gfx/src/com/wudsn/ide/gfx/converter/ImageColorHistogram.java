@@ -90,14 +90,12 @@ public final class ImageColorHistogram {
 	    }
 	    for (int y = 0; y < imageData.height; y++) {
 		for (int x = 0; x < imageData.width; x++) {
-		    Integer pixelColor = NumberFactory.getInteger(imageData
-			    .getPixel(x, y));
+		    Integer pixelColor = NumberFactory.getInteger(imageData.getPixel(x, y));
 		    Integer pixelColorCount = pixelColorCounts.get(pixelColor);
 		    if (pixelColorCount == null) {
 			pixelColorCount = NumberFactory.getInteger(1);
 		    } else {
-			pixelColorCount = NumberFactory
-				.getInteger(pixelColorCount.intValue() + 1);
+			pixelColorCount = NumberFactory.getInteger(pixelColorCount.intValue() + 1);
 		    }
 		    pixelColorCounts.put(pixelColor, pixelColorCount);
 		}
@@ -105,8 +103,7 @@ public final class ImageColorHistogram {
 	} else {
 	    pixelColors = Collections.emptyList();
 	}
-	usedPixelColors = Collections.unmodifiableList(new ArrayList<Integer>(
-		pixelColorCounts.keySet()));
+	usedPixelColors = Collections.unmodifiableList(new ArrayList<Integer>(pixelColorCounts.keySet()));
     }
 
     public boolean isDirectPalette() {
@@ -127,8 +124,7 @@ public final class ImageColorHistogram {
 	    return 0;
 	}
 	if (paletteData.isDirect) {
-	    return Integer.bitCount(paletteData.redMask)
-		    + Integer.bitCount(paletteData.greenMask)
+	    return Integer.bitCount(paletteData.redMask) + Integer.bitCount(paletteData.greenMask)
 		    + Integer.bitCount(paletteData.blueMask);
 	}
 	int length = paletteData.getRGBs().length;
@@ -184,8 +180,7 @@ public final class ImageColorHistogram {
      */
     public int getPixelColorCount(Integer pixelColor) {
 	if (pixelColor == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'pixelColor' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'pixelColor' must not be null.");
 	}
 	Integer count = pixelColorCounts.get(pixelColor);
 	if (count == null) {
@@ -205,8 +200,7 @@ public final class ImageColorHistogram {
      */
     public RGB getRGB(Integer pixelColor) {
 	if (pixelColor == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'pixelColor' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'pixelColor' must not be null.");
 	}
 
 	RGB rgb;
@@ -223,9 +217,7 @@ public final class ImageColorHistogram {
 		if (intValue < rgbs.length) {
 		    rgb = rgbs[intValue];
 		    if (rgb == null) {
-			throw new IllegalStateException(
-				"Palette data has no RGB value at index "
-					+ intValue + ".");
+			throw new IllegalStateException("Palette data has no RGB value at index " + intValue + ".");
 		    }
 		} else {
 		    rgb = new RGB(0, 0, 0);

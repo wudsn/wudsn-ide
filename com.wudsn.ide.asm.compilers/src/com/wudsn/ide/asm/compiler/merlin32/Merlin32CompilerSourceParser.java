@@ -44,12 +44,12 @@ final class Merlin32CompilerSourceParser extends CompilerSourceParser {
 	} // Symbol not empty
 
 	// TODO Implement macro and Lup handling
-//	if (instruction.equals("<<<<")) {
-//	    endMacroDefinition();
-//	} else if (instruction.equals(">>>>")) {
-//	    // Same as "PMC"
-//	} else if (instruction.equals("--^")) {
-//	    endRepeatSection();
-//	}
+	// if (instruction.equals("<<<<")) {
+	// endMacroDefinition();
+	// } else if (instruction.equals(">>>>")) {
+	// // Same as "PMC"
+	// } else if (instruction.equals("--^")) {
+	// endRepeatSection();
+	// }
     }
 }

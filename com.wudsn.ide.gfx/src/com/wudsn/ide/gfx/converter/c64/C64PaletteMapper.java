@@ -44,14 +44,15 @@ import com.wudsn.ide.gfx.converter.PaletteMapper;
  * 15	Light Grey	0,11	0,12
  * </pre>
  */
-public final class C64PaletteMapper extends PaletteMapper{
+public final class C64PaletteMapper extends PaletteMapper {
 
     /**
      * Creation is private.
      */
-    public  C64PaletteMapper() {
+    public C64PaletteMapper() {
 	super(16);
-	// From http://unusedino.de/ec64/technical/misc/vic656x/colors/index.html
+	// From
+	// http://unusedino.de/ec64/technical/misc/vic656x/colors/index.html
 	loadPalette("pepto.pal");
     }
 }

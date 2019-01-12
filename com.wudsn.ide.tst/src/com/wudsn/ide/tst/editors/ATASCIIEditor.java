@@ -15,6 +15,5 @@ public class ATASCIIEditor extends TextEditor {
 	setDocumentProvider(new ATASCIDocumentProvider());
 
     }
-    
 
 }

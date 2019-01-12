@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -31,10 +31,8 @@ public abstract class Converter {
      * Constants for 1 bit pixels. Constants are defined as int to ensure no
      * sign extension takes place when anding with byte values.
      */
-    protected static final int[] mask_1bit = new int[] { 0x80, 0x40, 0x20,
-	    0x10, 0x08, 0x04, 0x02, 0x01 };
-    protected static final int[] shift_1bit = new int[] { 7, 6, 5, 4, 3, 2, 1,
-	    0 };
+    protected static final int[] mask_1bit = new int[] { 0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01 };
+    protected static final int[] shift_1bit = new int[] { 7, 6, 5, 4, 3, 2, 1, 0 };
 
     /**
      * Constants for 2 bit pixels.Constants are defined as int to ensure no sign
@@ -65,8 +63,7 @@ public abstract class Converter {
      */
     final void setDefinition(ConverterDefinition definition) {
 	if (definition == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'type' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'type' must not be null.");
 	}
 	this.definition = definition;
     }
@@ -78,8 +75,7 @@ public abstract class Converter {
      */
     public final ConverterDefinition getDefinition() {
 	if (definition == null) {
-	    throw new IllegalStateException(
-		    "Field 'definition' must not be null.");
+	    throw new IllegalStateException("Field 'definition' must not be null.");
 	}
 	return definition;
     }
@@ -98,8 +94,7 @@ public abstract class Converter {
      */
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	return false;
     }
@@ -118,8 +113,7 @@ public abstract class Converter {
      * 
      * @since 1.6.0
      */
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	throw new UnsupportedOperationException();
     }
 
@@ -140,15 +134,13 @@ public abstract class Converter {
      *            The palette colors or not <code>null</code> if palette is
      *            {@link Palette#TRUE_COLOR}.
      */
-    protected final void setImageSizeAndPalette(FilesConverterData data,
-	    int columns, int rows, Palette palette, RGB[] paletteColors) {
+    protected final void setImageSizeAndPalette(FilesConverterData data, int columns, int rows, Palette palette,
+	    RGB[] paletteColors) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (palette == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'palette' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'palette' must not be null.");
 	}
 	if (paletteColors == null) {
 	    if (!palette.equals(Palette.TRUE_COLOR)) {
@@ -160,8 +152,7 @@ public abstract class Converter {
 	FilesConverterParameters parameters;
 	parameters = data.getParameters();
 	parameters.setConverterId(this.getClass().getName());
-	parameters.setDisplayAspect(getDefinition()
-		.getTargetImageDisplayAspect());
+	parameters.setDisplayAspect(getDefinition().getTargetImageDisplayAspect());
 	parameters.setColumns(columns);
 	parameters.setRows(rows);
 	parameters.setPalette(palette);

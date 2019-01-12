@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -35,8 +35,7 @@ import org.eclipse.swt.graphics.Point;
  * 
  * @author Peter Dell
  */
-final class AssemblerInstructionCompletionProposal implements
-	ICompletionProposal, ICompletionProposalExtension6 {
+final class AssemblerInstructionCompletionProposal implements ICompletionProposal, ICompletionProposalExtension6 {
 
     /** The string to be displayed in the completion proposal popup. */
     private String displayString;
@@ -48,14 +47,13 @@ final class AssemblerInstructionCompletionProposal implements
     private int replacementOffset;
     /** The replacement length. */
     private int replacementLength;
-    /**  The offset of the cursor after applying the replacement. */
+    /** The offset of the cursor after applying the replacement. */
     private int cursorOffset;
-    
+
     /** The image to be displayed in the completion proposal popup. */
     private Image image;
     /** The context information of this proposal. */
     private IContextInformation contextInformation;
-
 
     /**
      * Creates a new completion proposal. All fields are initialized based on
@@ -78,9 +76,8 @@ final class AssemblerInstructionCompletionProposal implements
      * @param contextInformation
      *            The context information associated with this proposal.
      */
-    AssemblerInstructionCompletionProposal(String replacementString,
-	    int replacementOffset, int replacementLength, int cursorOffset, Image image,
-	    String displayString, StyledString styledDisplayString,
+    AssemblerInstructionCompletionProposal(String replacementString, int replacementOffset, int replacementLength,
+	    int cursorOffset, Image image, String displayString, StyledString styledDisplayString,
 	    IContextInformation contextInformation) {
 	Assert.isNotNull(replacementString);
 	Assert.isNotNull(displayString);
@@ -91,7 +88,7 @@ final class AssemblerInstructionCompletionProposal implements
 	this.replacementString = replacementString;
 	this.replacementOffset = replacementOffset;
 	this.replacementLength = replacementLength;
-	this.cursorOffset=cursorOffset;
+	this.cursorOffset = cursorOffset;
 	this.image = image;
 	this.displayString = displayString;
 	this.styledDisplayString = styledDisplayString;
@@ -104,11 +101,9 @@ final class AssemblerInstructionCompletionProposal implements
     @Override
     public void apply(IDocument document) {
 	try {
-	    document.replace(replacementOffset, replacementLength,
-		    replacementString);
+	    document.replace(replacementOffset, replacementLength, replacementString);
 	} catch (BadLocationException ex) {
-	    throw new RuntimeException("Replacement offset "
-		    + replacementOffset + " no valid", ex);
+	    throw new RuntimeException("Replacement offset " + replacementOffset + " no valid", ex);
 
 	}
     }

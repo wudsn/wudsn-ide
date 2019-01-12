@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -18,7 +18,6 @@
  */
 package com.wudsn.ide.snd.player;
 
-
 /**
  * Listener interface for periodic changes in the player.
  * 
@@ -30,7 +29,7 @@ public interface SoundPlayerListener {
     public static final int STATE = 0x1;
     public static final int POSITION = 0x2;
     public static final int VOLUME = 0x4;
-    public static final int ALL = STATE|POSITION|VOLUME;
+    public static final int ALL = STATE | POSITION | VOLUME;
 
     // Number of milliseconds between position update.
     public static final int POSITION_UPDATE_INCREMENT = 1000;

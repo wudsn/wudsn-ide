@@ -26,63 +26,57 @@ import com.wudsn.ide.base.BasePlugin;
 
 public final class Profiler {
 
-	public static final String PROPERTY_NAME = "com.wudsn.ide.common.base.Profiler";
+    public static final String PROPERTY_NAME = "com.wudsn.ide.common.base.Profiler";
 
-	private static final class Entry {
+    private static final class Entry {
 
-		public final long startTimeMillis;
-		public final String description;
+	public final long startTimeMillis;
+	public final String description;
 
-		public Entry(String description) {
-			if (description == null) {
-				throw new IllegalArgumentException(
-						"Parameter 'description' must not be null.");
-			}
-			startTimeMillis = System.currentTimeMillis();
-			this.description = description;
-		}
+	public Entry(String description) {
+	    if (description == null) {
+		throw new IllegalArgumentException("Parameter 'description' must not be null.");
+	    }
+	    startTimeMillis = System.currentTimeMillis();
+	    this.description = description;
+	}
+    }
+
+    private Object owner;
+    private Map<String, Entry> statistics;
+
+    public Profiler(Object owner) {
+	if (owner == null) {
+	    throw new IllegalArgumentException("Parameter 'owner' must not be null.");
+	}
+	this.owner = owner;
+	statistics = new HashMap<String, Entry>();
+    }
+
+    public void end(String key) {
+	Entry entry = statistics.get(key);
+	if (entry == null) {
+	    throw new IllegalStateException("No begin for key '" + key + "'.");
 	}
 
-	private Object owner;
-	private Map<String, Entry> statistics;
-
-	public Profiler(Object owner) {
-		if (owner == null) {
-			throw new IllegalArgumentException(
-					"Parameter 'owner' must not be null.");
-		}
-		this.owner = owner;
-		statistics = new HashMap<String, Entry>();
+	if (Boolean.getBoolean(PROPERTY_NAME)) {
+	    Long duration = new Long((System.currentTimeMillis() - entry.startTimeMillis));
+	    if (entry.description.isEmpty()) {
+		BasePlugin.getInstance().log("Time for '{0}:{1}' is {2}ms", new Object[] { owner, key, duration });
+	    } else {
+		BasePlugin.getInstance().log("Time for '{0}:{1}' of {2} is {3}ms",
+			new Object[] { owner, key, entry.description, duration });
+	    }
 	}
 
-	public void end(String key) {
-		Entry entry = statistics.get(key);
-		if (entry == null) {
-			throw new IllegalStateException("No begin for key '" + key + "'.");
-		}
+    }
 
-		if (Boolean.getBoolean(PROPERTY_NAME)) {
-			Long duration = new Long(
-					(System.currentTimeMillis() - entry.startTimeMillis));
-			if (entry.description.isEmpty()) {
-				BasePlugin.getInstance().log("Time for '{0}:{1}' is {2}ms",
-						new Object[] { owner, key, duration });
-			} else {
-				BasePlugin.getInstance()
-						.log("Time for '{0}:{1}' of {2} is {3}ms",
-								new Object[] { owner, key, entry.description,
-										duration });
-			}
-		}
+    public void begin(String key) {
+	begin(key, "");
+    }
 
-	}
+    public void begin(String key, String description) {
+	statistics.put(key, new Entry(description));
 
-	public void begin(String key) {
-		begin(key, "");
-	}
-
-	public void begin(String key, String description) {
-		statistics.put(key, new Entry(description));
-
-	}
+    }
 }

@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -30,8 +30,7 @@ import org.eclipse.swt.graphics.Font;
  * 
  * @author Peter Dell
  */
-final class TextAttributeListItemProvider extends LabelProvider implements
-	IColorProvider, IFontProvider {
+final class TextAttributeListItemProvider extends LabelProvider implements IColorProvider, IFontProvider {
 
     TextAttributeListItemProvider() {
 
@@ -47,8 +46,7 @@ final class TextAttributeListItemProvider extends LabelProvider implements
      */
     @Override
     public Color getForeground(Object element) {
-	return ((TextAttributeListItem) element).getTextAttribute()
-		.getForeground();
+	return ((TextAttributeListItem) element).getTextAttribute().getForeground();
     }
 
     /**
@@ -56,8 +54,7 @@ final class TextAttributeListItemProvider extends LabelProvider implements
      */
     @Override
     public Color getBackground(Object element) {
-	return ((TextAttributeListItem) element).getTextAttribute()
-		.getBackground();
+	return ((TextAttributeListItem) element).getTextAttribute().getBackground();
     }
 
     /**

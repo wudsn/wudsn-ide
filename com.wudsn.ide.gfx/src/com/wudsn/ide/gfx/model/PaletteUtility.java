@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -36,15 +36,12 @@ public final class PaletteUtility {
     private PaletteUtility() {
     }
 
-    public static RGB[] getPaletteColors(PaletteType paletteType,
-	    Palette palette, RGB[] manualPaletteColors) {
+    public static RGB[] getPaletteColors(PaletteType paletteType, Palette palette, RGB[] manualPaletteColors) {
 	if (paletteType == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'paletteType' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'paletteType' must not be null.");
 	}
 	if (palette == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'palette' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'palette' must not be null.");
 	}
 
 	RGB[] result;
@@ -84,8 +81,7 @@ public final class PaletteUtility {
 	    result = new RGB[] { BLACK, WHITE, GREY2, GREY1 };
 	    break;
 	case MULTI_MANUAL:
-	    result = getPaletteColorsCopy(manualPaletteColors,
-		    manualPaletteColors.length);
+	    result = getPaletteColorsCopy(manualPaletteColors, manualPaletteColors.length);
 	    break;
 
 	case GTIA_GREY_1:
@@ -107,8 +103,7 @@ public final class PaletteUtility {
 	    break;
 
 	default:
-	    throw new IllegalStateException("Unknown palette '" + palette
-		    + "'.");
+	    throw new IllegalStateException("Unknown palette '" + palette + "'.");
 	}
 	return result;
     }
@@ -127,9 +122,7 @@ public final class PaletteUtility {
     private static RGB[] getPaletteColorsCopy(RGB[] paletteColors, int size) {
 
 	if (size < 1) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'size' must be positive. Specified value is "
-			    + size + ".");
+	    throw new IllegalArgumentException("Parameter 'size' must be positive. Specified value is " + size + ".");
 	}
 
 	RGB[] result;
@@ -146,11 +139,9 @@ public final class PaletteUtility {
 
     public static String getPaletteColorText(RGB rgb) {
 	if (rgb == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'rgb' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'rgb' must not be null.");
 	}
-	return HexUtility.getByteValueHexString(rgb.red)
-		+ HexUtility.getByteValueHexString(rgb.green)
+	return HexUtility.getByteValueHexString(rgb.red) + HexUtility.getByteValueHexString(rgb.green)
 		+ HexUtility.getByteValueHexString(rgb.blue);
     }
 }

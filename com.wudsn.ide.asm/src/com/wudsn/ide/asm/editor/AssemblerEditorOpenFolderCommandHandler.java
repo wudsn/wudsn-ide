@@ -30,28 +30,23 @@ import com.wudsn.ide.asm.compiler.CompilerFiles;
  * 
  * @author Peter Dell
  */
-public final class AssemblerEditorOpenFolderCommandHandler extends
-	AssemblerEditorFilesCommandHandler {
+public final class AssemblerEditorOpenFolderCommandHandler extends AssemblerEditorFilesCommandHandler {
 
     public static final String OPEN_SOURCE_FOLDER = "com.wudsn.ide.asm.editor.AssemblerEditorOpenSourceFolderCommand";
     public static final String OPEN_OUTPUT_FOLDER = "com.wudsn.ide.asm.editor.AssemblerEditorOpenOutputFolderCommand";
 
     @Override
-    protected void execute(ExecutionEvent event,
-	    AssemblerEditor assemblerEditor, CompilerFiles files)
+    protected void execute(ExecutionEvent event, AssemblerEditor assemblerEditor, CompilerFiles files)
 	    throws ExecutionException {
 
 	if (event == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'event' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'event' must not be null.");
 	}
 	if (assemblerEditor == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'assemblerEditor' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'assemblerEditor' must not be null.");
 	}
 	if (files == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'files' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'files' must not be null.");
 	}
 
 	String folderPath;

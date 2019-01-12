@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -36,33 +36,27 @@ public final class IPathUtility {
 
     public static IPath makeRelative(IPath filePath, IPath filePathPrefix) {
 	if (filePath == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'filePath' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'filePath' must not be null.");
 	}
 	if (filePathPrefix == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'filePathPrefix' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'filePathPrefix' must not be null.");
 	}
 	if (filePath.isAbsolute() && !filePathPrefix.isEmpty()) {
 	    if (filePathPrefix.isPrefixOf(filePath)) {
-		filePath = filePath.removeFirstSegments(filePathPrefix
-			.segmentCount());
+		filePath = filePath.removeFirstSegments(filePathPrefix.segmentCount());
 	    }
 	}
 	return filePath;
     }
 
-    public static IPath makeAbsolute(IPath filePath, IPath filePathPrefix,
-	    boolean forcePrefix) {
+    public static IPath makeAbsolute(IPath filePath, IPath filePathPrefix, boolean forcePrefix) {
 	if (filePath == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'filePath' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'filePath' must not be null.");
 	}
 	if (filePathPrefix == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'filePathPrefix' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'filePathPrefix' must not be null.");
 	}
-	
+
 	// If the file path is empty, the prefix is omitted by default.
 	// Only if forcePrefix is true, it is added.
 	if (!filePath.isEmpty() || forcePrefix) {

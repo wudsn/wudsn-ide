@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -109,15 +109,13 @@ public abstract class ConverterCommonParameters {
 
     public abstract void setConverterId(String value);
 
-
     public final String getConverterId() {
 	return converterId;
     }
-    
+
     public final void setImageAspect(Aspect value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	this.imageAspect = value;
     }
@@ -128,8 +126,7 @@ public abstract class ConverterCommonParameters {
 
     public final void setDisplayAspect(Aspect value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	this.displayAspect = value;
     }
@@ -156,8 +153,7 @@ public abstract class ConverterCommonParameters {
 
     protected void copyTo(ConverterCommonParameters target) {
 	if (target == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'target' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'target' must not be null.");
 	}
 
 	target.setConverterId(converterId);
@@ -169,8 +165,7 @@ public abstract class ConverterCommonParameters {
 
     protected boolean equals(ConverterCommonParameters target) {
 	if (target == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'target' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'target' must not be null.");
 	}
 	boolean result;
 
@@ -183,12 +178,10 @@ public abstract class ConverterCommonParameters {
 
     protected void serialize(GraphicsPropertiesSerializer serializer, String key) {
 	if (serializer == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'serializer' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'serializer' must not be null.");
 	}
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	GraphicsPropertiesSerializer ownSerializer;
 
@@ -196,19 +189,15 @@ public abstract class ConverterCommonParameters {
 	ownSerializer.writeString(Attributes.CONVERTER_ID, converterId);
 	ownSerializer.writeAspect(Attributes.IMAGE_ASPECT, imageAspect);
 	ownSerializer.writeAspect(Attributes.DISPLAY_ASPECT, displayAspect);
-	ownSerializer.writeBoolean(Attributes.DISPLAY_SHRINK_TO_FIT,
-		displayShrinkToFit);
-	ownSerializer.writeBoolean(Attributes.DISPLAY_ZOOM_TO_FIT,
-		displayZoomToFit);
+	ownSerializer.writeBoolean(Attributes.DISPLAY_SHRINK_TO_FIT, displayShrinkToFit);
+	ownSerializer.writeBoolean(Attributes.DISPLAY_ZOOM_TO_FIT, displayZoomToFit);
 
 	serializer.writeProperties(key, ownSerializer);
     }
 
-    protected void deserialize(GraphicsPropertiesSerializer serializer,
-	    String key) {
+    protected void deserialize(GraphicsPropertiesSerializer serializer, String key) {
 	if (serializer == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'serializer' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'serializer' must not be null.");
 	}
 	if (key == null) {
 	    throw new IllegalArgumentException();
@@ -218,17 +207,12 @@ public abstract class ConverterCommonParameters {
 	ownSerializer = new GraphicsPropertiesSerializer();
 	serializer.readProperties(key, ownSerializer);
 
-	setConverterId(ownSerializer.readString(Attributes.CONVERTER_ID,
-		Defaults.CONVERTER_ID));
+	setConverterId(ownSerializer.readString(Attributes.CONVERTER_ID, Defaults.CONVERTER_ID));
 
-	imageAspect = ownSerializer.readXYFactor(Attributes.DISPLAY_ASPECT,
-		Defaults.IMAGE_ASPECT);
-	displayAspect = ownSerializer.readXYFactor(Attributes.DISPLAY_ASPECT,
-		Defaults.DISPLAY_ASPECT);
-	displayShrinkToFit = ownSerializer.readBoolean(
-		Attributes.DISPLAY_SHRINK_TO_FIT,
-		Defaults.DISPLAY_SHRINK_TO_FIT);
-	displayZoomToFit = ownSerializer.readBoolean(
-		Attributes.DISPLAY_ZOOM_TO_FIT, Defaults.DISPLAY_ZOOM_TO_FIT);
+	imageAspect = ownSerializer.readXYFactor(Attributes.DISPLAY_ASPECT, Defaults.IMAGE_ASPECT);
+	displayAspect = ownSerializer.readXYFactor(Attributes.DISPLAY_ASPECT, Defaults.DISPLAY_ASPECT);
+	displayShrinkToFit = ownSerializer
+		.readBoolean(Attributes.DISPLAY_SHRINK_TO_FIT, Defaults.DISPLAY_SHRINK_TO_FIT);
+	displayZoomToFit = ownSerializer.readBoolean(Attributes.DISPLAY_ZOOM_TO_FIT, Defaults.DISPLAY_ZOOM_TO_FIT);
     }
 }

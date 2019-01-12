@@ -49,8 +49,7 @@ public final class ImageCanvas extends Canvas {
      *            The style of this control.
      */
     public ImageCanvas(final Composite parent, int style) {
-	super(parent, style | SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL
-		| SWT.NO_BACKGROUND);
+	super(parent, style | SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL | SWT.NO_BACKGROUND);
 
 	// Register a resize listener
 	addControlListener(new ControlAdapter() {
@@ -93,8 +92,7 @@ public final class ImageCanvas extends Canvas {
 	Rectangle clientRectangle = getClientArea();
 
 	if (sourceImage != null) {
-	    Rectangle imageRectangle = ImageCanvasUtility
-		    .inverseTransformRectangle(transform, clientRectangle);
+	    Rectangle imageRectangle = ImageCanvasUtility.inverseTransformRectangle(transform, clientRectangle);
 	    // Find a better start point to render
 	    int gap = 2;
 	    imageRectangle.x -= gap;
@@ -104,21 +102,18 @@ public final class ImageCanvas extends Canvas {
 
 	    Rectangle imageBounds = sourceImage.getBounds();
 	    imageRectangle = imageRectangle.intersection(imageBounds);
-	    Rectangle destRect = ImageCanvasUtility.transformRectangle(
-		    transform, imageRectangle);
+	    Rectangle destRect = ImageCanvasUtility.transformRectangle(transform, imageRectangle);
 
 	    if (screenImage != null) {
 		screenImage.dispose();
 	    }
-	    screenImage = new Image(getDisplay(), clientRectangle.width,
-		    clientRectangle.height);
+	    screenImage = new Image(getDisplay(), clientRectangle.width, clientRectangle.height);
 	    GC newGC = new GC(screenImage);
 	    newGC.setBackground(getBackground());
 	    newGC.fillRectangle(clientRectangle);
 	    newGC.setClipping(clientRectangle);
-	    newGC.drawImage(sourceImage, imageRectangle.x, imageRectangle.y,
-		    imageRectangle.width, imageRectangle.height, destRect.x,
-		    destRect.y, destRect.width, destRect.height);
+	    newGC.drawImage(sourceImage, imageRectangle.x, imageRectangle.y, imageRectangle.width,
+		    imageRectangle.height, destRect.x, destRect.y, destRect.width, destRect.height);
 	    newGC.dispose();
 
 	    gc.drawImage(screenImage, 0, 0);
@@ -311,8 +306,7 @@ public final class ImageCanvas extends Canvas {
      */
     public Point getPoint(MouseEvent event) {
 	if (event == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'event' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'event' must not be null.");
 	}
 	return new Point(event.x, event.y);
     }

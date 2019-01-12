@@ -29,8 +29,7 @@ import com.wudsn.ide.asm.compiler.CompilerFiles;
  * 
  * @author Peter Dell
  */
-public final class AssemblerEditorCompileCommandHandler extends
-	AssemblerEditorFilesCommandHandler {
+public final class AssemblerEditorCompileCommandHandler extends AssemblerEditorFilesCommandHandler {
 
     /**
      * Creates a new instance. Called by the extension point
@@ -41,8 +40,7 @@ public final class AssemblerEditorCompileCommandHandler extends
     }
 
     @Override
-    protected void execute(ExecutionEvent event,
-	    AssemblerEditor assemblerEditor, CompilerFiles files)
+    protected void execute(ExecutionEvent event, AssemblerEditor assemblerEditor, CompilerFiles files)
 	    throws ExecutionException {
 	if (event == null) {
 	    throw new IllegalArgumentException("Parameter 'event' must not be null.");
@@ -54,8 +52,7 @@ public final class AssemblerEditorCompileCommandHandler extends
 	    throw new IllegalArgumentException("Parameter 'files' must not be null.");
 	}
 	try {
-	    AssemblerEditorCompileCommand.execute(assemblerEditor, files, event
-		    .getCommand().getId(), null);
+	    AssemblerEditorCompileCommand.execute(assemblerEditor, files, event.getCommand().getId(), null);
 	} catch (RuntimeException ex) {
 	    throw new ExecutionException("Cannot execute event " + event, ex);
 	}

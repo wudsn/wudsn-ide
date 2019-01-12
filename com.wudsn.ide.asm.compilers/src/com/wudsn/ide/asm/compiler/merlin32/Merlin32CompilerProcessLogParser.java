@@ -96,85 +96,89 @@ final class Merlin32CompilerProcessLogParser extends CompilerProcessLogParser {
 	    }
 	}
     }
+
     @Override
     public void addCompilerSymbols(List<CompilerSymbol> compilerSymbols) throws CoreException {
 	if (compilerSymbols == null) {
 	    throw new IllegalArgumentException("Parameter 'compilerSymbols' must not be null.");
 	}
-//	String labelsFilePath = files.outputFilePathWithoutExtension + ".lab";
-//	File labelsFile = new File(labelsFilePath);
-//	if (labelsFile.exists()) {
-//
-//	    String labelsFileContent = FileUtility.readString(labelsFile, FileUtility.MAX_SIZE_UNLIMITED);
-//	    String[] lines = labelsFileContent.split("[\\r\\n]+");
-//	    if (lines.length > 2 || lines[0].toLowerCase().startsWith("mads")
-//		    || lines[1].toLowerCase().startsWith("label table:")) {
-//		for (int i = 2; i < lines.length; i++) {
-//		    String[] parts = lines[i].split("\\t");
-//		    if (parts.length == 3) {
-//			int type = CompilerSymbolType.LABEL_DEFINITION;
-//			String bankString = parts[0];
-//
-//			String name = parts[2];
-//			String valueString = parts[1];
-//			try {
-//			    long bank = Long.parseLong(bankString, 16);
-//			    int symbolBank;
-//			    if (bank >= 0 && bank < 0xfff9) {
-//				symbolBank = (int) bank;
-//			    } else {
-//				symbolBank = CompilerSymbol.UNDEFINED_BANK;
-//				if (bank == 0xfff9) {
-//				    // Label for parameter in procedure defined
-//				    // by .PROC
-//				    // TODO: This would actually be a separate
-//				    // type
-//				    type = CompilerSymbolType.PROCEDURE_DEFINITION_SECTION;
-//				} else if (bank == 0xfffa) {
-//				    // Label for array defined by .ARRAY
-//				    // TODO: This would actually be a separate
-//				    // type
-//				    type = CompilerSymbolType.LABEL_DEFINITION;
-//				} else if (bank == 0xfffb) {
-//				    // Label for structured data defined by the
-//				    // pseudo-command DTA STRUCT_LABEL
-//				    type = CompilerSymbolType.STRUCTURE_DEFINITION_SECTION;
-//				} else if (bank == 0xfffc) {
-//				    // Label for SpartaDOS X symbol defined by
-//				    // SMB
-//				    // TODO: This would actually be a separate
-//				    // type
-//				    type = CompilerSymbolType.LABEL_DEFINITION;
-//				} else if (bank == 0xfffd) {
-//				    // Label for macro defined by .MACRO
-//				    // directive
-//				    // TODO: This would actually be a separate
-//				    // type
-//				    type = CompilerSymbolType.MACRO_DEFINITION_SECTION;
-//				} else if (bank == 0xfffe) {
-//				    // Label for structure defined by .STRUCT
-//				    // directive
-//				    type = CompilerSymbolType.STRUCTURE_DEFINITION_SECTION;
-//				} else if (bank == 0xffff) {
-//				    // Label for procedure defined by .PROC
-//				    // directive
-//				    type = CompilerSymbolType.PROCEDURE_DEFINITION_SECTION;
-//				}
-//			    }
-//			    long value = Long.parseLong(valueString, 16);
-//			    CompilerSymbol compilerSymbol = CompilerSymbol.createNumberSymbol(type, name, symbolBank,
-//				    value);
-//			    compilerSymbols.add(compilerSymbol);
-//			} catch (NumberFormatException ex) {
-//			    AssemblerPlugin.getInstance().logError("Cannot parse value {1} of symbol {0}.",
-//				    new Object[] { name, valueString }, ex);
-//			}
-//
-//		    }
-//		}
-//	    }
-//
-//	}
+	// String labelsFilePath = files.outputFilePathWithoutExtension +
+	// ".lab";
+	// File labelsFile = new File(labelsFilePath);
+	// if (labelsFile.exists()) {
+	//
+	// String labelsFileContent = FileUtility.readString(labelsFile,
+	// FileUtility.MAX_SIZE_UNLIMITED);
+	// String[] lines = labelsFileContent.split("[\\r\\n]+");
+	// if (lines.length > 2 || lines[0].toLowerCase().startsWith("mads")
+	// || lines[1].toLowerCase().startsWith("label table:")) {
+	// for (int i = 2; i < lines.length; i++) {
+	// String[] parts = lines[i].split("\\t");
+	// if (parts.length == 3) {
+	// int type = CompilerSymbolType.LABEL_DEFINITION;
+	// String bankString = parts[0];
+	//
+	// String name = parts[2];
+	// String valueString = parts[1];
+	// try {
+	// long bank = Long.parseLong(bankString, 16);
+	// int symbolBank;
+	// if (bank >= 0 && bank < 0xfff9) {
+	// symbolBank = (int) bank;
+	// } else {
+	// symbolBank = CompilerSymbol.UNDEFINED_BANK;
+	// if (bank == 0xfff9) {
+	// // Label for parameter in procedure defined
+	// // by .PROC
+	// // TODO: This would actually be a separate
+	// // type
+	// type = CompilerSymbolType.PROCEDURE_DEFINITION_SECTION;
+	// } else if (bank == 0xfffa) {
+	// // Label for array defined by .ARRAY
+	// // TODO: This would actually be a separate
+	// // type
+	// type = CompilerSymbolType.LABEL_DEFINITION;
+	// } else if (bank == 0xfffb) {
+	// // Label for structured data defined by the
+	// // pseudo-command DTA STRUCT_LABEL
+	// type = CompilerSymbolType.STRUCTURE_DEFINITION_SECTION;
+	// } else if (bank == 0xfffc) {
+	// // Label for SpartaDOS X symbol defined by
+	// // SMB
+	// // TODO: This would actually be a separate
+	// // type
+	// type = CompilerSymbolType.LABEL_DEFINITION;
+	// } else if (bank == 0xfffd) {
+	// // Label for macro defined by .MACRO
+	// // directive
+	// // TODO: This would actually be a separate
+	// // type
+	// type = CompilerSymbolType.MACRO_DEFINITION_SECTION;
+	// } else if (bank == 0xfffe) {
+	// // Label for structure defined by .STRUCT
+	// // directive
+	// type = CompilerSymbolType.STRUCTURE_DEFINITION_SECTION;
+	// } else if (bank == 0xffff) {
+	// // Label for procedure defined by .PROC
+	// // directive
+	// type = CompilerSymbolType.PROCEDURE_DEFINITION_SECTION;
+	// }
+	// }
+	// long value = Long.parseLong(valueString, 16);
+	// CompilerSymbol compilerSymbol =
+	// CompilerSymbol.createNumberSymbol(type, name, symbolBank,
+	// value);
+	// compilerSymbols.add(compilerSymbol);
+	// } catch (NumberFormatException ex) {
+	// AssemblerPlugin.getInstance().logError("Cannot parse value {1} of symbol {0}.",
+	// new Object[] { name, valueString }, ex);
+	// }
+	//
+	// }
+	// }
+	// }
+	//
+	// }
     }
 
 }

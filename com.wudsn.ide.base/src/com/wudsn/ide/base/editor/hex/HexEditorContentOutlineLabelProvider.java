@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -31,14 +31,12 @@ import com.wudsn.ide.base.BasePlugin;
  * 
  * @author Peter Dell
  */
-final class HexEditorContentOutlineLabelProvider extends
-	DelegatingStyledCellLabelProvider {
+final class HexEditorContentOutlineLabelProvider extends DelegatingStyledCellLabelProvider {
 
     /** Outline segment image */
     private final Image segmentImage;
 
-    private static class HexEditorStyledLabelProvider extends LabelProvider
-	    implements IStyledLabelProvider {
+    private static class HexEditorStyledLabelProvider extends LabelProvider implements IStyledLabelProvider {
 
 	/**
 	 * Creation is local.
@@ -50,8 +48,7 @@ final class HexEditorContentOutlineLabelProvider extends
 	@Override
 	public StyledString getStyledText(Object element) {
 	    if (element == null) {
-		throw new IllegalArgumentException(
-			"Parameter 'element' must not be null.");
+		throw new IllegalArgumentException("Parameter 'element' must not be null.");
 	    }
 	    HexEditorContentOutlineTreeObject treeObject;
 	    treeObject = (HexEditorContentOutlineTreeObject) element;
@@ -70,8 +67,7 @@ final class HexEditorContentOutlineLabelProvider extends
 	super(new HexEditorStyledLabelProvider());
 	BasePlugin plugin;
 	plugin = BasePlugin.getInstance();
-	segmentImage = plugin
-		.getImage("hex-editor-segment-16x16.gif");
+	segmentImage = plugin.getImage("hex-editor-segment-16x16.gif");
     }
 
     @Override

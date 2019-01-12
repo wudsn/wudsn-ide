@@ -173,7 +173,7 @@ public abstract class HexEditorParser {
 	    contentBuilder.append(blockHeaderNumberText, offsetStyler);
 	}
 	contentBuilder.append("\n");
-	return owner.printBlockHeader( contentBuilder, styledString,offset);
+	return owner.printBlockHeader(contentBuilder, styledString, offset);
     }
 
     /**

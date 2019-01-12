@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -68,8 +68,7 @@ public final class ConverterConsole {
 
     public void display(IConsoleView consoleView) {
 	if (consoleView == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'consoleView' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'consoleView' must not be null.");
 	}
 	consoleView.display(console);
 
@@ -83,8 +82,7 @@ public final class ConverterConsole {
      */
     public void println(String message) {
 	if (message == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'message' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'message' must not be null.");
 	}
 	messageStream.println(message);
     }

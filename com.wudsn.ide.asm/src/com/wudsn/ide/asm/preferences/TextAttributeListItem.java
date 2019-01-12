@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -39,12 +39,10 @@ final class TextAttributeListItem {
 
     TextAttributeListItem(String displayName, String preferencesKey) {
 	if (displayName == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'displayName' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'displayName' must not be null.");
 	}
 	if (preferencesKey == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'preferencesKey' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'preferencesKey' must not be null.");
 	}
 	this.displayName = displayName;
 	this.preferencesKey = preferencesKey;
@@ -77,8 +75,7 @@ final class TextAttributeListItem {
      */
     public void setTextAttribute(TextAttribute textAttribute) {
 	if (textAttribute == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'textAttribute' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'textAttribute' must not be null.");
 	}
 	this.textAttribute = textAttribute;
     }
@@ -90,8 +87,7 @@ final class TextAttributeListItem {
      */
     public TextAttribute getTextAttribute() {
 	if (textAttribute == null) {
-	    throw new IllegalStateException(
-		    "Field 'textAttribute' must not be null.");
+	    throw new IllegalStateException("Field 'textAttribute' must not be null.");
 	}
 	return textAttribute;
     }

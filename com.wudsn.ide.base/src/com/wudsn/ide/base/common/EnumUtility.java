@@ -33,37 +33,33 @@ import com.wudsn.ide.base.BasePlugin;
 
 public final class EnumUtility {
 
-	/**
-	 * Gets the localized text for an enum value.
-	 * 
-	 * @param enumValue
-	 *            The enum value, not <code>null</code>.
-	 * @return The localized text, may be empty, not <code>null</code>.
-	 */
-	public static String getText(Enum<?> enumValue) {
-		if (enumValue == null) {
-			throw new IllegalArgumentException(
-					"Parameter 'enumValue' must not be null.");
-		}
-
-		String result;
-
-		Class<?> enumClass = enumValue.getClass();
-
-		String key = enumClass.getName() + "." + enumValue.name();
-		try {
-			ResourceBundle resourceBundle;
-
-			resourceBundle = ResourceBundle.getBundle("plugin",
-					Locale.getDefault(), enumClass.getClassLoader());
-			result = resourceBundle.getString(key);
-		} catch (MissingResourceException ex) {
-			result = enumValue.name() + " - Text missing";
-			BasePlugin.getInstance().logError(
-					"Resource for enum value {0} is missing.",
-					new Object[] { key }, ex);
-		}
-		return result;
+    /**
+     * Gets the localized text for an enum value.
+     * 
+     * @param enumValue
+     *            The enum value, not <code>null</code>.
+     * @return The localized text, may be empty, not <code>null</code>.
+     */
+    public static String getText(Enum<?> enumValue) {
+	if (enumValue == null) {
+	    throw new IllegalArgumentException("Parameter 'enumValue' must not be null.");
 	}
+
+	String result;
+
+	Class<?> enumClass = enumValue.getClass();
+
+	String key = enumClass.getName() + "." + enumValue.name();
+	try {
+	    ResourceBundle resourceBundle;
+
+	    resourceBundle = ResourceBundle.getBundle("plugin", Locale.getDefault(), enumClass.getClassLoader());
+	    result = resourceBundle.getString(key);
+	} catch (MissingResourceException ex) {
+	    result = enumValue.name() + " - Text missing";
+	    BasePlugin.getInstance().logError("Resource for enum value {0} is missing.", new Object[] { key }, ex);
+	}
+	return result;
+    }
 
 }

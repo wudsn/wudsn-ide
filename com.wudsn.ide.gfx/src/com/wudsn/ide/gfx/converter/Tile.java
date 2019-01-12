@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -41,18 +41,14 @@ public final class Tile {
 
     public Tile(TileSet tileSet, int column, int row) {
 	if (tileSet == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'tileSet' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'tileSet' must not be null.");
 	}
 	if (column < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'column' must not be negative. Specified value is "
-			    + column + ".");
+	    throw new IllegalArgumentException("Parameter 'column' must not be negative. Specified value is " + column
+		    + ".");
 	}
 	if (row < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'row' must not be negative. Specified value is "
-			    + row + ".");
+	    throw new IllegalArgumentException("Parameter 'row' must not be negative. Specified value is " + row + ".");
 	}
 	this.tileSet = tileSet;
 	this.column = column;
@@ -62,8 +58,7 @@ public final class Tile {
 	yOffset = row * tileSet.getPixelsPerRow();
 
 	pixelColorCounts = new TreeMap<Integer, Integer>();
-	linePixelColorCounts = new ArrayList<Map<Integer, Integer>>(tileSet
-		.getPixelsPerRow());
+	linePixelColorCounts = new ArrayList<Map<Integer, Integer>>(tileSet.getPixelsPerRow());
 
 	for (int y = 0; y < tileSet.getPixelsPerRow(); y++) {
 	    linePixelColorCounts.add(new TreeMap<Integer, Integer>());
@@ -75,22 +70,18 @@ public final class Tile {
 	}
     }
 
-    private void increment(Map<Integer, Integer> pixelColorCounts,
-	    Integer pixelColorKey) {
+    private void increment(Map<Integer, Integer> pixelColorCounts, Integer pixelColorKey) {
 	if (pixelColorCounts == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'pixelColorCounts' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'pixelColorCounts' must not be null.");
 	}
 	if (pixelColorKey == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'pixelColorKey' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'pixelColorKey' must not be null.");
 	}
 	Integer pixelColorCount = pixelColorCounts.get(pixelColorKey);
 	if (pixelColorCount == null) {
 	    pixelColorCount = NumberFactory.getInteger(1);
 	} else {
-	    pixelColorCount = NumberFactory.getInteger(pixelColorCount
-		    .intValue() + 1);
+	    pixelColorCount = NumberFactory.getInteger(pixelColorCount.intValue() + 1);
 	}
 	pixelColorCounts.put(pixelColorKey, pixelColorCount);
     }
@@ -114,8 +105,7 @@ public final class Tile {
      */
     public Integer getPixelColor(int x, int y) {
 	try {
-	    return NumberFactory.getInteger(tileSet.getImageData().getPixel(
-		    xOffset + x, yOffset + y));
+	    return NumberFactory.getInteger(tileSet.getImageData().getPixel(xOffset + x, yOffset + y));
 	} catch (IllegalArgumentException ex) {
 	    // throw new IllegalArgumentException("Cannot access pixel at "
 	    // + xOffset + "+" + x + ", " + yOffset + "+" + y + ".", ex);
@@ -125,16 +115,14 @@ public final class Tile {
 
     public boolean hasPixelColor(Integer pixelColor) {
 	if (pixelColor == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'pixelColor' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'pixelColor' must not be null.");
 	}
 	return getPixelColorCount(pixelColor) > 0;
     }
 
     public int getPixelColorCount(Integer pixelColor) {
 	if (pixelColor == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'pixelColor' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'pixelColor' must not be null.");
 	}
 	Integer pixelColorCount = pixelColorCounts.get(pixelColor);
 	if (pixelColorCount == null) {
@@ -153,12 +141,10 @@ public final class Tile {
      * @return The map of distinct colors used and their count, not
      *         <code>null</code>.
      */
-    public Map<Integer, Integer> getDistinctPixelColorCounts(
-	    List<Integer> ignoredPixelColors) {
+    public Map<Integer, Integer> getDistinctPixelColorCounts(List<Integer> ignoredPixelColors) {
 
 	if (ignoredPixelColors == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'ignoredPixelColors' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'ignoredPixelColors' must not be null.");
 	}
 	Map<Integer, Integer> pixelColorCounts;
 	pixelColorCounts = new TreeMap<Integer, Integer>();
@@ -166,8 +152,7 @@ public final class Tile {
 	    for (int x = 0; x < tileSet.getPixelsPerColumn(); x++) {
 		Integer pixelColor = getPixelColor(x, y);
 		boolean ignore = false;
-		if (ignoredPixelColors != null
-			&& ignoredPixelColors.contains(pixelColor)) {
+		if (ignoredPixelColors != null && ignoredPixelColors.contains(pixelColor)) {
 		    ignore = true;
 		}
 		if (!ignore) {
@@ -178,23 +163,19 @@ public final class Tile {
 	return pixelColorCounts;
     }
 
-    public static Integer getMajorColor(Map<Integer, Integer> pixelColorCounts,
-	    List<Integer> ignoredPixelColors) {
+    public static Integer getMajorColor(Map<Integer, Integer> pixelColorCounts, List<Integer> ignoredPixelColors) {
 	if (pixelColorCounts == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'pixelColorCounts' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'pixelColorCounts' must not be null.");
 	}
 	if (pixelColorCounts.isEmpty()) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'pixelColorCounts' must not be empty.");
+	    throw new IllegalArgumentException("Parameter 'pixelColorCounts' must not be empty.");
 	}
 	Integer majorColor;
 	int majorColorCount;
 	majorColor = null;
 	majorColorCount = -1;
 	for (Map.Entry<Integer, Integer> entry : pixelColorCounts.entrySet()) {
-	    if (ignoredPixelColors == null
-		    || !ignoredPixelColors.contains(entry.getKey())) {
+	    if (ignoredPixelColors == null || !ignoredPixelColors.contains(entry.getKey())) {
 		if (entry.getValue().intValue() > majorColorCount) {
 		    majorColor = entry.getKey();
 		}
@@ -205,8 +186,7 @@ public final class Tile {
 
     public int getLinePixelColorCount(int y, int pixelColor) {
 	Map<Integer, Integer> pixelColorCounts = linePixelColorCounts.get(y);
-	Integer pixelColorCount = pixelColorCounts.get(NumberFactory
-		.getInteger(pixelColor));
+	Integer pixelColorCount = pixelColorCounts.get(NumberFactory.getInteger(pixelColor));
 	if (pixelColorCount == null) {
 	    return 0;
 	}
@@ -226,20 +206,16 @@ public final class Tile {
      * @return The map of distinct colors used and their count, not
      *         <code>null</code>.
      */
-    public Map<Integer, Integer> getDistinctLinePixelColorCounts(int y,
-	    List<Integer> ignoredPixelColors) {
+    public Map<Integer, Integer> getDistinctLinePixelColorCounts(int y, List<Integer> ignoredPixelColors) {
 	if (y < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'y' must not be negative, specified value is "
-			    + y + ".");
+	    throw new IllegalArgumentException("Parameter 'y' must not be negative, specified value is " + y + ".");
 	}
 	Map<Integer, Integer> pixelColorCounts;
 	pixelColorCounts = new TreeMap<Integer, Integer>();
 	for (int x = 0; x < tileSet.getPixelsPerColumn(); x++) {
 	    Integer pixelColor = getPixelColor(x, y);
 	    boolean ignore = false;
-	    if (ignoredPixelColors != null
-		    && ignoredPixelColors.contains(pixelColor)) {
+	    if (ignoredPixelColors != null && ignoredPixelColors.contains(pixelColor)) {
 		ignore = true;
 
 	    }

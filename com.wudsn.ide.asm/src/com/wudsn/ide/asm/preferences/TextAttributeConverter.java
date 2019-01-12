@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -92,8 +92,7 @@ public final class TextAttributeConverter {
 	FontData fontData = font.getFontData()[0];
 	fontData = new FontData(fontData.getName(), fontData.getHeight(), style);
 	font = new Font(display, fontData);
-	result = new TextAttribute(foregroundColor, backgroundColor, style,
-		font);
+	result = new TextAttribute(foregroundColor, backgroundColor, style, font);
 	return result;
     }
 
@@ -106,13 +105,11 @@ public final class TextAttributeConverter {
      */
     public static String toString(TextAttribute textAttribute) {
 	if (textAttribute == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'textAttribute' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'textAttribute' must not be null.");
 	}
 
 	String result;
-	result = toString(textAttribute.getForeground()) + ","
-		+ toString(textAttribute.getBackground()) + ","
+	result = toString(textAttribute.getForeground()) + "," + toString(textAttribute.getBackground()) + ","
 		+ Integer.toString(textAttribute.getStyle());
 	return result;
     }
@@ -138,12 +135,13 @@ public final class TextAttributeConverter {
     }
 
     /**
-     * Dispose the colors and the font of the text attribute created by this class.
+     * Dispose the colors and the font of the text attribute created by this
+     * class.
      * 
      * @param textAttribute
      *            The text attribute or <code>null</code>.
-     *            
-     * @since 1.6.0            
+     * 
+     * @since 1.6.0
      */
     public static void dispose(TextAttribute textAttribute) {
 	if (textAttribute != null) {

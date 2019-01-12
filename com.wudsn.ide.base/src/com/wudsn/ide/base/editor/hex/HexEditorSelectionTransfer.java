@@ -66,8 +66,8 @@ public final class HexEditorSelectionTransfer extends ByteArrayTransfer {
 		ByteArrayInputStream in = new ByteArrayInputStream(buffer);
 		DataInputStream readIn = new DataInputStream(in);
 		while (readIn.available() > 0) {
-		    int startOffset=readIn.readInt();
-		    int endOffset=readIn.readInt();
+		    int startOffset = readIn.readInt();
+		    int endOffset = readIn.readInt();
 		    int size = readIn.readInt();
 		    byte[] bytes = new byte[size];
 		    readIn.read(bytes);

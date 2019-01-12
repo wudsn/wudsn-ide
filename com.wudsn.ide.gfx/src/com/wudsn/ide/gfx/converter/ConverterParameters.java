@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -85,8 +85,7 @@ public final class ConverterParameters {
 
     public void setConverterDirection(ConverterDirection value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	this.converterDirection = value;
     }
@@ -102,8 +101,7 @@ public final class ConverterParameters {
 	case IMAGE_TO_FILES:
 	    return imageConverterParameters;
 	default:
-	    throw new IllegalStateException("Unknown converter direction "
-		    + getConverterDirection() + ".");
+	    throw new IllegalStateException("Unknown converter direction " + getConverterDirection() + ".");
 	}
     }
 
@@ -117,8 +115,7 @@ public final class ConverterParameters {
 
     public void copyTo(ConverterParameters target) {
 	if (target == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'target' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'target' must not be null.");
 	}
 	target.setConverterDirection(converterDirection);
 	filesConverterParameters.copyTo(target.getFilesConverterParameters());
@@ -127,24 +124,18 @@ public final class ConverterParameters {
 
     public boolean equals(ConverterParameters target) {
 	if (target == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'target' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'target' must not be null.");
 	}
 	boolean result;
 	result = target.getConverterDirection().equals(converterDirection);
-	result = result
-		&& target.getFilesConverterParameters().equals(
-			filesConverterParameters);
-	result = result
-		&& target.getImageConverterParameters().equals(
-			imageConverterParameters);
+	result = result && target.getFilesConverterParameters().equals(filesConverterParameters);
+	result = result && target.getImageConverterParameters().equals(imageConverterParameters);
 	return result;
     }
 
     public InputStream getContents(String filePath) throws CoreException {
 	if (filePath == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'filePath' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'filePath' must not be null.");
 	}
 
 	GraphicsPropertiesSerializer serializer;
@@ -158,8 +149,7 @@ public final class ConverterParameters {
 	try {
 	    // ByteArrayOutputStream propertiesStream = new
 	    // ByteArrayOutputStream();
-	    properties
-		    .store(propertiesStream, "WUDSN IDE Converter Parameters");
+	    properties.store(propertiesStream, "WUDSN IDE Converter Parameters");
 	    propertiesStream.close();
 
 	    // Iterator<ImageWriter> iterator = ImageIO
@@ -202,8 +192,8 @@ public final class ConverterParameters {
 
 	} catch (IOException ex) {
 	    // ERROR: Cannot write content of file '{0}'.
-	    throw new CoreException(new Status(IStatus.ERROR, GraphicsPlugin.ID,
-		    TextUtility.format(Texts.MESSAGE_E212, filePath), ex));
+	    throw new CoreException(new Status(IStatus.ERROR, GraphicsPlugin.ID, TextUtility.format(Texts.MESSAGE_E212,
+		    filePath), ex));
 
 	}
 
@@ -212,35 +202,28 @@ public final class ConverterParameters {
 
     private void serialize(GraphicsPropertiesSerializer serializer) {
 	if (serializer == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'serializer' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'serializer' must not be null.");
 	}
-	serializer
-		.writeEnum(Attributes.CONVERTER_DIRECTION, converterDirection);
-	filesConverterParameters.serialize(serializer,
-		Attributes.FILES_CONVERTER_PARAMETERS);
-	imageConverterParameters.serialize(serializer,
-		Attributes.IMAGE_CONVERTER_PARAMETERS);
+	serializer.writeEnum(Attributes.CONVERTER_DIRECTION, converterDirection);
+	filesConverterParameters.serialize(serializer, Attributes.FILES_CONVERTER_PARAMETERS);
+	imageConverterParameters.serialize(serializer, Attributes.IMAGE_CONVERTER_PARAMETERS);
     }
 
     public void read(IFile file) throws CoreException {
 	if (file == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'file' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'file' must not be null.");
 	}
 
 	byte[] content;
-	content = FileUtility.readBytes(file, FileUtility.MAX_SIZE_UNLIMITED,
-		false);
+	content = FileUtility.readBytes(file, FileUtility.MAX_SIZE_UNLIMITED, false);
 	SequencedProperties properties = new SequencedProperties();
 
 	try {
 	    properties.load(new ByteArrayInputStream(content));
 	} catch (IOException ex) {
 	    // ERROR: Cannot read content of file '{0}'.
-	    throw new CoreException(new Status(IStatus.ERROR, GraphicsPlugin.ID,
-		    TextUtility.format(Texts.MESSAGE_E206, file.getFullPath()
-			    .toOSString()), ex));
+	    throw new CoreException(new Status(IStatus.ERROR, GraphicsPlugin.ID, TextUtility.format(Texts.MESSAGE_E206,
+		    file.getFullPath().toOSString()), ex));
 
 	}
 	GraphicsPropertiesSerializer serializer;
@@ -256,15 +239,11 @@ public final class ConverterParameters {
 
     private void deserialize(GraphicsPropertiesSerializer serializer) {
 	if (serializer == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'serializer' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'serializer' must not be null.");
 	}
-	converterDirection = serializer.readEnum(
-		Attributes.CONVERTER_DIRECTION, Defaults.CONVERTER_DIRECTION,
+	converterDirection = serializer.readEnum(Attributes.CONVERTER_DIRECTION, Defaults.CONVERTER_DIRECTION,
 		ConverterDirection.class);
-	filesConverterParameters.deserialize(serializer,
-		Attributes.FILES_CONVERTER_PARAMETERS);
-	imageConverterParameters.deserialize(serializer,
-		Attributes.IMAGE_CONVERTER_PARAMETERS);
+	filesConverterParameters.deserialize(serializer, Attributes.FILES_CONVERTER_PARAMETERS);
+	imageConverterParameters.deserialize(serializer, Attributes.IMAGE_CONVERTER_PARAMETERS);
     }
 }

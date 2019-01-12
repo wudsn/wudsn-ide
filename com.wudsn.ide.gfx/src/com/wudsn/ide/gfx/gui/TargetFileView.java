@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -36,19 +36,16 @@ public final class TargetFileView {
 
     public TargetFileView(Composite parent, String labelText, int dialogMode) {
 	if (parent == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'parent' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
 	}
 	if (dialogMode != SWT.OPEN && dialogMode != SWT.SAVE) {
 	    throw new IllegalArgumentException(
-		    "Parameter 'dialogMode' must be 'SWT.OPEN' or 'SWT.SAVE'. Specified value is "
-			    + dialogMode + "-");
+		    "Parameter 'dialogMode' must be 'SWT.OPEN' or 'SWT.SAVE'. Specified value is " + dialogMode + "-");
 	}
 
 	filePathField = new FilePathField(parent, labelText, dialogMode);
 
-	fileSizeField = new TextField(parent,
-		Texts.FILE_SECTION_FIELD_SIZE_LABEL, SWT.READ_ONLY);
+	fileSizeField = new TextField(parent, Texts.FILE_SECTION_FIELD_SIZE_LABEL, SWT.READ_ONLY);
     }
 
     public FilePathField getFilePathField() {
@@ -64,8 +61,7 @@ public final class TargetFileView {
      */
     public void setFilePathPrefix(IPath filePathPrefix) {
 	if (filePathPrefix == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'filePathPrefix' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'filePathPrefix' must not be null.");
 	}
 	filePathField.setFilePathPrefix(filePathPrefix);
     }
@@ -82,8 +78,7 @@ public final class TargetFileView {
 	if (bytes == null) {
 	    fileSizeField.setValue(Texts.FILE_SECTION_FIELD_SIZE_NO_DATA);
 	} else {
-	    fileSizeField.setValue(HexUtility
-		    .getLongValueHexString(bytes.length));
+	    fileSizeField.setValue(HexUtility.getLongValueHexString(bytes.length));
 
 	    int step = (bytes.length + 15) / 16;
 	    int[] defaultValues = new int[16];
@@ -115,5 +110,5 @@ public final class TargetFileView {
 	    throw new IllegalArgumentException("Parameter 'changeListener' must not be null.");
 	}
 	filePathField.addChangeListener(changeListener);
-   }
+    }
 }

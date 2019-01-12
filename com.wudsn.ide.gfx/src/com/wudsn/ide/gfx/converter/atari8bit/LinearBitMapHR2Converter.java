@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -35,25 +35,21 @@ public class LinearBitMapHR2Converter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	return bytes.length == 16006;
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
-	PaletteMapper paletteMapper=new Atari8BitPaletteMapper();
+	PaletteMapper paletteMapper = new Atari8BitPaletteMapper();
 
 	RGB[] paletteColors = new RGB[8];
 	RGB[] palette1Colors = new RGB[2];
@@ -68,12 +64,11 @@ public class LinearBitMapHR2Converter extends LinearBitMapConverter {
 	// Compute mixed interlace colors.
 	for (int x1 = 0; x1 < palette1Colors.length; x1++) {
 	    for (int x2 = 0; x2 < palette2Colors.length; x2++) {
-		paletteColors[x1 * palette2Colors.length + x2] = RBGUtility
-			.combineRGB(palette1Colors[x1], palette2Colors[x2]);
+		paletteColors[x1 * palette2Colors.length + x2] = RBGUtility.combineRGB(palette1Colors[x1],
+			palette2Colors[x2]);
 	    }
 	}
-	setImageSizeAndPalette(data, 40, 200, Palette.MULTI_MANUAL,
-		paletteColors);
+	setImageSizeAndPalette(data, 40, 200, Palette.MULTI_MANUAL, paletteColors);
     }
 
     @Override
@@ -85,8 +80,7 @@ public class LinearBitMapHR2Converter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int offset = 0;
@@ -99,8 +93,7 @@ public class LinearBitMapHR2Converter extends LinearBitMapConverter {
 		if (b1 < 0) {
 		    return true;
 		}
-		int b2 = data.getSourceFileByte(BIT_MAP_FILE, offset
-			+ frameSize);
+		int b2 = data.getSourceFileByte(BIT_MAP_FILE, offset + frameSize);
 		if (b2 < 0) {
 		    return true;
 		}

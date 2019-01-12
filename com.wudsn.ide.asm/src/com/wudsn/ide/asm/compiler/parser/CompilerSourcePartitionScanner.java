@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -42,8 +42,7 @@ import com.wudsn.ide.asm.editor.AssemblerEditor;
  * @author Peter Dell
  * @author Andy Reek
  */
-public final class CompilerSourcePartitionScanner extends
-	RuleBasedPartitionScanner {
+public final class CompilerSourcePartitionScanner extends RuleBasedPartitionScanner {
 
     /**
      * Name for the single line comment partition.
@@ -72,46 +71,37 @@ public final class CompilerSourcePartitionScanner extends
      */
     public CompilerSourcePartitionScanner(CompilerSyntax compilerSyntax) {
 	if (compilerSyntax == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'compilerSyntax' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'compilerSyntax' must not be null.");
 	}
 	IToken commentSingleToken = new Token(PARTITION_COMMENT_SINGLE);
 	IToken commentMultipleToken = new Token(PARTITION_COMMENT_MULTIPLE);
 	IToken stringToken = new Token(PARTITION_STRING);
 
 	List<IRule> rules = new ArrayList<IRule>();
-	for (String singleLineCommentDelimiter : compilerSyntax
-		.getSingleLineCommentDelimiters()) {
+	for (String singleLineCommentDelimiter : compilerSyntax.getSingleLineCommentDelimiters()) {
 
 	    // A "*" is only a comment start token if it is followed by a space
 	    // or a tab.
 	    // It is allowed as part of an expression to refer to the program
 	    // counter.
 	    if (singleLineCommentDelimiter.equals("*")) {
-		rules.add(new EndOfLineRule(singleLineCommentDelimiter + " ",
-			commentSingleToken));
-		rules.add(new EndOfLineRule(singleLineCommentDelimiter + "\t",
-			commentSingleToken));
+		rules.add(new EndOfLineRule(singleLineCommentDelimiter + " ", commentSingleToken));
+		rules.add(new EndOfLineRule(singleLineCommentDelimiter + "\t", commentSingleToken));
 	    } else {
-		rules.add(new EndOfLineRule(singleLineCommentDelimiter,
-			commentSingleToken));
+		rules.add(new EndOfLineRule(singleLineCommentDelimiter, commentSingleToken));
 	    }
 	}
-	List<String> multipleLinesCommentDelimiters = compilerSyntax
-		.getMultipleLinesCommentDelimiters();
+	List<String> multipleLinesCommentDelimiters = compilerSyntax.getMultipleLinesCommentDelimiters();
 	for (int i = 0; i < multipleLinesCommentDelimiters.size();) {
 	    String startSequence = multipleLinesCommentDelimiters.get(i++);
 	    String endSequence = multipleLinesCommentDelimiters.get(i++);
-	    rules.add(new MultiLineRule(startSequence, endSequence,
-		    commentMultipleToken));
+	    rules.add(new MultiLineRule(startSequence, endSequence, commentMultipleToken));
 	}
 
 	for (String stringDelimiter : compilerSyntax.getStringDelimiters()) {
-	    rules.add(new SingleLineRule(stringDelimiter, stringDelimiter,
-		    stringToken));
+	    rules.add(new SingleLineRule(stringDelimiter, stringDelimiter, stringToken));
 	}
 
-	
 	IPredicateRule[] rulesArray = new IPredicateRule[rules.size()];
 	rules.toArray(rulesArray);
 	setPredicateRules(rulesArray);
@@ -127,8 +117,7 @@ public final class CompilerSourcePartitionScanner extends
     public void createDocumentPartitioner(IDocument document) {
 
 	if (document == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'document' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'document' must not be null.");
 	}
 	FastPartitioner partitioner = new FastPartitioner(this, new String[] {
 		CompilerSourcePartitionScanner.PARTITION_COMMENT_SINGLE,

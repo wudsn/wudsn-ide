@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -22,13 +22,13 @@ import com.wudsn.ide.asm.Hardware;
 import com.wudsn.ide.asm.preferences.AssemblerPreferencesCompilersPage;
 
 /**
- * Visual editor page for the assembler preferences regarding arbitrary compilers.
+ * Visual editor page for the assembler preferences regarding arbitrary
+ * compilers.
  * 
  * @author Peter Dell
  * 
  */
-public final class AssemblerPreferencesTestCompilersPage extends
-	AssemblerPreferencesCompilersPage {
+public final class AssemblerPreferencesTestCompilersPage extends AssemblerPreferencesCompilersPage {
 
     /**
      * Create is public. Used by extension point

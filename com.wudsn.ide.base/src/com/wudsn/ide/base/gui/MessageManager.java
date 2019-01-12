@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -57,20 +57,17 @@ public final class MessageManager {
 
 	public FieldRegistryEntry(Field field, int messageId) {
 	    if (field == null) {
-		throw new IllegalArgumentException(
-			"Parameter 'field' must not be null.");
+		throw new IllegalArgumentException("Parameter 'field' must not be null.");
 	    }
 	    if (messageId < 0) {
-		throw new IllegalArgumentException(
-			"Parameter 'messageId' must not be negative.");
+		throw new IllegalArgumentException("Parameter 'messageId' must not be negative.");
 	    }
 	    this.field = field;
 	    this.messageId = messageId;
 
 	    Control control = field.getControl();
 
-	    controlDecoration = new ControlDecoration(control, SWT.RIGHT
-		    | SWT.TOP);
+	    controlDecoration = new ControlDecoration(control, SWT.RIGHT | SWT.TOP);
 	    controlDecoration.setShowHover(true);
 	}
 
@@ -96,8 +93,7 @@ public final class MessageManager {
 	private String[] parameters;
 	private Throwable throwable;
 
-	public MessageQueueEntry(int messageId, int severity, String message,
-		String[] parameters, Throwable throwable) {
+	public MessageQueueEntry(int messageId, int severity, String message, String[] parameters, Throwable throwable) {
 	    this.messageId = messageId;
 	    this.severity = severity;
 	    this.message = message;
@@ -141,8 +137,7 @@ public final class MessageManager {
 
     public MessageManager(IWorkbenchPart workbenchPart) {
 	if (workbenchPart == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'workbenchPart' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'workbenchPart' must not be null.");
 	}
 	this.workbenchPart = workbenchPart;
 
@@ -171,29 +166,24 @@ public final class MessageManager {
     private void initStatusLineManager() {
 	if (statusLineManager == null) {
 	    if (workbenchPart instanceof IEditorPart) {
-		statusLineManager = ((IEditorPart) workbenchPart)
-			.getEditorSite().getActionBars().getStatusLineManager();
+		statusLineManager = ((IEditorPart) workbenchPart).getEditorSite().getActionBars()
+			.getStatusLineManager();
 	    } else if (workbenchPart instanceof IViewPart) {
-		statusLineManager = ((IViewPart) workbenchPart).getViewSite()
-			.getActionBars().getStatusLineManager();
+		statusLineManager = ((IViewPart) workbenchPart).getViewSite().getActionBars().getStatusLineManager();
 	    } else {
-		throw new IllegalStateException("Workbench part "
-			+ workbenchPart + " has an unsupported type.");
+		throw new IllegalStateException("Workbench part " + workbenchPart + " has an unsupported type.");
 	    }
 	}
     }
 
     public void registerField(Field field, int messageId) {
 	if (field == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'field' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'field' must not be null.");
 	}
 	if (messageId < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'messageId' must not be negative.");
+	    throw new IllegalArgumentException("Parameter 'messageId' must not be negative.");
 	}
-	FieldRegistryEntry fieldRegistryEntry = new FieldRegistryEntry(field,
-		messageId);
+	FieldRegistryEntry fieldRegistryEntry = new FieldRegistryEntry(field, messageId);
 	fieldRegistryEntries.add(fieldRegistryEntry);
     }
 
@@ -230,15 +220,12 @@ public final class MessageManager {
      * @param parameters
      *            The message parameters, may be empty or null.
      */
-    public void sendMessage(int messageId, int severity, String message,
-	    String... parameters) {
+    public void sendMessage(int messageId, int severity, String message, String... parameters) {
 	if (message == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'message' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'message' must not be null.");
 	}
 	MessageQueueEntry messageQueueEntry;
-	messageQueueEntry = new MessageQueueEntry(messageId, severity, message,
-		parameters, null);
+	messageQueueEntry = new MessageQueueEntry(messageId, severity, message, parameters, null);
 	addMessageQueueEntry(messageQueueEntry);
     }
 
@@ -254,21 +241,18 @@ public final class MessageManager {
      */
     public void sendMessage(int messageId, CoreException coreException) {
 	if (coreException == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'coreException' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'coreException' must not be null.");
 	}
 	MessageQueueEntry messageQueueEntry;
-	messageQueueEntry = new MessageQueueEntry(messageId, coreException
-		.getStatus().getSeverity(), coreException.getStatus()
-		.getMessage(), null, coreException);
+	messageQueueEntry = new MessageQueueEntry(messageId, coreException.getStatus().getSeverity(), coreException
+		.getStatus().getMessage(), null, coreException);
 	addMessageQueueEntry(messageQueueEntry);
 
     }
 
     private void addMessageQueueEntry(MessageQueueEntry messageQueueEntry) {
 	if (messageQueueEntry == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'messageQueueEntry' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'messageQueueEntry' must not be null.");
 	}
 	messageQueueEntries.add(messageQueueEntry);
 	if (messageQueueEntry.getSeverity() == IStatus.ERROR) {
@@ -284,20 +268,16 @@ public final class MessageManager {
 
 	initStatusLineManager();
 
-	FieldDecorationRegistry fieldDecorationRegistry = FieldDecorationRegistry
-		.getDefault();
-	Image informationImage = fieldDecorationRegistry.getFieldDecoration(
-		FieldDecorationRegistry.DEC_INFORMATION).getImage();
-	Image warningImage = fieldDecorationRegistry.getFieldDecoration(
-		FieldDecorationRegistry.DEC_INFORMATION).getImage();
-	Image errorImage = fieldDecorationRegistry.getFieldDecoration(
-		FieldDecorationRegistry.DEC_ERROR).getImage();
+	FieldDecorationRegistry fieldDecorationRegistry = FieldDecorationRegistry.getDefault();
+	Image informationImage = fieldDecorationRegistry.getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION)
+		.getImage();
+	Image warningImage = fieldDecorationRegistry.getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION)
+		.getImage();
+	Image errorImage = fieldDecorationRegistry.getFieldDecoration(FieldDecorationRegistry.DEC_ERROR).getImage();
 
 	for (MessageQueueEntry messageQueueEntry : messageQueueEntries) {
 
-	    String messageText = TextUtility.format(
-		    messageQueueEntry.getMessage(),
-		    messageQueueEntry.getParameters());
+	    String messageText = TextUtility.format(messageQueueEntry.getMessage(), messageQueueEntry.getParameters());
 
 	    BasePlugin plugin = BasePlugin.getInstance();
 
@@ -305,8 +285,7 @@ public final class MessageManager {
 	    case IStatus.OK:
 		statusLineManager.setMessage(messageText);
 
-		plugin.log(messageQueueEntry.getMessage(),
-			messageQueueEntry.getParameters());
+		plugin.log(messageQueueEntry.getMessage(), messageQueueEntry.getParameters());
 		break;
 
 	    case IStatus.INFO:
@@ -327,8 +306,7 @@ public final class MessageManager {
 		    image = null;
 		}
 		for (FieldRegistryEntry fieldRegistryEntry : fieldRegistryEntries) {
-		    if (fieldRegistryEntry.getMessageId() == messageQueueEntry
-			    .getMessageId()) {
+		    if (fieldRegistryEntry.getMessageId() == messageQueueEntry.getMessageId()) {
 
 			ControlDecoration controlDecoration;
 			Control control;
@@ -337,12 +315,10 @@ public final class MessageManager {
 			if (messageQueueEntry.getSeverity() == IStatus.ERROR) {
 			    control.setForeground(red);
 			} else {
-			    control.setForeground(control.getParent()
-				    .getForeground());
+			    control.setForeground(control.getParent().getForeground());
 			}
 
-			controlDecoration = fieldRegistryEntry
-				.getControlDecoration();
+			controlDecoration = fieldRegistryEntry.getControlDecoration();
 
 			controlDecoration.setImage(image);
 			controlDecoration.setDescriptionText(messageText);
@@ -355,14 +331,11 @@ public final class MessageManager {
 		    statusLineManager.setMessage(messageText);
 
 		}
-		plugin.logError(messageQueueEntry.getMessage(),
-			messageQueueEntry.getParameters(),
+		plugin.logError(messageQueueEntry.getMessage(), messageQueueEntry.getParameters(),
 			messageQueueEntry.getThrowable());
 		break;
 	    default:
-		throw new IllegalStateException("Severity "
-			+ messageQueueEntry.getSeverity()
-			+ " is not supported.");
+		throw new IllegalStateException("Severity " + messageQueueEntry.getSeverity() + " is not supported.");
 	    }
 
 	}

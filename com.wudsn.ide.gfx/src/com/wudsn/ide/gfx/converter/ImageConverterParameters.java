@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -100,8 +100,7 @@ public final class ImageConverterParameters extends ConverterCommonParameters {
 
 	public void setPath(String path) {
 	    if (path == null) {
-		throw new IllegalArgumentException(
-			"Parameter 'path' must not be null.");
+		throw new IllegalArgumentException("Parameter 'path' must not be null.");
 	    }
 	    this.path = path;
 	}
@@ -121,12 +120,10 @@ public final class ImageConverterParameters extends ConverterCommonParameters {
 	@Override
 	public boolean equals(Object obj) {
 	    if (obj == null) {
-		throw new IllegalArgumentException(
-			"Parameter 'obj' must not be null.");
+		throw new IllegalArgumentException("Parameter 'obj' must not be null.");
 	    }
 	    TargetFile other = (TargetFile) obj;
-	    return other.id == this.id && other.path.equals(this.path)
-		    && other.offset == this.offset;
+	    return other.id == this.id && other.path.equals(this.path) && other.offset == this.offset;
 	}
 
 	@Override
@@ -166,16 +163,14 @@ public final class ImageConverterParameters extends ConverterCommonParameters {
     @Override
     public void setConverterId(String value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 
 	if (!value.equals(this.converterId))
 	    this.converterId = value;
 
 	ConverterDefinition converterDefinition;
-	converterDefinition = GraphicsPlugin.getInstance()
-		.getConverterRegistry()
+	converterDefinition = GraphicsPlugin.getInstance().getConverterRegistry()
 		.getDefinition(converterId, ConverterDirection.IMAGE_TO_FILES);
 	if (converterDefinition != null) {
 	    targetFilesSize = targetFiles.size();
@@ -186,8 +181,7 @@ public final class ImageConverterParameters extends ConverterCommonParameters {
 
     public void setDefaultTargetFilePath(String targetFilePath) {
 	if (targetFilePath == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'targetFilePath' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'targetFilePath' must not be null.");
 	}
 	for (int i = 0; i < targetFiles.size(); i++) {
 	    TargetFile targetFile = targetFiles.get(i);
@@ -198,8 +192,7 @@ public final class ImageConverterParameters extends ConverterCommonParameters {
 
     public void setImageFilePath(String value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	this.imageFilePath = value;
     }
@@ -245,8 +238,7 @@ public final class ImageConverterParameters extends ConverterCommonParameters {
      */
     public void setScript(String value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	this.script = value;
     }
@@ -265,8 +257,7 @@ public final class ImageConverterParameters extends ConverterCommonParameters {
 
     protected final void copyTo(ImageConverterParameters target) {
 	if (target == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'target' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'target' must not be null.");
 	}
 	super.copyTo(target);
 
@@ -286,8 +277,7 @@ public final class ImageConverterParameters extends ConverterCommonParameters {
 
     protected final boolean equals(ImageConverterParameters target) {
 	if (target == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'target' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'target' must not be null.");
 	}
 	boolean result;
 	result = super.equals(target);
@@ -299,15 +289,12 @@ public final class ImageConverterParameters extends ConverterCommonParameters {
     }
 
     @Override
-    protected final void serialize(GraphicsPropertiesSerializer serializer,
-	    String key) {
+    protected final void serialize(GraphicsPropertiesSerializer serializer, String key) {
 	if (serializer == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'serializer' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'serializer' must not be null.");
 	}
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 
 	super.serialize(serializer, key);
@@ -320,10 +307,8 @@ public final class ImageConverterParameters extends ConverterCommonParameters {
 	    TargetFile targetFile = targetFiles.get(i);
 	    GraphicsPropertiesSerializer innerSeralizer;
 	    innerSeralizer = new GraphicsPropertiesSerializer();
-	    innerSeralizer.writeString(Attributes.TARGET_FILE_PATH,
-		    targetFile.getPath());
-	    ownSerializer.writeProperties(Attributes.TARGET_FILES + "." + i,
-		    innerSeralizer);
+	    innerSeralizer.writeString(Attributes.TARGET_FILE_PATH, targetFile.getPath());
+	    ownSerializer.writeProperties(Attributes.TARGET_FILES + "." + i, innerSeralizer);
 	}
 
 	ownSerializer.writeBoolean(Attributes.USE_DEFAULT_SCRIPT, useDefaultScript);
@@ -333,11 +318,9 @@ public final class ImageConverterParameters extends ConverterCommonParameters {
     }
 
     @Override
-    protected final void deserialize(GraphicsPropertiesSerializer serializer,
-	    String key) {
+    protected final void deserialize(GraphicsPropertiesSerializer serializer, String key) {
 	if (serializer == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'serializer' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'serializer' must not be null.");
 	}
 	if (key == null) {
 	    throw new IllegalArgumentException();
@@ -348,24 +331,19 @@ public final class ImageConverterParameters extends ConverterCommonParameters {
 	ownSerializer = new GraphicsPropertiesSerializer();
 	serializer.readProperties(key, ownSerializer);
 
-	imageFilePath = ownSerializer.readString(Attributes.IMAGE_FILE_PATH,
-		Defaults.IMAGE_FILE_PATH);
-	imageFilePath = ownSerializer.readString(Attributes.IMAGE_FILE_PATH,
-		Defaults.IMAGE_FILE_PATH);
+	imageFilePath = ownSerializer.readString(Attributes.IMAGE_FILE_PATH, Defaults.IMAGE_FILE_PATH);
+	imageFilePath = ownSerializer.readString(Attributes.IMAGE_FILE_PATH, Defaults.IMAGE_FILE_PATH);
 	targetFiles.clear();
 	for (int i = 0; i < ConverterRegistry.MAX_TARGET_FILES; i++) {
 	    TargetFile targetFile = new TargetFile(i);
 	    GraphicsPropertiesSerializer innerSerializer;
 	    innerSerializer = new GraphicsPropertiesSerializer();
-	    ownSerializer.readProperties(Attributes.TARGET_FILES + "." + i,
-		    innerSerializer);
-	    targetFile.setPath(innerSerializer.readString(
-		    Attributes.TARGET_FILE_PATH, Defaults.TARGET_FILE_PATH));
+	    ownSerializer.readProperties(Attributes.TARGET_FILES + "." + i, innerSerializer);
+	    targetFile.setPath(innerSerializer.readString(Attributes.TARGET_FILE_PATH, Defaults.TARGET_FILE_PATH));
 	    targetFiles.add(targetFile);
 	}
 
-	useDefaultScript = ownSerializer.readBoolean(
-		Attributes.USE_DEFAULT_SCRIPT, Defaults.USE_DEFAULT_SCRIPT);
+	useDefaultScript = ownSerializer.readBoolean(Attributes.USE_DEFAULT_SCRIPT, Defaults.USE_DEFAULT_SCRIPT);
 	script = ownSerializer.readString(Attributes.SCRIPT, Defaults.SCRIPT);
 
     }

@@ -313,9 +313,9 @@ public final class SoundEditor extends EditorPart implements Application, SoundP
     public void createPartControl(Composite parent) {
 
 	parent.setLayout(new FillLayout(SWT.VERTICAL));
-//	parent.setLayout(new RowLayout(SWT.VERTICAL));
-//	parent.setLayoutData(null);
-	
+	// parent.setLayout(new RowLayout(SWT.VERTICAL));
+	// parent.setLayoutData(null);
+
 	mainComposite = new Composite(parent, SWT.NONE);
 	mainComposite.setLayout(new FillLayout(SWT.VERTICAL));
 

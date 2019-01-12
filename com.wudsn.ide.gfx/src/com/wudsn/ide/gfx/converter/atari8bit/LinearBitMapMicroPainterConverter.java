@@ -37,22 +37,18 @@ public class LinearBitMapMicroPainterConverter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	return bytes.length == 7680 || bytes.length == 7684;
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	PaletteMapper paletteMapper = new Atari8BitPaletteMapper();
 	RGB[] paletteColors;
@@ -63,12 +59,10 @@ public class LinearBitMapMicroPainterConverter extends LinearBitMapConverter {
 	    paletteColors[2] = paletteMapper.getRGB(bytes[7682] & 0xfe);
 	    paletteColors[3] = paletteMapper.getRGB(bytes[7683] & 0xfe);
 	} else {
-	    paletteColors = PaletteUtility.getPaletteColors(
-		    PaletteType.ATARI_DEFAULT, Palette.MULTI_1, null);
+	    paletteColors = PaletteUtility.getPaletteColors(PaletteType.ATARI_DEFAULT, Palette.MULTI_1, null);
 	}
 
-	setImageSizeAndPalette(data, 40, 192, Palette.MULTI_MANUAL,
-		paletteColors);
+	setImageSizeAndPalette(data, 40, 192, Palette.MULTI_MANUAL, paletteColors);
     }
 
     @Override
@@ -80,8 +74,7 @@ public class LinearBitMapMicroPainterConverter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int offset = 0;

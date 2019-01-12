@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -42,16 +42,15 @@ public interface ImageProvider {
     public boolean isZoomToFit();
 
     public void setZoomToFit(boolean value);
-    
+
     public ImageData getImageData();
 
     public ImageColorHistogram getImageColorHistogram();
 
     public boolean isPaletteChangeable();
-    
+
     public void setPaletteRGBs(RGB[] rgbs);
 
     public void setPaletteRGB(int pixelColor, RGB rgb);
-
 
 }

@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -40,8 +40,7 @@ public abstract class ConverterCommonData {
 
     ConverterCommonData(ConverterData converterData) {
 	if (converterData == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'converterData' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'converterData' must not be null.");
 	}
 
 	this.converterData = converterData;
@@ -52,8 +51,7 @@ public abstract class ConverterCommonData {
     public final IPath getFilePathPrefix() {
 	IPath result;
 	if (converterData.isValid()) {
-	    result = converterData.getFile().getFullPath()
-		    .removeLastSegments(1);
+	    result = converterData.getFile().getFullPath().removeLastSegments(1);
 	} else {
 	    result = new Path("");
 

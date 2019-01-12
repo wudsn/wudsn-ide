@@ -65,7 +65,6 @@ public class Runner {
 	return definition;
     }
 
-
     /**
      * Creates the {@link File} object for the breakpoints file.
      * 

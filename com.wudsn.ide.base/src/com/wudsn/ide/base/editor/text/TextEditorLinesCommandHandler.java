@@ -61,10 +61,8 @@ abstract class TextEditorLinesCommandHandler extends AbstractHandler {
 
 	textEditor = (ITextEditor) editor;
 
-	document = textEditor.getDocumentProvider().getDocument(
-		textEditor.getEditorInput());
-	selection = (ITextSelection) textEditor.getSelectionProvider()
-		.getSelection();
+	document = textEditor.getDocumentProvider().getDocument(textEditor.getEditorInput());
+	selection = (ITextSelection) textEditor.getSelectionProvider().getSelection();
 	endLineIndex = selection.getEndLine();
 	startLineIndex = selection.getStartLine();
 	if (startLineIndex == endLineIndex) {
@@ -83,10 +81,10 @@ abstract class TextEditorLinesCommandHandler extends AbstractHandler {
 	    List<String> lines;
 	    lines = new ArrayList<String>();
 	    for (int line = startLineIndex; line <= endLineIndex; line++) {
-		int delimiterLength = document.getLineDelimiter(line) == null ? 0
-			: document.getLineDelimiter(line).length();
-		String lineText = document.get(document.getLineOffset(line),
-			document.getLineLength(line) - delimiterLength);
+		int delimiterLength = document.getLineDelimiter(line) == null ? 0 : document.getLineDelimiter(line)
+			.length();
+		String lineText = document.get(document.getLineOffset(line), document.getLineLength(line)
+			- delimiterLength);
 		lines.add(lineText);
 		length = length + lineText.length() + delimiterLength;
 	    }
@@ -98,8 +96,7 @@ abstract class TextEditorLinesCommandHandler extends AbstractHandler {
 	    StringBuilder replacementText = new StringBuilder();
 	    for (int i = 0; i < lineCount; i++) {
 		replacementText.append(lines.get(i));
-		if ((i < lineCount - 1) || (i == lineCount - 1)
-			&& (document.getLineDelimiter(endLineIndex) != null)) {
+		if ((i < lineCount - 1) || (i == lineCount - 1) && (document.getLineDelimiter(endLineIndex) != null)) {
 		    replacementText.append(lineDelimiter);
 		}
 	    }
@@ -110,9 +107,8 @@ abstract class TextEditorLinesCommandHandler extends AbstractHandler {
 		    return null;
 		}
 	    }
-	    
-	    ReplaceEdit replaceEdit = new ReplaceEdit(startOffset, length,
-		    replacementText.toString());
+
+	    ReplaceEdit replaceEdit = new ReplaceEdit(startOffset, length, replacementText.toString());
 	    replaceEdit.apply(document);
 	    // re-select the lines that have been processed
 	    textEditor.getSelectionProvider().setSelection(selection);

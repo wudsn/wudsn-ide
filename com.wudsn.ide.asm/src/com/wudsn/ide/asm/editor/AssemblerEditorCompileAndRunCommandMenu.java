@@ -31,34 +31,31 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.menus.WorkbenchWindowControlContribution;
 
 // TODO: Dynamic menu contribution is not working!
-public final class AssemblerEditorCompileAndRunCommandMenu extends
-		WorkbenchWindowControlContribution {
+public final class AssemblerEditorCompileAndRunCommandMenu extends WorkbenchWindowControlContribution {
 
-	public AssemblerEditorCompileAndRunCommandMenu() {
-		new Exception().printStackTrace();
-	}
+    public AssemblerEditorCompileAndRunCommandMenu() {
+	new Exception().printStackTrace();
+    }
 
-	public AssemblerEditorCompileAndRunCommandMenu(String id) {
-		super(id);
-	}
+    public AssemblerEditorCompileAndRunCommandMenu(String id) {
+	super(id);
+    }
 
-	@AboutToShow
-	public void aboutToShow(List<MMenuElement> items) {
-		MDirectMenuItem dynamicItem = MMenuFactory.INSTANCE
-				.createDirectMenuItem();
-		dynamicItem.setLabel("Dynamic Menu Item (" + new Date() + ")");
-		dynamicItem
-				.setContributorURI("platform:/plugin/at.descher.eclipse.bug389063");
-		dynamicItem
-				.setContributionURI("bundleclass://at.descher.eclipse.bug389063/at.descher.eclipse.bug389063.dynamic.DirectMenuItemAHandler");
-		items.add(dynamicItem);
+    @AboutToShow
+    public void aboutToShow(List<MMenuElement> items) {
+	MDirectMenuItem dynamicItem = MMenuFactory.INSTANCE.createDirectMenuItem();
+	dynamicItem.setLabel("Dynamic Menu Item (" + new Date() + ")");
+	dynamicItem.setContributorURI("platform:/plugin/at.descher.eclipse.bug389063");
+	dynamicItem
+		.setContributionURI("bundleclass://at.descher.eclipse.bug389063/at.descher.eclipse.bug389063.dynamic.DirectMenuItemAHandler");
+	items.add(dynamicItem);
 
-	}
+    }
 
-	@Override
-	protected Control createControl(Composite parent) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    protected Control createControl(Composite parent) {
+	// TODO Auto-generated method stub
+	return null;
+    }
 
 }

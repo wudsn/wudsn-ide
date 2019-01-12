@@ -27,8 +27,7 @@ final class HexEditorFonts {
 	atari8Font = loadFont(display, "fonts/atari8/ATARCC__.TTF", "");
 
 	// From http://style64.org/c64-truetype
-	c64Font = loadFont(display, "fonts/c64/C64_Pro_v1.0-STYLE.ttf",
-		"C64 Pro Mono");
+	c64Font = loadFont(display, "fonts/c64/C64_Pro_v1.0-STYLE.ttf", "C64 Pro Mono");
 
     }
 
@@ -43,41 +42,34 @@ final class HexEditorFonts {
 
     private Font loadFont(Display display, String fileName, String fontName) {
 	if (display == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'display' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'display' must not be null.");
 	}
 	if (fileName == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'fileName' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'fileName' must not be null.");
 	}
 	if (fontName == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'fontName' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'fontName' must not be null.");
 	}
 
 	URL url;
-	url = FileLocator.find(HexPlugin.getInstance().getBundle(), new Path(
-		fileName), null);
+	url = FileLocator.find(HexPlugin.getInstance().getBundle(), new Path(fileName), null);
 	try {
 	    url = FileLocator.toFileURL(url);
 	} catch (IOException ex) {
-	    throw new IllegalArgumentException("Cannot load font from '"
-		    + fileName + "'.", ex);
+	    throw new IllegalArgumentException("Cannot load font from '" + fileName + "'.", ex);
 	}
 	try {
 	    File file = new File(url.toURI());
 	    fileName = file.getAbsolutePath();
 	} catch (URISyntaxException ex) {
-	    throw new IllegalArgumentException("Cannot load font from '"
-		    + fileName + "'.", ex);
+	    throw new IllegalArgumentException("Cannot load font from '" + fileName + "'.", ex);
 	}
 	int fontSize = 8;
 	if (display.loadFont(fileName)) {
 	    Font result = new Font(display, fontName, fontSize, SWT.NORMAL);
 	    return result;
 	}
-	throw new IllegalArgumentException("Cannot load font from '" + fileName
-		+ "'.");
+	throw new IllegalArgumentException("Cannot load font from '" + fileName + "'.");
     }
 
 }

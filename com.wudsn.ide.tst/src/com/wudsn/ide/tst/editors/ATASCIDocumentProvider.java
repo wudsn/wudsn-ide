@@ -112,13 +112,13 @@ public class ATASCIDocumentProvider extends FileDocumentProvider {
 	    byte[] bytes = null;
 	    try {
 		bytes = document.get().getBytes(ENCODING);
-		
-	    } catch (UnsupportedEncodingException ex){
+
+	    } catch (UnsupportedEncodingException ex) {
 		throw new CoreException(new Status(IStatus.ERROR, "com.wudsn.ide.tst", ex.getMessage()));
 	    }
 	    for (int i = 0; i < bytes.length; i++) {
 		if (bytes[i] == NL) {
-		    bytes[i] = (byte)EOL;
+		    bytes[i] = (byte) EOL;
 		}
 	    }
 	    InputStream stream = new ByteArrayInputStream(bytes);

@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -55,10 +55,8 @@ public final class InverseBlockList {
      *            <code>true</code> if the inverse color shall also be used in
      *            case of conflict
      */
-    public void add(int column1, int column2, int row1, int row2,
-	    Integer inverseColor, boolean inverseIfConflict) {
-	inverseBlocks.add(new InverseBlock(column1, column2, row1, row2,
-		inverseColor, inverseIfConflict));
+    public void add(int column1, int column2, int row1, int row2, Integer inverseColor, boolean inverseIfConflict) {
+	inverseBlocks.add(new InverseBlock(column1, column2, row1, row2, inverseColor, inverseIfConflict));
     }
 
     /**
@@ -75,10 +73,8 @@ public final class InverseBlockList {
     public InverseBlock getInverseBlock(int column, int row) {
 
 	for (InverseBlock inverseBlock : inverseBlocks) {
-	    if (inverseBlock.getColumn1() <= column
-		    && column <= inverseBlock.getColumn2()
-		    && inverseBlock.getRow1() <= row
-		    && row <= inverseBlock.getRow2()) {
+	    if (inverseBlock.getColumn1() <= column && column <= inverseBlock.getColumn2()
+		    && inverseBlock.getRow1() <= row && row <= inverseBlock.getRow2()) {
 		return inverseBlock;
 	    }
 	}

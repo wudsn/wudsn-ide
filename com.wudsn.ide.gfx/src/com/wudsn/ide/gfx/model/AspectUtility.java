@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -56,8 +56,7 @@ public final class AspectUtility {
      */
     public static Aspect fromString(String value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 
 	Aspect result;

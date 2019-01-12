@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -34,17 +34,14 @@ public class LinearBitMapHIPConverter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	// HIP image with binary file headers. Two concatenated COM files.
 	int frame1Length = Atari8BitUtility.getLengthFromBinaryHeader(bytes, 0);
-	if (frame1Length > 0 && frame1Length * 2 + 12 == bytes.length
-		&& frame1Length % 40 == 0) {
+	if (frame1Length > 0 && frame1Length * 2 + 12 == bytes.length && frame1Length % 40 == 0) {
 
-	    int frame2Length = Atari8BitUtility.getLengthFromBinaryHeader(bytes,
-		    frame1Length + 6);
+	    int frame2Length = Atari8BitUtility.getLengthFromBinaryHeader(bytes, frame1Length + 6);
 	    if (frame2Length == frame1Length) {
 		return true;
 	    }
@@ -57,25 +54,20 @@ public class LinearBitMapHIPConverter extends LinearBitMapConverter {
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	// HIP image with binary file headers. Two concatenated COM files.
 	int rows;
 	int frame1Length = Atari8BitUtility.getLengthFromBinaryHeader(bytes, 0);
-	if (frame1Length > 0 && frame1Length * 2 + 12 == bytes.length
-		&& frame1Length % 40 == 0) {
+	if (frame1Length > 0 && frame1Length * 2 + 12 == bytes.length && frame1Length % 40 == 0) {
 
-	    int frame2Length = Atari8BitUtility.getLengthFromBinaryHeader(bytes,
-		    frame1Length + 6);
+	    int frame2Length = Atari8BitUtility.getLengthFromBinaryHeader(bytes, frame1Length + 6);
 	    if (frame2Length != frame1Length) {
 		throw new IllegalStateException("Inconsistent file");
 	    }
@@ -101,13 +93,12 @@ public class LinearBitMapHIPConverter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int rows = data.getParameters().getRows();
 	int columns = data.getParameters().getColumns();
-	PaletteMapper paletteMapper=new Atari8BitPaletteMapper();
+	PaletteMapper paletteMapper = new Atari8BitPaletteMapper();
 
 	// Assume the binary is already merged in case of a 160012 bytes HIP.
 	int offset9, offset10, offsetPalette;
@@ -182,8 +173,7 @@ public class LinearBitMapHIPConverter extends LinearBitMapConverter {
 
 	    // Merge the two buffers into combined color values.
 	    for (int x = 0; x < buffer1.length; x++) {
-		int atariColor = RBGUtility.combineRGBColor(
-			paletteMapper.getRGBColor(buffer1[x]),
+		int atariColor = RBGUtility.combineRGBColor(paletteMapper.getRGBColor(buffer1[x]),
 			paletteMapper.getRGBColor(buffer2[x]));
 		data.setDirectPixel(x, y1, atariColor);
 	    }

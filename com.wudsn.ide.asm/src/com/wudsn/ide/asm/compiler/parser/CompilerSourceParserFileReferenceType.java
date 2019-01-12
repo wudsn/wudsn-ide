@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -26,13 +26,13 @@ package com.wudsn.ide.asm.compiler.parser;
  */
 public final class CompilerSourceParserFileReferenceType {
 
-	/**
-	 * Creation is private.
-	 */
-	private CompilerSourceParserFileReferenceType() {
-	}
+    /**
+     * Creation is private.
+     */
+    private CompilerSourceParserFileReferenceType() {
+    }
 
-	public final static int NONE=1;
-	public final static int SOURCE = 2;
-	public final static int BINARY = 3;
+    public final static int NONE = 1;
+    public final static int SOURCE = 2;
+    public final static int BINARY = 3;
 }

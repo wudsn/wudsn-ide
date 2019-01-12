@@ -48,8 +48,7 @@ public final class AssemblerPreferences {
      */
     public AssemblerPreferences(IPreferenceStore preferenceStore) {
 	if (preferenceStore == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'preferenceStore' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'preferenceStore' must not be null.");
 	}
 	this.preferenceStore = preferenceStore;
     }
@@ -65,11 +64,9 @@ public final class AssemblerPreferences {
      */
     public TextAttribute getEditorTextAttribute(String name) {
 	if (name == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'name' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'name' must not be null.");
 	}
-	return TextAttributeConverter.fromString(preferenceStore
-		.getString(name));
+	return TextAttributeConverter.fromString(preferenceStore.getString(name));
     }
 
     /**
@@ -105,15 +102,12 @@ public final class AssemblerPreferences {
      */
     public String getCompilerExecutablePath(String compilerId) {
 	if (compilerId == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'compilerId' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'compilerId' must not be null.");
 	}
 	if (StringUtility.isEmpty(compilerId)) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'compilerId' must not be empty.");
+	    throw new IllegalArgumentException("Parameter 'compilerId' must not be empty.");
 	}
-	return getString(AssemblerPreferencesConstants
-		.getCompilerExecutablePathName(compilerId));
+	return getString(AssemblerPreferencesConstants.getCompilerExecutablePathName(compilerId));
     }
 
     /**
@@ -127,19 +121,15 @@ public final class AssemblerPreferences {
      * 
      * @return The compiler preferences, not <code>null</code>.
      */
-    public CompilerPreferences getCompilerPreferences(String compilerId,
-	    Hardware hardware) {
+    public CompilerPreferences getCompilerPreferences(String compilerId, Hardware hardware) {
 	if (compilerId == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'compilerId' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'compilerId' must not be null.");
 	}
 	if (StringUtility.isEmpty(compilerId)) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'compilerId' must not be empty.");
+	    throw new IllegalArgumentException("Parameter 'compilerId' must not be empty.");
 	}
 	if (hardware == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'hardware' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'hardware' must not be null.");
 	}
 	return new CompilerPreferences(this, compilerId, hardware);
 
@@ -157,8 +147,7 @@ public final class AssemblerPreferences {
      */
     String getString(String name) {
 	if (name == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	String result;
 	result = preferenceStore.getString(name);
@@ -183,8 +172,7 @@ public final class AssemblerPreferences {
      */
     boolean getBoolean(String name) {
 	if (name == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	return preferenceStore.getBoolean(name);
     }

@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -149,8 +149,7 @@ public final class FilesConverterParameters extends ConverterCommonParameters {
 
 	public void setPath(String path) {
 	    if (path == null) {
-		throw new IllegalArgumentException(
-			"Parameter 'path' must not be null.");
+		throw new IllegalArgumentException("Parameter 'path' must not be null.");
 	    }
 	    this.path = path;
 	}
@@ -170,12 +169,10 @@ public final class FilesConverterParameters extends ConverterCommonParameters {
 	@Override
 	public boolean equals(Object obj) {
 	    if (obj == null) {
-		throw new IllegalArgumentException(
-			"Parameter 'obj' must not be null.");
+		throw new IllegalArgumentException("Parameter 'obj' must not be null.");
 	    }
 	    SourceFile other = (SourceFile) obj;
-	    return other.id == this.id && other.path.equals(this.path)
-		    && other.offset == this.offset;
+	    return other.id == this.id && other.path.equals(this.path) && other.offset == this.offset;
 	}
 
 	@Override
@@ -232,14 +229,12 @@ public final class FilesConverterParameters extends ConverterCommonParameters {
     @Override
     public void setConverterId(String value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	this.converterId = value;
 
 	ConverterDefinition converterDefinition;
-	converterDefinition = GraphicsPlugin.getInstance()
-		.getConverterRegistry()
+	converterDefinition = GraphicsPlugin.getInstance().getConverterRegistry()
 		.getDefinition(converterId, ConverterDirection.FILES_TO_IMAGE);
 	if (converterDefinition != null) {
 	    sourceFilesSize = converterDefinition.getSourceFileDefinitions().size();
@@ -250,8 +245,7 @@ public final class FilesConverterParameters extends ConverterCommonParameters {
 
     public void setDefaultSourceFilePath(String sourceFilePath) {
 	if (sourceFilePath == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'sourceFilePath' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'sourceFilePath' must not be null.");
 	}
 	for (int i = 0; i < sourceFiles.size(); i++) {
 	    SourceFile sourceFile = sourceFiles.get(i);
@@ -270,8 +264,7 @@ public final class FilesConverterParameters extends ConverterCommonParameters {
 
     public void setImageFilePath(String value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	this.imageFilePath = value;
     }
@@ -332,8 +325,7 @@ public final class FilesConverterParameters extends ConverterCommonParameters {
 
     public void setPaletteType(PaletteType value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	this.paletteType = value;
     }
@@ -344,8 +336,7 @@ public final class FilesConverterParameters extends ConverterCommonParameters {
 
     public void setPalette(Palette value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	this.palette = value;
     }
@@ -382,21 +373,24 @@ public final class FilesConverterParameters extends ConverterCommonParameters {
     }
 
     /**
-     * Sets the array of palette RGBs. Note that the values is kept as a reference.
+     * Sets the array of palette RGBs. Note that the values is kept as a
+     * reference.
      * 
-     * @param value The array of palette RGBs, may be empty, not <code>null</code>.
+     * @param value
+     *            The array of palette RGBs, may be empty, not <code>null</code>
+     *            .
      */
     public void setPaletteRGBs(RGB[] value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	this.paletteRGBs = value;
 
     }
 
     /**
-     * Gets the array of palette RGBs. Note that the returned values is a reference.
+     * Gets the array of palette RGBs. Note that the returned values is a
+     * reference.
      * 
      * @return The array of palette RGBs, may be empty, not <code>null</code>.
      */
@@ -406,8 +400,7 @@ public final class FilesConverterParameters extends ConverterCommonParameters {
 
     protected final void copyTo(FilesConverterParameters target) {
 	if (target == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'target' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'target' must not be null.");
 	}
 	super.copyTo(target);
 
@@ -433,8 +426,7 @@ public final class FilesConverterParameters extends ConverterCommonParameters {
 
     protected final boolean equals(FilesConverterParameters target) {
 	if (target == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'target' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'target' must not be null.");
 	}
 	boolean result;
 	result = super.equals(target);
@@ -452,15 +444,12 @@ public final class FilesConverterParameters extends ConverterCommonParameters {
     }
 
     @Override
-    protected final void serialize(GraphicsPropertiesSerializer serializer,
-	    String key) {
+    protected final void serialize(GraphicsPropertiesSerializer serializer, String key) {
 	if (serializer == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'serializer' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'serializer' must not be null.");
 	}
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 
 	super.serialize(serializer, key);
@@ -473,12 +462,9 @@ public final class FilesConverterParameters extends ConverterCommonParameters {
 	    SourceFile sourceFile = sourceFiles.get(i);
 	    GraphicsPropertiesSerializer innerSeralizer;
 	    innerSeralizer = new GraphicsPropertiesSerializer();
-	    innerSeralizer.writeString(Attributes.SOURCE_FILE_PATH,
-		    sourceFile.getPath());
-	    innerSeralizer.writeInteger(Attributes.SOURCE_FILE_OFFSET,
-		    sourceFile.getOffset());
-	    ownSerializer.writeProperties(Attributes.SOURCE_FILES + "." + i,
-		    innerSeralizer);
+	    innerSeralizer.writeString(Attributes.SOURCE_FILE_PATH, sourceFile.getPath());
+	    innerSeralizer.writeInteger(Attributes.SOURCE_FILE_OFFSET, sourceFile.getOffset());
+	    ownSerializer.writeProperties(Attributes.SOURCE_FILES + "." + i, innerSeralizer);
 	}
 
 	ownSerializer.writeString(Attributes.IMAGE_FILE_PATH, imageFilePath);
@@ -497,11 +483,9 @@ public final class FilesConverterParameters extends ConverterCommonParameters {
     }
 
     @Override
-    protected final void deserialize(GraphicsPropertiesSerializer serializer,
-	    String key) {
+    protected final void deserialize(GraphicsPropertiesSerializer serializer, String key) {
 	if (serializer == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'serializer' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'serializer' must not be null.");
 	}
 	if (key == null) {
 	    throw new IllegalArgumentException();
@@ -517,34 +501,23 @@ public final class FilesConverterParameters extends ConverterCommonParameters {
 	    SourceFile sourceFile = new SourceFile(i);
 	    GraphicsPropertiesSerializer innerSerializer;
 	    innerSerializer = new GraphicsPropertiesSerializer();
-	    ownSerializer.readProperties(Attributes.SOURCE_FILES + "." + i,
-		    innerSerializer);
-	    sourceFile.setPath(innerSerializer.readString(
-		    Attributes.SOURCE_FILE_PATH, Defaults.SOURCE_FILE_PATH));
-	    sourceFile
-		    .setOffset(innerSerializer.readInteger(
-			    Attributes.SOURCE_FILE_OFFSET,
-			    Defaults.SOURCE_FILE_OFFSET));
+	    ownSerializer.readProperties(Attributes.SOURCE_FILES + "." + i, innerSerializer);
+	    sourceFile.setPath(innerSerializer.readString(Attributes.SOURCE_FILE_PATH, Defaults.SOURCE_FILE_PATH));
+	    sourceFile.setOffset(innerSerializer
+		    .readInteger(Attributes.SOURCE_FILE_OFFSET, Defaults.SOURCE_FILE_OFFSET));
 	    sourceFiles.add(sourceFile);
 	}
 
-	imageFilePath = ownSerializer.readString(Attributes.IMAGE_FILE_PATH,
-		Defaults.IMAGE_FILE_PATH);
+	imageFilePath = ownSerializer.readString(Attributes.IMAGE_FILE_PATH, Defaults.IMAGE_FILE_PATH);
 
-	columns = ownSerializer.readInteger(Attributes.COLUMNS,
-		Defaults.COLUMNS);
+	columns = ownSerializer.readInteger(Attributes.COLUMNS, Defaults.COLUMNS);
 	rows = ownSerializer.readInteger(Attributes.ROWS, Defaults.ROWS);
 
-	spacingColor = ownSerializer.readRGB(Attributes.SPACING_COLOR,
-		Defaults.SPACING_COLOR);
-	spacingWidth = ownSerializer.readInteger(Attributes.SPACING_WIDTH,
-		Defaults.SPACING_WIDTH);
+	spacingColor = ownSerializer.readRGB(Attributes.SPACING_COLOR, Defaults.SPACING_COLOR);
+	spacingWidth = ownSerializer.readInteger(Attributes.SPACING_WIDTH, Defaults.SPACING_WIDTH);
 
-	palette = ownSerializer.readEnum(Attributes.PALETTE, Defaults.PALETTE,
-		Palette.class);
-	paletteType = ownSerializer.readEnum(Attributes.PALETTE_TYPE,
-		Defaults.PALETTE_TYPE, PaletteType.class);
-	paletteRGBs = ownSerializer.readRGBArray(Attributes.PALETTE_COLORS,
-		Defaults.PALETTE_COLORS);
+	palette = ownSerializer.readEnum(Attributes.PALETTE, Defaults.PALETTE, Palette.class);
+	paletteType = ownSerializer.readEnum(Attributes.PALETTE_TYPE, Defaults.PALETTE_TYPE, PaletteType.class);
+	paletteRGBs = ownSerializer.readRGBArray(Attributes.PALETTE_COLORS, Defaults.PALETTE_COLORS);
     }
 }

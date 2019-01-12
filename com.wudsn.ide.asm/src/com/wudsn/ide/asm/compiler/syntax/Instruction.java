@@ -42,25 +42,18 @@ public abstract class Instruction implements Comparable<Instruction> {
     private int[] styledTitleOffsets;
     private String proposal;
 
-    protected Instruction(Set<CPU> cpus, int type, boolean caseSensitive,
-	    String name, String title, String proposal) {
+    protected Instruction(Set<CPU> cpus, int type, boolean caseSensitive, String name, String title, String proposal) {
 	if (cpus == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'cpus' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'cpus' must not be null.");
 	}
 	if (name == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'name' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'name' must not be null.");
 	}
 	if (title == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'title' must not be null for instruction '"
-			    + name + "'.");
+	    throw new IllegalArgumentException("Parameter 'title' must not be null for instruction '" + name + "'.");
 	}
 	if (proposal == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'proposal' must not be null for instruction '"
-			    + name + "'.");
+	    throw new IllegalArgumentException("Parameter 'proposal' must not be null for instruction '" + name + "'.");
 	}
 	this.cpus = cpus;
 	this.type = type;
@@ -85,14 +78,12 @@ public abstract class Instruction implements Comparable<Instruction> {
 	    if (c == '_') {
 		i++;
 		if (i >= title.length()) {
-		    throw new RuntimeException("Instruction '" + name
-			    + "' has invalid title '" + title + "'.");
+		    throw new RuntimeException("Instruction '" + name + "' has invalid title '" + title + "'.");
 		}
 		c = title.charAt(i);
 		fc = Character.toUpperCase(c);
 		mnemonicBuilder.append(fc);
-		styledTitleOffsetsList.add(NumberFactory
-			.getInteger(styledTitleBuilder.length()));
+		styledTitleOffsetsList.add(NumberFactory.getInteger(styledTitleBuilder.length()));
 	    } else {
 		fc = c;
 	    }
@@ -104,20 +95,17 @@ public abstract class Instruction implements Comparable<Instruction> {
 	int size = styledTitleOffsetsList.size();
 	this.styledTitleOffsets = new int[size];
 	for (int i = 0; i < size; i++) {
-	    this.styledTitleOffsets[i] = styledTitleOffsetsList.get(i)
-		    .intValue();
+	    this.styledTitleOffsets[i] = styledTitleOffsetsList.get(i).intValue();
 	}
 
 	proposal = proposal.replace("\\n", "" + NEWLINE);
 	if (!proposal.startsWith(name)) {
-	    throw new RuntimeException("Proposal '" + proposal
-		    + "' of instruction '" + name + "' does not start with '"
-		    + name + "'.");
+	    throw new RuntimeException("Proposal '" + proposal + "' of instruction '" + name
+		    + "' does not start with '" + name + "'.");
 	}
 	if (proposal.indexOf(CURSOR) == -1) {
 
-	    throw new RuntimeException("Proposal '" + proposal
-		    + "' of instruction '" + name
+	    throw new RuntimeException("Proposal '" + proposal + "' of instruction '" + name
 		    + "' does not contain cursor positioning via '_'.");
 	}
 
@@ -126,8 +114,7 @@ public abstract class Instruction implements Comparable<Instruction> {
 	// Remove all special characters like
 	StringBuilder mnemonicNameBuilder = new StringBuilder(upperCaseName);
 	for (int i = 0; i < mnemonicNameBuilder.length(); i++) {
-	    if (!Character.isLetter(mnemonicNameBuilder.charAt(i))
-		    && !Character.isDigit(mnemonicNameBuilder.charAt(i))) {
+	    if (!Character.isLetter(mnemonicNameBuilder.charAt(i)) && !Character.isDigit(mnemonicNameBuilder.charAt(i))) {
 		mnemonicNameBuilder.deleteCharAt(i);
 	    }
 	}
@@ -135,10 +122,8 @@ public abstract class Instruction implements Comparable<Instruction> {
 	String mnemonic = mnemonicBuilder.toString();
 	String mnemonicName = mnemonicNameBuilder.toString();
 	if (!mnemonicName.equalsIgnoreCase(mnemonic)) {
-	    throw new RuntimeException("Menmonic '" + mnemonic
-		    + "' derived from title '" + title
-		    + "' with of instruction '" + name
-		    + "' does match mnemonic '" + mnemonicName
+	    throw new RuntimeException("Menmonic '" + mnemonic + "' derived from title '" + title
+		    + "' with of instruction '" + name + "' does match mnemonic '" + mnemonicName
 		    + " derived from the name'.");
 
 	}

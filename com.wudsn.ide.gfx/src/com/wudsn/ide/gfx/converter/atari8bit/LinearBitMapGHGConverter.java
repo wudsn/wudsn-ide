@@ -34,24 +34,19 @@ public class LinearBitMapGHGConverter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	return bytes.length == 0x1f43 && Atari8BitUtility.getWord(bytes, 0) > 0
-		&& Atari8BitUtility.getWord(bytes, 0) <= 320
-		&& (bytes[2] & 0xff) > 0 && (bytes[2] & 0xff) <= 200;
+		&& Atari8BitUtility.getWord(bytes, 0) <= 320 && (bytes[2] & 0xff) > 0 && (bytes[2] & 0xff) <= 200;
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	int columns = (Atari8BitUtility.getWord(bytes, 0) + 7) / 8;
@@ -62,8 +57,7 @@ public class LinearBitMapGHGConverter extends LinearBitMapConverter {
 	paletteColors[0] = paletteMapper.getRGB(12);
 	paletteColors[1] = paletteMapper.getRGB(2);
 
-	setImageSizeAndPalette(data, columns, rows, Palette.HIRES_MANUAL,
-		paletteColors);
+	setImageSizeAndPalette(data, columns, rows, Palette.HIRES_MANUAL, paletteColors);
     }
 
     @Override
@@ -75,8 +69,7 @@ public class LinearBitMapGHGConverter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int offset = 3;

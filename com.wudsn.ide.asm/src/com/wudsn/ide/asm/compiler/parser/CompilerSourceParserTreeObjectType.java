@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -111,13 +111,13 @@ public final class CompilerSourceParserTreeObjectType {
 	case BINARY_OUTPUT:
 	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_BINARY_OUTPUT;
 	    break;
-	    default:
+	default:
 	    throw new IllegalArgumentException("Unknown type " + type + ".");
 	}
 	return result;
 
     }
-    
+
     /**
      * Determines if instructions are allowed in the given type of section.
      * 

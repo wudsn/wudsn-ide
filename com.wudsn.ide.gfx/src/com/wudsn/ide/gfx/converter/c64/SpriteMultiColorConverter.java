@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -28,17 +28,14 @@ public class SpriteMultiColorConverter extends SpriteConverter {
 
     @Override
     public void convertToImageDataSize(FilesConverterData data) {
-	data.setImageDataWidth(data.getParameters().getColumns()
-		* (3 * 4 + data.getParameters().getSpacingWidth()));
-	data.setImageDataHeight(data.getParameters().getRows()
-		* (21 + data.getParameters().getSpacingWidth()));
+	data.setImageDataWidth(data.getParameters().getColumns() * (3 * 4 + data.getParameters().getSpacingWidth()));
+	data.setImageDataHeight(data.getParameters().getRows() * (21 + data.getParameters().getSpacingWidth()));
     }
 
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int offset = 0;

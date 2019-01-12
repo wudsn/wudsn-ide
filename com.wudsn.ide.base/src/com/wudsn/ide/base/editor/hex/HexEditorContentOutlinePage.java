@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -39,8 +39,7 @@ final class HexEditorContentOutlinePage extends ContentOutlinePage {
 
     HexEditorContentOutlinePage(HexEditor editor) {
 	if (editor == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'editor' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'editor' must not be null.");
 	}
 	this.editor = editor;
 
@@ -52,8 +51,7 @@ final class HexEditorContentOutlinePage extends ContentOutlinePage {
 
 	TreeViewer viewer = getTreeViewer();
 	viewer.getControl().setFont(JFaceResources.getTextFont());
-	viewer
-		.setContentProvider(new HexEditorContentOutlineTreeContentProvider());
+	viewer.setContentProvider(new HexEditorContentOutlineTreeContentProvider());
 	viewer.setLabelProvider(new HexEditorContentOutlineLabelProvider());
 	viewer.addSelectionChangedListener(this);
 	viewer.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
@@ -71,8 +69,7 @@ final class HexEditorContentOutlinePage extends ContentOutlinePage {
 
     void setInput(Object input) {
 	if (input == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'input' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'input' must not be null.");
 	}
 	this.input = input;
 	updateTreeView();

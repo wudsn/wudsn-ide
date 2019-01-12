@@ -74,7 +74,7 @@ import com.wudsn.ide.base.gui.SWTFactory;
 public final class AssemblerPreferencesPage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
     private abstract class TextAttributeSelectionListener implements SelectionListener {
-	
+
 	/**
 	 * Creation is public.
 	 */

@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -36,29 +36,23 @@ public class LinearBitMapGraphics9Converter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	return bytes.length == 7680;
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	RGB[] paletteColors;
-	paletteColors = PaletteUtility.getPaletteColors(
-		PaletteType.ATARI_DEFAULT, Palette.GTIA_GREY_1, null);
-	setImageSizeAndPalette(data, 40, 192, Palette.GTIA_GREY_1,
-		paletteColors);
+	paletteColors = PaletteUtility.getPaletteColors(PaletteType.ATARI_DEFAULT, Palette.GTIA_GREY_1, null);
+	setImageSizeAndPalette(data, 40, 192, Palette.GTIA_GREY_1, paletteColors);
     }
 
     @Override
@@ -70,8 +64,7 @@ public class LinearBitMapGraphics9Converter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int offset = 0;

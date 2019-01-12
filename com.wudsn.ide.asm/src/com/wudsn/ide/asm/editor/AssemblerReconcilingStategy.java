@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -33,8 +33,7 @@ import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
  * @author Peter Dell
  * @author Andy Reek
  */
-final class AssemblerReconcilingStategy implements IReconcilingStrategy,
-	IReconcilingStrategyExtension {
+final class AssemblerReconcilingStategy implements IReconcilingStrategy, IReconcilingStrategyExtension {
 
     private final AssemblerEditor editor;
     private IDocument document;
@@ -48,8 +47,7 @@ final class AssemblerReconcilingStategy implements IReconcilingStrategy,
      */
     AssemblerReconcilingStategy(AssemblerEditor editor) {
 	if (editor == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'editor' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'editor' must not be null.");
 	}
 	this.editor = editor;
     }

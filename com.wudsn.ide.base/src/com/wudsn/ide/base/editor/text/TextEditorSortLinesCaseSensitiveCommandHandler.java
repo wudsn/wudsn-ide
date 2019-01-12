@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -26,8 +26,7 @@ import java.util.Comparator;
  * 
  * @author Peter Dell
  */
-public final class TextEditorSortLinesCaseSensitiveCommandHandler extends
-	TextEditorSortLinesCommandHandler {
+public final class TextEditorSortLinesCaseSensitiveCommandHandler extends TextEditorSortLinesCommandHandler {
 
     private static final Comparator<String> CASE_SENSITIVE_COMPARATOR = new CaseSensitiveComparator();
 

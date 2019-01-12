@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -62,12 +62,10 @@ public abstract class CommonOpenEditorCommandHandler extends AbstractHandler {
      */
     protected CommonOpenEditorCommandHandler(String editorId) {
 	if (editorId == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'editorId' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'editorId' must not be null.");
 	}
 	if (StringUtility.isEmpty(editorId)) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'editorId' must not be empty.");
+	    throw new IllegalArgumentException("Parameter 'editorId' must not be empty.");
 	}
 	this.editorId = editorId;
     }
@@ -88,8 +86,7 @@ public abstract class CommonOpenEditorCommandHandler extends AbstractHandler {
 
 	    }
 	} else if (menuEditorInputSelection instanceof IStructuredSelection) {
-	    Iterator<?> i = ((IStructuredSelection) menuEditorInputSelection)
-		    .iterator();
+	    Iterator<?> i = ((IStructuredSelection) menuEditorInputSelection).iterator();
 	    while (i.hasNext()) {
 		Object object = i.next();
 		if (object instanceof IFileEditorInput) {
@@ -114,8 +111,7 @@ public abstract class CommonOpenEditorCommandHandler extends AbstractHandler {
     private void openFile(List<IFile> files, Object object) {
 
 	if (files == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'files' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'files' must not be null.");
 	}
 	if (object instanceof IFile) {
 
@@ -123,8 +119,7 @@ public abstract class CommonOpenEditorCommandHandler extends AbstractHandler {
 	    if (!files.contains(file)) {
 		files.add(file);
 
-		IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench()
-			.getActiveWorkbenchWindow();
+		IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IWorkbenchPage page = workbenchWindow.getActivePage();
 
 		// Open an editor on the new file.
@@ -142,8 +137,7 @@ public abstract class CommonOpenEditorCommandHandler extends AbstractHandler {
 		    IDE.setDefaultEditor(file, editorId);
 		    IDE.openEditor(page, editorInput, editorId);
 		} catch (PartInitException exception) {
-		    MessageDialog.openError(workbenchWindow.getShell(),
-			    Texts.DIALOG_TITLE, exception.getMessage());
+		    MessageDialog.openError(workbenchWindow.getShell(), Texts.DIALOG_TITLE, exception.getMessage());
 		}
 	    }
 	}

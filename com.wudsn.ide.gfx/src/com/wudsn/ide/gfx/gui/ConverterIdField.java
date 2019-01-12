@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -40,19 +40,15 @@ public final class ConverterIdField extends Field {
     private Combo combo;
     private List<ConverterDefinition> converterDefinitions;
 
-    public ConverterIdField(Composite parent, String labelText,
-	    ConverterDirection converterDirection) {
+    public ConverterIdField(Composite parent, String labelText, ConverterDirection converterDirection) {
 	if (parent == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'parent' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
 	}
 	if (labelText == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'labelText' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'labelText' must not be null.");
 	}
 	if (converterDirection == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'converterDirection' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'converterDirection' must not be null.");
 	}
 	label = new Label(parent, SWT.NONE);
 	label.setText(labelText);
@@ -60,8 +56,7 @@ public final class ConverterIdField extends Field {
 
 	GraphicsPlugin plugin = GraphicsPlugin.getInstance();
 	ConverterRegistry converterRegistry = plugin.getConverterRegistry();
-	converterDefinitions = converterRegistry
-		.getDefinitions(converterDirection);
+	converterDefinitions = converterRegistry.getDefinitions(converterDirection);
 
 	combo.add("");
 	for (ConverterDefinition converterDefinition : converterDefinitions) {
@@ -99,8 +94,7 @@ public final class ConverterIdField extends Field {
 
     public void setValue(String value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	for (int i = 0; i < converterDefinitions.size(); i++) {
 	    if (value.equals(converterDefinitions.get(i).getId())) {

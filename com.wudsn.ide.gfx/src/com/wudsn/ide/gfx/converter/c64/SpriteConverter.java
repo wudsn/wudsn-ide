@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -28,7 +28,6 @@ public abstract class SpriteConverter extends Converter {
      */
     public static final int SPRITE_FILE = 0;
 
-    
     protected SpriteConverter() {
     }
 }

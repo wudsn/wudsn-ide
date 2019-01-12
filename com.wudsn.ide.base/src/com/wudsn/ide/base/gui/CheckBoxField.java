@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -52,12 +52,10 @@ public final class CheckBoxField extends Field {
      */
     public CheckBoxField(Composite parent, String labelText, int style) {
 	if (parent == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'parent' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
 	}
 	if (labelText == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'labelText' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'labelText' must not be null.");
 	}
 
 	label = new Label(parent, SWT.NONE);
@@ -123,8 +121,7 @@ public final class CheckBoxField extends Field {
      */
     public void addSelectionAction(Action action) {
 	if (action == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'action' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'action' must not be null.");
 	}
 	selectionActions.add(action);
 	button.addSelectionListener(action);

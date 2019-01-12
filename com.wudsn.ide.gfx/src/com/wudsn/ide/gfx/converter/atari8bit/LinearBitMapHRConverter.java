@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -35,22 +35,18 @@ public class LinearBitMapHRConverter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	return bytes.length == 16384;
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	RGB[] paletteColors = new RGB[3];
@@ -58,10 +54,8 @@ public class LinearBitMapHRConverter extends LinearBitMapConverter {
 	paletteColors[2] = PaletteUtility.WHITE;
 
 	// Compute mixed interlace colors.
-	paletteColors[1] = RBGUtility.combineRGB(paletteColors[0],
-		paletteColors[2]);
-	setImageSizeAndPalette(data, 32, 239, Palette.MULTI_MANUAL,
-		paletteColors);
+	paletteColors[1] = RBGUtility.combineRGB(paletteColors[0], paletteColors[2]);
+	setImageSizeAndPalette(data, 32, 239, Palette.MULTI_MANUAL, paletteColors);
     }
 
     @Override
@@ -73,8 +67,7 @@ public class LinearBitMapHRConverter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int offset = 0;
@@ -87,8 +80,7 @@ public class LinearBitMapHRConverter extends LinearBitMapConverter {
 		if (b1 < 0) {
 		    return true;
 		}
-		int b2 = data.getSourceFileByte(BIT_MAP_FILE, offset
-			+ frameSize);
+		int b2 = data.getSourceFileByte(BIT_MAP_FILE, offset + frameSize);
 		if (b2 < 0) {
 		    return true;
 		}

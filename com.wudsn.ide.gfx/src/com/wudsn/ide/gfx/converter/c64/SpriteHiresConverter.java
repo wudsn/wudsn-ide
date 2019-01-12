@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -35,31 +35,26 @@ public class SpriteHiresConverter extends SpriteConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	boolean c64Sprite = C64Utility.isC64Sprite(bytes);
 	return c64Sprite;
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	int columns = 8;
 	int lineSize = columns * 64;
 	int rows;
 	if (bytes.length % 0x100 == 2) {
-	    data.getParameters().getSourceFile(SpriteConverter.SPRITE_FILE)
-		    .setOffset(2);
+	    data.getParameters().getSourceFile(SpriteConverter.SPRITE_FILE).setOffset(2);
 	    rows = (bytes.length - 2 + lineSize - 1) / lineSize;
 
 	} else {
@@ -67,25 +62,20 @@ public class SpriteHiresConverter extends SpriteConverter {
 	}
 
 	RGB[] paletteColors;
-	paletteColors = PaletteUtility.getPaletteColors(
-		PaletteType.ATARI_DEFAULT, Palette.HIRES_1, null);
-	setImageSizeAndPalette(data, columns, rows, Palette.HIRES_1,
-		paletteColors);
+	paletteColors = PaletteUtility.getPaletteColors(PaletteType.ATARI_DEFAULT, Palette.HIRES_1, null);
+	setImageSizeAndPalette(data, columns, rows, Palette.HIRES_1, paletteColors);
     }
 
     @Override
     public void convertToImageDataSize(FilesConverterData data) {
-	data.setImageDataWidth(data.getParameters().getColumns()
-		* (3 * 8 + data.getParameters().getSpacingWidth()));
-	data.setImageDataHeight(data.getParameters().getRows()
-		* (21 + data.getParameters().getSpacingWidth()));
+	data.setImageDataWidth(data.getParameters().getColumns() * (3 * 8 + data.getParameters().getSpacingWidth()));
+	data.setImageDataHeight(data.getParameters().getRows() * (21 + data.getParameters().getSpacingWidth()));
     }
 
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int offset = 0;

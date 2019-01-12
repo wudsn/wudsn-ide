@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -30,18 +30,15 @@ import org.eclipse.core.commands.Command;
  * 
  * @author Peter Dell
  */
-abstract class TextEditorSortLinesCommandHandler extends
-	TextEditorLinesCommandHandler {
+abstract class TextEditorSortLinesCommandHandler extends TextEditorLinesCommandHandler {
 
     @Override
     protected void process(Command command, List<String> lines) {
 	if (command == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'command' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'command' must not be null.");
 	}
 	if (lines == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'lines' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'lines' must not be null.");
 	}
 	Comparator<String> comparator = getComparator();
 	Collections.sort(lines, comparator);

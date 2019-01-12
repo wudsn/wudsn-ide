@@ -25,7 +25,6 @@ import com.wudsn.ide.asm.AssemblerPlugin;
 import com.wudsn.ide.asm.compiler.CompilerSymbol;
 import com.wudsn.ide.asm.compiler.CompilerSymbolType;
 
-
 /**
  * LabelProvider for the {@link CompilerSymbol} instances in the compiler
  * symbols view.
@@ -55,7 +54,6 @@ final class CompilerSymbolLabelProvider {
     /** Outline procedure definition section image */
     private final Image procedureDefinitionSectionImage;
 
-    
     CompilerSymbolLabelProvider() {
 	AssemblerPlugin plugin;
 	plugin = AssemblerPlugin.getInstance();

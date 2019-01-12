@@ -37,24 +37,19 @@ public final class CompilerPreferences {
     private Hardware hardware;
     private String compilerId;
 
-    CompilerPreferences(AssemblerPreferences assemblerPreferences,
-	    String compilerId, Hardware hardware) {
+    CompilerPreferences(AssemblerPreferences assemblerPreferences, String compilerId, Hardware hardware) {
 	if (assemblerPreferences == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'assemblerPreferences' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'assemblerPreferences' must not be null.");
 	}
 
 	if (compilerId == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'compilerId' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'compilerId' must not be null.");
 	}
 	if (StringUtility.isEmpty(compilerId)) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'compilerId' must not be empty.");
+	    throw new IllegalArgumentException("Parameter 'compilerId' must not be empty.");
 	}
 	if (hardware == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'hardware' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'hardware' must not be null.");
 	}
 	this.assemblerPreferences = assemblerPreferences;
 	this.compilerId = compilerId;
@@ -91,9 +86,8 @@ public final class CompilerPreferences {
      */
     public CPU getCPU() {
 	CPU result;
-	String cpuString = assemblerPreferences
-		.getString(AssemblerPreferencesConstants.getCompilerCPUName(
-			compilerId, hardware));
+	String cpuString = assemblerPreferences.getString(AssemblerPreferencesConstants.getCompilerCPUName(compilerId,
+		hardware));
 
 	if (StringUtility.isEmpty(cpuString)) {
 	    result = CPU.MOS6502;
@@ -130,8 +124,8 @@ public final class CompilerPreferences {
      *         <code>null</code>.
      */
     public String getParameters() {
-	return assemblerPreferences.getString(AssemblerPreferencesConstants
-		.getCompilerParametersName(compilerId, hardware));
+	return assemblerPreferences.getString(AssemblerPreferencesConstants.getCompilerParametersName(compilerId,
+		hardware));
     }
 
     /**
@@ -143,8 +137,8 @@ public final class CompilerPreferences {
      */
     public String getOutputFolderMode() {
 
-	return assemblerPreferences.getString(AssemblerPreferencesConstants
-		.getCompilerOutputFolderModeName(compilerId, hardware));
+	return assemblerPreferences.getString(AssemblerPreferencesConstants.getCompilerOutputFolderModeName(compilerId,
+		hardware));
     }
 
     /**
@@ -157,8 +151,8 @@ public final class CompilerPreferences {
      */
     public String getOutputFolderPath() {
 
-	return assemblerPreferences.getString(AssemblerPreferencesConstants
-		.getCompilerOutputFolderPathName(compilerId, hardware));
+	return assemblerPreferences.getString(AssemblerPreferencesConstants.getCompilerOutputFolderPathName(compilerId,
+		hardware));
     }
 
     /**
@@ -168,8 +162,8 @@ public final class CompilerPreferences {
      */
     public String getOutputFileExtension() {
 
-	return assemblerPreferences.getString(AssemblerPreferencesConstants
-		.getCompilerOutputFileExtensionName(compilerId, hardware));
+	return assemblerPreferences.getString(AssemblerPreferencesConstants.getCompilerOutputFileExtensionName(
+		compilerId, hardware));
     }
 
     /**
@@ -179,9 +173,8 @@ public final class CompilerPreferences {
      *         <code>null</code>.
      */
     public String getRunnerId() {
-	String result = assemblerPreferences
-		.getString(AssemblerPreferencesConstants
-			.getCompilerRunnerIdName(compilerId, hardware));
+	String result = assemblerPreferences.getString(AssemblerPreferencesConstants.getCompilerRunnerIdName(
+		compilerId, hardware));
 	if (StringUtility.isEmpty(result)) {
 	    result = RunnerId.DEFAULT_APPLICATION;
 	}
@@ -199,16 +192,13 @@ public final class CompilerPreferences {
      */
     public String getRunnerExecutablePath(String runnerId) {
 	if (runnerId == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'runnerId' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'runnerId' must not be null.");
 	}
 	if (StringUtility.isEmpty(runnerId)) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'runnerId' must not be empty.");
+	    throw new IllegalArgumentException("Parameter 'runnerId' must not be empty.");
 	}
-	return assemblerPreferences.getString(AssemblerPreferencesConstants
-		.getCompilerRunnerExecutablePathName(compilerId, hardware,
-			runnerId));
+	return assemblerPreferences.getString(AssemblerPreferencesConstants.getCompilerRunnerExecutablePathName(
+		compilerId, hardware, runnerId));
     }
 
     /**
@@ -222,16 +212,13 @@ public final class CompilerPreferences {
      */
     public String getRunnerCommandLine(String runnerId) {
 	if (runnerId == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'runnerId' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'runnerId' must not be null.");
 	}
 	if (StringUtility.isEmpty(runnerId)) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'runnerId' must not be empty.");
+	    throw new IllegalArgumentException("Parameter 'runnerId' must not be empty.");
 	}
-	return assemblerPreferences.getString(AssemblerPreferencesConstants
-		.getCompilerRunnerCommandLineName(compilerId, hardware,
-			runnerId));
+	return assemblerPreferences.getString(AssemblerPreferencesConstants.getCompilerRunnerCommandLineName(
+		compilerId, hardware, runnerId));
     }
 
     /**
@@ -247,16 +234,13 @@ public final class CompilerPreferences {
      */
     public boolean isRunnerWaitForCompletion(String runnerId) {
 	if (runnerId == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'runnerId' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'runnerId' must not be null.");
 	}
 	if (StringUtility.isEmpty(runnerId)) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'runnerId' must not be empty.");
+	    throw new IllegalArgumentException("Parameter 'runnerId' must not be empty.");
 	}
-	return assemblerPreferences.getBoolean(AssemblerPreferencesConstants
-		.getCompilerRunnerWaitForCompletionName(compilerId, hardware,
-			runnerId));
+	return assemblerPreferences.getBoolean(AssemblerPreferencesConstants.getCompilerRunnerWaitForCompletionName(
+		compilerId, hardware, runnerId));
     }
 
 }

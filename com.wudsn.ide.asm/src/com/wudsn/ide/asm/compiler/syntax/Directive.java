@@ -25,8 +25,7 @@ import com.wudsn.ide.asm.CPU;
 
 public final class Directive extends Instruction {
 
-    Directive(Set<CPU> cpus, int type, boolean caseSensitive,
-	    String name, String title, String proposal) {
+    Directive(Set<CPU> cpus, int type, boolean caseSensitive, String name, String title, String proposal) {
 	super(cpus, type, caseSensitive, name, title, proposal);
 
 	switch (type) {
@@ -50,8 +49,7 @@ public final class Directive extends Instruction {
 	    break;
 
 	default:
-	    throw new IllegalArgumentException("Unknown type " + type
-		    + " for directive '" + name + "'.");
+	    throw new IllegalArgumentException("Unknown type " + type + " for directive '" + name + "'.");
 	}
     }
 }

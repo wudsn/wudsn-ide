@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -52,15 +52,12 @@ final class ImageCanvasUtility {
      * @return The SWT rectangle after transform with positive width and height,
      *         not <code>null</code>.
      */
-    public static Rectangle transformRectangle(AffineTransform affineTransform,
-	    Rectangle sourceRectangle) {
+    public static Rectangle transformRectangle(AffineTransform affineTransform, Rectangle sourceRectangle) {
 	if (affineTransform == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'transform' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'transform' must not be null.");
 	}
 	if (sourceRectangle == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'sourceRectangle' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'sourceRectangle' must not be null.");
 	}
 	Rectangle result = new Rectangle(0, 0, 0, 0);
 	sourceRectangle = absoluteRectangle(sourceRectangle);
@@ -68,10 +65,8 @@ final class ImageCanvasUtility {
 	point = transformPoint(affineTransform, point);
 	result.x = point.x;
 	result.y = point.y;
-	result.width = (int) (sourceRectangle.width * affineTransform
-		.getScaleX());
-	result.height = (int) (sourceRectangle.height * affineTransform
-		.getScaleY());
+	result.width = (int) (sourceRectangle.width * affineTransform.getScaleX());
+	result.height = (int) (sourceRectangle.height * affineTransform.getScaleY());
 	return result;
     }
 
@@ -86,15 +81,12 @@ final class ImageCanvasUtility {
      * @return The SWT rectangle after transform with positive width and height,
      *         not <code>null</code>.
      */
-    public static Rectangle inverseTransformRectangle(
-	    AffineTransform affineTransform, Rectangle sourceRectangle) {
+    public static Rectangle inverseTransformRectangle(AffineTransform affineTransform, Rectangle sourceRectangle) {
 	if (affineTransform == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'transform' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'transform' must not be null.");
 	}
 	if (sourceRectangle == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'sourceRectangle' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'sourceRectangle' must not be null.");
 	}
 	Rectangle result = new Rectangle(0, 0, 0, 0);
 	sourceRectangle = absoluteRectangle(sourceRectangle);
@@ -102,10 +94,8 @@ final class ImageCanvasUtility {
 	p1 = inverseTransformPoint(affineTransform, p1);
 	result.x = p1.x;
 	result.y = p1.y;
-	result.width = (int) (sourceRectangle.width / affineTransform
-		.getScaleX());
-	result.height = (int) (sourceRectangle.height / affineTransform
-		.getScaleY());
+	result.width = (int) (sourceRectangle.width / affineTransform.getScaleX());
+	result.height = (int) (sourceRectangle.height / affineTransform.getScaleY());
 	return result;
     }
 
@@ -118,20 +108,16 @@ final class ImageCanvasUtility {
      *            The SWT source point, not <code>null</code>.
      * @return The SWT point after transform, not <code>null</code>.
      */
-    public static Point transformPoint(AffineTransform affineTransform,
-	    Point sourcePoint) {
+    public static Point transformPoint(AffineTransform affineTransform, Point sourcePoint) {
 	if (affineTransform == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'affineTransform' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'affineTransform' must not be null.");
 	}
 	if (sourcePoint == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'sourcePoint' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'sourcePoint' must not be null.");
 	}
 	Point2D src = new Point2D.Float(sourcePoint.x, sourcePoint.y);
 	Point2D dest = affineTransform.transform(src, null);
-	Point result = new Point((int) Math.floor(dest.getX()), (int) Math
-		.floor(dest.getY()));
+	Point result = new Point((int) Math.floor(dest.getX()), (int) Math.floor(dest.getY()));
 	return result;
     }
 
@@ -144,16 +130,13 @@ final class ImageCanvasUtility {
      *            The SWT source point, not <code>null</code>.
      * @return The SWT point after transform, not <code>null</code>.
      */
-    public static Point inverseTransformPoint(AffineTransform affineTransform,
-	    Point sourcePoint) {
+    public static Point inverseTransformPoint(AffineTransform affineTransform, Point sourcePoint) {
 
 	if (affineTransform == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'affineTransform' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'affineTransform' must not be null.");
 	}
 	if (sourcePoint == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'sourcePoint' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'sourcePoint' must not be null.");
 	}
 	Point2D src = new Point2D.Float(sourcePoint.x, sourcePoint.y);
 
@@ -163,8 +146,7 @@ final class ImageCanvasUtility {
 	} catch (NoninvertibleTransformException ex) {
 	    throw new RuntimeException("Invalid transformation", ex);
 	}
-	Point result = new Point((int) Math.floor(dest.getX()), (int) Math
-		.floor(dest.getY()));
+	Point result = new Point((int) Math.floor(dest.getX()), (int) Math.floor(dest.getY()));
 	return result;
     }
 
@@ -179,8 +161,7 @@ final class ImageCanvasUtility {
      */
     private static Rectangle absoluteRectangle(Rectangle sourceRectangle) {
 	if (sourceRectangle == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'sourceRectangle' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'sourceRectangle' must not be null.");
 	}
 	Rectangle result = new Rectangle(0, 0, 0, 0);
 	if (sourceRectangle.width < 0) {

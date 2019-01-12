@@ -113,8 +113,8 @@ final class SongTableView {
 
 	table = new Table(parent, SWT.BORDER | SWT.SINGLE | SWT.FULL_SELECTION);
 	table.setHeaderVisible(true);
-	RowData layoutData=new RowData();
-	layoutData.width=640;
+	RowData layoutData = new RowData();
+	layoutData.width = 640;
 	table.setLayoutData(layoutData);
 	/*
 	 * NOTE: MeasureItem, PaintItem and EraseItem are called repeatedly.

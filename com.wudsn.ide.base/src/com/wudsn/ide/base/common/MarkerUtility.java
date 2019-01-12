@@ -62,19 +62,15 @@ public final class MarkerUtility {
      * 
      * @return The marker representing the message, not <code>null</code>.
      */
-    public static IMarker createMarker(IFile file, int lineNumber,
-	    int severity, String message, String... parameters) {
+    public static IMarker createMarker(IFile file, int lineNumber, int severity, String message, String... parameters) {
 	if (file == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'file' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'file' must not be null.");
 	}
 	if (message == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'message' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'message' must not be null.");
 	}
 	if (parameters == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'parameters' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'parameters' must not be null.");
 	}
 
 	message = TextUtility.format(message, parameters);
@@ -107,8 +103,7 @@ public final class MarkerUtility {
      */
     public static void gotoMarker(IEditorPart editor, IMarker marker) {
 	if (marker == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'marker' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'marker' must not be null.");
 	}
 	try {
 	    IFile iFile = (IFile) marker.getResource();

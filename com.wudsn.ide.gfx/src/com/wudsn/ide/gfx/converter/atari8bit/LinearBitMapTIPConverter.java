@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -39,18 +39,15 @@ public class LinearBitMapTIPConverter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	if (bytes.length < 9) {
 	    return false;
 	}
 
 	int frameLength = (bytes[7] & 0xff) + ((bytes[8] & 0xff) << 8);
-	if (bytes[0] != 'T' || bytes[1] != 'I' || bytes[2] != 'P'
-		|| bytes[3] != 1 || bytes[4] != 0 || bytes[5] == 0
-		|| (bytes[5] & 0xff) > 160 || bytes[6] == 0
-		|| (bytes[6] & 0xff) > 119
+	if (bytes[0] != 'T' || bytes[1] != 'I' || bytes[2] != 'P' || bytes[3] != 1 || bytes[4] != 0 || bytes[5] == 0
+		|| (bytes[5] & 0xff) > 160 || bytes[6] == 0 || (bytes[6] & 0xff) > 119
 		|| (9 + frameLength * 3) != bytes.length) {
 	    return false;
 	}
@@ -59,15 +56,12 @@ public class LinearBitMapTIPConverter extends LinearBitMapConverter {
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	int columns;
 	int rows;
@@ -85,13 +79,12 @@ public class LinearBitMapTIPConverter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int rows = data.getParameters().getRows();
 	int columns = data.getParameters().getColumns();
-	PaletteMapper paletteMapper=new Atari8BitPaletteMapper();
+	PaletteMapper paletteMapper = new Atari8BitPaletteMapper();
 
 	// Assume the binary is already merged in case of a 160012 bytes HIP.
 	int offset9, offset10, offset11;
@@ -152,8 +145,7 @@ public class LinearBitMapTIPConverter extends LinearBitMapConverter {
 
 	    // Merge the two buffers into combined color values.
 	    for (int x = 0; x < buffer1.length; x++) {
-		int atariColor = RBGUtility.combineRGBColor(
-			paletteMapper.getRGBColor(buffer1[x]),
+		int atariColor = RBGUtility.combineRGBColor(paletteMapper.getRGBColor(buffer1[x]),
 			paletteMapper.getRGBColor(buffer2[x]));
 		data.setDirectPixel(x, y1, atariColor);
 	    }
@@ -163,8 +155,7 @@ public class LinearBitMapTIPConverter extends LinearBitMapConverter {
 
     public static void convertToFileData(ImageConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
     }
 }

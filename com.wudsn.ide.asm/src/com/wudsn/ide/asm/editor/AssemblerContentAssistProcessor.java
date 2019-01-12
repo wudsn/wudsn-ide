@@ -94,8 +94,7 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
      * 
      * @since 1.6.0
      */
-    private static final class SourceParserCallback extends
-	    CompilerSourceParserLineCallback {
+    private static final class SourceParserCallback extends CompilerSourceParserLineCallback {
 	private boolean instructionFound;
 	private int instructionEndOffset;
 
@@ -114,11 +113,9 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 	}
 
 	@Override
-	public void processLine(CompilerSourceParser compilerSourceParser,
-		CompilerSourceFile compilerSourceFile, int lineNumber,
-		int startOffset, int symbolOffset, boolean instructionFound,
-		int instructionOffset, String instruction, int operandOffset,
-		CompilerSourceParserTreeObject section) {
+	public void processLine(CompilerSourceParser compilerSourceParser, CompilerSourceFile compilerSourceFile,
+		int lineNumber, int startOffset, int symbolOffset, boolean instructionFound, int instructionOffset,
+		String instruction, int operandOffset, CompilerSourceParserTreeObject section) {
 
 	    this.instructionFound = instructionFound;
 	    if (instructionFound) {
@@ -173,21 +170,16 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
      */
     AssemblerContentAssistProcessor(AssemblerEditor editor) {
 	if (editor == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'editor' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'editor' must not be null.");
 	}
 
 	this.editor = editor;
 
 	AssemblerPlugin plugin = editor.getPlugin();
-	directiveImage = plugin
-		.getImage("instruction-type-directive-16x16.gif");
-	legalOpcodeImage = plugin
-		.getImage("instruction-type-legal-opcode-16x16.gif");
-	illegalOpcodeImage = plugin
-		.getImage("instruction-type-illegal-opcode-16x16.gif");
-	pseudoOpcodeImage = plugin
-		.getImage("instruction-type-pseudo-opcode-16x16.gif");
+	directiveImage = plugin.getImage("instruction-type-directive-16x16.gif");
+	legalOpcodeImage = plugin.getImage("instruction-type-legal-opcode-16x16.gif");
+	illegalOpcodeImage = plugin.getImage("instruction-type-illegal-opcode-16x16.gif");
+	pseudoOpcodeImage = plugin.getImage("instruction-type-pseudo-opcode-16x16.gif");
 	instructionStyler = new InstructionStyler();
 	highlightStyler = new HighlightStyler();
     }
@@ -196,14 +188,11 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
      * {@inheritDoc}
      */
     @Override
-    public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer,
-	    int offset) {
+    public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 	if (viewer == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'viewer' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'viewer' must not be null.");
 	}
-	ITextSelection selection = (ITextSelection) viewer
-		.getSelectionProvider().getSelection();
+	ITextSelection selection = (ITextSelection) viewer.getSelectionProvider().getSelection();
 
 	int selectionOffset = offset;
 
@@ -227,38 +216,27 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 	// Parse the current assembler file and try to find the line in the
 	// correct source file.
 	CompilerFiles files = AssemblerEditorFilesLogic.createInstance(editor).createCompilerFiles();
-	if (files==null){
+	if (files == null) {
 	    return null;
 	}
-	SourceParserCallback compilerSourceCallback = new SourceParserCallback(
-		files.sourceFile.filePath, lineNumber);
-	CompilerSourceParser compilerSourceParser = editor
-		.createCompilerSourceParser();
-	CompilerSourceFile compilerSourceFile = compilerSourceParser
-		.createCompilerSourceFile(files.sourceFile.file,
-			viewer.getDocument());
+	SourceParserCallback compilerSourceCallback = new SourceParserCallback(files.sourceFile.filePath, lineNumber);
+	CompilerSourceParser compilerSourceParser = editor.createCompilerSourceParser();
+	CompilerSourceFile compilerSourceFile = compilerSourceParser.createCompilerSourceFile(files.sourceFile.file,
+		viewer.getDocument());
 	compilerSourceParser.parse(compilerSourceFile, compilerSourceCallback);
 
 	// If there is no instruction in the line yet or the cursor is exactly
 	// at the last character of that instruction, propose one.
 	if (!compilerSourceCallback.wasInstructionFound()
-		|| selectionOffset == lineOffset
-			+ compilerSourceCallback.getInstructionEndOffset()) {
-	    String prefix = getPrefix(viewer,
-		    compilerSourceParser.getCompilerSyntax(), selectionOffset,
-		    false);
-	    Region region = new Region(selectionOffset - prefix.length(),
-		    prefix.length() + selection.getLength());
+		|| selectionOffset == lineOffset + compilerSourceCallback.getInstructionEndOffset()) {
+	    String prefix = getPrefix(viewer, compilerSourceParser.getCompilerSyntax(), selectionOffset, false);
+	    Region region = new Region(selectionOffset - prefix.length(), prefix.length() + selection.getLength());
 	    addInstructionProposals(region, prefix, proposalList);
 	} else {
 	    // Otherwise propose to use an identifier as operand.
-	    String prefix = getPrefix(viewer,
-		    compilerSourceParser.getCompilerSyntax(), selectionOffset,
-		    true);
-	    Region region = new Region(selectionOffset - prefix.length(),
-		    prefix.length() + selection.getLength());
-	    addIdentifierProposals(region, prefix, compilerSourceFile,
-		    proposalList);
+	    String prefix = getPrefix(viewer, compilerSourceParser.getCompilerSyntax(), selectionOffset, true);
+	    Region region = new Region(selectionOffset - prefix.length(), prefix.length() + selection.getLength());
+	    addIdentifierProposals(region, prefix, compilerSourceFile, proposalList);
 	}
 
 	// If there is no proposal entry, return null instead of an empty array.
@@ -286,15 +264,12 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
      * 
      * @return The prefix, may be empty, not <code>null</code>.
      */
-    private String getPrefix(ITextViewer viewer, CompilerSyntax compilerSyntax,
-	    int offset, boolean onlyIdentifiers) {
+    private String getPrefix(ITextViewer viewer, CompilerSyntax compilerSyntax, int offset, boolean onlyIdentifiers) {
 	if (viewer == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'viewer' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'viewer' must not be null.");
 	}
 	if (compilerSyntax == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'compilerSyntax' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'compilerSyntax' must not be null.");
 	}
 	int i = offset;
 	IDocument document = viewer.getDocument();
@@ -327,44 +302,34 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 	}
     }
 
-    private void addInstructionProposals(Region region, String prefix,
-	    List<ICompletionProposal> proposalList) {
+    private void addInstructionProposals(Region region, String prefix, List<ICompletionProposal> proposalList) {
 	if (region == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'region' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'region' must not be null.");
 	}
 	if (prefix == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'prefix' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'prefix' must not be null.");
 	}
 	if (proposalList == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'proposalList' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'proposalList' must not be null.");
 	}
-	AssemblerPreferences assemblerPreferences = editor.getPlugin()
-		.getPreferences();
+	AssemblerPreferences assemblerPreferences = editor.getPlugin().getPreferences();
 
 	int offset = region.getOffset();
 	boolean lowerCase;
 
 	// Prefix is empty or prefix does not end with a letter but for
 	// example "."
-	if (StringUtility.isEmpty(prefix)
-		|| !Character.isLetter(prefix.charAt(prefix.length() - 1))) {
+	if (StringUtility.isEmpty(prefix) || !Character.isLetter(prefix.charAt(prefix.length() - 1))) {
 	    String defaultCase;
-	    defaultCase = assemblerPreferences
-		    .getEditorContentAssistProcessorDefaultCase();
-	    lowerCase = AssemblerContentAssistProcessorDefaultCase.LOWER_CASE
-		    .equals(defaultCase);
+	    defaultCase = assemblerPreferences.getEditorContentAssistProcessorDefaultCase();
+	    lowerCase = AssemblerContentAssistProcessorDefaultCase.LOWER_CASE.equals(defaultCase);
 	} else {
 	    char lastchar = prefix.charAt(prefix.length() - 1);
 	    lowerCase = ((lastchar < 'a') || (lastchar > 'z')) ? false : true;
 	}
 
-	CompilerSourceParser compilerSourceParser = editor
-		.createCompilerSourceParser();
-	InstructionSet instructionSet = compilerSourceParser
-		.getInstructionSet();
+	CompilerSourceParser compilerSourceParser = editor.createCompilerSourceParser();
+	InstructionSet instructionSet = compilerSourceParser.getInstructionSet();
 
 	boolean caseSenstive = instructionSet.areInstructionsCaseSensitive();
 	if (!caseSenstive) {
@@ -383,8 +348,7 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 	    } else {
 		if (instruction.getUpperCaseName().indexOf(prefix) == 0) {
 
-		    name = lowerCase ? instruction.getLowerCaseName()
-			    : instruction.getUpperCaseName();
+		    name = lowerCase ? instruction.getLowerCaseName() : instruction.getUpperCaseName();
 		}
 	    }
 
@@ -407,26 +371,22 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 			image = pseudoOpcodeImage;
 			break;
 		    default:
-			throw new IllegalStateException("Unknown opcode type "
-				+ opcode.getType() + ".");
+			throw new IllegalStateException("Unknown opcode type " + opcode.getType() + ".");
 		    }
 		}
 
 		String separator = " - ";
-		String displayString = name + separator
-			+ instruction.getTitle();
+		String displayString = name + separator + instruction.getTitle();
 		StyledString styledDisplayString = new StyledString();
 		styledDisplayString.append(name);
 		styledDisplayString.append(separator);
 		int start = styledDisplayString.length();
 		styledDisplayString.append(instruction.getStyledTitle());
-		styledDisplayString.setStyle(0, name.length(),
-			instructionStyler);
+		styledDisplayString.setStyle(0, name.length(), instructionStyler);
 		int[] offsets = instruction.getStyledTitleOffsets();
 
 		for (int j = 0; j < offsets.length; j++) {
-		    styledDisplayString.setStyle(start + offsets[j], 1,
-			    highlightStyler);
+		    styledDisplayString.setStyle(start + offsets[j], 1, highlightStyler);
 		}
 
 		// Adapt proposal.
@@ -442,56 +402,47 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 		proposal = proposal.replace("\n", "\n\t");
 		newCursorOffset = offset + proposalIndex;
 
-		proposalList.add(new AssemblerInstructionCompletionProposal(
-			proposal, offset, region.getLength(), newCursorOffset,
-			image, displayString, styledDisplayString, null));
+		proposalList.add(new AssemblerInstructionCompletionProposal(proposal, offset, region.getLength(),
+			newCursorOffset, image, displayString, styledDisplayString, null));
 	    }
 	}
     }
 
     // TODO Handle prefixes which contain "." or end with it.
     // TODO Handle identifier case sensitivity correctly
-    private void addIdentifierProposals(Region region, String prefix,
-	    CompilerSourceFile compilerSourceFile,
+    private void addIdentifierProposals(Region region, String prefix, CompilerSourceFile compilerSourceFile,
 	    List<ICompletionProposal> proposalList) {
 	if (region == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'region' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'region' must not be null.");
 	}
 	if (prefix == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'prefix' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'prefix' must not be null.");
 	}
 	if (compilerSourceFile == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'compilerSourceFile' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'compilerSourceFile' must not be null.");
 	}
 	if (proposalList == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'proposalList' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'proposalList' must not be null.");
 	}
 
 	CompilerSourceParserTreeObjectLabelProvider imageProvider = new CompilerSourceParserTreeObjectLabelProvider();
-	IStyledLabelProvider styledStringProvider = imageProvider
-		.getStyledStringProvider();
+	IStyledLabelProvider styledStringProvider = imageProvider.getStyledStringProvider();
 	int regionOffset = region.getOffset();
 	int regionLength = region.getLength();
 	String lowerCasePrefix = prefix.toLowerCase();
 
 	// Find last separator as basis for the prefix.
-	char identifierSeparatorCharacter = editor.getCompilerDefinition()
-		.getSyntax().getIdentifierSeparatorCharacter();
+	char identifierSeparatorCharacter = editor.getCompilerDefinition().getSyntax()
+		.getIdentifierSeparatorCharacter();
 	if (identifierSeparatorCharacter != CompilerSyntax.NO_CHARACTER) {
-	    int index = lowerCasePrefix
-		    .lastIndexOf(identifierSeparatorCharacter);
+	    int index = lowerCasePrefix.lastIndexOf(identifierSeparatorCharacter);
 	    if (index >= 0) {
 		regionOffset += index + 1;
 		regionLength -= index + 1;
-		 lowerCasePrefix = lowerCasePrefix.substring(index + 1);
+		lowerCasePrefix = lowerCasePrefix.substring(index + 1);
 	    }
 	}
-	List<CompilerSourceParserTreeObject> identifiers = compilerSourceFile
-		.getIdentifiers();
+	List<CompilerSourceParserTreeObject> identifiers = compilerSourceFile.getIdentifiers();
 	String separator = " - ";
 	for (int i = 0; i < identifiers.size(); i++) {
 	    CompilerSourceParserTreeObject element = identifiers.get(i);
@@ -510,14 +461,12 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 		    displayString = displayName;
 
 		}
-		StyledString styledDisplayString = styledStringProvider
-			.getStyledText(element);
+		StyledString styledDisplayString = styledStringProvider.getStyledText(element);
 
 		int newCursorOffset = regionOffset + proposal.length();
 
-		proposalList.add(new AssemblerInstructionCompletionProposal(
-			proposal, regionOffset, regionLength, newCursorOffset,
-			image, displayString, styledDisplayString, null));
+		proposalList.add(new AssemblerInstructionCompletionProposal(proposal, regionOffset, regionLength,
+			newCursorOffset, image, displayString, styledDisplayString, null));
 	    }
 	}
 
@@ -527,8 +476,7 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
      * {@inheritDoc}
      */
     @Override
-    public IContextInformation[] computeContextInformation(ITextViewer viewer,
-	    int offset) {
+    public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
 	return null;
     }
 
@@ -537,10 +485,8 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
      */
     @Override
     public char[] getCompletionProposalAutoActivationCharacters() {
-	CompilerSyntax compilerSyntax = editor.getCompilerDefinition()
-		.getSyntax();
-	char[] result = compilerSyntax
-		.getCompletionProposalAutoActivationCharacters();
+	CompilerSyntax compilerSyntax = editor.getCompilerDefinition().getSyntax();
+	char[] result = compilerSyntax.getCompletionProposalAutoActivationCharacters();
 	if (result.length == 0) {
 	    result = null;
 	}

@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -34,8 +34,7 @@ public abstract class RunnableWithLogging implements Runnable {
 	    runWithLogging();
 
 	} catch (Throwable th) {
-	    BasePlugin.getInstance().logError(
-		    "Runnable '{0}' ended with exception.",
+	    BasePlugin.getInstance().logError("Runnable '{0}' ended with exception.",
 		    new Object[] { getClass().getName() }, th);
 	}
     }

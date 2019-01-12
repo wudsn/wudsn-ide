@@ -41,31 +41,23 @@ public final class CompilerVariables {
     public static final String OUTPUT_FILE_NAME_WITHOUT_EXTENSION = "${outputFileNameWithoutExtension}";
     public static final String OUTPUT_FILE_NAME_SHORT_WITHOUT_EXTENSION = "${outputFileNameShortWithoutExtension}";
 
-    public static String replaceVariables(String parameter,
-	    CompilerFiles files) {
+    public static String replaceVariables(String parameter, CompilerFiles files) {
 	if (parameter == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'parameter' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'parameter' must not be null.");
 	}
 	if (files == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'files' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'files' must not be null.");
 	}
 
 	// When referring to the source file and folder at compiler time,
 	// this always means the main source file.
-	parameter = parameter.replace(SOURCE_FOLDER_PATH,
-		files.mainSourceFile.folderPath);
-	parameter = parameter.replace(SOURCE_FILE_PATH,
-		files.mainSourceFile.filePath);
-	parameter = parameter.replace(OUTPUT_FOLDER_PATH,
-		files.outputFolderPath);
+	parameter = parameter.replace(SOURCE_FOLDER_PATH, files.mainSourceFile.folderPath);
+	parameter = parameter.replace(SOURCE_FILE_PATH, files.mainSourceFile.filePath);
+	parameter = parameter.replace(OUTPUT_FOLDER_PATH, files.outputFolderPath);
 	parameter = parameter.replace(OUTPUT_FILE_PATH, files.outputFilePath);
-	parameter = parameter.replace(OUTPUT_FILE_PATH_WITHOUT_EXTENSION,
-		files.outputFilePathWithoutExtension);
+	parameter = parameter.replace(OUTPUT_FILE_PATH_WITHOUT_EXTENSION, files.outputFilePathWithoutExtension);
 	parameter = parameter.replace(OUTPUT_FILE_NAME, files.outputFileName);
-	parameter = parameter.replace(OUTPUT_FILE_NAME_WITHOUT_EXTENSION,
-		files.outputFileNameWithoutExtension);
+	parameter = parameter.replace(OUTPUT_FILE_NAME_WITHOUT_EXTENSION, files.outputFileNameWithoutExtension);
 	parameter = parameter.replace(OUTPUT_FILE_NAME_SHORT_WITHOUT_EXTENSION,
 		files.outputFileNameShortWithoutExtension);
 

@@ -171,7 +171,8 @@ public final class ConverterDataLogic {
 	filePath = IPathUtility.makeAbsolute(filePath, filePathPrefix, false);
 	byte[] bytes = loadSourceFile(sourceFile.getPathMessageId(), filePath);
 
-	// TODO: If bytes is null or length is 0, an error message should be displayed instead.
+	// TODO: If bytes is null or length is 0, an error message should be
+	// displayed instead.
 	if (bytes != null) {
 	    String fileExtension = filePath.getFileExtension();
 	    if (fileExtension != null) {

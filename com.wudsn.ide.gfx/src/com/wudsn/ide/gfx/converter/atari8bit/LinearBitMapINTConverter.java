@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -41,40 +41,27 @@ public class LinearBitMapINTConverter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	if (bytes.length < 10) {
 	    return false;
 	}
-	if (bytes[0] != (byte) 'I'
-		|| bytes[1] != (byte) 'N'
-		|| bytes[2] != (byte) 'T'
-		|| bytes[3] != (byte) '9'
-		|| bytes[4] != (byte) '5'
-		|| bytes[5] != (byte) 'a'
-		|| bytes[6] == (byte) 0
-		|| (bytes[6] & 0xff) > 40
-		|| bytes[7] == (byte) 0
-		|| (bytes[7] & 0xff) > 239
-		|| bytes[8] != (byte) 0x0f
-		|| bytes[9] != (byte) 0x2b
-		|| 18 + (bytes[6] & 0xff) * (bytes[7] & 0xff) * 2 != bytes.length) {
+	if (bytes[0] != (byte) 'I' || bytes[1] != (byte) 'N' || bytes[2] != (byte) 'T' || bytes[3] != (byte) '9'
+		|| bytes[4] != (byte) '5' || bytes[5] != (byte) 'a' || bytes[6] == (byte) 0 || (bytes[6] & 0xff) > 40
+		|| bytes[7] == (byte) 0 || (bytes[7] & 0xff) > 239 || bytes[8] != (byte) 0x0f
+		|| bytes[9] != (byte) 0x2b || 18 + (bytes[6] & 0xff) * (bytes[7] & 0xff) * 2 != bytes.length) {
 	    return false;
 	}
 	return true;
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	int rows;
 	int columns;
@@ -97,13 +84,11 @@ public class LinearBitMapINTConverter extends LinearBitMapConverter {
 	// Compute mixed interlace colors.
 	for (int x1 = 0; x1 < 4; x1++) {
 	    for (int x2 = 0; x2 < 4; x2++) {
-		paletteColors[x1 * 4 + x2] = RBGUtility.combineRGB(
-			palette1Colors[x1], palette2Colors[x2]);
+		paletteColors[x1 * 4 + x2] = RBGUtility.combineRGB(palette1Colors[x1], palette2Colors[x2]);
 	    }
 
 	}
-	setImageSizeAndPalette(data, columns, rows, Palette.MULTI_MANUAL,
-		paletteColors);
+	setImageSizeAndPalette(data, columns, rows, Palette.MULTI_MANUAL, paletteColors);
     }
 
     @Override
@@ -115,13 +100,11 @@ public class LinearBitMapINTConverter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int offset1 = 18;
-	int offset2 = offset1 + data.getParameters().getRows()
-		* data.getParameters().getColumns();
+	int offset2 = offset1 + data.getParameters().getRows() * data.getParameters().getColumns();
 	int xpixels = 4;
 
 	for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {

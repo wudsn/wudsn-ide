@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -64,16 +64,14 @@ final class AssemblerEditorToggleCommentAction extends TextEditorAction {
      *            The assembler editor's source viewer.
      * 
      */
-    AssemblerEditorToggleCommentAction(ResourceBundle bundle, String prefix,
-	    AssemblerEditor editor, SourceViewer sourceViewer) {
+    AssemblerEditorToggleCommentAction(ResourceBundle bundle, String prefix, AssemblerEditor editor,
+	    SourceViewer sourceViewer) {
 	super(bundle, prefix, editor);
 	if (editor == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'editor' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'editor' must not be null.");
 	}
 	if (sourceViewer == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'sourceViewer' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'sourceViewer' must not be null.");
 	}
 	this.editor = editor;
 	this.sourceViewer = sourceViewer;
@@ -113,12 +111,10 @@ final class AssemblerEditorToggleCommentAction extends TextEditorAction {
      */
     private boolean isCommented(IDocument document, TextSelection selection) {
 	if (document == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'document' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'document' must not be null.");
 	}
 	if (selection == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'selection' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'selection' must not be null.");
 	}
 	try {
 	    int startLine = selection.getStartLine();
@@ -151,13 +147,11 @@ final class AssemblerEditorToggleCommentAction extends TextEditorAction {
     private boolean isCommented(String lineText) {
 
 	if (lineText == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'lineText' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'lineText' must not be null.");
 	}
 
 	List<String> singleLineCommentDeliminters;
-	singleLineCommentDeliminters = editor.getCompilerDefinition()
-		.getSyntax().getSingleLineCommentDelimiters();
+	singleLineCommentDeliminters = editor.getCompilerDefinition().getSyntax().getSingleLineCommentDelimiters();
 	for (String delimiter : singleLineCommentDeliminters) {
 	    if (lineText.startsWith(delimiter)) {
 		return true;

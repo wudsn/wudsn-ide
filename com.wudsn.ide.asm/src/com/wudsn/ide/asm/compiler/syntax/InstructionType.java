@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -54,7 +54,6 @@ public final class InstructionType {
     public static final int SOURCE_INCLUDE_DIRECTIVE = 120;
     public static final int BINARY_INCLUDE_DIRECTIVE = 121;
     public static final int BINARY_OUTPUT_DIRECTIVE = 122;
-
 
     // Types of opcodes.
     public static final int LEGAL_OPCODE = 200;

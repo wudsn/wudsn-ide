@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -23,7 +23,7 @@ package com.wudsn.ide.base.common;
  * Utility class to handle strings.
  * 
  * @author Peter Dell
- *
+ * 
  */
 public final class StringUtility {
 
@@ -45,8 +45,7 @@ public final class StringUtility {
      */
     public static boolean isEmpty(String value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	return value.trim().length() == 0;
     }
@@ -62,8 +61,7 @@ public final class StringUtility {
      */
     public static boolean isSpecified(String value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	return value.trim().length() > 0;
     }

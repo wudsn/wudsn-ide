@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -27,19 +27,19 @@ public final class ConverterSourceFileDefinition {
     }
 
     public int getSourceFileId() {
-        return sourceFileId;
+	return sourceFileId;
     }
 
     final void setSourceFileId(int sourceFileId) {
-        this.sourceFileId = sourceFileId;
+	this.sourceFileId = sourceFileId;
     }
 
     public String getLabel() {
-        return label;
+	return label;
     }
 
     final void setLabel(String label) {
-        this.label = label;
+	this.label = label;
     }
 
 }

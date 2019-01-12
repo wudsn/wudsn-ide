@@ -38,7 +38,8 @@ public final class AtariDiskImageKFileParser extends AtariDiskImageParser {
 	// as well.
 	if (!error) {
 	    // The length of the k-file is stored in $709/$70a.
-	    int length = ATARI_DISK_IMAGE_K_FILE_COM_FILE_OFFSET + getFileContentByte(0x19) + 256 * getFileContentByte(0x1a);
+	    int length = ATARI_DISK_IMAGE_K_FILE_COM_FILE_OFFSET + getFileContentByte(0x19) + 256
+		    * getFileContentByte(0x1a);
 	    error = parseAtariCOMFile(contentBuilder, ATARI_DISK_IMAGE_K_FILE_COM_FILE_OFFSET, length);
 	}
 	return error;

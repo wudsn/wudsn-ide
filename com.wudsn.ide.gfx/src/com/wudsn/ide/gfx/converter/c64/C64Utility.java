@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -58,8 +58,7 @@ public final class C64Utility {
      */
     public static boolean isC64Charset(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	return bytes.length == 2048 || bytes.length % 0x100 == 2
 		|| (bytes.length > 2 && bytes[0] == 0x00 && bytes[1] == 0x38);
@@ -77,10 +76,8 @@ public final class C64Utility {
      */
     public static boolean isC64Sprite(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
-	return bytes.length == 64
-		|| (bytes.length > 2 + 64 && bytes[0] == 0x00);
+	return bytes.length == 64 || (bytes.length > 2 + 64 && bytes[0] == 0x00);
     }
 }

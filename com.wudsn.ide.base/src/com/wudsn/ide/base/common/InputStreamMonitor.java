@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -68,8 +68,7 @@ final class InputStreamMonitor {
      */
     public InputStreamMonitor(OutputStream outputStream) {
 	if (outputStream == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'outputStream' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'outputStream' must not be null.");
 	}
 	this.outputStream = outputStream;
 	outputQueue = new ArrayList<String>();
@@ -128,8 +127,7 @@ final class InputStreamMonitor {
 	    try {
 		outputStream.close();
 	    } catch (IOException ex) {
-		BasePlugin.getInstance().logError("IOException during write()",
-			null, ex);
+		BasePlugin.getInstance().logError("IOException during write()", null, ex);
 	    }
 	}
     }
@@ -145,8 +143,7 @@ final class InputStreamMonitor {
 		outputStream.write(text.getBytes());
 		outputStream.flush();
 	    } catch (IOException ex) {
-		BasePlugin.getInstance().logError(
-			"IOException during writeNext()", null, ex);
+		BasePlugin.getInstance().logError("IOException during writeNext()", null, ex);
 	    }
 	}
 	try {

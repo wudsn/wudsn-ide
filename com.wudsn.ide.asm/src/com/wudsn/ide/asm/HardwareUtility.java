@@ -48,8 +48,7 @@ public final class HardwareUtility {
      */
     public static String getDefaultFileExtension(Hardware hardware) {
 	if (hardware == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'hardware' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'hardware' must not be null.");
 	}
 	switch (hardware) {
 	case APPLE2:
@@ -90,8 +89,7 @@ public final class HardwareUtility {
      */
     public static String getImagePath(Hardware hardware) {
 	if (hardware == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'hardware' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'hardware' must not be null.");
 	}
 	String path;
 	switch (hardware) {
@@ -120,8 +118,7 @@ public final class HardwareUtility {
 	    path = "hardware-test-16x16.gif";
 	    break;
 	default:
-	    throw new IllegalArgumentException("Unknown hardware " + hardware
-		    + ".");
+	    throw new IllegalArgumentException("Unknown hardware " + hardware + ".");
 	}
 	return path;
     }
@@ -136,12 +133,10 @@ public final class HardwareUtility {
      */
     public static ImageDescriptor getImageDescriptor(Hardware hardware) {
 	if (hardware == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'hardware' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'hardware' must not be null.");
 	}
 	ImageDescriptor result;
-	result = AssemblerPlugin.getInstance().getImageDescriptor(
-		getImagePath(hardware));
+	result = AssemblerPlugin.getInstance().getImageDescriptor(getImagePath(hardware));
 	return result;
     }
 
@@ -156,8 +151,7 @@ public final class HardwareUtility {
      */
     public static CompilerFileWriter getCompilerFileWriter(Hardware hardware) {
 	if (hardware == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'hardware' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'hardware' must not be null.");
 	}
 	CompilerFileWriter compilerFileWriter;
 	if (hardware.equals(Hardware.APPLE2)) {

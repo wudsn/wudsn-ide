@@ -78,70 +78,52 @@ public final class CompilerRegistry {
 	compilerMap = new TreeMap<String, Compiler>();
 
 	IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
-	IExtensionPoint extensionPoint = extensionRegistry
-		.getExtensionPoint(COMPILERS);
+	IExtensionPoint extensionPoint = extensionRegistry.getExtensionPoint(COMPILERS);
 	if (extensionPoint == null) {
-	    throw new IllegalStateException("Extension point '" + COMPILERS
-		    + "' is not defined.");
+	    throw new IllegalStateException("Extension point '" + COMPILERS + "' is not defined.");
 	}
 
 	IExtension[] extensions = extensionPoint.getExtensions();
 
 	for (IExtension extension : extensions) {
-	    IConfigurationElement[] configurationElements = extension
-		    .getConfigurationElements();
+	    IConfigurationElement[] configurationElements = extension.getConfigurationElements();
 	    for (IConfigurationElement configurationElement : configurationElements) {
 
 		try {
 		    CompilerDefinition compilerDefinition;
 		    compilerDefinition = new CompilerDefinition();
-		    compilerDefinition.setId(configurationElement
-			    .getAttribute("id"));
-		    compilerDefinition.setName(configurationElement
-			    .getAttribute("name"));
-		    compilerDefinition.setClassName(configurationElement
-			    .getAttribute("class"));
-		    compilerDefinition.setHelpFilePaths(configurationElement
-			    .getAttribute("helpFilePaths"));
-		    compilerDefinition.setHomePageURL(configurationElement
-			    .getAttribute("homePageURL"));
-		    compilerDefinition
-			    .setDefaultParameters(configurationElement
-				    .getAttribute("defaultParameters"));
+		    compilerDefinition.setId(configurationElement.getAttribute("id"));
+		    compilerDefinition.setName(configurationElement.getAttribute("name"));
+		    compilerDefinition.setClassName(configurationElement.getAttribute("class"));
+		    compilerDefinition.setHelpFilePaths(configurationElement.getAttribute("helpFilePaths"));
+		    compilerDefinition.setHomePageURL(configurationElement.getAttribute("homePageURL"));
+		    compilerDefinition.setDefaultParameters(configurationElement.getAttribute("defaultParameters"));
 
 		    configurationElement.getChildren("supportedCPU");
 		    IConfigurationElement[] supportedCPUArray;
-		    supportedCPUArray = configurationElement
-			    .getChildren("supportedCPU");
-		    List<CPU> supportedCPUs = new ArrayList<CPU>(
-			    supportedCPUArray.length);
+		    supportedCPUArray = configurationElement.getChildren("supportedCPU");
+		    List<CPU> supportedCPUs = new ArrayList<CPU>(supportedCPUArray.length);
 		    for (IConfigurationElement supportedCPU : supportedCPUArray) {
-			supportedCPUs.add(CPU.valueOf(supportedCPU
-				.getAttribute("cpu")));
+			supportedCPUs.add(CPU.valueOf(supportedCPU.getAttribute("cpu")));
 		    }
 		    supportedCPUs = Collections.unmodifiableList(supportedCPUs);
 		    compilerDefinition.setSupportedCPUs(supportedCPUs);
-		    compilerDefinition.setDefaultHardware(Hardware
-			    .valueOf(configurationElement
-				    .getAttribute("defaultHardware")));
+		    compilerDefinition.setDefaultHardware(Hardware.valueOf(configurationElement
+			    .getAttribute("defaultHardware")));
 
 		    compilerDefinitionList.add(compilerDefinition);
 
 		    addCompiler(configurationElement, compilerDefinition);
 		} catch (RuntimeException ex) {
-		    throw new RuntimeException(
-			    "Error during registration of compiler '"
-				    + configurationElement.getAttribute("id")
-				    + "'.", ex);
+		    throw new RuntimeException("Error during registration of compiler '"
+			    + configurationElement.getAttribute("id") + "'.", ex);
 		}
 	    }
 	}
 
-	compilerDefinitionList = new ArrayList<CompilerDefinition>(
-		compilerDefinitionList);
+	compilerDefinitionList = new ArrayList<CompilerDefinition>(compilerDefinitionList);
 	Collections.sort(compilerDefinitionList);
-	compilerDefinitionList = Collections
-		.unmodifiableList(compilerDefinitionList);
+	compilerDefinitionList = Collections.unmodifiableList(compilerDefinitionList);
 	compilerMap = Collections.unmodifiableMap(compilerMap);
     }
 
@@ -155,26 +137,21 @@ public final class CompilerRegistry {
      * @param compilerDefinition
      *            The compiler definition, not <code>null</code>.
      */
-    private void addCompiler(IConfigurationElement configurationElement,
-	    CompilerDefinition compilerDefinition) {
+    private void addCompiler(IConfigurationElement configurationElement, CompilerDefinition compilerDefinition) {
 	if (configurationElement == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'configurationElement' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'configurationElement' must not be null.");
 	}
 	if (compilerDefinition == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'compilerDefinition' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'compilerDefinition' must not be null.");
 	}
 
 	String id = compilerDefinition.getId();
 	Compiler compiler;
 	try {
 	    // The class loading must be delegated to the framework.
-	    compiler = (Compiler) configurationElement
-		    .createExecutableExtension("class");
+	    compiler = (Compiler) configurationElement.createExecutableExtension("class");
 	} catch (CoreException ex) {
-	    throw new RuntimeException(
-		    "Cannot create compiler instance for id '" + id + "'.", ex);
+	    throw new RuntimeException("Cannot create compiler instance for id '" + id + "'.", ex);
 	}
 
 	// Build the list of common and specific syntax definition files.
@@ -193,8 +170,7 @@ public final class CompilerRegistry {
 
 	compiler = compilerMap.put(id, compiler);
 	if (compiler != null) {
-	    throw new RuntimeException("Compiler id '" + id
-		    + "' is already registered to class '"
+	    throw new RuntimeException("Compiler id '" + id + "' is already registered to class '"
 		    + compiler.getClass().getName() + "'.");
 	}
 
@@ -224,8 +200,7 @@ public final class CompilerRegistry {
      */
     public Compiler getCompiler(String compilerId) {
 	if (compilerId == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'compilerId' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'compilerId' must not be null.");
 	}
 	Compiler result;
 	synchronized (compilerMap) {
@@ -234,8 +209,7 @@ public final class CompilerRegistry {
 	}
 	if (result == null) {
 
-	    throw new IllegalArgumentException("Unknown compiler id '"
-		    + compilerId + "'.");
+	    throw new IllegalArgumentException("Unknown compiler id '" + compilerId + "'.");
 	}
 
 	return result;

@@ -43,7 +43,7 @@ public final class CompilerRunPreferences {
 	    throw new IllegalArgumentException("Parameter 'properties' must not be null.");
 	}
 	this.compilerPreferences = compilerPreferences;
-	this.mainSourceFileProperties=mainSourceFileProperties;
+	this.mainSourceFileProperties = mainSourceFileProperties;
     }
 
     /**

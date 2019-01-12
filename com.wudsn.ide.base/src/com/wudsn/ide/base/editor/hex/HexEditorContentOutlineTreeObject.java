@@ -43,8 +43,7 @@ public final class HexEditorContentOutlineTreeObject {
      */
     public HexEditorContentOutlineTreeObject(StyledString styledString) {
 	if (styledString == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'styledString' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'styledString' must not be null.");
 	}
 	this.styledString = new StyledString().append(styledString);
     }
@@ -71,7 +70,8 @@ public final class HexEditorContentOutlineTreeObject {
      * Sets the start offset of the tree object in the file.
      * 
      * @param fileOffset
-     *            The start offset, a non-negative integer or <code>-1</code> if the offset is not defined.
+     *            The start offset, a non-negative integer or <code>-1</code> if
+     *            the offset is not defined.
      */
     public void setFileStartOffset(int fileOffset) {
 
@@ -81,17 +81,20 @@ public final class HexEditorContentOutlineTreeObject {
     /**
      * Gets the end offset of the tree object in the file.
      * 
-     * @return The end offset, a non-negative integer or <code>-1</code> if the offset is not defined.
+     * @return The end offset, a non-negative integer or <code>-1</code> if the
+     *         offset is not defined.
      */
     public int getFileEndOffset() {
 	return fileEndOffset;
     }
 
     /**
-     * Sets the end offset of the tree object in the file or <code>-1</code> if the offset is not defined.
+     * Sets the end offset of the tree object in the file or <code>-1</code> if
+     * the offset is not defined.
      * 
      * @param fileOffset
-     *            The end offset, a non-negative integer  or <code>-1</code> if the offset is not defined.
+     *            The end offset, a non-negative integer or <code>-1</code> if
+     *            the offset is not defined.
      */
     public void setFileEndOffset(int fileOffset) {
 
@@ -115,9 +118,8 @@ public final class HexEditorContentOutlineTreeObject {
      */
     public void setTextStartOffset(int textOffset) {
 	if (textOffset < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'textOffset' must not be negative. Specified value is "
-			    + textOffset + ".");
+	    throw new IllegalArgumentException("Parameter 'textOffset' must not be negative. Specified value is "
+		    + textOffset + ".");
 	}
 	this.textStartOffset = textOffset;
     }
@@ -139,9 +141,8 @@ public final class HexEditorContentOutlineTreeObject {
      */
     public void setTextEndOffset(int textOffset) {
 	if (textOffset < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'textOffset' must not be negative. Specified value is "
-			    + textOffset + ".");
+	    throw new IllegalArgumentException("Parameter 'textOffset' must not be negative. Specified value is "
+		    + textOffset + ".");
 	}
 	this.textEndOffset = textOffset;
     }

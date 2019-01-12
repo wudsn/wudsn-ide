@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -29,7 +29,6 @@ public final class AtasmEditor extends AssemblerEditor {
      */
     public AtasmEditor() {
     }
-
 
     @Override
     public String getCompilerId() {

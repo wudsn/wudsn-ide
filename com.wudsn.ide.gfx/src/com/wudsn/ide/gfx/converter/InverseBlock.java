@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -33,8 +33,7 @@ public final class InverseBlock {
     private Integer inverseColor;
     private boolean inverseIfConflict;
 
-    InverseBlock(int column1, int column2, int row1, int row2,
-	    Integer inverseColor, boolean inverseIfConflict) {
+    InverseBlock(int column1, int column2, int row1, int row2, Integer inverseColor, boolean inverseIfConflict) {
 	this.column1 = column1;
 	this.column2 = column2;
 	this.row1 = row1;

@@ -221,7 +221,7 @@ final class AssemblerSourceScanner extends RuleBasedScanner {
 		    }
 		}
 	    }
-	    System.out.println(""+this+":"+state.identifierWordTokens.size());
+	    System.out.println("" + this + ":" + state.identifierWordTokens.size());
 	}
 
 	/*

@@ -78,7 +78,7 @@ public final class Texts extends NLS {
     public static String HEX_EDITOR_FILE_CONTENT_MODE_FIELD_LABEL;
     public static String HEX_EDITOR_CHARACTER_SET_TYPE_FIELD_LABEL;
     public static String HEX_EDITOR_BYTES_PER_ROW_FIELD_LABEL;
-    
+
     public static String HEX_EDITOR_SAVE_SELECTION_AS_DIALOG_TITLE;
 
     /**

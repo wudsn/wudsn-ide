@@ -143,8 +143,7 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
 	private int[] palette;
 	private byte[] unpackedImage;
 
-	private RIPFile(int graphicsMode, int width, int height, int[] palette,
-		byte[] unpacked_image) {
+	private RIPFile(int graphicsMode, int width, int height, int[] palette, byte[] unpacked_image) {
 	    this.graphicsMode = graphicsMode;
 	    this.width = width;
 	    this.height = height;
@@ -155,8 +154,7 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
 
 	public static RIPFile createInstance(byte[] bytes) {
 	    if (bytes == null) {
-		throw new IllegalArgumentException(
-			"Parameter 'bytes' must not be null.");
+		throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	    }
 	    if (bytes.length < 23) {
 		return null;
@@ -172,12 +170,9 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
 	    int paletteLength = bytes[20 + textLength] & 0xff;
 	    int dataLength = bytes.length - headerLength;
 
-	    if (bytes[0] != 'R' || bytes[1] != 'I' || bytes[2] != 'P'
-		    || width > 80 || height > 239 || textLength > 152
-		    || bytes[18] != 'T' || bytes[19] != ':'
-		    || paletteLength != 9 || bytes[21 + textLength] != 'C'
-		    || bytes[22 + textLength] != 'M'
-		    || bytes[23 + textLength] != ':') {
+	    if (bytes[0] != 'R' || bytes[1] != 'I' || bytes[2] != 'P' || width > 80 || height > 239 || textLength > 152
+		    || bytes[18] != 'T' || bytes[19] != ':' || paletteLength != 9 || bytes[21 + textLength] != 'C'
+		    || bytes[22 + textLength] != 'M' || bytes[23 + textLength] != ':') {
 		return null;
 	    }
 
@@ -190,14 +185,12 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
 		if (dataLength > unpackedImage.length) {
 		    return null;
 		}
-		System.arraycopy(bytes, headerLength, unpackedImage, 0,
-			dataLength);
+		System.arraycopy(bytes, headerLength, unpackedImage, 0, dataLength);
 		break;
 
 	    // Compression
 	    case 1:
-		if (!ShannonFano.unpack(bytes, headerLength, dataLength,
-			unpackedImage)) {
+		if (!ShannonFano.unpack(bytes, headerLength, dataLength, unpackedImage)) {
 		    return null;
 		}
 		break;
@@ -228,8 +221,7 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
 	    for (int i = 0; i < paletteLength; i++) {
 		palette[i] = bytes[24 + textLength + i] & 0xff;
 	    }
-	    RIPFile result = new RIPFile(graphicsMode, width, height, palette,
-		    unpackedImage);
+	    RIPFile result = new RIPFile(graphicsMode, width, height, palette, unpackedImage);
 	    return result;
 	}
 
@@ -257,8 +249,7 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
 
     private static final class ShannonFano {
 
-	private static void unpack_cnibl(byte data[], int dataOffset, int size,
-		int output[]) {
+	private static void unpack_cnibl(byte data[], int dataOffset, int size, int output[]) {
 	    int x = dataOffset;
 	    int y = 0;
 	    while (y < size) {
@@ -268,8 +259,7 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
 	    }
 	}
 
-	private static void unpack_sort(byte data[], int dataOffset, int size,
-		int tre01[], int tre02[]) {
+	private static void unpack_sort(byte data[], int dataOffset, int size, int tre01[], int tre02[]) {
 	    int[] pom = new int[16];
 	    int y;
 	    int x;
@@ -305,9 +295,8 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
 	    } while (x < 16);
 	}
 
-	private static void unpack_fano(byte data[], int dataOffset, int size,
-		int tre01[], int tre02[], int l0[], int h0[], int l1[],
-		int h1[], int lhOffset) {
+	private static void unpack_fano(byte data[], int dataOffset, int size, int tre01[], int tre02[], int l0[],
+		int h0[], int l1[], int h1[], int lhOffset) {
 	    int p;
 	    int err;
 	    int l;
@@ -383,20 +372,16 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
 
 	}
 
-	public static boolean unpack(byte data[], int dataOffset,
-		int dataLength, byte unpackedData[]) {
+	public static boolean unpack(byte data[], int dataOffset, int dataLength, byte unpackedData[]) {
 	    if (data == null) {
-		throw new IllegalArgumentException(
-			"Parameter 'data' must not be null.");
+		throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	    }
 	    if (dataOffset < 0) {
-		throw new IllegalArgumentException(
-			"Parameter 'dataOffset' must not be negative, specified value is "
-				+ dataOffset + ".");
+		throw new IllegalArgumentException("Parameter 'dataOffset' must not be negative, specified value is "
+			+ dataOffset + ".");
 	    }
 	    if (unpackedData == null) {
-		throw new IllegalArgumentException(
-			"Parameter 'unpackedData' must not be null.");
+		throw new IllegalArgumentException("Parameter 'unpackedData' must not be null.");
 	    }
 	    int[] adl0 = new int[576];
 	    int[] adh0 = new int[576];
@@ -412,14 +397,12 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
 	    int lic, csh, c;
 
 	    // "PCK" header (16 bytes) + 288 bytes shannon-fano
-	    if (dataLength < 16 + 288 || data[dataOffset + 0] != 'P'
-		    || data[dataOffset + 1] != 'C'
+	    if (dataLength < 16 + 288 || data[dataOffset + 0] != 'P' || data[dataOffset + 1] != 'C'
 		    || data[dataOffset + 2] != 'K') {
 		return false;
 	    }
 
-	    unpacked_len = (data[dataOffset + 4] & 0xff) + 256
-		    * (data[dataOffset + 5] & 0xff) - 33;
+	    unpacked_len = (data[dataOffset + 4] & 0xff) + 256 * (data[dataOffset + 5] & 0xff) - 33;
 	    if (unpacked_len > 0x5EFE) {
 		return false;
 	    }
@@ -429,12 +412,9 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
 		unpacked_len = 16800;
 	    }
 
-	    unpack_fano(data, dataOffset + 16, 64, tre01, tre02, adl0, adh0,
-		    adl1, adh1, 0);
-	    unpack_fano(data, dataOffset + 16 + 32, 256, tre01, tre02, adl0,
-		    adh0, adl1, adh1, 64);
-	    unpack_fano(data, dataOffset + 16 + 160, 256, tre01, tre02, adl0,
-		    adh0, adl1, adh1, 320);
+	    unpack_fano(data, dataOffset + 16, 64, tre01, tre02, adl0, adh0, adl1, adh1, 0);
+	    unpack_fano(data, dataOffset + 16 + 32, 256, tre01, tre02, adl0, adh0, adl1, adh1, 64);
+	    unpack_fano(data, dataOffset + 16 + 160, 256, tre01, tre02, adl0, adh0, adl1, adh1, 320);
 
 	    sx = dataOffset + 16 + 288;
 	    sxend = dataOffset + dataLength + 1;
@@ -538,8 +518,7 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
 		    }
 
 		    if (cx > 0) {
-			System.arraycopy(unpackedData, cx, unpackedData, dx,
-				a + 2);
+			System.arraycopy(unpackedData, cx, unpackedData, dx, a + 2);
 		    }
 		    dx += a + 2;
 		}
@@ -556,8 +535,7 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	RIPFile ripFile = RIPFile.createInstance(bytes);
@@ -568,15 +546,12 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	RIPFile ripFile = RIPFile.createInstance(bytes);
@@ -601,8 +576,7 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int rows = data.getParameters().getRows();
@@ -610,8 +584,7 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
 	PaletteMapper paletteMapper = new Atari8BitPaletteMapper();
 
 	// Compute palette.
-	RIPFile ripFile = RIPFile.createInstance(data
-		.getSourceFileBytes(BIT_MAP_FILE));
+	RIPFile ripFile = RIPFile.createInstance(data.getSourceFileBytes(BIT_MAP_FILE));
 	if (ripFile == null) {
 	    return false;
 	}
@@ -626,8 +599,7 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
 	    graphics10Colors = new int[ripFile.getPalette().length];
 	    break;
 	default:
-	    throw new IllegalStateException("Unsupported graphics mode "
-		    + ripFile.getGraphicsMode() + ".");
+	    throw new IllegalStateException("Unsupported graphics mode " + ripFile.getGraphicsMode() + ".");
 
 	}
 
@@ -686,8 +658,7 @@ public class LinearBitMapRIPConverter extends LinearBitMapConverter {
 
 	    // Merge the two buffers into combined color values.
 	    for (int x = 0; x < buffer1.length; x++) {
-		int atariColor = RBGUtility.combineRGBColor(
-			paletteMapper.getRGBColor(buffer1[x]),
+		int atariColor = RBGUtility.combineRGBColor(paletteMapper.getRGBColor(buffer1[x]),
 			paletteMapper.getRGBColor(buffer2[x]));
 		data.setDirectPixel(x, y1, atariColor);
 	    }

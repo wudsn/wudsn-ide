@@ -52,7 +52,7 @@ public final class AssemblerBreakpointsTarget implements IToggleBreakpointsTarge
 	AssemblerEditor assemblerEditor = getEditor(part);
 	if (assemblerEditor != null) {
 	    IBreakpointManager breakPointManager = DebugPlugin.getDefault().getBreakpointManager();
-	    String editorId=assemblerEditor.getClass().getName();
+	    String editorId = assemblerEditor.getClass().getName();
 	    IEditorInput editorInput = assemblerEditor.getEditorInput();
 	    IResource resource = (IResource) editorInput.getAdapter(IResource.class);
 	    ITextSelection textSelection = (ITextSelection) selection;
@@ -85,7 +85,8 @@ public final class AssemblerBreakpointsTarget implements IToggleBreakpointsTarge
 	    if (StringUtility.isEmpty(description)) {
 		return;
 	    }
-	    AssemblerBreakpoint breakpoint = new AssemblerBreakpoint(editorId, editorInput, resource, lineNumber + 1, description);
+	    AssemblerBreakpoint breakpoint = new AssemblerBreakpoint(editorId, editorInput, resource, lineNumber + 1,
+		    description);
 	    breakPointManager.addBreakpoint(breakpoint);
 	}
     }

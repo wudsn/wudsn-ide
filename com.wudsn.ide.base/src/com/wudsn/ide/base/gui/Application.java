@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -25,9 +25,9 @@ import com.wudsn.ide.base.gui.MessageManager;
  * Interface to be implemented by applications.
  * 
  * @author Peter Dell
- *
+ * 
  */
-public interface Application extends ActionListener{
+public interface Application extends ActionListener {
 
     public MessageManager getMessageManager();
 }

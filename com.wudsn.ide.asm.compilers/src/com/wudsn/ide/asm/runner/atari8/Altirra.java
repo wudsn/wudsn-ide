@@ -63,8 +63,8 @@ public final class Altirra extends Runner {
 		    AssemblerBreakpoint assemberBreakpoint = (AssemblerBreakpoint) breakpoint;
 		    IMarker marker = breakpoint.getMarker();
 		    String sourceFilePath = marker.getResource().getLocation().toOSString();
-		    breakpointBuilder
-			    .append("bp \"`" + sourceFilePath + ":" + assemberBreakpoint.getLineNumber() + "`\"\n");
+		    breakpointBuilder.append("bp \"`" + sourceFilePath + ":" + assemberBreakpoint.getLineNumber()
+			    + "`\"\n");
 		    activeBreakpoints++;
 		}
 	    } catch (CoreException ex) {

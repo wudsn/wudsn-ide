@@ -71,7 +71,6 @@ import com.wudsn.ide.gfx.model.Aspect;
 import com.wudsn.ide.gfx.model.ConverterDirection;
 import com.wudsn.ide.gfx.model.ConverterMode;
 
-
 public final class GraphicsEditor extends EditorPart implements Application, ISelectionProvider, ChangeListener {
 
     public final class Actions {

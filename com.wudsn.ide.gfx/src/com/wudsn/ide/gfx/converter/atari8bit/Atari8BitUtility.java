@@ -1,7 +1,7 @@
 package com.wudsn.ide.gfx.converter.atari8bit;
 
 /**
-* Copyright (C) 2009 - 2014 <a href="http://www.wudsn.com" target="_top">Peter
+ * Copyright (C) 2009 - 2014 <a href="http://www.wudsn.com" target="_top">Peter
  * Dell</a>
  * 
  * This file is part of WUDSN IDE.
@@ -30,8 +30,7 @@ public final class Atari8BitUtility {
      * Mapping of the 4 bit pixel values to the corresponding color register.
      * Make sure not to modify contents of this array.
      */
-    public final static int[] GRAPHICS_10_REGISTERS = { 0, 1, 2, 3, 4, 5, 6, 7,
-	    8, 8, 8, 8, 4, 5, 6, 7 };
+    public final static int[] GRAPHICS_10_REGISTERS = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 8, 4, 5, 6, 7 };
 
     /**
      * Creation is private.
@@ -55,8 +54,7 @@ public final class Atari8BitUtility {
      */
     public static int getWord(byte[] bytes, int offset) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	return (bytes[offset] & 0xff) | ((bytes[offset + 1] & 0xff) << 8);
     }
@@ -75,16 +73,13 @@ public final class Atari8BitUtility {
      */
     public static int getLengthFromBinaryHeader(byte[] bytes, int offset) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	if (offset < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'offset' must not be negative, specified value is "
-			    + offset + ".");
+	    throw new IllegalArgumentException("Parameter 'offset' must not be negative, specified value is " + offset
+		    + ".");
 	}
-	if (bytes.length >= offset + 6 && (bytes[offset + 0] & 0xff) == 0xff
-		&& (bytes[offset + 1] & 0xff) == 0xff) {
+	if (bytes.length >= offset + 6 && (bytes[offset + 0] & 0xff) == 0xff && (bytes[offset + 1] & 0xff) == 0xff) {
 	    int startAddress = getWord(bytes, offset + 2);
 	    int endAddress = getWord(bytes, offset + 4);
 	    int length = endAddress - startAddress + 1;
@@ -113,21 +108,17 @@ public final class Atari8BitUtility {
      * 
      * @since 1.6.0
      */
-    public static boolean unpackKoala(byte[] data, int dataOffset,
-	    int dataLength, int cprtype, byte[] unpackedData) {
+    public static boolean unpackKoala(byte[] data, int dataOffset, int dataLength, int cprtype, byte[] unpackedData) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (dataOffset < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'dataOffset' must not be negative. Specified value is "
-			    + dataOffset + ".");
+	    throw new IllegalArgumentException("Parameter 'dataOffset' must not be negative. Specified value is "
+		    + dataOffset + ".");
 	}
 	if (dataLength < 1) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'dataLength' must be positive. Specified value is "
-			    + dataLength + ".");
+	    throw new IllegalArgumentException("Parameter 'dataLength' must be positive. Specified value is "
+		    + dataLength + ".");
 	}
 	int i;
 	int d;
@@ -231,9 +222,8 @@ public final class Atari8BitUtility {
      * 
      * @since 1.6.0
      */
-    public static boolean unpackCCI(byte data[], int dataOffset,
-	    int dataLength, int step, int count, byte unpackedData[],
-	    int unpackedDataOffset) {
+    public static boolean unpackCCI(byte data[], int dataOffset, int dataLength, int step, int count,
+	    byte unpackedData[], int unpackedDataOffset) {
 	int i = 0;
 	int d = 2;
 	int size = step * count;
@@ -288,12 +278,10 @@ public final class Atari8BitUtility {
      */
     public static boolean isAtariCharset(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	return bytes.length == 1024
-		|| (bytes.length == 1024 + 6 && Atari8BitUtility
-			.getLengthFromBinaryHeader(bytes, 0) == 1024);
+		|| (bytes.length == 1024 + 6 && Atari8BitUtility.getLengthFromBinaryHeader(bytes, 0) == 1024);
     }
 
 }

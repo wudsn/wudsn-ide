@@ -55,8 +55,8 @@ public final class AssemblerEditorOpenDeclarationCommandHandler extends Abstract
 	    int offset = textSelection.getOffset();
 	    List<AssemblerHyperlink> hyperlinks = new ArrayList<AssemblerHyperlink>();
 	    AssemblerHyperlinkDetector.detectHyperlinks(assemblerEditor, document, offset, false, hyperlinks);
-	    if (!hyperlinks.isEmpty()){
-		AssemblerHyperlink hyperlink=hyperlinks.get(0);
+	    if (!hyperlinks.isEmpty()) {
+		AssemblerHyperlink hyperlink = hyperlinks.get(0);
 		hyperlink.open();
 	    }
 	}

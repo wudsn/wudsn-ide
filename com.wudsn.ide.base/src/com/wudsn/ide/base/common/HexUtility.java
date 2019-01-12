@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -63,8 +63,7 @@ public final class HexUtility {
      */
     public static String getByteValueHexString(int byteValue) {
 	if (byteValue < 0 || byteValue > 255) {
-	    throw new IllegalArgumentException("Integer value " + byteValue
-		    + " is no byte value.");
+	    throw new IllegalArgumentException("Integer value " + byteValue + " is no byte value.");
 	}
 	return hexStrings[byteValue];
     }
@@ -80,9 +79,8 @@ public final class HexUtility {
      */
     public static int getLongValueHexLength(long longValue) {
 	if (longValue < 0) {
-	    throw new RuntimeException(
-		    "Parameter 'longValue' must not be negative. Specified value is "
-			    + longValue + ".");
+	    throw new RuntimeException("Parameter 'longValue' must not be negative. Specified value is " + longValue
+		    + ".");
 	}
 	int result = Long.toHexString(longValue).length();
 	if ((result & 1) == 1) {
@@ -99,8 +97,7 @@ public final class HexUtility {
      * @return The string, not empty and not <code>null</code>.
      */
     public static String getLongValueHexString(long longValue) {
-	return getLongValueHexString(longValue,
-		getLongValueHexLength(longValue));
+	return getLongValueHexString(longValue, getLongValueHexLength(longValue));
     }
 
     /**
@@ -116,14 +113,12 @@ public final class HexUtility {
      */
     public static String getLongValueHexString(long longValue, int length) {
 	if (longValue < 0) {
-	    throw new RuntimeException(
-		    "Parameter 'longValue' must not be negative. Specified value is "
-			    + longValue + ".");
+	    throw new RuntimeException("Parameter 'longValue' must not be negative. Specified value is " + longValue
+		    + ".");
 	}
 	if (length < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'length' must not be negative. Specified value is "
-			    + length + ".");
+	    throw new IllegalArgumentException("Parameter 'length' must not be negative. Specified value is " + length
+		    + ".");
 	}
 	String result = Long.toHexString(longValue).toUpperCase();
 	if (length > AUTOMATIC_LENGTH) {

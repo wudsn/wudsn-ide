@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -38,38 +38,31 @@ public class CharSet2x2HiresConverter extends CharSetConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	boolean atariCharset = Atari8BitUtility.isAtariCharset(bytes);
-	boolean c64Charset =C64Utility.isC64Charset(bytes);
+	boolean c64Charset = C64Utility.isC64Charset(bytes);
 	return atariCharset || c64Charset;
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	int columns = 16;
-	int lineSize = columns * 8*4;
+	int lineSize = columns * 8 * 4;
 	int rows;
-	if ((bytes.length == 1024 + 6 && Atari8BitUtility
-		.getLengthFromBinaryHeader(bytes, 0) == 1024)) {
-	    data.getParameters().getSourceFile(CharSetConverter.CHAR_SET_FILE)
-		    .setOffset(6);
+	if ((bytes.length == 1024 + 6 && Atari8BitUtility.getLengthFromBinaryHeader(bytes, 0) == 1024)) {
+	    data.getParameters().getSourceFile(CharSetConverter.CHAR_SET_FILE).setOffset(6);
 
 	    rows = (bytes.length - 6 + lineSize - 1) / lineSize;
 	} else if (bytes.length % 0x100 == 2) {
-	    data.getParameters().getSourceFile(CharSetConverter.CHAR_SET_FILE)
-		    .setOffset(2);
+	    data.getParameters().getSourceFile(CharSetConverter.CHAR_SET_FILE).setOffset(2);
 	    rows = (bytes.length - 2 + lineSize - 1) / lineSize;
 
 	} else {
@@ -77,25 +70,20 @@ public class CharSet2x2HiresConverter extends CharSetConverter {
 	}
 
 	RGB[] paletteColors;
-	paletteColors = PaletteUtility.getPaletteColors(
-		PaletteType.ATARI_DEFAULT, Palette.HIRES_1, null);
-	setImageSizeAndPalette(data, columns, rows, Palette.HIRES_1,
-		paletteColors);
+	paletteColors = PaletteUtility.getPaletteColors(PaletteType.ATARI_DEFAULT, Palette.HIRES_1, null);
+	setImageSizeAndPalette(data, columns, rows, Palette.HIRES_1, paletteColors);
     }
 
     @Override
     public void convertToImageDataSize(FilesConverterData data) {
-	data.setImageDataWidth((data.getParameters().getColumns())
-		* (16 + data.getParameters().getSpacingWidth()));
-	data.setImageDataHeight((data.getParameters().getRows())
-		* (16 + data.getParameters().getSpacingWidth()));
+	data.setImageDataWidth((data.getParameters().getColumns()) * (16 + data.getParameters().getSpacingWidth()));
+	data.setImageDataHeight((data.getParameters().getRows()) * (16 + data.getParameters().getSpacingWidth()));
     }
 
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int offset = 0;
@@ -107,8 +95,7 @@ public class CharSet2x2HiresConverter extends CharSetConverter {
 		for (int cy = 0; cy < 2; cy++) {
 		    for (int cx = 0; cx < 2; cx++) {
 			for (int y2 = 0; y2 < 8; y2++) {
-			    int b = data.getSourceFileByte(CHAR_SET_FILE,
-				    offset++);
+			    int b = data.getSourceFileByte(CHAR_SET_FILE, offset++);
 			    if (b < 0) {
 				return true;
 			    }

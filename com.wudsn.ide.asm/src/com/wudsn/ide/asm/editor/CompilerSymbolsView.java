@@ -249,15 +249,15 @@ public final class CompilerSymbolsView extends ViewPart {
 	    text += " " + DateFormat.getTimeInstance().format(updateTimestamp);
 	}
 	sourceFileNameText.setText(text);
-	String filterTextSequence =  filterTextField.getText().toUpperCase();
+	String filterTextSequence = filterTextField.getText().toUpperCase();
 
 	// A leading ! reverses the filter
-	boolean matchTarget= true;
-	if (filterTextSequence.startsWith("!")){
-	    filterTextSequence=filterTextSequence.substring(1);
-	    matchTarget=false;
+	boolean matchTarget = true;
+	if (filterTextSequence.startsWith("!")) {
+	    filterTextSequence = filterTextSequence.substring(1);
+	    matchTarget = false;
 	}
-	
+
 	String[] filterTexts = filterTextSequence.split("[ ]+");
 	List<CompilerSymbol> filteredCompilerSymbols = compilerSymbols;
 	if (filterTexts.length > 0) {

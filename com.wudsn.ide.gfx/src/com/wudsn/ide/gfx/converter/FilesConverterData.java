@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -39,8 +39,7 @@ public final class FilesConverterData extends ConverterCommonData {
     FilesConverterData(ConverterData converterData) {
 	super(converterData);
 
-	this.parameters = converterData.getParameters()
-		.getFilesConverterParameters();
+	this.parameters = converterData.getParameters().getFilesConverterParameters();
 	sourceFilesBytes = new ArrayList<byte[]>(0);
     }
 
@@ -69,8 +68,8 @@ public final class FilesConverterData extends ConverterCommonData {
 	int result;
 
 	converterRegistry = GraphicsPlugin.getInstance().getConverterRegistry();
-	converterDefinition = converterRegistry.getDefinition(
-		parameters.getConverterId(), ConverterDirection.FILES_TO_IMAGE);
+	converterDefinition = converterRegistry.getDefinition(parameters.getConverterId(),
+		ConverterDirection.FILES_TO_IMAGE);
 	if (converterDefinition != null) {
 	    result = converterDefinition.getTargetImagePaletteSize();
 	} else {
@@ -81,8 +80,7 @@ public final class FilesConverterData extends ConverterCommonData {
 
     @Override
     public boolean isCreateConversionEnabled() {
-	return converterData.isValid()
-		&& converterData.getConverterMode() == ConverterMode.RAW_FILE;
+	return converterData.isValid() && converterData.getConverterMode() == ConverterMode.RAW_FILE;
     }
 
     @Override
@@ -103,9 +101,8 @@ public final class FilesConverterData extends ConverterCommonData {
 
     public void setSourceFileBytes(int sourceFileId, byte[] bytes) {
 	if (sourceFileId < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'sourceFileId' must not be negative. Specified value is "
-			    + sourceFileId + ".");
+	    throw new IllegalArgumentException("Parameter 'sourceFileId' must not be negative. Specified value is "
+		    + sourceFileId + ".");
 	}
 	while (sourceFilesBytes.size() <= sourceFileId) {
 	    sourceFilesBytes.add(null);
@@ -115,9 +112,8 @@ public final class FilesConverterData extends ConverterCommonData {
 
     public byte[] getSourceFileBytes(int sourceFileId) {
 	if (sourceFileId < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'sourceFileId' must not be negative. Specified value is "
-			    + sourceFileId + ".");
+	    throw new IllegalArgumentException("Parameter 'sourceFileId' must not be negative. Specified value is "
+		    + sourceFileId + ".");
 	}
 	byte[] bytes;
 	if (sourceFileId < sourceFilesBytes.size()) {
@@ -137,7 +133,7 @@ public final class FilesConverterData extends ConverterCommonData {
     }
 
     public boolean isSaveImageEnabled() {
-	return converterData.isValidFile()&& isImageDataValid();
+	return converterData.isValidFile() && isImageDataValid();
     }
 
     /**
@@ -174,19 +170,12 @@ public final class FilesConverterData extends ConverterCommonData {
 	try {
 	    imageData.setPixel(x, y, color);
 	} catch (RuntimeException ex) {
-	    GraphicsPlugin
-		    .getInstance()
-		    .logError(
-			    "Error setting palette pixel at ({0}, {1}) to color {2}. Image size is {3},{4}",
-			    new String[] {
-				    NumberUtility.getLongValueDecimalString(x),
-				    NumberUtility.getLongValueDecimalString(y),
-				    HexUtility.getLongValueHexString(color),
-				    NumberUtility
-					    .getLongValueDecimalString(imageData.width),
-				    NumberUtility
-					    .getLongValueDecimalString(imageData.height) },
-			    ex);
+	    GraphicsPlugin.getInstance().logError(
+		    "Error setting palette pixel at ({0}, {1}) to color {2}. Image size is {3},{4}",
+		    new String[] { NumberUtility.getLongValueDecimalString(x),
+			    NumberUtility.getLongValueDecimalString(y), HexUtility.getLongValueHexString(color),
+			    NumberUtility.getLongValueDecimalString(imageData.width),
+			    NumberUtility.getLongValueDecimalString(imageData.height) }, ex);
 	}
     }
 
@@ -194,19 +183,12 @@ public final class FilesConverterData extends ConverterCommonData {
 	try {
 	    imageData.setPixel(x, y, color);
 	} catch (RuntimeException ex) {
-	    GraphicsPlugin
-		    .getInstance()
-		    .logError(
-			    "Error setting direct pixel at ({0}, {1}) to color {2}. Image size is {3},{4}",
-			    new String[] {
-				    NumberUtility.getLongValueDecimalString(x),
-				    NumberUtility.getLongValueDecimalString(y),
-				    HexUtility.getLongValueHexString(color),
-				    NumberUtility
-					    .getLongValueDecimalString(imageData.width),
-				    NumberUtility
-					    .getLongValueDecimalString(imageData.height) },
-			    ex);
+	    GraphicsPlugin.getInstance().logError(
+		    "Error setting direct pixel at ({0}, {1}) to color {2}. Image size is {3},{4}",
+		    new String[] { NumberUtility.getLongValueDecimalString(x),
+			    NumberUtility.getLongValueDecimalString(y), HexUtility.getLongValueHexString(color),
+			    NumberUtility.getLongValueDecimalString(imageData.width),
+			    NumberUtility.getLongValueDecimalString(imageData.height) }, ex);
 	}
     }
 }

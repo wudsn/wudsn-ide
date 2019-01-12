@@ -24,7 +24,6 @@ package resid_builder.resid;
 import resid_builder.resid.EnvelopeGenerator;
 import resid_builder.resid.WaveformGenerator;
 
-
 /**
  * Representation of SID voice block.
  * 
@@ -33,52 +32,55 @@ import resid_builder.resid.WaveformGenerator;
  * @author Antti Lankila
  */
 public final class Voice {
-	public final WaveformGenerator wave = new WaveformGenerator();
+    public final WaveformGenerator wave = new WaveformGenerator();
 
-	public final EnvelopeGenerator envelope = new EnvelopeGenerator();
+    public final EnvelopeGenerator envelope = new EnvelopeGenerator();
 
-	/**
-	 * Amplitude modulated waveform output.
-	 *
-	 * The waveform DAC generates a voltage between 5 and 12 V corresponding
-	 * to oscillator state 0 .. 4095.
-	 *
-	 * The envelope DAC generates a voltage between waveform gen output and
-	 * the 5V level, corresponding to envelope state 0 .. 255.
-	 *
-	 * Ideal range [-2048*255, 2047*255].
-	 *
-	 * @param ringModulator Ring-modulator for waveform
-	 * @return waveformgenerator output
-	 */
-	public int output(final WaveformGenerator ringModulator) {
-		return wave.output(ringModulator) * envelope.output();
-	}
+    /**
+     * Amplitude modulated waveform output.
+     * 
+     * The waveform DAC generates a voltage between 5 and 12 V corresponding to
+     * oscillator state 0 .. 4095.
+     * 
+     * The envelope DAC generates a voltage between waveform gen output and the
+     * 5V level, corresponding to envelope state 0 .. 255.
+     * 
+     * Ideal range [-2048*255, 2047*255].
+     * 
+     * @param ringModulator
+     *            Ring-modulator for waveform
+     * @return waveformgenerator output
+     */
+    public int output(final WaveformGenerator ringModulator) {
+	return wave.output(ringModulator) * envelope.output();
+    }
 
-	/**
-	 * Constructor.
-	 */
-	protected Voice() {}
+    /**
+     * Constructor.
+     */
+    protected Voice() {
+    }
 
-	// ----------------------------------------------------------------------------
-	// Register functions.
-	// ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+    // Register functions.
+    // ----------------------------------------------------------------------------
 
-	/**
-	 * Register functions.
-	 * 
-	 * @param control Control register value.
-	 */
-	public void writeCONTROL_REG(final byte control) {
-		wave.writeCONTROL_REG(control);
-		envelope.writeCONTROL_REG(control);
-	}
+    /**
+     * Register functions.
+     * 
+     * @param control
+     *            Control register value.
+     */
+    public void writeCONTROL_REG(final byte control) {
+	wave.writeCONTROL_REG(control);
+	envelope.writeCONTROL_REG(control);
+    }
 
-	/**
-	 * SID reset.
-	 */
-	public void reset() {
-		wave.reset();
-		envelope.reset();
-	}
+    /**
+     * SID reset.
+     */
+    public void reset() {
+	wave.reset();
+	envelope.reset();
+    }
 }

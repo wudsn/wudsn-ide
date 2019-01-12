@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -30,18 +30,15 @@ public final class GraphicsPropertiesSerializer extends PropertiesSerializer {
      */
     public GraphicsPropertiesSerializer() {
 
- 
     }
 
     public final RGB readRGB(String key, RGB defaultValue) {
 
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	if (defaultValue == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'defaultValue' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'defaultValue' must not be null.");
 	}
 
 	RGB result;
@@ -58,12 +55,10 @@ public final class GraphicsPropertiesSerializer extends PropertiesSerializer {
     public final void writeRGB(String key, RGB value) {
 
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 
 	writeInteger(key + ".red", value.red);
@@ -74,12 +69,10 @@ public final class GraphicsPropertiesSerializer extends PropertiesSerializer {
     public final Aspect readXYFactor(String key, Aspect defaultValue) {
 
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	if (defaultValue == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'defaultValue' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'defaultValue' must not be null.");
 	}
 	Aspect result;
 
@@ -93,26 +86,21 @@ public final class GraphicsPropertiesSerializer extends PropertiesSerializer {
     public final void writeAspect(String key, Aspect value) {
 
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	setProperty(key + ".factorX", String.valueOf(value.getFactorX()));
 	setProperty(key + ".factorY", String.valueOf(value.getFactorY()));
     }
 
-
     public final RGB[] readRGBArray(String key, RGB[] defaultValue) {
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	if (defaultValue == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'defaultValue' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'defaultValue' must not be null.");
 	}
 	RGB[] result;
 
@@ -134,12 +122,10 @@ public final class GraphicsPropertiesSerializer extends PropertiesSerializer {
 
     public final void writeRGBArray(String key, RGB[] value) {
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	writeInteger(key, value.length);
 	String prefix = key + ".";

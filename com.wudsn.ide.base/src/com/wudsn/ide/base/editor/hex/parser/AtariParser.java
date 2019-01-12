@@ -65,7 +65,7 @@ public abstract class AtariParser extends HexEditorParser {
 
 		    int headerLength = -1;
 		    // No more bytes left?
-		    if (offset == fileContentLength ) {
+		    if (offset == fileContentLength) {
 			blockMode = false;
 		    } else
 		    // At least 5 bytes available? (4 header bytes and 1 data

@@ -37,8 +37,7 @@ import com.wudsn.ide.asm.compiler.CompilerFiles;
  * 
  * @author Peter Dell
  */
-public abstract class AssemblerEditorFilesCommandHandler extends
-	AbstractHandler {
+public abstract class AssemblerEditorFilesCommandHandler extends AbstractHandler {
 
     public AssemblerEditorFilesCommandHandler() {
 	super();
@@ -62,14 +61,11 @@ public abstract class AssemblerEditorFilesCommandHandler extends
 	    execute(event, assemblerEditor, files);
 	} else {
 	    try {
-		AssemblerPlugin
-			.getInstance()
-			.showError(
-				assemblerEditor.getSite().getShell(),
-				"Operation '"
-					+ event.getCommand().getName()
-					+ "' is not possible because the file in the editor is not located in the worksapce.",
-				new Exception());
+		AssemblerPlugin.getInstance().showError(
+			assemblerEditor.getSite().getShell(),
+			"Operation '" + event.getCommand().getName()
+				+ "' is not possible because the file in the editor is not located in the worksapce.",
+			new Exception());
 	    } catch (NotDefinedException ignore) {
 		// Ignore
 	    }
@@ -86,13 +82,12 @@ public abstract class AssemblerEditorFilesCommandHandler extends
      *            The assembler editor, not <code>null</code> and with current
      *            files which are not <code>null</code>.
      * @param files
-     *            The current compiler files of the editor, not <code>null</code>
-     *            .
+     *            The current compiler files of the editor, not
+     *            <code>null</code> .
      * @throws ExecutionException
      *             if an exception occurred during execution.
      */
-    protected abstract void execute(ExecutionEvent event,
-	    AssemblerEditor assemblerEditor, CompilerFiles files)
+    protected abstract void execute(ExecutionEvent event, AssemblerEditor assemblerEditor, CompilerFiles files)
 	    throws ExecutionException;
 
 }

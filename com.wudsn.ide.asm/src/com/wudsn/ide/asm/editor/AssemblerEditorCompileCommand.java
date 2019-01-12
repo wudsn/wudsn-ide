@@ -657,7 +657,8 @@ final class AssemblerEditorCompileCommand {
 	List<IMarker> markers = new ArrayList<IMarker>();
 	while (logParser.nextMarker()) {
 	    Marker markerProxy = logParser.getMarker();
-	    while (markerProxy != null) { // Loop to add main marker and its detail markers
+	    while (markerProxy != null) { // Loop to add main marker and its
+					  // detail markers
 		if (!set.contains(markerProxy)) {
 		    set.add(markerProxy);
 		    try {

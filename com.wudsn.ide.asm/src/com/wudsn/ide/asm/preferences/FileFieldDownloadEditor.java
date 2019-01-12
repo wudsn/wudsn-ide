@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -43,8 +43,7 @@ final class FileFieldDownloadEditor extends FileFieldEditor {
 
     Link link;
 
-    public FileFieldDownloadEditor(String name, String labelText,
-	    Composite parent) {
+    public FileFieldDownloadEditor(String name, String labelText, Composite parent) {
 	super(name, labelText, parent);
     }
 
@@ -97,7 +96,8 @@ final class FileFieldDownloadEditor extends FileFieldEditor {
     }
 
     /**
-     * Do not check input as file to allow selecting ".app" directories on MacOS X.
+     * Do not check input as file to allow selecting ".app" directories on MacOS
+     * X.
      * 
      * @return <code>true</code> in all cases.
      */
@@ -115,19 +115,15 @@ final class FileFieldDownloadEditor extends FileFieldEditor {
      */
     public void setLinkURL(String url) {
 	if (link == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'link' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'link' must not be null.");
 	}
 	if (url == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'url' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'url' must not be null.");
 	}
 
 	if (url.length() > 0) {
-	    link.setText("<a href=\"" + url + "\">"
-		    + Texts.PREFERENCES_DOWNLOAD_LINK + "</a>");
-	    link.setToolTipText(TextUtility.format(
-		    Texts.PREFERENCES_DOWNLOAD_LINK_TOOL_TIP, url));
+	    link.setText("<a href=\"" + url + "\">" + Texts.PREFERENCES_DOWNLOAD_LINK + "</a>");
+	    link.setToolTipText(TextUtility.format(Texts.PREFERENCES_DOWNLOAD_LINK_TOOL_TIP, url));
 
 	} else {
 	    link.setText("");

@@ -79,11 +79,9 @@ import com.wudsn.ide.gfx.model.PaletteUtility;
  * @see ImageCanvas
  */
 
-public final class ImagePaletteView extends ViewPart implements
-	ISelectionListener {
+public final class ImagePaletteView extends ViewPart implements ISelectionListener {
 
-    private final class PaletteMenuCreator implements IMenuCreator,
-	    SelectionListener {
+    private final class PaletteMenuCreator implements IMenuCreator, SelectionListener {
 	private Menu menu;
 	private Map<String, Image> images;
 
@@ -103,23 +101,15 @@ public final class ImagePaletteView extends ViewPart implements
 		menu = null;
 	    }
 	    menu = new Menu(parent);
-	    createMenuItem("Hires-1", PaletteUtility.getPaletteColors(
-		    PaletteType.ATARI_DEFAULT, Palette.HIRES_1, null));
-	    createMenuItem("Hires-2", PaletteUtility.getPaletteColors(
-		    PaletteType.ATARI_DEFAULT, Palette.HIRES_2, null));
+	    createMenuItem("Hires-1", PaletteUtility.getPaletteColors(PaletteType.ATARI_DEFAULT, Palette.HIRES_1, null));
+	    createMenuItem("Hires-2", PaletteUtility.getPaletteColors(PaletteType.ATARI_DEFAULT, Palette.HIRES_2, null));
 
-	    createMenuItem("Multi-1", PaletteUtility.getPaletteColors(
-		    PaletteType.ATARI_DEFAULT, Palette.MULTI_1, null));
-	    createMenuItem("Multi-2", PaletteUtility.getPaletteColors(
-		    PaletteType.ATARI_DEFAULT, Palette.MULTI_2, null));
-	    createMenuItem("Multi-3", PaletteUtility.getPaletteColors(
-		    PaletteType.ATARI_DEFAULT, Palette.MULTI_3, null));
-	    createMenuItem("Multi-4", PaletteUtility.getPaletteColors(
-		    PaletteType.ATARI_DEFAULT, Palette.MULTI_4, null));
-	    createMenuItem("Multi-5", PaletteUtility.getPaletteColors(
-		    PaletteType.ATARI_DEFAULT, Palette.MULTI_5, null));
-	    createMenuItem("Multi-6", PaletteUtility.getPaletteColors(
-		    PaletteType.ATARI_DEFAULT, Palette.MULTI_6, null));
+	    createMenuItem("Multi-1", PaletteUtility.getPaletteColors(PaletteType.ATARI_DEFAULT, Palette.MULTI_1, null));
+	    createMenuItem("Multi-2", PaletteUtility.getPaletteColors(PaletteType.ATARI_DEFAULT, Palette.MULTI_2, null));
+	    createMenuItem("Multi-3", PaletteUtility.getPaletteColors(PaletteType.ATARI_DEFAULT, Palette.MULTI_3, null));
+	    createMenuItem("Multi-4", PaletteUtility.getPaletteColors(PaletteType.ATARI_DEFAULT, Palette.MULTI_4, null));
+	    createMenuItem("Multi-5", PaletteUtility.getPaletteColors(PaletteType.ATARI_DEFAULT, Palette.MULTI_5, null));
+	    createMenuItem("Multi-6", PaletteUtility.getPaletteColors(PaletteType.ATARI_DEFAULT, Palette.MULTI_6, null));
 	    return menu;
 	}
 
@@ -131,8 +121,7 @@ public final class ImagePaletteView extends ViewPart implements
 		int width = rgbs.length * size;
 		int height = size;
 		PaletteData paletteData = new PaletteData(rgbs);
-		ImageData imageData = new ImageData(width, height, 8,
-			paletteData);
+		ImageData imageData = new ImageData(width, height, 8, paletteData);
 		for (int i = 0; i < rgbs.length; i++) {
 		    for (int y = 0; y < size; y++) {
 			for (int x = 0; x < size; x++) {
@@ -194,15 +183,12 @@ public final class ImagePaletteView extends ViewPart implements
 	    private int pixelColorCount;
 	    private int pixelColorCountPercent;
 
-	    public Data(int index, Integer pixelColor, RGB rgb,
-		    int pixelColorCount, int pixelColorCountPercent) {
+	    public Data(int index, Integer pixelColor, RGB rgb, int pixelColorCount, int pixelColorCountPercent) {
 		if (pixelColor == null) {
-		    throw new IllegalArgumentException(
-			    "Parameter 'pixelColor' must not be null.");
+		    throw new IllegalArgumentException("Parameter 'pixelColor' must not be null.");
 		}
 		if (rgb == null) {
-		    throw new IllegalArgumentException(
-			    "Parameter 'rgb' must not be null.");
+		    throw new IllegalArgumentException("Parameter 'rgb' must not be null.");
 		}
 		this.index = index;
 		this.pixelColor = pixelColor.intValue();
@@ -254,8 +240,7 @@ public final class ImagePaletteView extends ViewPart implements
 	     */
 	    public DataComparator(TableColumn sortColumn, int direction) {
 		if (sortColumn == null) {
-		    throw new IllegalArgumentException(
-			    "Parameter 'sortColumn' must not be null.");
+		    throw new IllegalArgumentException("Parameter 'sortColumn' must not be null.");
 		}
 		this.sortColumn = sortColumn;
 		this.sortDirection = direction == SWT.UP ? 1 : -1;
@@ -265,10 +250,8 @@ public final class ImagePaletteView extends ViewPart implements
 	    public int compare(Data o1, Data o2) {
 		if (sortColumn == indexColumn) {
 		    return (o1.getIndex() - o2.getIndex()) * sortDirection;
-		} else if (sortColumn == pixelColorHexColumn
-			|| sortColumn == pixelColorBinaryColumn) {
-		    return (o1.getPixelColor() - o2.getPixelColor())
-			    * sortDirection;
+		} else if (sortColumn == pixelColorHexColumn || sortColumn == pixelColorBinaryColumn) {
+		    return (o1.getPixelColor() - o2.getPixelColor()) * sortDirection;
 		} else if (sortColumn == rgbColorColumn) {
 		    // Sort by brightness
 		    float b1 = o1.getRGB().getHSB()[2];
@@ -279,10 +262,8 @@ public final class ImagePaletteView extends ViewPart implements
 			return -sortDirection;
 		    }
 		    return 0;
-		} else if (sortColumn == pixelColorCountColumn
-			|| sortColumn == pixelColorCountPercentColumn) {
-		    return (o1.getPixelColorCount() - o2.getPixelColorCount())
-			    * sortDirection;
+		} else if (sortColumn == pixelColorCountColumn || sortColumn == pixelColorCountPercentColumn) {
+		    return (o1.getPixelColorCount() - o2.getPixelColorCount()) * sortDirection;
 		}
 		return 0;
 	    }
@@ -314,17 +295,14 @@ public final class ImagePaletteView extends ViewPart implements
 
 	public TableView(Composite parent, final ImagePaletteView owner) {
 	    if (parent == null) {
-		throw new IllegalArgumentException(
-			"Parameter 'parent' must not be null.");
+		throw new IllegalArgumentException("Parameter 'parent' must not be null.");
 	    }
 	    if (owner == null) {
-		throw new IllegalArgumentException(
-			"Parameter 'owner' must not be null.");
+		throw new IllegalArgumentException("Parameter 'owner' must not be null.");
 	    }
 	    this.owner = owner;
 
-	    table = new Table(parent, SWT.VIRTUAL | SWT.BORDER | SWT.SINGLE
-		    | SWT.FULL_SELECTION);
+	    table = new Table(parent, SWT.VIRTUAL | SWT.BORDER | SWT.SINGLE | SWT.FULL_SELECTION);
 	    table.setLayoutData(new GridData(GridData.FILL_BOTH));
 
 	    table.setHeaderVisible(true);
@@ -360,20 +338,15 @@ public final class ImagePaletteView extends ViewPart implements
 	    indexColumn.setText(Texts.IMAGE_PALETTE_VIEW_COLUMN_INDEX_TEXT);
 	    pixelColorHexColumn = new TableColumn(table, SWT.RIGHT);
 	    pixelColorHexColumn.setText("Hex");
-	    pixelColorHexColumn
-		    .setText(Texts.IMAGE_PALETTE_VIEW_COLUMN_COLOR_HEX_TEXT);
+	    pixelColorHexColumn.setText(Texts.IMAGE_PALETTE_VIEW_COLUMN_COLOR_HEX_TEXT);
 	    pixelColorBinaryColumn = new TableColumn(table, SWT.RIGHT);
-	    pixelColorBinaryColumn
-		    .setText(Texts.IMAGE_PALETTE_VIEW_COLUMN_COLOR_BINARY_TEXT);
+	    pixelColorBinaryColumn.setText(Texts.IMAGE_PALETTE_VIEW_COLUMN_COLOR_BINARY_TEXT);
 	    rgbColorColumn = new TableColumn(table, SWT.RIGHT);
-	    rgbColorColumn
-		    .setText(Texts.IMAGE_PALETTE_VIEW_COLUMN_RGB_COLOR_TEXT);
+	    rgbColorColumn.setText(Texts.IMAGE_PALETTE_VIEW_COLUMN_RGB_COLOR_TEXT);
 	    pixelColorCountColumn = new TableColumn(table, SWT.RIGHT);
-	    pixelColorCountColumn
-		    .setText(Texts.IMAGE_PALETTE_VIEW_COLUMN_COLOR_COUNT_TEXT);
+	    pixelColorCountColumn.setText(Texts.IMAGE_PALETTE_VIEW_COLUMN_COLOR_COUNT_TEXT);
 	    pixelColorCountPercentColumn = new TableColumn(table, SWT.RIGHT);
-	    pixelColorCountPercentColumn
-		    .setText(Texts.IMAGE_PALETTE_VIEW_COLUMN_COLOR_COUNT_PERCENT_TEXT);
+	    pixelColorCountPercentColumn.setText(Texts.IMAGE_PALETTE_VIEW_COLUMN_COLOR_COUNT_PERCENT_TEXT);
 
 	    indexColumn.setWidth(WIDTH);
 	    pixelColorHexColumn.setWidth(WIDTH);
@@ -402,8 +375,7 @@ public final class ImagePaletteView extends ViewPart implements
 	    pixelColorBinaryColumn.addListener(SWT.Selection, sortListener);
 	    rgbColorColumn.addListener(SWT.Selection, sortListener);
 	    pixelColorCountColumn.addListener(SWT.Selection, sortListener);
-	    pixelColorCountPercentColumn.addListener(SWT.Selection,
-		    sortListener);
+	    pixelColorCountPercentColumn.addListener(SWT.Selection, sortListener);
 
 	    table.setSortColumn(indexColumn);
 	    table.setSortDirection(SWT.UP);
@@ -434,21 +406,18 @@ public final class ImagePaletteView extends ViewPart implements
 
 	void updateTableItem(Event event) {
 	    if (event == null) {
-		throw new IllegalArgumentException(
-			"Parameter 'event' must not be null.");
+		throw new IllegalArgumentException("Parameter 'event' must not be null.");
 	    }
 	    TableItem item = (TableItem) event.item;
 	    Font font = JFaceResources.getTextFont();
 	    int i = table.indexOf(item);
 	    Data data = dataList.get(i);
 	    item.setData(data);
-	    item.setText(1,
-		    NumberUtility.getLongValueDecimalString(data.getIndex()));
+	    item.setText(1, NumberUtility.getLongValueDecimalString(data.getIndex()));
 
 	    // Pixel color values are uninteresting for direct palettes.
 	    if (!imageColorHistogram.isDirectPalette()) {
-		item.setText(2,
-			HexUtility.getLongValueHexString(data.getPixelColor()));
+		item.setText(2, HexUtility.getLongValueHexString(data.getPixelColor()));
 		item.setFont(2, font);
 		item.setText(3, Integer.toBinaryString(data.getPixelColor()));
 		item.setFont(3, font);
@@ -466,17 +435,14 @@ public final class ImagePaletteView extends ViewPart implements
 	    item.setImage(4, image);
 	    item.setText(4, PaletteUtility.getPaletteColorText(rgb));
 	    item.setFont(4, font);
-	    item.setText(5, NumberUtility.getLongValueDecimalString(data
-		    .getPixelColorCount()));
-	    item.setText(6, NumberUtility.getLongValueDecimalString(data
-		    .getPixelColorCountPercent()));
+	    item.setText(5, NumberUtility.getLongValueDecimalString(data.getPixelColorCount()));
+	    item.setText(6, NumberUtility.getLongValueDecimalString(data.getPixelColorCountPercent()));
 
 	}
 
 	void eraseItem(Event event) {
 	    if (event == null) {
-		throw new IllegalArgumentException(
-			"Parameter 'event' must not be null.");
+		throw new IllegalArgumentException("Parameter 'event' must not be null.");
 	    }
 	    event.detail &= ~SWT.HOT;
 	    if ((event.detail & SWT.SELECTED) != 0) {
@@ -504,8 +470,7 @@ public final class ImagePaletteView extends ViewPart implements
 		Rectangle rect = event.getBounds();
 		Color foreground = gc.getForeground();
 
-		gc.setForeground(table.getDisplay().getSystemColor(
-			SWT.COLOR_RED));
+		gc.setForeground(table.getDisplay().getSystemColor(SWT.COLOR_RED));
 		gc.fillRectangle(0, rect.y, 500, rect.height - 1);
 
 		// Restore colors for subsequent drawing
@@ -517,8 +482,7 @@ public final class ImagePaletteView extends ViewPart implements
 
 	void sortTableColumn(Event event) {
 	    if (event == null) {
-		throw new IllegalArgumentException(
-			"Parameter 'event' must not be null.");
+		throw new IllegalArgumentException("Parameter 'event' must not be null.");
 	    }
 	    // determine new sort column and direction
 	    TableColumn sortColumn = table.getSortColumn();
@@ -532,8 +496,7 @@ public final class ImagePaletteView extends ViewPart implements
 	    }
 	    table.setSortDirection(direction);
 
-	    Collections.sort(dataList, new DataComparator(
-		    table.getSortColumn(), table.getSortDirection()));
+	    Collections.sort(dataList, new DataComparator(table.getSortColumn(), table.getSortDirection()));
 	    // Update data displayed in table
 	    table.clearAll();
 	}
@@ -547,16 +510,13 @@ public final class ImagePaletteView extends ViewPart implements
 		RGB newRGB = colorDialog.open();
 
 		if (newRGB != null) {
-		    owner.imageProvider.setPaletteRGB(data.getPixelColor(),
-			    newRGB);
+		    owner.imageProvider.setPaletteRGB(data.getPixelColor(), newRGB);
 		}
 	    }
 	}
 
-	public void setImageColorHistogram(
-		ImageColorHistogram imageColorHistogram,
-		boolean paletteChangeable, boolean showUnusedColors,
-		boolean force) {
+	public void setImageColorHistogram(ImageColorHistogram imageColorHistogram, boolean paletteChangeable,
+		boolean showUnusedColors, boolean force) {
 	    if (imageColorHistogram == null) {
 		clear();
 	    } else if (this.imageColorHistogram != imageColorHistogram || force) {
@@ -564,11 +524,9 @@ public final class ImagePaletteView extends ViewPart implements
 		this.imageColorHistogram = imageColorHistogram;
 
 		// Register double click only if palette is changeable.
-		table.removeListener(SWT.DefaultSelection,
-			defaultSelectionListener);
+		table.removeListener(SWT.DefaultSelection, defaultSelectionListener);
 		if (paletteChangeable) {
-		    table.addListener(SWT.DefaultSelection,
-			    defaultSelectionListener);
+		    table.addListener(SWT.DefaultSelection, defaultSelectionListener);
 		}
 
 		// For direct palette, display only used pixel colors.
@@ -579,8 +537,7 @@ public final class ImagePaletteView extends ViewPart implements
 		    pixelColors = imageColorHistogram.getUsedPixelColors();
 		} else {
 		    if (showUnusedColors) {
-			pixelColors = imageColorHistogram
-				.getPalettePixelColors();
+			pixelColors = imageColorHistogram.getPalettePixelColors();
 		    } else {
 			pixelColors = imageColorHistogram.getUsedPixelColors();
 		    }
@@ -600,19 +557,14 @@ public final class ImagePaletteView extends ViewPart implements
 		int pixelCount = imageColorHistogram.getPixelCount();
 		for (int i = 0; i < size; i++) {
 		    Integer pixelColor = pixelColors.get(i);
-		    int pixelColorCount = imageColorHistogram
-			    .getPixelColorCount(pixelColor);
+		    int pixelColorCount = imageColorHistogram.getPixelColorCount(pixelColor);
 		    int pixelColorCountPercent = ((pixelColorCount * 100) / pixelCount);
 		    RGB rgb = imageColorHistogram.getRGB(pixelColor);
-		    Data data = new Data(i, pixelColor, rgb, pixelColorCount,
-			    pixelColorCountPercent);
+		    Data data = new Data(i, pixelColor, rgb, pixelColorCount, pixelColorCountPercent);
 		    dataList.add(data);
 		}
 
-		Collections.sort(
-			dataList,
-			new DataComparator(table.getSortColumn(), table
-				.getSortDirection()));
+		Collections.sort(dataList, new DataComparator(table.getSortColumn(), table.getSortDirection()));
 		table.setItemCount(dataList.size());
 		table.setSelection(0);
 	    }
@@ -642,31 +594,24 @@ public final class ImagePaletteView extends ViewPart implements
     @Override
     public void createPartControl(Composite parent) {
 
-	IToolBarManager toolBarManager = getViewSite().getActionBars()
-		.getToolBarManager();
+	IToolBarManager toolBarManager = getViewSite().getActionBars().getToolBarManager();
 
-	editColorAction = new Action(
-		Texts.IMAGE_PALETTE_VIEW_EDIT_COLOR_ACTION_LABEL,
-		IAction.AS_DROP_DOWN_MENU) {
+	editColorAction = new Action(Texts.IMAGE_PALETTE_VIEW_EDIT_COLOR_ACTION_LABEL, IAction.AS_DROP_DOWN_MENU) {
 	    @Override
 	    public void run() {
 		editColor();
 	    }
 	};
-	editColorAction
-		.setToolTipText(Texts.IMAGE_PALETTE_VIEW_EDIT_COLOR_ACTION_TOOLTIP);
+	editColorAction.setToolTipText(Texts.IMAGE_PALETTE_VIEW_EDIT_COLOR_ACTION_TOOLTIP);
 	editColorAction.setMenuCreator(new PaletteMenuCreator());
 
-	showUnusedColorsAction = new Action(
-		Texts.IMAGE_PALETTE_VIEW_UNUSED_COLORS_ACTION_LABEL,
-		IAction.AS_CHECK_BOX) {
+	showUnusedColorsAction = new Action(Texts.IMAGE_PALETTE_VIEW_UNUSED_COLORS_ACTION_LABEL, IAction.AS_CHECK_BOX) {
 	    @Override
 	    public void run() {
 		showUnusedColors();
 	    }
 	};
-	showUnusedColorsAction
-		.setToolTipText(Texts.IMAGE_PALETTE_VIEW_UNUSED_COLORS_ACTION_TOOLTIP);
+	showUnusedColorsAction.setToolTipText(Texts.IMAGE_PALETTE_VIEW_UNUSED_COLORS_ACTION_TOOLTIP);
 
 	toolBarManager.add(editColorAction);
 	toolBarManager.add(showUnusedColorsAction);
@@ -702,11 +647,10 @@ public final class ImagePaletteView extends ViewPart implements
     }
 
     void showUnusedColors() {
-	ImageColorHistogram imageColorHistogram = imageProvider
-		.getImageColorHistogram();
+	ImageColorHistogram imageColorHistogram = imageProvider.getImageColorHistogram();
 	boolean paletteChangeable = imageProvider.isPaletteChangeable();
-	tableView.setImageColorHistogram(imageColorHistogram,
-		paletteChangeable, showUnusedColorsAction.isChecked(), true);
+	tableView.setImageColorHistogram(imageColorHistogram, paletteChangeable, showUnusedColorsAction.isChecked(),
+		true);
     }
 
     @Override
@@ -775,48 +719,34 @@ public final class ImagePaletteView extends ViewPart implements
 	boolean enabled;
 
 	if (imageProvider != null) {
-	    ImageColorHistogram imageColorHistogram = imageProvider
-		    .getImageColorHistogram();
+	    ImageColorHistogram imageColorHistogram = imageProvider.getImageColorHistogram();
 	    boolean paletteChangeable = imageProvider.isPaletteChangeable();
 	    editColorAction.setEnabled(paletteChangeable);
 
-	    enabled = (imageColorHistogram != null)
-		    && !imageColorHistogram.isDirectPalette();
+	    enabled = (imageColorHistogram != null) && !imageColorHistogram.isDirectPalette();
 	    showUnusedColorsAction.setEnabled(enabled);
 
 	    String text;
 	    if (imageColorHistogram != null) {
 		int palettBits = imageColorHistogram.getPaletteBits();
 		if (imageColorHistogram.isDirectPalette()) {
-		    text = TextUtility
-			    .format(Texts.IMAGE_PALETTE_VIEW_INFO_DIRECT_PALETTE_IMAGE,
-				    NumberUtility
-					    .getLongValueDecimalString(palettBits),
-				    NumberUtility
-					    .getLongValueDecimalString(imageColorHistogram
-						    .getUsedPixelColors()
-						    .size()));
+		    text = TextUtility.format(Texts.IMAGE_PALETTE_VIEW_INFO_DIRECT_PALETTE_IMAGE,
+			    NumberUtility.getLongValueDecimalString(palettBits),
+			    NumberUtility.getLongValueDecimalString(imageColorHistogram.getUsedPixelColors().size()));
 		} else {
-		    text = TextUtility
-			    .format(Texts.IMAGE_PALETTE_VIEW_INFO_INDEXED_PALETTE_IMAGE,
-				    NumberUtility
-					    .getLongValueDecimalString(palettBits),
+		    text = TextUtility.format(Texts.IMAGE_PALETTE_VIEW_INFO_INDEXED_PALETTE_IMAGE,
+			    NumberUtility.getLongValueDecimalString(palettBits),
 
-				    NumberUtility
-					    .getLongValueDecimalString(imageColorHistogram
-						    .getUsedPixelColors()
-						    .size()),
-				    NumberUtility
-					    .getLongValueDecimalString(1 << palettBits));
+			    NumberUtility.getLongValueDecimalString(imageColorHistogram.getUsedPixelColors().size()),
+			    NumberUtility.getLongValueDecimalString(1 << palettBits));
 		}
 	    } else {
 		text = Texts.IMAGE_PALETTE_VIEW_INFO_NO_IMAGE;
 	    }
 	    infoLabel.setText(text);
 
-	    tableView.setImageColorHistogram(imageColorHistogram,
-		    paletteChangeable, showUnusedColorsAction.isChecked(),
-		    false);
+	    tableView.setImageColorHistogram(imageColorHistogram, paletteChangeable,
+		    showUnusedColorsAction.isChecked(), false);
 	} else {
 	    editColorAction.setEnabled(false);
 	    showUnusedColorsAction.setEnabled(false);

@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -72,15 +72,13 @@ public final class IntegerField extends Field {
      * @param style
      *            The SWT style.
      */
-    public IntegerField(Composite parent, String labelText,
-	    int[] defaultValues, boolean hexMode, int digitLength, int style) {
+    public IntegerField(Composite parent, String labelText, int[] defaultValues, boolean hexMode, int digitLength,
+	    int style) {
 	if (parent == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'parent' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
 	}
 	if (labelText == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'labelText' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'labelText' must not be null.");
 	}
 	this.hexMode = hexMode;
 	this.digitLength = digitLength;
@@ -88,7 +86,7 @@ public final class IntegerField extends Field {
 	label = new Label(parent, SWT.NONE);
 	label.setText(labelText);
 
-	ModifyListener modifyListener= new ModifyListener() {
+	ModifyListener modifyListener = new ModifyListener() {
 
 	    @Override
 	    public void modifyText(ModifyEvent e) {
@@ -96,11 +94,10 @@ public final class IntegerField extends Field {
 
 	    }
 	};
-	
+
 	if (defaultValues != null) {
 	    if (defaultValues.length == 0) {
-		throw new IllegalArgumentException(
-			"Parameter 'defaultValues0' must not be empty.");
+		throw new IllegalArgumentException("Parameter 'defaultValues0' must not be empty.");
 	    }
 	    combo = new Combo(parent, SWT.DROP_DOWN | style);
 
@@ -112,7 +109,6 @@ public final class IntegerField extends Field {
 	    text = new Text(parent, style);
 	    text.addModifyListener(modifyListener);
 	}
-
 
 	selectionActions = new ArrayList<Action>(1);
     }
@@ -166,13 +162,11 @@ public final class IntegerField extends Field {
 
     public void setDefaultValues(int[] defaultValues) {
 	if (defaultValues == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'defaultValues' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'defaultValues' must not be null.");
 	}
 
 	if (defaultValues.length == 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'defaultValues' must not be empty.");
+	    throw new IllegalArgumentException("Parameter 'defaultValues' must not be empty.");
 	}
 
 	if (this.defaultValues != null) {
@@ -193,11 +187,9 @@ public final class IntegerField extends Field {
 	for (int defaultValue : defaultValues) {
 	    String textValue;
 	    if (hexMode) {
-		textValue = HexUtility.getLongValueHexString(defaultValue,
-			digitLength);
+		textValue = HexUtility.getLongValueHexString(defaultValue, digitLength);
 	    } else {
-		textValue = NumberUtility.getLongValueDecimalString(
-			defaultValue, digitLength);
+		textValue = NumberUtility.getLongValueDecimalString(defaultValue, digitLength);
 	    }
 	    combo.add(textValue);
 	}
@@ -215,8 +207,7 @@ public final class IntegerField extends Field {
 	if (hexMode) {
 	    textValue = HexUtility.getLongValueHexString(value, digitLength);
 	} else {
-	    textValue = NumberUtility.getLongValueDecimalString(value,
-		    digitLength);
+	    textValue = NumberUtility.getLongValueDecimalString(value, digitLength);
 	}
 	for (Action action : selectionActions) {
 	    action.setEnabled(false);
@@ -229,8 +220,7 @@ public final class IntegerField extends Field {
 
     private void setText(String value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 
 	if (combo != null) {
@@ -281,8 +271,7 @@ public final class IntegerField extends Field {
      */
     public void addSelectionAction(Action action) {
 	if (action == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'action' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'action' must not be null.");
 	}
 	selectionActions.add(action);
 	combo.addSelectionListener(action);

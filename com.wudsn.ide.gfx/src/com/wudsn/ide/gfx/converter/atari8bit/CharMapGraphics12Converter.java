@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -37,8 +37,7 @@ import com.wudsn.ide.gfx.converter.c64.C64Utility;
 import com.wudsn.ide.gfx.converter.generic.CharMapConverter;
 import com.wudsn.ide.gfx.converter.generic.CharMapMultiColorConverter;
 
-public class CharMapGraphics12Converter extends
-	CharMapMultiColorConverter {
+public class CharMapGraphics12Converter extends CharMapMultiColorConverter {
 
     private static final Integer PF1 = NumberFactory.getInteger(1);
     private static final Integer PF2 = NumberFactory.getInteger(2);
@@ -49,27 +48,22 @@ public class CharMapGraphics12Converter extends
 
     @Override
     public void convertToImageDataSize(FilesConverterData data) {
-	data.setImageDataWidth(data.getParameters().getColumns()
-		* (8 + data.getParameters().getSpacingWidth()));
-	data.setImageDataHeight(data.getParameters().getRows()
-		* (8 + data.getParameters().getSpacingWidth()));
+	data.setImageDataWidth(data.getParameters().getColumns() * (8 + data.getParameters().getSpacingWidth()));
+	data.setImageDataHeight(data.getParameters().getRows() * (8 + data.getParameters().getSpacingWidth()));
     }
 
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	return false;
 
     }
 
-
     public static void convertToFileData(ImageConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	int pixelPerColumn = 4;
 	int pixelPerRow = 8;
@@ -90,11 +84,9 @@ public class CharMapGraphics12Converter extends
 	// centered.
 	int screenOffset = (screenWidth - tileSet.getColumns()) / 2;
 
-	boolean effect = data.getParameters().getConverterId()
-		.equals(CharMapGraphics12Converter.class.getName());
+	boolean effect = data.getParameters().getConverterId().equals(CharMapGraphics12Converter.class.getName());
 
-	int charSets = (tileSet.getRows() + rowsPerCharset - 1)
-		/ rowsPerCharset;
+	int charSets = (tileSet.getRows() + rowsPerCharset - 1) / rowsPerCharset;
 	byte[] screenBuffer = new byte[tileSet.getRows() * screenWidth];
 	byte[] charSetBuffer = new byte[1024 * charSets];
 
@@ -131,12 +123,10 @@ public class CharMapGraphics12Converter extends
 		// TODO Make hard coded mapping real parameters
 		if (System.getProperty("user.name").equals("d025328")) {
 		    if (r < 10 || r > 19) {
-			getTileMapping1(pixelMapping, ignoredPixelColors,
-				inverseBlockList);
+			getTileMapping1(pixelMapping, ignoredPixelColors, inverseBlockList);
 		    } else {
 
-			getTileMapping2(pixelMapping, ignoredPixelColors,
-				inverseBlockList);
+			getTileMapping2(pixelMapping, ignoredPixelColors, inverseBlockList);
 		    }
 		}
 
@@ -152,8 +142,7 @@ public class CharMapGraphics12Converter extends
 			// Collect all mappings which map to PF3.
 			List<Integer> pf3colors;
 			pf3colors = new ArrayList<Integer>();
-			for (Map.Entry<Integer, Integer> entry : pixelMapping
-				.entrySet()) {
+			for (Map.Entry<Integer, Integer> entry : pixelMapping.entrySet()) {
 			    if (entry.getValue().equals(PF3)) {
 				pf3colors.add(entry.getKey());
 			    }
@@ -186,22 +175,19 @@ public class CharMapGraphics12Converter extends
 		}
 
 		screenBuffer[r * screenWidth + c + screenOffset] = (byte) (screenCharacter + inverseCharacter);
-		int charSetBufferOffset = charSetCount * 1024 + 8
-			* (screenCharacter & 0x7f);
+		int charSetBufferOffset = charSetCount * 1024 + 8 * (screenCharacter & 0x7f);
 		screenCharacter++;
 
 		// Draw/copy tile.
-		Map<Integer, Integer> pixelColorCounts = tile
-			.getDistinctPixelColorCounts(ignoredPixelColors);
+		Map<Integer, Integer> pixelColorCounts = tile.getDistinctPixelColorCounts(ignoredPixelColors);
 
 		Integer lastRowMajorColor = null;
 
 		for (int r1 = 0; r1 < pixelPerRow; r1++) {
 		    int my = r * (pixelPerRow + 1) + r1 + 1;
 
-		    Map<Integer, Integer> rowPixelColorCounts = tile
-			    .getDistinctLinePixelColorCounts(r1,
-				    ignoredPixelColors);
+		    Map<Integer, Integer> rowPixelColorCounts = tile.getDistinctLinePixelColorCounts(r1,
+			    ignoredPixelColors);
 
 		    int charSetByte = 0;
 		    for (int c1 = 0; c1 < pixelPerColumn; c1++) {
@@ -215,13 +201,11 @@ public class CharMapGraphics12Converter extends
 			    if (pixelColorCounts.size() == 0) {
 				color = C64Utility.BLACK;
 			    } else if (pixelColorCounts.size() == 1) {
-				color = Tile.getMajorColor(pixelColorCounts,
-					ignoredPixelColors);
+				color = Tile.getMajorColor(pixelColorCounts, ignoredPixelColors);
 			    } else if (rowPixelColorCounts.size() == 0) {
 				color = lastRowMajorColor;
 			    } else if (rowPixelColorCounts.size() == 1) {
-				color = Tile.getMajorColor(rowPixelColorCounts,
-					ignoredPixelColors);
+				color = Tile.getMajorColor(rowPixelColorCounts, ignoredPixelColors);
 				lastRowMajorColor = color;
 			    }
 
@@ -243,8 +227,7 @@ public class CharMapGraphics12Converter extends
 		}
 	    }
 
-	    tileSet.drawTileBoundaries(targetImageData, gridColor,
-		    inverseConflictColor);
+	    tileSet.drawTileBoundaries(targetImageData, gridColor, inverseConflictColor);
 	}
 
 	data.setTargetFileBytes(CharMapConverter.CHAR_SET_FILE, charSetBuffer);
@@ -253,8 +236,8 @@ public class CharMapGraphics12Converter extends
 	data.setTargetImageData(targetImageData);
     }
 
-    private static void getTileMapping2(Map<Integer, Integer> pixelMapping,
-	    List<Integer> ignoredPixelColors, InverseBlockList inverseBlockList) {
+    private static void getTileMapping2(Map<Integer, Integer> pixelMapping, List<Integer> ignoredPixelColors,
+	    InverseBlockList inverseBlockList) {
 	pixelMapping.put(C64Utility.BLACK, PF1);
 	pixelMapping.put(C64Utility.WHITE, PF2);
 	pixelMapping.put(C64Utility.RED, PF3);
@@ -284,8 +267,8 @@ public class CharMapGraphics12Converter extends
 	inverseBlockList.add(4, 11, 20, 24, C64Utility.BROWN, false);
     }
 
-    private static void getTileMapping1(Map<Integer, Integer> pixelMapping,
-	    List<Integer> ignoredPixelColors, InverseBlockList inverseBlockList) {
+    private static void getTileMapping1(Map<Integer, Integer> pixelMapping, List<Integer> ignoredPixelColors,
+	    InverseBlockList inverseBlockList) {
 	pixelMapping.put(C64Utility.BLACK, PF1);
 	pixelMapping.put(C64Utility.WHITE, PF2);
 	pixelMapping.put(C64Utility.DARK_GRAY, PF3);

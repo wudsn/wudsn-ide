@@ -35,47 +35,38 @@ public class LinearBitMapKoalaConverter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	if (bytes.length < 22) {
 	    return false;
 	}
 
-	if ((bytes[0] != (byte) 0xff || bytes[1] != (byte) 0x80
-		|| bytes[2] != (byte) 0xc9 || bytes[3] != (byte) 0xc7
-		|| bytes[4] < (byte) 0x1a || (bytes[4] & 0xff) >= bytes.length
-		|| bytes[5] != (byte) 0 || bytes[6] != (byte) 1
-		|| bytes[8] != (byte) 0x0e || bytes[9] != (byte) 0
-		|| bytes[10] != (byte) 40 || bytes[11] != (byte) 0
-		|| bytes[12] != (byte) 192 || bytes[20] != (byte) 0 || bytes[21] != (byte) 0)) {
+	if ((bytes[0] != (byte) 0xff || bytes[1] != (byte) 0x80 || bytes[2] != (byte) 0xc9 || bytes[3] != (byte) 0xc7
+		|| bytes[4] < (byte) 0x1a || (bytes[4] & 0xff) >= bytes.length || bytes[5] != (byte) 0
+		|| bytes[6] != (byte) 1 || bytes[8] != (byte) 0x0e || bytes[9] != (byte) 0 || bytes[10] != (byte) 40
+		|| bytes[11] != (byte) 0 || bytes[12] != (byte) 192 || bytes[20] != (byte) 0 || bytes[21] != (byte) 0)) {
 	    return false;
 	}
 
 	byte[] unpackedImage = new byte[7684];
-	boolean result = Atari8BitUtility.unpackKoala(bytes,
-		(bytes[4] & 0xff) + 1, bytes.length - (bytes[4] & 0xff) - 1,
-		bytes[7] & 0xff, unpackedImage);
+	boolean result = Atari8BitUtility.unpackKoala(bytes, (bytes[4] & 0xff) + 1, bytes.length - (bytes[4] & 0xff)
+		- 1, bytes[7] & 0xff, unpackedImage);
 
 	return result;
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	byte[] unpackedImage = new byte[7684];
-	boolean result = Atari8BitUtility.unpackKoala(bytes,
-		(bytes[4] & 0xff) + 1, bytes.length - (bytes[4] & 0xff) - 1,
-		bytes[7] & 0xff, unpackedImage);
+	boolean result = Atari8BitUtility.unpackKoala(bytes, (bytes[4] & 0xff) + 1, bytes.length - (bytes[4] & 0xff)
+		- 1, bytes[7] & 0xff, unpackedImage);
 
 	if (!result) {
 	    throw new IllegalStateException("canConverterToImage() not called");
@@ -93,8 +84,7 @@ public class LinearBitMapKoalaConverter extends LinearBitMapConverter {
 	paletteColors[2] = paletteMapper.getRGB(unpackedImage[7682] & 0xfe);
 	paletteColors[3] = paletteMapper.getRGB(unpackedImage[7683] & 0xfe);
 
-	setImageSizeAndPalette(data, 40, 192, Palette.MULTI_MANUAL,
-		paletteColors);
+	setImageSizeAndPalette(data, 40, 192, Palette.MULTI_MANUAL, paletteColors);
     }
 
     @Override
@@ -106,8 +96,7 @@ public class LinearBitMapKoalaConverter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	byte[] bytes = data.getSourceFileBytes(BIT_MAP_FILE);
@@ -118,9 +107,8 @@ public class LinearBitMapKoalaConverter extends LinearBitMapConverter {
 	byte[] unpackedImage = new byte[7684];
 	boolean result;
 
-	result = Atari8BitUtility.unpackKoala(bytes, (bytes[4] & 0xff) + 1,
-		bytes.length - (bytes[4] & 0xff) - 1, bytes[7] & 0xff,
-		unpackedImage);
+	result = Atari8BitUtility.unpackKoala(bytes, (bytes[4] & 0xff) + 1, bytes.length - (bytes[4] & 0xff) - 1,
+		bytes[7] & 0xff, unpackedImage);
 	if (!result) {
 	    return false;
 	}

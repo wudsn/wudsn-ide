@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -40,65 +40,55 @@ public class LinearBitMapCINConverter extends LinearBitMapConverter {
 
     private boolean isCIN(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	return bytes.length == 16384;
     }
 
     private boolean isCCI(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
-	return bytes.length > 7 && bytes[0] == 'C' && bytes[1] == 'I'
-		&& bytes[2] == 'N' && bytes[3] == ' ' && bytes[4] == '1'
-		&& bytes[5] == '.' && bytes[6] == '2' && bytes[7] == ' ';
+	return bytes.length > 7 && bytes[0] == 'C' && bytes[1] == 'I' && bytes[2] == 'N' && bytes[3] == ' '
+		&& bytes[4] == '1' && bytes[5] == '.' && bytes[6] == '2' && bytes[7] == ' ';
     }
 
     private boolean unpackCCI(byte[] bytes, int offset, byte[] unpackedImage) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	if (offset < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'offset' must not be negative. Specified value is "
-			    + offset + ".");
+	    throw new IllegalArgumentException("Parameter 'offset' must not be negative. Specified value is " + offset
+		    + ".");
 	}
 	if (unpackedImage == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'unpackedImage' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'unpackedImage' must not be null.");
 	}
 	// Compressed even lines of graphics 15 frame
 	int dataOffset = offset + 8;
 	int dataLength = Atari8BitUtility.getWord(bytes, dataOffset);
-	if (!Atari8BitUtility.unpackCCI(bytes, dataOffset + 2, dataLength, 80, 96,
-		unpackedImage, 0)) {
+	if (!Atari8BitUtility.unpackCCI(bytes, dataOffset + 2, dataLength, 80, 96, unpackedImage, 0)) {
 	    return false;
 	}
 
 	// Compressed odd lines of graphics 15 frame
 	dataOffset += 2 + dataLength;
 	dataLength = Atari8BitUtility.getWord(bytes, dataOffset);
-	if (!Atari8BitUtility.unpackCCI(bytes, dataOffset + 2, dataLength, 80, 96,
-		unpackedImage, 40)) {
+	if (!Atari8BitUtility.unpackCCI(bytes, dataOffset + 2, dataLength, 80, 96, unpackedImage, 40)) {
 	    return false;
 	}
 
 	// Compressed graphics 11
 	dataOffset += 2 + dataLength;
 	dataLength = Atari8BitUtility.getWord(bytes, dataOffset);
-	if (!Atari8BitUtility.unpackCCI(bytes, dataOffset + 2, dataLength, 40,
-		192, unpackedImage, 7680)) {
+	if (!Atari8BitUtility.unpackCCI(bytes, dataOffset + 2, dataLength, 40, 192, unpackedImage, 7680)) {
 	    return false;
 	}
 
 	/* compressed color values for gr15 */
 	dataOffset += 2 + dataLength;
 	dataLength = Atari8BitUtility.getWord(bytes, dataOffset);
-	if (!Atari8BitUtility.unpackCCI(bytes, dataOffset + 2, dataLength, 1,
-		0x400, unpackedImage, 0x3C00)) {
+	if (!Atari8BitUtility.unpackCCI(bytes, dataOffset + 2, dataLength, 1, 0x400, unpackedImage, 0x3C00)) {
 	    return false;
 	}
 
@@ -109,22 +99,18 @@ public class LinearBitMapCINConverter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	return isCIN(bytes) || isCCI(bytes);
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	setImageSizeAndPalette(data, 40, 192, Palette.TRUE_COLOR, null);
@@ -139,8 +125,7 @@ public class LinearBitMapCINConverter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	byte[] bytes = data.getSourceFileBytes(BIT_MAP_FILE);
@@ -149,8 +134,7 @@ public class LinearBitMapCINConverter extends LinearBitMapConverter {
 	}
 
 	byte[] unpackedImage;
-	SourceFile sourceFile = data.getParameters()
-		.getSourceFile(BIT_MAP_FILE);
+	SourceFile sourceFile = data.getParameters().getSourceFile(BIT_MAP_FILE);
 	int offset = sourceFile.getOffset();
 
 	if (isCCI(bytes)) {
@@ -162,8 +146,8 @@ public class LinearBitMapCINConverter extends LinearBitMapConverter {
 	    unpackedImage = bytes;
 	}
 	int xpixels = 4;
-	PaletteMapper paletteMapper=new Atari8BitPaletteMapper();
-	
+	PaletteMapper paletteMapper = new Atari8BitPaletteMapper();
+
 	for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
 	    for (int x1 = 0; x1 < data.getParameters().getColumns(); x1++) {
 		if (offset + 7680 >= unpackedImage.length) {
@@ -183,8 +167,7 @@ public class LinearBitMapCINConverter extends LinearBitMapConverter {
 			luma = unpackedImage[lumaOffset] & 0xe;
 		    }
 
-		    int color = paletteMapper.getRGBColor(hue << 4
-			    | luma);
+		    int color = paletteMapper.getRGBColor(hue << 4 | luma);
 		    data.setDirectPixel(x, y1, color);
 		}
 	    }

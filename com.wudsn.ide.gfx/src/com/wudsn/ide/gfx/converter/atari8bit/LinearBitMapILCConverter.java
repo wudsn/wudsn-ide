@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -33,22 +33,18 @@ public class LinearBitMapILCConverter extends LinearBitMapConverter {
     @Override
     public boolean canConvertToImage(byte[] bytes) {
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	return bytes.length == 15360;
     }
 
     @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data,
-	    byte[] bytes) {
+    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
 	setImageSizeAndPalette(data, 40, 192, Palette.TRUE_COLOR, null);
@@ -63,8 +59,7 @@ public class LinearBitMapILCConverter extends LinearBitMapConverter {
     @Override
     public boolean convertToImageData(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
 	int columns = data.getParameters().getColumns();
@@ -90,8 +85,7 @@ public class LinearBitMapILCConverter extends LinearBitMapConverter {
 		    int color = (c & mask_4bit[x2]) >>> shift_4bit[x2];
 		    int brightness = (b & mask_4bit[x2]) >>> shift_4bit[x2];
 		    int atariColor = color << 4 | brightness;
-		    int directColor = paletteMapper
-			    .getRGBColor(atariColor);
+		    int directColor = paletteMapper.getRGBColor(atariColor);
 		    data.setDirectPixel(x, y1, directColor);
 		}
 

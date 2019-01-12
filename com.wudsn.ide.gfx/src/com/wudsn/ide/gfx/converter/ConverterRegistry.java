@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -90,80 +90,60 @@ public final class ConverterRegistry {
 	converterMap = new TreeMap<String, Converter>();
 
 	IExtensionRegistry extensionRegistry = Platform.getExtensionRegistry();
-	IExtensionPoint extensionPoint = extensionRegistry
-		.getExtensionPoint(CONVERTERS);
+	IExtensionPoint extensionPoint = extensionRegistry.getExtensionPoint(CONVERTERS);
 	if (extensionPoint == null) {
-	    throw new IllegalStateException("Extension point '" + CONVERTERS
-		    + "' is not defined.");
+	    throw new IllegalStateException("Extension point '" + CONVERTERS + "' is not defined.");
 	}
 
 	IExtension[] extensions = extensionPoint.getExtensions();
 
 	for (IExtension extension : extensions) {
-	    IConfigurationElement[] converterGroupElements = extension
-		    .getConfigurationElements();
+	    IConfigurationElement[] converterGroupElements = extension.getConfigurationElements();
 	    for (IConfigurationElement converterGroupElement : converterGroupElements) {
-		IConfigurationElement[] converterElements = converterGroupElement
-			.getChildren("converter");
+		IConfigurationElement[] converterElements = converterGroupElement.getChildren("converter");
 		for (IConfigurationElement converterElement : converterElements) {
 
 		    ConverterDefinition converterDefinition;
 		    converterDefinition = new ConverterDefinition();
-		    converterDefinition.setId(converterElement
-			    .getAttribute("id"));
-		    converterDefinition.setName(converterElement
-			    .getAttribute("name"));
-		    converterDefinition
-			    .setSourceFileExtensions(converterElement
-				    .getAttribute("sourceFileExtensions"));
-		    converterDefinition.setTargetImagePaletteSize(Integer
-			    .parseInt(converterElement
-				    .getAttribute("targetImagePaletteSize")));
-		    converterDefinition
-			    .setTargetImageDisplayAspect(AspectUtility.fromString(converterElement
-				    .getAttribute("targetImageDisplayAspect")));
-		    IConfigurationElement[] sourceFileElements = converterElement
-			    .getChildren("sourceFile");
+		    converterDefinition.setId(converterElement.getAttribute("id"));
+		    converterDefinition.setName(converterElement.getAttribute("name"));
+		    converterDefinition.setSourceFileExtensions(converterElement.getAttribute("sourceFileExtensions"));
+		    converterDefinition.setTargetImagePaletteSize(Integer.parseInt(converterElement
+			    .getAttribute("targetImagePaletteSize")));
+		    converterDefinition.setTargetImageDisplayAspect(AspectUtility.fromString(converterElement
+			    .getAttribute("targetImageDisplayAspect")));
+		    IConfigurationElement[] sourceFileElements = converterElement.getChildren("sourceFile");
 		    int i = 0;
 		    for (IConfigurationElement sourceFileElement : sourceFileElements) {
 			ConverterSourceFileDefinition sourceFileDefinition;
 			sourceFileDefinition = new ConverterSourceFileDefinition();
 			sourceFileDefinition.setSourceFileId(i);
-			sourceFileDefinition.setLabel(sourceFileElement
-				.getAttribute("label"));
-			converterDefinition
-				.addSourceFileDefinition(sourceFileDefinition);
+			sourceFileDefinition.setLabel(sourceFileElement.getAttribute("label"));
+			converterDefinition.addSourceFileDefinition(sourceFileDefinition);
 			i++;
 		    }
 
-		    IConfigurationElement[] targetFileElements = converterElement
-			    .getChildren("targetFile");
+		    IConfigurationElement[] targetFileElements = converterElement.getChildren("targetFile");
 		    i = 0;
 		    for (IConfigurationElement targetFileElement : targetFileElements) {
 			ConverterTargetFileDefinition targetFileDefinition;
 			targetFileDefinition = new ConverterTargetFileDefinition();
 			targetFileDefinition.setSourceFileId(i);
-			targetFileDefinition.setLabel(targetFileElement
-				.getAttribute("label"));
-			converterDefinition
-				.addTargetFileDefinition(targetFileDefinition);
+			targetFileDefinition.setLabel(targetFileElement.getAttribute("label"));
+			converterDefinition.addTargetFileDefinition(targetFileDefinition);
 			i++;
 		    }
 
 		    // If there is a source file, it is a files to image
 		    // converter.
-		    if (!converterDefinition.getSourceFileDefinitions()
-			    .isEmpty()) {
-			filesToImageConverterDefinitionList
-				.add(converterDefinition);
+		    if (!converterDefinition.getSourceFileDefinitions().isEmpty()) {
+			filesToImageConverterDefinitionList.add(converterDefinition);
 
 		    }
 		    // If there is a target file, it is a files to image
 		    // converter.
-		    if (!converterDefinition.getTargetFileDefinitions()
-			    .isEmpty()) {
-			imageToFilesConverterDefinitionList
-				.add(converterDefinition);
+		    if (!converterDefinition.getTargetFileDefinitions().isEmpty()) {
+			imageToFilesConverterDefinitionList.add(converterDefinition);
 
 		    }
 		    addConverter(converterElement, converterDefinition);
@@ -172,18 +152,14 @@ public final class ConverterRegistry {
 	}
 
 	// Create a sorted, unmodifiable copy.
-	filesToImageConverterDefinitionList = new ArrayList<ConverterDefinition>(
-		filesToImageConverterDefinitionList);
+	filesToImageConverterDefinitionList = new ArrayList<ConverterDefinition>(filesToImageConverterDefinitionList);
 	Collections.sort(filesToImageConverterDefinitionList);
-	filesToImageConverterDefinitionList = Collections
-		.unmodifiableList(filesToImageConverterDefinitionList);
+	filesToImageConverterDefinitionList = Collections.unmodifiableList(filesToImageConverterDefinitionList);
 
 	// Create a sorted, unmodifiable copy.
-	imageToFilesConverterDefinitionList = new ArrayList<ConverterDefinition>(
-		imageToFilesConverterDefinitionList);
+	imageToFilesConverterDefinitionList = new ArrayList<ConverterDefinition>(imageToFilesConverterDefinitionList);
 	Collections.sort(imageToFilesConverterDefinitionList);
-	imageToFilesConverterDefinitionList = Collections
-		.unmodifiableList(imageToFilesConverterDefinitionList);
+	imageToFilesConverterDefinitionList = Collections.unmodifiableList(imageToFilesConverterDefinitionList);
 
 	// Create an unmodifiable copy.
 	converterMap = Collections.unmodifiableMap(converterMap);
@@ -199,31 +175,25 @@ public final class ConverterRegistry {
      * @param converterDefinition
      *            The converter definition, not <code>null</code>.
      */
-    private void addConverter(IConfigurationElement configurationElement,
-	    ConverterDefinition converterDefinition) {
+    private void addConverter(IConfigurationElement configurationElement, ConverterDefinition converterDefinition) {
 	if (configurationElement == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'configurationElement' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'configurationElement' must not be null.");
 	}
 	if (converterDefinition == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'converterDefinition' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'converterDefinition' must not be null.");
 	}
 
 	String id = converterDefinition.getId();
 	Converter converter;
 	try {
-	    converter = (Converter) configurationElement
-		    .createExecutableExtension("id");
+	    converter = (Converter) configurationElement.createExecutableExtension("id");
 	} catch (CoreException ex) {
-	    throw new RuntimeException("Cannot instantiate converter '" + id
-		    + "'.", ex);
+	    throw new RuntimeException("Cannot instantiate converter '" + id + "'.", ex);
 	}
 	converter.setDefinition(converterDefinition);
 	converter = converterMap.put(id, converter);
 	if (converter != null) {
-	    throw new RuntimeException("Converter id '" + id
-		    + "' is already registered to class '"
+	    throw new RuntimeException("Converter id '" + id + "' is already registered to class '"
 		    + converter.getClass().getName() + "'.");
 	}
 
@@ -238,11 +208,9 @@ public final class ConverterRegistry {
      * @return The unmodifiable list of converter definitions, sorted by their
      *         id, not empty and not <code>null</code>.
      */
-    public List<ConverterDefinition> getDefinitions(
-	    ConverterDirection converterDirection) {
+    public List<ConverterDefinition> getDefinitions(ConverterDirection converterDirection) {
 	if (converterDirection == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'converterDirection' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'converterDirection' must not be null.");
 	}
 	switch (converterDirection) {
 	case FILES_TO_IMAGE:
@@ -250,8 +218,7 @@ public final class ConverterRegistry {
 	case IMAGE_TO_FILES:
 	    return imageToFilesConverterDefinitionList;
 	default:
-	    throw new IllegalArgumentException("Unknown converter directtion "
-		    + converterDirection + ".");
+	    throw new IllegalArgumentException("Unknown converter directtion " + converterDirection + ".");
 	}
     }
 
@@ -265,11 +232,9 @@ public final class ConverterRegistry {
      * 
      * @return The converter definition or <code>null</code>.
      */
-    public ConverterDefinition getDefinition(String converterId,
-	    ConverterDirection converterDirection) {
+    public ConverterDefinition getDefinition(String converterId, ConverterDirection converterDirection) {
 	if (converterId == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'converterId' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'converterId' must not be null.");
 	}
 	List<ConverterDefinition> converterDefinitionList = getDefinitions(converterDirection);
 	for (ConverterDefinition converterDefinition : converterDefinitionList) {
@@ -291,8 +256,7 @@ public final class ConverterRegistry {
      */
     public Converter getConverter(String converterId) {
 	if (converterId == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'converterId' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'converterId' must not be null.");
 	}
 	Converter result;
 	synchronized (converterMap) {

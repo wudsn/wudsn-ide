@@ -102,8 +102,8 @@ public final class ConverterScriptData {
      * 
      * @param errorLineNumber
      *            The line number of the first error that occurred in the
-     *            script, a positive integer or <code>-1</code> if there is
-     *            no error.
+     *            script, a positive integer or <code>-1</code> if there is no
+     *            error.
      */
     public void setErrorLineNumber(int errorLineNumber) {
 	this.errorLineNumber = errorLineNumber;

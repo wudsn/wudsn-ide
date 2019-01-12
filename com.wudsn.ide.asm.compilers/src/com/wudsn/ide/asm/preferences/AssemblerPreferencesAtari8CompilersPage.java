@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -28,8 +28,7 @@ import com.wudsn.ide.asm.preferences.AssemblerPreferencesCompilersPage;
  * @author Peter Dell
  * 
  */
-public final class AssemblerPreferencesAtari8CompilersPage extends
-	AssemblerPreferencesCompilersPage {
+public final class AssemblerPreferencesAtari8CompilersPage extends AssemblerPreferencesCompilersPage {
 
     /**
      * Create is public. Used by extension point

@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -24,6 +24,7 @@ import net.sf.asap.ASAP;
 import net.sf.asap.ASAPSampleFormat;
 
 import com.wudsn.ide.snd.player.SoundGenerator;
+
 /**
  * Sound generator for {@link ASAPPlayer}.
  * 
@@ -37,41 +38,38 @@ final class ASAPSoundGenerator extends SoundGenerator {
     private int len;
 
     public ASAPSoundGenerator(ASAP asap, SourceDataLine line) {
-        if (asap == null) {
-    	throw new IllegalArgumentException(
-    		"Parameter 'asap' must not be null.");
-        }
-        if (line == null) {
-    	throw new IllegalArgumentException(
-    		"Parameter 'line' must not be null.");
-        }
-        this.asap = asap;
-        this.line = line;
-        buffer = new byte[line.getBufferSize()];
+	if (asap == null) {
+	    throw new IllegalArgumentException("Parameter 'asap' must not be null.");
+	}
+	if (line == null) {
+	    throw new IllegalArgumentException("Parameter 'line' must not be null.");
+	}
+	this.asap = asap;
+	this.line = line;
+	buffer = new byte[line.getBufferSize()];
 
-        line.start();
+	line.start();
 
     }
 
     @Override
     public void generateBuffer() {
-        len = asap
-    	    .generate(buffer, buffer.length, ASAPSampleFormat.S16_L_E);
+	len = asap.generate(buffer, buffer.length, ASAPSampleFormat.S16_L_E);
     }
 
     @Override
     public void playBuffer() {
-        line.write(buffer, 0, len);
+	line.write(buffer, 0, len);
     }
 
     @Override
     public boolean isGenerating() {
-        return len == buffer.length;
+	return len == buffer.length;
     }
 
     @Override
     public void close() {
-        line.drain();
-        line.close();
+	line.drain();
+	line.close();
     }
 }

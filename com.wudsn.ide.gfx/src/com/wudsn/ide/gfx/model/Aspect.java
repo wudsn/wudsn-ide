@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -60,8 +60,7 @@ public final class Aspect {
 	if (obj instanceof Aspect) {
 	    Aspect aspect;
 	    aspect = (Aspect) obj;
-	    if (aspect.getFactorX() == factorX
-		    && aspect.getFactorY() == factorY) {
+	    if (aspect.getFactorX() == factorX && aspect.getFactorY() == factorY) {
 		return true;
 	    }
 	}
@@ -71,9 +70,9 @@ public final class Aspect {
     @Override
     public int hashCode() {
 
-	return factorX+17*factorY;
+	return factorX + 17 * factorY;
     }
-    
+
     @Override
     public String toString() {
 	return factorX + "x" + factorY;

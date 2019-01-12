@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -46,12 +46,10 @@ public class PropertiesSerializer {
 
     protected final void setProperty(String key, String value) {
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 
 	properties.put(key, value);
@@ -60,12 +58,10 @@ public class PropertiesSerializer {
     public final String readString(String key, String defaultValue) {
 
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	if (defaultValue == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'defaultValue' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'defaultValue' must not be null.");
 	}
 	String result;
 	result = properties.getProperty(key);
@@ -79,20 +75,17 @@ public class PropertiesSerializer {
     public final void writeString(String key, String value) {
 
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	setProperty(key, value);
     }
 
     public boolean readBoolean(String key, boolean defaultValue) {
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 
 	}
 	boolean result;
@@ -106,25 +99,20 @@ public class PropertiesSerializer {
 
     public final void writeBoolean(String key, boolean value) {
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	properties.setProperty(key, Boolean.toString(value));
     }
 
-    public final <T extends Enum<?>> T readEnum(String key, T defaultValue,
-	    Class<T> enumClass) {
+    public final <T extends Enum<?>> T readEnum(String key, T defaultValue, Class<T> enumClass) {
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	if (defaultValue == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'defaultValue' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'defaultValue' must not be null.");
 	}
 	if (enumClass == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'enumClass' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'enumClass' must not be null.");
 	}
 	T result;
 	result = defaultValue;
@@ -146,12 +134,10 @@ public class PropertiesSerializer {
 
     public final <T extends Enum<?>> void writeEnum(String key, T value) {
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	setProperty(key, value.name());
     }
@@ -159,8 +145,7 @@ public class PropertiesSerializer {
     public final int readInteger(String key, int defaultValue) {
 
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 
 	int result;
@@ -181,8 +166,7 @@ public class PropertiesSerializer {
     public final void writeInteger(String key, int value) {
 
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 
 	setProperty(key, String.valueOf(value));
@@ -190,12 +174,10 @@ public class PropertiesSerializer {
 
     public final void readProperties(String key, PropertiesSerializer value) {
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	String prefix = key + ".";
 	Properties valueProperties = value.getProperties();
@@ -204,29 +186,24 @@ public class PropertiesSerializer {
 	while (i.hasMoreElements()) {
 	    String valueKey = (String) i.nextElement();
 	    if (valueKey.startsWith(prefix)) {
-		valueProperties.setProperty(
-			valueKey.substring(prefix.length()),
-			properties.getProperty(valueKey));
+		valueProperties.setProperty(valueKey.substring(prefix.length()), properties.getProperty(valueKey));
 	    }
 	}
     }
 
     public final void writeProperties(String key, PropertiesSerializer value) {
 	if (key == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'key' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
 	}
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	String prefix = key + ".";
 	Properties valueProperties = value.getProperties();
 	Enumeration<Object> i = valueProperties.keys();
 	while (i.hasMoreElements()) {
 	    String valueKey = (String) i.nextElement();
-	    setProperty(prefix + valueKey,
-		    valueProperties.getProperty(valueKey));
+	    setProperty(prefix + valueKey, valueProperties.getProperty(valueKey));
 	}
     }
 

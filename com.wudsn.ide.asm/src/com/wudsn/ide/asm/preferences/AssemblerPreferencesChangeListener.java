@@ -32,6 +32,7 @@ public interface AssemblerPreferencesChangeListener {
 
     /**
      * Notify of changed properties.
+     * 
      * @param preferences
      *            The assembler preferences containing the new values, not
      *            <code>null</code>.

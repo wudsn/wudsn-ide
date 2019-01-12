@@ -79,17 +79,14 @@ public final class CompilerSourceParserTreeObject {
      * @param description
      *            The description of the tree object, not <code>null</code>.
      */
-    CompilerSourceParserTreeObject(CompilerSourceFile compilerSourceFile,
-	    int startOffset, int type, String name, String displayName,
-	    String description) {
+    CompilerSourceParserTreeObject(CompilerSourceFile compilerSourceFile, int startOffset, int type, String name,
+	    String displayName, String description) {
 	if (compilerSourceFile == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'compilerSourceFile' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'compilerSourceFile' must not be null.");
 	}
 	if (startOffset < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'startOffset' must not be negative. Specified value is "
-			    + startOffset + ".");
+	    throw new IllegalArgumentException("Parameter 'startOffset' must not be negative. Specified value is "
+		    + startOffset + ".");
 	}
 	this.compilerSourceFile = compilerSourceFile;
 	this.startOffset = startOffset;
@@ -121,16 +118,13 @@ public final class CompilerSourceParserTreeObject {
 	    throw new IllegalArgumentException("Unknown type " + type + ".");
 	}
 	if (name == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'name' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'name' must not be null.");
 	}
 	if (displayName == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'displayName' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'displayName' must not be null.");
 	}
 	if (description == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'description' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'description' must not be null.");
 	}
 	this.type = type;
 	this.name = name;
@@ -191,8 +185,8 @@ public final class CompilerSourceParserTreeObject {
      */
     public String getCompoundName() {
 	if (compoundName == null) {
-	    char identifierSeparatorCharacter = compilerSourceFile
-		    .getCompilerSyntax().getIdentifierSeparatorCharacter();
+	    char identifierSeparatorCharacter = compilerSourceFile.getCompilerSyntax()
+		    .getIdentifierSeparatorCharacter();
 	    switch (type) {
 	    case CompilerSourceParserTreeObjectType.DEFINITION_SECTION:
 	    case CompilerSourceParserTreeObjectType.IMPLEMENTATION_SECTION:
@@ -236,13 +230,11 @@ public final class CompilerSourceParserTreeObject {
 			&& namedParent.getType() != CompilerSourceParserTreeObjectType.PROCEDURE_DEFINITION_SECTION) {
 		    namedParent = namedParent.getParent();
 		}
-		if (namedParent != null
-			&& StringUtility.isSpecified(compoundName)) {
+		if (namedParent != null && StringUtility.isSpecified(compoundName)) {
 		    String parentCompoundName;
 		    parentCompoundName = parent.getCompoundName();
 		    if (StringUtility.isSpecified(parentCompoundName)) {
-			compoundName = parentCompoundName
-				+ identifierSeparatorCharacter + compoundName;
+			compoundName = parentCompoundName + identifierSeparatorCharacter + compoundName;
 		    }
 		}
 	    }
@@ -350,12 +342,10 @@ public final class CompilerSourceParserTreeObject {
      */
     final void addChild(CompilerSourceParserTreeObject child) {
 	if (child == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'child' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'child' must not be null.");
 	}
 	if (child == this) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'child' must not be this: " + toString());
+	    throw new IllegalArgumentException("Parameter 'child' must not be this: " + toString());
 	}
 	children.add(child);
 	child.setParent(this);
@@ -377,16 +367,13 @@ public final class CompilerSourceParserTreeObject {
      * @param includedCompilerSourceFile
      *            The included compiler source file, may be <code>null</code>.
      */
-    final void setIncludedCompilerSourceFile(
-	    CompilerSourceFile includedCompilerSourceFile) {
+    final void setIncludedCompilerSourceFile(CompilerSourceFile includedCompilerSourceFile) {
 	if (type != CompilerSourceParserTreeObjectType.SOURCE_INCLUDE) {
-	    throw new IllegalStateException("The type of this tree object is "
-		    + type + " and not SOURCE_INCLUDE");
+	    throw new IllegalStateException("The type of this tree object is " + type + " and not SOURCE_INCLUDE");
 	}
 	this.includedCompilerSourceFile = includedCompilerSourceFile;
 
     }
-    
 
     @Override
     public boolean equals(Object object) {

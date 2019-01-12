@@ -63,8 +63,7 @@ public final class RunnerDefinition implements Comparable<RunnerDefinition> {
      */
     final void setHardware(Hardware hardware) {
 	if (hardware == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'hardware' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'hardware' must not be null.");
 	}
 	this.hardware = hardware;
     }
@@ -76,8 +75,7 @@ public final class RunnerDefinition implements Comparable<RunnerDefinition> {
      */
     public final Hardware getHardware() {
 	if (hardware == null) {
-	    throw new IllegalStateException(
-		    "Field 'hardware' must not be null.");
+	    throw new IllegalStateException("Field 'hardware' must not be null.");
 	}
 	return hardware;
     }
@@ -92,8 +90,7 @@ public final class RunnerDefinition implements Comparable<RunnerDefinition> {
      */
     final void setId(String id) {
 	if (id == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'id' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'id' must not be null.");
 	}
 	this.id = id;
     }
@@ -118,8 +115,7 @@ public final class RunnerDefinition implements Comparable<RunnerDefinition> {
      */
     final void setName(String name) {
 	if (name == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'name' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'name' must not be null.");
 	}
 	this.name = name;
     }
@@ -146,8 +142,7 @@ public final class RunnerDefinition implements Comparable<RunnerDefinition> {
     public final boolean isRunnerExecutablePathPossible() {
 	boolean result;
 
-	result = id.equals(RunnerId.USER_DEFINED_APPLICATION)
-		|| defaultCommandLine.contains(RUNNER_EXECUTABLE_PATH);
+	result = id.equals(RunnerId.USER_DEFINED_APPLICATION) || defaultCommandLine.contains(RUNNER_EXECUTABLE_PATH);
 	return result;
     }
 
@@ -175,8 +170,7 @@ public final class RunnerDefinition implements Comparable<RunnerDefinition> {
      */
     public final String getHomePageURL() {
 	if (homePageURL == null) {
-	    throw new IllegalStateException(
-		    "Field 'homePageURL' must not be null.");
+	    throw new IllegalStateException("Field 'homePageURL' must not be null.");
 	}
 	return homePageURL;
     }
@@ -203,8 +197,7 @@ public final class RunnerDefinition implements Comparable<RunnerDefinition> {
      */
     public final String getDefaultCommandLine() {
 	if (defaultCommandLine == null) {
-	    throw new IllegalStateException(
-		    "Field 'defaultCommandLine' must not be null.");
+	    throw new IllegalStateException("Field 'defaultCommandLine' must not be null.");
 	}
 	return defaultCommandLine;
     }
@@ -218,12 +211,10 @@ public final class RunnerDefinition implements Comparable<RunnerDefinition> {
     @Override
     public final int compareTo(RunnerDefinition o) {
 	if (o == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'o' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'o' must not be null.");
 	}
 	if (name == null || o.name == null) {
-	    throw new IllegalStateException(
-		    "Field 'name' must not be null for this or for argument.");
+	    throw new IllegalStateException("Field 'name' must not be null for this or for argument.");
 
 	}
 	int result = id.compareTo(o.id);

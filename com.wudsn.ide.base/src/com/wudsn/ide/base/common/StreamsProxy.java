@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -37,8 +37,7 @@ final class StreamsProxy {
 
     public StreamsProxy(Process process, String encoding, PrintStream out, PrintStream err) {
 	if (process == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'process' must not be null");
+	    throw new IllegalArgumentException("Parameter 'process' must not be null");
 	}
 	if (out == null) {
 	    throw new IllegalArgumentException("Parameter 'out' must not be null.");
@@ -46,10 +45,8 @@ final class StreamsProxy {
 	if (err == null) {
 	    throw new IllegalArgumentException("Parameter 'err' must not be null.");
 	}
-	outputMonitor = new OutputStreamMonitor(process.getInputStream(),
-		encoding, out);
-	errorMonitor = new OutputStreamMonitor(process.getErrorStream(),
-		encoding, err);
+	outputMonitor = new OutputStreamMonitor(process.getInputStream(), encoding, out);
+	errorMonitor = new OutputStreamMonitor(process.getErrorStream(), encoding, err);
 	inputMonitor = new InputStreamMonitor(process.getOutputStream());
 	outputMonitor.startMonitoring();
 	errorMonitor.startMonitoring();

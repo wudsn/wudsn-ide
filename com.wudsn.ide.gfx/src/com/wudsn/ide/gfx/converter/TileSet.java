@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -51,18 +51,15 @@ public final class TileSet {
      */
     public TileSet(ImageData imageData, int pixelsPerColumn, int pixelsPerRow) {
 	if (imageData == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'imageData' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'imageData' must not be null.");
 	}
 	if (pixelsPerColumn < 1) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'pixelsPerColumn' must be poitive. Specified value is "
-			    + pixelsPerColumn + ".");
+	    throw new IllegalArgumentException("Parameter 'pixelsPerColumn' must be poitive. Specified value is "
+		    + pixelsPerColumn + ".");
 	}
 	if (pixelsPerRow < 1) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'pixelsPerRow' must be poitive. Specified value is "
-			    + pixelsPerRow + ".");
+	    throw new IllegalArgumentException("Parameter 'pixelsPerRow' must be poitive. Specified value is "
+		    + pixelsPerRow + ".");
 	}
 
 	this.imageData = imageData;
@@ -149,14 +146,11 @@ public final class TileSet {
      */
     public Tile getTile(int column, int row) {
 	if (column < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'column' must not be negative. Specified value is "
-			    + column + ".");
+	    throw new IllegalArgumentException("Parameter 'column' must not be negative. Specified value is " + column
+		    + ".");
 	}
 	if (row < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'row' must not be negative. Specified value is "
-			    + row + ".");
+	    throw new IllegalArgumentException("Parameter 'row' must not be negative. Specified value is " + row + ".");
 	}
 	return tiles[row][column];
     }
@@ -170,8 +164,7 @@ public final class TileSet {
     public ImageData createTiledImageData() {
 	int width = columns * (pixelsPerColumn + 1) + 1;
 	int height = rows * (pixelsPerRow + 1) + 1;
-	ImageData tiledImageData = new ImageData(width, height,
-		imageData.depth, imageData.palette);
+	ImageData tiledImageData = new ImageData(width, height, imageData.depth, imageData.palette);
 	return tiledImageData;
     }
 
@@ -185,19 +178,15 @@ public final class TileSet {
      * @param inverseConflictColor
      *            The pixel color for coloring conflict tiles in the tile grid.
      */
-    public void drawTileBoundaries(ImageData targetImageData,
-	    Integer gridColor, Integer inverseConflictColor) {
+    public void drawTileBoundaries(ImageData targetImageData, Integer gridColor, Integer inverseConflictColor) {
 	if (targetImageData == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'targetImageData' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'targetImageData' must not be null.");
 	}
 	if (gridColor == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'gridColor' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'gridColor' must not be null.");
 	}
 	if (inverseConflictColor == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'inverseConflictColor' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'inverseConflictColor' must not be null.");
 	}
 	for (int r = 0; r < rows + 1; r++) {
 	    int ty = r * (pixelsPerRow + 1);
@@ -220,16 +209,12 @@ public final class TileSet {
 		Tile tile = getTile(c, r);
 		if (tile.isInverseConflict()) {
 		    for (int x = 0; x < pixelsPerColumn + 1; x++) {
-			targetImageData.setPixel(tx + x, ty,
-				inverseConflictColor.intValue());
-			targetImageData.setPixel(tx + x, ty + pixelsPerRow + 1,
-				inverseConflictColor.intValue());
+			targetImageData.setPixel(tx + x, ty, inverseConflictColor.intValue());
+			targetImageData.setPixel(tx + x, ty + pixelsPerRow + 1, inverseConflictColor.intValue());
 		    }
 		    for (int y = 0; y < pixelsPerRow + 1; y++) {
-			targetImageData.setPixel(tx, ty + y,
-				inverseConflictColor.intValue());
-			targetImageData.setPixel(tx + pixelsPerColumn + 1, ty
-				+ y, inverseConflictColor.intValue());
+			targetImageData.setPixel(tx, ty + y, inverseConflictColor.intValue());
+			targetImageData.setPixel(tx + pixelsPerColumn + 1, ty + y, inverseConflictColor.intValue());
 
 		    }
 		}

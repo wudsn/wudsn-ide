@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -97,11 +97,11 @@ public final class FilesConverterDataLogic {
 	// Hires 256x239, 3 colors, interlaced
 	// @since FAIL 1.0.0
 	public static final String HR = "hr";
-        
-	// Hires 320x200, 5 colors, interlaced  
-	// @since FAIL 1.0.1                    
-	public static final String HR2 = "hr2"; 
-	
+
+	// Hires 320x200, 5 colors, interlaced
+	// @since FAIL 1.0.1
+	public static final String HR2 = "hr2";
+
 	// APAC 80x192, 256 colors interlaced
 	// @since FAIL 1.0.0
 	public static final String ILC = "ilc";
@@ -145,34 +145,33 @@ public final class FilesConverterDataLogic {
 	// Taquart Interlace Picture; up to 160x119
 	// @since FAIL 1.0.0
 	public static final String TIP = "tip";
-	
-	
-	
+
 	// TODO Fail 1.1.0
-//	Fixed decoding of ILC, AP3, RIP, PIC, CPR, HIP and CIN.
-//	Added support for MCH, IGE, 256, AP2, JGP, DGP, ESC, PZM, IST and RAW.
-//  	MCH IGE 256 AP2 JGP DGP ESC PZM IST RAW
-//	256:: 80x96, 256 colors.
-//	AP2:: 80x96, 256 colors.
-//
-//	DGP:: "DigiPaint", 80x192, 256 colors, interlaced.
-//	ESC:: "EscalPaint", 80x192, 256 colors, interlaced.
-//	IGE:: "Interlace Graphics Editor", 128x96, 16 colors, interlaced.
-//
-//	IST:: "Interlace Studio", 160x200, interlaced.
-//	JGP:: "Jet Graphics Planner", 8x16 tiles, 4 colors.
-//	MCH:: Up to 192x240, 128 colors.
-//	PZM:: "EscalPaint", 80x192, 256 colors, interlaced.
-//	RAW:: "XL-Paint MAX", 160x192, 16 colors, interlaced.
-	
-//	fail.h: #define FAIL_WIDTH_MAX    320 => 384, used in RIP
-//	
-//	/* Limits. */
-//	#define FAIL_IMAGE_MAX    30000
-//	#define FAIL_WIDTH_MAX    384
-//	#define FAIL_HEIGHT_MAX   240
-//	#define FAIL_PALETTE_MAX  768
-//	#define FAIL_PIXELS_MAX   (FAIL_WIDTH_MAX * FAIL_HEIGHT_MAX * 3)
+	// Fixed decoding of ILC, AP3, RIP, PIC, CPR, HIP and CIN.
+	// Added support for MCH, IGE, 256, AP2, JGP, DGP, ESC, PZM, IST and
+	// RAW.
+	// MCH IGE 256 AP2 JGP DGP ESC PZM IST RAW
+	// 256:: 80x96, 256 colors.
+	// AP2:: 80x96, 256 colors.
+	//
+	// DGP:: "DigiPaint", 80x192, 256 colors, interlaced.
+	// ESC:: "EscalPaint", 80x192, 256 colors, interlaced.
+	// IGE:: "Interlace Graphics Editor", 128x96, 16 colors, interlaced.
+	//
+	// IST:: "Interlace Studio", 160x200, interlaced.
+	// JGP:: "Jet Graphics Planner", 8x16 tiles, 4 colors.
+	// MCH:: Up to 192x240, 128 colors.
+	// PZM:: "EscalPaint", 80x192, 256 colors, interlaced.
+	// RAW:: "XL-Paint MAX", 160x192, 16 colors, interlaced.
+
+	// fail.h: #define FAIL_WIDTH_MAX 320 => 384, used in RIP
+	//
+	// /* Limits. */
+	// #define FAIL_IMAGE_MAX 30000
+	// #define FAIL_WIDTH_MAX 384
+	// #define FAIL_HEIGHT_MAX 240
+	// #define FAIL_PALETTE_MAX 768
+	// #define FAIL_PIXELS_MAX (FAIL_WIDTH_MAX * FAIL_HEIGHT_MAX * 3)
     }
 
     FilesConverterDataLogic() {
@@ -181,8 +180,7 @@ public final class FilesConverterDataLogic {
 
     public void applyDefaults(FilesConverterData data) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	FilesConverterParameters parameters;
 	Converter converter;
@@ -192,8 +190,7 @@ public final class FilesConverterDataLogic {
 
 	// Take defaults from the definition.
 	if (converter != null) {
-	    int targetImagePaletteSize = converter.getDefinition()
-		    .getTargetImagePaletteSize();
+	    int targetImagePaletteSize = converter.getDefinition().getTargetImagePaletteSize();
 	    RGB[] rgbs;
 	    if (targetImagePaletteSize > 0) {
 		rgbs = new RGB[targetImagePaletteSize];
@@ -206,8 +203,7 @@ public final class FilesConverterDataLogic {
 		rgbs = new RGB[0];
 	    }
 	    parameters.setPaletteRGBs(rgbs);
-	    parameters.setDisplayAspect(converter.getDefinition()
-		    .getTargetImageDisplayAspect());
+	    parameters.setDisplayAspect(converter.getDefinition().getTargetImageDisplayAspect());
 	}
     }
 
@@ -226,26 +222,21 @@ public final class FilesConverterDataLogic {
      *            The file extension of the input file, may be empty, not
      *            <code>null</code>.
      */
-    public void findDefaultFileConverter(FilesConverterData data, byte[] bytes,
-	    String fileExtension) {
+    public void findDefaultFileConverter(FilesConverterData data, byte[] bytes, String fileExtension) {
 	if (data == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'data' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 	if (bytes == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'bytes' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 	if (fileExtension == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'fileExtension' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'fileExtension' must not be null.");
 	}
 	int columns;
 	int rows;
 	FilesConverterParameters parameters = data.getParameters();
 
-	ConverterRegistry converterRegistry = GraphicsPlugin.getInstance()
-		.getConverterRegistry();
+	ConverterRegistry converterRegistry = GraphicsPlugin.getInstance().getConverterRegistry();
 	List<ConverterDefinition> converterDefinitions = converterRegistry
 		.getDefinitions(ConverterDirection.FILES_TO_IMAGE);
 
@@ -254,10 +245,8 @@ public final class FilesConverterDataLogic {
 	Iterator<ConverterDefinition> i = converterDefinitions.iterator();
 	while (i.hasNext() && !converted) {
 	    ConverterDefinition converterDefinition = i.next();
-	    if (converterDefinition
-		    .isSourceFileExtensionSupported(fileExtension)) {
-		Converter converter = converterRegistry
-			.getConverter(converterDefinition.getId());
+	    if (converterDefinition.isSourceFileExtensionSupported(fileExtension)) {
+		Converter converter = converterRegistry.getConverter(converterDefinition.getId());
 		if (converter.canConvertToImage(bytes)) {
 		    converter.convertToImageSizeAndPalette(data, bytes);
 		    converted = true;
@@ -270,8 +259,7 @@ public final class FilesConverterDataLogic {
 	    i = converterDefinitions.iterator();
 	    while (i.hasNext() && !converted) {
 		ConverterDefinition converterDefinition = i.next();
-		Converter converter = converterRegistry
-			.getConverter(converterDefinition.getId());
+		Converter converter = converterRegistry.getConverter(converterDefinition.getId());
 		if (converter.canConvertToImage(bytes)) {
 		    converter.convertToImageSizeAndPalette(data, bytes);
 		    converted = true;
@@ -281,8 +269,7 @@ public final class FilesConverterDataLogic {
 
 	// If nothing matched, display as hires bitmap.
 	if (!converted) {
-	    data.getParameters().setConverterId(
-		    LinearBitMapGraphics8Converter.class.getName());
+	    data.getParameters().setConverterId(LinearBitMapGraphics8Converter.class.getName());
 	    applyDefaults(data);
 	    columns = 40;
 	    rows = (bytes.length + columns - 1) / columns;

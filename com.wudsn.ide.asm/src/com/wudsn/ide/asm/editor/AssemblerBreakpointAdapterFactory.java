@@ -38,8 +38,7 @@ import com.wudsn.ide.asm.Texts;
  * @author Peter Dell
  * @since 1.6.1
  */
-public final class AssemblerBreakpointAdapterFactory implements
-	IToggleBreakpointsTargetFactory {
+public final class AssemblerBreakpointAdapterFactory implements IToggleBreakpointsTargetFactory {
 
     private String TARGET_ID = AssemblerBreakpointsTarget.class.getName();
     private Set<String> defaultSet;
@@ -50,8 +49,7 @@ public final class AssemblerBreakpointAdapterFactory implements
     }
 
     @Override
-    public Set<String> getToggleTargets(IWorkbenchPart part,
-	    ISelection selection) {
+    public Set<String> getToggleTargets(IWorkbenchPart part, ISelection selection) {
 	if (part instanceof AssemblerEditor) {
 	    return defaultSet;
 	}
@@ -59,8 +57,7 @@ public final class AssemblerBreakpointAdapterFactory implements
     }
 
     @Override
-    public String getDefaultToggleTarget(IWorkbenchPart part,
-	    ISelection selection) {
+    public String getDefaultToggleTarget(IWorkbenchPart part, ISelection selection) {
 	if (part instanceof AssemblerEditor) {
 	    return TARGET_ID;
 	}

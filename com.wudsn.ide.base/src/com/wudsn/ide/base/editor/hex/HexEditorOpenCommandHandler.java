@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -21,14 +21,12 @@ package com.wudsn.ide.base.editor.hex;
 
 import com.wudsn.ide.base.editor.CommonOpenEditorCommandHandler;
 
-
 /**
  * The action to open the hex editor from the context menu.
  * 
  * @author Peter Dell
  */
-public final class HexEditorOpenCommandHandler extends
-	CommonOpenEditorCommandHandler {
+public final class HexEditorOpenCommandHandler extends CommonOpenEditorCommandHandler {
 
     /**
      * Creation is public. Called by extension "org.eclipse.ui.popupMenus".

@@ -1,5 +1,5 @@
 /**
-* Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2019 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -42,12 +42,10 @@ public final class AspectField extends Field {
 
     public AspectField(Composite parent, String labelText) {
 	if (parent == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'parent' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
 	}
 	if (labelText == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'labelText' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'labelText' must not be null.");
 	}
 
 	label = new Label(parent, SWT.NONE);
@@ -67,8 +65,7 @@ public final class AspectField extends Field {
 
     public void setValue(Aspect value) {
 	if (value == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'value' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
 	for (Action action : selectionActions) {
 	    action.setEnabled(false);
@@ -124,8 +121,7 @@ public final class AspectField extends Field {
      */
     public void addSelectionAction(Action action) {
 	if (action == null) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'action' must not be null.");
+	    throw new IllegalArgumentException("Parameter 'action' must not be null.");
 	}
 	selectionActions.add(action);
 	combo.addSelectionListener(action);
