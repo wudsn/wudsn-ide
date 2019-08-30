@@ -436,7 +436,12 @@ final class AssemblerEditorCompileCommand {
 	}
 	File breakpointsFile = runner.createBreakpointsFile(files);
 	IBreakpointManager breakpointManager = DebugPlugin.getDefault().getBreakpointManager();
-	IBreakpoint breakpoints[] = breakpointManager.getBreakpoints(AssemblerBreakpoint.DEBUG_MODEL_ID);
+	IBreakpoint breakpoints[];
+	if (breakpointManager.isEnabled()) {
+	    breakpoints = breakpointManager.getBreakpoints(AssemblerBreakpoint.DEBUG_MODEL_ID);
+	} else {
+	    breakpoints = new IBreakpoint[0];
+	}
 	if (breakpointsFile == null) {
 	    if (breakpoints.length > 0) {
 		// WARNING: Breakpoints will be ignored because the application
