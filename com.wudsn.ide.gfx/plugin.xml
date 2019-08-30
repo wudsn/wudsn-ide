@@ -5,15 +5,15 @@
    <extension
          point="org.eclipse.ui.commands">
       <command
-            id="com.wudsn.ide.gfx.editor.GraphicsEditorOpenCommand"
-            name="%com.wudsn.ide.gfx.editor.GraphicsEditorOpenCommand.name">
+            id="com.wudsn.ide.gfx.editor.GraphicsConversionEditorOpenCommand"
+            name="%com.wudsn.ide.gfx.editor.GraphicsConversionEditorOpenCommand.name">
       </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="com.wudsn.ide.gfx.editor.GraphicsEditorOpenCommandHandler"
-            commandId="com.wudsn.ide.gfx.editor.GraphicsEditorOpenCommand">
+            class="com.wudsn.ide.gfx.editor.GraphicsConversionEditorOpenCommandHandler"
+            commandId="com.wudsn.ide.gfx.editor.GraphicsConversionEditorOpenCommand">
       </handler>
    </extension>
    <extension
@@ -21,8 +21,8 @@
       <menuContribution
             locationURI="popup:org.eclipse.ui.popup.any?after=com.wudsn.ide.base.editor.hex.HexEditorOpenCommand">
          <command
-               commandId="com.wudsn.ide.gfx.editor.GraphicsEditorOpenCommand"
-               id="com.wudsn.ide.gfx.editor.GraphicsEditorOpenCommand"
+               commandId="com.wudsn.ide.gfx.editor.GraphicsConversionEditorOpenCommand"
+               id="com.wudsn.ide.gfx.editor.GraphicsConversionEditorOpenCommand"
                style="push">
             <visibleWhen
                   checkEnabled="false">
@@ -55,7 +55,7 @@
    <extension
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
-            file-extensions="bmp, ico, gif, jpg, png, cnv"
+            file-extensions="bmp, ico, gif, jpg, jpeg, png"
             id="com.wudsn.ide.gfx.converter.GraphicsFile"
             name="%com.wudsn.ide.gfx.converter.GraphicsFile.name"
             priority="normal">
@@ -81,19 +81,28 @@
             name="%com.wudsn.ide.gfx.converter.apple2.AppleIIGraphicsFile.name"
             priority="normal">
       </content-type>
+      <content-type
+            file-extensions="cnv"
+            id="com.wudsn.ide.gfx.converter.GraphicsConverterFile"
+            name="%com.wudsn.ide.gfx.converter.GraphicsConverterFile.name"
+            priority="normal">
+      </content-type>
    </extension>
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            class="com.wudsn.ide.gfx.editor.GraphicsEditor"
+            class="com.wudsn.ide.gfx.editor.GraphicsConversionEditor"
             contributorClass="org.eclipse.ui.part.EditorActionBarContributor"
             default="true"
             extensions="bmp, ico, gif, jpg, png, cnv"
             icon="icons/graphics-editor-16x16.gif"
-            id="com.wudsn.ide.gfx.editor.GraphicsEditor"
-            name="%com.wudsn.ide.gfx.editor.GraphicsEditor.name">
+            id="com.wudsn.ide.gfx.editor.GraphicsConversionEditor"
+            name="%com.wudsn.ide.gfx.editor.GraphicsConversionEditor.name">
          <contentTypeBinding
                contentTypeId="com.wudsn.ide.gfx.converter.GraphicsFile">
+         </contentTypeBinding>
+         <contentTypeBinding
+               contentTypeId="com.wudsn.ide.gfx.converter.GraphicsConverterFile">
          </contentTypeBinding>
       </editor>
    </extension>
@@ -250,6 +259,15 @@
          </sourceFile>
          <sourceFile
                label="%com.wudsn.ide.gfx.converter.generic.TiledBitMapConverter.COLOR_RAM_FILE">
+         </sourceFile>
+      </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.generic.RecoilConverter"
+            name="Recoil"
+            targetImageDisplayAspect="1x1"
+            targetImagePaletteSize="0">
+         <sourceFile
+               label="Source File">
          </sourceFile>
       </converter>
                   </converterGroup>

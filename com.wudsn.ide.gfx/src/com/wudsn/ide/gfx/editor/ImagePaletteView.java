@@ -681,9 +681,9 @@ public final class ImagePaletteView extends ViewPart implements ISelectionListen
 	if (part == null) {
 	    setImageProvider(null);
 	} else {
-	    if (part instanceof GraphicsEditor) {
-		GraphicsEditor graphicsEditor = ((GraphicsEditor) part);
-		setImageProvider(graphicsEditor.getImageProvider());
+	    if (part instanceof GraphicsConversionEditor) {
+		GraphicsConversionEditor graphicsConversionEditor = ((GraphicsConversionEditor) part);
+		setImageProvider(graphicsConversionEditor.getImageProvider());
 	    }
 	}
     }

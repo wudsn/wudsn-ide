@@ -93,7 +93,7 @@ final class ImageConverterDataView {
     private CheckBoxField useDefaultScriptField;
     private MultiLineTextField scriptField;
 
-    public ImageConverterDataView(GraphicsEditor editor, Composite parent, ImageConverterData imageConverterData) {
+    public ImageConverterDataView(GraphicsConversionEditor editor, Composite parent, ImageConverterData imageConverterData) {
 	if (editor == null) {
 	    throw new IllegalArgumentException("Parameter 'editor' must not be null.");
 	}

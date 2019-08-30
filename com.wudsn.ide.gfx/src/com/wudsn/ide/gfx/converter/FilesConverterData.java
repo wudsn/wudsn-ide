@@ -30,10 +30,11 @@ import com.wudsn.ide.gfx.model.ConverterMode;
 
 public final class FilesConverterData extends ConverterCommonData {
 
+    // Persistent attributes.
     private FilesConverterParameters parameters;
 
+    // Transient attributes.
     private List<byte[]> sourceFilesBytes;
-
     private boolean imageDataValid;
 
     FilesConverterData(ConverterData converterData) {
@@ -123,7 +124,7 @@ public final class FilesConverterData extends ConverterCommonData {
 	}
 	return bytes;
     }
-
+    
     public void setImageDataValid(boolean imageDataValid) {
 	this.imageDataValid = imageDataValid;
     }

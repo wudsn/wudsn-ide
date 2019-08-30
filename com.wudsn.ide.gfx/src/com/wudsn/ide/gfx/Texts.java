@@ -21,7 +21,7 @@ package com.wudsn.ide.gfx;
 
 import org.eclipse.osgi.util.NLS;
 
-import com.wudsn.ide.gfx.editor.GraphicsEditor;
+import com.wudsn.ide.gfx.editor.GraphicsConversionEditor;
 
 /**
  * Class which holds the localized text constants.
@@ -96,7 +96,7 @@ public final class Texts extends NLS {
     public static String IMAGE_PALETTE_VIEW_COLUMN_COLOR_COUNT_PERCENT_TEXT;
 
     /**
-     * Messages for {@link GraphicsEditor}.
+     * Messages for {@link GraphicsConversionEditor}.
      */
     public static String MESSAGE_S100 = "Source files loaded and converted in {0} ms";
     public static String MESSAGE_E400;

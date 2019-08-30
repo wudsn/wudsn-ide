@@ -200,9 +200,9 @@ public final class ImageView extends ViewPart implements ISelectionListener {
 	if (part == null) {
 	    setImageProvider(null);
 	} else {
-	    if (part instanceof GraphicsEditor) {
-		GraphicsEditor graphicsEditor = ((GraphicsEditor) part);
-		setImageProvider(graphicsEditor.getImageProvider());
+	    if (part instanceof GraphicsConversionEditor) {
+		GraphicsConversionEditor graphicsConversionEditor = ((GraphicsConversionEditor) part);
+		setImageProvider(graphicsConversionEditor.getImageProvider());
 		System.out.println(this + "" + part + "" + selection);
 	    }
 	}

@@ -17,4 +17,5 @@ Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Export-Package: com.wudsn.ide.gfx.editor
 Bundle-ClassPath: lib/js.jar,
+ lib/recoil.jar,
  .

@@ -97,7 +97,7 @@ final class FilesConverterDataView {
     private IntegerField imageDataWidthField;
     private IntegerField imageDataHeightField;
 
-    public FilesConverterDataView(final GraphicsEditor editor, Composite parent, FilesConverterData filesConverterData) {
+    public FilesConverterDataView(final GraphicsConversionEditor editor, Composite parent, FilesConverterData filesConverterData) {
 	if (parent == null) {
 	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
 	}
