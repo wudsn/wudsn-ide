@@ -2,5 +2,5 @@
 	ORG $1000
 
 
-	lax $ab
+LAB1	lax $ab
 

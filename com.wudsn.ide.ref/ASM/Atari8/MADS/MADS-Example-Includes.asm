@@ -6,7 +6,6 @@
 ;	Absolute and relative file paths are supported.
 	ICL "..\Macros.inc"
 
-
 ;	Support for hyperlink navigation to binary includes.
 ;	Absolute and relative file paths are supported.
 	INS "C:\jac\system\Atari800\Example.bin"
