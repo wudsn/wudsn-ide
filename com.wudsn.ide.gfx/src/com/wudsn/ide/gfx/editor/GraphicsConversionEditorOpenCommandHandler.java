@@ -26,13 +26,13 @@ import com.wudsn.ide.base.editor.CommonOpenEditorCommandHandler;
  * 
  * @author Peter Dell
  */
-public final class GraphicsEditorOpenCommandHandler extends CommonOpenEditorCommandHandler {
+public final class GraphicsConversionEditorOpenCommandHandler extends CommonOpenEditorCommandHandler {
 
     /**
      * Creation is public. Called by extension "org.eclipse.ui.popupMenus".
      */
-    public GraphicsEditorOpenCommandHandler() {
-	super(GraphicsEditor.ID);
+    public GraphicsConversionEditorOpenCommandHandler() {
+	super(GraphicsConversionEditor.ID);
     }
 
 }

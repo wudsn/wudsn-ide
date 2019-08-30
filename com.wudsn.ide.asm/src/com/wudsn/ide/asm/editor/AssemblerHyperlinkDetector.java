@@ -46,7 +46,7 @@ import com.wudsn.ide.asm.compiler.syntax.CompilerSyntax;
 import com.wudsn.ide.base.common.NumberUtility;
 import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.editor.hex.HexEditor;
-import com.wudsn.ide.gfx.editor.GraphicsEditor;
+import com.wudsn.ide.gfx.editor.GraphicsConversionEditor;
 
 /**
  * Hyperlink detector implementation for opening source or binary include files.
@@ -213,7 +213,7 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 			0, Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_HEX_EDITOR));
 		if (canShowMultipleHyperlinks) {
 		    hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
-			    GraphicsEditor.ID, 0, Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_GRAPHICS_EDITOR));
+			    GraphicsConversionEditor.ID, 0, Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_GRAPHICS_EDITOR));
 		    hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
 			    AssemblerHyperlink.DEFAULT_EDITOR, 0,
 			    Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_DEFAULT_EDITOR));

@@ -71,7 +71,7 @@ import com.wudsn.ide.gfx.model.Aspect;
 import com.wudsn.ide.gfx.model.ConverterDirection;
 import com.wudsn.ide.gfx.model.ConverterMode;
 
-public final class GraphicsEditor extends EditorPart implements Application, ISelectionProvider, ChangeListener {
+public final class GraphicsConversionEditor extends EditorPart implements Application, ISelectionProvider, ChangeListener {
 
     public final class Actions {
 
@@ -276,7 +276,7 @@ public final class GraphicsEditor extends EditorPart implements Application, ISe
     }
 
     // ID of the editor in the plugin manifest.
-    public static final String ID = "com.wudsn.ide.gfx.editor.GraphicsEditor";
+    public static final String ID = "com.wudsn.ide.gfx.editor.GraphicsConversionEditor";
 
     private MessageManager messageManager;
     private boolean processing;
@@ -298,7 +298,7 @@ public final class GraphicsEditor extends EditorPart implements Application, ISe
     private List<ISelectionChangedListener> selectionChangedListeners;
     private MyImageProvider imageProvider;
 
-    public GraphicsEditor() {
+    public GraphicsConversionEditor() {
 	messageManager = new MessageManager(this);
 
 	converterDataLogic = new ConverterDataLogic(messageManager);
