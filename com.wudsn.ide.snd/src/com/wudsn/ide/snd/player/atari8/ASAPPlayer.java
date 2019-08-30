@@ -61,7 +61,6 @@ public final class ASAPPlayer extends SoundPlayer {
 
     private final ASAP asap;
 
-    private static final int MAX_EXTENSIONS = 10;
     private static final int MAX_EXPORT_SIZE = 655636;
 
     // Module binary is not in the base class because other players only work on
@@ -157,7 +156,7 @@ public final class ASAPPlayer extends SoundPlayer {
 	}
 
 	final List<FileType> supportedExportFileTypes = new ArrayList<FileType>();
-	String[] extensions = new String[MAX_EXTENSIONS]; //
+	String[] extensions = new String[ASAPWriter.MAX_SAVE_EXTS]; //
 	int numberOfExtensions = ASAPWriter.getSaveExts(extensions, asap.getInfo(), module, module.length);
 	for (int i = 0; i < numberOfExtensions; i++) {
 	    String extension = "." + extensions[i];
