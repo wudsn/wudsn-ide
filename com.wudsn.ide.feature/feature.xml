@@ -375,4 +375,18 @@ POSSIBILITY OF SUCH DAMAGES.
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="com.wudsn.ide.hex"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.wudsn.ide.pas"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
