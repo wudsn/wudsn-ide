@@ -24,3 +24,4 @@ Export-Package: com.wudsn.ide.base,
  com.wudsn.ide.base.editor.hex,
  com.wudsn.ide.base.gui
 Import-Package: org.eclipse.ui.internal.editors.text
+Automatic-Module-Name: com.wudsn.ide.base

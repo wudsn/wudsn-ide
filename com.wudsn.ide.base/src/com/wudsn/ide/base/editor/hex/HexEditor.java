@@ -276,16 +276,17 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
 	dataToUi();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
+    public <T> T getAdapter(Class<T> adapter) {
 	if (adapter != null && IContentOutlinePage.class.equals(adapter)) {
 	    if (contentOutlinePage == null) {
+		
 		contentOutlinePage = new HexEditorContentOutlinePage(this);
-
 		contentOutlinePage.setInput(parserComponent.getOutlineBlocks());
 	    }
 
-	    return contentOutlinePage;
+	    return (T)contentOutlinePage;
 	}
 	return super.getAdapter(adapter);
     }

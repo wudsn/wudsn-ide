@@ -10,3 +10,4 @@ Require-Bundle: com.wudsn.ide.asm,
  org.eclipse.ui.ide
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
+Automatic-Module-Name: com.wudsn.ide.asm.compilers

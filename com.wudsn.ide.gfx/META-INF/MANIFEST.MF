@@ -19,3 +19,4 @@ Export-Package: com.wudsn.ide.gfx.editor
 Bundle-ClassPath: lib/js.jar,
  lib/recoil.jar,
  .
+Automatic-Module-Name: com.wudsn.ide.gfx

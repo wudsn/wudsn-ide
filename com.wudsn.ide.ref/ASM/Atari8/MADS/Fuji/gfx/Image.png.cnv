@@ -1,5 +1,5 @@
 #WUDSN IDE Converter Parameters
-#Fri Aug 30 12:10:47 CEST 2019
+#Fri Aug 30 12:27:38 CEST 2019
 converterDirection=IMAGE_TO_FILES
 filesConverterParameters.converterId=
 filesConverterParameters.imageAspect.factorX=1
@@ -19,16 +19,16 @@ filesConverterParameters.spacingWidth=0
 filesConverterParameters.palette=HIRES_1
 filesConverterParameters.paletteType=ATARI_DEFAULT
 filesConverterParameters.paletteRGBs=0
-imageConverterParameters.converterId=com.wudsn.ide.gfx.converter.generic.CharSet1x1HiresConverter
+imageConverterParameters.converterId=com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapGraphics8Converter
 imageConverterParameters.imageAspect.factorX=1
 imageConverterParameters.imageAspect.factorY=1
 imageConverterParameters.displayAspect.factorX=1
 imageConverterParameters.displayAspect.factorY=1
 imageConverterParameters.displayShrinkToFit=false
 imageConverterParameters.displayZoomToFit=true
-imageConverterParameters.imageFilePath=Charset.png
+imageConverterParameters.imageFilePath=Image.png
 imageConverterParameters.targetFiles=10
-imageConverterParameters.targetFiles.0.path=Charset.chr
+imageConverterParameters.targetFiles.0.path=Image.pic
 imageConverterParameters.targetFiles.1.path=
 imageConverterParameters.targetFiles.2.path=
 imageConverterParameters.targetFiles.3.path=
@@ -39,4 +39,4 @@ imageConverterParameters.targetFiles.7.path=
 imageConverterParameters.targetFiles.8.path=
 imageConverterParameters.targetFiles.9.path=
 imageConverterParameters.useDefaultScript=true
-imageConverterParameters.script=function convertToFileData(data) {\r\n\tvar columns \= data.getImageDataWidth()  / 8;\r\n\tvar rows    \= data.getImageDataHeight() / 8;\r\n\tvar chars   \= 256;\r\n\r\n\tvar char \= 0;\r\n\tvar bytes \= [];\r\n\tvar offset \= 0;\r\n\tfor (var r \= 0; r < rows; r++) {\r\n\t\tfor (var c \= 0; c < columns; c++) {\r\n\t\t\tif (char < chars) {\r\n\t\t\t\tfor (var l\=0;l<8;l++) {\r\n\t\t\t\t\tvar b \= 0;\r\n\t\t\t\t\tfor (var p \= 0; p < 8; p++) {\r\n\t\t    \t\t\tvar color;\r\n\t\t    \t\t\tcolor \= data.getPixel(c*8+p, r*8+l);\r\n\t\t    \t\t\tif (color \!\= 0) {\r\n\t\t\t\t\t\t\tb \= b | 1 << 7 - p;\r\n\t\t    \t\t\t}\r\n\t\t\t\t\t}\r\n\t\t\t\t\tbytes[offset++] \= b;\r\n    \t\t\t}\r\n\t\t\tchar++;\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\tdata.setTargetFileObject(0, bytes);\r\n}
+imageConverterParameters.script=function convertToFileData(data) {\r\n\tvar bpsl \= (data.getImageDataWidth() + 7) / 8;\r\n\tvar bytes \= [];\r\n\tvar offset \= 0;\r\n\tfor (var y \= 0; y < data.getImageDataHeight(); y++) {\r\n\t    for (var x \= 0; x < data.getImageDataWidth(); x \= x + 8) {\r\n\t\t\tvar b \= 0;\r\n\t\t\tfor (var p \= 0; p < 8; p++) {\r\n\t\t\t    var color;\r\n\t\t\t    color \= data.getPixel(x + p, y);\r\n\t\t\t    if (color \!\= 0) {\r\n\t\t\t\t\tb \= b | 1 << 7 - p;\r\n\t\t\t    }\r\n\t\t\t}\r\n\t\t\tbytes[offset++] \= b;\r\n\t    }\r\n\t}\r\n\tdata.setTargetFileObject(0, bytes);\r\n}

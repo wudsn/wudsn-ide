@@ -18,3 +18,4 @@ Bundle-ClassPath: .,
  lib/atari8bit/asap.jar,
  lib/c64/jsidplay2.jar
 Bundle-Vendor: Peter Dell
+Automatic-Module-Name: com.wudsn.ide.snd

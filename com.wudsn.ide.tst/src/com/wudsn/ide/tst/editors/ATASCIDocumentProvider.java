@@ -15,7 +15,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
@@ -156,9 +156,10 @@ public class ATASCIDocumentProvider extends FileDocumentProvider {
 	    } else {
 		try {
 		    monitor.beginTask("Saving...", 2000);
-		    ContainerCreator creator = new ContainerCreator(file.getWorkspace(), file.getParent().getFullPath());
-		    creator.createContainer(new SubProgressMonitor(monitor, 1000));
-		    file.create(stream, false, new SubProgressMonitor(monitor, 1000));
+		    ContainerCreator creator = new ContainerCreator(file.getWorkspace(),
+			    file.getParent().getFullPath());
+		    creator.createContainer(SubMonitor.convert(monitor, 1000));
+		    file.create(stream, false, SubMonitor.convert(monitor, 1000));
 		} finally {
 		    monitor.done();
 		}

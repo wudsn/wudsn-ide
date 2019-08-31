@@ -8,3 +8,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Localization: plugin
 Require-Bundle: com.wudsn.ide.asm
 Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: com.wudsn.ide.asm.compilers.test
