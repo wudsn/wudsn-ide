@@ -34,7 +34,7 @@ import org.eclipse.ui.menus.WorkbenchWindowControlContribution;
 public final class AssemblerEditorCompileAndRunCommandMenu extends WorkbenchWindowControlContribution {
 
     public AssemblerEditorCompileAndRunCommandMenu() {
-	new Exception().printStackTrace();
+	new Exception("JAC! Test for Startup!").printStackTrace();
     }
 
     public AssemblerEditorCompileAndRunCommandMenu(String id) {
