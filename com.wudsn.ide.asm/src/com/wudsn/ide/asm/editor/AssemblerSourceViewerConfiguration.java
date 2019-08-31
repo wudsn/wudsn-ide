@@ -214,7 +214,6 @@ final class AssemblerSourceViewerConfiguration extends TextSourceViewerConfigura
 	return reconciler;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected Map<String, IAdaptable> getHyperlinkDetectorTargets(ISourceViewer sourceViewer) {
 	Map<String, IAdaptable> targets = super.getHyperlinkDetectorTargets(sourceViewer);

@@ -101,7 +101,7 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 
 	AssemblerEditor assemblerEditor;
 
-	assemblerEditor = (AssemblerEditor) getAdapter(AssemblerEditor.class);
+	assemblerEditor = getAdapter(AssemblerEditor.class);
 	if (assemblerEditor == null) {
 	    return null;
 	}
@@ -203,17 +203,17 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 
 	    switch (fileReference.getType()) {
 	    case CompilerSourceParserFileReferenceType.SOURCE:
-		hyperlinks
-			.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri, assemblerEditor
-				.getClass().getName(), 0,
-				Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_SOURCE_WITH_ASSEMBLER_EDITOR));
+		hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
+			assemblerEditor.getClass().getName(), 0,
+			Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_SOURCE_WITH_ASSEMBLER_EDITOR));
 		break;
 	    case CompilerSourceParserFileReferenceType.BINARY:
-		hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri, HexEditor.ID,
-			0, Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_HEX_EDITOR));
+		hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri, HexEditor.ID, 0,
+			Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_HEX_EDITOR));
 		if (canShowMultipleHyperlinks) {
 		    hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
-			    GraphicsConversionEditor.ID, 0, Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_GRAPHICS_EDITOR));
+			    GraphicsConversionEditor.ID, 0,
+			    Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_GRAPHICS_EDITOR));
 		    hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
 			    AssemblerHyperlink.DEFAULT_EDITOR, 0,
 			    Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_DEFAULT_EDITOR));
@@ -229,8 +229,8 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 	}
     }
 
-    private static void detectIdentifier(AssemblerEditor assemblerEditor, IRegion lineInfo, int lineNumber,
-	    String line, int offsetInLine, boolean canShowMultipleHyperlinks, List<AssemblerHyperlink> hyperlinks) {
+    private static void detectIdentifier(AssemblerEditor assemblerEditor, IRegion lineInfo, int lineNumber, String line,
+	    int offsetInLine, boolean canShowMultipleHyperlinks, List<AssemblerHyperlink> hyperlinks) {
 
 	CompilerSyntax compilerSyntax = assemblerEditor.createCompilerSourceParser().getCompilerSyntax();
 
@@ -324,8 +324,8 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 			CompilerSourceParserTreeObjectType.getText(element.getType()), element.getCompoundName(),
 			NumberUtility.getLongValueDecimalString(elementLineNumber), fileName);
 	    }
-	    hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri, assemblerEditor
-		    .getClass().getName(), elementLineNumber, hyperlinkText));
+	    hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
+		    assemblerEditor.getClass().getName(), elementLineNumber, hyperlinkText));
 	}
     }
 

@@ -304,8 +304,9 @@ public abstract class AssemblerEditor extends TextEditor {
 	super.dispose();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public final Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
+    public <T> T getAdapter(Class<T> adapter) {
 	if (IContentOutlinePage.class.equals(adapter)) {
 	    if (contentOutlinePage == null) {
 		contentOutlinePage = new AssemblerContentOutlinePage(this);
@@ -313,7 +314,7 @@ public abstract class AssemblerEditor extends TextEditor {
 		// currently.
 		updateContentOutlinePage();
 	    }
-	    return contentOutlinePage;
+	    return (T)contentOutlinePage;
 	}
 	return super.getAdapter(adapter);
     }

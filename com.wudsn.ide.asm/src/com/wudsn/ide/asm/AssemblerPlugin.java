@@ -60,7 +60,7 @@ public final class AssemblerPlugin extends AbstractIDEPlugin {
      * The preferences.
      */
     private AssemblerPreferences preferences;
-    private ListenerList preferencesChangeListeners;
+    private ListenerList<AssemblerPreferencesChangeListener> preferencesChangeListeners;
 
     /**
      * The compiler registry.
@@ -87,7 +87,7 @@ public final class AssemblerPlugin extends AbstractIDEPlugin {
      */
     public AssemblerPlugin() {
 	preferences = null;
-	preferencesChangeListeners = new ListenerList(ListenerList.IDENTITY);
+	preferencesChangeListeners = new ListenerList<AssemblerPreferencesChangeListener>(ListenerList.IDENTITY);
 	compilerRegistry = new CompilerRegistry();
 	compilerConsole = null;
 	runnerRegistry = new RunnerRegistry();
