@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: WUDSN IDE Base Plug-in
 Bundle-SymbolicName: com.wudsn.ide.base;singleton:=true
-Bundle-Version: 1.7.0.qualifier
+Bundle-Version: 1.7.1.qualifier
 Bundle-Activator: com.wudsn.ide.base.BasePlugin
 Bundle-Localization: plugin
 Bundle-Vendor: Peter Dell

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: WUDSN IDE Sound Plugin
 Bundle-SymbolicName: com.wudsn.ide.snd;singleton:=true
-Bundle-Version: 1.7.0.qualifier
+Bundle-Version: 1.7.1.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: com.wudsn.ide.snd.SoundPlugin

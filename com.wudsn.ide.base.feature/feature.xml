@@ -2,7 +2,7 @@
 <feature
       id="com.wudsn.ide.base.feature"
       label="WUDSN Base Feature"
-      version="1.7.0.qualifier"
+      version="1.7.1.qualifier"
       provider-name="WUDSN">
 
    <description url="http:://www.wudsn.com">

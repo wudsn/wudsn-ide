@@ -30,7 +30,15 @@
 
 	</target>
 	
-	<target name="clean_daily">
+	<!-- This refreshes bundle versions in the source projects-->
+	<target name="check_bundle_versions" >
+		  <exec dir="." executable="cmd.exe">
+		        <arg line="/c check-bundle-versions"/>
+		    </exec>
+	</target>
+		
+	<!-- This refreshes the daily build for testing -->
+	<target name="build_daily" >
 		<antcall target="_clean_folder">
 			<param name="folder" value="daily" />
 		</antcall>
@@ -40,11 +48,12 @@
 		<echo>Open daily/site.xml and press "Build All".</echo>
 	</target>
 
+	<!-- This publishes the daily build when testing was successful -->
 	<target name="publish_daily_to_stable_and_main">
 		<echo>Copying daily to stable and main.</echo>
 		<antcall target="_copy_folder">
 			<param name="source" value="daily" />
-			<param name="target" value="1.7.0" />
+			<param name="target" value="1.7.1" />
 		</antcall>
 		<antcall target="_copy_folder">
 			<param name="source" value="daily" />
