@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            file-extensions="pas"
+            base-type="org.eclipse.core.runtime.text"
+            name="%com.wudsn.ide.pas.compiler.PascalSourceFile.name"
+            id="com.wudsn.ide.pas.compiler.PascalSourceFile">
+      </content-type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editorContentTypeBinding
+            contentTypeId="com.wudsn.ide.pas.compiler.PascalSourceFile"
+            editorId="org.eclipse.ui.genericeditor.GenericEditor">
+      </editorContentTypeBinding>
+   </extension>
+   <extension
+         point="org.eclipse.ui.genericeditor.presentationReconcilers">
+      <presentationReconciler
+            class="com.wudsn.ide.pas.editor.PascalReconciler"
+            contentType="com.wudsn.ide.pas.compiler.PascalSourceFile">
+      </presentationReconciler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.genericeditor.hoverProviders">
+      <hoverProvider
+            class="com.wudsn.ide.pas.editor.PascalHoverProvider"
+            contentType="com.wudsn.ide.pas.compiler.PascalSourceFile">
+      </hoverProvider>
+   </extension>
+   <extension
+         point="org.eclipse.ui.genericeditor.contentAssistProcessors">
+      <contentAssistProcessor
+            class="com.wudsn.ide.pas.editor.PascalContentAssistProcessor"
+            contentType="com.wudsn.ide.pas.compiler.PascalSourceFile">
+      </contentAssistProcessor>
+   </extension>
+   <extension
+         point="org.eclipse.core.filebuffers.documentSetup">
+      <participant
+            contentTypeId="com.wudsn.ide.pas.compiler.PascalSourceFile"
+            extensions="pas"
+            class="com.wudsn.ide.pas.editor.ValidatorDocumentSetupParticipant">
+      </participant>
+   </extension>
+
+</plugin>

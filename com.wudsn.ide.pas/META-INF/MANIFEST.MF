@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: WUDSN IDE Pascal Plug-in
+Bundle-SymbolicName: com.wudsn.ide.pas;singleton:=true
+Bundle-Version: 1.7.1.qualifier
+Bundle-Activator: com.wudsn.ide.pas.Activator
+Bundle-Vendor: Peter Dell
+Require-Bundle: org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ org.eclipse.jface.text,
+ org.eclipse.ui,
+ org.eclipse.ui.editors
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: com.wudsn.ide.pas
