@@ -29,10 +29,10 @@ import org.eclipse.jface.viewers.StyledString;
 public final class HexEditorContentOutlineTreeObject {
 
     private final StyledString styledString;
-    private int fileStartOffset;
-    private int textStartOffset;
-    private int fileEndOffset;
-    private int textEndOffset;
+    private long fileStartOffset;
+    private long textStartOffset;
+    private long fileEndOffset;
+    private long textEndOffset;
 
     /**
      * Create a new instance.
@@ -62,7 +62,7 @@ public final class HexEditorContentOutlineTreeObject {
      * 
      * @return The start offset, a non-negative integer.
      */
-    public int getFileStartOffset() {
+    public long getFileStartOffset() {
 	return fileStartOffset;
     }
 
@@ -73,7 +73,7 @@ public final class HexEditorContentOutlineTreeObject {
      *            The start offset, a non-negative integer or <code>-1</code> if
      *            the offset is not defined.
      */
-    public void setFileStartOffset(int fileOffset) {
+    public void setFileStartOffset(long fileOffset) {
 
 	this.fileStartOffset = fileOffset;
     }
@@ -84,7 +84,7 @@ public final class HexEditorContentOutlineTreeObject {
      * @return The end offset, a non-negative integer or <code>-1</code> if the
      *         offset is not defined.
      */
-    public int getFileEndOffset() {
+    public long getFileEndOffset() {
 	return fileEndOffset;
     }
 
@@ -96,7 +96,7 @@ public final class HexEditorContentOutlineTreeObject {
      *            The end offset, a non-negative integer or <code>-1</code> if
      *            the offset is not defined.
      */
-    public void setFileEndOffset(int fileOffset) {
+    public void setFileEndOffset(long fileOffset) {
 
 	this.fileEndOffset = fileOffset;
     }
@@ -106,7 +106,7 @@ public final class HexEditorContentOutlineTreeObject {
      * 
      * @return The offset, a non-negative integer.
      */
-    public int getTextStartOffset() {
+    public long getTextStartOffset() {
 	return textStartOffset;
     }
 
@@ -116,10 +116,10 @@ public final class HexEditorContentOutlineTreeObject {
      * @param textOffset
      *            The offset, a non-negative integer.
      */
-    public void setTextStartOffset(int textOffset) {
+    public void setTextStartOffset(long textOffset) {
 	if (textOffset < 0) {
-	    throw new IllegalArgumentException("Parameter 'textOffset' must not be negative. Specified value is "
-		    + textOffset + ".");
+	    throw new IllegalArgumentException(
+		    "Parameter 'textOffset' must not be negative. Specified value is " + textOffset + ".");
 	}
 	this.textStartOffset = textOffset;
     }
@@ -129,7 +129,7 @@ public final class HexEditorContentOutlineTreeObject {
      * 
      * @return The offset, a non-negative integer.
      */
-    public int getTextEndOffset() {
+    public long getTextEndOffset() {
 	return textEndOffset;
     }
 
@@ -141,8 +141,8 @@ public final class HexEditorContentOutlineTreeObject {
      */
     public void setTextEndOffset(int textOffset) {
 	if (textOffset < 0) {
-	    throw new IllegalArgumentException("Parameter 'textOffset' must not be negative. Specified value is "
-		    + textOffset + ".");
+	    throw new IllegalArgumentException(
+		    "Parameter 'textOffset' must not be negative. Specified value is " + textOffset + ".");
 	}
 	this.textEndOffset = textOffset;
     }

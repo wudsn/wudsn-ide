@@ -29,7 +29,7 @@ public abstract class AtariParser extends HexEditorParser {
 
     public final static int COM_HEADER = 0xffff;
 
-    protected final boolean parseAtariCOMFile(StyledString contentBuilder, int offset, int fileContentLength) {
+    protected final boolean parseAtariCOMFile(StyledString contentBuilder, long offset, int fileContentLength) {
 	if (contentBuilder == null) {
 	    throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
 	}
@@ -38,7 +38,7 @@ public abstract class AtariParser extends HexEditorParser {
 	int endAddress;
 
 	int blockCount;
-	int blockEnd;
+	long blockEnd;
 
 	// Skip offset bytes in lookup array.
 	skipByteTextIndex(offset);

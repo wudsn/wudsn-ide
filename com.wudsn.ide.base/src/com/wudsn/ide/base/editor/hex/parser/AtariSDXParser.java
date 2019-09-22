@@ -43,7 +43,7 @@ public class AtariSDXParser extends HexEditorParser {
 	}
 
 	boolean error;
-	int offset = 0;
+	long offset = 0;
 
 	// Skip offset bytes in lookup array.
 	skipByteTextIndex(offset);
@@ -74,7 +74,7 @@ public class AtariSDXParser extends HexEditorParser {
 				endAddress);
 			offset = printBytes(treeObject, contentBuilder, offset, offset + 5, true, 0);
 
-			int blockEnd = offset + endAddress - startAddress;
+			long blockEnd = offset + endAddress - startAddress;
 
 			offset = printBytes(treeObject, contentBuilder, offset, blockEnd, true, startAddress);
 
@@ -94,7 +94,7 @@ public class AtariSDXParser extends HexEditorParser {
 			treeObject = printBlockHeader(contentBuilder, headerStyledString, offset);
 			offset = printBytes(treeObject, contentBuilder, offset, offset + 7, true, 0);
 
-			int blockEnd = offset + blockLength - 1;
+			long blockEnd = offset + blockLength - 1;
 
 			// Print bytes only of the block is not marked as EMPTY
 			if ((blockId & 0x80) != 0x80) {
@@ -111,7 +111,7 @@ public class AtariSDXParser extends HexEditorParser {
 			contentBuilder.append(headerStyledString).append("\n");
 			treeObject = printBlockHeader(contentBuilder, headerStyledString, offset);
 			offset = printBytes(treeObject, contentBuilder, offset, offset + 4, true, 0);
-			int blockEnd = getBlockEnd(offset);
+			long blockEnd = getBlockEnd(offset);
 			offset = printBytes(treeObject, contentBuilder, offset, blockEnd, true, 0);
 		    } else if (header == UPDATE_SYMBOLS_HEADER) {
 			String symbolName = getSymbolName(offset + 2);
@@ -123,7 +123,7 @@ public class AtariSDXParser extends HexEditorParser {
 			contentBuilder.append(headerStyledString).append("\n");
 			treeObject = printBlockHeader(contentBuilder, headerStyledString, offset);
 			offset = printBytes(treeObject, contentBuilder, offset, offset + 11, true, 0);
-			int blockEnd = getBlockEnd(offset);
+			long blockEnd = getBlockEnd(offset);
 			offset = printBytes(treeObject, contentBuilder, offset, blockEnd, true, 0);
 		    } else if (header == DEFINE_SYMBOLS_HEADER) {
 			int blockNumber = getFileContentByte(offset + 2);
@@ -160,10 +160,10 @@ public class AtariSDXParser extends HexEditorParser {
      *            The start offset, a non-negative integer.
      * @return The end offset, a non-negative integer.
      */
-    private int getBlockEnd(int offset) {
+    private long getBlockEnd(long offset) {
 	int fileContentLength = getFileContentLength();
-	int i = offset;
-	int blockEnd = -1;
+	long i = offset;
+	long blockEnd = -1;
 	while (blockEnd < 0 && i < fileContentLength) {
 	    int location = getFileContentByte(i);
 	    switch (location) {
@@ -184,7 +184,7 @@ public class AtariSDXParser extends HexEditorParser {
 	return blockEnd;
     }
 
-    private String getSymbolName(int offset) {
+    private String getSymbolName(long offset) {
 	StringBuffer buffer = new StringBuffer(8);
 	for (int i = 0; i < 8; i++) {
 	    buffer.append((char) getFileContentByte(offset + i));

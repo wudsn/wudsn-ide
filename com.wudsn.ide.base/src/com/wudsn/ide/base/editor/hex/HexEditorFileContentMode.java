@@ -19,22 +19,45 @@
 
 package com.wudsn.ide.base.editor.hex;
 
+import com.wudsn.ide.base.editor.hex.parser.*;
+
 enum HexEditorFileContentMode {
 
-    BINARY(Hardware.GENERIC), ATARI_COM_FILE(Hardware.ATARI8BIT), ATARI_DISK_IMAGE(Hardware.ATARI8BIT), ATARI_DISK_IMAGE_K_FILE(
-	    Hardware.ATARI8BIT), ATARI_MADS_FILE(Hardware.ATARI8BIT), ATARI_SDX_FILE(Hardware.ATARI8BIT), ATARI_SAP_FILE(
-	    Hardware.ATARI8BIT), C64_PRG_FILE(Hardware.C64);
+    BINARY(Hardware.GENERIC, BinaryParser.class), ATARI_COM_FILE(Hardware.ATARI8BIT,
+	    AtariCOMParser.class), ATARI_DISK_IMAGE(Hardware.ATARI8BIT,
+		    AtariDiskImageParser.class), ATARI_DISK_IMAGE_K_FILE(Hardware.ATARI8BIT,
+			    AtariDiskImageKFileParser.class), ATARI_MADS_FILE(Hardware.ATARI8BIT,
+				    AtariMADSParser.class), ATARI_SDX_FILE(Hardware.ATARI8BIT,
+					    AtariSDXParser.class), ATARI_SAP_FILE(Hardware.ATARI8BIT,
+						    AtariSAPParser.class), C64_PRG_FILE(Hardware.C64,
+							    C64PRGParser.class), IFF_FILE(Hardware.GENERIC,
+								    IFFParser.class);
 
     private Hardware hardware;
+    private Class<? extends HexEditorParser> parserClass;
 
-    private HexEditorFileContentMode(Hardware hardware) {
+    private HexEditorFileContentMode(Hardware hardware, Class<? extends HexEditorParser> parserClass) {
 	if (hardware == null) {
 	    throw new IllegalArgumentException("Parameter 'hardware' must not be null.");
 	}
+	if (parserClass == null) {
+	    throw new IllegalArgumentException("Parameter 'parserClass' must not be null.");
+	}
 	this.hardware = hardware;
+	this.parserClass = parserClass;
     }
 
     public Hardware getHardware() {
 	return hardware;
+    }
+
+    public HexEditorParser createParser() {
+	try {
+	    return parserClass.newInstance();
+	} catch (InstantiationException ex) {
+	    throw new RuntimeException(ex);
+	} catch (IllegalAccessException ex) {
+	    throw new RuntimeException(ex);
+	}
     }
 }

@@ -83,25 +83,36 @@ public abstract class HexEditorParser {
     }
 
     /**
-     * Gets a byte from the file content.
+     * Gets a byte (8-bit) from the file content.
      * 
      * @param offset
      *            The offset, a non-negative integer.
      * @return The byte from the file content.
      */
-    protected final int getFileContentByte(int offset) {
+    protected final int getFileContentByte(long offset) {
 	return owner.getFileContentByte(offset);
     }
 
     /**
-     * Gets a word from the file content.
+     * Gets a word (16 bit) in little endian format from the file content.
      * 
      * @param offset
      *            The offset, a non-negative integer.
      * @return The word from the file content.
      */
-    protected final int getFileContentWord(int offset) {
+    protected final int getFileContentWord(long offset) {
 	return owner.getFileContentWord(offset);
+    }
+
+    /**
+     * Gets a double word (32 bit) in big endian format from the file content.
+     * 
+     * @param offset
+     *            The offset, a non-negative integer.
+     * @return The word from the file content.
+     */
+    protected final long getFileContentDoubleWordBigEndian(long offset) {
+	return owner.getFileContentDoubleWordBigEndian(offset);
     }
 
     /**
@@ -128,13 +139,13 @@ public abstract class HexEditorParser {
      * @return The tree object representing the block.
      */
     protected final HexEditorContentOutlineTreeObject printBlockHeader(StyledString contentBuilder,
-	    String blockHeaderText, int blockHeaderNumber, String blockHeaderParameterText, int offset,
-	    int startAddress, int endAddress) {
+	    String blockHeaderText, int blockHeaderNumber, String blockHeaderParameterText, long offset,
+	    long startAddress, long endAddress) {
 
 	if (contentBuilder == null) {
 	    throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
 	}
-	int blockLength = endAddress - startAddress + 1;
+	long blockLength = endAddress - startAddress + 1;
 	String blockHeaderNumberText;
 	if (blockHeaderNumber >= 0) {
 	    blockHeaderNumberText = NumberUtility.getLongValueDecimalString(blockHeaderNumber);
@@ -177,8 +188,7 @@ public abstract class HexEditorParser {
     }
 
     /**
-     * Prints a block header in the context area and adds a block to the
-     * outline.
+     * Adds a block to the outline.
      * 
      * @param contentBuilder
      *            The content builder, not <code>null</code>.
@@ -191,7 +201,7 @@ public abstract class HexEditorParser {
      * @return The tree object representing the block.
      */
     protected final HexEditorContentOutlineTreeObject printBlockHeader(StyledString contentBuilder,
-	    StyledString headerStyledString, int offset) {
+	    StyledString headerStyledString, long offset) {
 	return owner.printBlockHeader(contentBuilder, headerStyledString, offset);
     }
 
@@ -208,17 +218,17 @@ public abstract class HexEditorParser {
      * @param offset
      *            The offset of the last block, a non-negative integer.
      */
-    protected final void printBlockWithError(StyledString contentBuilder, String errorText, int length, int offset) {
+    protected final void printBlockWithError(StyledString contentBuilder, String errorText, long length, long offset) {
 	owner.printBlockWithError(contentBuilder, errorText, length, offset);
     }
 
-    protected final void skipByteTextIndex(int offset) {
+    protected final void skipByteTextIndex(long offset) {
 	owner.skipByteTextIndex(offset);
 
     }
 
-    protected final int printBytes(HexEditorContentOutlineTreeObject treeObject, StyledString contentBuilder,
-	    int offset, int maxOffset, boolean withStartAddress, int startAddress) {
+    protected final long printBytes(HexEditorContentOutlineTreeObject treeObject, StyledString contentBuilder,
+	    long offset, long maxOffset, boolean withStartAddress, int startAddress) {
 	return owner.printBytes(treeObject, contentBuilder, offset, maxOffset, withStartAddress, startAddress);
 
     }

@@ -37,7 +37,7 @@ public class C64PRGParser extends HexEditorParser {
 	int endAddress;
 
 	int length = getFileContentLength();
-	int offset = 0;
+	long offset = 0;
 
 	error = (length < 2);
 	if (!error) {

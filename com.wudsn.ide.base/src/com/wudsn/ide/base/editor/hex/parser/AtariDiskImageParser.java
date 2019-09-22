@@ -35,7 +35,7 @@ public class AtariDiskImageParser extends AtariParser {
 
 	boolean error = false;
 	int length = getFileContentLength();
-	int offset = 0;
+	long offset = 0;
 
 	HexEditorContentOutlineTreeObject treeObject;
 	treeObject = printBlockHeader(contentBuilder, Texts.HEX_EDITOR_ATARI_DISK_IMAGE_HEADER, -1, "", offset, offset,
@@ -63,7 +63,8 @@ public class AtariDiskImageParser extends AtariParser {
 	    while (blockMode && !error) {
 		treeObject = printBlockHeader(contentBuilder, Texts.HEX_EDITOR_ATARI_SECTOR_HEADER, sectorCount,
 
-		Texts.HEX_EDITOR_ATARI_SECTOR_HEADER_PARAMETERS, offset, startAddress, startAddress + sectorSize - 1);
+			Texts.HEX_EDITOR_ATARI_SECTOR_HEADER_PARAMETERS, offset, startAddress,
+			startAddress + sectorSize - 1);
 		offset = printBytes(treeObject, contentBuilder, offset, offset + sectorSize - 1, true, startAddress);
 		contentBuilder.append("\n");
 

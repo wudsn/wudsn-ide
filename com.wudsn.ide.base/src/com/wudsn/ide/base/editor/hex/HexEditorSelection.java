@@ -29,8 +29,8 @@ import org.eclipse.jface.viewers.ISelection;
  */
 final class HexEditorSelection implements ISelection {
 
-    private int startOffset;
-    private int endOffset;
+    private long startOffset;
+    private long endOffset;
     private byte[] bytes;
 
     /**
@@ -45,7 +45,7 @@ final class HexEditorSelection implements ISelection {
      *            The content of the selection, may be empty, not
      *            <code>null</code>.
      */
-    public HexEditorSelection(int startOffset, int endOffset, byte[] bytes) {
+    public HexEditorSelection(long startOffset, long endOffset, byte[] bytes) {
 
 	if (startOffset < 0) {
 	    throw new IllegalArgumentException("Parameter 'startOffset' must not be negative, specified value is "
@@ -74,7 +74,7 @@ final class HexEditorSelection implements ISelection {
      * @return The start offset in the original array, a non-negative number.
      * 
      */
-    public int getStartOffset() {
+    public long getStartOffset() {
 	return startOffset;
     }
 
@@ -84,7 +84,7 @@ final class HexEditorSelection implements ISelection {
      * @return The end offset in the original array, a non-negative number
      *         greater or equal to the start offset.
      */
-    public int getEndOffset() {
+    public long getEndOffset() {
 	return endOffset;
     }
 

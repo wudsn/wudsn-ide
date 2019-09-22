@@ -31,7 +31,7 @@ public final class AtariSAPParser extends AtariParser {
 	if (contentBuilder == null) {
 	    throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
 	}
-	int offset = 0;
+	long offset = 0;
 	int fileContentLenght = getFileContentLength();
 	int maxOffset = fileContentLenght - 2;
 	while (offset < maxOffset && getFileContentByte(offset) != 0xff && getFileContentByte(offset) != 0xff) {

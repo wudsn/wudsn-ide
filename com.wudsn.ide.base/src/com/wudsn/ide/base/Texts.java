@@ -73,6 +73,10 @@ public final class Texts extends NLS {
     public static String HEX_EDITOR_C64_PRG_HEADER_PARAMETERS;
     public static String HEX_EDITOR_C64_PRG_ERROR;
 
+    public static String HEX_EDITOR_IFF_CHUNK;
+    public static String HEX_EDITOR_IFF_FORM_CHUNK;
+    public static String HEX_EDITOR_IFF_FILE_ERROR;
+    
     public static String HEX_EDITOR_FILE_CONTENT_SIZE_FIELD_LABEL;
     public static String HEX_EDITOR_FILE_CONTENT_SIZE_FIELD_TEXT;
     public static String HEX_EDITOR_FILE_CONTENT_MODE_FIELD_LABEL;

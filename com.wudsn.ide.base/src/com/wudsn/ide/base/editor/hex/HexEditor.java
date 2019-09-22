@@ -281,12 +281,12 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
     public <T> T getAdapter(Class<T> adapter) {
 	if (adapter != null && IContentOutlinePage.class.equals(adapter)) {
 	    if (contentOutlinePage == null) {
-		
+
 		contentOutlinePage = new HexEditorContentOutlinePage(this);
 		contentOutlinePage.setInput(parserComponent.getOutlineBlocks());
 	    }
 
-	    return (T)contentOutlinePage;
+	    return (T) contentOutlinePage;
 	}
 	return super.getAdapter(adapter);
     }
@@ -384,8 +384,8 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
 	// Single range selection?
 	if (selection instanceof HexEditorSelection) {
 	    HexEditorSelection hexEditorSelection = (HexEditorSelection) selection;
-	    int textStartOffset = parserComponent.getByteTextOffset(hexEditorSelection.getStartOffset());
-	    int textEndOffset = parserComponent.getByteTextOffset(hexEditorSelection.getEndOffset());
+	    long textStartOffset = parserComponent.getByteTextOffset(hexEditorSelection.getStartOffset());
+	    long textEndOffset = parserComponent.getByteTextOffset(hexEditorSelection.getEndOffset());
 	    setSelectionOffsets(textStartOffset, textEndOffset);
 	    // Range of outline tree objects?
 	} else if (selection instanceof IStructuredSelection) {
@@ -394,8 +394,8 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
 	    if (structuredSelection.getFirstElement() instanceof HexEditorContentOutlineTreeObject) {
 		Iterator<?> i = ((IStructuredSelection) selection).iterator();
 
-		int textStartOffset = Integer.MAX_VALUE;
-		int textEndOffset = Integer.MIN_VALUE;
+		long textStartOffset = Long.MAX_VALUE;
+		long textEndOffset = Long.MIN_VALUE;
 		while (i.hasNext()) {
 		    HexEditorContentOutlineTreeObject treeObject = (HexEditorContentOutlineTreeObject) i.next();
 		    textStartOffset = Math.min(treeObject.getTextStartOffset(), textStartOffset);
@@ -408,15 +408,21 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
 	setFocus();
     }
 
-    private void setSelectionOffsets(int textStartOffset, int textEndOffset) {
+    private void setSelectionOffsets(long textStartOffset, long textEndOffset) {
+	if (textStartOffset < 0 || textEndOffset > Integer.MAX_VALUE) {
+	    throw new IllegalArgumentException("Parameter textStartOffset=" + textStartOffset + " is out of range");
+	}
+	if (textEndOffset < 0 || textEndOffset > Integer.MAX_VALUE) {
+	    throw new IllegalArgumentException("Parameter textStartOffset=" + textStartOffset + " is out of range");
+	}
 	try {
 	    // Mark complete selection area. This also scrolls to
 	    // the end of the area.
-	    textField.setSelection(new Point(textStartOffset, textEndOffset));
+	    textField.setSelection(new Point((int) textStartOffset, (int) textEndOffset));
 	    //
 	    // // But we want to see start of the selection are, so
 	    // // position explicitly.
-	    textField.setTopIndex(textField.getContent().getLineAtOffset(textStartOffset));
+	    textField.setTopIndex(textField.getContent().getLineAtOffset((int) textStartOffset));
 	} catch (IllegalArgumentException x) {
 	    // Ignore
 	}
@@ -570,16 +576,19 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
 
 	// If there is no end offset, we insert the new bytes.
 	if (selection.getEndOffset() != HexEditorParserComponent.UNDEFINED_OFFSET) {
-	    int selectionLength = selection.getEndOffset() - selection.getStartOffset() + 1;
-	    newFileContent = new byte[parserComponent.getFileContent().length - selectionLength + bytes.length];
-	    System.arraycopy(parserComponent.getFileContent(), 0, newFileContent, 0, selection.getStartOffset());
-	    System.arraycopy(bytes, 0, newFileContent, selection.getStartOffset(), bytes.length);
-	    int length = parserComponent.getFileContent().length - selection.getEndOffset() - 1;
+	    int selectionStartOffset = (int) selection.getStartOffset();
+	    int selectionEndOffset = (int) selection.getEndOffset();
+
+	    int selectionLength = selectionEndOffset - selectionStartOffset + 1;
+	    int newFileContentLength = parserComponent.getFileContent().length - selectionLength + bytes.length;
+	    newFileContent = new byte[newFileContentLength];
+	    System.arraycopy(parserComponent.getFileContent(), 0, newFileContent, 0, selectionStartOffset);
+	    System.arraycopy(bytes, 0, newFileContent, selectionStartOffset, bytes.length);
+	    int length = parserComponent.getFileContent().length - selectionEndOffset - 1;
 	    if (length > 0) {
 		// TODO Hex paste is not working yet
-		System.arraycopy(parserComponent.getFileContent(), selection.getEndOffset(),
-
-		newFileContent, selection.getStartOffset() + bytes.length, length);
+		System.arraycopy(parserComponent.getFileContent(), selectionEndOffset, newFileContent,
+			selectionStartOffset + bytes.length, length);
 	    }
 	    messageManager.sendMessage(0, IStatus.OK,
 		    "${0} ({1}) bytes pasted from clipboard to replace ${2} ({3}) bytes ",
@@ -588,7 +597,7 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
 		    HexUtility.getLongValueHexString(selectionLength),
 		    NumberUtility.getLongValueDecimalString(selectionLength));
 	} else {
-	    // If there is and end offset, we replace the selection with the new
+	    // If there is an end offset, we replace the selection with the new
 	    // bytes.
 	    newFileContent = parserComponent.getFileContent();
 	    messageManager.sendMessage(0, IStatus.OK, "${0} ({1}) bytes inserted from clipboard",

@@ -35,20 +35,15 @@ import com.wudsn.ide.base.common.NumberUtility;
 import com.wudsn.ide.base.common.Profiler;
 import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.editor.hex.HexEditor.MessageIds;
-import com.wudsn.ide.base.editor.hex.parser.AtariCOMParser;
 import com.wudsn.ide.base.editor.hex.parser.AtariDiskImageKFileParser;
-import com.wudsn.ide.base.editor.hex.parser.AtariDiskImageParser;
 import com.wudsn.ide.base.editor.hex.parser.AtariMADSParser;
 import com.wudsn.ide.base.editor.hex.parser.AtariParser;
-import com.wudsn.ide.base.editor.hex.parser.AtariSAPParser;
 import com.wudsn.ide.base.editor.hex.parser.AtariSDXParser;
-import com.wudsn.ide.base.editor.hex.parser.BinaryParser;
-import com.wudsn.ide.base.editor.hex.parser.C64PRGParser;
 import com.wudsn.ide.base.gui.MessageManager;
 
 final class HexEditorParserComponent {
 
-    public static final int UNDEFINED_OFFSET = -1;
+    public static final long UNDEFINED_OFFSET = -1;
     private final static int BYTES_PER_ROW = 16;
     private static final int INT_FF = 0xff;
 
@@ -77,7 +72,7 @@ final class HexEditorParserComponent {
     // Parsing state.
     private List<HexEditorFileContentMode> possibleFileContentModes;
     private List<HexEditorContentOutlineTreeObject> outlineBlocks;
-    private int[] byteTextOffsets;
+    private long[] byteTextOffsets;
     private int byteTextIndex;
 
     // Line buffers for binary to hex and char conversion.
@@ -148,7 +143,7 @@ final class HexEditorParserComponent {
     private void initByteTextOffsets() {
 	// Twice the space, because some format display the content twice, for
 	// example ATARI_DISK_IMAGE_K_FILE.
-	byteTextOffsets = new int[fileContent.length * 2];
+	byteTextOffsets = new long[fileContent.length * 2];
 	byteTextIndex = 0;
     }
 
@@ -266,6 +261,21 @@ final class HexEditorParserComponent {
 		result = HexEditorFileContentMode.C64_PRG_FILE;
 	    }
 	}
+
+	// IFF files always have an even number of bytes
+	if (fileContent.length > 8 && (fileContent.length & 0x1) == 0) {
+	    possibleFileContentModes.add(HexEditorFileContentMode.IFF_FILE);
+	    char[] id = new char[4];
+	    id[0] = (char) fileContent[0];
+	    id[1] = (char) fileContent[1];
+	    id[2] = (char) fileContent[2];
+	    id[3] = (char) fileContent[3];
+	    String chunk = String.copyValueOf(id);
+	    boolean iff = chunk.equals("FORM") || chunk.equals("LIST") || chunk.equals("CAT ");
+	    if (result.equals(HexEditorFileContentMode.BINARY) && iff) {
+		result = HexEditorFileContentMode.IFF_FILE;
+	    }
+	}
 	return result;
     }
 
@@ -322,8 +332,8 @@ final class HexEditorParserComponent {
      */
     public void setBytesPerRow(int bytesPerRow) {
 	if (bytesPerRow < 1) {
-	    throw new IllegalArgumentException("Parameter 'bytesPerRow' must not be positive. Specified valie was "
-		    + bytesPerRow + ".");
+	    throw new IllegalArgumentException(
+		    "Parameter 'bytesPerRow' must not be positive. Specified valie was " + bytesPerRow + ".");
 	}
 	this.bytesPerRow = bytesPerRow;
     }
@@ -386,24 +396,7 @@ final class HexEditorParserComponent {
 
 	if (fileContent.length > 0) {
 	    boolean error;
-	    HexEditorParser parser;
-	    if (fileContentMode.equals(HexEditorFileContentMode.ATARI_COM_FILE)) {
-		parser = new AtariCOMParser();
-	    } else if (fileContentMode.equals(HexEditorFileContentMode.ATARI_DISK_IMAGE)) {
-		parser = new AtariDiskImageParser();
-	    } else if (fileContentMode.equals(HexEditorFileContentMode.ATARI_DISK_IMAGE_K_FILE)) {
-		parser = new AtariDiskImageKFileParser();
-	    } else if (fileContentMode.equals(HexEditorFileContentMode.ATARI_MADS_FILE)) {
-		parser = new AtariMADSParser();
-	    } else if (fileContentMode.equals(HexEditorFileContentMode.ATARI_SDX_FILE)) {
-		parser = new AtariSDXParser();
-	    } else if (fileContentMode.equals(HexEditorFileContentMode.ATARI_SAP_FILE)) {
-		parser = new AtariSAPParser();
-	    } else if (fileContentMode.equals(HexEditorFileContentMode.C64_PRG_FILE)) {
-		parser = new C64PRGParser();
-	    } else {
-		parser = new BinaryParser();
-	    }
+	    HexEditorParser parser = fileContentMode.createParser();
 
 	    // Initialize the buffers for the hex and char conversion.
 	    hexBuffer = new char[3 + bytesPerRow * 3 + 2];
@@ -437,25 +430,54 @@ final class HexEditorParserComponent {
     }
 
     /**
-     * Gets a byte from the file content.
+     * Gets a byte (8 bit) from the file content.
      * 
      * @param offset
      *            The offset, a non-negative integer.
      * @return The byte from the file content.
      */
-    final int getFileContentByte(int offset) {
-	return fileContent[offset] & INT_FF;
+    final int getFileContentByte(long offset) {
+	if (offset < 0) {
+	    throw new IllegalArgumentException("Parameter offset=" + offset + " must not be negative");
+	}
+	if (offset >= fileContent.length) {
+	    throw new IllegalArgumentException(
+		    "Parameter offset=" + offset + " must be less than the file content size " + fileContent.length);
+	}
+	return fileContent[(int) offset] & INT_FF;
     }
 
     /**
-     * Gets a word from the file content.
+     * Gets a word (16 bit) in little endian format from the file content.
      * 
      * @param offset
      *            The offset, a non-negative integer.
      * @return The word from the file content.
      */
-    final int getFileContentWord(int offset) {
-	return getFileContentByte(offset) + 256 * getFileContentByte(offset + 1);
+    final int getFileContentWord(long offset) {
+	return getFileContentByte(offset) + 0x100 * getFileContentByte(offset + 1);
+    }
+
+    /**
+     * Gets a word (16 bit) in big endian format from the file content.
+     * 
+     * @param offset
+     *            The offset, a non-negative integer.
+     * @return The word from the file content.
+     */
+    final int getFileContentWordBigEndian(long offset) {
+	return getFileContentByte(offset + 1) + 0x100 * getFileContentByte(offset);
+    }
+
+    /**
+     * Gets a double word (32 bit) in big endian format from the file content.
+     * 
+     * @param offset
+     *            The offset, a non-negative integer.
+     * @return The word from the file content.
+     */
+    final long getFileContentDoubleWordBigEndian(long offset) {
+	return getFileContentWordBigEndian(offset + 2) + 0x10000 * getFileContentWordBigEndian(offset);
     }
 
     /**
@@ -473,7 +495,7 @@ final class HexEditorParserComponent {
      * @return The tree object representing the block.
      */
     final HexEditorContentOutlineTreeObject printBlockHeader(StyledString contentBuilder,
-	    StyledString headerStyledString, int offset) {
+	    StyledString headerStyledString, long offset) {
 
 	if (contentBuilder == null) {
 	    throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
@@ -503,7 +525,7 @@ final class HexEditorParserComponent {
      * @param offset
      *            The offset of the last block, a non-negative integer.
      */
-    final void printBlockWithError(StyledString contentBuilder, String errorText, int length, int offset) {
+    final void printBlockWithError(StyledString contentBuilder, String errorText, long length, long offset) {
 	if (contentBuilder == null) {
 	    throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
 	}
@@ -525,22 +547,22 @@ final class HexEditorParserComponent {
 	offset = printBytes(treeObject, contentBuilder, offset, length - 1, true, 0);
     }
 
-    final void skipByteTextIndex(int offset) {
+    final void skipByteTextIndex(long offset) {
 	byteTextIndex += offset;
     }
 
-    final int printBytes(HexEditorContentOutlineTreeObject treeObject, StyledString contentBuilder, int offset,
-	    int maxOffset, boolean withStartAddress, int startAddress) {
+    final long printBytes(HexEditorContentOutlineTreeObject treeObject, StyledString contentBuilder, long offset,
+	    long maxOffset, boolean withStartAddress, int startAddress) {
 
 	if (offset < 0) {
-	    throw new IllegalArgumentException("Parameter 'offset' must not be negative, specified value is " + offset
-		    + ".");
+	    throw new IllegalArgumentException(
+		    "Parameter 'offset' must not be negative, specified value is " + offset + ".");
 	}
 	if (maxOffset < 0) {
-	    throw new IllegalArgumentException("Parameter 'offset' must not be negative, specified value is "
-		    + maxOffset + ".");
+	    throw new IllegalArgumentException(
+		    "Parameter 'offset' must not be negative, specified value is " + maxOffset + ".");
 	}
-	int length = Math.max(4, HexUtility.getLongValueHexLength(maxOffset));
+	int length = Math.max(4, HexUtility.getLongValueHexLength(fileContent.length));
 	char[] characterMapping = characterSet.getCharacterMapping();
 	while (offset <= maxOffset) {
 	    int contentBuilderLineStartOffset = contentBuilder.length();
@@ -609,11 +631,11 @@ final class HexEditorParserComponent {
      */
     public HexEditorSelection getSelection(int x, int y) {
 
-	int startOffset = UNDEFINED_OFFSET;
-	int endOffset = UNDEFINED_OFFSET;
-	int textOffset = 0;
+	long startOffset = UNDEFINED_OFFSET;
+	long endOffset = UNDEFINED_OFFSET;
+	long textOffset = 0;
 	for (int i = 0; i < byteTextIndex && (startOffset == UNDEFINED_OFFSET || endOffset == UNDEFINED_OFFSET); i++) {
-	    int nextTextOffset;
+	    long nextTextOffset;
 	    if (i < byteTextIndex - 1) {
 		nextTextOffset = byteTextOffsets[i + 1];
 	    } else {
@@ -633,23 +655,26 @@ final class HexEditorParserComponent {
 	if (startOffset == UNDEFINED_OFFSET) {
 	    return null;
 	}
-	int length;
+	long length;
 	byte[] bytes;
 
 	length = endOffset - startOffset + 1;
-	// BasePlugin.getInstance().log("HexEditor.getSelection(): startOffset={0} endoffset={1} length={2}",
+	// BasePlugin.getInstance().log("HexEditor.getSelection():
+	// startOffset={0} endoffset={1} length={2}",
 	// new Object[] { String.valueOf(startOffset),
 	// String.valueOf(endOffset), String.valueOf(length) });
+
 	// Length not empty and selection does not cross file end boundary.
-	if (length > 0 && endOffset < fileContent.length) {
+	if (length > 0 && length < Integer.MAX_VALUE && startOffset < fileContent.length
+		&& endOffset < fileContent.length) {
 	    // Reposition into first occurrence of in the file.
 	    // This is relevant for the format that display the content more
 	    // than once.
-	    bytes = new byte[length];
+	    bytes = new byte[(int) length];
 	    // startOffset = startOffset % fileContent.length;
 	    // endOffset = endOffset % fileContent.length;
 	    // length = endOffset - startOffset + 1;
-	    System.arraycopy(fileContent, startOffset, bytes, 0, length);
+	    System.arraycopy(fileContent, (int) startOffset, bytes, 0, bytes.length);
 
 	    // BasePlugin.getInstance().log(
 	    // "HexEditor startOffset={0} endoffset={1} length={2}",
@@ -672,9 +697,9 @@ final class HexEditorParserComponent {
      * @return The text offset where the byte is represented or <code>-1</code>
      *         if there is no such text offset.
      */
-    public int getByteTextOffset(int byteOffset) {
+    public long getByteTextOffset(long byteOffset) {
 	if (byteOffset < byteTextOffsets.length) {
-	    return byteTextOffsets[byteOffset];
+	    return byteTextOffsets[(int) byteOffset];
 	}
 	return -1;
     }

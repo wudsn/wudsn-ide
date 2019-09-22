@@ -48,7 +48,7 @@ public class AtariMADSParser extends HexEditorParser {
 	}
 
 	boolean error;
-	int offset = 0;
+	long offset = 0;
 
 	// Skip offset bytes in lookup array.
 	skipByteTextIndex(offset);
@@ -82,7 +82,7 @@ public class AtariMADSParser extends HexEditorParser {
 			treeObject = printHeader(contentBuilder, offset, headerText);
 			offset = printBytes(treeObject, contentBuilder, offset, offset + 15, true, 0);
 
-			int blockEnd = offset + endAddress - startAddress;
+			long blockEnd = offset + endAddress - startAddress;
 
 			offset = printBytes(treeObject, contentBuilder, offset, blockEnd, true, startAddress);
 
@@ -100,7 +100,7 @@ public class AtariMADSParser extends HexEditorParser {
 			// stored for each address (low byte of address being
 			// modified).
 			int dataSize = (type == '>' ? 3 : 2);
-			int blockEnd = offset + (dataLength * dataSize) - 1;
+			long blockEnd = offset + (dataLength * dataSize) - 1;
 
 			offset = printBytes(treeObject, contentBuilder, offset, blockEnd, false, 0);
 
@@ -141,7 +141,7 @@ public class AtariMADSParser extends HexEditorParser {
 			    int labelLength = getFileContentWord(offset + 2);
 			    String labelName = getLabelName(offset + 4, labelLength);
 			    int address = getFileContentWord(offset + 4 + labelLength);
-			    int headerEnd = offset + 6 + labelLength - 1;
+			    long headerEnd = offset + 6 + labelLength - 1;
 			    switch (labelType) {
 			    case 'P':
 				int procType = getFileContentByte(headerEnd + 1);
@@ -194,7 +194,7 @@ public class AtariMADSParser extends HexEditorParser {
 	return error;
     }
 
-    private HexEditorContentOutlineTreeObject printHeader(StyledString contentBuilder, int offset, String headerText) {
+    private HexEditorContentOutlineTreeObject printHeader(StyledString contentBuilder, long offset, String headerText) {
 	HexEditorContentOutlineTreeObject treeObject;
 	StyledString headerStyledString = new StyledString(headerText, offsetStyler);
 	contentBuilder.append(headerStyledString).append("\n");
@@ -202,7 +202,7 @@ public class AtariMADSParser extends HexEditorParser {
 	return treeObject;
     }
 
-    private HexEditorContentOutlineTreeObject printTypedHeader(StyledString contentBuilder, int offset, String text,
+    private HexEditorContentOutlineTreeObject printTypedHeader(StyledString contentBuilder, long offset, String text,
 	    int type, int dataLength) {
 	HexEditorContentOutlineTreeObject treeObject;
 	String headerText = TextUtility.format(text, String.valueOf((char) type),
@@ -211,7 +211,7 @@ public class AtariMADSParser extends HexEditorParser {
 	return treeObject;
     }
 
-    private String getLabelName(int offset, int length) {
+    private String getLabelName(long offset, int length) {
 	StringBuffer buffer = new StringBuffer(8);
 	for (int i = 0; i < length; i++) {
 	    buffer.append((char) getFileContentByte(offset + i));
