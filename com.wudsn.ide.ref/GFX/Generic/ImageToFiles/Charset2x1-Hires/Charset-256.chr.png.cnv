@@ -1,6 +1,6 @@
 #WUDSN IDE Converter Parameters
-#Tue Jun 10 22:37:36 CEST 2014
-converterDirection=IMAGE_TO_FILES
+#Mon Sep 16 11:37:16 CEST 2019
+converterDirection=FILES_TO_IMAGE
 filesConverterParameters.converterId=
 filesConverterParameters.imageAspect.factorX=1
 filesConverterParameters.imageAspect.factorY=1

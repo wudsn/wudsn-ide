@@ -209,7 +209,7 @@ public abstract class ConverterCommonParameters {
 
 	setConverterId(ownSerializer.readString(Attributes.CONVERTER_ID, Defaults.CONVERTER_ID));
 
-	imageAspect = ownSerializer.readXYFactor(Attributes.DISPLAY_ASPECT, Defaults.IMAGE_ASPECT);
+	imageAspect = ownSerializer.readXYFactor(Attributes.IMAGE_ASPECT, Defaults.IMAGE_ASPECT);
 	displayAspect = ownSerializer.readXYFactor(Attributes.DISPLAY_ASPECT, Defaults.DISPLAY_ASPECT);
 	displayShrinkToFit = ownSerializer
 		.readBoolean(Attributes.DISPLAY_SHRINK_TO_FIT, Defaults.DISPLAY_SHRINK_TO_FIT);
