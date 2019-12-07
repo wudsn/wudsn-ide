@@ -3,10 +3,10 @@
    <description name="WUDSN IDE Update Site" url="http://www.wudsn.com/update">
       Central Update Site for WUDSN IDE
    </description>
-   <feature url="features/com.wudsn.ide.base.feature_1.7.0.201812301213.jar" id="com.wudsn.ide.base.feature" version="1.7.0.201812301213">
+   <feature url="features/com.wudsn.ide.base.feature_1.7.1.201909240025.jar" id="com.wudsn.ide.base.feature" version="1.7.1.201909240025">
       <category name="General"/>
    </feature>
-   <feature url="features/com.wudsn.ide.feature_1.7.0.201812301213.jar" id="com.wudsn.ide.feature" version="1.7.0.201812301213">
+   <feature url="features/com.wudsn.ide.feature_1.7.1.201909240025.jar" id="com.wudsn.ide.feature" version="1.7.1.201909240025">
       <category name="WUDSN IDE"/>
    </feature>
    <category-def name="WUDSN IDE" label="WUDSN IDE">
