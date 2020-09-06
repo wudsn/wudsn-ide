@@ -143,6 +143,7 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
      */
     public static void main(String[] args) throws Exception {
 
+	System.out.print("Testing HexEditorParserComponent: Parsing took ");
 	// Initialize for stand alone usage.
 	new BasePlugin().start(null);
 
@@ -154,7 +155,7 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
 	parser.setFileContentMode(HexEditorFileContentMode.BINARY);
 	parser.parseFileContent();
 	long duration = System.currentTimeMillis() - startTimeMillis;
-	System.out.println(duration);
+	System.out.println(duration+ " ms");
 	System.exit(0);
 
     }
