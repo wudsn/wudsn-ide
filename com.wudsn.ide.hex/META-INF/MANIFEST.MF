@@ -1,12 +1,18 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Hex Editor Test
-Bundle-SymbolicName: com.wudsn.ide.hex
-Bundle-Version: 1.7.1
+Bundle-Name: WUDSN IDE Hex Editor Plugin
+Bundle-SymbolicName: com.wudsn.ide.hex;singleton:=true
+Bundle-Version: 1.7.1.qualifier
 Bundle-Activator: com.wudsn.ide.hex.HexPlugin
-Bundle-Vendor: WUDSN
+Bundle-Localization: plugin
+Bundle-Vendor: Peter Dell
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.ui.ide,
+ org.eclipse.ui.views,
+ com.wudsn.ide.base
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Automatic-Module-Name: com.wudsn.ide.hex
+Export-Package: com.wudsn.ide.hex

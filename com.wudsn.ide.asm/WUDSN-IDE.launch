@@ -37,6 +37,8 @@
 <stringAttribute key="product" value="org.eclipse.platform.ide"/>
 <setAttribute key="selected_features">
 <setEntry value="com.wudsn.ide.feature:default"/>
+<setEntry value="org.eclipse.egit.gitflow.feature:default"/>
+<setEntry value="org.eclipse.egit:default"/>
 <setEntry value="org.eclipse.equinox.p2.user.ui:default"/>
 <setEntry value="org.eclipse.help:default"/>
 <setEntry value="org.eclipse.platform:default"/>

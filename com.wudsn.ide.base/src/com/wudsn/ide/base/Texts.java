@@ -22,7 +22,6 @@ package com.wudsn.ide.base;
 import org.eclipse.osgi.util.NLS;
 
 import com.wudsn.ide.base.common.FileUtility;
-import com.wudsn.ide.base.editor.hex.HexEditor;
 
 /**
  * Class which holds the localized text constants.
@@ -37,53 +36,6 @@ public final class Texts extends NLS {
     public static String DIALOG_TITLE;
     public static String FILE_PATH_FIELD_BROWSE_BUTTON_LABEL;
     public static String FILE_PATH_FIELD_DIALOG_MESSAGE;
-
-    /**
-     * Hex editor
-     */
-    public static String HEX_EDITOR_FILE_SIZE;
-
-    public static String HEX_EDITOR_ATARI_COM_BLOCK_HEADER;
-    public static String HEX_EDITOR_ATARI_COM_BLOCK_HEADER_PARAMETERS;
-    public static String HEX_EDITOR_ATARI_COM_BLOCK_ERROR;
-
-    public static String HEX_EDITOR_ATARI_DISK_IMAGE_HEADER;
-    public static String HEX_EDITOR_ATARI_SECTOR_HEADER;
-    public static String HEX_EDITOR_ATARI_SECTOR_HEADER_PARAMETERS;
-    public static String HEX_EDITOR_ATARI_SECTOR_ERROR;
-
-    public static String HEX_EDITOR_ATARI_MADS_RELOC_BLOCK_HEADER;
-    public static String HEX_EDITOR_ATARI_MADS_UPDATE_RELOC_BLOCK_HEADER;
-    public static String HEX_EDITOR_ATARI_MADS_UPDATE_SYMBOLS_BLOCK_HEADER;
-    public static String HEX_EDITOR_ATARI_MADS_DEFINE_SYMBOLS_BLOCK_HEADER;
-    public static String HEX_EDITOR_ATARI_MADS_DEFINE_SYMBOL_HEADER;
-    public static String HEX_EDITOR_ATARI_MADS_BLOCK_ERROR;
-
-    public static String HEX_EDITOR_ATARI_SAP_FILE_HEADER;
-
-    public static String HEX_EDITOR_ATARI_SDX_NON_RELOC_BLOCK_HEADER;
-    public static String HEX_EDITOR_ATARI_SDX_NON_RELOC_BLOCK_HEADER_PARAMETERS;
-    public static String HEX_EDITOR_ATARI_SDX_RELOC_BLOCK_HEADER;
-    public static String HEX_EDITOR_ATARI_SDX_UPDATE_RELOC_BLOCK_HEADER;
-    public static String HEX_EDITOR_ATARI_SDX_UPDATE_SYMBOLS_BLOCK_HEADER;
-    public static String HEX_EDITOR_ATARI_SDX_DEFINE_SYMBOLS_BLOCK_HEADER;
-    public static String HEX_EDITOR_ATARI_SDX_BLOCK_ERROR;
-
-    public static String HEX_EDITOR_C64_PRG_HEADER;
-    public static String HEX_EDITOR_C64_PRG_HEADER_PARAMETERS;
-    public static String HEX_EDITOR_C64_PRG_ERROR;
-
-    public static String HEX_EDITOR_IFF_CHUNK;
-    public static String HEX_EDITOR_IFF_FORM_CHUNK;
-    public static String HEX_EDITOR_IFF_FILE_ERROR;
-    
-    public static String HEX_EDITOR_FILE_CONTENT_SIZE_FIELD_LABEL;
-    public static String HEX_EDITOR_FILE_CONTENT_SIZE_FIELD_TEXT;
-    public static String HEX_EDITOR_FILE_CONTENT_MODE_FIELD_LABEL;
-    public static String HEX_EDITOR_CHARACTER_SET_TYPE_FIELD_LABEL;
-    public static String HEX_EDITOR_BYTES_PER_ROW_FIELD_LABEL;
-
-    public static String HEX_EDITOR_SAVE_SELECTION_AS_DIALOG_TITLE;
 
     /**
      * Messages for {@link FileUtility}.
@@ -102,14 +54,6 @@ public final class Texts extends NLS {
     public static String MESSAGE_E211;
     public static String MESSAGE_E212;
     public static String MESSAGE_E213;
-
-    /**
-     * Message for the {@link HexEditor}
-     */
-    public static String MESSAGE_E300;
-    public static String MESSAGE_E301;
-    public static String MESSAGE_I302;
-    public static String MESSAGE_I303;
 
     /**
      * Initializes the constants.

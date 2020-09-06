@@ -1,15 +1,16 @@
 package com.wudsn.ide.hex;
 
-import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+
+import com.wudsn.ide.base.common.AbstractIDEPlugin;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class HexPlugin extends AbstractUIPlugin {
+public class HexPlugin extends AbstractIDEPlugin {
 
     // The plug-in ID
-    public static final String PLUGIN_ID = "com.wudsn.ide.hex"; //$NON-NLS-1$
+    public static final String ID = "com.wudsn.ide.hex"; //$NON-NLS-1$
 
     // The shared instance
     private static HexPlugin plugin;
@@ -20,12 +21,16 @@ public class HexPlugin extends AbstractUIPlugin {
     public HexPlugin() {
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
-     * )
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected String getPluginId() {
+	return ID;
+    }
+
+    /**
+     * {@inheritDoc}
      */
     @Override
     public void start(BundleContext context) throws Exception {
@@ -33,12 +38,8 @@ public class HexPlugin extends AbstractUIPlugin {
 	plugin = this;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
-     * )
+    /**
+     * {@inheritDoc}
      */
     @Override
     public void stop(BundleContext context) throws Exception {
@@ -47,11 +48,14 @@ public class HexPlugin extends AbstractUIPlugin {
     }
 
     /**
-     * Returns the shared instance
+     * Gets the shared plugin instance
      * 
-     * @return the shared instance
+     * @return The plug-in, not <code>null</code>.
      */
     public static HexPlugin getInstance() {
+	if (plugin == null) {
+	    throw new IllegalStateException("Plugin not initialized or already stopped");
+	}
 	return plugin;
     }
 

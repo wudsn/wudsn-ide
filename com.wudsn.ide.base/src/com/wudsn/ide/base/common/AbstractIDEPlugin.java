@@ -94,7 +94,7 @@ public abstract class AbstractIDEPlugin extends AbstractUIPlugin {
 	}
 	message = format(message, parameters);
 	getLog().log(new Status(IStatus.INFO, getPluginId(), IStatus.OK, message, null));
-	// System.out.println(message);
+//	System.out.println(message);
     }
 
     /**

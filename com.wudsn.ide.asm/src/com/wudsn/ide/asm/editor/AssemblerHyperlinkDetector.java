@@ -45,8 +45,8 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParserTreeObjectType;
 import com.wudsn.ide.asm.compiler.syntax.CompilerSyntax;
 import com.wudsn.ide.base.common.NumberUtility;
 import com.wudsn.ide.base.common.TextUtility;
-import com.wudsn.ide.base.editor.hex.HexEditor;
 import com.wudsn.ide.gfx.editor.GraphicsConversionEditor;
+import com.wudsn.ide.hex.HexEditor;
 
 /**
  * Hyperlink detector implementation for opening source or binary include files.
