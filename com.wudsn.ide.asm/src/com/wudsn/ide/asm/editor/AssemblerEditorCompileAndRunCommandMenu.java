@@ -30,16 +30,15 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.menus.WorkbenchWindowControlContribution;
 
-// TODO: Dynamic menu contribution is not working!
+// TODO: This should become a replacement for the action/actionSet based dynamic menu
+// See also https://wiki.eclipse.org/Menu_Contributions
+// Mail sent to grthor@users.sourceforge.net on 2020-10-11.
 public final class AssemblerEditorCompileAndRunCommandMenu extends WorkbenchWindowControlContribution {
 
     public AssemblerEditorCompileAndRunCommandMenu() {
 	new Exception("JAC! Test for Startup!").printStackTrace();
     }
 
-    public AssemblerEditorCompileAndRunCommandMenu(String id) {
-	super(id);
-    }
 
     @AboutToShow
     public void aboutToShow(List<MMenuElement> items) {
@@ -54,7 +53,6 @@ public final class AssemblerEditorCompileAndRunCommandMenu extends WorkbenchWind
 
     @Override
     protected Control createControl(Composite parent) {
-	// TODO Auto-generated method stub
 	return null;
     }
 

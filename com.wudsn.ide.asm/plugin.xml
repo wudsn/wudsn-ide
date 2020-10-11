@@ -276,10 +276,7 @@
                </visibleWhen>
             </dynamic>
          </toolbar>
-         <dynamic
-               class="com.wudsn.ide.asm.editor.AssemblerEditorCompileAndRunCommandMenu"
-               id="com.wudsn.ide.asm.editor.AssemblerEditorCompileAndRunCommandMenu2">
-         </dynamic>
+
       </menuContribution>
       
       <menuContribution
