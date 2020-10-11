@@ -98,7 +98,7 @@ In case something is not correct or not working, please contact me.
 <ul>
 	<li>Start Eclipse</li>
 	<li>Select the entry "Install New Software..." from the menu "Help".</li>
-	<li>Enter "http://www.wudsn.com/update" in the "Work with" field and press ENTER.</li>
+	<li>Enter "https://www.wudsn.com/update" in the "Work with" field and press ENTER.</li>
 	<li>
 		Select the latest version of the feature "WUDSN IDE" for in and press the button "Next".
 		<br/>
@@ -112,7 +112,7 @@ In case something is not correct or not working, please contact me.
 		As always with updates, it may happen that the update fails for whatever reason or the installed version turns out to have
 		severe issues. For example the required Java Version might not be available on your machine. In this case you can uninstall it
 		via the link "What is already installed" in the "Install New Software..." dialog and restart the IDE. Then you can reinstall
-		the latest version from "http://www.wudsn.com/update" or previously released versions from the locations listed in the
+		the latest version from "https://www.wudsn.com/update" or previously released versions from the locations listed in the
 		"Releases" chapter.
 		<br/>
 		<img src="productions/java/ide/installation/ide-installation-steps.gif" alt="IDE installation steps"/>
@@ -384,9 +384,7 @@ In case something is not correct or not working, please contact me.
 			</tbody>
 		</table>
 	</li>
-	<li>In the section "Browse..." button for the field "Path to Compiler" to locate the executable. Note that under Mac OS-X, you
-		must specify the path to the actual executable inside the ".app" folder.
-	</li>
+	<li>In the section "Browse..." button for the field "Path to Compiler" to locate the executable.</li>
 	<li>If not explicit compiler parameters are specified, the default parameters are used.</li>
 	<li>If explicit compiler parameters are specified, the default parameters are ignored.</li>
 	<li>
@@ -436,10 +434,11 @@ In case something is not correct or not working, please contact me.
 		</ul>
 	</li>
 	<li>If you have not yet downloaded the corresponding emulator, you can use the download link on the tab of the emulator and
-		follow the instruction on the download site for install the emulator</li>
+		follow the instructions on the download site for install the emulator.</li>
 	<li>Use the "Browse..." button for the field "Path to Application" to locate the executable. If required you can specify your
-		own command line based on the default command line displayed. Note that under Mac OS-X, you must specify the path to the
-		actual executable inside the ".app" folder.
+		own command line based on the default command line displayed.<br/>Note: Under Mac OS-X, you must specify the path to the
+		actual executable inside the ".app" folder. To see this path you have to select "Show Package Contents" in the context menu of the ".app" folder.
+		For the "Stella" emulator installed in the "/Applications/Stella.app" folder this means "/Applications/Stella.app/Contents/MacOS/Stella".
 	</li>
 	<li>If not explicit command line is specified, the default command line is used.</li>
 	<li>If an explicit command line is specified, the default command line is ignored.</li>
@@ -459,10 +458,6 @@ In case something is not correct or not working, please contact me.
 		<a href="http://www.emulators.com/download.htm" target="_blank">http://www.emulators.com</a>
 	</li>
 	<li>
-		The patch to convert the English version into a German version including a German keyboard layout is available from
-		<a href="http://www.abbuc.de/files/software/Atari800WinPLusDE.zip" target="_blank">ABBUC</a>
-		. It also contains the ROM files
-		<br/>
 		<img src="productions/java/ide/features/ide-assembler-preferences-compilers.gif" alt="Configuration of emulator executable path"/>
 	</li>
 </ul>
