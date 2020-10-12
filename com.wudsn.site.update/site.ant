@@ -1,8 +1,12 @@
-<project name="Site" basedir=".">
+<!-- 
+  The first target is "build_daily". It ends with  manual step.
+  The result can then be uploaded with "upload_all".
+  If the daily build is tested and OK, the target "publish_daily_to_stable_and_main" copies
+  it to the current main version field and the default update site folder and then triggers "upload_all".
+ -->
+<project name="Site" basedir="." default="build_daily">
 
-	<!-- - - - - - - - - - - - - - - - - - 
-	          target: name                      
-	         - - - - - - - - - - - - - - - - - -->
+
 	<target name="_clean_folder">
 		<echo message="Cleaning ${folder}" />
 		<delete dir="${folder}/features" />
