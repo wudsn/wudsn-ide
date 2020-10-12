@@ -27,7 +27,6 @@ import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.ui.IWorkbenchSite;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import com.wudsn.ide.hex.Texts;
 import com.wudsn.ide.base.common.HexUtility;
 import com.wudsn.ide.base.common.NumberUtility;
 

@@ -19,8 +19,6 @@
 
 package com.wudsn.ide.base.gui;
 
-import com.wudsn.ide.base.gui.MessageManager;
-
 /**
  * Interface to be implemented by applications.
  * 

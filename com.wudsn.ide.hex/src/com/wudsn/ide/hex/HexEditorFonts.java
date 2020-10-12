@@ -10,6 +10,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
 
 final class HexEditorFonts {
 
@@ -21,7 +22,7 @@ final class HexEditorFonts {
     }
 
     public void init() {
-	Display display = HexPlugin.getInstance().getWorkbench().getDisplay();
+	Display display = PlatformUI.getWorkbench().getDisplay();
 
 	// From http://members.bitstream.net/~marksim/atarimac/fonts.html
 	atari8Font = loadFont(display, "fonts/atari8/ATARCC__.TTF", "");

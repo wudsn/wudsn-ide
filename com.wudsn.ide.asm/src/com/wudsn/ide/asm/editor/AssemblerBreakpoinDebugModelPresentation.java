@@ -29,9 +29,8 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
-
-import com.wudsn.ide.asm.AssemblerPlugin;
 
 /**
  * Implementation class for extension
@@ -66,7 +65,7 @@ public class AssemblerBreakpoinDebugModelPresentation implements IDebugModelPres
 	AssemblerBreakpoint assemblerBreakpoint = (AssemblerBreakpoint) element;
 	IEditorInput result = assemblerBreakpoint.getEditorInput();
 	if (result == null) {
-	    IWorkbenchWindow activeWindow = AssemblerPlugin.getInstance().getWorkbench().getActiveWorkbenchWindow();
+	    IWorkbenchWindow activeWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 	    if (activeWindow == null) {
 		return null;
 	    }

@@ -21,9 +21,6 @@
  */
 package resid_builder.resid;
 
-import resid_builder.resid.EnvelopeGenerator;
-import resid_builder.resid.WaveformGenerator;
-
 /**
  * Representation of SID voice block.
  * 
