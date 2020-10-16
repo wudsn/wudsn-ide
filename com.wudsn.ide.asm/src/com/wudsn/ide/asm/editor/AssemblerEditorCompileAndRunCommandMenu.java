@@ -32,21 +32,22 @@ import org.eclipse.ui.menus.WorkbenchWindowControlContribution;
 
 // TODO: This should become a replacement for the action/actionSet based dynamic menu
 // See also https://wiki.eclipse.org/Menu_Contributions
-// Mail sent to grthor@users.sourceforge.net on 2020-10-11.
+// Asked at https://www.eclipse.org/forums/index.php/m/1833428/#msg_1833428
 public final class AssemblerEditorCompileAndRunCommandMenu extends WorkbenchWindowControlContribution {
 
     public AssemblerEditorCompileAndRunCommandMenu() {
-	new Exception("JAC! Test for Startup!").printStackTrace();
+	if (System.getProperty("user.name").equals("JAC")) {
+	    new Exception("JAC! Test for Startup!").printStackTrace();
+	}
     }
-
 
     @AboutToShow
     public void aboutToShow(List<MMenuElement> items) {
 	MDirectMenuItem dynamicItem = MMenuFactory.INSTANCE.createDirectMenuItem();
 	dynamicItem.setLabel("Dynamic Menu Item (" + new Date() + ")");
 	dynamicItem.setContributorURI("platform:/plugin/at.descher.eclipse.bug389063");
-	dynamicItem
-		.setContributionURI("bundleclass://at.descher.eclipse.bug389063/at.descher.eclipse.bug389063.dynamic.DirectMenuItemAHandler");
+	dynamicItem.setContributionURI(
+		"bundleclass://at.descher.eclipse.bug389063/at.descher.eclipse.bug389063.dynamic.DirectMenuItemAHandler");
 	items.add(dynamicItem);
 
     }
