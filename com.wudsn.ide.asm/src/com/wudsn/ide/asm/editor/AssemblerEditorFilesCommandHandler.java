@@ -64,7 +64,7 @@ public abstract class AssemblerEditorFilesCommandHandler extends AbstractHandler
 		AssemblerPlugin.getInstance().showError(
 			assemblerEditor.getSite().getShell(),
 			"Operation '" + event.getCommand().getName()
-				+ "' is not possible because the file in the editor is not located in the worksapce.",
+				+ "' is not possible because the file in the editor is not located in the workspace.",
 			new Exception());
 	    } catch (NotDefinedException ignore) {
 		// Ignore
