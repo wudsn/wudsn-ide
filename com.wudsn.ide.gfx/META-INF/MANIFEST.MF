@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: WUDSN IDE Graphics Plug-in
 Bundle-SymbolicName: com.wudsn.ide.gfx;singleton:=true
-Bundle-Version: 1.7.1.qualifier
+Bundle-Version: 1.7.2.qualifier
 Bundle-Activator: com.wudsn.ide.gfx.GraphicsPlugin
 Bundle-Vendor: Peter Dell
 Require-Bundle: com.wudsn.ide.base,
@@ -13,7 +13,7 @@ Require-Bundle: com.wudsn.ide.base,
  org.eclipse.ui.ide,
  org.eclipse.ui.console,
  org.eclipse.ui.views
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Export-Package: com.wudsn.ide.gfx.editor

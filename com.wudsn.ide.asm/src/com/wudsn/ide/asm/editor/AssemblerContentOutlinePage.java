@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2009 - 2020 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2021 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -464,7 +464,7 @@ final class AssemblerContentOutlinePage extends ContentOutlinePage {
      * similar use case.
      * 
      * @param parent
-     *            ´The parent, not <code>null</code>.
+     *            ï¿½The parent, not <code>null</code>.
      */
     @Override
     public void createControl(Composite parent) {

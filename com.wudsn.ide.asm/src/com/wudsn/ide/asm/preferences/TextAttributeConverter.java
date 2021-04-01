@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2009 - 2020 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2021 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -38,123 +38,118 @@ import com.wudsn.ide.base.common.StringUtility;
  */
 public final class TextAttributeConverter {
 
-    /**
-     * Converts preferences string to a color value.
-     * 
-     * @param value
-     *            The color as an RGB string of the for "r, g, b", may be empty
-     *            or <code>null</code>.
-     * 
-     * @return The color, not <code>null</code>.
-     */
-    public static TextAttribute fromString(String value) {
+	/**
+	 * Converts preferences string to a color value.
+	 * 
+	 * @param value The color as an RGB string of the for "r, g, b", may be empty or
+	 *              <code>null</code>.
+	 * 
+	 * @return The color, not <code>null</code>.
+	 */
+	public static TextAttribute fromString(String value) {
 
-	TextAttribute result;
-	Display display = Display.getCurrent();
-	Color foregroundColor;
-	Color backgroundColor;
-	int style;
-	if (value != null) {
+		TextAttribute result;
+		Display display = Display.getCurrent();
+		Color foregroundColor;
+		Color backgroundColor;
+		int style;
+		if (value != null) {
 
-	    String[] data = value.split(",");
+			String[] data = value.split(",");
 
-	    try {
-		int r, g, b;
+			try {
+				int r, g, b;
 
-		if (StringUtility.isEmpty(data[0] + data[1] + data[2])) {
-		    foregroundColor = null;
+				if (StringUtility.isEmpty(data[0] + data[1] + data[2])) {
+					foregroundColor = null;
+				} else {
+					r = Integer.parseInt(data[0]);
+					g = Integer.parseInt(data[1]);
+					b = Integer.parseInt(data[2]);
+					foregroundColor = new Color(display, r, g, b);
+				}
+				if (StringUtility.isEmpty(data[3] + data[4] + data[5])) {
+					backgroundColor = null;
+				} else {
+					r = Integer.parseInt(data[3]);
+					g = Integer.parseInt(data[4]);
+					b = Integer.parseInt(data[5]);
+					backgroundColor = new Color(display, r, g, b);
+				}
+				style = b = Integer.parseInt(data[6]);
+			} catch (Exception ex) {
+				foregroundColor = new Color(display, 0, 0, 0);
+				backgroundColor = null;
+				style = SWT.NORMAL;
+			}
 		} else {
-		    r = new Integer(data[0]).intValue();
-		    g = new Integer(data[1]).intValue();
-		    b = new Integer(data[2]).intValue();
-		    foregroundColor = new Color(display, r, g, b);
+			foregroundColor = new Color(display, 0, 0, 0);
+			backgroundColor = null;
+			style = SWT.NORMAL;
 		}
-		if (StringUtility.isEmpty(data[3] + data[4] + data[5])) {
-		    backgroundColor = null;
+		Font font = JFaceResources.getTextFont();
+		FontData fontData = font.getFontData()[0];
+		fontData = new FontData(fontData.getName(), fontData.getHeight(), style);
+		font = new Font(display, fontData);
+		result = new TextAttribute(foregroundColor, backgroundColor, style, font);
+		return result;
+	}
+
+	/**
+	 * Converts a text attribute to a string, except for the font.
+	 * 
+	 * @param textAttribute The text attribute, not <code>null</code>.
+	 * @return The string, not <code>null</code>.
+	 */
+	public static String toString(TextAttribute textAttribute) {
+		if (textAttribute == null) {
+			throw new IllegalArgumentException("Parameter 'textAttribute' must not be null.");
+		}
+
+		String result;
+		result = toString(textAttribute.getForeground()) + "," + toString(textAttribute.getBackground()) + ","
+				+ Integer.toString(textAttribute.getStyle());
+		return result;
+	}
+
+	/**
+	 * Converts a color to a comma separated RGB string.
+	 * 
+	 * @param color The color, may be <code>null</code>.
+	 * @return The comma separated RGB string, not <code>null</code>.
+	 */
+	private static String toString(Color color) {
+		String result;
+		if (color == null) {
+			result = ",,";
 		} else {
-		    r = new Integer(data[3]).intValue();
-		    g = new Integer(data[4]).intValue();
-		    b = new Integer(data[5]).intValue();
-		    backgroundColor = new Color(display, r, g, b);
+			String red = Integer.toString(color.getRed());
+			String green = Integer.toString(color.getGreen());
+			String blue = Integer.toString(color.getBlue());
+			result = red + "," + green + "," + blue;
 		}
-		style = b = new Integer(data[6]).intValue();
-	    } catch (Exception ex) {
-		foregroundColor = new Color(display, 0, 0, 0);
-		backgroundColor = null;
-		style = SWT.NORMAL;
-	    }
-	} else {
-	    foregroundColor = new Color(display, 0, 0, 0);
-	    backgroundColor = null;
-	    style = SWT.NORMAL;
-	}
-	Font font = JFaceResources.getTextFont();
-	FontData fontData = font.getFontData()[0];
-	fontData = new FontData(fontData.getName(), fontData.getHeight(), style);
-	font = new Font(display, fontData);
-	result = new TextAttribute(foregroundColor, backgroundColor, style, font);
-	return result;
-    }
-
-    /**
-     * Converts a text attribute to a string, except for the font.
-     * 
-     * @param textAttribute
-     *            The text attribute, not <code>null</code>.
-     * @return The string, not <code>null</code>.
-     */
-    public static String toString(TextAttribute textAttribute) {
-	if (textAttribute == null) {
-	    throw new IllegalArgumentException("Parameter 'textAttribute' must not be null.");
+		return result;
 	}
 
-	String result;
-	result = toString(textAttribute.getForeground()) + "," + toString(textAttribute.getBackground()) + ","
-		+ Integer.toString(textAttribute.getStyle());
-	return result;
-    }
+	/**
+	 * Dispose the colors and the font of the text attribute created by this class.
+	 * 
+	 * @param textAttribute The text attribute or <code>null</code>.
+	 * 
+	 * @since 1.6.0
+	 */
+	public static void dispose(TextAttribute textAttribute) {
+		if (textAttribute != null) {
+			if (textAttribute.getForeground() != null) {
+				textAttribute.getForeground().dispose();
+			}
+			if (textAttribute.getBackground() != null) {
+				textAttribute.getBackground().dispose();
+			}
+			if (textAttribute.getFont() != null) {
+				textAttribute.getFont().dispose();
+			}
+		}
 
-    /**
-     * Converts a color to a comma separated RGB string.
-     * 
-     * @param color
-     *            The color, may be <code>null</code>.
-     * @return The comma separated RGB string, not <code>null</code>.
-     */
-    private static String toString(Color color) {
-	String result;
-	if (color == null) {
-	    result = ",,";
-	} else {
-	    String red = Integer.toString(color.getRed());
-	    String green = Integer.toString(color.getGreen());
-	    String blue = Integer.toString(color.getBlue());
-	    result = red + "," + green + "," + blue;
 	}
-	return result;
-    }
-
-    /**
-     * Dispose the colors and the font of the text attribute created by this
-     * class.
-     * 
-     * @param textAttribute
-     *            The text attribute or <code>null</code>.
-     * 
-     * @since 1.6.0
-     */
-    public static void dispose(TextAttribute textAttribute) {
-	if (textAttribute != null) {
-	    if (textAttribute.getForeground() != null) {
-		textAttribute.getForeground().dispose();
-	    }
-	    if (textAttribute.getBackground() != null) {
-		textAttribute.getBackground().dispose();
-	    }
-	    if (textAttribute.getFont() != null) {
-		textAttribute.getFont().dispose();
-	    }
-	}
-
-    }
 }

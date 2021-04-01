@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2009 - 2020 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2021 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -19,7 +19,6 @@
 package com.wudsn.ide.asm.preferences;
 
 import com.wudsn.ide.asm.Hardware;
-import com.wudsn.ide.asm.preferences.AssemblerPreferencesCompilersPage;
 
 /**
  * Visual editor page for the assembler preferences regarding Apple 2 compilers.

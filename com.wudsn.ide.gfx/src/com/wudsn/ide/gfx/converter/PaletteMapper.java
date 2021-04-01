@@ -143,7 +143,7 @@ public abstract class PaletteMapper {
 		    n = m;
 		}
 	    }
-	    colorValue = new Integer(n);
+	    colorValue = Integer.valueOf(n);
 	    map.put(colorKey, colorValue);
 	}
 	return colorValue.intValue();

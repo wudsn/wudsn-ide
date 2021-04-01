@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2009 - 2020 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2021 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -108,23 +108,23 @@ final class MadsCompilerProcessLogParser extends CompilerProcessLogParser {
      * .LAB file format
      * 
      * As with XASM, the *.LAB file stores information about labels in the program. There are three columns:
-     * • The first column is the virtual bank number assigned to the label (if <>0).
-     * • The second column is the label value.
-     * • The third column is the label name.
+     * ï¿½ The first column is the virtual bank number assigned to the label (if <>0).
+     * ï¿½ The second column is the label value.
+     * ï¿½ The third column is the label name.
      * 
      * Virtual bank numbers with values >= $FFF9 have special meanings:
-     * • $FFF9   label for parameter in procedure defined by .PROC
-     * • $FFFA   label for array defined by .ARRAY
-     * • $FFFB   label for structured data defined by the pseudo-command DTA STRUCT_LABEL
-     * • $FFFC   label for SpartaDOS X symbol defined by SMB
-     * • $FFFD   label for macro defined by .MACRO directive
-     * • $FFFE   label for structure defined by .STRUCT directive
-     * • $FFFF   label for procedure defined by .PROC directive
+     * ï¿½ $FFF9   label for parameter in procedure defined by .PROC
+     * ï¿½ $FFFA   label for array defined by .ARRAY
+     * ï¿½ $FFFB   label for structured data defined by the pseudo-command DTA STRUCT_LABEL
+     * ï¿½ $FFFC   label for SpartaDOS X symbol defined by SMB
+     * ï¿½ $FFFD   label for macro defined by .MACRO directive
+     * ï¿½ $FFFE   label for structure defined by .STRUCT directive
+     * ï¿½ $FFFF   label for procedure defined by .PROC directive
      * 
      * 
      * Characters with special meanings in label names: 
-     * • label with two colons :: is defined in a macro
-     * • a dot ('.') separates the name of a scope (.MACRO, .PROC, .LOCAL, .STRUCT) from the field name in the scope
+     * ï¿½ label with two colons :: is defined in a macro
+     * ï¿½ a dot ('.') separates the name of a scope (.MACRO, .PROC, .LOCAL, .STRUCT) from the field name in the scope
      * 
      * The numeric value after :: is the number of the macro call. This is an example file:
      * 

@@ -1,66 +1,35 @@
-
-The latest version contains the following features:
-<br/>
+<p>The latest version contains the following features:</p>
 <ul>
-	<li>
-		<a href="#IDE">General IDE enhancements</a>
-	</li>
-	<li>
-		<a href="#Editor">Fully integrated assembler editor</a>
-	</li>
-	<li>
-		<a href="#ContentOutline">Content outline and source folding</a>
-	</li>
-	<li>
-		<a href="#ContentAssist">Content assist and code completion</a>
-	</li>
-	<li>
-		<a href="#Hyperlinks">Hyperlink navigation</a>
-	</li>
-	<li>
-		<a href="#HexEditor">Hex Editor</a>
-	</li>
-	<li>
-		<a href="#GraphicsEditor">Graphics Editor</a>
-	</li>
-	<li>
-		<a href="#Preferences">Preferences for editing</a>
-	</li>
-	<li>
-		<a href="#CompilerPreferences">Preferences for compiling</a>
-	</li>
-	<li>
-		<a href="#CompilerAnnotations">Annotations for compiling</a>
-	</li>
-	<li>
-		<a href="#KnownBugs">Known Bugs</a>
-	</li>
-	<li>
-		<a href="#PlannedFeatures">Planned features</a>
-	</li>
+	<li><a href="#IDE">General IDE enhancements</a></li>
+	<li><a href="#Editor">Fully integrated assembler editor</a></li>
+	<li><a href="#ContentOutline">Content outline and source folding</a></li>
+	<li><a href="#ContentAssist">Content assist and code completion</a></li>
+	<li><a href="#Hyperlinks">Hyperlink navigation</a></li>
+	<li><a href="#HexEditor">Hex Editor</a></li>
+	<li><a href="#GraphicsEditor">Graphics Editor</a></li>
+	<li><a href="#Preferences">Preferences for editing</a></li>
+	<li><a href="#CompilerPreferences">Preferences for compiling</a></li>
+	<li><a href="#CompilerAnnotations">Annotations for compiling</a></li>
+	<li><a href="#KnownBugs">Known Bugs</a></li>
+	<li><a href="#PlannedFeatures">Planned features</a></li>
 </ul>
-<h5 id="IDE">General
-	IDE enhancements&nbsp;&nbsp;
-	<a href="#ide_features">» top</a>
-</h5>
+<h5 id="IDE">General IDE enhancements   <a href="#ide_features">» top</a></h5>
 <ul>
 	<li>"Open Folder" context menu available for all folders and files</li>
-	<li>
-		"Sort" context menu with sub-menu available for all text files including
-		<br/>
+	<li>"Sort" context menu with sub-menu available for all text files including <br />
 		<ul>
-			<li>Case sensitive, case insensitive and numeric sorting</li>
+			<li>Case sensitive, case insensitive, and numeric sorting</li>
 			<li>Sorting with and without removal of duplicates</li>
 			<li>Reverse ordering</li>
 		</ul>
-		<img src="productions/java/ide/features/ide-common-context-menu-open-folder.png" alt="Open folder action in context menu"/>
-		<img src="productions/java/ide/features/ide-text-editor-context-menu.png" alt="Sort action in text editor context menu"/>
+		<img src="productions/java/ide/features/ide-common-context-menu-open-folder.png"
+			alt="Open folder action in context menu" /> <img
+			src="productions/java/ide/features/ide-text-editor-context-menu.png"
+			alt="Sort action in text editor context menu" />
 	</li>
-	<li>
-		The online help contains the entry "WUDSN IDE Guide" which contains multiple sections.
+	<li>The online help contains the entry "WUDSN IDE Guide" which contains multiple sections.
 		<ul>
-			<li>
-				WUDSN IDE - mainly the documentation from the web site
+			<li>WUDSN IDE - mainly the documentation from the web site
 				<ul>
 					<li>Video links to the tutorial and release news</li>
 					<li>Features</li>
@@ -69,470 +38,368 @@ The latest version contains the following features:
 					<li>Link</li>
 				</ul>
 			</li>
-			<li>
-				Assemblers - the information on the supported assemblers and their properties
+			<li>Assemblers - the information on the supported assemblers and their properties
 				<ul>
-					<li>General - links, syntax and support features</li>
+					<li>General - links, syntax, and support features</li>
 					<li>Instructions - all supported instruction including their descriptions grouped by type</li>
-					<li>Manual - direct access to the PDF, HTML or text manual file or files which are part of the compiler installation</li>
+					<li>Manual - direct access to the PDF, HTML, or text manual file or files which are part of the
+						compiler installation</li>
 				</ul>
 			</li>
-			<li>
-				Hardware - the information on the supported hardwares and the corresponding emulators and links
+			<li>Hardware - the information on the supported hardware types and the corresponding emulators and links
 				<ul>
-					<li>Reference documentation - Hardware specific PDF, HTML or text files with CPU and customer chips reference sheets and programming guides</li>
+					<li>Reference documentation - Hardware specific PDF, HTML, or text files with CPU and customer chips
+						reference sheets and programming guides</li>
 				</ul>
 			</li>
 		</ul>
-		<br/>
-		<img src="productions/java/ide/features/ide-help.gif" alt="Integrated Help"/>
-	</li>
+		<br /> <img src="productions/java/ide/features/ide-help.gif" alt="Integrated Help" /></li>
 </ul>
-<h5 id="Editor">Fully
-	integrated assembler editor&nbsp;&nbsp;
-	<a href="#ide_features">» top</a>
-</h5>
+<h5 id="Editor">Fully integrated assembler editor   <a href="#ide_features">» top</a></h5>
 <ul>
-	<li>
-		The Eclipse platform contains editors like for example the generic text editor. Editors can support one or more
-		content types identified by file extensions. One editor can be the default for a specific file extension. WUDSN IDE
-		provides an assembler
-		editor and a corresponding content type for every compiler. Every assembler
-		editor has a default compiler associated which in turn defines via the preferences which application is used to run the
-		output file.
-		<br/>
-		<img src="productions/java/ide/features/ide-editor-content-types.png" alt="IDE editors, content types and file associations"/>
-	</li>
-	<li>
-		New content types and file associations for Atari 2600 compilers
+	<li>The Eclipse platform contains editors like for example the generic text editor. Editors can support one or more
+		content types identified by file extensions. One editor can be the default for a specific file extension. WUDSN
+		IDE provides an assembler editor and a corresponding content type for every compiler. Every assembler editor has
+		a default compiler associated which in turn defines via the preferences which application is used to run the
+		output file. <br /> <img src="productions/java/ide/features/ide-editor-content-types.png"
+			alt="IDE editors, content types and file associations" /></li>
+	<li>New content types and file associations for Atari 2600 compilers
 		<ul>
 			<li>DASM Source File (*.asm)</li>
 		</ul>
 	</li>
-	<li>
-		New content types and file associations for Atari 8-bit compilers
+	<li>New content types and file associations for Atari 8-bit compilers
 		<ul>
 			<li>ATASM Source File (*.asm)</li>
 			<li>MADS Source File (*.asm, default)</li>
 			<li>XASM Source File (*.asx, default)</li>
 		</ul>
 	</li>
-	<li>
-		New content types and file associations for C64 compilers
+	<li>New content types and file associations for C64 compilers
 		<ul>
 			<li>ACME Source File (*.a, default)</li>
 		</ul>
 	</li>
-	<li>
-		New content types and file associations for NES compilers
+	<li>New content types and file associations for NES compilers
 		<ul>
 			<li>ASM6 Source File (*.asm)</li>
 		</ul>
 	</li>
-	<li>
-		The default editor for an extension can be configured in section "File Associations" of the preferences with the
-		button "Default"
-		<br/>
-		<img src="productions/java/ide/features/ide-editor-file-associations.gif" alt="IDE file associations"/>
-	</li>
+	<li>The default editor for an extension can be configured in section "File Associations" of the preferences with the
+		button "Default" <br /> <img src="productions/java/ide/features/ide-editor-file-associations.gif"
+			alt="IDE file associations" /></li>
 	<li>Syntax highlighting colors and styles for comments, directives, all types of identifiers, legal opcodes, illegal
-		opcodes, pseudo opcodes and strings
-	</li>
-	<li>Single line comments for the current line selection can be toggled using "CTRL-7" or the editor context menu entry
-		"Toggle Comment"
-	</li>
+		opcodes, pseudo opcodes, and strings</li>
+	<li>Single line comments for the current line selection can be toggled using "CTRL-7" or the editor context menu
+		entry "Toggle Comment"</li>
 	<li>Configurable support for 16-bit opcodes of 65816</li>
-	<li>
-		Built-in support for
-		<a href="http://atari.miribilist.com/atasm" target="_blank">ATASM compiler</a>
-		,
-		<a href="http://mads.atari8.info" target="_blank">MADS compiler</a>
-		,
-		<a href="http://xasm.atari.org" target="_blank">XASM compiler</a>
-		,
-		<a href="http://www.esw-heim.tu-clausthal.de/~marco/smorbrod/acme" target="_blank">ACME compiler</a>
-	</li>
-	<li>Build in support for running compiler output files with the operating system default application without
-		configuration effort
-	</li>
-	<li>
-		Build in support for
-		<a href="http://www.virtualdub.org/altirra.html" target="_blank">Altirra emulator</a>
-		,
-		<a href="http://a800win.atari-area.prv.pl" target="_blank">Atari800Win emulator</a>
-		,
-		<a href="http://www.atarimac.com/atari800macx.php" target="_blank">Atari800MacX emulator</a>
-		,
-		<a href="http://www.xl-project.com" target="_blank">Atari++ emulator</a>
-	</li>
-	<li>
-		Adding support for new compilers and application is possible via Eclipse extension points
-		<br/>
-		<img src="productions/java/ide/features/ide-compiler-extensions.png" alt="IDE compiler extensions"/>
-	</li>
-	<li>Compile or compile and run with a single key stroke or via menu</li>
-	<li>Toolbar button for "Compile and Run" which adapts to the hardware of the currently opened editor, for example it
-		will show a C64 icon when using the "ACME (C64)" editor
-	</li>
-	<li>
-		The toolbar button for "Compile and Run" offers a pulldown menu which allows to run the output file with any of the
-		applications configured in the preferences. This way you can run the output file easily with different emulators
-		without changing the
-		preferences. That can be very helpful if one emulator show a different behaviour than another or
-		in case you have specified a build script as user defined application in the preferences
-		<br/>
-		<img src="productions/java/ide/features/ide-assembler-run-with-atari2600.png" alt="Run with... for Atari 2600" style="vertical-align:top"/>
-		<img src="productions/java/ide/features/ide-assembler-run-with-atari8.png" alt="Run with... for Atari 8-bit" style="vertical-align:top"/>
-		<img src="productions/java/ide/features/ide-assembler-run-with-c64.png" alt="Run with... for C64" style="vertical-align:top"/>
-	</li>
-	<li>Open source and output folder directly from menu</li>
-	<li>
-		Open compiler help directly from menu if the documentation is available in the default folder structure of the
-		compiler executable
-		<br/>
-		<img src="productions/java/ide/features/ide-assembler-menu.png" alt="IDE assembler menu"/>
-	</li>
+	<li>Built-in support for <a href="http://atari.miribilist.com/atasm" target="_blank" rel="noopener noreferrer">ATASM
+			compiler</a>, <a href="http://mads.atari8.info" target="_blank" rel="noopener noreferrer">MADS compiler</a>,
+		<a href="http://xasm.atari.org" target="_blank" rel="noopener noreferrer">XASM compiler</a>, <a
+			href="http://www.esw-heim.tu-clausthal.de/~marco/smorbrod/acme" target="_blank"
+			rel="noopener noreferrer">ACME compiler</a></li>
+	<li>Built-in support for running compiler output files with the operating system default application without
+		configuration effort</li>
+	<li>Built-in support for <a href="http://www.virtualdub.org/altirra.html" target="_blank"
+			rel="noopener noreferrer">Altirra emulator</a>, <a href="http://a800win.atari-area.prv.pl" target="_blank"
+			rel="noopener noreferrer">Atari800Win emulator</a>, <a href="http://www.atarimac.com/atari800macx.php"
+			target="_blank" rel="noopener noreferrer">Atari800MacX emulator</a>, <a href="http://www.xl-project.com"
+			target="_blank" rel="noopener noreferrer">Atari++ emulator</a></li>
+	<li>Adding support for new compilers and application is possible via Eclipse extension points <br /> <img
+			src="productions/java/ide/features/ide-compiler-extensions.png" alt="IDE compiler extensions" /></li>
+	<li>Compile or compile and run with a single keystroke or via the menu</li>
+	<li>Toolbar button for "Compile and Run" which adapts to the hardware of the currently opened editor, for example,
+		it will show a C64 icon when using the "ACME (C64)" editor</li>
+	<li>The toolbar button for "Compile and Run" offers a pulldown menu that allows running the output file with any of
+		the applications configured in the preferences. This way you can run the output file easily with different
+		emulators without changing the preferences. That can be very helpful if one emulator shows different behavior
+		than another or in case you have specified a build script as a user-defined application in the preferences
+		<br /> <img style="vertical-align: top;"
+			src="productions/java/ide/features/ide-assembler-run-with-atari2600.png" alt="Run with... for Atari 2600" />
+		<img style="vertical-align: top;" src="productions/java/ide/features/ide-assembler-run-with-atari8.png"
+			alt="Run with... for Atari 8-bit" /> <img style="vertical-align: top;"
+			src="productions/java/ide/features/ide-assembler-run-with-c64.png" alt="Run with... for C64" /></li>
+	<li>Open source and output folder directly from the menu</li>
+	<li>Open compiler help directly from the menu if the documentation is available in the default folder structure of
+		the compiler executable <br /> <img src="productions/java/ide/features/ide-assembler-menu.png"
+			alt="IDE assembler menu" /></li>
 	<li>Complete list of compiler error and warning messages in the problems view</li>
 	<li>Direct navigation to the source location of the via double click on the problem message</li>
-	<li>
-		Problem markers in the scroll area including tooltip with problem message
-		<br/>
-		<img src="productions/java/ide/features/ide-example-source.png" alt="IDE example source"/>
-	</li>
-	<li>
-		German localization for all Eclipse plugin texts. The original compiler messages are not translated but some are
-		mapped automatically
-		<br/>
+	<li>Problem markers in the scroll area including tooltip with problem message <br /> <img
+			src="productions/java/ide/features/ide-example-source.png" alt="IDE example source" /></li>
+	<li>German localization for all Eclipse plugin texts. The original compiler messages are not translated but some are
+		mapped automatically <br />
 		<ul>
 			<li>ATASM ".bank" warnings are mapped to info messages</li>
 		</ul>
 	</li>
-	<li>
-		Console view with original compiler output opens automatically in the background after compiling which useful in
+	<li>Console view with original compiler output opens automatically in the background after compiling which useful in
 		cases where the plugin is not yet complete. The "Compiler Console" is automatically brought to front when the
-		compiler starts. This prevents
-		the compiler output from being hidden behind other consoles in the console view
-		<br/>
-		<img src="productions/java/ide/features/ide-compiler-console.png" alt="IDE compiler console view"/>
-	</li>
+		compiler starts. This prevents the compiler output from being hidden behind other consoles in the console view
+		<br /> <img src="productions/java/ide/features/ide-compiler-console.png" alt="IDE compiler console view" /></li>
 </ul>
-<h5 id="ContentOutline">Content
-	outline and source folding&nbsp;&nbsp;
-	<a href="#ide_features">» top</a>
-</h5>
+<h5 id="ContentOutline">Content outline and source folding   <a href="#ide_features">» top</a></h5>
 <ul>
 	<li>Activated via the standard menu "Window/Show View/Outline"</li>
 	<li>Automated asynchronous parsing while typing</li>
-	<li>Automated recursive parsing of source includes and merge with current outline</li>
+	<li>Automated recursive parsing of source includes and merge with the current outline</li>
 	<li>Positioning in the content outline remains stable while typing unless structure changes appear</li>
-	<li>Folding is active automatically when outline is visible</li>
+	<li>Folding is activated automatically when the outline is visible</li>
 	<li>Folding for if/else/endif blocks</li>
 	<li>Outline and folding for definition section and implementation sections</li>
-	<li>Outline for equate definitions (including defining expression), label definitions and variable definitions</li>
+	<li>Outline for equate definitions (including defining expression), label definitions, and variable definitions</li>
 	<li>Outline and folding for enum and struct definitions</li>
 	<li>Outline and folding for macros definitions</li>
 	<li>Outline and folding for repeat sections</li>
 	<li>Outline and folding for procedure definitions</li>
 	<li>Outline and folding for local sections</li>
 	<li>Outline for source includes and binary includes</li>
-	<li>Type specific outline icons</li>
+	<li>Type-specific outline icons</li>
 	<li>Nested folding with tooltip for folded sections</li>
-	<li>Line end comment is used as short description</li>
-	<li>
-		Toolbar with button to toggle the sorting order of the sections and labels. The state of the button is persisted
-		automatically along with the respective source file. For files which do not have a setting yet, the setting from the
-		currently opened file
-		will be used
-		<br/>
-		<img src="productions/java/ide/features/ide-content-outline.gif" alt="IDE content outline"/>
-		<br/>
-		<img src="productions/java/ide/features/ide-content-folding.gif" alt="IDE content folding"/>
-	</li>
+	<li>Line end comment is used as a short description</li>
+	<li>Toolbar with a button to toggle the sorting order of the sections and labels. The state of the button is
+		persisted automatically along with the respective source file. For files that do not have a setting yet, the
+		setting from the currently opened file will be used <br /> <img
+			src="productions/java/ide/features/ide-content-outline.gif" alt="IDE content outline" /> <br /> <img
+			src="productions/java/ide/features/ide-content-folding.gif" alt="IDE content folding" /></li>
 </ul>
-<h5 id="ContentAssist">Content
-	assist and code completion&nbsp;&nbsp;
-	<a href="#ide_features">» top</a>
-</h5>
+<h5 id="ContentAssist">Content assist and code completion   <a href="#ide_features">» top</a></h5>
 <ul>
-	<li>Content assist by pressing CTRL-Space for directives, legal opcode, illegal opcodes and pseudo opcodes</li>
-	<li> The content assist also recognizes if there is already and instruction in the current line and suggests the
-		available identifiers instead if this is the case. This is the first version and it supports global identifiers in
-		the current source file and
-		source file included from there. Scoped identifiers of the form "a.b" are not yet
-		supported
-	</li>
-	<li>Completion proposal auto activation without pressing CTRL-Space after typing compiler dependent characters, for
-		example "." in ATASM, "." or "#" in MADS and "!" in ACME
-	</li>
-	<li>Type specific icon and mnemonic highlighting</li>
+	<li>Content assist by pressing CTRL-Space for directives, legal opcode, illegal opcodes, and pseudo opcodes</li>
+	<li>The content assist also recognizes if there is already an instruction in the current line and suggests the
+		available identifiers instead if this is the case. This is the first version and it supports global identifiers
+		in the current source file and source file included from there. Scoped identifiers of the form "a.b" are not yet
+		supported</li>
+	<li>Completion proposal auto-activation without pressing CTRL-Space after typing compiler dependent characters, for
+		example "." in ATASM, "." or "#" in MADS and "!" in ACME</li>
+	<li>Type-specific icon and mnemonic highlighting</li>
 	<li>Progressive filtering as you type</li>
 	<li>Automatic detection of lower case / upper case based on current input</li>
 	<li>Default case configurable in preferences</li>
 	<li>Illegal opcodes can be hidden via preferences</li>
-	<li>
-		16-bit opcodes of 65816 can hidden via preferences
-		<br/>
-		<img src="productions/java/ide/features/ide-content-assist.gif" alt="IDE content assist"/>
-	</li>
-	<li>
-		Multi-line content completion and explicit cursor positioning, for example ".MA" becomes ".MACRO &lt;cursor is
-		here&gt; &lt;newline&gt; .ENDM"
-		<br/>
-		<img src="productions/java/ide/features/ide-content-completion-instruction.gif" alt="Muli-line content completion and cursor positioning"/>
-	</li>
+	<li>16-bit opcodes of 65816 can be hidden via preferences <br /> <img
+			src="productions/java/ide/features/ide-content-assist.gif" alt="IDE content assist" /></li>
+	<li>Multi-line content completion and explicit cursor positioning, for example ".MA" becomes ".MACRO &lt;cursor is
+		here&gt; &lt;newline&gt; .ENDM" <br /> <img
+			src="productions/java/ide/features/ide-content-completion-instruction.gif"
+			alt="Muli-line content completion and cursor positioning" /></li>
 </ul>
-<h5 id="Hyperlinks">Hyperlink
-	navigation&nbsp;&nbsp;
-	<a href="#ide_features">» top</a>
-</h5>
+<h5 id="Hyperlinks">Hyperlink navigation   <a href="#ide_features">» top</a></h5>
 <ul>
 	<li>Hyperlink navigation via CTRL-click to source includes and binary includes</li>
 	<li>Support for relative and absolute file paths</li>
-	<li>Source file are always opened with the same assembler editor, irrespective of the extension</li>
+	<li>Source files are always opened with the same assembler editor, irrespective of the extension</li>
 	<li>The ".asm" extension for "ICL" source includes is appended automatically in MADS, if it is missing</li>
 	<li>The ".asx" extension for "ICL" source includes is appended automatically in XASM, if it is missing</li>
-	<li>
-		Choice for binary includes to open the file with
+	<li>Option for binary includes for opening the file with
 		<ul>
-			<li>the build in hex editor</li>
-			<li>the build in graphics editor</li>
+			<li>the built-in hex editor</li>
+			<li>the built-in graphics editor</li>
 			<li>the default Eclipse editor (e.g. a text editor)</li>
 			<li>system editor (e.g. an emulator or a paint program)</li>
 		</ul>
 	</li>
-	<li>
-		Hyperlink navigation via CTRL-click to labels, equates, local definitions, macro definitions and procedure
-		definitions. In case there is only one target, direct navigation takes place. In case there is more than one possible
-		target, the type and line
-		number of the target are displayed in a hyperlink popup. All included source files are also
-		taken into account like in the content outline. In case there are targets from different files, the file name is also
-		displayed as differentiator in the hyperlink
-		popup.
-		<br/>
-		<br/>
-		<img src="productions/java/ide/features/ide-hyperlink-navigation-source.png" alt="IDE navigation to source file"/>
-		<br/>
-		<img src="productions/java/ide/features/ide-hyperlink-navigation-binary.png" alt="IDE navigation to binary file"/>
-		<br/>
-		<img src="productions/java/ide/features/ide-hyperlink-navigation-identifier.png" alt="IDE navigation to labels, equates, local definitions, macro definitions and procedure definitions"/>
+	<li>Hyperlink navigation via CTRL-click to labels equates, local definitions, macro definitions, and procedure
+		definitions. In case there is only one target, direct navigation takes place. In case there is more than one
+		possible target, the type and line number of the target are displayed in a hyperlink popup. All included source
+		files are also taken into account like in the content outline. In case there are targets from different files,
+		the file name is also displayed as a differentiator in the hyperlink popup. <br /> <br /> <img
+			src="productions/java/ide/features/ide-hyperlink-navigation-source.png"
+			alt="IDE navigation to source file" /> <br /> <img
+			src="productions/java/ide/features/ide-hyperlink-navigation-binary.png"
+			alt="IDE navigation to binary file" /> <br /> <img
+			src="productions/java/ide/features/ide-hyperlink-navigation-identifier.png"
+			alt="IDE navigation to labels, equates, local definitions, macro definitions and procedure definitions" />
 	</li>
 </ul>
-<h5 id="HexEditor">Hex
-	Editor&nbsp;&nbsp;
-	<a href="#ide_features">» top</a>
-</h5>
+<h5 id="HexEditor">Hex Editor   <a href="#ide_features">» top</a></h5>
 <ul>
 	<li>Read-only hex editor to inspect arbitrary files</li>
-	<li>
-		Available via context menu including multi-file-selection to open several files at once
-		<br/>
-		<img src="productions/java/ide/features/ide-common-context-menu-open-with-hex-editor.png" alt="Open With Hex Editor"/>
-	</li>
+	<li>Available via context menu including multi-file-selection to open several files at once <br /> <img
+			src="productions/java/ide/features/ide-common-context-menu-open-with-hex-editor.png"
+			alt="Open With Hex Editor" /></li>
 	<li>The "Open With Hex Editor" menu entry closes an existing editor in case the file is already opened and thereby
-		forces the file to be opened with the hex editor. In addition the hex editor is set as the default editor this one
-		file. As a consequence
-		double clicking the file in the package explorer will open it automatically with the hex
-		editor, no matter which type of file is actually is. This saves you from always using the context menu, just because
-		the file has no known file type. You can change
-		the default editor again by just using the "Open With" context menu
-		entry
-	</li>
+		forces the file to be opened with the hex editor. In addition, the hex editor is set as the default editor for
+		this file. As a consequence double-clicking the file in the package explorer will open it automatically with the
+		hex editor, no matter which type of file is actually is. This saves you from always using the context menu, just
+		because the file has no known file type. You can change the default editor again by just using the "Open With"
+		context menu entry</li>
 	<li>Available via hyperlink navigation for binary includes</li>
-	<li>
-		Context menu to copy parts of the file into the clipboard in different formats:
+	<li>Context menu to copy parts of the file into the clipboard in different formats:
 		<ul>
 			<li>hex values (".byte $01,$02,...")</li>
 			<li>decimal values (".byte 1,2,...")</li>
 			<li>ASCII string</li>
 		</ul>
-		This is very helpful to turn parts of a file into source code. The possibility to copy/paste into the binary file
-		itself in order to modify is prepared but not working yet and will be completed later.
-		<br/>
-		<img src="productions/java/ide/features/ide-hex-editor-context-menu.png" alt="Hex Editor context menu"/>
-	</li>
-	<li>
-		Support for binary files, Atari COM files and Atari Disk Images
-		<br/>
-		<img src="productions/java/ide/features/ide-hex-editor-binary-file.png" alt="Hex Editor file mode selection"/>
+		This is very helpful to turn parts of a file into source code. The possibility to copy/paste into the binary
+		file itself in order to modify is prepared but not working yet and will be completed later. <br /> <img
+			src="productions/java/ide/features/ide-hex-editor-context-menu.png" alt="Hex Editor context menu" /></li>
+	<li>Support for binary files, Atari COM files, and Atari Disk Images <br /> <img
+			src="productions/java/ide/features/ide-hex-editor-binary-file.png" alt="Hex Editor file mode selection" />
 	</li>
 	<li>The possible file modes for a binary file are computed automatically and used as default when opening the file
 	</li>
 	<li>Unsupported file modes are detected and cannot be used</li>
 	<li>Files with a block structure get an outline in the outline view</li>
-	<li>
-		Files with a corrupted block structure are detected and displayed as good as possible
-		<br/>
-		<img src="productions/java/ide/features/ide-hex-editor-outline.png" alt="Hex Editor outline view"/>
-		<br/>
-		<img src="productions/java/ide/features/ide-hex-editor-atari-com-file.png" alt="Hex Editor with corrupted Atari COM file "/>
-	</li>
+	<li>Files with a corrupted block structure are detected and displayed as good as possible <br /> <img
+			src="productions/java/ide/features/ide-hex-editor-outline.png" alt="Hex Editor outline view" /> <br /> <img
+			src="productions/java/ide/features/ide-hex-editor-atari-com-file.png"
+			alt="Hex Editor with corrupted Atari COM file " /></li>
 </ul>
-<h5 id="GraphicsEditor">Graphics
-	Editor&nbsp;&nbsp;
-	<a href="#ide_features">»</a>
-</h5>
+<h5 id="GraphicsEditor">Graphics Editor   <a href="#ide_features">»</a></h5>
 <ul>
-	<li>
-		Viewer for binary files and 8-bit image files.
-		<br/>
-		The most suitable supported converter and the corresponding default parameters are computed based on the file
-		content, size and extension.
-		<br/>
-		The converters for the Atari standard image formats are based on
-		<a href="http://fail.sourceforge.net" target="_blank">FAIL</a>
-		, the excellent First Atari Image Library created by Piotr Fusik and Adrian Matoga.
-		<br/>
+	<li>Viewer for binary files and 8-bit image files. <br /> The most suitable supported converter and the
+		corresponding default parameters are computed based on the file content, size, and extension. <br /> The
+		converters for the Atari standard image formats are based on <a href="http://fail.sourceforge.net"
+			target="_blank" rel="noopener noreferrer">FAIL</a>, the excellent First Atari Image Library created by Piotr
+		Fusik and Adrian Matoga. <br />
 		<table class="standard_table">
-			<tr>
-				<th>Platform</th>
-				<th>File Extension</th>
-				<th>File Format</th>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>AP3</td>
-				<td>80x192, 256 colors, interlaced</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>APC</td>
-				<td>Any Point, Any Color, 80x96, 256 colors, interlaced</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>CHR</td>
-				<td>8x8 charset, mono or multicolor</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>CCI</td>
-				<td>Champions' Interlace, 160x192, compressed</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>CIN</td>
-				<td>Champions' Interlace, 160x192</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>CHG</td>
-				<td>Gephard Hires Graphics, up to 320x200, mono</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>CPR</td>
-				<td>Trzmiel, 320x192, mono, compressed</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>FNT</td>
-				<td>Standard 8x8 font, mono</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>GR8</td>
-				<td> Standard 320x192, mono</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>GR9</td>
-				<td>Standard 80x192, grayscale</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>HIP</td>
-				<td> Hard Interlace Picture, 160x200, grayscale</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>HR</td>
-				<td>Hires 256x239, 3 colors, interlaced</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>HR2</td>
-				<td>Hires 320x200, 5 colors, interlaced</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>ILC</td>
-				<td>APAC 80x192, 256 colors interlaced</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>INP</td>
-				<td>Interlace Picture 160x200, 7 colors, interlaced</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>INT</td>
-				<td>INT95a, up to 160x239, 16 colors, interlaced</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>MCP</td>
-				<td>McPainter, 160x200, 16 colors, interlaced</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>MIC</td>
-				<td>Micropainter 160x192, 4 colors</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>PIC</td>
-				<td>Koala MicroIllustrator, 160x192, 4 colors, compressed</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>PLM</td>
-				<td>Plama 256, 80x96, 256 colors</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>RIP</td>
-				<td>Rocky Interlace Picture, up to 160x239</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>SXS</td>
-				<td>16x16 font, mono</td>
-			</tr>
-			<tr>
-				<td>Atari 8-bit</td>
-				<td>TIP</td>
-				<td>Taquart Interlace Picture, up to 160x119</td>
-			</tr>
-			<tr>
-				<td>C64</td>
-				<td>64C</td>
-				<td>Charset, mono or multi color</td>
-			</tr>
-			<tr>
-				<td>C64</td>
-				<td>SPR</td>
-				<td>Sprite, mono or multi color</td>
-			</tr>
+			<tbody>
+				<tr>
+					<th>Platform</th>
+					<th>File Extension</th>
+					<th>File Format</th>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>AP3</td>
+					<td>80x192, 256 colors, interlaced</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>APC</td>
+					<td>Any Point, Any Color, 80x96, 256 colors, interlaced</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>CHR</td>
+					<td>8x8 charset, mono or multicolor</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>CCI</td>
+					<td>Champions' Interlace, 160x192, compressed</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>CIN</td>
+					<td>Champions' Interlace, 160x192</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>CHG</td>
+					<td>Gephard Hires Graphics, up to 320x200, mono</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>CPR</td>
+					<td>Trzmiel, 320x192, mono, compressed</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>FNT</td>
+					<td>Standard 8x8 font, mono</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>GR8</td>
+					<td>Standard 320x192, mono</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>GR9</td>
+					<td>Standard 80x192, grayscale</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>HIP</td>
+					<td>Hard Interlace Picture, 160x200, grayscale</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>HR</td>
+					<td>Hires 256x239, 3 colors, interlaced</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>HR2</td>
+					<td>Hires 320x200, 5 colors, interlaced</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>ILC</td>
+					<td>APAC 80x192, 256 colors interlaced</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>INP</td>
+					<td>Interlace Picture 160x200, 7 colors, interlaced</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>INT</td>
+					<td>INT95a, up to 160x239, 16 colors, interlaced</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>MCP</td>
+					<td>McPainter, 160x200, 16 colors, interlaced</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>MIC</td>
+					<td>Micropainter 160x192, 4 colors</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>PIC</td>
+					<td>Koala MicroIllustrator, 160x192, 4 colors, compressed</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>PLM</td>
+					<td>Plama 256, 80x96, 256 colors</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>RIP</td>
+					<td>Rocky Interlace Picture, up to 160x239</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>SXS</td>
+					<td>16x16 font, mono</td>
+				</tr>
+				<tr>
+					<td>Atari 8-bit</td>
+					<td>TIP</td>
+					<td>Taquart Interlace Picture, up to 160x119</td>
+				</tr>
+				<tr>
+					<td>C64</td>
+					<td>64C</td>
+					<td>Charset, mono or multi color</td>
+				</tr>
+				<tr>
+					<td>C64</td>
+					<td>SPR</td>
+					<td>Sprite, mono or multi color</td>
+				</tr>
+			</tbody>
 		</table>
 	</li>
 	<li>Viewer for GIF/JPG/BMP/PNG images</li>
-	<li>
-		Available via context menu including multi-file-selection to open several files at once
-		<br/>
-		<img src="productions/java/ide/features/ide-common-context-menu-open-with-graphics-editor.png" alt="Open With Graphics Editor"/>
-	</li>
+	<li>Available via context menu including multi-file-selection to open several files at once <br /> <img
+			src="productions/java/ide/features/ide-common-context-menu-open-with-graphics-editor.png"
+			alt="Open With Graphics Editor" /></li>
 	<li>The "Open With Graphics Editor" menu entry closes an existing editor in case the file is already opened and
-		thereby forces the file to be opened with the graphics editor. In addition the graphics editor is set as the default
-		editor this one file. As a
-		consequence double clicking the file in the package explorer will open it automatically
-		with the graphics editor, no matter which type of file is actually is. This saves you from always using the context
-		menu, just because the file has no known file
-		type. You can change the default editor again by just using the "Open
-		With" context menu entry
-	</li>
+		thereby forces the file to be opened with the graphics editor. In addition, the graphics editor is set as the
+		default editor for this file. As a consequence double-clicking the file in the package explorer will open it
+		automatically with the graphics editor, no matter which type of file it actually is. This saves you from always
+		using the context menu, just because the file has no known file type. You can change the default editor again by
+		just using the "Open With" context menu entry</li>
 	<li>Available via hyperlink navigation for binary includes</li>
-	<li>
-		Conversion from binary files or 8-bit images files to GIF/JPG/BMP/PNG images
+	<li>Conversion from binary files or 8-bit images files to GIF/JPG/BMP/PNG images
 		<ul>
 			<li>Up to different 3 source files depending on the converter</li>
 			<li>Configurable start offset for every source file, useful for extracting character sets</li>
@@ -541,474 +408,403 @@ The latest version contains the following features:
 			<li>Configurable spacing width for and spacing color to separate tiles and unused areas</li>
 			<li>Separate aspect ratio for display and saving the image file</li>
 		</ul>
-		<img src="productions/java/ide/features/ide-graphics-editor-files-to-image.gif" alt="Conversion from binary files or 8-bit images files to GIF/JPG/BMP/PNG images"/>
-	</li>
-	<li>
-		Conversion from GIF/JPG/BMP/PNG images to binary files or 8-bit images using JavaScript.
+		<img src="productions/java/ide/features/ide-graphics-editor-files-to-image.gif"
+			alt="Conversion from binary files or 8-bit images files to GIF/JPG/BMP/PNG images" /></li>
+	<li>Conversion from GIF/JPG/BMP/PNG images to binary files or 8-bit images using JavaScript.
 		<ul>
 			<li>Separate aspect ratio for loading and displaying the image file</li>
-			<li>Default scripts are included. They can adjusted and saved along with the other parameters</li>
+			<li>Default scripts are included. They can be adjusted and saved along with the other parameters</li>
 		</ul>
-		<br/>
-		<img src="productions/java/ide/features/ide-graphics-editor-image-to-files.gif" alt="Conversion from GIF/JPG/BMP/PNG images to binary files or 8-bit images files"/>
-	</li>
-	<li>
-		The image palette view associated with the graphics editor displays the palette entries and the color histogram. It
-		supports filtering of unused colors, sorting by index and color frequencies, pre-settings and editing the palette
-		when displaying 8-bit
-		images
-		<br/>
-		<img src="productions/java/ide/features/ide-graphics-editor-image-palette-view.gif" alt="Image palette view"/>
+		<br /> <img src="productions/java/ide/features/ide-graphics-editor-image-to-files.gif"
+			alt="Conversion from GIF/JPG/BMP/PNG images to binary files or 8-bit images files" /></li>
+	<li>The image palette view associated with the graphics editor displays the palette entries and the color histogram.
+		It supports filtering of unused colors, sorting by index and color frequencies, pre-settings, and editing the
+		palette when displaying 8-bit images <br /> <img
+			src="productions/java/ide/features/ide-graphics-editor-image-palette-view.gif" alt="Image palette view" />
 	</li>
 	<li>Conversion files with extension ".cnv" are used to save the conversion direction and all conversion parameters
 	</li>
-	<li>Support for relative file paths. If the file path is in the same folder as the ".cnv" file, it it automatically
-		converted to a relative file path when the file name is defaulted or picked from the file browser dialog. This allows
-		to move the ".cnv"
-		file and the referenced source files around together without breaking the saved paths
+	<li>Support for relative file paths. If the file path is in the same folder as the ".cnv" file, it is automatically
+		converted to a relative file path when the file name is defaulted or picked from the file browser dialog. This
+		allows to move the ".cnv" file and the referenced source files around together without breaking the saved paths
 	</li>
 </ul>
-<h5 id="Preferences">Preferences
-	for editing&nbsp;&nbsp;
-	<a href="#ide_features">» top</a>
-</h5>
+<h5 id="Preferences">Preferences for editing   <a href="#ide_features">» top</a></h5>
 <ul>
 	<li>Available via entry "Preferences" from the menu "Window" (in Windows and Linux) or the menu "Eclipse" (in Mac OS
-		X)
-	</li>
+		X)</li>
 	<li>Configuration of syntax highlighting colors and styles for comments, directives, all types of identifiers, legal
-		opcodes, illegal opcodes, numbers, pseudo opcodes and strings
-	</li>
-	<li>For non unique identifiers, the syntax highlighting will try to be a best guess</li>
-	<li>
-		Configuration of default case in content assist
-		<br/>
-		<img src="productions/java/ide/features/ide-assembler-preferences-editor.png" alt="Preferences for compilers"/>
+		opcodes, illegal opcodes, numbers, pseudo opcodes, and strings</li>
+	<li>For non-unique identifiers, the syntax highlighting will try to be the best guess</li>
+	<li>Configuration of default case in content assist <br /> <img
+			src="productions/java/ide/features/ide-assembler-preferences-editor.png" alt="Preferences for compilers" />
 	</li>
 </ul>
-<h5 id="CompilerPreferences">Preferences
-	for compiling&nbsp;&nbsp;
-	<a href="#ide_features">» top</a>
-</h5>
+<h5 id="CompilerPreferences">Preferences for compiling   <a href="#ide_features">» top</a></h5>
 <ul>
 	<li>Available via entry "Preferences" from the menu "Window" (in Windows and Linux) or the menu "Eclipse" (in Mac OS
-		X)
-	</li>
+		X)</li>
 	<li>Separate compiler preferences page for every type of hardware, i.e. Atari 8-bit and C64; Apple 2 support is in
-		development by Nick Westgate
-	</li>
+		development by Nick Westgate</li>
 	<li>Preferences can be maintained for all compilers in parallel</li>
 	<li>Upon opening the compiler preferences, the tab for the compiler of the active editor is activated automatically
 	</li>
-	<li>
-		Configuration of illegal opcodes and 65816 opcodes support in syntax highlighting and content assist
-		<br/>
-		The configuration is offered only if the compiler supports the respective feature
-	</li>
-	<li>Download links, configurable paths and default parameters for all compilers</li>
+	<li>Configuration of illegal opcodes and 65816 opcodes support in syntax highlighting and content assist <br /> The
+		configuration is offered only if the compiler supports the respective feature</li>
+	<li>Download links, configurable paths, and default parameters for all compilers</li>
 	<li>The default file extension filter is set to "*.exe" on Windows and "*.*" on all other operating systems</li>
 	<li>The button "Apply Defaults" does explicitly not reset the paths to the executables</li>
-	<li>
-		Configuration of parameters per compiler including predefined defaults to run out-of-the-box
-		<br/>
-		Possible variables are:
+	<li>Configuration of parameters per compiler including predefined defaults to run out-of-the-box <br /> Possible
+		variables are:
 		<ul>
 			<li>{$sourceFolderPath} The absolute path to the source folder</li>
 			<li>{$sourceFilePath} The absolute path to the source file</li>
 			<li>{$outputFolderPath} The absolute path to the output folder</li>
 			<li>{$outputFilePath} The absolute path to the output file</li>
-			<li>{$outputFileName} The name of the output file including its extension, for example "TestFile123.asm"</li>
-			<li>{$outputFileNameWithoutExtension} The name of the output file without extension, for example "TestFile123"</li>
-			<li>{$outputFileNameShortWithoutExtension} The name of the output file without extension shortened to 8 alphanumeric
-				characters, for example "TESTFILE"
+			<li>{$outputFileName} The name of the output file including its extension, for example "TestFile123.asm"
 			</li>
+			<li>{$outputFileNameWithoutExtension} The name of the output file without extension, for example
+				"TestFile123"</li>
+			<li>{$outputFileNameShortWithoutExtension} The name of the output file without extension shortened to 8
+				alphanumeric characters, for example "TESTFILE"</li>
 		</ul>
-		Make sure that you don't remove parameters when you specify your own values
-		<br/>
-		If not, either creating the label definition file or parsing the compiler log may fail
+		Make sure that you don't remove parameters when you specify your own values <br /> If not, either creating the
+		label definition file or parsing the compiler log may fail
 		<ul>
 			<li>ATASM requires the "-s" parameter to be present"</li>
 			<li>MADS requires the "-p" parameter to be present</li>
-			<li>ACME requires the "!to" directive in the source to be commented out to ensure the output file name from the
-				command line is used
-			</li>
+			<li>ACME requires the "!to" directive in the source to be commented out to ensure the output file name from
+				the command line is used</li>
 		</ul>
 	</li>
-	<li>
-		Preferences can be maintained for all possible applications of all compilers in parallel
+	<li>Preferences can be maintained for all possible applications of all compilers in parallel
 		<ul>
-			<li>
-				Possibility to use the "Operating Sytem Default Application" of the platform to open the output file
-				<br/>
-				For Windows and Mac OS X choosing the "Operating Sytem Default Application" means that for ".xex" file the emulator will be started
-				automatically without any further configuration
-			</li>
+			<li>Possibility to use the "Operating System Default Application" of the platform to open the output file
+				<br /> For Windows and Mac OS X choosing the "Operating System Default Application" means that for
+				".xex" file the emulator will be started automatically without any further configuration</li>
 			<li>Possibility to use one of the pre-defined applications and optionally change the command line</li>
-			<li>Possibility to use a user defined application to open the output file</li>
-			<li>
-				Possible variables are:
+			<li>Possibility to use a user-defined application to open the output file</li>
+			<li>Possible variables are:
 				<ul>
 					<li>{$runnerExecutablePath} The absolute path to the executable of the application</li>
 					<li>{$sourceFolderPath} The absolute path to the source folder</li>
 					<li>{$sourceFilePath} The absolute path to the source file</li>
 					<li>{$outputFolderPath} The absolute path to the output folder</li>
 					<li>{$outputFilePath} The absolute path to the output file</li>
-					<li>{$outputFileName} The name of the output file including its extension, for example "TestFile123.asm"</li>
-					<li>{$outputFileNameWithoutExtension} The name of the output file without extension, for example "TestFile123"
-					</li>
-					<li>{$outputFileNameShortWithoutExtension} The name of the output file without extension shortened to 8
-						alphanumeric characters, for example "TESTFILE"
-					</li>
+					<li>{$outputFileName} The name of the output file including its extension, for example
+						"TestFile123.asm"</li>
+					<li>{$outputFileNameWithoutExtension} The name of the output file without extension, for example
+						"TestFile123"</li>
+					<li>{$outputFileNameShortWithoutExtension} The name of the output file without extension shortened
+						to 8 alphanumeric characters, for example "TESTFILE"</li>
 				</ul>
 			</li>
 		</ul>
 	</li>
-	<li>Download links, configurable paths and default command lines for Atari++, Atari800Win, Atari800MacX emulators per
-		compiler
-	</li>
-	<li>
-		The default file extension filter is set to "*.exe" on Windows and "*.*" on all other operating systems
-		<br/>
-		<img src="productions/java/ide/features/ide-assembler-preferences-compilers.gif" alt="Preferences for compilers"/>
-	</li>
+	<li>Download links, configurable paths, and default command lines for Atari++, Atari800Win, Atari800MacX emulators
+		per compiler</li>
+	<li>The default file extension filter is set to "*.exe" on Windows and "*.*" on all other operating systems <br />
+		<img src="productions/java/ide/features/ide-assembler-preferences-compilers.gif"
+			alt="Preferences for compilers" /></li>
 </ul>
-<h5 id="CompilerAnnotations">Annotations
-	for compiling&nbsp;&nbsp;
-	<a href="#ide_features">» top</a>
-</h5>
+<h5 id="CompilerAnnotations">Annotations for compiling   <a href="#ide_features">» top</a></h5>
 <ul>
-	<li>For most use-cases, the defaults provided for the compilers and in the preferences are sufficient. But if you want have develop in parallel in multiple projects, for different platforms (Apple II and Atari 8-bit) or in different output formats
-		(".XEX" and ".BIN") with the same compiler it may become cumbersome to change the preferences every time. Therefore WUDSN IDE offers annotations which you can put into the source code files. These annotations override the defaults and the preferences.
-	</li>
-	<li>All annotations start with the prefix "@com.wudsn.ide.asm." followed by the lower case name of the annotation, an equals sign and the unquoted value. Example: "@com.wudsn.ide.asm.hardware=ATARI8BIT"</li>
-	<li>All annotations can be placed in comment lines at the begin of a source file. Some of the annotations are only relevant for the main source file, some are only relevant in include source files, some are
-		relevant for all source files.
-	</li>
-	<li>
-		@com.wudsn.ide.asm.hardware
+	<li>For most use-cases, the defaults provided for the compilers and in the preferences are sufficient. But if you
+		want to develop in parallel in multiple projects, for different platforms (Apple II and Atari 8-bit) or in
+		different output formats (".XEX" and ".BIN") with the same compiler it may become cumbersome to change the
+		preferences every time. Therefore WUDSN IDE offers annotations that you can put into the source code files.
+		These annotations override the defaults and the preferences.</li>
+	<li>All annotations start with the prefix "@com.wudsn.ide.asm." followed by the lower case name of the annotation,
+		an equals sign, and the unquoted value. Example: "@com.wudsn.ide.asm.hardware=ATARI8BIT"</li>
+	<li>All annotations can be placed in comment lines at the beginning of a source file. Some of the annotations are
+		only relevant for the main source file, some are only relevant in include source files, some are relevant for
+		all source files.</li>
+	<li>@com.wudsn.ide.asm.hardware
 		<ul>
-			<li>Defines the target hardware for which the preferences shall be evaluated, in particular which emulator is used to run the output file.</li>
+			<li>Defines the target hardware for which the preferences shall be evaluated, in particular, which emulator
+				is used to run the output file.</li>
 			<li>Allowed values are "APPLE2", "ATARI2600", "ATARI7800", "ATARI8BIT", "C64", "NES".</li>
 			<li>This annotation is relevant for all source files.</li>
-			<li>This annotation is only evaluated when a file is opened. So if you add this annotation or change its value, you have to close and re-open the file once.</li>
+			<li>This annotation is only evaluated when a file is opened. So if you add this annotation or change its
+				value, you have to close and re-open the file once.</li>
 			<li>Example: @com.wudsn.ide.asm.hardware=ATARI8BIT</li>
 		</ul>
 	</li>
-	<li>
-		@com.wudsn.ide.asm.mainsourcefile
+	<li>@com.wudsn.ide.asm.mainsourcefile
 		<ul>
-			<li>Defines the main source file to which the current include source file belongs. When the "Compile" action is executed, the main source file is compiler instead of the current file.</li>
-			<li>Allowed values are file paths relative to the folder of the current include source file and absolute file paths.</li>
-			<li>This annotation is only relevant for include source files.</li>
+			<li>Defines the main source file to which the current include source file belongs. When the "Compile" action
+				is executed, the main source file is compiler instead of the current file.</li>
+			<li>Allowed values are file paths relative to the folder of the current include source file and absolute
+				file paths.</li>
+			<li>This annotation is only relevant in include source files.</li>
 			<li>Example: @com.wudsn.ide.asm.mainsourcefile=ExampleMain.asm</li>
 		</ul>
 	</li>
-	<li>
-		@com.wudsn.ide.asm.outputfoldermode (planned for 1.7.0)
+	<li>@com.wudsn.ide.asm.outputfoldermode (planned for 1.7.0)
 		<ul>
 			<li>Overrides the "Output Folder Mode" from the preferences.</li>
 			<li>Allowed values are "SOURCE_FOLDER", "TEMP_FOLDER", "FIXED_FOLDER".</li>
-			<li>This annotation is only relevant for the main source file.</li>
+			<li>This annotation is only relevant in the main source file.</li>
 			<li>Example: @com.wudsn.ide.asm.outputfoldermode=SOURCE_FOLDER</li>
 		</ul>
 	</li>
-	<li>
-		@com.wudsn.ide.asm.outputfolder (planned for 1.7.0)
+	<li>@com.wudsn.ide.asm.outputfolder (planned for 1.7.0)
 		<ul>
-			<li>Overrides the "Output Folder" from the preferences and the "@com.wudsn.ide.asm.outputfoldermode" annotation.</li>
-			<li>Allowed values are file paths relative to the folder of the main source file and absolute file paths.</li>
-			<li>This annotation is only relevant for the main source file.</li>
+			<li>Overrides the "Output Folder" from the preferences and the "@com.wudsn.ide.asm.outputfoldermode"
+				annotation.</li>
+			<li>Allowed values are file paths relative to the folder of the main source file and absolute file paths.
+			</li>
+			<li>This annotation is only relevant in the main source file.</li>
 			<li>Example: @com.wudsn.ide.asm.outputfolder=..\out</li>
 		</ul>
 	</li>
-	<li>
-		@com.wudsn.ide.asm.outputfileextension (planned for 1.7.0)
+	<li>@com.wudsn.ide.asm.outputfileextension (planned for 1.7.0)
 		<ul>
 			<li>Overrides the "Output File Extension" from the preferences.</li>
 			<li>Allowed values have to start with a period.</li>
-			<li>This annotation is only relevant for the main source file.</li>
+			<li>This annotation is only relevant in the main source file.</li>
 			<li>Example: @com.wudsn.ide.asm.outputfileextension=.bin</li>
 		</ul>
 	</li>
-	<li>
-		@com.wudsn.ide.asm.outputfile (planned for 1.7.0)
+	<li>@com.wudsn.ide.asm.outputfile (planned for 1.7.0)
 		<ul>
-			<li>Overrides the "Output Folder", "Output File Extension" from the preferences and the automatic computation of the out file name based on the main source file name.</li>
-			<li>Allowed values are file paths relative to the folder of the main source file and absolute file paths.</li>
-			<li>This annotation is only relevant for the main source file.</li>
+			<li>Overrides the "Output Folder", "Output File Extension" from the preferences and the automatic
+				computation of the out file name based on the main source file name.</li>
+			<li>Allowed values are file paths relative to the folder of the main source file and absolute file paths.
+			</li>
+			<li>This annotation is only relevant in the main source file.</li>
 			<li>Example: @com.wudsn.ide.asm.outputfile=..\out\output.bin</li>
 		</ul>
 	</li>
 </ul>
-<h5 id="KnownBugs">Known
-	bugs&nbsp;&nbsp;
-	<a href="#ide_features">» top</a>
-</h5>
-Open bugs:
+<h5 id="KnownBugs">Known bugs   <a href="#ide_features">» top</a></h5>
+<p>Open bugs:</p>
 <ul>
 	<li>If you find any, please contact me</li>
 </ul>
-Fixed bugs:
+<p>Fixed bugs:</p>
 <ul>
-	<li>
-		1.6.5
-		<br/>
+	<li>1.6.5 <br />
 		<ul>
-			<li>Automatic creation of ".DSK" disk images for Apple II now works correctly
-			</li>
-			<li>Dirty indicator in Graphics Editor is now updated correctly
-			</li>
+			<li>Automatic creation of ".DSK" disk images for Apple II now works correctly</li>
+			<li>The dirty indicator in Graphics Editor is now updated correctly</li>
 		</ul>
 	</li>
-	<li>
-		1.6.4
-		<br/>
+	<li>1.6.4 <br />
 		<ul>
 			<li>The toolbar icons now work correctly with newer Eclipse versions</li>
 			<li>Atari 8-bit Graphics 12 Converter works again</li>
 			<li>Graphics editor now properly closes input stream for image files</li>
-			<li>Empty selection and too large numbers no longer lead to exceptions when opening the context menu for "Convert..."</li>
-			<li>Pressing refresh in the graphics converter now always updates the image pane correctly and not only if the size has changed</li>
+			<li>Empty selection and too large numbers no longer lead to exceptions when opening the context menu for
+				"Convert..."</li>
+			<li>Pressing refresh in the graphics converter now always updates the image pane correctly and not only if
+				the size has changed</li>
 			<li>Inline repeats like ":64" in MADS are no longer detected as labels</li>
-			<li>Hex Editor now correctly detects erroneous COM files in case the segment length exceeds the file length (by one)</li>
-			<li>Disk images (for Apple II) are now updated also if only "Compile" instead of "Compile and Run" is used</li>
+			<li>Hex Editor now correctly detects erroneous COM files in case the segment length exceeds the file length
+				(by one)</li>
+			<li>Disk images (for Apple II) are now updated also if only "Compile" instead of "Compile and Run" is used
+			</li>
 			<li>Apple Commander integration is now part of the installation, as it should have been with 1.6.3</li>
-			<li>
-				The HELLO program generated for the auto-start disk images of Apple II now displays a title and uses "BLOAD/CALL" instead of "BRUN" because of this
-				<a href="http://www.textfiles.com/apple/ANATOMY/cmd.brun.bload.txt">bug in Apple DOS</a>
+			<li>The HELLO program generated for the auto-start disk images of Apple II now displays a title and uses
+				"BLOAD/CALL" instead of "BRUN" because of this <a
+					href="http://www.textfiles.com/apple/ANATOMY/cmd.brun.bload.txt">bug in Apple DOS</a>
 				<pre>10 PRINT "Loading &lt;title&gt;" : PRINT CHR$(4);"BRUN WORLD" : CALL &lt;address&gt;</pre>
 			</li>
 		</ul>
 	</li>
-	<li>
-		1.6.3
-		<br/>
+	<li>1.6.3 <br />
 		<ul>
-			<li>First character of numbers is now correctly highlighted in #123</li>
+			<li>The first character of numbers is now correctly highlighted in #123</li>
 			<li>Source file includes via "INCSRC" are now correctly detected for ASM6</li>
 		</ul>
 	</li>
-	<li>
-		1.6.2
-		<br/>
+	<li>1.6.2 <br />
 		<ul>
 			<li>Typing a "." to trigger the automatic content assist no longer locks-up</li>
-			<li>Default color for illegal opcodes changed to red as it was intended</li>
+			<li>The default color for illegal opcodes changed to red as it was intended</li>
 			<li>German localization for the graphics editor is finally completed</li>
-			<li>Sorting of application in the preferences now is "Default, A...Z, User Defined" also in non English localizations</li>
+			<li>Sorting of application in the preferences now is "Default, A...Z, User Defined" also in non-English
+				localizations</li>
 		</ul>
 	</li>
-	<li>
-		1.6.1
-		<br/>
+	<li>1.6.1 <br />
 		<ul>
-			<li>Clicking in the outline always positions the cursor correctly in the source, not only the first time</li>
+			<li>Clicking in the outline always positions the cursor correctly in the source, not only the first time
+			</li>
 			<li>All names of content types are now translated correctly in the preferences</li>
-			<li>"Open Folder" command now also works for objects which are no resource or file themselves but can be adapted to one of these types. For example project explorer entries for Java classes</li>
+			<li>"Open Folder" command now also works for objects which are no resource or file themselves but can be
+				adapted to one of these types. For example project explorer entries for Java classes</li>
 		</ul>
 	</li>
-	<li>
-		1.6.0
-		<br/>
+	<li>1.6.0 <br />
 		<ul>
-			<li>Hyperlink navigation now also works for labels which contain an underscore</li>
-			<li>The key binding for the "Compile" menu is now "Shift-Ctrl-9" because it turned out that "Ctrl-0" is not available in all cases</li>
-			<li>The HexEditor is now also detecting the situation that the first block of a COM file is incorrect and display this correctly</li>
+			<li>Hyperlink navigation now also works for labels that contain an underscore</li>
+			<li>The key binding for the "Compile" menu is now "Shift-Ctrl-9" because it turned out that "Ctrl-0" is not
+				available in all cases</li>
+			<li>The HexEditor is now also detecting the situation that the first block of a COM file is incorrect and
+				display this correctly</li>
 			<li>Content assist has now correct new lines when inserting #IF, #WHILE and .TEST</li>
-			<li>Fonts and colors resources are disposed correctly now</li>
+			<li>Fonts and colors resources are disposed of correctly now</li>
 			<li>Resetting to default syntax colors in the preferences works now</li>
 			<li>Elements of .ENUM are recognized as equates now also if they do not start of position 0</li>
 			<li>Elements of .STRUCT are recognized as labels now also if they do not start of position 0</li>
-			<li>Cursor is now positioned to the first character of an equate or label also if it is not defined starting at position 0</li>
-			<li>Cursor is now positioned to the first character of an equate or label also if it is not defined starting at position
-				0
-			</li>
+			<li>The cursor is now positioned to the first character of an equate or label also if it is not defined
+				starting at position 0</li>
+			<li>The cursor is now positioned to the first character of an equate or label also if it is not defined
+				starting at position 0</li>
 		</ul>
 	</li>
-	<li>
-		1.5.0
-		<br/>
-
+	<li>1.5.0 <br />
 		<ul>
 			<li>Syntax highlighting remains active now also after "Save as..."</li>
-			<li>Cursor is now placed correctly by content assist</li>
-			<li>The key binding for the "Compile" menu is now "Ctrl-0" instead of "Ctrl-Alt-0", so entering "}" is now possible again</li>
+			<li>The cursor is now placed correctly by content assist</li>
+			<li>The key binding for the "Compile" menu is now "Ctrl-0" instead of "Ctrl-Alt-0", so entering "}" is now
+				possible again</li>
 			<li>XASM editor now correctly detects the "ORG" directive</li>
-			<li>The assembler editor toolbar contribution now also displays the label "Assembler" in the customizing dialog for the perspective</li>
+			<li>The assembler editor toolbar contribution now also displays the label "Assembler" in the customizing
+				dialog for the perspective</li>
 		</ul>
 	</li>
-	<li>
-		1.4.4
-		<br/>
+	<li>1.4.4 <br />
 		<ul>
-			<li>The directive ".LOCAL" in ATASM is a normal directive now and does not start a folding section while in MADS it is
-				really is a folding section from ".LOCAL" to ".ENDL"
-			</li>
-			<li>"SIN()" and "RND()" in MADS are now recognized correctly even if there are no spaces before or after the directive
-			</li>
+			<li>The directive ".LOCAL" in ATASM is a normal directive now and does not start a folding section while in
+				MADS it is really is a folding section from ".LOCAL" to ".ENDL"</li>
+			<li>"SIN()" and "RND()" in MADS are now recognized correctly even if there are no spaces before or after the
+				directive</li>
 			<li>".EN" and ."END" in MADS are now recognized correctly</li>
 			<li>Labels in "ORG" lines are now recognized correctly and rendered as separate tree entries</li>
-			<li>Preferences for lower/upper case instructions in content assist are now also evaluated if the for directives which
-				do not start with letters like ".end"
-			</li>
-			<li>When opening a file which is located outside of the workspace, the action to open folders and to compile the file
-				are now not doing anything and will not cause exceptions. They will also be disabled once the new Eclipse version is
-				mandatory
-			</li>
+			<li>Preferences for lower/upper case instructions in content assist are now also evaluated if for directives
+				that do not start with letters like ".end"</li>
+			<li>When opening a file that is located outside of the workspace, the actions to open folders and to compile
+				the file are now not doing anything and will not cause exceptions. They will also be disabled once the
+				new Eclipse version is mandatory</li>
 			<li>The 16 bytes per row in the hex editor are now separated by a space</li>
 		</ul>
 	</li>
-	<li>
-		1.4.3
-		<br/>
+	<li>1.4.3 <br />
 		<ul>
-			<li>The output file is not opened anymore in case it has been there before but was not updated by the compiler due to
-				compiler errors
-			</li>
-			<li>The scroll bar and cursor in the editor are now stable also in the cases when the outline is changed by the latest
-				user input
-			</li>
+			<li>The output file is not opened anymore in case it has been there before but was not updated by the
+				compiler due to compiler errors</li>
+			<li>The scroll bar and cursor in the editor are now stable also in the cases when the outline is changed by
+				the latest user input</li>
 			<li>The hex editor now gets the focus correctly also when clicking on already opened files</li>
 		</ul>
 	</li>
-	<li>
-		1.4.2
-		<br/>
+	<li>1.4.2 <br />
 		<ul>
-			<li>The folder which contains the output file and the symbols file is refreshed automatically after compiling to
-				ensure that the Eclipse resource cache is in sync with the file system
+			<li>The folder which contains the output file and the symbols file is refreshed automatically after
+				compiling to ensure that the Eclipse resource cache is in sync with the file system</li>
+			<li>Line end comments are now used as a description for source and binary includes in the content outline
 			</li>
-			<li>Line end comments are now used as description for source and binary includes in the content outline</li>
-			<li>The "Open Folder" context menu entry works again, bug was introduced in version 1.4.0</li>
+			<li>The "Open Folder" context menu entry works again, a bug was introduced in version 1.4.0</li>
 		</ul>
 	</li>
-	<li>
-		1.4.0
-		<br/>
+	<li>1.4.0 <br />
 		<ul>
-			<li>The "Assembler" menu is visible now only if an Assembler editor is active. The contained entries and their short
-				cuts are now disabled if no Assembler editor is active
-			</li>
-			<li>The output file is not deleted anymore before the compiler is started, instead it is only checked for being
-				writeable. This allows for direct compilation into an existing ATR image
-			</li>
+			<li>The "Assembler" menu is visible now only if an Assembler editor is active. The contained entries and
+				their short cuts are now disabled if no Assembler editor is active</li>
+			<li>The output file is not deleted anymore before the compiler is started, instead, it is only checked for
+				being writeable. This allows for direct compilation into an existing ATR image</li>
 			<li>The name of the application used to open the output file is now included in the info message</li>
 		</ul>
 	</li>
-	<li>
-		1.3.2
-		<br/>
+	<li>1.3.2 <br />
 		<ul>
 			<li>The content outline sometimes only found the first macro definition</li>
 			<li>Folding did not show up in all situations</li>
-			<li>
-				Under Mac OS X, the file select dialog can now choose an "*.app" application like "Atari800MacX.app" since this is
-				folder. The solution is a workaround to the a general Eclipse problem under MacOS X, see
-				<a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=82155">BUG 82155</a>
-			</li>
+			<li>Under Mac OS X, the file select dialog can now choose an "*.app" application-like "Atari800MacX.app"
+				since this is a folder. The solution is a workaround to the general Eclipse problem under MacOS X, see
+				<a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=82155">BUG 82155</a></li>
 		</ul>
 	</li>
-	<li>
-		Before 1.3.2
-		<br/>
+	<li>Before 1.3.2 <br />
 		<ul>
-			<li>The "OK" and "Apply" buttons in the preferences are now always enabled, irrespective of the specified compiler and
-				emulator paths
-			</li>
-			<li>The focus is not back in editor window after compiling</li>
+			<li>The "OK" and "Apply" buttons in the preferences are now always enabled, irrespective of the specified
+				compiler and emulator paths</li>
+			<li>The focus is not back in the editor window after compiling</li>
 			<li>The syntax highlighting of illegal opcodes fixed, now also uses the preferences setting</li>
 			<li>On German operating systems, the properties for the correct locale are now found</li>
 		</ul>
 	</li>
 </ul>
-<h5 id="PlannedFeatures">Planned
-	features&nbsp;&nbsp;
-	<a href="#ide_features">» top</a>
-</h5>
+<h5 id="PlannedFeatures">Planned features   <a href="#ide_features">» top</a></h5>
 <ul>
-	<li>
-		See the table below for the current feature set for the features which depend on the compiler.
-		<br/>
-		Features which are not supported by the compiler itself and hence cannot be supported by the IDE are marked as "n/a".
-		<br/>
+	<li>See the table below for the current feature set for the features which depend on the compiler. <br /> Features
+		that are not supported by the compiler itself and hence cannot be supported by the IDE are marked as "n/a".
+		<br />
 		<table>
-			<tr>
-				<th>Compiler</th>
-				<th>Default Hardware</th>
-				<th>Auto Completion Activation</th>
-				<th>Single-Line Comments</th>
-				<th>Block Comments</th>
-				<th>Strings</th>
-				<th>Opcodes</th>
-				<th>Directives</th>
-				<th>Compile Log Parsing</th>
-				<th>Include Log Parsing</th>
-				<th>Content Outline</th>
-				<th>Label Definition File Format</th>
-			</tr>
-			<tr>
-				<td>ACME</td>
-				<td>C64</td>
-				<td>Yes: !</td>
-				<td>Yes: ;|</td>
-				<td>n/a</td>
-				<td>Yes: "</td>
-				<td>Yes</td>
-				<td>
-					<i>Partly</i>
-				</td>
-				<td>Yes</td>
-				<td>TBD</td>
-				<td>
-					<i>Partly</i>
-				</td>
-				<td>ACME</td>
-			</tr>
-			<tr>
-				<td>ATASM</td>
-				<td>Atari 8-bit</td>
-				<td>Yes: .</td>
-				<td>Yes: ;</td>
-				<td>n/a</td>
-				<td>Yes: "</td>
-				<td>Yes</td>
-				<td>Yes</td>
-				<td>Yes</td>
-				<td>TBD</td>
-				<td>Yes</td>
-				<td>XASM 3.0.1</td>
-			</tr>
-			<tr>
-				<td>MADS</td>
-				<td>Atari 8-bit</td>
-				<td>Yes: . #</td>
-				<td>Yes: ; * //</td>
-				<td>Yes</td>
-				<td>Yes: ' "</td>
-				<td>Yes</td>
-				<td>Yes</td>
-				<td>Yes</td>
-				<td>TBD</td>
-				<td>Yes</td>
-				<td>MADS</td>
-			</tr>
-			<tr>
-				<td>XASM</td>
-				<td>Atari 8-bit</td>
-				<td>n/a</td>
-				<td>Yes: ; * |</td>
-				<td>n/a</td>
-				<td>Yes: ' "</td>
-				<td>Yes</td>
-				<td>Yes</td>
-				<td>
-					<i>Planned</i>
-				</td>
-				<td>TBD</td>
-				<td>Yes</td>
-				<td>XASM 3.0.1</td>
-			</tr>
-
+			<tbody>
+				<tr>
+					<th>Compiler</th>
+					<th>Default Hardware</th>
+					<th>Auto-Completion Activation</th>
+					<th>Single-Line Comments</th>
+					<th>Block Comments</th>
+					<th>Strings</th>
+					<th>Opcodes</th>
+					<th>Directives</th>
+					<th>Compile Log Parsing</th>
+					<th>Include Log Parsing</th>
+					<th>Content Outline</th>
+					<th>Label Definition File Format</th>
+				</tr>
+				<tr>
+					<td>ACME</td>
+					<td>C64</td>
+					<td>Yes: !</td>
+					<td>Yes: ;|</td>
+					<td>n/a</td>
+					<td>Yes: "</td>
+					<td>Yes</td>
+					<td><i>Partly</i></td>
+					<td>Yes</td>
+					<td>TBD</td>
+					<td><i>Partly</i></td>
+					<td>ACME</td>
+				</tr>
+				<tr>
+					<td>ATASM</td>
+					<td>Atari 8-bit</td>
+					<td>Yes: .</td>
+					<td>Yes: ;</td>
+					<td>n/a</td>
+					<td>Yes: "</td>
+					<td>Yes</td>
+					<td>Yes</td>
+					<td>Yes</td>
+					<td>TBD</td>
+					<td>Yes</td>
+					<td>XASM 3.0.1</td>
+				</tr>
+				<tr>
+					<td>MADS</td>
+					<td>Atari 8-bit</td>
+					<td>Yes: . #</td>
+					<td>Yes: ; * //</td>
+					<td>Yes</td>
+					<td>Yes: ' "</td>
+					<td>Yes</td>
+					<td>Yes</td>
+					<td>Yes</td>
+					<td>TBD</td>
+					<td>Yes</td>
+					<td>MADS</td>
+				</tr>
+				<tr>
+					<td>XASM</td>
+					<td>Atari 8-bit</td>
+					<td>n/a</td>
+					<td>Yes: ; * |</td>
+					<td>n/a</td>
+					<td>Yes: ' "</td>
+					<td>Yes</td>
+					<td>Yes</td>
+					<td><i>Planned</i></td>
+					<td>TBD</td>
+					<td>Yes</td>
+					<td>XASM 3.0.1</td>
+				</tr>
+			</tbody>
 		</table>
 	</li>
 </ul>

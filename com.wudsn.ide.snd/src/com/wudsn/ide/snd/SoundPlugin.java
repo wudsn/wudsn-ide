@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2009 - 2020 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2021 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -34,97 +34,96 @@ import com.wudsn.ide.snd.player.c64.SIDPlayer;
 
 public final class SoundPlugin extends AbstractIDEPlugin {
 
-    /**
-     * The plugin id.
-     */
-    public static final String ID = "com.wudsn.ide.snd";
+	/**
+	 * The plugin id.
+	 */
+	public static final String ID = "com.wudsn.ide.snd";
 
-    /**
-     * Creates a new instance. Must be public for dynamic instantiation.
-     */
-    private static SoundPlugin plugin;
+	/**
+	 * Creates a new instance. Must be public for dynamic instantiation.
+	 */
+	private static SoundPlugin plugin;
 
-    private Map<String, Class<? extends SoundPlayer>> soundPlayers;
-    private SoundPlayer currentPlayer;
+	private Map<String, Class<? extends SoundPlayer>> soundPlayers;
+	private SoundPlayer currentPlayer;
 
-    public SoundPlugin() {
-	soundPlayers = new TreeMap<String, Class<? extends SoundPlayer>>();
-	soundPlayers.put("com.wudsn.ide.snd.player.atari8bit.Atari8BitSoundFile", ASAPPlayer.class);
-	soundPlayers.put("com.wudsn.ide.snd.player.c64.C64SoundFile", SIDPlayer.class);
-    }
-
-    @Override
-    protected String getPluginId() {
-	return ID;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void start(BundleContext context) throws Exception {
-	super.start(context);
-	plugin = this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void stop(BundleContext context) throws Exception {
-	plugin = null;
-	super.stop(context);
-    }
-
-    /**
-     * Gets the shared plugin instance
-     * 
-     * @return The plug-in, not <code>null</code>.
-     */
-    public static SoundPlugin getInstance() {
-	if (plugin == null) {
-	    throw new IllegalStateException("Plugin not initialized or already stopped");
+	public SoundPlugin() {
+		soundPlayers = new TreeMap<String, Class<? extends SoundPlayer>>();
+		soundPlayers.put("com.wudsn.ide.snd.player.atari8bit.Atari8BitSoundFile", ASAPPlayer.class);
+		soundPlayers.put("com.wudsn.ide.snd.player.c64.C64SoundFile", SIDPlayer.class);
 	}
-	return plugin;
-    }
 
-    /**
-     * Creates a new sound player based on the extension of the file name. A
-     * previously created sound player is stopped and freed first.
-     * 
-     * @param fileName
-     *            The file name, may be empty, not <code>null</code>.
-     * 
-     * @return The new sound player or <code>null</code>.
-     */
-    public SoundPlayer createSoundPlayer(String fileName) {
-	if (fileName == null) {
-	    throw new IllegalArgumentException("Parameter 'fileName' must not be null.");
+	@Override
+	protected String getPluginId() {
+		return ID;
 	}
-	IContentTypeManager contentTypeManager = Platform.getContentTypeManager();
 
-	synchronized (this) {
-	    if (currentPlayer != null) {
-		currentPlayer.stop();
-	    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+		plugin = this;
+	}
 
-	    currentPlayer = null;
-	    for (String contentTypeName : soundPlayers.keySet()) {
-		IContentType contentType = contentTypeManager.getContentType(contentTypeName);
-		if (contentType == null) {
-		    throw new IllegalArgumentException("Content type '" + contentTypeName + "' is unknown.");
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void stop(BundleContext context) throws Exception {
+		plugin = null;
+		super.stop(context);
+	}
+
+	/**
+	 * Gets the shared plugin instance
+	 * 
+	 * @return The plug-in, not <code>null</code>.
+	 */
+	public static SoundPlugin getInstance() {
+		if (plugin == null) {
+			throw new IllegalStateException("Plugin not initialized or already stopped");
 		}
-		if (contentType.isAssociatedWith(fileName)) {
-		    try {
-			currentPlayer = soundPlayers.get(contentTypeName).newInstance();
-		    } catch (Exception ex) {
-			throw new RuntimeException("Cannot create sound player for content type '" + contentTypeName
-				+ "'", ex);
-		    }
-		    break; // for
-		}
-	    }
-	    return currentPlayer;
+		return plugin;
 	}
-    }
+
+	/**
+	 * Creates a new sound player based on the extension of the file name. A
+	 * previously created sound player is stopped and freed first.
+	 * 
+	 * @param fileName The file name, may be empty, not <code>null</code>.
+	 * 
+	 * @return The new sound player or <code>null</code>.
+	 */
+	public SoundPlayer createSoundPlayer(String fileName) {
+		if (fileName == null) {
+			throw new IllegalArgumentException("Parameter 'fileName' must not be null.");
+		}
+		IContentTypeManager contentTypeManager = Platform.getContentTypeManager();
+
+		synchronized (this) {
+			if (currentPlayer != null) {
+				currentPlayer.stop();
+			}
+
+			currentPlayer = null;
+			for (String contentTypeName : soundPlayers.keySet()) {
+				IContentType contentType = contentTypeManager.getContentType(contentTypeName);
+				if (contentType == null) {
+					throw new IllegalArgumentException("Content type '" + contentTypeName + "' is unknown.");
+				}
+				if (contentType.isAssociatedWith(fileName)) {
+					try {
+						currentPlayer = soundPlayers.get(contentTypeName).getDeclaredConstructor().newInstance();
+					} catch (Exception ex) {
+						throw new RuntimeException(
+								"Cannot create sound player for content type '" + contentTypeName + "'", ex);
+					}
+					break; // for
+				}
+			}
+			return currentPlayer;
+		}
+	}
 }

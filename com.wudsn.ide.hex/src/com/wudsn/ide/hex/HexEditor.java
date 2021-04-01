@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2009 - 2020 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2021 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -125,7 +125,6 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
     private IntegerField bytesPerRowField;
 
     private StyledText textField;
-    private Point lastTextFieldSelection;
     private HexEditorSelection lastEditorSelection;
 
     // File source.
@@ -373,14 +372,10 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
 	    return null;
 	}
 
-//	if (textFieldSelection.equals(lastTextFieldSelection) && lastEditorSelection != null) {
-//	    return lastEditorSelection;
-//	}
 
 	BasePlugin.getInstance().log("HexEditor selectedText=\"{0}\", selection.x={1}, selection.y={2}", new Object[] {
 		selectedText, String.valueOf(textFieldSelection.x), String.valueOf(textFieldSelection.y) });
 
-	lastTextFieldSelection = textFieldSelection;
 	lastEditorSelection = parserComponent.getSelection(textFieldSelection.x, textFieldSelection.y);
 
 	return lastEditorSelection;
@@ -426,7 +421,6 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
 	    // Mark complete selection area. This also scrolls to
 	    // the end of the area.
 	    textField.setSelection(new Point((int) textStartOffset, (int) textEndOffset));
-	    lastTextFieldSelection = null;
 	    lastEditorSelection = null;
 
 	    //
@@ -531,7 +525,6 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
 	if (parserComponent.isParsingFileContentRequired()) {
 	    StyledString styledString = parserComponent.parseFileContent();
 	    textField.setText(styledString.getString());
-	    lastTextFieldSelection = null;
 	    lastEditorSelection = null;
 	    textField.setStyleRanges(styledString.getStyleRanges());
 

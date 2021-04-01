@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2009 - 2020 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2021 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -60,7 +60,7 @@ public final class Profiler {
 	}
 
 	if (Boolean.getBoolean(PROPERTY_NAME)) {
-	    Long duration = new Long((System.currentTimeMillis() - entry.startTimeMillis));
+	    Long duration = Long.valueOf((System.currentTimeMillis() - entry.startTimeMillis));
 	    if (entry.description.isEmpty()) {
 		BasePlugin.getInstance().log("Time for '{0}:{1}' is {2}ms", new Object[] { owner, key, duration });
 	    } else {

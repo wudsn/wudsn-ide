@@ -1,8 +1,8 @@
 <!-- 
   The first target is "build_daily". It ends with  manual step.
-  The result can then be uploaded with "upload_all".
+  The result can then be uploaded to the "/update" folder with "upload_site".
   If the daily build is tested and OK, the target "publish_daily_to_stable_and_main" copies
-  it to the current main version field and the default update site folder and then triggers "upload_all".
+  it to the current main version field and the default update site folder and then triggers "upload_site".
   
   If the stable site as been updated, the zero installation download can be update via "Check for Updates".
   After the update, the old plugin version should be deleted from the "C:\jac\wudsn\Tools\IDE\Eclipse\4.x.x-win32-x86_64\eclipse\plugins" folder.
@@ -53,25 +53,25 @@
 		<copy tofile="daily\site.xml" preservelastmodified="true" overwrite="true">
 			<fileset file="daily/site-template.xml" />
 		</copy>
-		<echo>Open daily/site.xml and press "Build All".</echo>
+		<echo>Open daily/site.xml and press "Build All". Then run the target "upload_site" to upload the daily version.</echo>
 	</target>
 
-	<!-- This publishes the daily build when testing was successful -->
+	<!-- This publishes the daily build when testing it was successful -->
 	<target name="publish_daily_to_stable_and_main">
 		<echo>Copying daily to stable and main.</echo>
 		<antcall target="_copy_folder">
 			<param name="source" value="daily" />
-			<param name="target" value="1.7.1" />
+			<param name="target" value="1.7.2" />
 		</antcall>
 		<antcall target="_copy_folder">
 			<param name="source" value="daily" />
 			<param name="target" value="." />
 		</antcall>
-		<antcall target="upload_all" />
+		<antcall target="upload_site" />
 		<echo>Done.</echo>
 	</target>
 	
-	<target name="upload_all">
+	<target name="upload_site">
 		<echo>Uploading builds from ${basedir}.</echo>
 		<exec executable="C:\jac\system\Windows\Tools\NET\WinSCP\WinSCP.com" failonerror="true">
 			<arg value="/script=site.scp"/>

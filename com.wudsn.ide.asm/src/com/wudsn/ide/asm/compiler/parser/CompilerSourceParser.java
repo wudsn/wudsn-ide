@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2009 - 2020 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2021 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -778,7 +778,7 @@ public abstract class CompilerSourceParser {
 	endSection(endOffset);
 
 	// Folding for an implementation section should only bebe active if
-	// there is´a name section in the code.
+	// there isï¿½a name section in the code.
 	boolean withFolding = (StringUtility.isSpecified(operand));
 	if (StringUtility.isEmpty(operand)) {
 	    operand = "Implementation Section";

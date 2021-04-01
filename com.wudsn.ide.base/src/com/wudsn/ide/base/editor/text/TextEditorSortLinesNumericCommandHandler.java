@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2009 - 2020 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ * Copyright (C) 2009 - 2021 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -33,46 +33,46 @@ import com.wudsn.ide.base.common.StringUtility;
  */
 public final class TextEditorSortLinesNumericCommandHandler extends TextEditorSortLinesCommandHandler {
 
-    private static final class NumericComparator implements Comparator<String> {
+	private static final class NumericComparator implements Comparator<String> {
 
-	private static final Double MAXIMUM = new Double(Double.POSITIVE_INFINITY);
-	private static final Pattern numericPattern = Pattern.compile("[-+]?([0-9]*\\.)?[0-9]+([eE][-+]?[0-9]+)?"); //$NON-NLS-1$
+		private static final Double MAXIMUM = Double.valueOf(Double.POSITIVE_INFINITY);
+		private static final Pattern numericPattern = Pattern.compile("[-+]?([0-9]*\\.)?[0-9]+([eE][-+]?[0-9]+)?"); //$NON-NLS-1$
 
-	public NumericComparator() {
-
-	}
-
-	@Override
-	public int compare(String o1, String o2) {
-	    return getNumber(o1).compareTo(getNumber(o2));
-	}
-
-	private Double getNumber(String text) {
-	    Double result;
-
-	    result = MAXIMUM;
-
-	    if (text != null && StringUtility.isSpecified(text)) {
-		try {
-		    Matcher m = numericPattern.matcher(text);
-		    if (m.find()) {
-			text = text.substring(m.start(), m.end());
-			result = Double.valueOf(text);
-		    }
-
-		} catch (NumberFormatException ignore) {
+		public NumericComparator() {
 
 		}
-	    }
-	    return result;
+
+		@Override
+		public int compare(String o1, String o2) {
+			return getNumber(o1).compareTo(getNumber(o2));
+		}
+
+		private Double getNumber(String text) {
+			Double result;
+
+			result = MAXIMUM;
+
+			if (text != null && StringUtility.isSpecified(text)) {
+				try {
+					Matcher m = numericPattern.matcher(text);
+					if (m.find()) {
+						text = text.substring(m.start(), m.end());
+						result = Double.valueOf(text);
+					}
+
+				} catch (NumberFormatException ignore) {
+
+				}
+			}
+			return result;
+		}
 	}
-    }
 
-    private static final NumericComparator COMPARATOR = new NumericComparator();
+	private static final NumericComparator COMPARATOR = new NumericComparator();
 
-    @Override
-    protected Comparator<String> getComparator() {
-	return COMPARATOR;
-    }
+	@Override
+	protected Comparator<String> getComparator() {
+		return COMPARATOR;
+	}
 
 }
