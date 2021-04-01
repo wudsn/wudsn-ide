@@ -15,6 +15,7 @@ call :check com.wudsn.ide.snd
 
 call :check com.wudsn.ide.base.feature
 call :check com.wudsn.ide.feature
+pause
 goto :eof
 
 
