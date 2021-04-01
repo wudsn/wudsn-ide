@@ -34,6 +34,8 @@ import com.wudsn.ide.gfx.converter.ImageConverterData;
  * "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino/Download_Rhino"
  * >https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino/
  * Download_Rhino"</a>.
+ * 
+ * TODO RHino is  embedded in J2SE 6 as the default Java scripting engine.: 
  */
 public final class GraphicsPlugin extends AbstractIDEPlugin {
 
