@@ -5,10 +5,10 @@
    <extension
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
-            file-extensions="pas"
             base-type="org.eclipse.core.runtime.text"
-            name="%com.wudsn.ide.pas.compiler.PascalSourceFile.name"
-            id="com.wudsn.ide.pas.compiler.PascalSourceFile">
+            file-extensions="pas"
+            id="com.wudsn.ide.pas.compiler.PascalSourceFile"
+            name="%com.wudsn.ide.pas.compiler.PascalSourceFile.name">
       </content-type>
    </extension>
    <extension
