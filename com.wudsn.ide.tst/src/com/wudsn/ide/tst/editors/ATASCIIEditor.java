@@ -1,19 +1,32 @@
 package com.wudsn.ide.tst.editors;
 
-import org.eclipse.swt.graphics.Device;
-import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.TextEditor;
+import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
+import org.eclipse.swt.graphics.Font;
+import com.wudsn.ide.base.hardware.HardwareCharacterSet;
 
-public class ATASCIIEditor extends TextEditor {
+public class ATASCIIEditor extends AbstractDecoratedTextEditor {
 
-    public ATASCIIEditor() {
-	super();
+	public ATASCIIEditor() {
+		super();
 
-	Display display = Display.getDefault();
-	Device device = display;
-	device.loadFont("C:\\Users\\D025328\\Documents\\Eclipse\\workspace.jac\\com.wudsn.ide.hex\\fonts\\atari8\\ATARCC__.TTF");
-	setDocumentProvider(new ATASCIDocumentProvider());
+		setDocumentProvider(new ATASCIDocumentProvider());
 
-    }
+	}
+	/*
+	 * @see
+	 * org.eclipse.ui.texteditor.AbstractTextEditor.createPartControl(Composite)
+	 */
+
+	@Override
+	public void createPartControl(Composite parent) {
+
+		super.createPartControl(parent);
+//		Font font = HardwareCharacterSet.ATARI_ATASCII.getFont();
+//		get
+//		PlatformUI.getWorkbench().getHelpSystem().setHelp(parent, "message");
+	}
 
 }

@@ -8,7 +8,7 @@
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             icon="icons/atascii-16x16.png"
             id="com.wudsn.ide.tst.editors.ATASCIIEditor"
-            name="ATASCI Editor">
+            name="%com.wudsn.ide.tst.editors.ATASCIIEditor.name">
          <contentTypeBinding
                contentTypeId="com.wudsn.ide.tst.editors.ATASCIIFile">
          </contentTypeBinding>
@@ -20,10 +20,32 @@
             base-type="org.eclipse.core.runtime.text"
             describer="com.wudsn.ide.tst.contenttypes.ATASCIIFileContentDescriber"
             file-extensions="*"
-            id="com.wudsn.ide.tst.editors.ATASCIIFile"
-            name="ATASCII File"
+            id="com.wudsn.ide.tst.ATASCIIFile"
+            name="%com.wudsn.ide.tst.ATASCIIFile.name"
             priority="high">
       </content-type>
+   </extension>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="help/toc.xml">
+      </toc>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="context.xml">
+      </contexts>
+   </extension>
+   <extension
+         point="org.eclipse.ui.themes">
+      <fontDefinition
+            id="com.wudsn.ide.tst.fontDefinition1"
+            label="label">
+         <fontValue
+               value="com.wudsn.ide.tst.fontValue1">
+         </fontValue>
+      </fontDefinition>
    </extension>
 
 </plugin>
