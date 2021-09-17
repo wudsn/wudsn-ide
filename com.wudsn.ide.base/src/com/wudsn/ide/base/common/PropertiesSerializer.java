@@ -30,181 +30,181 @@ import java.util.Properties;
  */
 public class PropertiesSerializer {
 
-    protected final SequencedProperties properties;
+	protected final SequencedProperties properties;
 
-    /**
-     * Creation is public.
-     */
-    public PropertiesSerializer() {
+	/**
+	 * Creation is public.
+	 */
+	public PropertiesSerializer() {
 
-	properties = new SequencedProperties();
-    }
-
-    public final SequencedProperties getProperties() {
-	return properties;
-    }
-
-    protected final void setProperty(String key, String value) {
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
-	}
-	if (value == null) {
-	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		properties = new SequencedProperties();
 	}
 
-	properties.put(key, value);
-    }
-
-    public final String readString(String key, String defaultValue) {
-
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
-	}
-	if (defaultValue == null) {
-	    throw new IllegalArgumentException("Parameter 'defaultValue' must not be null.");
-	}
-	String result;
-	result = properties.getProperty(key);
-	if (result == null) {
-	    result = defaultValue;
+	public final SequencedProperties getProperties() {
+		return properties;
 	}
 
-	return result;
-    }
-
-    public final void writeString(String key, String value) {
-
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
-	}
-	if (value == null) {
-	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
-	}
-	setProperty(key, value);
-    }
-
-    public boolean readBoolean(String key, boolean defaultValue) {
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
-
-	}
-	boolean result;
-	result = defaultValue;
-	String text = properties.getProperty(key);
-	if (text != null) {
-	    result = Boolean.parseBoolean(text);
-	}
-	return result;
-    }
-
-    public final void writeBoolean(String key, boolean value) {
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
-	}
-	properties.setProperty(key, Boolean.toString(value));
-    }
-
-    public final <T extends Enum<?>> T readEnum(String key, T defaultValue, Class<T> enumClass) {
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
-	}
-	if (defaultValue == null) {
-	    throw new IllegalArgumentException("Parameter 'defaultValue' must not be null.");
-	}
-	if (enumClass == null) {
-	    throw new IllegalArgumentException("Parameter 'enumClass' must not be null.");
-	}
-	T result;
-	result = defaultValue;
-	String text = properties.getProperty(key);
-	if (text != null) {
-	    T[] enumConstants = enumClass.getEnumConstants();
-
-	    for (int i = 0; i < enumConstants.length; i++) {
-		T enumConstant = enumConstants[i];
-		if (enumConstant.name().equals(text)) {
-		    result = enumConstant;
-		    break;
+	protected final void setProperty(String key, String value) {
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
 		}
-	    }
+		if (value == null) {
+			throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		}
+
+		properties.put(key, value);
 	}
 
-	return result;
-    }
+	public final String readString(String key, String defaultValue) {
 
-    public final <T extends Enum<?>> void writeEnum(String key, T value) {
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
-	}
-	if (value == null) {
-	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
-	}
-	setProperty(key, value.name());
-    }
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+		if (defaultValue == null) {
+			throw new IllegalArgumentException("Parameter 'defaultValue' must not be null.");
+		}
+		String result;
+		result = properties.getProperty(key);
+		if (result == null) {
+			result = defaultValue;
+		}
 
-    public final int readInteger(String key, int defaultValue) {
-
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		return result;
 	}
 
-	int result;
-	String text = properties.getProperty(key);
-	if (text == null) {
-	    result = defaultValue;
-	} else {
-	    try {
-		result = Integer.parseInt(text);
-	    } catch (NumberFormatException ex) {
-		result = 0;
-	    }
+	public final void writeString(String key, String value) {
+
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+		if (value == null) {
+			throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		}
+		setProperty(key, value);
 	}
 
-	return result;
-    }
+	public boolean readBoolean(String key, boolean defaultValue) {
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
 
-    public final void writeInteger(String key, int value) {
-
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+		boolean result;
+		result = defaultValue;
+		String text = properties.getProperty(key);
+		if (text != null) {
+			result = Boolean.parseBoolean(text);
+		}
+		return result;
 	}
 
-	setProperty(key, String.valueOf(value));
-    }
+	public final void writeBoolean(String key, boolean value) {
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+		properties.setProperty(key, Boolean.toString(value));
+	}
 
-    public final void readProperties(String key, PropertiesSerializer value) {
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
-	}
-	if (value == null) {
-	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
-	}
-	String prefix = key + ".";
-	Properties valueProperties = value.getProperties();
-	valueProperties.clear();
-	Enumeration<Object> i = properties.keys();
-	while (i.hasMoreElements()) {
-	    String valueKey = (String) i.nextElement();
-	    if (valueKey.startsWith(prefix)) {
-		valueProperties.setProperty(valueKey.substring(prefix.length()), properties.getProperty(valueKey));
-	    }
-	}
-    }
+	public final <T extends Enum<?>> T readEnum(String key, T defaultValue, Class<T> enumClass) {
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+		if (defaultValue == null) {
+			throw new IllegalArgumentException("Parameter 'defaultValue' must not be null.");
+		}
+		if (enumClass == null) {
+			throw new IllegalArgumentException("Parameter 'enumClass' must not be null.");
+		}
+		T result;
+		result = defaultValue;
+		String text = properties.getProperty(key);
+		if (text != null) {
+			T[] enumConstants = enumClass.getEnumConstants();
 
-    public final void writeProperties(String key, PropertiesSerializer value) {
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
+			for (int i = 0; i < enumConstants.length; i++) {
+				T enumConstant = enumConstants[i];
+				if (enumConstant.name().equals(text)) {
+					result = enumConstant;
+					break;
+				}
+			}
+		}
+
+		return result;
 	}
-	if (value == null) {
-	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
+
+	public final <T extends Enum<?>> void writeEnum(String key, T value) {
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+		if (value == null) {
+			throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		}
+		setProperty(key, value.name());
 	}
-	String prefix = key + ".";
-	Properties valueProperties = value.getProperties();
-	Enumeration<Object> i = valueProperties.keys();
-	while (i.hasMoreElements()) {
-	    String valueKey = (String) i.nextElement();
-	    setProperty(prefix + valueKey, valueProperties.getProperty(valueKey));
+
+	public final int readInteger(String key, int defaultValue) {
+
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+
+		int result;
+		String text = properties.getProperty(key);
+		if (text == null) {
+			result = defaultValue;
+		} else {
+			try {
+				result = Integer.parseInt(text);
+			} catch (NumberFormatException ex) {
+				result = 0;
+			}
+		}
+
+		return result;
 	}
-    }
+
+	public final void writeInteger(String key, int value) {
+
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+
+		setProperty(key, String.valueOf(value));
+	}
+
+	public final void readProperties(String key, PropertiesSerializer value) {
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+		if (value == null) {
+			throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		}
+		String prefix = key + ".";
+		Properties valueProperties = value.getProperties();
+		valueProperties.clear();
+		Enumeration<Object> i = properties.keys();
+		while (i.hasMoreElements()) {
+			String valueKey = (String) i.nextElement();
+			if (valueKey.startsWith(prefix)) {
+				valueProperties.setProperty(valueKey.substring(prefix.length()), properties.getProperty(valueKey));
+			}
+		}
+	}
+
+	public final void writeProperties(String key, PropertiesSerializer value) {
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+		if (value == null) {
+			throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		}
+		String prefix = key + ".";
+		Properties valueProperties = value.getProperties();
+		Enumeration<Object> i = valueProperties.keys();
+		while (i.hasMoreElements()) {
+			String valueKey = (String) i.nextElement();
+			setProperty(prefix + valueKey, valueProperties.getProperty(valueKey));
+		}
+	}
 
 }

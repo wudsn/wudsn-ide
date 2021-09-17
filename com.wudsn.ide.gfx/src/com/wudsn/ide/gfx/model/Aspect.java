@@ -20,62 +20,62 @@ package com.wudsn.ide.gfx.model;
 
 public final class Aspect {
 
-    private int factorX;
-    private int factorY;
+	private int factorX;
+	private int factorY;
 
-    public Aspect(int factorX, int factorY) {
-	this.factorX = factorX;
-	this.factorY = factorY;
-    }
-
-    public int getFactorX() {
-	return factorX;
-    }
-
-    public int getFactorY() {
-	return factorY;
-    }
-
-    public int getValidFactorX() {
-	if (isValid()) {
-	    return factorX;
+	public Aspect(int factorX, int factorY) {
+		this.factorX = factorX;
+		this.factorY = factorY;
 	}
-	return 1;
-    }
 
-    public int getValidFactorY() {
-	if (isValid()) {
-	    return factorY;
+	public int getFactorX() {
+		return factorX;
 	}
-	return 1;
-    }
 
-    public boolean isValid() {
-	return factorX > 0 && factorX < 32 && factorY > 0 && factorY < 32;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-
-	if (obj instanceof Aspect) {
-	    Aspect aspect;
-	    aspect = (Aspect) obj;
-	    if (aspect.getFactorX() == factorX && aspect.getFactorY() == factorY) {
-		return true;
-	    }
+	public int getFactorY() {
+		return factorY;
 	}
-	return false;
-    }
 
-    @Override
-    public int hashCode() {
+	public int getValidFactorX() {
+		if (isValid()) {
+			return factorX;
+		}
+		return 1;
+	}
 
-	return factorX + 17 * factorY;
-    }
+	public int getValidFactorY() {
+		if (isValid()) {
+			return factorY;
+		}
+		return 1;
+	}
 
-    @Override
-    public String toString() {
-	return factorX + "x" + factorY;
-    }
+	public boolean isValid() {
+		return factorX > 0 && factorX < 32 && factorY > 0 && factorY < 32;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		if (obj instanceof Aspect) {
+			Aspect aspect;
+			aspect = (Aspect) obj;
+			if (aspect.getFactorX() == factorX && aspect.getFactorY() == factorY) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+
+		return factorX + 17 * factorY;
+	}
+
+	@Override
+	public String toString() {
+		return factorX + "x" + factorY;
+	}
 
 }

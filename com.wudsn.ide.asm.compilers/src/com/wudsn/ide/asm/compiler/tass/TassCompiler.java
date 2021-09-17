@@ -30,21 +30,21 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 public final class TassCompiler extends Compiler {
 
-    /**
-     * Creates a new instance.
-     */
-    public TassCompiler() {
-    }
+	/**
+	 * Creates a new instance.
+	 */
+	public TassCompiler() {
+	}
 
-    @Override
-    public CompilerSourceParser createSourceParser() {
-	return new TassCompilerSourceParser();
-    }
+	@Override
+	public CompilerSourceParser createSourceParser() {
+		return new TassCompilerSourceParser();
+	}
 
-    @Override
-    public CompilerProcessLogParser createLogParser() {
+	@Override
+	public CompilerProcessLogParser createLogParser() {
 
-	return new TassCompilerProcessLogParser();
-    }
+		return new TassCompilerProcessLogParser();
+	}
 
 }

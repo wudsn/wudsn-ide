@@ -30,31 +30,31 @@ import java.util.List;
  */
 final class TextAttributeListContentProvider implements IStructuredContentProvider {
 
-    TextAttributeListContentProvider() {
-    }
+	TextAttributeListContentProvider() {
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public Object[] getElements(Object inputElement) {
-	return ((List<TextAttributeListItem>) inputElement).toArray();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object[] getElements(Object inputElement) {
+		return ((List<TextAttributeListItem>) inputElement).toArray();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void dispose() {
-	// Not used.
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void dispose() {
+		// Not used.
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-	// Not used.
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+		// Not used.
+	}
 }

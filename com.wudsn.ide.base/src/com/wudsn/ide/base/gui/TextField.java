@@ -33,97 +33,93 @@ import org.eclipse.swt.widgets.Text;
  */
 public final class TextField extends Field {
 
-    private Text text;
+	private Text text;
 
-    /**
-     * Creates a text field.
-     * 
-     * @param parent
-     *            The parent composite, not <code>null</code>.
-     * @param labelText
-     *            The label text, not <code>null</code>.
-     * @param style
-     *            The SWT style.
-     */
-    public TextField(Composite parent, String labelText, int style) {
-	if (parent == null) {
-	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+	/**
+	 * Creates a text field.
+	 * 
+	 * @param parent    The parent composite, not <code>null</code>.
+	 * @param labelText The label text, not <code>null</code>.
+	 * @param style     The SWT style.
+	 */
+	public TextField(Composite parent, String labelText, int style) {
+		if (parent == null) {
+			throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+		}
+		if (labelText == null) {
+			throw new IllegalArgumentException("Parameter 'labelText' must not be null.");
+		}
+
+		label = new Label(parent, SWT.RIGHT);
+		label.setText(labelText);
+
+		text = new Text(parent, style);
+
 	}
-	if (labelText == null) {
-	    throw new IllegalArgumentException("Parameter 'labelText' must not be null.");
+
+	/**
+	 * Gets the text control representing this text field.
+	 * 
+	 * @return The text control, not <code>null</code>.
+	 */
+	public Text getText() {
+		return text;
 	}
 
-	label = new Label(parent, SWT.RIGHT);
-	label.setText(labelText);
-
-	text = new Text(parent, style);
-
-    }
-
-    /**
-     * Gets the text control representing this text field.
-     * 
-     * @return The text control, not <code>null</code>.
-     */
-    public Text getText() {
-	return text;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Control getControl() {
-	return text;
-    }
-
-    public void setVisible(boolean visible) {
-	label.setVisible(visible);
-	text.setVisible(visible);
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setEnabled(boolean enabled) {
-	label.setEnabled(enabled);
-	text.setEnabled(enabled);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setEditable(boolean editable) {
-	text.setEditable(editable);
-    }
-
-    /**
-     * Sets the value.
-     * 
-     * @param value
-     *            The value, not <code>null</code>.
-     */
-    public void setValue(String value) {
-	if (value == null) {
-	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Control getControl() {
+		return text;
 	}
-	text.setText(value);
-    }
 
-    /**
-     * Gets the value.
-     * 
-     * @return The value, not <code>null</code>.
-     */
-    public String getValue() {
-	String result;
-	result = text.getText();
-	result = result.trim();
-	return result;
+	public void setVisible(boolean visible) {
+		label.setVisible(visible);
+		text.setVisible(visible);
 
-    }
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEnabled(boolean enabled) {
+		label.setEnabled(enabled);
+		text.setEnabled(enabled);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEditable(boolean editable) {
+		text.setEditable(editable);
+	}
+
+	/**
+	 * Sets the value.
+	 * 
+	 * @param value The value, not <code>null</code>.
+	 */
+	public void setValue(String value) {
+		if (value == null) {
+			throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		}
+		text.setText(value);
+	}
+
+	/**
+	 * Gets the value.
+	 * 
+	 * @return The value, not <code>null</code>.
+	 */
+	public String getValue() {
+		String result;
+		result = text.getText();
+		result = result.trim();
+		return result;
+
+	}
 
 }

@@ -32,44 +32,44 @@ import com.wudsn.ide.snd.player.SoundGenerator;
  * @since 1.6.1
  */
 final class ASAPSoundGenerator extends SoundGenerator {
-    private final ASAP asap;
-    private final SourceDataLine line;
-    private final byte[] buffer;
-    private int len;
+	private final ASAP asap;
+	private final SourceDataLine line;
+	private final byte[] buffer;
+	private int len;
 
-    public ASAPSoundGenerator(ASAP asap, SourceDataLine line) {
-	if (asap == null) {
-	    throw new IllegalArgumentException("Parameter 'asap' must not be null.");
+	public ASAPSoundGenerator(ASAP asap, SourceDataLine line) {
+		if (asap == null) {
+			throw new IllegalArgumentException("Parameter 'asap' must not be null.");
+		}
+		if (line == null) {
+			throw new IllegalArgumentException("Parameter 'line' must not be null.");
+		}
+		this.asap = asap;
+		this.line = line;
+		buffer = new byte[line.getBufferSize()];
+
+		line.start();
+
 	}
-	if (line == null) {
-	    throw new IllegalArgumentException("Parameter 'line' must not be null.");
+
+	@Override
+	public void generateBuffer() {
+		len = asap.generate(buffer, buffer.length, ASAPSampleFormat.S16_L_E);
 	}
-	this.asap = asap;
-	this.line = line;
-	buffer = new byte[line.getBufferSize()];
 
-	line.start();
+	@Override
+	public void playBuffer() {
+		line.write(buffer, 0, len);
+	}
 
-    }
+	@Override
+	public boolean isGenerating() {
+		return len == buffer.length;
+	}
 
-    @Override
-    public void generateBuffer() {
-	len = asap.generate(buffer, buffer.length, ASAPSampleFormat.S16_L_E);
-    }
-
-    @Override
-    public void playBuffer() {
-	line.write(buffer, 0, len);
-    }
-
-    @Override
-    public boolean isGenerating() {
-	return len == buffer.length;
-    }
-
-    @Override
-    public void close() {
-	line.drain();
-	line.close();
-    }
+	@Override
+	public void close() {
+		line.drain();
+		line.close();
+	}
 }

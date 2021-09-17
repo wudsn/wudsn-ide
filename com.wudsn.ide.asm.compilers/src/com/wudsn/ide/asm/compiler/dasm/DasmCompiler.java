@@ -30,21 +30,21 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 public final class DasmCompiler extends Compiler {
 
-    /**
-     * Creates a new instance.
-     */
-    public DasmCompiler() {
-    }
+	/**
+	 * Creates a new instance.
+	 */
+	public DasmCompiler() {
+	}
 
-    @Override
-    public CompilerSourceParser createSourceParser() {
-	return new DasmCompilerSourceParser();
-    }
+	@Override
+	public CompilerSourceParser createSourceParser() {
+		return new DasmCompilerSourceParser();
+	}
 
-    @Override
-    public CompilerProcessLogParser createLogParser() {
+	@Override
+	public CompilerProcessLogParser createLogParser() {
 
-	return new DasmCompilerProcessLogParser();
-    }
+		return new DasmCompilerProcessLogParser();
+	}
 
 }

@@ -26,17 +26,17 @@ package com.wudsn.ide.asm.help;
  * @since 1.6.3
  */
 final class HTMLConstants {
-    public static final String UTF8 = "UTF-8";
+	public static final String UTF8 = "UTF-8";
 
-    private static final String NL = "\n";
-    private static final String DOC_TYPE = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">";
-    private static final String CONTENT_TYPE = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=" + UTF8
-	    + "\" />";
-    private static final String STYLE_SHEETS = "<link rel=\"STYLESHEET\" href=\"/help/content/org.eclipse.platform/book.css\" type=\"text/css\" />"
-	    + NL + "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"stylesheets/ide.css\"/>";
+	private static final String NL = "\n";
+	private static final String DOC_TYPE = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">";
+	private static final String CONTENT_TYPE = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=" + UTF8
+			+ "\" />";
+	private static final String STYLE_SHEETS = "<link rel=\"STYLESHEET\" href=\"/help/content/org.eclipse.platform/book.css\" type=\"text/css\" />"
+			+ NL + "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"stylesheets/ide.css\"/>";
 
-    public static final String PREFIX = DOC_TYPE + NL + "<html xmlns=\"http://www.w3.org/1999/xhtml\">" + NL + "<head>"
-	    + NL + HTMLConstants.CONTENT_TYPE + NL + HTMLConstants.STYLE_SHEETS + NL + "</head><body>";
-    public static final String SUFFIX = "</body>" + NL + "</html>";
+	public static final String PREFIX = DOC_TYPE + NL + "<html xmlns=\"http://www.w3.org/1999/xhtml\">" + NL + "<head>"
+			+ NL + HTMLConstants.CONTENT_TYPE + NL + HTMLConstants.STYLE_SHEETS + NL + "</head><body>";
+	public static final String SUFFIX = "</body>" + NL + "</html>";
 
 }

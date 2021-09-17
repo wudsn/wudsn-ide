@@ -31,99 +31,98 @@ import org.eclipse.swt.graphics.ImageData;
  */
 public abstract class ConverterCommonData {
 
-    protected final ConverterData converterData;
+	protected final ConverterData converterData;
 
-    private int imageDataWidth;
-    private int imageDataHeight;
-    protected ImageData imageData;
-    private ImageColorHistogram imageColorHistogram;
+	private int imageDataWidth;
+	private int imageDataHeight;
+	protected ImageData imageData;
+	private ImageColorHistogram imageColorHistogram;
 
-    ConverterCommonData(ConverterData converterData) {
-	if (converterData == null) {
-	    throw new IllegalArgumentException("Parameter 'converterData' must not be null.");
+	ConverterCommonData(ConverterData converterData) {
+		if (converterData == null) {
+			throw new IllegalArgumentException("Parameter 'converterData' must not be null.");
+		}
+
+		this.converterData = converterData;
+		imageData = null;
+		imageColorHistogram = new ImageColorHistogram();
 	}
 
-	this.converterData = converterData;
-	imageData = null;
-	imageColorHistogram = new ImageColorHistogram();
-    }
+	public final IPath getFilePathPrefix() {
+		IPath result;
+		if (converterData.isValid()) {
+			result = converterData.getFile().getFullPath().removeLastSegments(1);
+		} else {
+			result = new Path("");
 
-    public final IPath getFilePathPrefix() {
-	IPath result;
-	if (converterData.isValid()) {
-	    result = converterData.getFile().getFullPath().removeLastSegments(1);
-	} else {
-	    result = new Path("");
-
+		}
+		return result;
 	}
-	return result;
-    }
 
-    public abstract boolean isCreateConversionEnabled();
+	public abstract boolean isCreateConversionEnabled();
 
-    public abstract boolean isValid();
+	public abstract boolean isValid();
 
-    public abstract boolean isRefreshEnabled();
+	public abstract boolean isRefreshEnabled();
 
-    protected void clear() {
-	imageData = null;
-	imageColorHistogram.clear();
-    }
+	protected void clear() {
+		imageData = null;
+		imageColorHistogram.clear();
+	}
 
-    public final void setImageDataWidth(int width) {
-	this.imageDataWidth = width;
-    }
+	public final void setImageDataWidth(int width) {
+		this.imageDataWidth = width;
+	}
 
-    public final int getImageDataWidth() {
-	return imageDataWidth;
-    }
+	public final int getImageDataWidth() {
+		return imageDataWidth;
+	}
 
-    public final void setImageDataHeight(int height) {
-	this.imageDataHeight = height;
-    }
+	public final void setImageDataHeight(int height) {
+		this.imageDataHeight = height;
+	}
 
-    public final int getImageDataHeight() {
-	return imageDataHeight;
-    }
+	public final int getImageDataHeight() {
+		return imageDataHeight;
+	}
 
-    /**
-     * Sets the image data.
-     * 
-     * @param imageData
-     *            The image data, may be <code>null</code>.
-     */
-    final void setImageData(ImageData imageData) {
-	this.imageData = imageData;
-	imageColorHistogram = null;
-    }
+	/**
+	 * Sets the image data.
+	 * 
+	 * @param imageData The image data, may be <code>null</code>.
+	 */
+	final void setImageData(ImageData imageData) {
+		this.imageData = imageData;
+		imageColorHistogram = null;
+	}
 
-    /**
-     * Gets the image data.
-     * 
-     * @return The image data or <code>null</code>.
-     */
-    public final ImageData getImageData() {
-	return imageData;
-    }
+	/**
+	 * Gets the image data.
+	 * 
+	 * @return The image data or <code>null</code>.
+	 */
+	public final ImageData getImageData() {
+		return imageData;
+	}
 
-    /**
-     * Sets the image color histogram.
-     * 
-     * @param imageColorHistogram
-     *            The image color histogram, may be <code>null</code>.
-     * 
-     * @since 1.6.0
-     */
-    final void setImageColorHistogram(ImageColorHistogram imageColorHistogram) {
-	this.imageColorHistogram = imageColorHistogram;
-    }
+	/**
+	 * Sets the image color histogram.
+	 * 
+	 * @param imageColorHistogram The image color histogram, may be
+	 *                            <code>null</code>.
+	 * 
+	 * @since 1.6.0
+	 */
+	final void setImageColorHistogram(ImageColorHistogram imageColorHistogram) {
+		this.imageColorHistogram = imageColorHistogram;
+	}
 
-    /**
-     * Gets the image color histogram.
-     * 
-     * @return The image color histogram, not <code>null</code>.
-     */
-    public final ImageColorHistogram getImageColorHistogram() {
-	return imageColorHistogram;
-    }
+	/**
+	 * Gets the image color histogram.
+	 * 
+	 * @return The image color histogram, not <code>null</code>.
+	 */
+	public final ImageColorHistogram getImageColorHistogram() {
+		return imageColorHistogram;
+	}
 }

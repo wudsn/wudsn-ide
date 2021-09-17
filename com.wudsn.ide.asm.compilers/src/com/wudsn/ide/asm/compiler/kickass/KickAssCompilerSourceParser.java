@@ -28,47 +28,47 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 final class KickAssCompilerSourceParser extends CompilerSourceParser {
 
-    @Override
-    protected void parseLine(int startOffset, String symbol, int symbolOffset, String instruction,
-	    int instructionOffset, String operand, String comment) {
+	@Override
+	protected void parseLine(int startOffset, String symbol, int symbolOffset, String instruction,
+			int instructionOffset, String operand, String comment) {
 
-	int symbolLength = symbol.length();
-	if (symbolLength > 0) {
+		int symbolLength = symbol.length();
+		if (symbolLength > 0) {
 
-	    if (symbol.charAt(symbolLength - 1) == ':') {
-		symbol = symbol.substring(0, symbolLength - 1);
-	    }
-	    if (instruction.equals("=")) {
-		createEquateDefinitionChild(startOffset, startOffset + symbolOffset, symbol, operand, comment);
-	    } else {
-		createLabelDefinitionChild(startOffset, startOffset + symbolOffset, symbol, comment);
+			if (symbol.charAt(symbolLength - 1) == ':') {
+				symbol = symbol.substring(0, symbolLength - 1);
+			}
+			if (instruction.equals("=")) {
+				createEquateDefinitionChild(startOffset, startOffset + symbolOffset, symbol, operand, comment);
+			} else {
+				createLabelDefinitionChild(startOffset, startOffset + symbolOffset, symbol, comment);
 
-	    }
+			}
 
-	} // Symbol not empty
+		} // Symbol not empty
 
-	// TODO Make .VAR an own type of instruction. Same code as in
-	// MadsCompilerSourceParser!
-	if (instruction.equals(".var")) {
-	    operand = operand.trim();
-	    int index = operand.indexOf('=');
-	    String variable;
-	    String value;
-	    if (index < 0) {
-		variable = operand;
-		value = "";
-	    } else {
-		variable = operand.substring(0, index).trim();
-		value = operand.substring(index).trim();
-		if (value.startsWith("=")) {
-		    value = value.substring(1).trim();
+		// TODO Make .VAR an own type of instruction. Same code as in
+		// MadsCompilerSourceParser!
+		if (instruction.equals(".var")) {
+			operand = operand.trim();
+			int index = operand.indexOf('=');
+			String variable;
+			String value;
+			if (index < 0) {
+				variable = operand;
+				value = "";
+			} else {
+				variable = operand.substring(0, index).trim();
+				value = operand.substring(index).trim();
+				if (value.startsWith("=")) {
+					value = value.substring(1).trim();
+				}
+			}
+			if (value.length() > 0) {
+				createEquateDefinitionChild(startOffset, startOffset + instructionOffset, variable, value, comment);
+			} else {
+				createLabelDefinitionChild(startOffset, startOffset + instructionOffset, variable, comment);
+			}
 		}
-	    }
-	    if (value.length() > 0) {
-		createEquateDefinitionChild(startOffset, startOffset + instructionOffset, variable, value, comment);
-	    } else {
-		createLabelDefinitionChild(startOffset, startOffset + instructionOffset, variable, comment);
-	    }
 	}
-    }
 }

@@ -36,95 +36,94 @@ import com.wudsn.ide.gfx.model.AspectUtility;
 
 public final class AspectField extends Field {
 
-    private Label label;
-    private Combo combo;
-    private List<Action> selectionActions;
+	private Label label;
+	private Combo combo;
+	private List<Action> selectionActions;
 
-    public AspectField(Composite parent, String labelText) {
-	if (parent == null) {
-	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+	public AspectField(Composite parent, String labelText) {
+		if (parent == null) {
+			throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+		}
+		if (labelText == null) {
+			throw new IllegalArgumentException("Parameter 'labelText' must not be null.");
+		}
+
+		label = new Label(parent, SWT.NONE);
+		label.setText(labelText);
+		combo = new Combo(parent, SWT.DROP_DOWN);
+
+		combo.add("1x1");
+		combo.add("2x1");
+		combo.add("2x2");
+		combo.add("4x2");
+		combo.add("4x4");
+
+		combo.select(0);
+
+		selectionActions = new ArrayList<Action>(1);
 	}
-	if (labelText == null) {
-	    throw new IllegalArgumentException("Parameter 'labelText' must not be null.");
+
+	public void setValue(Aspect value) {
+		if (value == null) {
+			throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		}
+		for (Action action : selectionActions) {
+			action.setEnabled(false);
+		}
+		combo.setText(AspectUtility.toString(value));
+		for (Action action : selectionActions) {
+			action.setEnabled(true);
+		}
 	}
 
-	label = new Label(parent, SWT.NONE);
-	label.setText(labelText);
-	combo = new Combo(parent, SWT.DROP_DOWN);
+	public Aspect getValue() {
+		Aspect result;
+		String text = combo.getText().toLowerCase();
+		if (StringUtility.isEmpty(text)) {
+			result = new Aspect(1, 1);
+		} else {
+			result = AspectUtility.fromString(text);
+		}
+		return result;
 
-	combo.add("1x1");
-	combo.add("2x1");
-	combo.add("2x2");
-	combo.add("4x2");
-	combo.add("4x4");
-
-	combo.select(0);
-
-	selectionActions = new ArrayList<Action>(1);
-    }
-
-    public void setValue(Aspect value) {
-	if (value == null) {
-	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
-	for (Action action : selectionActions) {
-	    action.setEnabled(false);
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Control getControl() {
+		return combo;
 	}
-	combo.setText(AspectUtility.toString(value));
-	for (Action action : selectionActions) {
-	    action.setEnabled(true);
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEnabled(boolean enabled) {
+		label.setEnabled(enabled);
+		combo.setEnabled(enabled);
 	}
-    }
 
-    public Aspect getValue() {
-	Aspect result;
-	String text = combo.getText().toLowerCase();
-	if (StringUtility.isEmpty(text)) {
-	    result = new Aspect(1, 1);
-	} else {
-	    result = AspectUtility.fromString(text);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEditable(boolean editable) {
+		// There is only a style SWT#READ_ONLY, but no changeable property
 	}
-	return result;
 
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Control getControl() {
-	return combo;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setEnabled(boolean enabled) {
-	label.setEnabled(enabled);
-	combo.setEnabled(enabled);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setEditable(boolean editable) {
-	// There is only a style SWT#READ_ONLY, but no changeable property
-    }
-
-    /**
-     * Adds a selection action which is fire when the field content changes.
-     * 
-     * @param action
-     *            The selection action, not <code>null</code>.
-     */
-    public void addSelectionAction(Action action) {
-	if (action == null) {
-	    throw new IllegalArgumentException("Parameter 'action' must not be null.");
+	/**
+	 * Adds a selection action which is fire when the field content changes.
+	 * 
+	 * @param action The selection action, not <code>null</code>.
+	 */
+	public void addSelectionAction(Action action) {
+		if (action == null) {
+			throw new IllegalArgumentException("Parameter 'action' must not be null.");
+		}
+		selectionActions.add(action);
+		combo.addSelectionListener(action);
 	}
-	selectionActions.add(action);
-	combo.addSelectionListener(action);
-    }
 
 }

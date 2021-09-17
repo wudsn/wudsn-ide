@@ -28,13 +28,12 @@ import com.wudsn.ide.asm.Hardware;
  */
 public final class AssemblerPreferencesNESCompilersPage extends AssemblerPreferencesCompilersPage {
 
-    /**
-     * Create is public. Used by extension point
-     * "org.eclipse.ui.preferencePages".
-     */
-    public AssemblerPreferencesNESCompilersPage() {
-	super(Hardware.NES);
+	/**
+	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
+	 */
+	public AssemblerPreferencesNESCompilersPage() {
+		super(Hardware.NES);
 
-    }
+	}
 
 }

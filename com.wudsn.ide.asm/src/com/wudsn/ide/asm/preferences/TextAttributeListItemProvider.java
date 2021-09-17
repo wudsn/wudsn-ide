@@ -32,36 +32,36 @@ import org.eclipse.swt.graphics.Font;
  */
 final class TextAttributeListItemProvider extends LabelProvider implements IColorProvider, IFontProvider {
 
-    TextAttributeListItemProvider() {
+	TextAttributeListItemProvider() {
 
-    }
+	}
 
-    @Override
-    public String getText(Object element) {
-	return ((TextAttributeListItem) element).getDisplayName();
-    }
+	@Override
+	public String getText(Object element) {
+		return ((TextAttributeListItem) element).getDisplayName();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Color getForeground(Object element) {
-	return ((TextAttributeListItem) element).getTextAttribute().getForeground();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Color getForeground(Object element) {
+		return ((TextAttributeListItem) element).getTextAttribute().getForeground();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Color getBackground(Object element) {
-	return ((TextAttributeListItem) element).getTextAttribute().getBackground();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Color getBackground(Object element) {
+		return ((TextAttributeListItem) element).getTextAttribute().getBackground();
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Font getFont(Object element) {
-	return ((TextAttributeListItem) element).getTextAttribute().getFont();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Font getFont(Object element) {
+		return ((TextAttributeListItem) element).getTextAttribute().getFont();
+	}
 }

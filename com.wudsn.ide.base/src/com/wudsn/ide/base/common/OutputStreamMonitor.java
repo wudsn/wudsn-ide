@@ -36,171 +36,170 @@ import com.wudsn.ide.base.BasePlugin;
  */
 final class OutputStreamMonitor {
 
-    /**
-     * The stream being monitored (connected system out or err).
-     */
-    private InputStream inputStream;
+	/**
+	 * The stream being monitored (connected system out or err).
+	 */
+	private InputStream inputStream;
 
-    /**
-     * The stream to which the output is sent.
-     */
-    private PrintStream outputStream;
+	/**
+	 * The stream to which the output is sent.
+	 */
+	private PrintStream outputStream;
 
-    /**
-     * The encoding of the stream to which the output is sent.
-     */
-    private String outputStreamEncoding;
-    /**
-     * The local copy of the stream contents
-     */
-    private StringBuilder bufferedContent;
+	/**
+	 * The encoding of the stream to which the output is sent.
+	 */
+	private String outputStreamEncoding;
+	/**
+	 * The local copy of the stream contents
+	 */
+	private StringBuilder bufferedContent;
 
-    /**
-     * The thread which reads from the stream
-     */
-    private Thread thread;
+	/**
+	 * The thread which reads from the stream
+	 */
+	private Thread thread;
 
-    /**
-     * The size of the read buffer
-     */
-    private static final int BUFFER_SIZE = 8192;
+	/**
+	 * The size of the read buffer
+	 */
+	private static final int BUFFER_SIZE = 8192;
 
-    /**
-     * Whether or not this monitor has been killed. When the monitor is killed,
-     * it stops reading from the stream immediately.
-     */
-    private boolean killed;
+	/**
+	 * Whether or not this monitor has been killed. When the monitor is killed, it
+	 * stops reading from the stream immediately.
+	 */
+	private boolean killed;
 
-    /**
-     * Creates an output stream monitor on the given stream (connected to system
-     * out or err).
-     * 
-     * @param inputStream
-     *            The input stream to read from, not <code>null</code>.
-     * @param outputStreamEncoding
-     *            The stream encoding or <code>null</code> for system default.
-     * @param outputStream
-     *            The output stream, not <code>null</code>.
-     */
-    public OutputStreamMonitor(InputStream inputStream, String outputStreamEncoding, PrintStream outputStream) {
-	if (inputStream == null) {
-	    throw new IllegalArgumentException("Parameter 'stream' must not be null.");
-	}
-	if (outputStream == null) {
-	    throw new IllegalArgumentException("Parameter 'outputStream' must not be null.");
-	}
-	this.inputStream = new BufferedInputStream(inputStream, BUFFER_SIZE);
-	this.outputStreamEncoding = outputStreamEncoding;
-	this.outputStream = outputStream;
-	bufferedContent = new StringBuilder();
-    }
-
-    /**
-     * Causes the monitor to close all communications between it and the
-     * underlying stream by waiting for the thread to terminate.
-     */
-    protected void close() {
-	if (this.thread != null) {
-	    Thread thread = this.thread;
-	    this.thread = null;
-	    try {
-		thread.join();
-	    } catch (InterruptedException ie) {
-	    }
-	}
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.debug.core.model.IStreamMonitor#getContents()
-     */
-    public String getContents() {
-	synchronized (bufferedContent) {
-	    return bufferedContent.toString();
-	}
-    }
-
-    /**
-     * Continually reads from the stream.
-     * <p>
-     * This method, along with the <code>startReading</code> method is used to
-     * allow <code>OutputStreamMonitor</code> to implement <code>Runnable</code>
-     * without publicly exposing a <code>run</code> method.
-     */
-    void read() {
-	long lastSleep = System.currentTimeMillis();
-	byte[] bytes = new byte[8192];
-	int read = 0;
-	while (read >= 0) {
-	    try {
-		if (killed) {
-		    break;
+	/**
+	 * Creates an output stream monitor on the given stream (connected to system out
+	 * or err).
+	 * 
+	 * @param inputStream          The input stream to read from, not
+	 *                             <code>null</code>.
+	 * @param outputStreamEncoding The stream encoding or <code>null</code> for
+	 *                             system default.
+	 * @param outputStream         The output stream, not <code>null</code>.
+	 */
+	public OutputStreamMonitor(InputStream inputStream, String outputStreamEncoding, PrintStream outputStream) {
+		if (inputStream == null) {
+			throw new IllegalArgumentException("Parameter 'stream' must not be null.");
 		}
-		read = inputStream.read(bytes);
-		if (read > 0) {
-		    String text;
-		    if (outputStreamEncoding != null) {
-			text = new String(bytes, 0, read, outputStreamEncoding);
-		    } else {
-			text = new String(bytes, 0, read);
-		    }
-		    synchronized (bufferedContent) {
-			bufferedContent.append(text);
-			outputStream.print(text);
-			outputStream.flush();
-		    }
+		if (outputStream == null) {
+			throw new IllegalArgumentException("Parameter 'outputStream' must not be null.");
 		}
-	    } catch (IOException ioe) {
-		if (!killed) {
-		    BasePlugin.getInstance().logError("IOException occured", null, ioe);
-		}
-		return;
-	    } catch (NullPointerException ex) {
-		// killing the stream monitor while reading can cause an NPE
-		// when reading from the stream
-		if (!killed && this.thread != null) {
-		    BasePlugin.getInstance().logError("Cannot read from stream", null, ex);
-		}
-		return;
-	    }
+		this.inputStream = new BufferedInputStream(inputStream, BUFFER_SIZE);
+		this.outputStreamEncoding = outputStreamEncoding;
+		this.outputStream = outputStream;
+		bufferedContent = new StringBuilder();
+	}
 
-	    long currentTime = System.currentTimeMillis();
-	    if (currentTime - lastSleep > 1000) {
-		lastSleep = currentTime;
+	/**
+	 * Causes the monitor to close all communications between it and the underlying
+	 * stream by waiting for the thread to terminate.
+	 */
+	protected void close() {
+		if (this.thread != null) {
+			Thread thread = this.thread;
+			this.thread = null;
+			try {
+				thread.join();
+			} catch (InterruptedException ie) {
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.debug.core.model.IStreamMonitor#getContents()
+	 */
+	public String getContents() {
+		synchronized (bufferedContent) {
+			return bufferedContent.toString();
+		}
+	}
+
+	/**
+	 * Continually reads from the stream.
+	 * <p>
+	 * This method, along with the <code>startReading</code> method is used to allow
+	 * <code>OutputStreamMonitor</code> to implement <code>Runnable</code> without
+	 * publicly exposing a <code>run</code> method.
+	 */
+	void read() {
+		long lastSleep = System.currentTimeMillis();
+		byte[] bytes = new byte[8192];
+		int read = 0;
+		while (read >= 0) {
+			try {
+				if (killed) {
+					break;
+				}
+				read = inputStream.read(bytes);
+				if (read > 0) {
+					String text;
+					if (outputStreamEncoding != null) {
+						text = new String(bytes, 0, read, outputStreamEncoding);
+					} else {
+						text = new String(bytes, 0, read);
+					}
+					synchronized (bufferedContent) {
+						bufferedContent.append(text);
+						outputStream.print(text);
+						outputStream.flush();
+					}
+				}
+			} catch (IOException ioe) {
+				if (!killed) {
+					BasePlugin.getInstance().logError("IOException occured", null, ioe);
+				}
+				return;
+			} catch (NullPointerException ex) {
+				// killing the stream monitor while reading can cause an NPE
+				// when reading from the stream
+				if (!killed && this.thread != null) {
+					BasePlugin.getInstance().logError("Cannot read from stream", null, ex);
+				}
+				return;
+			}
+
+			long currentTime = System.currentTimeMillis();
+			if (currentTime - lastSleep > 1000) {
+				lastSleep = currentTime;
+				try {
+					Thread.sleep(100); // just give up CPU to maintain UI
+					// responsiveness.
+				} catch (InterruptedException e) {
+				}
+			}
+		}
 		try {
-		    Thread.sleep(100); // just give up CPU to maintain UI
-		    // responsiveness.
-		} catch (InterruptedException e) {
+			inputStream.close();
+		} catch (IOException ex) {
+			BasePlugin.getInstance().logError("Cannot close input stream.", null, ex);
 		}
-	    }
-	}
-	try {
-	    inputStream.close();
-	} catch (IOException ex) {
-	    BasePlugin.getInstance().logError("Cannot close input stream.", null, ex);
+
 	}
 
-    }
+	protected void kill() {
+		killed = true;
+	}
 
-    protected void kill() {
-	killed = true;
-    }
-
-    /**
-     * Starts a thread which reads from the stream
-     */
-    protected void startMonitoring() {
-	if (this.thread == null) {
-	    this.thread = new Thread(new RunnableWithLogging() {
-		@Override
-		public void runWithLogging() {
-		    read();
+	/**
+	 * Starts a thread which reads from the stream
+	 */
+	protected void startMonitoring() {
+		if (this.thread == null) {
+			this.thread = new Thread(new RunnableWithLogging() {
+				@Override
+				public void runWithLogging() {
+					read();
+				}
+			}, "OutputStreamMonitor");
 		}
-	    }, "OutputStreamMonitor");
+		this.thread.setDaemon(true);
+		this.thread.setPriority(Thread.MIN_PRIORITY);
+		this.thread.start();
 	}
-	this.thread.setDaemon(true);
-	this.thread.setPriority(Thread.MIN_PRIORITY);
-	this.thread.start();
-    }
 }

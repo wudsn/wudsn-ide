@@ -24,14 +24,14 @@ import com.wudsn.ide.asm.editor.AssemblerEditor;
 
 public final class AcmeEditor extends AssemblerEditor {
 
-    /**
-     * Creation is public. Called by the extension "org.eclipse.ui.editors".
-     */
-    public AcmeEditor() {
-    }
+	/**
+	 * Creation is public. Called by the extension "org.eclipse.ui.editors".
+	 */
+	public AcmeEditor() {
+	}
 
-    @Override
-    public String getCompilerId() {
-	return CompilerId.ACME;
-    }
+	@Override
+	public String getCompilerId() {
+		return CompilerId.ACME;
+	}
 }

@@ -45,97 +45,97 @@ import com.wudsn.ide.asm.runner.RunnerId;
  */
 public final class AssemblerPreferencesInitializer extends AbstractPreferenceInitializer {
 
-    /**
-     * Creation must be public default.
-     */
-    public AssemblerPreferencesInitializer() {
-    }
-
-    @Override
-    public void initializeDefaultPreferences() {
-	IPreferenceStore store = AssemblerPlugin.getInstance().getPreferenceStore();
-
-	initializeEditorPreferences(store);
-
-	initializeCompilerPreferences(store);
-
-	AssemblerPlugin.getInstance().savePreferences();
-    }
-
-    private void initializeEditorPreferences(IPreferenceStore store) {
-	if (store == null) {
-	    throw new IllegalArgumentException("Parameter 'store' must not be null.");
-	}
-	// Editor.
-	Display display = Display.getCurrent();
-
-	TextAttribute textAttribute = new TextAttribute(new Color(display, 0, 128, 0), null, SWT.ITALIC);
-	store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT,
-		TextAttributeConverter.toString(textAttribute));
-
-	textAttribute = new TextAttribute(new Color(display, 0, 0, 255), null, SWT.NORMAL);
-	store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_STRING,
-		TextAttributeConverter.toString(textAttribute));
-
-	textAttribute = new TextAttribute(new Color(display, 0, 0, 255), null, SWT.BOLD);
-	store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_NUMBER,
-		TextAttributeConverter.toString(textAttribute));
-
-	textAttribute = new TextAttribute(new Color(display, 128, 64, 0), null, SWT.BOLD);
-	store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_DIRECTVE,
-		TextAttributeConverter.toString(textAttribute));
-
-	textAttribute = new TextAttribute(new Color(display, 0, 0, 128), null, SWT.BOLD);
-	store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL,
-		TextAttributeConverter.toString(textAttribute));
-
-	textAttribute = new TextAttribute(new Color(display, 255, 32, 32), null, SWT.BOLD);
-	store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL,
-		TextAttributeConverter.toString(textAttribute));
-
-	textAttribute = new TextAttribute(new Color(display, 32, 128, 32), null, SWT.BOLD);
-	store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO,
-		TextAttributeConverter.toString(textAttribute));
-
-	// Content assist.
-	store.setDefault(AssemblerPreferencesConstants.EDITOR_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE,
-		AssemblerContentAssistProcessorDefaultCase.LOWER_CASE);
-
-	// Compiling.
-	store.setDefault(AssemblerPreferencesConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE,
-		AssemblerEditorCompileCommandPositioningMode.FIRST_ERROR_OR_WARNING);
-    }
-
-    private void initializeCompilerPreferences(IPreferenceStore store) {
-	if (store == null) {
-	    throw new IllegalArgumentException("Parameter 'store' must not be null.");
+	/**
+	 * Creation must be public default.
+	 */
+	public AssemblerPreferencesInitializer() {
 	}
 
-	CompilerRegistry compilerRegistry = AssemblerPlugin.getInstance().getCompilerRegistry();
+	@Override
+	public void initializeDefaultPreferences() {
+		IPreferenceStore store = AssemblerPlugin.getInstance().getPreferenceStore();
 
-	List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions();
-	for (CompilerDefinition compilerDefinition : compilerDefinitions) {
-	    String compilerId;
-	    String name;
-	    compilerId = compilerDefinition.getId();
+		initializeEditorPreferences(store);
 
-	    for (Hardware hardware : Hardware.values()) {
-		if (hardware.equals(Hardware.GENERIC)) {
-		    continue;
+		initializeCompilerPreferences(store);
+
+		AssemblerPlugin.getInstance().savePreferences();
+	}
+
+	private void initializeEditorPreferences(IPreferenceStore store) {
+		if (store == null) {
+			throw new IllegalArgumentException("Parameter 'store' must not be null.");
 		}
-		store.setDefault(AssemblerPreferencesConstants.getCompilerCPUName(compilerId, hardware),
-			compilerDefinition.getSupportedCPUs().get(0).toString());
+		// Editor.
+		Display display = Display.getCurrent();
 
-		name = AssemblerPreferencesConstants.getCompilerParametersName(compilerId, hardware);
-		store.setDefault(name, compilerDefinition.getDefaultParameters());
-		name = AssemblerPreferencesConstants.getCompilerOutputFolderModeName(compilerId, hardware);
-		store.setDefault(name, CompilerOutputFolderMode.TEMP_FOLDER);
-		name = AssemblerPreferencesConstants.getCompilerOutputFileExtensionName(compilerId, hardware);
-		store.setDefault(name, HardwareUtility.getDefaultFileExtension(hardware));
-		name = AssemblerPreferencesConstants.getCompilerRunnerIdName(compilerId, hardware);
-		store.setDefault(name, RunnerId.DEFAULT_APPLICATION);
-	    }
+		TextAttribute textAttribute = new TextAttribute(new Color(display, 0, 128, 0), null, SWT.ITALIC);
+		store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT,
+				TextAttributeConverter.toString(textAttribute));
 
+		textAttribute = new TextAttribute(new Color(display, 0, 0, 255), null, SWT.NORMAL);
+		store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_STRING,
+				TextAttributeConverter.toString(textAttribute));
+
+		textAttribute = new TextAttribute(new Color(display, 0, 0, 255), null, SWT.BOLD);
+		store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_NUMBER,
+				TextAttributeConverter.toString(textAttribute));
+
+		textAttribute = new TextAttribute(new Color(display, 128, 64, 0), null, SWT.BOLD);
+		store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_DIRECTVE,
+				TextAttributeConverter.toString(textAttribute));
+
+		textAttribute = new TextAttribute(new Color(display, 0, 0, 128), null, SWT.BOLD);
+		store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL,
+				TextAttributeConverter.toString(textAttribute));
+
+		textAttribute = new TextAttribute(new Color(display, 255, 32, 32), null, SWT.BOLD);
+		store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL,
+				TextAttributeConverter.toString(textAttribute));
+
+		textAttribute = new TextAttribute(new Color(display, 32, 128, 32), null, SWT.BOLD);
+		store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO,
+				TextAttributeConverter.toString(textAttribute));
+
+		// Content assist.
+		store.setDefault(AssemblerPreferencesConstants.EDITOR_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE,
+				AssemblerContentAssistProcessorDefaultCase.LOWER_CASE);
+
+		// Compiling.
+		store.setDefault(AssemblerPreferencesConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE,
+				AssemblerEditorCompileCommandPositioningMode.FIRST_ERROR_OR_WARNING);
 	}
-    }
+
+	private void initializeCompilerPreferences(IPreferenceStore store) {
+		if (store == null) {
+			throw new IllegalArgumentException("Parameter 'store' must not be null.");
+		}
+
+		CompilerRegistry compilerRegistry = AssemblerPlugin.getInstance().getCompilerRegistry();
+
+		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions();
+		for (CompilerDefinition compilerDefinition : compilerDefinitions) {
+			String compilerId;
+			String name;
+			compilerId = compilerDefinition.getId();
+
+			for (Hardware hardware : Hardware.values()) {
+				if (hardware.equals(Hardware.GENERIC)) {
+					continue;
+				}
+				store.setDefault(AssemblerPreferencesConstants.getCompilerCPUName(compilerId, hardware),
+						compilerDefinition.getSupportedCPUs().get(0).toString());
+
+				name = AssemblerPreferencesConstants.getCompilerParametersName(compilerId, hardware);
+				store.setDefault(name, compilerDefinition.getDefaultParameters());
+				name = AssemblerPreferencesConstants.getCompilerOutputFolderModeName(compilerId, hardware);
+				store.setDefault(name, CompilerOutputFolderMode.TEMP_FOLDER);
+				name = AssemblerPreferencesConstants.getCompilerOutputFileExtensionName(compilerId, hardware);
+				store.setDefault(name, HardwareUtility.getDefaultFileExtension(hardware));
+				name = AssemblerPreferencesConstants.getCompilerRunnerIdName(compilerId, hardware);
+				store.setDefault(name, RunnerId.DEFAULT_APPLICATION);
+			}
+
+		}
+	}
 }

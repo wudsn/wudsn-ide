@@ -27,42 +27,40 @@ package com.wudsn.ide.base.common;
  */
 public final class StringUtility {
 
-    /**
-     * Creation is private.
-     */
-    private StringUtility() {
+	/**
+	 * Creation is private.
+	 */
+	private StringUtility() {
 
-    }
-
-    /**
-     * Determines if a string value is empty, i.e. has zero length or is only
-     * containing white spaces.
-     * 
-     * @param value
-     *            The string value, not <code>null</code>.
-     * @return <code>true</code> if the value is empty or only containing of
-     *         white spaces, <code>false</code> otherwise.
-     */
-    public static boolean isEmpty(String value) {
-	if (value == null) {
-	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
 	}
-	return value.trim().length() == 0;
-    }
 
-    /**
-     * Determines if a string value is specified, i.e. not empty and not only
-     * containing white spaces.
-     * 
-     * @param value
-     *            The string value, not <code>null</code>.
-     * @return <code>true</code> if the value is not empty and not only
-     *         containing of white spaces, <code>false</code> otherwise.
-     */
-    public static boolean isSpecified(String value) {
-	if (value == null) {
-	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
+	/**
+	 * Determines if a string value is empty, i.e. has zero length or is only
+	 * containing white spaces.
+	 * 
+	 * @param value The string value, not <code>null</code>.
+	 * @return <code>true</code> if the value is empty or only containing of white
+	 *         spaces, <code>false</code> otherwise.
+	 */
+	public static boolean isEmpty(String value) {
+		if (value == null) {
+			throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		}
+		return value.trim().length() == 0;
 	}
-	return value.trim().length() > 0;
-    }
+
+	/**
+	 * Determines if a string value is specified, i.e. not empty and not only
+	 * containing white spaces.
+	 * 
+	 * @param value The string value, not <code>null</code>.
+	 * @return <code>true</code> if the value is not empty and not only containing
+	 *         of white spaces, <code>false</code> otherwise.
+	 */
+	public static boolean isSpecified(String value) {
+		if (value == null) {
+			throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		}
+		return value.trim().length() > 0;
+	}
 }

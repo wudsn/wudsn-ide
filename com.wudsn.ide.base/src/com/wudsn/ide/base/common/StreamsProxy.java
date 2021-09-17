@@ -30,68 +30,68 @@ import java.io.PrintStream;
  */
 final class StreamsProxy {
 
-    private OutputStreamMonitor outputMonitor;
-    private OutputStreamMonitor errorMonitor;
-    private InputStreamMonitor inputMonitor;
-    private boolean closed;
+	private OutputStreamMonitor outputMonitor;
+	private OutputStreamMonitor errorMonitor;
+	private InputStreamMonitor inputMonitor;
+	private boolean closed;
 
-    public StreamsProxy(Process process, String encoding, PrintStream out, PrintStream err) {
-	if (process == null) {
-	    throw new IllegalArgumentException("Parameter 'process' must not be null");
+	public StreamsProxy(Process process, String encoding, PrintStream out, PrintStream err) {
+		if (process == null) {
+			throw new IllegalArgumentException("Parameter 'process' must not be null");
+		}
+		if (out == null) {
+			throw new IllegalArgumentException("Parameter 'out' must not be null.");
+		}
+		if (err == null) {
+			throw new IllegalArgumentException("Parameter 'err' must not be null.");
+		}
+		outputMonitor = new OutputStreamMonitor(process.getInputStream(), encoding, out);
+		errorMonitor = new OutputStreamMonitor(process.getErrorStream(), encoding, err);
+		inputMonitor = new InputStreamMonitor(process.getOutputStream());
+		outputMonitor.startMonitoring();
+		errorMonitor.startMonitoring();
+		inputMonitor.startMonitoring();
+
 	}
-	if (out == null) {
-	    throw new IllegalArgumentException("Parameter 'out' must not be null.");
+
+	public void close() {
+		if (!closed) {
+			closed = true;
+			outputMonitor.close();
+			errorMonitor.close();
+			inputMonitor.close();
+		}
 	}
-	if (err == null) {
-	    throw new IllegalArgumentException("Parameter 'err' must not be null.");
+
+	public void kill() {
+		closed = true;
+		outputMonitor.kill();
+		errorMonitor.kill();
+		inputMonitor.close();
 	}
-	outputMonitor = new OutputStreamMonitor(process.getInputStream(), encoding, out);
-	errorMonitor = new OutputStreamMonitor(process.getErrorStream(), encoding, err);
-	inputMonitor = new InputStreamMonitor(process.getOutputStream());
-	outputMonitor.startMonitoring();
-	errorMonitor.startMonitoring();
-	inputMonitor.startMonitoring();
 
-    }
-
-    public void close() {
-	if (!closed) {
-	    closed = true;
-	    outputMonitor.close();
-	    errorMonitor.close();
-	    inputMonitor.close();
+	public OutputStreamMonitor getErrorStreamMonitor() {
+		return errorMonitor;
 	}
-    }
 
-    public void kill() {
-	closed = true;
-	outputMonitor.kill();
-	errorMonitor.kill();
-	inputMonitor.close();
-    }
-
-    public OutputStreamMonitor getErrorStreamMonitor() {
-	return errorMonitor;
-    }
-
-    public OutputStreamMonitor getOutputStreamMonitor() {
-	return outputMonitor;
-    }
-
-    public void write(String input) throws IOException {
-	if (!closed) {
-	    inputMonitor.write(input);
-	} else {
-	    throw new IOException("StreamsProxy alsready closed");
+	public OutputStreamMonitor getOutputStreamMonitor() {
+		return outputMonitor;
 	}
-    }
 
-    public void closeInputStream() throws IOException {
-	if (!closed) {
-	    inputMonitor.closeInputStream();
-	} else {
-	    throw new IOException("StreamsProxy alsready closed");
+	public void write(String input) throws IOException {
+		if (!closed) {
+			inputMonitor.write(input);
+		} else {
+			throw new IOException("StreamsProxy alsready closed");
+		}
 	}
-    }
+
+	public void closeInputStream() throws IOException {
+		if (!closed) {
+			inputMonitor.closeInputStream();
+		} else {
+			throw new IOException("StreamsProxy alsready closed");
+		}
+	}
 
 }

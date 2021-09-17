@@ -28,50 +28,49 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParserTreeObjectType;
  */
 public final class CompilerSymbolType {
 
-    /**
-     * Creation is private.
-     */
-    private CompilerSymbolType() {
-    }
-
-    /**
-     * Default-type
-     */
-    public static final int DEFAULT = CompilerSourceParserTreeObjectType.DEFAULT;
-
-    public static final int EQUATE_DEFINITION = CompilerSourceParserTreeObjectType.EQUATE_DEFINITION;
-    public static final int LABEL_DEFINITION = CompilerSourceParserTreeObjectType.LABEL_DEFINITION;
-
-    public static final int ENUM_DEFINITION_SECTION = CompilerSourceParserTreeObjectType.ENUM_DEFINITION_SECTION;
-    public static final int STRUCTURE_DEFINITION_SECTION = CompilerSourceParserTreeObjectType.STRUCTURE_DEFINITION_SECTION;
-    public static final int MACRO_DEFINITION_SECTION = CompilerSourceParserTreeObjectType.MACRO_DEFINITION_SECTION;
-    public static final int LOCAL_SECTION = CompilerSourceParserTreeObjectType.LOCAL_SECTION;
-    public static final int PROCEDURE_DEFINITION_SECTION = CompilerSourceParserTreeObjectType.PROCEDURE_DEFINITION_SECTION;
-
-    /**
-     * Gets the localized text for a compiler symbol type.
-     * 
-     * @param type
-     *            The type, see constants of this class.
-     * @return The localized text, may be empty but not <code>null</code>.
-     */
-    public static String getText(int type) {
-	String result;
-	switch (type) {
-	case DEFAULT:
-	case EQUATE_DEFINITION:
-	case LABEL_DEFINITION:
-	case ENUM_DEFINITION_SECTION:
-	case STRUCTURE_DEFINITION_SECTION:
-	case MACRO_DEFINITION_SECTION:
-	case LOCAL_SECTION:
-	case PROCEDURE_DEFINITION_SECTION:
-	    result = CompilerSourceParserTreeObjectType.getText(type);
-	    break;
-	default:
-	    throw new IllegalArgumentException("Unknown type " + type + ".");
+	/**
+	 * Creation is private.
+	 */
+	private CompilerSymbolType() {
 	}
-	return result;
 
-    }
+	/**
+	 * Default-type
+	 */
+	public static final int DEFAULT = CompilerSourceParserTreeObjectType.DEFAULT;
+
+	public static final int EQUATE_DEFINITION = CompilerSourceParserTreeObjectType.EQUATE_DEFINITION;
+	public static final int LABEL_DEFINITION = CompilerSourceParserTreeObjectType.LABEL_DEFINITION;
+
+	public static final int ENUM_DEFINITION_SECTION = CompilerSourceParserTreeObjectType.ENUM_DEFINITION_SECTION;
+	public static final int STRUCTURE_DEFINITION_SECTION = CompilerSourceParserTreeObjectType.STRUCTURE_DEFINITION_SECTION;
+	public static final int MACRO_DEFINITION_SECTION = CompilerSourceParserTreeObjectType.MACRO_DEFINITION_SECTION;
+	public static final int LOCAL_SECTION = CompilerSourceParserTreeObjectType.LOCAL_SECTION;
+	public static final int PROCEDURE_DEFINITION_SECTION = CompilerSourceParserTreeObjectType.PROCEDURE_DEFINITION_SECTION;
+
+	/**
+	 * Gets the localized text for a compiler symbol type.
+	 * 
+	 * @param type The type, see constants of this class.
+	 * @return The localized text, may be empty but not <code>null</code>.
+	 */
+	public static String getText(int type) {
+		String result;
+		switch (type) {
+		case DEFAULT:
+		case EQUATE_DEFINITION:
+		case LABEL_DEFINITION:
+		case ENUM_DEFINITION_SECTION:
+		case STRUCTURE_DEFINITION_SECTION:
+		case MACRO_DEFINITION_SECTION:
+		case LOCAL_SECTION:
+		case PROCEDURE_DEFINITION_SECTION:
+			result = CompilerSourceParserTreeObjectType.getText(type);
+			break;
+		default:
+			throw new IllegalArgumentException("Unknown type " + type + ".");
+		}
+		return result;
+
+	}
 }

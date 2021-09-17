@@ -30,64 +30,64 @@ import com.wudsn.ide.snd.editor.SoundEditor;
  */
 public final class Texts extends NLS {
 
-    /**
-     * Sound editor
-     */
-    public static String SOUND_EDITOR_AUTHOR_LABEL;
-    public static String SOUND_EDITOR_CHANNELS_LABEL;
-    public static String SOUND_EDITOR_CHANNELS_MONO;
-    public static String SOUND_EDITOR_CHANNELS_STEREO;
-    public static String SOUND_EDITOR_DATE_LABEL;
-    public static String SOUND_EDITOR_DEFAULT;
-    public static String SOUND_EDITOR_DEFAULT_SONG_LABEL;
-    public static String SOUND_EDITOR_DURATION_LABEL;
-    public static String SOUND_EDITOR_DURATION_PATTERN;
-    public static String SOUND_EDITOR_FORMAT_LABEL;
-    public static String SOUND_EDITOR_FORMAT_PATTERN;
-    public static String SOUND_EDITOR_FREQUENCY_LABEL;
-    public static String SOUND_EDITOR_FREQUENCY_HERTZ_PATTERN;
-    public static String SOUND_EDITOR_FREQUENCY_PATTERN;
-    public static String SOUND_EDITOR_INIT_ADDRESS_LABEL;
-    public static String SOUND_EDITOR_INIT_ADDRESS_FULLTIME;
-    public static String SOUND_EDITOR_LOOP_LABEL;
-    public static String SOUND_EDITOR_LOOP_NO;
-    public static String SOUND_EDITOR_LOOP_YES;
-    public static String SOUND_EDITOR_NORM_NTSC;
-    public static String SOUND_EDITOR_NORM_PAL;
-    public static String SOUND_EDITOR_PAUSED;
-    public static String SOUND_EDITOR_PAUSE_BUTTON_TOOLTIP;
-    public static String SOUND_EDITOR_PLAYER_ADDRESS_LABEL;
-    public static String SOUND_EDITOR_MUSIC_ADDRESS_LABEL;
-    public static String SOUND_EDITOR_PLAY_BUTTON_TOOLTIP;
-    public static String SOUND_EDITOR_PLAYING_TIME_LABEL;
-    public static String SOUND_EDITOR_PLAYYING_POSITION_LABEL;
-    public static String SOUND_EDITOR_EXPORT_BUTTON_TOOLTIP;
-    public static String SOUND_EDITOR_SONGS_LABEL;
-    public static String SOUND_EDITOR_SONG_ID_LABEL;
-    public static String SOUND_EDITOR_STOPPED;
-    public static String SOUND_EDITOR_STOP_BUTTON_TOOLTIP;
-    public static String SOUND_EDITOR_TITLE_LABEL;
-    public static String SOUND_EDITOR_UNKNOWN;
-    public static String SOUND_EDITOR_VOLUME_LABEL;
+	/**
+	 * Sound editor
+	 */
+	public static String SOUND_EDITOR_AUTHOR_LABEL;
+	public static String SOUND_EDITOR_CHANNELS_LABEL;
+	public static String SOUND_EDITOR_CHANNELS_MONO;
+	public static String SOUND_EDITOR_CHANNELS_STEREO;
+	public static String SOUND_EDITOR_DATE_LABEL;
+	public static String SOUND_EDITOR_DEFAULT;
+	public static String SOUND_EDITOR_DEFAULT_SONG_LABEL;
+	public static String SOUND_EDITOR_DURATION_LABEL;
+	public static String SOUND_EDITOR_DURATION_PATTERN;
+	public static String SOUND_EDITOR_FORMAT_LABEL;
+	public static String SOUND_EDITOR_FORMAT_PATTERN;
+	public static String SOUND_EDITOR_FREQUENCY_LABEL;
+	public static String SOUND_EDITOR_FREQUENCY_HERTZ_PATTERN;
+	public static String SOUND_EDITOR_FREQUENCY_PATTERN;
+	public static String SOUND_EDITOR_INIT_ADDRESS_LABEL;
+	public static String SOUND_EDITOR_INIT_ADDRESS_FULLTIME;
+	public static String SOUND_EDITOR_LOOP_LABEL;
+	public static String SOUND_EDITOR_LOOP_NO;
+	public static String SOUND_EDITOR_LOOP_YES;
+	public static String SOUND_EDITOR_NORM_NTSC;
+	public static String SOUND_EDITOR_NORM_PAL;
+	public static String SOUND_EDITOR_PAUSED;
+	public static String SOUND_EDITOR_PAUSE_BUTTON_TOOLTIP;
+	public static String SOUND_EDITOR_PLAYER_ADDRESS_LABEL;
+	public static String SOUND_EDITOR_MUSIC_ADDRESS_LABEL;
+	public static String SOUND_EDITOR_PLAY_BUTTON_TOOLTIP;
+	public static String SOUND_EDITOR_PLAYING_TIME_LABEL;
+	public static String SOUND_EDITOR_PLAYYING_POSITION_LABEL;
+	public static String SOUND_EDITOR_EXPORT_BUTTON_TOOLTIP;
+	public static String SOUND_EDITOR_SONGS_LABEL;
+	public static String SOUND_EDITOR_SONG_ID_LABEL;
+	public static String SOUND_EDITOR_STOPPED;
+	public static String SOUND_EDITOR_STOP_BUTTON_TOOLTIP;
+	public static String SOUND_EDITOR_TITLE_LABEL;
+	public static String SOUND_EDITOR_UNKNOWN;
+	public static String SOUND_EDITOR_VOLUME_LABEL;
 
-    /**
-     * Messages for {@link SoundEditor}.
-     */
-    public static String MESSAGE_E500;
-    public static String MESSAGE_E501;
-    public static String MESSAGE_E502;
-    public static String MESSAGE_E503;
-    public static String MESSAGE_E504;
-    public static String MESSAGE_I505;
-    public static String MESSAGE_E506;
-    public static String MESSAGE_I507;
-    public static String MESSAGE_I508;
-    public static String MESSAGE_E509;
+	/**
+	 * Messages for {@link SoundEditor}.
+	 */
+	public static String MESSAGE_E500;
+	public static String MESSAGE_E501;
+	public static String MESSAGE_E502;
+	public static String MESSAGE_E503;
+	public static String MESSAGE_E504;
+	public static String MESSAGE_I505;
+	public static String MESSAGE_E506;
+	public static String MESSAGE_I507;
+	public static String MESSAGE_I508;
+	public static String MESSAGE_E509;
 
-    /**
-     * Initializes the constants.
-     */
-    static {
-	NLS.initializeMessages(Texts.class.getName(), Texts.class);
-    }
+	/**
+	 * Initializes the constants.
+	 */
+	static {
+		NLS.initializeMessages(Texts.class.getName(), Texts.class);
+	}
 }

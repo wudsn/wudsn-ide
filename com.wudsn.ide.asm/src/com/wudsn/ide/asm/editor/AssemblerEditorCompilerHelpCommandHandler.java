@@ -42,33 +42,33 @@ import com.wudsn.ide.asm.preferences.AssemblerPreferences;
  */
 public final class AssemblerEditorCompilerHelpCommandHandler extends AbstractHandler {
 
-    @Override
-    public Object execute(ExecutionEvent event) throws ExecutionException {
-	Shell shell;
-	shell = HandlerUtil.getActiveShell(event);
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		Shell shell;
+		shell = HandlerUtil.getActiveShell(event);
 
-	IEditorPart editor;
-	editor = HandlerUtil.getActiveEditorChecked(event);
-	if (!(editor instanceof AssemblerEditor)) {
-	    return null;
+		IEditorPart editor;
+		editor = HandlerUtil.getActiveEditorChecked(event);
+		if (!(editor instanceof AssemblerEditor)) {
+			return null;
+		}
+
+		AssemblerEditor assemblerEditor;
+		assemblerEditor = (AssemblerEditor) editor;
+
+		CompilerDefinition compilerDefinition = assemblerEditor.getCompilerDefinition();
+		AssemblerPreferences assemblerPreferences = AssemblerPlugin.getInstance().getPreferences();
+		String compilerExecutablePath = assemblerPreferences.getCompilerExecutablePath(compilerDefinition.getId());
+
+		try {
+			File file = compilerDefinition.getHelpFile(compilerExecutablePath);
+			Program.launch(file.getPath());
+
+		} catch (CoreException ex) {
+			// ERROR: Display text from core exception.
+			MessageDialog.openInformation(shell, com.wudsn.ide.base.Texts.DIALOG_TITLE, ex.getMessage());
+		}
+
+		return null;
 	}
-
-	AssemblerEditor assemblerEditor;
-	assemblerEditor = (AssemblerEditor) editor;
-
-	CompilerDefinition compilerDefinition = assemblerEditor.getCompilerDefinition();
-	AssemblerPreferences assemblerPreferences = AssemblerPlugin.getInstance().getPreferences();
-	String compilerExecutablePath = assemblerPreferences.getCompilerExecutablePath(compilerDefinition.getId());
-
-	try {
-	    File file = compilerDefinition.getHelpFile(compilerExecutablePath);
-	    Program.launch(file.getPath());
-
-	} catch (CoreException ex) {
-	    // ERROR: Display text from core exception.
-	    MessageDialog.openInformation(shell, com.wudsn.ide.base.Texts.DIALOG_TITLE, ex.getMessage());
-	}
-
-	return null;
-    }
 }

@@ -31,18 +31,18 @@ import org.eclipse.core.commands.Command;
  */
 public final class TextEditorReverseLinesCommandHandler extends TextEditorLinesCommandHandler {
 
-    @Override
-    protected void process(Command command, List<String> lines) {
-	if (command == null) {
-	    throw new IllegalArgumentException("Parameter 'command' must not be null.");
-	}
-	if (lines == null) {
-	    throw new IllegalArgumentException("Parameter 'lines' must not be null.");
-	}
-	for (int i = 0; i < lines.size() / 2; i++) {
-	    int j = lines.size() - i - 1;
-	    Collections.swap(lines, i, j);
+	@Override
+	protected void process(Command command, List<String> lines) {
+		if (command == null) {
+			throw new IllegalArgumentException("Parameter 'command' must not be null.");
+		}
+		if (lines == null) {
+			throw new IllegalArgumentException("Parameter 'lines' must not be null.");
+		}
+		for (int i = 0; i < lines.size() / 2; i++) {
+			int j = lines.size() - i - 1;
+			Collections.swap(lines, i, j);
 
+		}
 	}
-    }
 }

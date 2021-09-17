@@ -32,34 +32,34 @@ import com.wudsn.ide.asm.compiler.CompilerFiles;
  */
 public final class AssemblerEditorOpenFolderCommandHandler extends AssemblerEditorFilesCommandHandler {
 
-    public static final String OPEN_SOURCE_FOLDER = "com.wudsn.ide.asm.editor.AssemblerEditorOpenSourceFolderCommand";
-    public static final String OPEN_OUTPUT_FOLDER = "com.wudsn.ide.asm.editor.AssemblerEditorOpenOutputFolderCommand";
+	public static final String OPEN_SOURCE_FOLDER = "com.wudsn.ide.asm.editor.AssemblerEditorOpenSourceFolderCommand";
+	public static final String OPEN_OUTPUT_FOLDER = "com.wudsn.ide.asm.editor.AssemblerEditorOpenOutputFolderCommand";
 
-    @Override
-    protected void execute(ExecutionEvent event, AssemblerEditor assemblerEditor, CompilerFiles files)
-	    throws ExecutionException {
+	@Override
+	protected void execute(ExecutionEvent event, AssemblerEditor assemblerEditor, CompilerFiles files)
+			throws ExecutionException {
 
-	if (event == null) {
-	    throw new IllegalArgumentException("Parameter 'event' must not be null.");
-	}
-	if (assemblerEditor == null) {
-	    throw new IllegalArgumentException("Parameter 'assemblerEditor' must not be null.");
-	}
-	if (files == null) {
-	    throw new IllegalArgumentException("Parameter 'files' must not be null.");
-	}
+		if (event == null) {
+			throw new IllegalArgumentException("Parameter 'event' must not be null.");
+		}
+		if (assemblerEditor == null) {
+			throw new IllegalArgumentException("Parameter 'assemblerEditor' must not be null.");
+		}
+		if (files == null) {
+			throw new IllegalArgumentException("Parameter 'files' must not be null.");
+		}
 
-	String folderPath;
-	if (event.getCommand().getId().equals(OPEN_SOURCE_FOLDER)) {
-	    folderPath = files.sourceFile.folderPath;
-	} else if (event.getCommand().getId().equals(OPEN_OUTPUT_FOLDER)) {
-	    folderPath = files.outputFolderPath;
-	} else {
-	    folderPath = null;
-	}
-	if (folderPath != null) {
-	    Program.launch(folderPath);
-	}
+		String folderPath;
+		if (event.getCommand().getId().equals(OPEN_SOURCE_FOLDER)) {
+			folderPath = files.sourceFile.folderPath;
+		} else if (event.getCommand().getId().equals(OPEN_OUTPUT_FOLDER)) {
+			folderPath = files.outputFolderPath;
+		} else {
+			folderPath = null;
+		}
+		if (folderPath != null) {
+			Program.launch(folderPath);
+		}
 
-    }
+	}
 }

@@ -21,8 +21,8 @@ package com.wudsn.ide.gfx.converter.generic;
 
 public abstract class LinearBitMapConverter extends BitMapConverter {
 
-    protected LinearBitMapConverter() {
+	protected LinearBitMapConverter() {
 
-    }
+	}
 
 }

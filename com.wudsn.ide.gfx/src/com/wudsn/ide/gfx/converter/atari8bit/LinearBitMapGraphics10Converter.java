@@ -24,40 +24,40 @@ import com.wudsn.ide.gfx.converter.generic.LinearBitMapConverter;
 
 public class LinearBitMapGraphics10Converter extends LinearBitMapConverter {
 
-    public LinearBitMapGraphics10Converter() {
+	public LinearBitMapGraphics10Converter() {
 
-    }
-
-    @Override
-    public void convertToImageDataSize(FilesConverterData data) {
-	data.setImageDataWidth(data.getParameters().getColumns() * 8);
-	data.setImageDataHeight(data.getParameters().getRows());
-    }
-
-    @Override
-    public boolean convertToImageData(FilesConverterData data) {
-	if (data == null) {
-	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
-	int offset = 0;
-	int xpixels = 2;
-
-	for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
-	    for (int x1 = 0; x1 < data.getParameters().getColumns(); x1++) {
-		int b = data.getSourceFileByte(BIT_MAP_FILE, offset++);
-		if (b < 0) {
-		    return true;
-		}
-		for (int x2 = 0; x2 < 2; x2++) {
-		    int x = x1 * xpixels + x2;
-
-		    int color = (b & mask_4bit[x2]) >>> shift_4bit[x2];
-		    data.setDirectPixel(x, y1, color * 0x101010);
-		}
-
-	    }
+	@Override
+	public void convertToImageDataSize(FilesConverterData data) {
+		data.setImageDataWidth(data.getParameters().getColumns() * 8);
+		data.setImageDataHeight(data.getParameters().getRows());
 	}
-	return true;
-    }
+
+	@Override
+	public boolean convertToImageData(FilesConverterData data) {
+		if (data == null) {
+			throw new IllegalArgumentException("Parameter 'data' must not be null.");
+		}
+
+		int offset = 0;
+		int xpixels = 2;
+
+		for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
+			for (int x1 = 0; x1 < data.getParameters().getColumns(); x1++) {
+				int b = data.getSourceFileByte(BIT_MAP_FILE, offset++);
+				if (b < 0) {
+					return true;
+				}
+				for (int x2 = 0; x2 < 2; x2++) {
+					int x = x1 * xpixels + x2;
+
+					int color = (b & mask_4bit[x2]) >>> shift_4bit[x2];
+					data.setDirectPixel(x, y1, color * 0x101010);
+				}
+
+			}
+		}
+		return true;
+	}
 }

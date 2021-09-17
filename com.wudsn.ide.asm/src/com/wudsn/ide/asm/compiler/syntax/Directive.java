@@ -25,31 +25,31 @@ import com.wudsn.ide.asm.CPU;
 
 public final class Directive extends Instruction {
 
-    Directive(Set<CPU> cpus, int type, boolean caseSensitive, String name, String title, String proposal) {
-	super(cpus, type, caseSensitive, name, title, proposal);
+	Directive(Set<CPU> cpus, int type, boolean caseSensitive, String name, String title, String proposal) {
+		super(cpus, type, caseSensitive, name, title, proposal);
 
-	switch (type) {
-	case InstructionType.DIRECTIVE:
-	case InstructionType.BEGIN_IMPLEMENTATION_SECTION_DIRECTIVE:
-	case InstructionType.BEGIN_FOLDING_BLOCK_DIRECTIVE:
-	case InstructionType.END_FOLDING_BLOCK_DIRECTIVE:
-	case InstructionType.END_SECTION_DIRECTIVE:
+		switch (type) {
+		case InstructionType.DIRECTIVE:
+		case InstructionType.BEGIN_IMPLEMENTATION_SECTION_DIRECTIVE:
+		case InstructionType.BEGIN_FOLDING_BLOCK_DIRECTIVE:
+		case InstructionType.END_FOLDING_BLOCK_DIRECTIVE:
+		case InstructionType.END_SECTION_DIRECTIVE:
 
-	case InstructionType.BEGIN_ENUM_DEFINITION_SECTION_DIRECTIVE:
-	case InstructionType.BEGIN_STRUCTURE_DEFINITION_SECTION_DIRECTIVE:
-	case InstructionType.BEGIN_LOCAL_SECTION_DIRECTIVE:
-	case InstructionType.BEGIN_MACRO_DEFINITION_SECTION_DIRECTIVE:
-	case InstructionType.BEGIN_PROCEDURE_DEFINITION_SECTION_DIRECTIVE:
-	case InstructionType.BEGIN_PAGES_SECTION_DIRECTIVE:
-	case InstructionType.BEGIN_REPEAT_SECTION_DIRECTIVE:
+		case InstructionType.BEGIN_ENUM_DEFINITION_SECTION_DIRECTIVE:
+		case InstructionType.BEGIN_STRUCTURE_DEFINITION_SECTION_DIRECTIVE:
+		case InstructionType.BEGIN_LOCAL_SECTION_DIRECTIVE:
+		case InstructionType.BEGIN_MACRO_DEFINITION_SECTION_DIRECTIVE:
+		case InstructionType.BEGIN_PROCEDURE_DEFINITION_SECTION_DIRECTIVE:
+		case InstructionType.BEGIN_PAGES_SECTION_DIRECTIVE:
+		case InstructionType.BEGIN_REPEAT_SECTION_DIRECTIVE:
 
-	case InstructionType.SOURCE_INCLUDE_DIRECTIVE:
-	case InstructionType.BINARY_INCLUDE_DIRECTIVE:
-	case InstructionType.BINARY_OUTPUT_DIRECTIVE:
-	    break;
+		case InstructionType.SOURCE_INCLUDE_DIRECTIVE:
+		case InstructionType.BINARY_INCLUDE_DIRECTIVE:
+		case InstructionType.BINARY_OUTPUT_DIRECTIVE:
+			break;
 
-	default:
-	    throw new IllegalArgumentException("Unknown type " + type + " for directive '" + name + "'.");
+		default:
+			throw new IllegalArgumentException("Unknown type " + type + " for directive '" + name + "'.");
+		}
 	}
-    }
 }

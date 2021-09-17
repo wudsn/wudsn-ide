@@ -28,13 +28,13 @@ import org.eclipse.osgi.util.NLS;
  */
 public final class Texts extends NLS {
 
-    public static String MESSAGE_E100;
-    public static String MESSAGE_E101;
+	public static String MESSAGE_E100;
+	public static String MESSAGE_E101;
 
-    /**
-     * Initializes the constants.
-     */
-    static {
-	NLS.initializeMessages(Texts.class.getName(), Texts.class);
-    }
+	/**
+	 * Initializes the constants.
+	 */
+	static {
+		NLS.initializeMessages(Texts.class.getName(), Texts.class);
+	}
 }

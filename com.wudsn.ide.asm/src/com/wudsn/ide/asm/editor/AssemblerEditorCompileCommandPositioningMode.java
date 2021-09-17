@@ -27,13 +27,13 @@ package com.wudsn.ide.asm.editor;
  */
 public final class AssemblerEditorCompileCommandPositioningMode {
 
-    /**
-     * Creation is private.
-     */
-    private AssemblerEditorCompileCommandPositioningMode() {
+	/**
+	 * Creation is private.
+	 */
+	private AssemblerEditorCompileCommandPositioningMode() {
 
-    }
+	}
 
-    public static final String FIRST_ERROR_OR_WARNING = "FIRST_ERROR_OR_WARNING";
-    public static final String FIRST_ERROR = "FIRST_ERROR";
+	public static final String FIRST_ERROR_OR_WARNING = "FIRST_ERROR_OR_WARNING";
+	public static final String FIRST_ERROR = "FIRST_ERROR";
 }

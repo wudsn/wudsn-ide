@@ -27,5 +27,5 @@ package com.wudsn.ide.base.gui;
  */
 public interface Application extends ActionListener {
 
-    public MessageManager getMessageManager();
+	public MessageManager getMessageManager();
 }

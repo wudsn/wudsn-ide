@@ -31,84 +31,83 @@ import com.wudsn.ide.gfx.Texts;
 
 public final class TargetFileView {
 
-    private final FilePathField filePathField;
-    private final TextField fileSizeField;
+	private final FilePathField filePathField;
+	private final TextField fileSizeField;
 
-    public TargetFileView(Composite parent, String labelText, int dialogMode) {
-	if (parent == null) {
-	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+	public TargetFileView(Composite parent, String labelText, int dialogMode) {
+		if (parent == null) {
+			throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+		}
+		if (dialogMode != SWT.OPEN && dialogMode != SWT.SAVE) {
+			throw new IllegalArgumentException(
+					"Parameter 'dialogMode' must be 'SWT.OPEN' or 'SWT.SAVE'. Specified value is " + dialogMode + "-");
+		}
+
+		filePathField = new FilePathField(parent, labelText, dialogMode);
+
+		fileSizeField = new TextField(parent, Texts.FILE_SECTION_FIELD_SIZE_LABEL, SWT.READ_ONLY);
 	}
-	if (dialogMode != SWT.OPEN && dialogMode != SWT.SAVE) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'dialogMode' must be 'SWT.OPEN' or 'SWT.SAVE'. Specified value is " + dialogMode + "-");
+
+	public FilePathField getFilePathField() {
+		return filePathField;
 	}
 
-	filePathField = new FilePathField(parent, labelText, dialogMode);
-
-	fileSizeField = new TextField(parent, Texts.FILE_SECTION_FIELD_SIZE_LABEL, SWT.READ_ONLY);
-    }
-
-    public FilePathField getFilePathField() {
-	return filePathField;
-    }
-
-    /**
-     * Sets the path prefix which will be stripped automatically if it is the
-     * prefix of the user input.
-     * 
-     * @param filePathPrefix
-     *            The file path prefix, may be empty, not <code>null</code>.
-     */
-    public void setFilePathPrefix(IPath filePathPrefix) {
-	if (filePathPrefix == null) {
-	    throw new IllegalArgumentException("Parameter 'filePathPrefix' must not be null.");
+	/**
+	 * Sets the path prefix which will be stripped automatically if it is the prefix
+	 * of the user input.
+	 * 
+	 * @param filePathPrefix The file path prefix, may be empty, not
+	 *                       <code>null</code>.
+	 */
+	public void setFilePathPrefix(IPath filePathPrefix) {
+		if (filePathPrefix == null) {
+			throw new IllegalArgumentException("Parameter 'filePathPrefix' must not be null.");
+		}
+		filePathField.setFilePathPrefix(filePathPrefix);
 	}
-	filePathField.setFilePathPrefix(filePathPrefix);
-    }
 
-    public void setFilePath(String filePath) {
-	filePathField.setValue(filePath);
-    }
-
-    public String getFilePath() {
-	return filePathField.getValue();
-    }
-
-    public void setFileBytes(byte[] bytes) {
-	if (bytes == null) {
-	    fileSizeField.setValue(Texts.FILE_SECTION_FIELD_SIZE_NO_DATA);
-	} else {
-	    fileSizeField.setValue(HexUtility.getLongValueHexString(bytes.length));
-
-	    int step = (bytes.length + 15) / 16;
-	    int[] defaultValues = new int[16];
-
-	    for (int i = 0; i < 16; i++) {
-		defaultValues[i] = i * step;
-	    }
+	public void setFilePath(String filePath) {
+		filePathField.setValue(filePath);
 	}
-    }
 
-    public void setVisible(boolean visible) {
-	filePathField.setVisible(visible);
-	fileSizeField.setVisible(visible);
-    }
-
-    public void setEnabled(boolean enabled) {
-	filePathField.setEnabled(enabled);
-	fileSizeField.setEnabled(enabled);
-    }
-
-    /**
-     * Adds a change listener.
-     * 
-     * @param changeListener
-     *            The change listener , not <code>null</code>.
-     */
-    public void addChangeListener(ChangeListener changeListener) {
-	if (changeListener == null) {
-	    throw new IllegalArgumentException("Parameter 'changeListener' must not be null.");
+	public String getFilePath() {
+		return filePathField.getValue();
 	}
-	filePathField.addChangeListener(changeListener);
-    }
+
+	public void setFileBytes(byte[] bytes) {
+		if (bytes == null) {
+			fileSizeField.setValue(Texts.FILE_SECTION_FIELD_SIZE_NO_DATA);
+		} else {
+			fileSizeField.setValue(HexUtility.getLongValueHexString(bytes.length));
+
+			int step = (bytes.length + 15) / 16;
+			int[] defaultValues = new int[16];
+
+			for (int i = 0; i < 16; i++) {
+				defaultValues[i] = i * step;
+			}
+		}
+	}
+
+	public void setVisible(boolean visible) {
+		filePathField.setVisible(visible);
+		fileSizeField.setVisible(visible);
+	}
+
+	public void setEnabled(boolean enabled) {
+		filePathField.setEnabled(enabled);
+		fileSizeField.setEnabled(enabled);
+	}
+
+	/**
+	 * Adds a change listener.
+	 * 
+	 * @param changeListener The change listener , not <code>null</code>.
+	 */
+	public void addChangeListener(ChangeListener changeListener) {
+		if (changeListener == null) {
+			throw new IllegalArgumentException("Parameter 'changeListener' must not be null.");
+		}
+		filePathField.addChangeListener(changeListener);
+	}
 }

@@ -27,11 +27,10 @@ package com.wudsn.ide.base.gui;
  */
 public interface ActionListener {
 
-    /**
-     * Perform the operation associated with an action.
-     * 
-     * @param action
-     *            The action, not <code>null</code>.
-     */
-    public void performAction(Action action);
+	/**
+	 * Perform the operation associated with an action.
+	 * 
+	 * @param action The action, not <code>null</code>.
+	 */
+	public void performAction(Action action);
 }

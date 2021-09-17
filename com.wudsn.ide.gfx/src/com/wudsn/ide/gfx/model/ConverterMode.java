@@ -20,5 +20,5 @@
 package com.wudsn.ide.gfx.model;
 
 public enum ConverterMode {
-    NONE, RAW_FILE, RAW_IMAGE, CNV
+	NONE, RAW_FILE, RAW_IMAGE, CNV
 }

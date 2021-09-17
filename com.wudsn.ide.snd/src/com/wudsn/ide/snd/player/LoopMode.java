@@ -26,6 +26,6 @@ package com.wudsn.ide.snd.player;
  */
 public enum LoopMode {
 
-    UNKNOWN, YES, NO
+	UNKNOWN, YES, NO
 
 }

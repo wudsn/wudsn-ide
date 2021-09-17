@@ -23,14 +23,14 @@ import com.wudsn.ide.gfx.converter.Converter;
 
 public abstract class CharMapConverter extends Converter {
 
-    /**
-     * Source file ids.
-     */
-    public static final int CHAR_SET_FILE = 0;
-    public static final int CHAR_MAP_FILE = 1;
+	/**
+	 * Source file ids.
+	 */
+	public static final int CHAR_SET_FILE = 0;
+	public static final int CHAR_MAP_FILE = 1;
 
-    public CharMapConverter() {
+	public CharMapConverter() {
 
-    }
+	}
 
 }

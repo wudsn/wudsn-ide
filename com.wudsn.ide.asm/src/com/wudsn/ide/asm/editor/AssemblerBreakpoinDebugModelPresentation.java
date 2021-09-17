@@ -42,72 +42,72 @@ import org.eclipse.ui.ide.IDE;
  */
 public class AssemblerBreakpoinDebugModelPresentation implements IDebugModelPresentation {
 
-    @Override
-    public void dispose() {
-    }
-
-    @Override
-    public boolean isLabelProperty(Object element, String property) {
-	return false;
-    }
-
-    @Override
-    public void addListener(ILabelProviderListener listener) {
-    }
-
-    @Override
-    public void removeListener(ILabelProviderListener listener) {
-
-    }
-
-    @Override
-    public IEditorInput getEditorInput(Object element) {
-	AssemblerBreakpoint assemblerBreakpoint = (AssemblerBreakpoint) element;
-	IEditorInput result = assemblerBreakpoint.getEditorInput();
-	if (result == null) {
-	    IWorkbenchWindow activeWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-	    if (activeWindow == null) {
-		return null;
-	    }
-	    IWorkbenchPage activePage = activeWindow.getActivePage();
-	    if (activePage == null) {
-		return null;
-	    }
-	    IEditorPart part;
-	    try {
-		part = IDE.openEditor(activePage, assemblerBreakpoint.getMarker(), false);
-	    } catch (PartInitException ex) {
-		return null;
-	    }
-	    return part.getEditorInput();
+	@Override
+	public void dispose() {
 	}
-	return result;
-    }
 
-    @Override
-    public String getEditorId(IEditorInput input, Object element) {
-	AssemblerBreakpoint assemblerBreakpoint = (AssemblerBreakpoint) element;
-	return assemblerBreakpoint.getEditorId();
-    }
+	@Override
+	public boolean isLabelProperty(Object element, String property) {
+		return false;
+	}
 
-    @Override
-    public void setAttribute(String attribute, Object value) {
+	@Override
+	public void addListener(ILabelProviderListener listener) {
+	}
 
-    }
+	@Override
+	public void removeListener(ILabelProviderListener listener) {
 
-    @Override
-    public Image getImage(Object element) {
-	return null;
-    }
+	}
 
-    @Override
-    public String getText(Object element) {
-	return null;
-    }
+	@Override
+	public IEditorInput getEditorInput(Object element) {
+		AssemblerBreakpoint assemblerBreakpoint = (AssemblerBreakpoint) element;
+		IEditorInput result = assemblerBreakpoint.getEditorInput();
+		if (result == null) {
+			IWorkbenchWindow activeWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+			if (activeWindow == null) {
+				return null;
+			}
+			IWorkbenchPage activePage = activeWindow.getActivePage();
+			if (activePage == null) {
+				return null;
+			}
+			IEditorPart part;
+			try {
+				part = IDE.openEditor(activePage, assemblerBreakpoint.getMarker(), false);
+			} catch (PartInitException ex) {
+				return null;
+			}
+			return part.getEditorInput();
+		}
+		return result;
+	}
 
-    @Override
-    public void computeDetail(IValue value, IValueDetailListener listener) {
+	@Override
+	public String getEditorId(IEditorInput input, Object element) {
+		AssemblerBreakpoint assemblerBreakpoint = (AssemblerBreakpoint) element;
+		return assemblerBreakpoint.getEditorId();
+	}
 
-    }
+	@Override
+	public void setAttribute(String attribute, Object value) {
+
+	}
+
+	@Override
+	public Image getImage(Object element) {
+		return null;
+	}
+
+	@Override
+	public String getText(Object element) {
+		return null;
+	}
+
+	@Override
+	public void computeDetail(IValue value, IValueDetailListener listener) {
+
+	}
 
 }

@@ -24,15 +24,15 @@ import com.wudsn.ide.asm.editor.AssemblerEditor;
 
 public final class MadsEditor extends AssemblerEditor {
 
-    /**
-     * Creation is public. Called by the extension "org.eclipse.ui.editors".
-     */
-    public MadsEditor() {
+	/**
+	 * Creation is public. Called by the extension "org.eclipse.ui.editors".
+	 */
+	public MadsEditor() {
 
-    }
+	}
 
-    @Override
-    public String getCompilerId() {
-	return CompilerId.MADS;
-    }
+	@Override
+	public String getCompilerId() {
+		return CompilerId.MADS;
+	}
 }

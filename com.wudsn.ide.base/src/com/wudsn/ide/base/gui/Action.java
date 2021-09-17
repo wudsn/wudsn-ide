@@ -30,77 +30,74 @@ import org.eclipse.swt.events.SelectionListener;
  */
 public final class Action implements SelectionListener {
 
-    private int id;
-    private ActionListener actionListener;
-    private boolean enabled;
+	private int id;
+	private ActionListener actionListener;
+	private boolean enabled;
 
-    /**
-     * Creates a new action.
-     * 
-     * @param id
-     *            The action is, a non-negative integer.
-     * @param actionListener
-     *            The action listener, not <code>null</code>.
-     */
-    public Action(int id, ActionListener actionListener) {
-	if (id < 0) {
-	    throw new IllegalArgumentException("Parameter 'id' must not be negative. Specified value is " + id + ".");
+	/**
+	 * Creates a new action.
+	 * 
+	 * @param id             The action is, a non-negative integer.
+	 * @param actionListener The action listener, not <code>null</code>.
+	 */
+	public Action(int id, ActionListener actionListener) {
+		if (id < 0) {
+			throw new IllegalArgumentException("Parameter 'id' must not be negative. Specified value is " + id + ".");
+		}
+		if (actionListener == null) {
+			throw new IllegalArgumentException("Parameter 'actionListener' must not be null.");
+		}
+		this.id = id;
+		this.actionListener = actionListener;
+		this.enabled = true;
 	}
-	if (actionListener == null) {
-	    throw new IllegalArgumentException("Parameter 'actionListener' must not be null.");
+
+	/**
+	 * Gets the id of the action.
+	 * 
+	 * @return The id of the action, a non-negative integer.
+	 */
+	public int getId() {
+		return id;
 	}
-	this.id = id;
-	this.actionListener = actionListener;
-	this.enabled = true;
-    }
 
-    /**
-     * Gets the id of the action.
-     * 
-     * @return The id of the action, a non-negative integer.
-     */
-    public int getId() {
-	return id;
-    }
+	/**
+	 * Sets the enabled state of the action. Disabled actions do not fire.
+	 * 
+	 * @param enabled <code>true</code> to enable the action, <code>false</code> to
+	 *                disable the action.
+	 */
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 
-    /**
-     * Sets the enabled state of the action. Disabled actions do not fire.
-     * 
-     * @param enabled
-     *            <code>true</code> to enable the action, <code>false</code> to
-     *            disable the action.
-     */
-    public void setEnabled(boolean enabled) {
-	this.enabled = enabled;
-
-    }
-
-    /**
-     * Callback from SWT, do not use.
-     */
-    @Override
-    public void widgetDefaultSelected(SelectionEvent e) {
-	performAction();
-    }
-
-    /**
-     * Callback from SWT, do not use.
-     */
-    @Override
-    public void widgetSelected(SelectionEvent e) {
-	performAction();
-
-    }
-
-    private void performAction() {
-	if (enabled) {
-	    actionListener.performAction(this);
 	}
-    }
 
-    @Override
-    public String toString() {
-	return "actionId=" + id;
-    }
+	/**
+	 * Callback from SWT, do not use.
+	 */
+	@Override
+	public void widgetDefaultSelected(SelectionEvent e) {
+		performAction();
+	}
+
+	/**
+	 * Callback from SWT, do not use.
+	 */
+	@Override
+	public void widgetSelected(SelectionEvent e) {
+		performAction();
+
+	}
+
+	private void performAction() {
+		if (enabled) {
+			actionListener.performAction(this);
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "actionId=" + id;
+	}
 
 }

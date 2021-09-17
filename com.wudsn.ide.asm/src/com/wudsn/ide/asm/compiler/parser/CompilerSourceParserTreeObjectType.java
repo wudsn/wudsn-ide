@@ -27,117 +27,115 @@ import com.wudsn.ide.asm.Texts;
  */
 public final class CompilerSourceParserTreeObjectType {
 
-    /**
-     * Creation is private.
-     */
-    private CompilerSourceParserTreeObjectType() {
-    }
-
-    /**
-     * Default-type
-     */
-    public static final int DEFAULT = 0;
-
-    public static final int DEFINITION_SECTION = 1;
-    public static final int IMPLEMENTATION_SECTION = 2;
-
-    public static final int EQUATE_DEFINITION = 3;
-    public static final int LABEL_DEFINITION = 4;
-
-    public static final int ENUM_DEFINITION_SECTION = 5;
-    public static final int STRUCTURE_DEFINITION_SECTION = 6;
-    public static final int LOCAL_SECTION = 7;
-    public static final int MACRO_DEFINITION_SECTION = 8;
-    public static final int PAGES_SECTION = 9;
-    public static final int PROCEDURE_DEFINITION_SECTION = 10;
-    public static final int REPEAT_SECTION = 11;
-
-    public static final int SOURCE_INCLUDE = 12;
-    public static final int BINARY_INCLUDE = 13;
-    public static final int BINARY_OUTPUT = 14;
-
-    /**
-     * Gets the localized text for a compiler source parser tree object type.
-     * 
-     * @param type
-     *            The type, see constants of this class.
-     * @return The localized text, may be empty but not <code>null</code>.
-     */
-    public static String getText(int type) {
-	String result;
-	switch (type) {
-	case DEFAULT:
-	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_DEFAULT;
-	    break;
-	case DEFINITION_SECTION:
-	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_DEFINITION_SECTION;
-	    break;
-	case IMPLEMENTATION_SECTION:
-	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_IMPLEMENTATION_SECTION;
-	    break;
-	case EQUATE_DEFINITION:
-	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_EQUATE_DEFINITION;
-	    break;
-	case LABEL_DEFINITION:
-	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_LABEL_DEFINITION;
-	    break;
-	case ENUM_DEFINITION_SECTION:
-	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_ENUM_DEFINITION_SECTION;
-	    break;
-	case STRUCTURE_DEFINITION_SECTION:
-	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_STRUCTURE_DEFINITION_SECTION;
-	    break;
-	case LOCAL_SECTION:
-	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_LOCAL_SECTION;
-	    break;
-	case MACRO_DEFINITION_SECTION:
-	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_MACRO_DEFINITION_SECTION;
-	    break;
-	case PAGES_SECTION:
-	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_PAGES_SECTION;
-	    break;
-	case PROCEDURE_DEFINITION_SECTION:
-	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_PROCEDURE_DEFINITION_SECTION;
-	    break;
-	case REPEAT_SECTION:
-	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_REPEAT_SECTION;
-	    break;
-	case SOURCE_INCLUDE:
-	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_SOURCE_INCLUDE;
-	    break;
-	case BINARY_INCLUDE:
-	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_BINARY_INCLUDE;
-	    break;
-	case BINARY_OUTPUT:
-	    result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_BINARY_OUTPUT;
-	    break;
-	default:
-	    throw new IllegalArgumentException("Unknown type " + type + ".");
+	/**
+	 * Creation is private.
+	 */
+	private CompilerSourceParserTreeObjectType() {
 	}
-	return result;
 
-    }
+	/**
+	 * Default-type
+	 */
+	public static final int DEFAULT = 0;
 
-    /**
-     * Determines if instructions are allowed in the given type of section.
-     * 
-     * @param type
-     *            The type of the tree object, {link
-     *            {@link CompilerSourceParserTreeObjectType}
-     * @return <code>true</code> if instructions are allowed, <code>false</code>
-     *         otherwise.
-     * 
-     * @since 1.6.0
-     */
-    public static boolean areInstructionsAllowed(int type) {
-	// Within ENUM_DEFINITION_SECTION everything is an equate.
-	// Within STRUCTURE_DEFINITION_SECTION everything is a label.
-	switch (type) {
-	case CompilerSourceParserTreeObjectType.ENUM_DEFINITION_SECTION:
-	case CompilerSourceParserTreeObjectType.STRUCTURE_DEFINITION_SECTION:
-	    return false;
-	default:
-	    return true;
+	public static final int DEFINITION_SECTION = 1;
+	public static final int IMPLEMENTATION_SECTION = 2;
+
+	public static final int EQUATE_DEFINITION = 3;
+	public static final int LABEL_DEFINITION = 4;
+
+	public static final int ENUM_DEFINITION_SECTION = 5;
+	public static final int STRUCTURE_DEFINITION_SECTION = 6;
+	public static final int LOCAL_SECTION = 7;
+	public static final int MACRO_DEFINITION_SECTION = 8;
+	public static final int PAGES_SECTION = 9;
+	public static final int PROCEDURE_DEFINITION_SECTION = 10;
+	public static final int REPEAT_SECTION = 11;
+
+	public static final int SOURCE_INCLUDE = 12;
+	public static final int BINARY_INCLUDE = 13;
+	public static final int BINARY_OUTPUT = 14;
+
+	/**
+	 * Gets the localized text for a compiler source parser tree object type.
+	 * 
+	 * @param type The type, see constants of this class.
+	 * @return The localized text, may be empty but not <code>null</code>.
+	 */
+	public static String getText(int type) {
+		String result;
+		switch (type) {
+		case DEFAULT:
+			result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_DEFAULT;
+			break;
+		case DEFINITION_SECTION:
+			result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_DEFINITION_SECTION;
+			break;
+		case IMPLEMENTATION_SECTION:
+			result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_IMPLEMENTATION_SECTION;
+			break;
+		case EQUATE_DEFINITION:
+			result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_EQUATE_DEFINITION;
+			break;
+		case LABEL_DEFINITION:
+			result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_LABEL_DEFINITION;
+			break;
+		case ENUM_DEFINITION_SECTION:
+			result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_ENUM_DEFINITION_SECTION;
+			break;
+		case STRUCTURE_DEFINITION_SECTION:
+			result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_STRUCTURE_DEFINITION_SECTION;
+			break;
+		case LOCAL_SECTION:
+			result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_LOCAL_SECTION;
+			break;
+		case MACRO_DEFINITION_SECTION:
+			result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_MACRO_DEFINITION_SECTION;
+			break;
+		case PAGES_SECTION:
+			result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_PAGES_SECTION;
+			break;
+		case PROCEDURE_DEFINITION_SECTION:
+			result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_PROCEDURE_DEFINITION_SECTION;
+			break;
+		case REPEAT_SECTION:
+			result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_REPEAT_SECTION;
+			break;
+		case SOURCE_INCLUDE:
+			result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_SOURCE_INCLUDE;
+			break;
+		case BINARY_INCLUDE:
+			result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_BINARY_INCLUDE;
+			break;
+		case BINARY_OUTPUT:
+			result = Texts.COMPILER_SOURCE_PARSER_TREE_OBJECT_TYPE_BINARY_OUTPUT;
+			break;
+		default:
+			throw new IllegalArgumentException("Unknown type " + type + ".");
+		}
+		return result;
+
 	}
-    }
+
+	/**
+	 * Determines if instructions are allowed in the given type of section.
+	 * 
+	 * @param type The type of the tree object, {link
+	 *             {@link CompilerSourceParserTreeObjectType}
+	 * @return <code>true</code> if instructions are allowed, <code>false</code>
+	 *         otherwise.
+	 * 
+	 * @since 1.6.0
+	 */
+	public static boolean areInstructionsAllowed(int type) {
+		// Within ENUM_DEFINITION_SECTION everything is an equate.
+		// Within STRUCTURE_DEFINITION_SECTION everything is a label.
+		switch (type) {
+		case CompilerSourceParserTreeObjectType.ENUM_DEFINITION_SECTION:
+		case CompilerSourceParserTreeObjectType.STRUCTURE_DEFINITION_SECTION:
+			return false;
+		default:
+			return true;
+		}
+	}
 }

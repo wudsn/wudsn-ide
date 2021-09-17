@@ -20,21 +20,20 @@
 package com.wudsn.ide.asm.compiler;
 
 public class CompilerFileWriter {
-    /**
-     * Creates or updates a disk image file with the output file.
-     * 
-     * @param files
-     *            The compiler files, not <code>null</code>.
-     * 
-     * @return <code>true</code> if no disk image is required or it is required
-     *         and has been updated.
-     * 
-     * @since 1.6.3
-     */
-    public boolean createOrUpdateDiskImage(CompilerFiles files) {
-	if (files == null) {
-	    throw new IllegalArgumentException("Parameter 'outputFile' must not be null.");
+	/**
+	 * Creates or updates a disk image file with the output file.
+	 * 
+	 * @param files The compiler files, not <code>null</code>.
+	 * 
+	 * @return <code>true</code> if no disk image is required or it is required and
+	 *         has been updated.
+	 * 
+	 * @since 1.6.3
+	 */
+	public boolean createOrUpdateDiskImage(CompilerFiles files) {
+		if (files == null) {
+			throw new IllegalArgumentException("Parameter 'outputFile' must not be null.");
+		}
+		return true;
 	}
-	return true;
-    }
 }

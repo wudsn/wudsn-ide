@@ -39,138 +39,137 @@ import com.wudsn.ide.base.common.Profiler;
  */
 final class AssemblerContentOutlineTreeContentProvider implements ITreeContentProvider {
 
-    /**
-     * The surrounding content outline page.
-     */
-    private final AssemblerContentOutlinePage assemblerContentOutlinePage;
+	/**
+	 * The surrounding content outline page.
+	 */
+	private final AssemblerContentOutlinePage assemblerContentOutlinePage;
 
-    /**
-     * The last editor input which was parsed.
-     */
-    private IEditorInput input;
+	/**
+	 * The last editor input which was parsed.
+	 */
+	private IEditorInput input;
 
-    /**
-     * The result of the last parse process.
-     */
-    private CompilerSourceFile compilerSourceFile;
+	/**
+	 * The result of the last parse process.
+	 */
+	private CompilerSourceFile compilerSourceFile;
 
-    /**
-     * Called by
-     * {@link AssemblerContentOutlinePage#createControl(org.eclipse.swt.widgets.Composite)}
-     * .
-     * 
-     * @param assemblerContentOutlinePage
-     *            The outline page, not <code>null</code>.
-     */
-    AssemblerContentOutlineTreeContentProvider(AssemblerContentOutlinePage assemblerContentOutlinePage) {
-	if (assemblerContentOutlinePage == null) {
-	    throw new IllegalArgumentException("Parameter 'assemblerContentOutlinePage' must not be null.");
-	}
-	this.assemblerContentOutlinePage = assemblerContentOutlinePage;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getParent(Object element) {
-	if (element instanceof CompilerSourceParserTreeObject) {
-	    return ((CompilerSourceParserTreeObject) element).getParent();
+	/**
+	 * Called by
+	 * {@link AssemblerContentOutlinePage#createControl(org.eclipse.swt.widgets.Composite)}
+	 * .
+	 * 
+	 * @param assemblerContentOutlinePage The outline page, not <code>null</code>.
+	 */
+	AssemblerContentOutlineTreeContentProvider(AssemblerContentOutlinePage assemblerContentOutlinePage) {
+		if (assemblerContentOutlinePage == null) {
+			throw new IllegalArgumentException("Parameter 'assemblerContentOutlinePage' must not be null.");
+		}
+		this.assemblerContentOutlinePage = assemblerContentOutlinePage;
 	}
 
-	return null;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Object getParent(Object element) {
+		if (element instanceof CompilerSourceParserTreeObject) {
+			return ((CompilerSourceParserTreeObject) element).getParent();
+		}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasChildren(Object element) {
-	if (element instanceof CompilerSourceParserTreeObject) {
-	    return (((CompilerSourceParserTreeObject) element).hasChildren());
+		return null;
 	}
 
-	return false;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean hasChildren(Object element) {
+		if (element instanceof CompilerSourceParserTreeObject) {
+			return (((CompilerSourceParserTreeObject) element).hasChildren());
+		}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object[] getChildren(Object parentElement) {
-	if (parentElement instanceof CompilerSourceParserTreeObject) {
-	    return ((CompilerSourceParserTreeObject) parentElement).getChildrenAsArray();
-	}
-	return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object[] getElements(Object inputElement) {
-	Object[] result;
-	if (inputElement == input && compilerSourceFile != null) {
-	    List<CompilerSourceParserTreeObject> sections;
-	    sections = compilerSourceFile.getSections();
-	    result = sections.toArray(new Object[sections.size()]);
-	} else {
-	    result = new Object[0];
+		return false;
 	}
 
-	return result;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void dispose() {
-	input = null;
-    }
-
-    /**
-     * Gets the compiler source file of the last parse process.
-     * 
-     * @return The compiler source file of the last parse process or
-     *         <code>null</code>.
-     */
-    CompilerSourceFile getCompilerSourceFile() {
-	return compilerSourceFile;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-	if (oldInput instanceof IEditorInput) {
-	    input = null;
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Object[] getChildren(Object parentElement) {
+		if (parentElement instanceof CompilerSourceParserTreeObject) {
+			return ((CompilerSourceParserTreeObject) parentElement).getChildrenAsArray();
+		}
+		return null;
 	}
 
-	if (newInput instanceof IEditorInput) {
-	    input = (IEditorInput) newInput;
-	    parse();
-	}
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Object[] getElements(Object inputElement) {
+		Object[] result;
+		if (inputElement == input && compilerSourceFile != null) {
+			List<CompilerSourceParserTreeObject> sections;
+			sections = compilerSourceFile.getSections();
+			result = sections.toArray(new Object[sections.size()]);
+		} else {
+			result = new Object[0];
+		}
 
-    /**
-     * Parses the new input and builds up the parse tree.
-     */
-    private void parse() {
-
-	AssemblerEditor editor = this.assemblerContentOutlinePage.editor;
-	IDocument document = editor.getDocumentProvider().getDocument(editor.getEditorInput());
-
-	if (document != null) {
-	    CompilerSourceParser parser = editor.createCompilerSourceParser();
-	    compilerSourceFile = parser.createCompilerSourceFile(editor.getCurrentFile(), document);
-	    Profiler profiler = new Profiler(parser);
-	    profiler.begin("parse", editor.getTitle());
-	    parser.parse(compilerSourceFile, null);
-	    profiler.end("parse");
+		return result;
 	}
 
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void dispose() {
+		input = null;
+	}
+
+	/**
+	 * Gets the compiler source file of the last parse process.
+	 * 
+	 * @return The compiler source file of the last parse process or
+	 *         <code>null</code>.
+	 */
+	CompilerSourceFile getCompilerSourceFile() {
+		return compilerSourceFile;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+		if (oldInput instanceof IEditorInput) {
+			input = null;
+		}
+
+		if (newInput instanceof IEditorInput) {
+			input = (IEditorInput) newInput;
+			parse();
+		}
+	}
+
+	/**
+	 * Parses the new input and builds up the parse tree.
+	 */
+	private void parse() {
+
+		AssemblerEditor editor = this.assemblerContentOutlinePage.editor;
+		IDocument document = editor.getDocumentProvider().getDocument(editor.getEditorInput());
+
+		if (document != null) {
+			CompilerSourceParser parser = editor.createCompilerSourceParser();
+			compilerSourceFile = parser.createCompilerSourceFile(editor.getCurrentFile(), document);
+			Profiler profiler = new Profiler(parser);
+			profiler.begin("parse", editor.getTitle());
+			parser.parse(compilerSourceFile, null);
+			profiler.end("parse");
+		}
+
+	}
 
 }

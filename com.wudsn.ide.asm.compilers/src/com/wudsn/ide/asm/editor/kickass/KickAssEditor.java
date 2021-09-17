@@ -24,15 +24,15 @@ import com.wudsn.ide.asm.editor.AssemblerEditor;
 
 public final class KickAssEditor extends AssemblerEditor {
 
-    /**
-     * Creation is public. Called by the extension "org.eclipse.ui.editors".
-     */
-    public KickAssEditor() {
+	/**
+	 * Creation is public. Called by the extension "org.eclipse.ui.editors".
+	 */
+	public KickAssEditor() {
 
-    }
+	}
 
-    @Override
-    public String getCompilerId() {
-	return CompilerId.KICKASS;
-    }
+	@Override
+	public String getCompilerId() {
+		return CompilerId.KICKASS;
+	}
 }

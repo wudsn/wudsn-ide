@@ -28,43 +28,43 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 final class MadsCompilerSourceParser extends CompilerSourceParser {
 
-    @Override
-    protected void parseLine(int startOffset, String symbol, int symbolOffset, String instruction,
-	    int instructionOffset, String operand, String comment) {
+	@Override
+	protected void parseLine(int startOffset, String symbol, int symbolOffset, String instruction,
+			int instructionOffset, String operand, String comment) {
 
-	if (symbol.length() > 0) {
+		if (symbol.length() > 0) {
 
-	    if (instruction.equals("=") || instruction.equals("EQU")) {
-		createEquateDefinitionChild(startOffset, startOffset + symbolOffset, symbol, operand, comment);
+			if (instruction.equals("=") || instruction.equals("EQU")) {
+				createEquateDefinitionChild(startOffset, startOffset + symbolOffset, symbol, operand, comment);
 
-	    } else {
-		createLabelDefinitionChild(startOffset, startOffset + symbolOffset, symbol, comment);
-	    }
+			} else {
+				createLabelDefinitionChild(startOffset, startOffset + symbolOffset, symbol, comment);
+			}
 
-	} // Symbol not empty
+		} // Symbol not empty
 
-	// TODO Make .VAR an own type of instruction
-	if (instruction.equals(".VAR") || instruction.equals(".ZPVAR")) {
-	    operand = operand.trim();
-	    int index = operand.indexOf('=');
-	    String variable;
-	    String value;
-	    if (index < 0) {
-		variable = operand;
-		value = "";
-	    } else {
-		variable = operand.substring(0, index).trim();
-		value = operand.substring(index).trim();
-		if (value.startsWith("=")) {
-		    value = value.substring(1).trim();
+		// TODO Make .VAR an own type of instruction
+		if (instruction.equals(".VAR") || instruction.equals(".ZPVAR")) {
+			operand = operand.trim();
+			int index = operand.indexOf('=');
+			String variable;
+			String value;
+			if (index < 0) {
+				variable = operand;
+				value = "";
+			} else {
+				variable = operand.substring(0, index).trim();
+				value = operand.substring(index).trim();
+				if (value.startsWith("=")) {
+					value = value.substring(1).trim();
+				}
+			}
+			if (value.length() > 0) {
+				createEquateDefinitionChild(startOffset, startOffset + instructionOffset, variable, value, comment);
+			} else {
+				createLabelDefinitionChild(startOffset, startOffset + instructionOffset, variable, comment);
+			}
+
 		}
-	    }
-	    if (value.length() > 0) {
-		createEquateDefinitionChild(startOffset, startOffset + instructionOffset, variable, value, comment);
-	    } else {
-		createLabelDefinitionChild(startOffset, startOffset + instructionOffset, variable, comment);
-	    }
-
 	}
-    }
 }

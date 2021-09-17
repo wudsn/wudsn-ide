@@ -10,23 +10,23 @@ import org.eclipse.core.runtime.content.ITextContentDescriber;
 
 public class ATASCIIFileContentDescriber implements ITextContentDescriber {
 
-    public ATASCIIFileContentDescriber() {
+	public ATASCIIFileContentDescriber() {
 
-    }
+	}
 
-    @Override
-    public int describe(InputStream contents, IContentDescription description) throws IOException {
-	return INDETERMINATE;
-    }
+	@Override
+	public int describe(InputStream contents, IContentDescription description) throws IOException {
+		return INDETERMINATE;
+	}
 
-    @Override
-    public QualifiedName[] getSupportedOptions() {
-	return new QualifiedName[0];
-    }
+	@Override
+	public QualifiedName[] getSupportedOptions() {
+		return new QualifiedName[0];
+	}
 
-    @Override
-    public int describe(Reader contents, IContentDescription description) throws IOException {
-	return INDETERMINATE;
-    }
+	@Override
+	public int describe(Reader contents, IContentDescription description) throws IOException {
+		return INDETERMINATE;
+	}
 
 }

@@ -24,15 +24,15 @@ import com.wudsn.ide.asm.editor.AssemblerEditor;
 
 public final class XasmEditor extends AssemblerEditor {
 
-    /**
-     * Creation is public. Called by the extension "org.eclipse.ui.editors".
-     */
-    public XasmEditor() {
+	/**
+	 * Creation is public. Called by the extension "org.eclipse.ui.editors".
+	 */
+	public XasmEditor() {
 
-    }
+	}
 
-    @Override
-    public String getCompilerId() {
-	return CompilerId.XASM;
-    }
+	@Override
+	public String getCompilerId() {
+		return CompilerId.XASM;
+	}
 }

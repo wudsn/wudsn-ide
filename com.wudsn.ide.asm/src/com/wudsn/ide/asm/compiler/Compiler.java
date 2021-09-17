@@ -28,71 +28,68 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 public abstract class Compiler {
 
-    // See {@link CompilerId} for predefined ids.
-    private CompilerDefinition definition;
+	// See {@link CompilerId} for predefined ids.
+	private CompilerDefinition definition;
 
-    /**
-     * Creation is protected.
-     */
-    protected Compiler() {
+	/**
+	 * Creation is protected.
+	 */
+	protected Compiler() {
 
-    }
-
-    /**
-     * Sets the definition of the compiler. Called by {@link CompilerRegistry}
-     * only.
-     * 
-     * @param definition
-     *            The definition if the compiler, not <code>null</code>.
-     */
-    final void setDefinition(CompilerDefinition definition) {
-	if (definition == null) {
-	    throw new IllegalArgumentException("Parameter 'type' must not be null.");
 	}
-	this.definition = definition;
-    }
 
-    /**
-     * Gets the definition of the compiler.
-     * 
-     * @return The definition of the compiler, not <code>null</code>.
-     */
-    public final CompilerDefinition getDefinition() {
-	if (definition == null) {
-	    throw new IllegalStateException("Field 'definition' must not be null.");
+	/**
+	 * Sets the definition of the compiler. Called by {@link CompilerRegistry} only.
+	 * 
+	 * @param definition The definition if the compiler, not <code>null</code>.
+	 */
+	final void setDefinition(CompilerDefinition definition) {
+		if (definition == null) {
+			throw new IllegalArgumentException("Parameter 'type' must not be null.");
+		}
+		this.definition = definition;
 	}
-	return definition;
-    }
 
-    /**
-     * Creates a compiler source parser.
-     * 
-     * @return The compiler source parser, not <code>null</code>.
-     */
-    public abstract CompilerSourceParser createSourceParser();
+	/**
+	 * Gets the definition of the compiler.
+	 * 
+	 * @return The definition of the compiler, not <code>null</code>.
+	 */
+	public final CompilerDefinition getDefinition() {
+		if (definition == null) {
+			throw new IllegalStateException("Field 'definition' must not be null.");
+		}
+		return definition;
+	}
 
-    /**
-     * Checks if the exit code of the compiler process represents success. By
-     * default <code>0</code> is interpreted as success, but a compiler may
-     * override this.
-     * 
-     * @param exitValue
-     *            The exit code of the compiler process.
-     * @return <code>true</code> if the exit code represents success (only
-     *         information and warning messages) or a failure (at least one
-     *         error message).
-     * 
-     * @since 1.7.0
-     */
-    public boolean isSuccessExitValue(int exitValue) {
-	return exitValue == 0;
-    }
+	/**
+	 * Creates a compiler source parser.
+	 * 
+	 * @return The compiler source parser, not <code>null</code>.
+	 */
+	public abstract CompilerSourceParser createSourceParser();
 
-    /**
-     * Creates the parser to for the compiler output.
-     * 
-     * @return The parser to for the compiler output, not <code>null</code>.
-     */
-    public abstract CompilerProcessLogParser createLogParser();
+	/**
+	 * Checks if the exit code of the compiler process represents success. By
+	 * default <code>0</code> is interpreted as success, but a compiler may override
+	 * this.
+	 * 
+	 * @param exitValue The exit code of the compiler process.
+	 * @return <code>true</code> if the exit code represents success (only
+	 *         information and warning messages) or a failure (at least one error
+	 *         message).
+	 * 
+	 * @since 1.7.0
+	 */
+	public boolean isSuccessExitValue(int exitValue) {
+		return exitValue == 0;
+	}
+
+	/**
+	 * Creates the parser to for the compiler output.
+	 * 
+	 * @return The parser to for the compiler output, not <code>null</code>.
+	 */
+	public abstract CompilerProcessLogParser createLogParser();
 
 }

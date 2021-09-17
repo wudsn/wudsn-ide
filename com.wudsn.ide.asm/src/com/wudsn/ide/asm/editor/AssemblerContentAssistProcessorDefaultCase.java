@@ -27,13 +27,13 @@ package com.wudsn.ide.asm.editor;
  */
 public final class AssemblerContentAssistProcessorDefaultCase {
 
-    /**
-     * Creation is private.
-     */
-    private AssemblerContentAssistProcessorDefaultCase() {
+	/**
+	 * Creation is private.
+	 */
+	private AssemblerContentAssistProcessorDefaultCase() {
 
-    }
+	}
 
-    public static final String UPPER_CASE = "UPPER_CASE";
-    public static final String LOWER_CASE = "LOWER_CASE";
+	public static final String UPPER_CASE = "UPPER_CASE";
+	public static final String LOWER_CASE = "LOWER_CASE";
 }

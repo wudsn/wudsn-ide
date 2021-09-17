@@ -23,43 +23,43 @@ import com.wudsn.ide.gfx.converter.FilesConverterData;
 
 public class TiledBitMapMultiColorConverter extends TiledBitMapConverter {
 
-    public TiledBitMapMultiColorConverter() {
+	public TiledBitMapMultiColorConverter() {
 
-    }
-
-    @Override
-    public void convertToImageDataSize(FilesConverterData data) {
-	data.setImageDataWidth(data.getParameters().getColumns() * (4 + data.getParameters().getSpacingWidth()));
-	data.setImageDataHeight(data.getParameters().getRows() * (8 + data.getParameters().getSpacingWidth()));
-    }
-
-    @Override
-    public boolean convertToImageData(FilesConverterData data) {
-	if (data == null) {
-	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
-	int offset = 0;
-	int xpixels = 4 + data.getParameters().getSpacingWidth();
-	int ypixels = 8 + data.getParameters().getSpacingWidth();
+	@Override
+	public void convertToImageDataSize(FilesConverterData data) {
+		data.setImageDataWidth(data.getParameters().getColumns() * (4 + data.getParameters().getSpacingWidth()));
+		data.setImageDataHeight(data.getParameters().getRows() * (8 + data.getParameters().getSpacingWidth()));
+	}
 
-	for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
-	    for (int x1 = 0; x1 < data.getParameters().getColumns(); x1++) {
-		for (int y2 = 0; y2 < 8; y2++) {
-		    int b = data.getSourceFileByte(BIT_MAP_FILE, offset++);
-		    if (b < 0) {
-			return true;
-		    }
-		    int y = y1 * ypixels + y2;
-		    for (int x2 = 0; x2 < 4; x2++) {
-			int x = x1 * xpixels + x2;
-
-			int color = (b & mask_2bit[x2]) >>> shift_2bit[x2];
-			data.setPalettePixel(x, y, color);
-		    }
+	@Override
+	public boolean convertToImageData(FilesConverterData data) {
+		if (data == null) {
+			throw new IllegalArgumentException("Parameter 'data' must not be null.");
 		}
-	    }
+
+		int offset = 0;
+		int xpixels = 4 + data.getParameters().getSpacingWidth();
+		int ypixels = 8 + data.getParameters().getSpacingWidth();
+
+		for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
+			for (int x1 = 0; x1 < data.getParameters().getColumns(); x1++) {
+				for (int y2 = 0; y2 < 8; y2++) {
+					int b = data.getSourceFileByte(BIT_MAP_FILE, offset++);
+					if (b < 0) {
+						return true;
+					}
+					int y = y1 * ypixels + y2;
+					for (int x2 = 0; x2 < 4; x2++) {
+						int x = x1 * xpixels + x2;
+
+						int color = (b & mask_2bit[x2]) >>> shift_2bit[x2];
+						data.setPalettePixel(x, y, color);
+					}
+				}
+			}
+		}
+		return true;
 	}
-	return true;
-    }
 }

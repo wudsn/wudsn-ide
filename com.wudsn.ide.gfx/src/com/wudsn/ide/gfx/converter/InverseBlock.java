@@ -26,44 +26,44 @@ package com.wudsn.ide.gfx.converter;
  */
 public final class InverseBlock {
 
-    private int column1;
-    private int column2;
-    private int row1;
-    private int row2;
-    private Integer inverseColor;
-    private boolean inverseIfConflict;
+	private int column1;
+	private int column2;
+	private int row1;
+	private int row2;
+	private Integer inverseColor;
+	private boolean inverseIfConflict;
 
-    InverseBlock(int column1, int column2, int row1, int row2, Integer inverseColor, boolean inverseIfConflict) {
-	this.column1 = column1;
-	this.column2 = column2;
-	this.row1 = row1;
-	this.row2 = row2;
-	this.inverseColor = inverseColor;
-	this.inverseIfConflict = inverseIfConflict;
+	InverseBlock(int column1, int column2, int row1, int row2, Integer inverseColor, boolean inverseIfConflict) {
+		this.column1 = column1;
+		this.column2 = column2;
+		this.row1 = row1;
+		this.row2 = row2;
+		this.inverseColor = inverseColor;
+		this.inverseIfConflict = inverseIfConflict;
 
-    }
+	}
 
-    public int getColumn1() {
-	return column1;
-    }
+	public int getColumn1() {
+		return column1;
+	}
 
-    public int getColumn2() {
-	return column2;
-    }
+	public int getColumn2() {
+		return column2;
+	}
 
-    public int getRow1() {
-	return row1;
-    }
+	public int getRow1() {
+		return row1;
+	}
 
-    public int getRow2() {
-	return row2;
-    }
+	public int getRow2() {
+		return row2;
+	}
 
-    public Integer getInverseColor() {
-	return inverseColor;
-    }
+	public Integer getInverseColor() {
+		return inverseColor;
+	}
 
-    public boolean isInverseIfConflict() {
-	return inverseIfConflict;
-    }
+	public boolean isInverseIfConflict() {
+		return inverseIfConflict;
+	}
 }

@@ -32,37 +32,37 @@ import org.eclipse.core.commands.Command;
  */
 abstract class TextEditorSortLinesCommandHandler extends TextEditorLinesCommandHandler {
 
-    @Override
-    protected void process(Command command, List<String> lines) {
-	if (command == null) {
-	    throw new IllegalArgumentException("Parameter 'command' must not be null.");
-	}
-	if (lines == null) {
-	    throw new IllegalArgumentException("Parameter 'lines' must not be null.");
-	}
-	Comparator<String> comparator = getComparator();
-	Collections.sort(lines, comparator);
-
-	if (command.getId().endsWith("WithoutDuplicatesCommand")) {
-	    int i = 0;
-	    while (lines.size() > 1 && i < lines.size() - 1) {
-		String line1 = lines.get(i);
-		String line2 = lines.get(i + 1);
-		int result = comparator.compare(line1, line2);
-		if (result == 0) {
-		    lines.remove(i + 1);
-		} else {
-		    i++;
+	@Override
+	protected void process(Command command, List<String> lines) {
+		if (command == null) {
+			throw new IllegalArgumentException("Parameter 'command' must not be null.");
 		}
-	    }
-	}
-    }
+		if (lines == null) {
+			throw new IllegalArgumentException("Parameter 'lines' must not be null.");
+		}
+		Comparator<String> comparator = getComparator();
+		Collections.sort(lines, comparator);
 
-    /**
-     * Sub classes must provide a comparator for strings.
-     * 
-     * @return The comparator, not <code>null</code>.
-     */
-    protected abstract Comparator<String> getComparator();
+		if (command.getId().endsWith("WithoutDuplicatesCommand")) {
+			int i = 0;
+			while (lines.size() > 1 && i < lines.size() - 1) {
+				String line1 = lines.get(i);
+				String line2 = lines.get(i + 1);
+				int result = comparator.compare(line1, line2);
+				if (result == 0) {
+					lines.remove(i + 1);
+				} else {
+					i++;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Sub classes must provide a comparator for strings.
+	 * 
+	 * @return The comparator, not <code>null</code>.
+	 */
+	protected abstract Comparator<String> getComparator();
 
 }

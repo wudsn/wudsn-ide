@@ -35,92 +35,92 @@ import com.wudsn.ide.gfx.converter.ImageConverterData;
  * >https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Rhino/
  * Download_Rhino"</a>.
  * 
- * TODO RHino is  embedded in J2SE 6 as the default Java scripting engine.: 
+ * TODO RHino is embedded in J2SE 6 as the default Java scripting engine.:
  */
 public final class GraphicsPlugin extends AbstractIDEPlugin {
 
-    /**
-     * The plugin id.
-     */
-    public static final String ID = "com.wudsn.ide.gfx";
+	/**
+	 * The plugin id.
+	 */
+	public static final String ID = "com.wudsn.ide.gfx";
 
-    /**
-     * Creates a new instance. Must be public for dynamic instantiation.
-     */
-    private static GraphicsPlugin plugin;
+	/**
+	 * Creates a new instance. Must be public for dynamic instantiation.
+	 */
+	private static GraphicsPlugin plugin;
 
-    /**
-     * The converter registry.
-     */
-    private ConverterRegistry converterRegistry;
+	/**
+	 * The converter registry.
+	 */
+	private ConverterRegistry converterRegistry;
 
-    /**
-     * The converter console.
-     */
-    private ConverterConsole converterConsole;
+	/**
+	 * The converter console.
+	 */
+	private ConverterConsole converterConsole;
 
-    /**
-     * The constructor
-     */
-    public GraphicsPlugin() {
-	converterRegistry = new ConverterRegistry();
-    }
-
-    @Override
-    protected String getPluginId() {
-	return ID;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void start(BundleContext context) throws Exception {
-	super.start(context);
-	plugin = this;
-	converterRegistry.init();
-	converterConsole = new ConverterConsole();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void stop(BundleContext context) throws Exception {
-	plugin = null;
-	super.stop(context);
-    }
-
-    /**
-     * Gets the shared plugin instance
-     * 
-     * @return The plug-in, not <code>null</code>.
-     */
-    public static GraphicsPlugin getInstance() {
-	if (plugin == null) {
-	    throw new IllegalStateException("Plugin not initialized or already stopped");
+	/**
+	 * The constructor
+	 */
+	public GraphicsPlugin() {
+		converterRegistry = new ConverterRegistry();
 	}
-	return plugin;
-    }
 
-    /**
-     * Gets the converter registry for this plugin.
-     * 
-     * @return The converter registry, not <code>null</code>.
-     */
-    public ConverterRegistry getConverterRegistry() {
-	if (converterRegistry == null) {
-	    throw new IllegalStateException("Field 'converterRegistry' must not be null.");
+	@Override
+	protected String getPluginId() {
+		return ID;
 	}
-	return converterRegistry;
-    }
 
-    /**
-     * Gets the converter console for this plugin.
-     * 
-     * @return The converter console, not <code>null</code>.
-     */
-    public ConverterConsole getConverterConsole() {
-	return converterConsole;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+		plugin = this;
+		converterRegistry.init();
+		converterConsole = new ConverterConsole();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void stop(BundleContext context) throws Exception {
+		plugin = null;
+		super.stop(context);
+	}
+
+	/**
+	 * Gets the shared plugin instance
+	 * 
+	 * @return The plug-in, not <code>null</code>.
+	 */
+	public static GraphicsPlugin getInstance() {
+		if (plugin == null) {
+			throw new IllegalStateException("Plugin not initialized or already stopped");
+		}
+		return plugin;
+	}
+
+	/**
+	 * Gets the converter registry for this plugin.
+	 * 
+	 * @return The converter registry, not <code>null</code>.
+	 */
+	public ConverterRegistry getConverterRegistry() {
+		if (converterRegistry == null) {
+			throw new IllegalStateException("Field 'converterRegistry' must not be null.");
+		}
+		return converterRegistry;
+	}
+
+	/**
+	 * Gets the converter console for this plugin.
+	 * 
+	 * @return The converter console, not <code>null</code>.
+	 */
+	public ConverterConsole getConverterConsole() {
+		return converterConsole;
+	}
 }

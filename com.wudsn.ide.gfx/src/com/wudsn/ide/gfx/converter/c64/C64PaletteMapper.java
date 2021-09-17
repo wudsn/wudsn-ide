@@ -46,13 +46,13 @@ import com.wudsn.ide.gfx.converter.PaletteMapper;
  */
 public final class C64PaletteMapper extends PaletteMapper {
 
-    /**
-     * Creation is private.
-     */
-    public C64PaletteMapper() {
-	super(16);
-	// From
-	// http://unusedino.de/ec64/technical/misc/vic656x/colors/index.html
-	loadPalette("pepto.pal");
-    }
+	/**
+	 * Creation is private.
+	 */
+	public C64PaletteMapper() {
+		super(16);
+		// From
+		// http://unusedino.de/ec64/technical/misc/vic656x/colors/index.html
+		loadPalette("pepto.pal");
+	}
 }

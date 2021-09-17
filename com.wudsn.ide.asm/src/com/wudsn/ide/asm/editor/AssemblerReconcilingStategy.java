@@ -35,73 +35,73 @@ import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
  */
 final class AssemblerReconcilingStategy implements IReconcilingStrategy, IReconcilingStrategyExtension {
 
-    private final AssemblerEditor editor;
-    private IDocument document;
+	private final AssemblerEditor editor;
+	private IDocument document;
 
-    /**
-     * Creates a new instance. Called by
-     * {@link AssemblerSourceViewerConfiguration#getReconciler(org.eclipse.jface.text.source.ISourceViewer)}
-     * .
-     * 
-     * * @param editor The underlying assembler editor, not <code>null</code>.
-     */
-    AssemblerReconcilingStategy(AssemblerEditor editor) {
-	if (editor == null) {
-	    throw new IllegalArgumentException("Parameter 'editor' must not be null.");
-	}
-	this.editor = editor;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDocument(IDocument document) {
-	this.document = document;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final void setProgressMonitor(final IProgressMonitor monitor) {
-	// Not needed
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initialReconcile() {
-	parse();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion) {
-	parse();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void reconcile(IRegion partition) {
-	parse();
-    }
-
-    /**
-     * Parses the current document for the content outline and the folding
-     * structure.
-     */
-    private void parse() {
-	if (document == null) {
-	    return;
+	/**
+	 * Creates a new instance. Called by
+	 * {@link AssemblerSourceViewerConfiguration#getReconciler(org.eclipse.jface.text.source.ISourceViewer)}
+	 * .
+	 * 
+	 * * @param editor The underlying assembler editor, not <code>null</code>.
+	 */
+	AssemblerReconcilingStategy(AssemblerEditor editor) {
+		if (editor == null) {
+			throw new IllegalArgumentException("Parameter 'editor' must not be null.");
+		}
+		this.editor = editor;
 	}
 
-	editor.updateContentOutlinePage();
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setDocument(IDocument document) {
+		this.document = document;
+	}
 
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public final void setProgressMonitor(final IProgressMonitor monitor) {
+		// Not needed
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void initialReconcile() {
+		parse();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void reconcile(DirtyRegion dirtyRegion, IRegion subRegion) {
+		parse();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void reconcile(IRegion partition) {
+		parse();
+	}
+
+	/**
+	 * Parses the current document for the content outline and the folding
+	 * structure.
+	 */
+	private void parse() {
+		if (document == null) {
+			return;
+		}
+
+		editor.updateContentOutlinePage();
+
+	}
 }

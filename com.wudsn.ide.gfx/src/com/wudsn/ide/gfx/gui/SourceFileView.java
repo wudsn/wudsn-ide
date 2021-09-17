@@ -34,114 +34,113 @@ import com.wudsn.ide.gfx.Texts;
 
 public final class SourceFileView {
 
-    private static final int[] EMPTY_DEFAULT_VALUES = new int[] { 0, 65535 };
+	private static final int[] EMPTY_DEFAULT_VALUES = new int[] { 0, 65535 };
 
-    private final FilePathField filePathField;
-    private final TextField fileSizeField;
-    private final IntegerField fileOffsetField;
-    private final Label dummyLabel;
+	private final FilePathField filePathField;
+	private final TextField fileSizeField;
+	private final IntegerField fileOffsetField;
+	private final Label dummyLabel;
 
-    public SourceFileView(Composite parent, String labelText, int dialogMode) {
-	if (parent == null) {
-	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+	public SourceFileView(Composite parent, String labelText, int dialogMode) {
+		if (parent == null) {
+			throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+		}
+		if (dialogMode != SWT.OPEN && dialogMode != SWT.SAVE) {
+			throw new IllegalArgumentException(
+					"Parameter 'dialogMode' must be 'SWT.OPEN' or 'SWT.SAVE'. Specified value is " + dialogMode + "-");
+		}
+
+		filePathField = new FilePathField(parent, labelText, dialogMode);
+
+		fileSizeField = new TextField(parent, Texts.FILE_SECTION_FIELD_SIZE_LABEL, SWT.READ_ONLY);
+
+		fileOffsetField = new IntegerField(parent, Texts.FILE_SECTION_FIELD_OFFSET_LABEL, EMPTY_DEFAULT_VALUES, true, 4,
+				SWT.NONE);
+
+		dummyLabel = new Label(parent, SWT.NONE);
 	}
-	if (dialogMode != SWT.OPEN && dialogMode != SWT.SAVE) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'dialogMode' must be 'SWT.OPEN' or 'SWT.SAVE'. Specified value is " + dialogMode + "-");
+
+	public FilePathField getFilePathField() {
+		return filePathField;
 	}
 
-	filePathField = new FilePathField(parent, labelText, dialogMode);
-
-	fileSizeField = new TextField(parent, Texts.FILE_SECTION_FIELD_SIZE_LABEL, SWT.READ_ONLY);
-
-	fileOffsetField = new IntegerField(parent, Texts.FILE_SECTION_FIELD_OFFSET_LABEL, EMPTY_DEFAULT_VALUES, true,
-		4, SWT.NONE);
-
-	dummyLabel = new Label(parent, SWT.NONE);
-    }
-
-    public FilePathField getFilePathField() {
-	return filePathField;
-    }
-
-    public IntegerField getFileOffsetField() {
-	return fileOffsetField;
-    }
-
-    /**
-     * Sets the path prefix which will be stripped automatically if it is the
-     * prefix of the user input.
-     * 
-     * @param filePathPrefix
-     *            The file path prefix, may be empty, not <code>null</code>.
-     */
-    public void setFilePathPrefix(IPath filePathPrefix) {
-	if (filePathPrefix == null) {
-	    throw new IllegalArgumentException("Parameter 'filePathPrefix' must not be null.");
+	public IntegerField getFileOffsetField() {
+		return fileOffsetField;
 	}
-	filePathField.setFilePathPrefix(filePathPrefix);
-    }
 
-    public void setFilePath(String filePath) {
-	filePathField.setValue(filePath);
-    }
-
-    public String getFilePath() {
-	return filePathField.getValue();
-    }
-
-    public void setFileBytes(byte[] bytes) {
-	if (bytes == null) {
-	    fileSizeField.setValue(Texts.FILE_SECTION_FIELD_SIZE_NO_DATA);
-	    fileOffsetField.setDefaultValues(EMPTY_DEFAULT_VALUES);
-	} else {
-	    fileSizeField.setValue(HexUtility.getLongValueHexString(bytes.length));
-
-	    int step = (bytes.length + 15) / 16;
-	    int[] defaultValues = new int[16];
-
-	    for (int i = 0; i < 16; i++) {
-		defaultValues[i] = i * step;
-	    }
-
-	    fileOffsetField.setDefaultValues(defaultValues);
+	/**
+	 * Sets the path prefix which will be stripped automatically if it is the prefix
+	 * of the user input.
+	 * 
+	 * @param filePathPrefix The file path prefix, may be empty, not
+	 *                       <code>null</code>.
+	 */
+	public void setFilePathPrefix(IPath filePathPrefix) {
+		if (filePathPrefix == null) {
+			throw new IllegalArgumentException("Parameter 'filePathPrefix' must not be null.");
+		}
+		filePathField.setFilePathPrefix(filePathPrefix);
 	}
-    }
 
-    public void setFileOffset(int fileOffset) {
-	fileOffsetField.setValue(fileOffset);
-    }
-
-    public int getFileOffset() {
-	return fileOffsetField.getValue();
-    }
-
-    public void setVisible(boolean visible) {
-	filePathField.setVisible(visible);
-	fileSizeField.setVisible(visible);
-	fileOffsetField.setVisible(visible);
-	dummyLabel.setVisible(visible);
-    }
-
-    public void setEnabled(boolean enabled) {
-	filePathField.setEnabled(enabled);
-	fileSizeField.setEnabled(enabled);
-	fileOffsetField.setEnabled(enabled);
-	dummyLabel.setEnabled(enabled);
-    }
-
-    /**
-     * Adds a change listener.
-     * 
-     * @param changeListener
-     *            The change listener , not <code>null</code>.
-     */
-    public void addChangeListener(ChangeListener changeListener) {
-	if (changeListener == null) {
-	    throw new IllegalArgumentException("Parameter 'changeListener' must not be null.");
+	public void setFilePath(String filePath) {
+		filePathField.setValue(filePath);
 	}
-	filePathField.addChangeListener(changeListener);
-	fileOffsetField.addChangeListener(changeListener);
 
-    }
+	public String getFilePath() {
+		return filePathField.getValue();
+	}
+
+	public void setFileBytes(byte[] bytes) {
+		if (bytes == null) {
+			fileSizeField.setValue(Texts.FILE_SECTION_FIELD_SIZE_NO_DATA);
+			fileOffsetField.setDefaultValues(EMPTY_DEFAULT_VALUES);
+		} else {
+			fileSizeField.setValue(HexUtility.getLongValueHexString(bytes.length));
+
+			int step = (bytes.length + 15) / 16;
+			int[] defaultValues = new int[16];
+
+			for (int i = 0; i < 16; i++) {
+				defaultValues[i] = i * step;
+			}
+
+			fileOffsetField.setDefaultValues(defaultValues);
+		}
+	}
+
+	public void setFileOffset(int fileOffset) {
+		fileOffsetField.setValue(fileOffset);
+	}
+
+	public int getFileOffset() {
+		return fileOffsetField.getValue();
+	}
+
+	public void setVisible(boolean visible) {
+		filePathField.setVisible(visible);
+		fileSizeField.setVisible(visible);
+		fileOffsetField.setVisible(visible);
+		dummyLabel.setVisible(visible);
+	}
+
+	public void setEnabled(boolean enabled) {
+		filePathField.setEnabled(enabled);
+		fileSizeField.setEnabled(enabled);
+		fileOffsetField.setEnabled(enabled);
+		dummyLabel.setEnabled(enabled);
+	}
+
+	/**
+	 * Adds a change listener.
+	 * 
+	 * @param changeListener The change listener , not <code>null</code>.
+	 */
+	public void addChangeListener(ChangeListener changeListener) {
+		if (changeListener == null) {
+			throw new IllegalArgumentException("Parameter 'changeListener' must not be null.");
+		}
+		filePathField.addChangeListener(changeListener);
+		fileOffsetField.addChangeListener(changeListener);
+
+	}
 }

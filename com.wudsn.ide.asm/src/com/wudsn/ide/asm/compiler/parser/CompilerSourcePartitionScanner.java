@@ -44,87 +44,85 @@ import com.wudsn.ide.asm.editor.AssemblerEditor;
  */
 public final class CompilerSourcePartitionScanner extends RuleBasedPartitionScanner {
 
-    /**
-     * Name for the single line comment partition.
-     */
-    public static final String PARTITION_COMMENT_SINGLE = "partition.comment.single"; //$NON-NLS-1$
+	/**
+	 * Name for the single line comment partition.
+	 */
+	public static final String PARTITION_COMMENT_SINGLE = "partition.comment.single"; //$NON-NLS-1$
 
-    /**
-     * Name for the multiple lines comment partition.
-     */
-    public static final String PARTITION_COMMENT_MULTIPLE = "partition.comment.multiple"; //$NON-NLS-1$
+	/**
+	 * Name for the multiple lines comment partition.
+	 */
+	public static final String PARTITION_COMMENT_MULTIPLE = "partition.comment.multiple"; //$NON-NLS-1$
 
-    /**
-     * Name for the string partition.
-     */
-    public static final String PARTITION_STRING = "partition.string"; //$NON-NLS-1$
+	/**
+	 * Name for the string partition.
+	 */
+	public static final String PARTITION_STRING = "partition.string"; //$NON-NLS-1$
 
-    /**
-     * Creates a new instance.
-     * 
-     * Called by
-     * {@link AssemblerEditor#init(org.eclipse.ui.IEditorSite, org.eclipse.ui.IEditorInput)}
-     * .
-     * 
-     * @param compilerSyntax
-     *            The compiler syntax, not <code>null</code>.
-     */
-    public CompilerSourcePartitionScanner(CompilerSyntax compilerSyntax) {
-	if (compilerSyntax == null) {
-	    throw new IllegalArgumentException("Parameter 'compilerSyntax' must not be null.");
+	/**
+	 * Creates a new instance.
+	 * 
+	 * Called by
+	 * {@link AssemblerEditor#init(org.eclipse.ui.IEditorSite, org.eclipse.ui.IEditorInput)}
+	 * .
+	 * 
+	 * @param compilerSyntax The compiler syntax, not <code>null</code>.
+	 */
+	public CompilerSourcePartitionScanner(CompilerSyntax compilerSyntax) {
+		if (compilerSyntax == null) {
+			throw new IllegalArgumentException("Parameter 'compilerSyntax' must not be null.");
+		}
+		IToken commentSingleToken = new Token(PARTITION_COMMENT_SINGLE);
+		IToken commentMultipleToken = new Token(PARTITION_COMMENT_MULTIPLE);
+		IToken stringToken = new Token(PARTITION_STRING);
+
+		List<IRule> rules = new ArrayList<IRule>();
+		for (String singleLineCommentDelimiter : compilerSyntax.getSingleLineCommentDelimiters()) {
+
+			// A "*" is only a comment start token if it is followed by a space
+			// or a tab.
+			// It is allowed as part of an expression to refer to the program
+			// counter.
+			if (singleLineCommentDelimiter.equals("*")) {
+				rules.add(new EndOfLineRule(singleLineCommentDelimiter + " ", commentSingleToken));
+				rules.add(new EndOfLineRule(singleLineCommentDelimiter + "\t", commentSingleToken));
+			} else {
+				rules.add(new EndOfLineRule(singleLineCommentDelimiter, commentSingleToken));
+			}
+		}
+		List<String> multipleLinesCommentDelimiters = compilerSyntax.getMultipleLinesCommentDelimiters();
+		for (int i = 0; i < multipleLinesCommentDelimiters.size();) {
+			String startSequence = multipleLinesCommentDelimiters.get(i++);
+			String endSequence = multipleLinesCommentDelimiters.get(i++);
+			rules.add(new MultiLineRule(startSequence, endSequence, commentMultipleToken));
+		}
+
+		for (String stringDelimiter : compilerSyntax.getStringDelimiters()) {
+			rules.add(new SingleLineRule(stringDelimiter, stringDelimiter, stringToken));
+		}
+
+		IPredicateRule[] rulesArray = new IPredicateRule[rules.size()];
+		rules.toArray(rulesArray);
+		setPredicateRules(rulesArray);
 	}
-	IToken commentSingleToken = new Token(PARTITION_COMMENT_SINGLE);
-	IToken commentMultipleToken = new Token(PARTITION_COMMENT_MULTIPLE);
-	IToken stringToken = new Token(PARTITION_STRING);
 
-	List<IRule> rules = new ArrayList<IRule>();
-	for (String singleLineCommentDelimiter : compilerSyntax.getSingleLineCommentDelimiters()) {
+	/**
+	 * Creates a new FastPartitioner based on this partition scanner and connects it
+	 * to the document.
+	 * 
+	 * @param document The document, not <code>null</code>.
+	 */
+	public void createDocumentPartitioner(IDocument document) {
 
-	    // A "*" is only a comment start token if it is followed by a space
-	    // or a tab.
-	    // It is allowed as part of an expression to refer to the program
-	    // counter.
-	    if (singleLineCommentDelimiter.equals("*")) {
-		rules.add(new EndOfLineRule(singleLineCommentDelimiter + " ", commentSingleToken));
-		rules.add(new EndOfLineRule(singleLineCommentDelimiter + "\t", commentSingleToken));
-	    } else {
-		rules.add(new EndOfLineRule(singleLineCommentDelimiter, commentSingleToken));
-	    }
+		if (document == null) {
+			throw new IllegalArgumentException("Parameter 'document' must not be null.");
+		}
+		FastPartitioner partitioner = new FastPartitioner(this,
+				new String[] { CompilerSourcePartitionScanner.PARTITION_COMMENT_SINGLE,
+						CompilerSourcePartitionScanner.PARTITION_COMMENT_MULTIPLE,
+						CompilerSourcePartitionScanner.PARTITION_STRING });
+		partitioner.connect(document);
+		document.setDocumentPartitioner(partitioner);
+
 	}
-	List<String> multipleLinesCommentDelimiters = compilerSyntax.getMultipleLinesCommentDelimiters();
-	for (int i = 0; i < multipleLinesCommentDelimiters.size();) {
-	    String startSequence = multipleLinesCommentDelimiters.get(i++);
-	    String endSequence = multipleLinesCommentDelimiters.get(i++);
-	    rules.add(new MultiLineRule(startSequence, endSequence, commentMultipleToken));
-	}
-
-	for (String stringDelimiter : compilerSyntax.getStringDelimiters()) {
-	    rules.add(new SingleLineRule(stringDelimiter, stringDelimiter, stringToken));
-	}
-
-	IPredicateRule[] rulesArray = new IPredicateRule[rules.size()];
-	rules.toArray(rulesArray);
-	setPredicateRules(rulesArray);
-    }
-
-    /**
-     * Creates a new FastPartitioner based on this partition scanner and
-     * connects it to the document.
-     * 
-     * @param document
-     *            The document, not <code>null</code>.
-     */
-    public void createDocumentPartitioner(IDocument document) {
-
-	if (document == null) {
-	    throw new IllegalArgumentException("Parameter 'document' must not be null.");
-	}
-	FastPartitioner partitioner = new FastPartitioner(this, new String[] {
-		CompilerSourcePartitionScanner.PARTITION_COMMENT_SINGLE,
-		CompilerSourcePartitionScanner.PARTITION_COMMENT_MULTIPLE,
-		CompilerSourcePartitionScanner.PARTITION_STRING });
-	partitioner.connect(document);
-	document.setDocumentPartitioner(partitioner);
-
-    }
 }

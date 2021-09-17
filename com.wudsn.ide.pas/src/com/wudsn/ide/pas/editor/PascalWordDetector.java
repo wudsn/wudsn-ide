@@ -26,13 +26,13 @@ import org.eclipse.jface.text.rules.IWordDetector;
  * @since 1.7.1
  */
 class PascalWordDetector implements IWordDetector {
-    @Override
-    public boolean isWordStart(char c) {
-	return Character.isLetter(c);
-    }
+	@Override
+	public boolean isWordStart(char c) {
+		return Character.isLetter(c);
+	}
 
-    @Override
-    public boolean isWordPart(char c) {
-	return Character.isLetter(c) || Character.isDigit(c) || (c == '_');
-    }
+	@Override
+	public boolean isWordPart(char c) {
+		return Character.isLetter(c) || Character.isDigit(c) || (c == '_');
+	}
 }

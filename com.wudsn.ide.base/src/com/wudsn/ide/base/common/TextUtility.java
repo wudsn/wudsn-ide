@@ -26,43 +26,41 @@ package com.wudsn.ide.base.common;
  */
 public final class TextUtility {
 
-    /**
-     * Parameter variable tokens.
-     */
-    private static final String[] PARAMETERS = { "{0}", "{1}", "{2}", "{3}", "{4}", "{5}", "{6}", "{7}", "{8}", "{9}" };
+	/**
+	 * Parameter variable tokens.
+	 */
+	private static final String[] PARAMETERS = { "{0}", "{1}", "{2}", "{3}", "{4}", "{5}", "{6}", "{7}", "{8}", "{9}" };
 
-    /**
-     * Creation is private.
-     */
-    private TextUtility() {
+	/**
+	 * Creation is private.
+	 */
+	private TextUtility() {
 
-    }
+	}
 
-    /**
-     * Formats a text with parameters "{0}" to "{9}".
-     * 
-     * @param text
-     *            The text with the parameters "{0}" to "{9}", may be empty, not
-     *            <code>null</code>.
-     * @param parameters
-     *            The parameters, may be empty or <code>null</code>.
-     * 
-     * @return The formatted text, may be empty, not <code>null</code>.
-     */
-    public static String format(String text, String... parameters) {
-	if (text == null) {
-	    throw new IllegalArgumentException("Parameter 'text' must not be null.");
+	/**
+	 * Formats a text with parameters "{0}" to "{9}".
+	 * 
+	 * @param text       The text with the parameters "{0}" to "{9}", may be empty,
+	 *                   not <code>null</code>.
+	 * @param parameters The parameters, may be empty or <code>null</code>.
+	 * 
+	 * @return The formatted text, may be empty, not <code>null</code>.
+	 */
+	public static String format(String text, String... parameters) {
+		if (text == null) {
+			throw new IllegalArgumentException("Parameter 'text' must not be null.");
+		}
+		if (parameters == null) {
+			parameters = new String[0];
+		}
+		for (int i = 0; i < parameters.length; i++) {
+			String parameter = parameters[i];
+			if (parameter == null) {
+				parameter = "";
+			}
+			text = text.replace(PARAMETERS[i], parameter);
+		}
+		return text;
 	}
-	if (parameters == null) {
-	    parameters = new String[0];
-	}
-	for (int i = 0; i < parameters.length; i++) {
-	    String parameter = parameters[i];
-	    if (parameter == null) {
-		parameter = "";
-	    }
-	    text = text.replace(PARAMETERS[i], parameter);
-	}
-	return text;
-    }
 }

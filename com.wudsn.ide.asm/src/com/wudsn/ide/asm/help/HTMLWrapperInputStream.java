@@ -33,66 +33,66 @@ import java.io.UnsupportedEncodingException;
  */
 final class HTMLWrapperInputStream extends InputStream {
 
-    private InputStream prefixInputStream;
-    private InputStream innerInputStream;
-    private InputStream suffixInputStream;
+	private InputStream prefixInputStream;
+	private InputStream innerInputStream;
+	private InputStream suffixInputStream;
 
-    public HTMLWrapperInputStream(String prefix, String suffix, InputStream inputStream) {
-	if (prefix == null) {
-	    throw new IllegalArgumentException("Parameter 'prefix' must not be null.");
-	}
-	if (suffix == null) {
-	    throw new IllegalArgumentException("Parameter 'suffix' must not be null.");
-	}
-	if (inputStream == null) {
-	    throw new IllegalArgumentException("Parameter 'inputStream' must not be null.");
-	}
+	public HTMLWrapperInputStream(String prefix, String suffix, InputStream inputStream) {
+		if (prefix == null) {
+			throw new IllegalArgumentException("Parameter 'prefix' must not be null.");
+		}
+		if (suffix == null) {
+			throw new IllegalArgumentException("Parameter 'suffix' must not be null.");
+		}
+		if (inputStream == null) {
+			throw new IllegalArgumentException("Parameter 'inputStream' must not be null.");
+		}
 
-	try {
-	    prefixInputStream = new ByteArrayInputStream(prefix.getBytes("UTF-8"));
+		try {
+			prefixInputStream = new ByteArrayInputStream(prefix.getBytes("UTF-8"));
 
-	    innerInputStream = inputStream;
-	    suffixInputStream = new ByteArrayInputStream(suffix.getBytes("UTF-8"));
-	} catch (UnsupportedEncodingException ex) {
-	    throw new RuntimeException(ex);
-	}
+			innerInputStream = inputStream;
+			suffixInputStream = new ByteArrayInputStream(suffix.getBytes("UTF-8"));
+		} catch (UnsupportedEncodingException ex) {
+			throw new RuntimeException(ex);
+		}
 
-    }
-
-    @Override
-    public int read() throws IOException {
-	int result;
-
-	if (prefixInputStream != null) {
-	    result = prefixInputStream.read();
-	    if (result != -1) {
-		// System.out.print((char)result);
-
-		return result;
-	    }
-	    prefixInputStream = null;
 	}
 
-	if (innerInputStream != null) {
-	    result = innerInputStream.read();
-	    if (result != -1) {
-		// System.out.print((char)result);
-		return result;
-	    }
-	    innerInputStream = null;
+	@Override
+	public int read() throws IOException {
+		int result;
+
+		if (prefixInputStream != null) {
+			result = prefixInputStream.read();
+			if (result != -1) {
+				// System.out.print((char)result);
+
+				return result;
+			}
+			prefixInputStream = null;
+		}
+
+		if (innerInputStream != null) {
+			result = innerInputStream.read();
+			if (result != -1) {
+				// System.out.print((char)result);
+				return result;
+			}
+			innerInputStream = null;
+		}
+
+		if (suffixInputStream != null) {
+			result = suffixInputStream.read();
+			if (result != -1) {
+				// System.out.print((char)result);
+
+				return result;
+			}
+			suffixInputStream = null;
+		}
+		return -1;
+
 	}
-
-	if (suffixInputStream != null) {
-	    result = suffixInputStream.read();
-	    if (result != -1) {
-		// System.out.print((char)result);
-
-		return result;
-	    }
-	    suffixInputStream = null;
-	}
-	return -1;
-
-    }
 
 }

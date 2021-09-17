@@ -24,15 +24,15 @@ import com.wudsn.ide.asm.editor.AssemblerEditor;
 
 public final class Merlin32Editor extends AssemblerEditor {
 
-    /**
-     * Creation is public. Called by the extension "org.eclipse.ui.editors".
-     */
-    public Merlin32Editor() {
+	/**
+	 * Creation is public. Called by the extension "org.eclipse.ui.editors".
+	 */
+	public Merlin32Editor() {
 
-    }
+	}
 
-    @Override
-    public String getCompilerId() {
-	return CompilerId.MERLIN32;
-    }
+	@Override
+	public String getCompilerId() {
+		return CompilerId.MERLIN32;
+	}
 }

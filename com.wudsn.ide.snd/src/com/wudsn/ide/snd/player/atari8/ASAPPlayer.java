@@ -59,254 +59,246 @@ import com.wudsn.ide.snd.player.SoundPlayerListener;
  */
 public final class ASAPPlayer extends SoundPlayer {
 
-    private final ASAP asap;
+	private final ASAP asap;
 
-    private static final int MAX_EXPORT_SIZE = 655636;
+	private static final int MAX_EXPORT_SIZE = 655636;
 
-    // Module binary is not in the base class because other players only work on
-    // the input stream and do not expose it at all. Is it also not purely local
-    // to load() because it is also used during export.
-    private byte[] module;
-    private int moduleLen;
+	// Module binary is not in the base class because other players only work on
+	// the input stream and do not expose it at all. Is it also not purely local
+	// to load() because it is also used during export.
+	private byte[] module;
+	private int moduleLen;
 
-    /**
-     * Creation is public.
-     */
-    public ASAPPlayer() {
-	asap = new ASAP();
-	module = null;
-	moduleLen = 0;
-    }
-
-    /**
-     * Loads a file from an input stream.
-     * 
-     * @param fileName
-     *            The file name including the file extensions, may be empty, not
-     *            <code>null</code>.
-     * @param inputStream
-     *            The input stream to read the file, not <code>null</code>.
-     * @throws CoreException
-     *             If and error occurs
-     */
-    @Override
-    public synchronized void load(String fileName, InputStream inputStream) throws CoreException {
-	if (fileName == null) {
-	    throw new IllegalArgumentException("Parameter 'fileName' must not be null.");
-	}
-	if (inputStream == null) {
-	    throw new IllegalArgumentException("Parameter 'inputStream' must not be null.");
-	}
-
-	clear();
-
-	// Read binary from the input stream.
-	try {
-	    module = new byte[ASAPInfo.MAX_MODULE_LENGTH];
-	    moduleLen = readAndClose(inputStream, module);
-
-	} catch (IOException ex) {
-	    // ERROR: Cannot read sound file {0}. {1}
-	    IStatus status = new Status(IStatus.ERROR, SoundPlugin.ID, TextUtility.format(Texts.MESSAGE_E501, fileName,
-		    ex.getMessage()));
-	    throw new CoreException(status);
-	} finally {
-	    try {
-		inputStream.close();
-	    } catch (IOException ex) {
-		// ERROR: Cannot read sound file {0}. {1}
-		IStatus status = new Status(IStatus.ERROR, SoundPlugin.ID, TextUtility.format(Texts.MESSAGE_E501,
-			fileName, ex.getMessage()));
-		throw new CoreException(status);
-	    }
-	}
-
-	// Parse binary.
-	ASAPMusicRoutine asapMusicRoutine;
-	try {
-	    asap.load(fileName, module, moduleLen);
-	    asapMusicRoutine = new ASAPMusicRoutine(fileName, module, moduleLen);
-	} catch (Exception ex) {
-	    // ERROR: Cannot load sound file '{0}'. {1}
-	    IStatus status = new Status(IStatus.ERROR, SoundPlugin.ID, TextUtility.format(Texts.MESSAGE_E502, fileName,
-		    ex.getMessage()));
-	    throw new CoreException(status);
-	}
-
-	// Create info.
-	info.valid = true;
-
-	ASAPInfo asapInfo = asap.getInfo();
-	info.title = asapInfo.getTitleOrFilename();
-	info.author = asapInfo.getAuthor();
-
-	// Determine the original file type in the container.
-	// Only if it cannot be determined, the file extension is used.
-	info.moduleFileType = asap.getInfo().getOriginalModuleExt(module, moduleLen);
-	if (info.moduleFileType == null) {
-	    info.moduleFileType = fileName.substring(fileName.lastIndexOf('.') + 1);
-	}
-	info.moduleFileType = info.moduleFileType.toUpperCase();
-
-	// Translate the file type to a human readable text.
-	try {
-	    info.moduleTypeDescription = ASAPInfo.getExtDescription(info.moduleFileType);
-	} catch (Exception unknownExtensionException) {
-	    info.moduleTypeDescription = unknownExtensionException.getMessage();
-	}
-
-	final List<FileType> supportedExportFileTypes = new ArrayList<FileType>();
-	String[] extensions = new String[ASAPWriter.MAX_SAVE_EXTS]; //
-	int numberOfExtensions = ASAPWriter.getSaveExts(extensions, asap.getInfo(), module, module.length);
-	for (int i = 0; i < numberOfExtensions; i++) {
-	    String extension = "." + extensions[i];
-	    FileType fileType = FileType.getInstanceByExtension(extension);
-	    if (fileType == null) {
-		throw new RuntimeException("Unknown file extension '" + extension + "'.");
-	    }
-	    supportedExportFileTypes.add(fileType);
-
-	}
-	info.setSupportedExportFileTypes(supportedExportFileTypes);
-	info.channels = asapInfo.getChannels();
-	info.songs = asapInfo.getSongs();
-	info.defaultSong = asapInfo.getDefaultSong();
-	info.durations = new int[info.songs];
-	info.loops = new LoopMode[info.songs];
-	for (int i = 0; i < info.songs; i++) {
-	    info.durations[i] = asapInfo.getDuration(i);
-	    info.loops[i] = asapInfo.getLoop(i) ? LoopMode.YES : LoopMode.NO;
-	}
-	info.playerClock = asapInfo.isNtsc() ? Clock.NTSC : Clock.PAL;
-	int scanlines = asapInfo.getPlayerRateScanlines();
-	info.playerRateScanlines = scanlines;
-	int cycles = scanlines * 114;
-	double clock = (asapInfo.isNtsc() ? 1789772.5d : 1773447.0d);
-	info.playerRateHertz = clock / cycles;
-
-	info.initAddress = asapMusicRoutine.getInitAddress();
-	info.initFulltime = asapMusicRoutine.isFulltime();
-	info.playerAddress = asapMusicRoutine.getPlayerAddress();
-	info.musicAddress = asapInfo.getMusicAddress();
-
-	setLoaded(true);
-
-    }
-
-    @Override
-    public byte[] getExportFileContent(FileType fileType, int musicAddress) throws Exception {
-	if (fileType == null) {
-	    throw new IllegalArgumentException("Parameter 'fileType' must not be null.");
-	}
-	if (!isLoaded()) {
-	    throw new IllegalStateException("No module loaded");
-	}
-
-	// The file name must have a least one character before the dot.
-	String asapFile = "DUMMY" + fileType.getExtension().toUpperCase();
-	ASAPInfo asapInfo = asap.getInfo();
-	int oldMusicAddress = asapInfo.getMusicAddress();
-	byte[] output = new byte[MAX_EXPORT_SIZE];
-	ASAPWriter asapWriter = new ASAPWriter();
-	int outputOffset = 0;
-	asapWriter.setOutput(output, outputOffset, output.length);
-	// Change the music address in case it is changeable.
-	if (fileType.isMusicAddressChangeable()) {
-	    asapInfo.setMusicAddress(musicAddress);
-	}
 	/**
-	 * Writes the given module in a possibly different file format.
-	 * 
-	 * @param targetFilename
-	 *            Output filename, used to determine the format.
-	 * @param info
-	 *            File information got from the source file with data
-	 *            updated for the output file.
-	 * @param module
-	 *            Contents of the source file.
-	 * @param moduleLen
-	 *            Length of the source file.
-	 * @param tag
-	 *            Display information (xex output only).
+	 * Creation is public.
 	 */
-
-	outputOffset = asapWriter.write(asapFile, asapInfo, module, moduleLen, false);
-	// Change the music address back in case it was changed.
-	if (fileType.isMusicAddressChangeable()) {
-	    asapInfo.setMusicAddress(oldMusicAddress);
-	}
-	byte[] result = new byte[outputOffset];
-	System.arraycopy(output, 0, result, 0, outputOffset);
-	return result;
-    }
-
-    @Override
-    public synchronized void play(int song, SoundPlayerListener listener) throws CoreException {
-
-	stop();
-
-	ASAPInfo info;
-	try {
-	    info = asap.getInfo();
-	    asap.playSong(song, info.getLoop(song) ? -1 : info.getDuration(song));
-	} catch (Exception ex) {
-	    // ERROR: Cannot play song number {0}. {1}
-	    IStatus status = new Status(IStatus.ERROR, SoundPlugin.ID, TextUtility.format(Texts.MESSAGE_E503,
-		    NumberUtility.getLongValueDecimalString(song), ex.getMessage()));
-	    throw new CoreException(status);
+	public ASAPPlayer() {
+		asap = new ASAP();
+		module = null;
+		moduleLen = 0;
 	}
 
-	AudioFormat format = new AudioFormat(ASAP.SAMPLE_RATE, 16, info.getChannels(), true, false);
-	SourceDataLine line;
-	int bufferSize = 8192;
-	try {
-	    line = (SourceDataLine) AudioSystem.getLine(new DataLine.Info(SourceDataLine.class, format));
-	    line.open(format, bufferSize);
-	} catch (LineUnavailableException ex) {
-	    // ERROR: No free audio line available to play song {0}. {1}
-	    IStatus status = new Status(IStatus.ERROR, SoundPlugin.ID, TextUtility.format(Texts.MESSAGE_E504,
-		    NumberUtility.getLongValueDecimalString(song), ex.getMessage()));
-	    throw new CoreException(status);
+	/**
+	 * Loads a file from an input stream.
+	 * 
+	 * @param fileName    The file name including the file extensions, may be empty,
+	 *                    not <code>null</code>.
+	 * @param inputStream The input stream to read the file, not <code>null</code>.
+	 * @throws CoreException If and error occurs
+	 */
+	@Override
+	public synchronized void load(String fileName, InputStream inputStream) throws CoreException {
+		if (fileName == null) {
+			throw new IllegalArgumentException("Parameter 'fileName' must not be null.");
+		}
+		if (inputStream == null) {
+			throw new IllegalArgumentException("Parameter 'inputStream' must not be null.");
+		}
+
+		clear();
+
+		// Read binary from the input stream.
+		try {
+			module = new byte[ASAPInfo.MAX_MODULE_LENGTH];
+			moduleLen = readAndClose(inputStream, module);
+
+		} catch (IOException ex) {
+			// ERROR: Cannot read sound file {0}. {1}
+			IStatus status = new Status(IStatus.ERROR, SoundPlugin.ID,
+					TextUtility.format(Texts.MESSAGE_E501, fileName, ex.getMessage()));
+			throw new CoreException(status);
+		} finally {
+			try {
+				inputStream.close();
+			} catch (IOException ex) {
+				// ERROR: Cannot read sound file {0}. {1}
+				IStatus status = new Status(IStatus.ERROR, SoundPlugin.ID,
+						TextUtility.format(Texts.MESSAGE_E501, fileName, ex.getMessage()));
+				throw new CoreException(status);
+			}
+		}
+
+		// Parse binary.
+		ASAPMusicRoutine asapMusicRoutine;
+		try {
+			asap.load(fileName, module, moduleLen);
+			asapMusicRoutine = new ASAPMusicRoutine(fileName, module, moduleLen);
+		} catch (Exception ex) {
+			// ERROR: Cannot load sound file '{0}'. {1}
+			IStatus status = new Status(IStatus.ERROR, SoundPlugin.ID,
+					TextUtility.format(Texts.MESSAGE_E502, fileName, ex.getMessage()));
+			throw new CoreException(status);
+		}
+
+		// Create info.
+		info.valid = true;
+
+		ASAPInfo asapInfo = asap.getInfo();
+		info.title = asapInfo.getTitleOrFilename();
+		info.author = asapInfo.getAuthor();
+
+		// Determine the original file type in the container.
+		// Only if it cannot be determined, the file extension is used.
+		info.moduleFileType = asap.getInfo().getOriginalModuleExt(module, moduleLen);
+		if (info.moduleFileType == null) {
+			info.moduleFileType = fileName.substring(fileName.lastIndexOf('.') + 1);
+		}
+		info.moduleFileType = info.moduleFileType.toUpperCase();
+
+		// Translate the file type to a human readable text.
+		try {
+			info.moduleTypeDescription = ASAPInfo.getExtDescription(info.moduleFileType);
+		} catch (Exception unknownExtensionException) {
+			info.moduleTypeDescription = unknownExtensionException.getMessage();
+		}
+
+		final List<FileType> supportedExportFileTypes = new ArrayList<FileType>();
+		String[] extensions = new String[ASAPWriter.MAX_SAVE_EXTS]; //
+		int numberOfExtensions = ASAPWriter.getSaveExts(extensions, asap.getInfo(), module, module.length);
+		for (int i = 0; i < numberOfExtensions; i++) {
+			String extension = "." + extensions[i];
+			FileType fileType = FileType.getInstanceByExtension(extension);
+			if (fileType == null) {
+				throw new RuntimeException("Unknown file extension '" + extension + "'.");
+			}
+			supportedExportFileTypes.add(fileType);
+
+		}
+		info.setSupportedExportFileTypes(supportedExportFileTypes);
+		info.channels = asapInfo.getChannels();
+		info.songs = asapInfo.getSongs();
+		info.defaultSong = asapInfo.getDefaultSong();
+		info.durations = new int[info.songs];
+		info.loops = new LoopMode[info.songs];
+		for (int i = 0; i < info.songs; i++) {
+			info.durations[i] = asapInfo.getDuration(i);
+			info.loops[i] = asapInfo.getLoop(i) ? LoopMode.YES : LoopMode.NO;
+		}
+		info.playerClock = asapInfo.isNtsc() ? Clock.NTSC : Clock.PAL;
+		int scanlines = asapInfo.getPlayerRateScanlines();
+		info.playerRateScanlines = scanlines;
+		int cycles = scanlines * 114;
+		double clock = (asapInfo.isNtsc() ? 1789772.5d : 1773447.0d);
+		info.playerRateHertz = clock / cycles;
+
+		info.initAddress = asapMusicRoutine.getInitAddress();
+		info.initFulltime = asapMusicRoutine.isFulltime();
+		info.playerAddress = asapMusicRoutine.getPlayerAddress();
+		info.musicAddress = asapInfo.getMusicAddress();
+
+		setLoaded(true);
+
 	}
-	playInNewThread(song, new ASAPSoundGenerator(asap, line), listener);
 
-    }
+	@Override
+	public byte[] getExportFileContent(FileType fileType, int musicAddress) throws Exception {
+		if (fileType == null) {
+			throw new IllegalArgumentException("Parameter 'fileType' must not be null.");
+		}
+		if (!isLoaded()) {
+			throw new IllegalStateException("No module loaded");
+		}
 
-    @Override
-    public synchronized int getPosition() {
-	return asap.getPosition();
-    }
+		// The file name must have a least one character before the dot.
+		String asapFile = "DUMMY" + fileType.getExtension().toUpperCase();
+		ASAPInfo asapInfo = asap.getInfo();
+		int oldMusicAddress = asapInfo.getMusicAddress();
+		byte[] output = new byte[MAX_EXPORT_SIZE];
+		ASAPWriter asapWriter = new ASAPWriter();
+		int outputOffset = 0;
+		asapWriter.setOutput(output, outputOffset, output.length);
+		// Change the music address in case it is changeable.
+		if (fileType.isMusicAddressChangeable()) {
+			asapInfo.setMusicAddress(musicAddress);
+		}
+		/**
+		 * Writes the given module in a possibly different file format.
+		 * 
+		 * @param targetFilename Output filename, used to determine the format.
+		 * @param info           File information got from the source file with data
+		 *                       updated for the output file.
+		 * @param module         Contents of the source file.
+		 * @param moduleLen      Length of the source file.
+		 * @param tag            Display information (xex output only).
+		 */
 
-    @Override
-    public boolean isSeekSupported() {
-	return true;
-    }
-
-    @Override
-    public synchronized void seekPosition(int position) {
-	try {
-
-	    asap.seek(position);
-	    if (listener != null) {
-		listenerUpdatedPosition = position;
-		listener.playerUpdated(SoundPlayerListener.POSITION);
-	    }
-	} catch (Exception ex) {
-	    throw new RuntimeException("Cannot seeek to position " + position, ex);
+		outputOffset = asapWriter.write(asapFile, asapInfo, module, moduleLen, false);
+		// Change the music address back in case it was changed.
+		if (fileType.isMusicAddressChangeable()) {
+			asapInfo.setMusicAddress(oldMusicAddress);
+		}
+		byte[] result = new byte[outputOffset];
+		System.arraycopy(output, 0, result, 0, outputOffset);
+		return result;
 	}
-    }
 
-    @Override
-    public synchronized int[] getChannelVolumes() {
-	int[] result;
+	@Override
+	public synchronized void play(int song, SoundPlayerListener listener) throws CoreException {
 
-	int channels = asap.getInfo().getChannels() * 4;
-	result = new int[channels];
-	if (isPlaying()) {
-	    for (int i = 0; i < channels; i++) {
-		result[i] = asap.getPokeyChannelVolume(i) * 16;
-	    }
+		stop();
+
+		ASAPInfo info;
+		try {
+			info = asap.getInfo();
+			asap.playSong(song, info.getLoop(song) ? -1 : info.getDuration(song));
+		} catch (Exception ex) {
+			// ERROR: Cannot play song number {0}. {1}
+			IStatus status = new Status(IStatus.ERROR, SoundPlugin.ID, TextUtility.format(Texts.MESSAGE_E503,
+					NumberUtility.getLongValueDecimalString(song), ex.getMessage()));
+			throw new CoreException(status);
+		}
+
+		AudioFormat format = new AudioFormat(ASAP.SAMPLE_RATE, 16, info.getChannels(), true, false);
+		SourceDataLine line;
+		int bufferSize = 8192;
+		try {
+			line = (SourceDataLine) AudioSystem.getLine(new DataLine.Info(SourceDataLine.class, format));
+			line.open(format, bufferSize);
+		} catch (LineUnavailableException ex) {
+			// ERROR: No free audio line available to play song {0}. {1}
+			IStatus status = new Status(IStatus.ERROR, SoundPlugin.ID, TextUtility.format(Texts.MESSAGE_E504,
+					NumberUtility.getLongValueDecimalString(song), ex.getMessage()));
+			throw new CoreException(status);
+		}
+		playInNewThread(song, new ASAPSoundGenerator(asap, line), listener);
+
 	}
-	return result;
-    }
+
+	@Override
+	public synchronized int getPosition() {
+		return asap.getPosition();
+	}
+
+	@Override
+	public boolean isSeekSupported() {
+		return true;
+	}
+
+	@Override
+	public synchronized void seekPosition(int position) {
+		try {
+
+			asap.seek(position);
+			if (listener != null) {
+				listenerUpdatedPosition = position;
+				listener.playerUpdated(SoundPlayerListener.POSITION);
+			}
+		} catch (Exception ex) {
+			throw new RuntimeException("Cannot seeek to position " + position, ex);
+		}
+	}
+
+	@Override
+	public synchronized int[] getChannelVolumes() {
+		int[] result;
+
+		int channels = asap.getInfo().getChannels() * 4;
+		result = new int[channels];
+		if (isPlaying()) {
+			for (int i = 0; i < channels; i++) {
+				result[i] = asap.getPokeyChannelVolume(i) * 16;
+			}
+		}
+		return result;
+	}
 }

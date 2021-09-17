@@ -40,130 +40,128 @@ import com.wudsn.ide.base.common.StringUtility;
  * {@link AssemblerBreakpointAdapterFactory}.
  */
 public final class AssemblerBreakpointsTarget implements IToggleBreakpointsTarget {
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.debug.ui.actions.IToggleBreakpointsTarget#
-     * toggleLineBreakpoints (org.eclipse.ui.IWorkbenchPart,
-     * org.eclipse.jface.viewers.ISelection)
-     */
-    @Override
-    public void toggleLineBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
-	AssemblerEditor assemblerEditor = getEditor(part);
-	if (assemblerEditor != null) {
-	    IBreakpointManager breakPointManager = DebugPlugin.getDefault().getBreakpointManager();
-	    String editorId = assemblerEditor.getClass().getName();
-	    IEditorInput editorInput = assemblerEditor.getEditorInput();
-	    IResource resource = editorInput.getAdapter(IResource.class);
-	    ITextSelection textSelection = (ITextSelection) selection;
-	    int lineNumber = textSelection.getStartLine();
-	    IBreakpoint[] breakpoints = breakPointManager.getBreakpoints(AssemblerBreakpoint.DEBUG_MODEL_ID);
-	    for (int i = 0; i < breakpoints.length; i++) {
-		IBreakpoint breakpoint = breakpoints[i];
-		if (resource.equals(breakpoint.getMarker().getResource())) {
-		    if (((ILineBreakpoint) breakpoint).getLineNumber() == (lineNumber + 1)) {
-			// Remove existing breakpoint
-			breakpoint.delete();
-			return;
-		    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.debug.ui.actions.IToggleBreakpointsTarget#
+	 * toggleLineBreakpoints (org.eclipse.ui.IWorkbenchPart,
+	 * org.eclipse.jface.viewers.ISelection)
+	 */
+	@Override
+	public void toggleLineBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
+		AssemblerEditor assemblerEditor = getEditor(part);
+		if (assemblerEditor != null) {
+			IBreakpointManager breakPointManager = DebugPlugin.getDefault().getBreakpointManager();
+			String editorId = assemblerEditor.getClass().getName();
+			IEditorInput editorInput = assemblerEditor.getEditorInput();
+			IResource resource = editorInput.getAdapter(IResource.class);
+			ITextSelection textSelection = (ITextSelection) selection;
+			int lineNumber = textSelection.getStartLine();
+			IBreakpoint[] breakpoints = breakPointManager.getBreakpoints(AssemblerBreakpoint.DEBUG_MODEL_ID);
+			for (int i = 0; i < breakpoints.length; i++) {
+				IBreakpoint breakpoint = breakpoints[i];
+				if (resource.equals(breakpoint.getMarker().getResource())) {
+					if (((ILineBreakpoint) breakpoint).getLineNumber() == (lineNumber + 1)) {
+						// Remove existing breakpoint
+						breakpoint.delete();
+						return;
+					}
+				}
+			}
+			// Create line breakpoint (doc line numbers start at 0)
+			String description;
+			IDocumentProvider provider = assemblerEditor.getDocumentProvider();
+			IDocument document = provider.getDocument(assemblerEditor.getEditorInput());
+			try {
+				int startOffset = document.getLineOffset(lineNumber);
+				int lineLength = document.getLineLength(lineNumber);
+				description = document.get(startOffset, lineLength).trim();
+				description = description.replace('\t', ' ');
+			} catch (BadLocationException ex) {
+				throw new RuntimeException(ex);
+			}
+
+			// No break points on empty lines
+			if (StringUtility.isEmpty(description)) {
+				return;
+			}
+			AssemblerBreakpoint breakpoint = new AssemblerBreakpoint(editorId, editorInput, resource, lineNumber + 1,
+					description);
+			breakPointManager.addBreakpoint(breakpoint);
 		}
-	    }
-	    // Create line breakpoint (doc line numbers start at 0)
-	    String description;
-	    IDocumentProvider provider = assemblerEditor.getDocumentProvider();
-	    IDocument document = provider.getDocument(assemblerEditor.getEditorInput());
-	    try {
-		int startOffset = document.getLineOffset(lineNumber);
-		int lineLength = document.getLineLength(lineNumber);
-		description = document.get(startOffset, lineLength).trim();
-		description = description.replace('\t', ' ');
-	    } catch (BadLocationException ex) {
-		throw new RuntimeException(ex);
-	    }
-
-	    // No break points on empty lines
-	    if (StringUtility.isEmpty(description)) {
-		return;
-	    }
-	    AssemblerBreakpoint breakpoint = new AssemblerBreakpoint(editorId, editorInput, resource, lineNumber + 1,
-		    description);
-	    breakPointManager.addBreakpoint(breakpoint);
 	}
-    }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.debug.ui.actions.IToggleBreakpointsTarget#
-     * canToggleLineBreakpoints(org.eclipse.ui.IWorkbenchPart,
-     * org.eclipse.jface.viewers.ISelection)
-     */
-    @Override
-    public boolean canToggleLineBreakpoints(IWorkbenchPart part, ISelection selection) {
-	return getEditor(part) != null;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.debug.ui.actions.IToggleBreakpointsTarget#
-     * toggleMethodBreakpoints (org.eclipse.ui.IWorkbenchPart,
-     * org.eclipse.jface.viewers.ISelection)
-     */
-    @Override
-    public void toggleMethodBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.debug.ui.actions.IToggleBreakpointsTarget#
-     * canToggleMethodBreakpoints(org.eclipse.ui.IWorkbenchPart,
-     * org.eclipse.jface.viewers.ISelection)
-     */
-    @Override
-    public boolean canToggleMethodBreakpoints(IWorkbenchPart part, ISelection selection) {
-	return false;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * org.eclipse.debug.ui.actions.IToggleBreakpointsTarget#toggleWatchpoints
-     * (org.eclipse.ui.IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
-     */
-    @Override
-    public void toggleWatchpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.debug.ui.actions.IToggleBreakpointsTarget#
-     * canToggleWatchpoints (org.eclipse.ui.IWorkbenchPart,
-     * org.eclipse.jface.viewers.ISelection)
-     */
-    @Override
-    public boolean canToggleWatchpoints(IWorkbenchPart part, ISelection selection) {
-	return false;
-    }
-
-    /**
-     * Determines of the specified workbench part is an assembler editor with a
-     * valid resource.
-     * 
-     * @param part
-     *            The editor part or <code>null</code>.
-     * @return The assembler editor or <code>null</code>.
-     */
-    private AssemblerEditor getEditor(IWorkbenchPart part) {
-	if (part instanceof AssemblerEditor) {
-	    AssemblerEditor assemblerEditor = (AssemblerEditor) part;
-	    if (assemblerEditor.getCurrentFile() != null) {
-		return assemblerEditor;
-	    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.debug.ui.actions.IToggleBreakpointsTarget#
+	 * canToggleLineBreakpoints(org.eclipse.ui.IWorkbenchPart,
+	 * org.eclipse.jface.viewers.ISelection)
+	 */
+	@Override
+	public boolean canToggleLineBreakpoints(IWorkbenchPart part, ISelection selection) {
+		return getEditor(part) != null;
 	}
-	return null;
-    }
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.debug.ui.actions.IToggleBreakpointsTarget#
+	 * toggleMethodBreakpoints (org.eclipse.ui.IWorkbenchPart,
+	 * org.eclipse.jface.viewers.ISelection)
+	 */
+	@Override
+	public void toggleMethodBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.debug.ui.actions.IToggleBreakpointsTarget#
+	 * canToggleMethodBreakpoints(org.eclipse.ui.IWorkbenchPart,
+	 * org.eclipse.jface.viewers.ISelection)
+	 */
+	@Override
+	public boolean canToggleMethodBreakpoints(IWorkbenchPart part, ISelection selection) {
+		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.debug.ui.actions.IToggleBreakpointsTarget#toggleWatchpoints
+	 * (org.eclipse.ui.IWorkbenchPart, org.eclipse.jface.viewers.ISelection)
+	 */
+	@Override
+	public void toggleWatchpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.debug.ui.actions.IToggleBreakpointsTarget#
+	 * canToggleWatchpoints (org.eclipse.ui.IWorkbenchPart,
+	 * org.eclipse.jface.viewers.ISelection)
+	 */
+	@Override
+	public boolean canToggleWatchpoints(IWorkbenchPart part, ISelection selection) {
+		return false;
+	}
+
+	/**
+	 * Determines of the specified workbench part is an assembler editor with a
+	 * valid resource.
+	 * 
+	 * @param part The editor part or <code>null</code>.
+	 * @return The assembler editor or <code>null</code>.
+	 */
+	private AssemblerEditor getEditor(IWorkbenchPart part) {
+		if (part instanceof AssemblerEditor) {
+			AssemblerEditor assemblerEditor = (AssemblerEditor) part;
+			if (assemblerEditor.getCurrentFile() != null) {
+				return assemblerEditor;
+			}
+		}
+		return null;
+	}
 }

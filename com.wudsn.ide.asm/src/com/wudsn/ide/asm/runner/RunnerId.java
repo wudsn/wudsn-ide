@@ -26,15 +26,15 @@ package com.wudsn.ide.asm.runner;
  */
 public final class RunnerId {
 
-    /**
-     * Creation is private.
-     */
-    private RunnerId() {
-    }
+	/**
+	 * Creation is private.
+	 */
+	private RunnerId() {
+	}
 
-    // The ID of the system default application for a file extension
-    public final static String DEFAULT_APPLICATION = "default_application";
-    // The ID of the user defined application
-    public final static String USER_DEFINED_APPLICATION = "user_defined_application";
+	// The ID of the system default application for a file extension
+	public final static String DEFAULT_APPLICATION = "default_application";
+	// The ID of the user defined application
+	public final static String USER_DEFINED_APPLICATION = "user_defined_application";
 
 }

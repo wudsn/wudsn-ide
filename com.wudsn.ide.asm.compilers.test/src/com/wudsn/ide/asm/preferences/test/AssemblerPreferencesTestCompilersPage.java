@@ -30,13 +30,12 @@ import com.wudsn.ide.asm.preferences.AssemblerPreferencesCompilersPage;
  */
 public final class AssemblerPreferencesTestCompilersPage extends AssemblerPreferencesCompilersPage {
 
-    /**
-     * Create is public. Used by extension point
-     * "org.eclipse.ui.preferencePages".
-     */
-    public AssemblerPreferencesTestCompilersPage() {
-	super(Hardware.TEST);
+	/**
+	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
+	 */
+	public AssemblerPreferencesTestCompilersPage() {
+		super(Hardware.TEST);
 
-    }
+	}
 
 }

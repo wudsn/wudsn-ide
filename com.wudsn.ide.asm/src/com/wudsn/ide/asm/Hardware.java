@@ -27,5 +27,5 @@ package com.wudsn.ide.asm;
  */
 public enum Hardware {
 
-    GENERIC, APPLE2, ATARI2600, ATARI7800, ATARI8BIT, C64, NES, TEST
+	GENERIC, APPLE2, ATARI2600, ATARI7800, ATARI8BIT, C64, NES, TEST
 }

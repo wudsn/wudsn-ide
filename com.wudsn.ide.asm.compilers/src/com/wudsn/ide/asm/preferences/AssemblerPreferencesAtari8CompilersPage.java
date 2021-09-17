@@ -29,13 +29,12 @@ import com.wudsn.ide.asm.Hardware;
  */
 public final class AssemblerPreferencesAtari8CompilersPage extends AssemblerPreferencesCompilersPage {
 
-    /**
-     * Create is public. Used by extension point
-     * "org.eclipse.ui.preferencePages".
-     */
-    public AssemblerPreferencesAtari8CompilersPage() {
-	super(Hardware.ATARI8BIT);
+	/**
+	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
+	 */
+	public AssemblerPreferencesAtari8CompilersPage() {
+		super(Hardware.ATARI8BIT);
 
-    }
+	}
 
 }

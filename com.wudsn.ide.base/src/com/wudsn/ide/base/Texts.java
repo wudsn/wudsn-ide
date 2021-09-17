@@ -30,35 +30,35 @@ import com.wudsn.ide.base.common.FileUtility;
  */
 public final class Texts extends NLS {
 
-    /**
-     * Common texts.
-     */
-    public static String DIALOG_TITLE;
-    public static String FILE_PATH_FIELD_BROWSE_BUTTON_LABEL;
-    public static String FILE_PATH_FIELD_DIALOG_MESSAGE;
+	/**
+	 * Common texts.
+	 */
+	public static String DIALOG_TITLE;
+	public static String FILE_PATH_FIELD_BROWSE_BUTTON_LABEL;
+	public static String FILE_PATH_FIELD_DIALOG_MESSAGE;
 
-    /**
-     * Messages for {@link FileUtility}.
-     */
-    public static String MESSAGE_E200;
-    public static String MESSAGE_E201;
-    public static String MESSAGE_E202;
-    public static String MESSAGE_E203;
-    public static String MESSAGE_E204;
-    public static String MESSAGE_E205;
-    public static String MESSAGE_E206;
-    public static String MESSAGE_E207;
-    public static String MESSAGE_E208;
-    public static String MESSAGE_E209;
-    public static String MESSAGE_E210;
-    public static String MESSAGE_E211;
-    public static String MESSAGE_E212;
-    public static String MESSAGE_E213;
+	/**
+	 * Messages for {@link FileUtility}.
+	 */
+	public static String MESSAGE_E200;
+	public static String MESSAGE_E201;
+	public static String MESSAGE_E202;
+	public static String MESSAGE_E203;
+	public static String MESSAGE_E204;
+	public static String MESSAGE_E205;
+	public static String MESSAGE_E206;
+	public static String MESSAGE_E207;
+	public static String MESSAGE_E208;
+	public static String MESSAGE_E209;
+	public static String MESSAGE_E210;
+	public static String MESSAGE_E211;
+	public static String MESSAGE_E212;
+	public static String MESSAGE_E213;
 
-    /**
-     * Initializes the constants.
-     */
-    static {
-	NLS.initializeMessages(Texts.class.getName(), Texts.class);
-    }
+	/**
+	 * Initializes the constants.
+	 */
+	static {
+		NLS.initializeMessages(Texts.class.getName(), Texts.class);
+	}
 }

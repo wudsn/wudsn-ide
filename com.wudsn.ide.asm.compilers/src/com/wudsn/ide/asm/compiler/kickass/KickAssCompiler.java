@@ -30,21 +30,21 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 public final class KickAssCompiler extends Compiler {
 
-    /**
-     * Creates a new instance.
-     */
-    public KickAssCompiler() {
-    }
+	/**
+	 * Creates a new instance.
+	 */
+	public KickAssCompiler() {
+	}
 
-    @Override
-    public CompilerSourceParser createSourceParser() {
-	return new KickAssCompilerSourceParser();
-    }
+	@Override
+	public CompilerSourceParser createSourceParser() {
+		return new KickAssCompilerSourceParser();
+	}
 
-    @Override
-    public CompilerProcessLogParser createLogParser() {
+	@Override
+	public CompilerProcessLogParser createLogParser() {
 
-	return new KickAssCompilerProcessLogParser();
-    }
+		return new KickAssCompilerProcessLogParser();
+	}
 
 }

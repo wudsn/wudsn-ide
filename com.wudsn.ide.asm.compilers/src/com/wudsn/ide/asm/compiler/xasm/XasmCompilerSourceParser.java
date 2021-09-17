@@ -28,26 +28,26 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 final class XasmCompilerSourceParser extends CompilerSourceParser {
 
-    /**
-     * Creation is package local.
-     */
-    XasmCompilerSourceParser() {
+	/**
+	 * Creation is package local.
+	 */
+	XasmCompilerSourceParser() {
 
-    }
+	}
 
-    @Override
-    protected void parseLine(int startOffset, String symbol, int symbolOffset, String instruction,
-	    int instructionOffset, String operand, String comment) {
-	if (symbol.length() > 0) {
+	@Override
+	protected void parseLine(int startOffset, String symbol, int symbolOffset, String instruction,
+			int instructionOffset, String operand, String comment) {
+		if (symbol.length() > 0) {
 
-	    if (instruction.equals("EQU")) {
-		createEquateDefinitionChild(startOffset, startOffset + symbolOffset, symbol, operand, comment);
+			if (instruction.equals("EQU")) {
+				createEquateDefinitionChild(startOffset, startOffset + symbolOffset, symbol, operand, comment);
 
-	    } else {
-		createLabelDefinitionChild(startOffset, startOffset + symbolOffset, symbol, comment);
-	    }
+			} else {
+				createLabelDefinitionChild(startOffset, startOffset + symbolOffset, symbol, comment);
+			}
 
-	} // Symbol not empty
-    }
+		} // Symbol not empty
+	}
 
 }

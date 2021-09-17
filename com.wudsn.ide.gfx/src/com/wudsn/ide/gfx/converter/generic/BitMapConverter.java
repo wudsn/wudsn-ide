@@ -23,13 +23,13 @@ import com.wudsn.ide.gfx.converter.Converter;
 
 public abstract class BitMapConverter extends Converter {
 
-    /**
-     * Source file ids.
-     */
-    public static final int BIT_MAP_FILE = 0;
+	/**
+	 * Source file ids.
+	 */
+	public static final int BIT_MAP_FILE = 0;
 
-    protected BitMapConverter() {
+	protected BitMapConverter() {
 
-    }
+	}
 
 }

@@ -25,44 +25,44 @@ import com.wudsn.ide.gfx.model.Palette;
 
 public class AsymetricalPlayfieldConverter extends BitMapConverter {
 
-    public AsymetricalPlayfieldConverter() {
+	public AsymetricalPlayfieldConverter() {
 
-    }
-
-    @Override
-    public boolean canConvertToImage(byte[] bytes) {
-	if (bytes == null) {
-	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
-	}
-	return false;
-    }
-
-    @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
-	if (data == null) {
-	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
-	}
-	if (bytes == null) {
-	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
-	}
-	int columns = 5;
-	int rows = (bytes.length + columns - 1) / columns;
-	setImageSizeAndPalette(data, columns, rows, Palette.HIRES_1, null);
-
-    }
-
-    @Override
-    public void convertToImageDataSize(FilesConverterData data) {
-	data.setImageDataWidth(data.getParameters().getColumns());
-	data.setImageDataHeight(data.getParameters().getRows());
-    }
-
-    @Override
-    public boolean convertToImageData(FilesConverterData data) {
-	if (data == null) {
-	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
-	return false;
-    }
+	@Override
+	public boolean canConvertToImage(byte[] bytes) {
+		if (bytes == null) {
+			throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
+		}
+		return false;
+	}
+
+	@Override
+	public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
+		if (data == null) {
+			throw new IllegalArgumentException("Parameter 'data' must not be null.");
+		}
+		if (bytes == null) {
+			throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
+		}
+		int columns = 5;
+		int rows = (bytes.length + columns - 1) / columns;
+		setImageSizeAndPalette(data, columns, rows, Palette.HIRES_1, null);
+
+	}
+
+	@Override
+	public void convertToImageDataSize(FilesConverterData data) {
+		data.setImageDataWidth(data.getParameters().getColumns());
+		data.setImageDataHeight(data.getParameters().getRows());
+	}
+
+	@Override
+	public boolean convertToImageData(FilesConverterData data) {
+		if (data == null) {
+			throw new IllegalArgumentException("Parameter 'data' must not be null.");
+		}
+
+		return false;
+	}
 }

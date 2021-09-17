@@ -56,167 +56,167 @@ import com.wudsn.ide.dsk.Texts;
  */
 public final class Apple2DiskImageEditor extends EditorPart {
 
-    private static class DummyDiskWindow extends DiskWindow {
+	private static class DummyDiskWindow extends DiskWindow {
 
-	public DummyDiskWindow() {
-	    super(null, null, null);
+		public DummyDiskWindow() {
+			super(null, null, null);
+		}
+
+		@Override
+		public void setStandardWindowTitle() {
+
+		}
+
+	}
+
+	private ImageManager imageManager;
+	private CTabFolder tabFolder;
+	private DiskExplorerTab diskExplorerTab;
+	private DiskMapTab[] diskMapTabs;
+	private DiskInfoTab diskInfoTab;
+
+	private String diskImageFilePath;
+
+	public Apple2DiskImageEditor() {
 	}
 
 	@Override
-	public void setStandardWindowTitle() {
+	public void doSave(IProgressMonitor monitor) {
 
 	}
 
-    }
+	@Override
+	public void doSaveAs() {
 
-    private ImageManager imageManager;
-    private CTabFolder tabFolder;
-    private DiskExplorerTab diskExplorerTab;
-    private DiskMapTab[] diskMapTabs;
-    private DiskInfoTab diskInfoTab;
-
-    private String diskImageFilePath;
-
-    public Apple2DiskImageEditor() {
-    }
-
-    @Override
-    public void doSave(IProgressMonitor monitor) {
-
-    }
-
-    @Override
-    public void doSaveAs() {
-
-    }
-
-    @Override
-    public void init(IEditorSite site, IEditorInput input) throws PartInitException {
-	// Clear fields.
-	File ioFile;
-	IFile iFile;
-	ioFile = null;
-	iFile = null;
-
-	setSite(site);
-	setInput(input);
-
-	String fileName = "";
-	if (input instanceof IFileEditorInput) {
-	    // Input file found in Eclipse Workspace.
-	    iFile = ((IFileEditorInput) input).getFile();
-	    ioFile = iFile.getRawLocation().toFile();
-	    fileName = iFile.getName();
-	} else if (input instanceof IPathEditorInput) {
-	    // Input file is outside the Eclipse Workspace
-	    IPathEditorInput pathEditorInput = (IPathEditorInput) input;
-	    IPath path = pathEditorInput.getPath();
-	    ioFile = path.toFile();
-	    fileName = ioFile.getName();
-
-	} else {
-	    // Not supported.
 	}
 
-	setPartName(fileName);
-	if (ioFile != null) {
-	    diskImageFilePath = FileUtility.getCanonicalFile(ioFile).getPath();
-	} else {
-	    diskImageFilePath = "";
-	}
-    }
+	@Override
+	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
+		// Clear fields.
+		File ioFile;
+		IFile iFile;
+		ioFile = null;
+		iFile = null;
 
-    @Override
-    public boolean isDirty() {
-	return false;
-    }
+		setSite(site);
+		setInput(input);
 
-    @Override
-    public boolean isSaveAsAllowed() {
-	return false;
-    }
+		String fileName = "";
+		if (input instanceof IFileEditorInput) {
+			// Input file found in Eclipse Workspace.
+			iFile = ((IFileEditorInput) input).getFile();
+			ioFile = iFile.getRawLocation().toFile();
+			fileName = iFile.getName();
+		} else if (input instanceof IPathEditorInput) {
+			// Input file is outside the Eclipse Workspace
+			IPathEditorInput pathEditorInput = (IPathEditorInput) input;
+			IPath path = pathEditorInput.getPath();
+			ioFile = path.toFile();
+			fileName = ioFile.getName();
 
-    @Override
-    public void createPartControl(Composite parent) {
-	FormattedDisk[] formattedDisks;
-	String errorText;
-
-	formattedDisks = new FormattedDisk[0];
-	errorText = null;
-	if (StringUtility.isEmpty(diskImageFilePath)) {
-	    // ERROR: The editor input is not a file in the file system.
-	    errorText = Texts.MESSAGE_E100;
-
-	} else {
-
-	    try {
-		Disk disk = new Disk(diskImageFilePath);
-		formattedDisks = disk.getFormattedDisks();
-		if (formattedDisks.length == 0) {
-		    // ERROOR: The file is not a valid disk image.
-		    errorText = Texts.MESSAGE_E101;
+		} else {
+			// Not supported.
 		}
-	    } catch (IOException ex) {
-		errorText = ex.getMessage();
 
-	    } catch (IllegalArgumentException ex) {
-		// Caused by
-		// com.webcodepro.applecommander.storage.Disk.isProdosFormat(Disk.java:379)
-		errorText = ex.getMessage();
-	    } catch (ArrayIndexOutOfBoundsException ex) {
-		// Caused by
-		// com.webcodepro.applecommander.storage.Disk.isProdosFormat(Disk.java:379)
-		errorText = Texts.MESSAGE_E101;
-	    }
+		setPartName(fileName);
+		if (ioFile != null) {
+			diskImageFilePath = FileUtility.getCanonicalFile(ioFile).getPath();
+		} else {
+			diskImageFilePath = "";
+		}
 	}
 
-	if (errorText != null) {
-	    Text text = new Text(parent, SWT.READ_ONLY);
-	    text.setText(errorText);
-	    return;
+	@Override
+	public boolean isDirty() {
+		return false;
 	}
 
-	imageManager = new ImageManager(parent.getDisplay());
-	tabFolder = new CTabFolder(parent, SWT.BOTTOM);
-	diskExplorerTab = new DiskExplorerTab(tabFolder, formattedDisks, imageManager, new DummyDiskWindow());
-	diskMapTabs = new DiskMapTab[formattedDisks.length];
-	for (int i = 0; i < formattedDisks.length; i++) {
-	    if (formattedDisks[i].supportsDiskMap()) {
-		diskMapTabs[i] = new DiskMapTab(tabFolder, formattedDisks[i]);
-	    }
+	@Override
+	public boolean isSaveAsAllowed() {
+		return false;
 	}
-	diskInfoTab = new DiskInfoTab(tabFolder, formattedDisks);
-	tabFolder.setSelection(tabFolder.getItems()[0]);
-    }
 
-    @Override
-    public void setFocus() {
-	if (tabFolder != null) {
-	    tabFolder.setFocus();
-	}
-    }
+	@Override
+	public void createPartControl(Composite parent) {
+		FormattedDisk[] formattedDisks;
+		String errorText;
 
-    @Override
-    public void dispose() {
-	if (diskExplorerTab != null) {
-	    diskExplorerTab.dispose();
-	    diskExplorerTab = null;
+		formattedDisks = new FormattedDisk[0];
+		errorText = null;
+		if (StringUtility.isEmpty(diskImageFilePath)) {
+			// ERROR: The editor input is not a file in the file system.
+			errorText = Texts.MESSAGE_E100;
+
+		} else {
+
+			try {
+				Disk disk = new Disk(diskImageFilePath);
+				formattedDisks = disk.getFormattedDisks();
+				if (formattedDisks.length == 0) {
+					// ERROOR: The file is not a valid disk image.
+					errorText = Texts.MESSAGE_E101;
+				}
+			} catch (IOException ex) {
+				errorText = ex.getMessage();
+
+			} catch (IllegalArgumentException ex) {
+				// Caused by
+				// com.webcodepro.applecommander.storage.Disk.isProdosFormat(Disk.java:379)
+				errorText = ex.getMessage();
+			} catch (ArrayIndexOutOfBoundsException ex) {
+				// Caused by
+				// com.webcodepro.applecommander.storage.Disk.isProdosFormat(Disk.java:379)
+				errorText = Texts.MESSAGE_E101;
+			}
+		}
+
+		if (errorText != null) {
+			Text text = new Text(parent, SWT.READ_ONLY);
+			text.setText(errorText);
+			return;
+		}
+
+		imageManager = new ImageManager(parent.getDisplay());
+		tabFolder = new CTabFolder(parent, SWT.BOTTOM);
+		diskExplorerTab = new DiskExplorerTab(tabFolder, formattedDisks, imageManager, new DummyDiskWindow());
+		diskMapTabs = new DiskMapTab[formattedDisks.length];
+		for (int i = 0; i < formattedDisks.length; i++) {
+			if (formattedDisks[i].supportsDiskMap()) {
+				diskMapTabs[i] = new DiskMapTab(tabFolder, formattedDisks[i]);
+			}
+		}
+		diskInfoTab = new DiskInfoTab(tabFolder, formattedDisks);
+		tabFolder.setSelection(tabFolder.getItems()[0]);
 	}
-	if (diskMapTabs != null) {
-	    for (int i = 0; i < diskMapTabs.length; i++) {
-		if (diskMapTabs[i] != null)
-		    diskMapTabs[i].dispose();
-	    }
-	    diskMapTabs = null;
+
+	@Override
+	public void setFocus() {
+		if (tabFolder != null) {
+			tabFolder.setFocus();
+		}
 	}
-	if (diskInfoTab != null) {
-	    diskInfoTab.dispose();
-	    diskInfoTab = null;
+
+	@Override
+	public void dispose() {
+		if (diskExplorerTab != null) {
+			diskExplorerTab.dispose();
+			diskExplorerTab = null;
+		}
+		if (diskMapTabs != null) {
+			for (int i = 0; i < diskMapTabs.length; i++) {
+				if (diskMapTabs[i] != null)
+					diskMapTabs[i].dispose();
+			}
+			diskMapTabs = null;
+		}
+		if (diskInfoTab != null) {
+			diskInfoTab.dispose();
+			diskInfoTab = null;
+		}
+		if (imageManager != null) {
+			imageManager.dispose();
+			imageManager = null;
+		}
 	}
-	if (imageManager != null) {
-	    imageManager.dispose();
-	    imageManager = null;
-	}
-    }
 
 }

@@ -28,13 +28,12 @@ import com.wudsn.ide.asm.Hardware;
  */
 public final class AssemblerPreferencesAtari7800CompilersPage extends AssemblerPreferencesCompilersPage {
 
-    /**
-     * Create is public. Used by extension point
-     * "org.eclipse.ui.preferencePages".
-     */
-    public AssemblerPreferencesAtari7800CompilersPage() {
-	super(Hardware.ATARI7800);
+	/**
+	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
+	 */
+	public AssemblerPreferencesAtari7800CompilersPage() {
+		super(Hardware.ATARI7800);
 
-    }
+	}
 
 }

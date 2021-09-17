@@ -28,28 +28,28 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 final class Merlin32CompilerSourceParser extends CompilerSourceParser {
 
-    @Override
-    protected void parseLine(int startOffset, String symbol, int symbolOffset, String instruction,
-	    int instructionOffset, String operand, String comment) {
+	@Override
+	protected void parseLine(int startOffset, String symbol, int symbolOffset, String instruction,
+			int instructionOffset, String operand, String comment) {
 
-	if (symbol.length() > 0) {
+		if (symbol.length() > 0) {
 
-	    if (instruction.equals("=") || instruction.equals("EQU")) {
-		createEquateDefinitionChild(startOffset, startOffset + symbolOffset, symbol, operand, comment);
+			if (instruction.equals("=") || instruction.equals("EQU")) {
+				createEquateDefinitionChild(startOffset, startOffset + symbolOffset, symbol, operand, comment);
 
-	    } else {
-		createLabelDefinitionChild(startOffset, startOffset + symbolOffset, symbol, comment);
-	    }
+			} else {
+				createLabelDefinitionChild(startOffset, startOffset + symbolOffset, symbol, comment);
+			}
 
-	} // Symbol not empty
+		} // Symbol not empty
 
-	// TODO Implement macro and Lup handling
-	// if (instruction.equals("<<<<")) {
-	// endMacroDefinition();
-	// } else if (instruction.equals(">>>>")) {
-	// // Same as "PMC"
-	// } else if (instruction.equals("--^")) {
-	// endRepeatSection();
-	// }
-    }
+		// TODO Implement macro and Lup handling
+		// if (instruction.equals("<<<<")) {
+		// endMacroDefinition();
+		// } else if (instruction.equals(">>>>")) {
+		// // Same as "PMC"
+		// } else if (instruction.equals("--^")) {
+		// endRepeatSection();
+		// }
+	}
 }

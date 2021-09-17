@@ -31,30 +31,30 @@ import com.wudsn.ide.asm.compiler.CompilerFiles;
  */
 public final class AssemblerEditorCompileCommandHandler extends AssemblerEditorFilesCommandHandler {
 
-    /**
-     * Creates a new instance. Called by the extension point
-     * "org.eclipse.ui.handlers".
-     */
-    public AssemblerEditorCompileCommandHandler() {
+	/**
+	 * Creates a new instance. Called by the extension point
+	 * "org.eclipse.ui.handlers".
+	 */
+	public AssemblerEditorCompileCommandHandler() {
 
-    }
+	}
 
-    @Override
-    protected void execute(ExecutionEvent event, AssemblerEditor assemblerEditor, CompilerFiles files)
-	    throws ExecutionException {
-	if (event == null) {
-	    throw new IllegalArgumentException("Parameter 'event' must not be null.");
+	@Override
+	protected void execute(ExecutionEvent event, AssemblerEditor assemblerEditor, CompilerFiles files)
+			throws ExecutionException {
+		if (event == null) {
+			throw new IllegalArgumentException("Parameter 'event' must not be null.");
+		}
+		if (assemblerEditor == null) {
+			throw new IllegalArgumentException("Parameter 'assemblerEditor' must not be null.");
+		}
+		if (files == null) {
+			throw new IllegalArgumentException("Parameter 'files' must not be null.");
+		}
+		try {
+			AssemblerEditorCompileCommand.execute(assemblerEditor, files, event.getCommand().getId(), null);
+		} catch (RuntimeException ex) {
+			throw new ExecutionException("Cannot execute event " + event, ex);
+		}
 	}
-	if (assemblerEditor == null) {
-	    throw new IllegalArgumentException("Parameter 'assemblerEditor' must not be null.");
-	}
-	if (files == null) {
-	    throw new IllegalArgumentException("Parameter 'files' must not be null.");
-	}
-	try {
-	    AssemblerEditorCompileCommand.execute(assemblerEditor, files, event.getCommand().getId(), null);
-	} catch (RuntimeException ex) {
-	    throw new ExecutionException("Cannot execute event " + event, ex);
-	}
-    }
 }

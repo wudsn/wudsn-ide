@@ -29,21 +29,21 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 public final class AcmeCompiler extends Compiler {
 
-    /**
-     * Creates a new instance.
-     */
-    public AcmeCompiler() {
-    }
+	/**
+	 * Creates a new instance.
+	 */
+	public AcmeCompiler() {
+	}
 
-    @Override
-    public CompilerSourceParser createSourceParser() {
-	return new AcmeCompilerSourceParser();
-    }
+	@Override
+	public CompilerSourceParser createSourceParser() {
+		return new AcmeCompilerSourceParser();
+	}
 
-    @Override
-    public CompilerProcessLogParser createLogParser() {
+	@Override
+	public CompilerProcessLogParser createLogParser() {
 
-	return new AcmeCompilerProcessLogParser();
-    }
+		return new AcmeCompilerProcessLogParser();
+	}
 
 }

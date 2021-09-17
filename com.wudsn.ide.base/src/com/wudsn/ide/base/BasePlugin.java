@@ -28,60 +28,60 @@ import com.wudsn.ide.base.common.AbstractIDEPlugin;
  */
 public final class BasePlugin extends AbstractIDEPlugin {
 
-    /**
-     * The plugin id.
-     */
-    public static final String ID = "com.wudsn.ide.base";
+	/**
+	 * The plugin id.
+	 */
+	public static final String ID = "com.wudsn.ide.base";
 
-    /**
-     * The shared instance.
-     */
-    private static BasePlugin plugin;
+	/**
+	 * The shared instance.
+	 */
+	private static BasePlugin plugin;
 
-    /**
-     * Creates a new instance. Must be public for dynamic instantiation.
-     */
-    public BasePlugin() {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected String getPluginId() {
-	return ID;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void start(BundleContext context) throws Exception {
-	if (context != null) {
-	    super.start(context);
+	/**
+	 * Creates a new instance. Must be public for dynamic instantiation.
+	 */
+	public BasePlugin() {
 	}
-	plugin = this;
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void stop(BundleContext context) throws Exception {
-	plugin = null;
-	super.stop(context);
-    }
-
-    /**
-     * Gets the shared plugin instance
-     * 
-     * @return The plug-in, not <code>null</code>.
-     */
-    public static BasePlugin getInstance() {
-	if (plugin == null) {
-	    throw new IllegalStateException("Plugin not initialized or already stopped");
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected String getPluginId() {
+		return ID;
 	}
-	return plugin;
-    }
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void start(BundleContext context) throws Exception {
+		if (context != null) {
+			super.start(context);
+		}
+		plugin = this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void stop(BundleContext context) throws Exception {
+		plugin = null;
+		super.stop(context);
+	}
+
+	/**
+	 * Gets the shared plugin instance
+	 * 
+	 * @return The plug-in, not <code>null</code>.
+	 */
+	public static BasePlugin getInstance() {
+		if (plugin == null) {
+			throw new IllegalStateException("Plugin not initialized or already stopped");
+		}
+		return plugin;
+	}
 
 }

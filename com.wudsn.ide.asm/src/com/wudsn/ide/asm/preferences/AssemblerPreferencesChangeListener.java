@@ -30,15 +30,13 @@ import java.util.Set;
  */
 public interface AssemblerPreferencesChangeListener {
 
-    /**
-     * Notify of changed properties.
-     * 
-     * @param preferences
-     *            The assembler preferences containing the new values, not
-     *            <code>null</code>.
-     * @param changedPropertyNames
-     *            The set of names of properties that have been changed, may be
-     *            empty, not <code>null</code>.
-     */
-    public void preferencesChanged(AssemblerPreferences preferences, Set<String> changedPropertyNames);
+	/**
+	 * Notify of changed properties.
+	 * 
+	 * @param preferences          The assembler preferences containing the new
+	 *                             values, not <code>null</code>.
+	 * @param changedPropertyNames The set of names of properties that have been
+	 *                             changed, may be empty, not <code>null</code>.
+	 */
+	public void preferencesChanged(AssemblerPreferences preferences, Set<String> changedPropertyNames);
 }

@@ -21,14 +21,14 @@ package com.wudsn.ide.gfx.converter.generic;
 
 public abstract class TiledBitMapConverter extends BitMapConverter {
 
-    /**
-     * Source file ids.
-     */
-    public static final int VIDEO_RAM_FILE = 1;
-    public static final int COLOR_RAM_FILE = 2;
+	/**
+	 * Source file ids.
+	 */
+	public static final int VIDEO_RAM_FILE = 1;
+	public static final int COLOR_RAM_FILE = 2;
 
-    protected TiledBitMapConverter() {
+	protected TiledBitMapConverter() {
 
-    }
+	}
 
 }

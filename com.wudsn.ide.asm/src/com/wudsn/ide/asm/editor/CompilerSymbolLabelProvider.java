@@ -33,77 +33,77 @@ import com.wudsn.ide.asm.compiler.CompilerSymbolType;
  */
 final class CompilerSymbolLabelProvider {
 
-    /** Default image */
-    private final Image defaultImage;
+	/** Default image */
+	private final Image defaultImage;
 
-    /** Outline equate definition image */
-    private final Image equateDefintionImage;
+	/** Outline equate definition image */
+	private final Image equateDefintionImage;
 
-    /** Outline label definition image */
-    private final Image labelDefinitionImage;
+	/** Outline label definition image */
+	private final Image labelDefinitionImage;
 
-    /** Outline enum definition section image */
-    private final Image enumDefinitionSectionImage;
+	/** Outline enum definition section image */
+	private final Image enumDefinitionSectionImage;
 
-    /** Outline structure definition section image */
-    private final Image structureDefinitionSectionImage;
+	/** Outline structure definition section image */
+	private final Image structureDefinitionSectionImage;
 
-    /** Outline local section image */
-    private final Image localSectionImage;
+	/** Outline local section image */
+	private final Image localSectionImage;
 
-    /** Outline procedure definition section image */
-    private final Image procedureDefinitionSectionImage;
+	/** Outline procedure definition section image */
+	private final Image procedureDefinitionSectionImage;
 
-    CompilerSymbolLabelProvider() {
-	AssemblerPlugin plugin;
-	plugin = AssemblerPlugin.getInstance();
-	defaultImage = plugin.getImage("outline-default-16x16.gif");
+	CompilerSymbolLabelProvider() {
+		AssemblerPlugin plugin;
+		plugin = AssemblerPlugin.getInstance();
+		defaultImage = plugin.getImage("outline-default-16x16.gif");
 
-	equateDefintionImage = plugin.getImage("outline-equate-definition-16x16.gif");
-	labelDefinitionImage = plugin.getImage("outline-label-definition-16x16.gif");
+		equateDefintionImage = plugin.getImage("outline-equate-definition-16x16.gif");
+		labelDefinitionImage = plugin.getImage("outline-label-definition-16x16.gif");
 
-	enumDefinitionSectionImage = plugin.getImage("outline-enum-definition-section-16x16.gif");
-	structureDefinitionSectionImage = plugin.getImage("outline-structure-definition-section-16x16.gif");
-	localSectionImage = plugin.getImage("outline-local-section-16x16.gif");
-	procedureDefinitionSectionImage = plugin.getImage("outline-procedure-definition-section-16x16.gif");
+		enumDefinitionSectionImage = plugin.getImage("outline-enum-definition-section-16x16.gif");
+		structureDefinitionSectionImage = plugin.getImage("outline-structure-definition-section-16x16.gif");
+		localSectionImage = plugin.getImage("outline-local-section-16x16.gif");
+		procedureDefinitionSectionImage = plugin.getImage("outline-procedure-definition-section-16x16.gif");
 
-    }
-
-    public Image getImage(Object element) {
-	Image result;
-	if (element instanceof CompilerSymbol) {
-	    CompilerSymbol elem = (CompilerSymbol) element;
-	    int type = elem.getType();
-
-	    switch (type) {
-	    case CompilerSymbolType.EQUATE_DEFINITION:
-		result = equateDefintionImage;
-		break;
-	    case com.wudsn.ide.asm.compiler.CompilerSymbolType.LABEL_DEFINITION:
-		result = labelDefinitionImage;
-		break;
-
-	    case CompilerSymbolType.ENUM_DEFINITION_SECTION:
-		result = enumDefinitionSectionImage;
-		break;
-	    case CompilerSymbolType.STRUCTURE_DEFINITION_SECTION:
-		result = structureDefinitionSectionImage;
-		break;
-	    case CompilerSymbolType.LOCAL_SECTION:
-		result = localSectionImage;
-		break;
-
-	    case CompilerSymbolType.PROCEDURE_DEFINITION_SECTION:
-		result = procedureDefinitionSectionImage;
-		break;
-
-	    default:
-		result = defaultImage;
-	    }
-	} else {
-	    result = null;
 	}
 
-	return result;
-    }
+	public Image getImage(Object element) {
+		Image result;
+		if (element instanceof CompilerSymbol) {
+			CompilerSymbol elem = (CompilerSymbol) element;
+			int type = elem.getType();
+
+			switch (type) {
+			case CompilerSymbolType.EQUATE_DEFINITION:
+				result = equateDefintionImage;
+				break;
+			case com.wudsn.ide.asm.compiler.CompilerSymbolType.LABEL_DEFINITION:
+				result = labelDefinitionImage;
+				break;
+
+			case CompilerSymbolType.ENUM_DEFINITION_SECTION:
+				result = enumDefinitionSectionImage;
+				break;
+			case CompilerSymbolType.STRUCTURE_DEFINITION_SECTION:
+				result = structureDefinitionSectionImage;
+				break;
+			case CompilerSymbolType.LOCAL_SECTION:
+				result = localSectionImage;
+				break;
+
+			case CompilerSymbolType.PROCEDURE_DEFINITION_SECTION:
+				result = procedureDefinitionSectionImage;
+				break;
+
+			default:
+				result = defaultImage;
+			}
+		} else {
+			result = null;
+		}
+
+		return result;
+	}
 }

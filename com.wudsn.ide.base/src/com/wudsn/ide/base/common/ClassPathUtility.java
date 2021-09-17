@@ -26,72 +26,71 @@ import java.net.URL;
 
 public final class ClassPathUtility {
 
-    /**
-     * Find the URI of the ".jar" file containing the resource files.
-     * 
-     * @return The URI of the ".jar" file containing the resource files or
-     *         <code>null</code>.
-     */
-    public static URI getJarURI() {
-	// Try to load simple menu from folder where the .jar file is located
-	ClassLoader classLoader = ClassPathUtility.class.getClassLoader();
-	String jarPath = ClassPathUtility.class.getName().replace('.', '/') + ".class";
-	URL url = classLoader.getResource(jarPath);
-	if (url == null) {
-	    url = ClassLoader.getSystemResource(jarPath);
-	}
-	if (url == null) {
-	    return null;
-	}
-	try {
-	    URI uri = url.toURI();
-
-	    // Convert "jar:file:/..." to file URI.
-	    if (uri.getScheme().equals("jar")) {
-		String uriString = uri.getRawSchemeSpecificPart();
-		int index = uriString.lastIndexOf("!");
-		if (index > 0) {
-		    uriString = uriString.substring(0, index);
-		    uri = new URI(uriString);
-		    return uri;
+	/**
+	 * Find the URI of the ".jar" file containing the resource files.
+	 * 
+	 * @return The URI of the ".jar" file containing the resource files or
+	 *         <code>null</code>.
+	 */
+	public static URI getJarURI() {
+		// Try to load simple menu from folder where the .jar file is located
+		ClassLoader classLoader = ClassPathUtility.class.getClassLoader();
+		String jarPath = ClassPathUtility.class.getName().replace('.', '/') + ".class";
+		URL url = classLoader.getResource(jarPath);
+		if (url == null) {
+			url = ClassLoader.getSystemResource(jarPath);
 		}
-	    }
+		if (url == null) {
+			return null;
+		}
+		try {
+			URI uri = url.toURI();
 
-	} catch (URISyntaxException ex) {
-	    throw new RuntimeException("Error when resolving URL '" + url + "'.");
+			// Convert "jar:file:/..." to file URI.
+			if (uri.getScheme().equals("jar")) {
+				String uriString = uri.getRawSchemeSpecificPart();
+				int index = uriString.lastIndexOf("!");
+				if (index > 0) {
+					uriString = uriString.substring(0, index);
+					uri = new URI(uriString);
+					return uri;
+				}
+			}
+
+		} catch (URISyntaxException ex) {
+			throw new RuntimeException("Error when resolving URL '" + url + "'.");
+		}
+		return null;
+
 	}
-	return null;
 
-    }
+	/**
+	 * The ".jar" file containing the resource files.
+	 * 
+	 * @return The ".jar" file containing the resource files or <code>null</code>.
+	 */
+	public static File getJarFile() {
+		URI uri = getJarURI();
 
-    /**
-     * The ".jar" file containing the resource files.
-     * 
-     * @return The ".jar" file containing the resource files or
-     *         <code>null</code>.
-     */
-    public static File getJarFile() {
-	URI uri = getJarURI();
-
-	File result = null;
-	if (uri != null) {
-	    result = new File(uri);
+		File result = null;
+		if (uri != null) {
+			result = new File(uri);
+		}
+		return result;
 	}
-	return result;
-    }
 
-    /**
-     * The folder of the ".jar" file containing the resource files.
-     * 
-     * @return The folder of the ".jar" file containing the resource files or
-     *         <code>null</code>.
-     */
-    public static File getJarFolder() {
+	/**
+	 * The folder of the ".jar" file containing the resource files.
+	 * 
+	 * @return The folder of the ".jar" file containing the resource files or
+	 *         <code>null</code>.
+	 */
+	public static File getJarFolder() {
 
-	File result = getJarFile();
-	if (result != null) {
-	    result = result.getParentFile();
+		File result = getJarFile();
+		if (result != null) {
+			result = result.getParentFile();
+		}
+		return result;
 	}
-	return result;
-    }
 }

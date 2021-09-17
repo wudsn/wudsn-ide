@@ -30,21 +30,21 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 public final class MadsCompiler extends Compiler {
 
-    /**
-     * Creates a new instance.
-     */
-    public MadsCompiler() {
-    }
+	/**
+	 * Creates a new instance.
+	 */
+	public MadsCompiler() {
+	}
 
-    @Override
-    public CompilerSourceParser createSourceParser() {
-	return new MadsCompilerSourceParser();
-    }
+	@Override
+	public CompilerSourceParser createSourceParser() {
+		return new MadsCompilerSourceParser();
+	}
 
-    @Override
-    public final CompilerProcessLogParser createLogParser() {
+	@Override
+	public final CompilerProcessLogParser createLogParser() {
 
-	return new MadsCompilerProcessLogParser();
-    }
+		return new MadsCompilerProcessLogParser();
+	}
 
 }

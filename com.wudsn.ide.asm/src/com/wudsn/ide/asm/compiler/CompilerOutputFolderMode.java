@@ -29,45 +29,43 @@ import com.wudsn.ide.base.common.StringUtility;
  */
 public final class CompilerOutputFolderMode {
 
-    /**
-     * Creation is private.
-     */
-    private CompilerOutputFolderMode() {
-    }
-
-    public final static String SOURCE_FOLDER = "SOURCE_FOLDER";
-    public final static String TEMP_FOLDER = "TEMP_FOLDER";
-    public final static String FIXED_FOLDER = "FIXED_FOLDER";
-
-    /**
-     * Determines if the output folder mode is defined.
-     * 
-     * @param outputFolderMode
-     *            The output folder mode, not <code>null</code>.
-     * @return <code>true</code> if the output folder mode is not specified or
-     *         defined.
-     */
-    public static boolean isDefined(String outputFolderMode) {
-	if (outputFolderMode == null) {
-	    throw new IllegalArgumentException("Parameter 'outputFolderMode' must not be null.");
+	/**
+	 * Creation is private.
+	 */
+	private CompilerOutputFolderMode() {
 	}
-	if (StringUtility.isEmpty(outputFolderMode)) {
-	    return true;
-	}
-	if (outputFolderMode.equals(SOURCE_FOLDER) || outputFolderMode.equals(TEMP_FOLDER)
-		|| outputFolderMode.equals(FIXED_FOLDER)) {
-	    return true;
-	}
-	return false;
-    }
 
-    /**
-     * Gets the comma separated list of allowed values.
-     * 
-     * @return The comma separated list of allowed values, not <code>null</code>
-     *         .
-     */
-    public static String getAllowedValues() {
-	return SOURCE_FOLDER + ", " + TEMP_FOLDER + ", " + FIXED_FOLDER;
-    }
+	public final static String SOURCE_FOLDER = "SOURCE_FOLDER";
+	public final static String TEMP_FOLDER = "TEMP_FOLDER";
+	public final static String FIXED_FOLDER = "FIXED_FOLDER";
+
+	/**
+	 * Determines if the output folder mode is defined.
+	 * 
+	 * @param outputFolderMode The output folder mode, not <code>null</code>.
+	 * @return <code>true</code> if the output folder mode is not specified or
+	 *         defined.
+	 */
+	public static boolean isDefined(String outputFolderMode) {
+		if (outputFolderMode == null) {
+			throw new IllegalArgumentException("Parameter 'outputFolderMode' must not be null.");
+		}
+		if (StringUtility.isEmpty(outputFolderMode)) {
+			return true;
+		}
+		if (outputFolderMode.equals(SOURCE_FOLDER) || outputFolderMode.equals(TEMP_FOLDER)
+				|| outputFolderMode.equals(FIXED_FOLDER)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Gets the comma separated list of allowed values.
+	 * 
+	 * @return The comma separated list of allowed values, not <code>null</code> .
+	 */
+	public static String getAllowedValues() {
+		return SOURCE_FOLDER + ", " + TEMP_FOLDER + ", " + FIXED_FOLDER;
+	}
 }

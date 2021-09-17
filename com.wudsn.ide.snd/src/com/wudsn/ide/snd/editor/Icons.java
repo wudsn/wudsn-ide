@@ -26,16 +26,16 @@ import com.wudsn.ide.snd.SoundPlugin;
 
 final class Icons {
 
-    public static final Image PLAY;
-    public static final Image PAUSE;
-    public static final Image STOP;
-    public static final Image EXPORT;
+	public static final Image PLAY;
+	public static final Image PAUSE;
+	public static final Image STOP;
+	public static final Image EXPORT;
 
-    static {
-	AbstractIDEPlugin plugin = SoundPlugin.getInstance();
-	PLAY = plugin.getImage("player-play-16x16.gif");
-	PAUSE = plugin.getImage("player-pause-16x16.gif");
-	STOP = plugin.getImage("player-stop-16x16.gif");
-	EXPORT = plugin.getImage("player-export-16x16.gif");
-    }
+	static {
+		AbstractIDEPlugin plugin = SoundPlugin.getInstance();
+		PLAY = plugin.getImage("player-play-16x16.gif");
+		PAUSE = plugin.getImage("player-pause-16x16.gif");
+		STOP = plugin.getImage("player-stop-16x16.gif");
+		EXPORT = plugin.getImage("player-export-16x16.gif");
+	}
 }

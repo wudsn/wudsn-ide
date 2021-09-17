@@ -30,21 +30,21 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 public final class Asm6Compiler extends Compiler {
 
-    /**
-     * Creates a new instance.
-     */
-    public Asm6Compiler() {
-    }
+	/**
+	 * Creates a new instance.
+	 */
+	public Asm6Compiler() {
+	}
 
-    @Override
-    public CompilerSourceParser createSourceParser() {
-	return new Asm6CompilerSourceParser();
-    }
+	@Override
+	public CompilerSourceParser createSourceParser() {
+		return new Asm6CompilerSourceParser();
+	}
 
-    @Override
-    public CompilerProcessLogParser createLogParser() {
+	@Override
+	public CompilerProcessLogParser createLogParser() {
 
-	return new Asm6CompilerProcessLogParser();
-    }
+		return new Asm6CompilerProcessLogParser();
+	}
 
 }

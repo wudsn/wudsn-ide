@@ -26,71 +26,71 @@ import com.wudsn.ide.gfx.model.Palette;
 
 public class LinearBitMapILCConverter extends LinearBitMapConverter {
 
-    public LinearBitMapILCConverter() {
+	public LinearBitMapILCConverter() {
 
-    }
-
-    @Override
-    public boolean canConvertToImage(byte[] bytes) {
-	if (bytes == null) {
-	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
-	}
-	return bytes.length == 15360;
-    }
-
-    @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
-	if (data == null) {
-	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
-	}
-	if (bytes == null) {
-	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 	}
 
-	setImageSizeAndPalette(data, 40, 192, Palette.TRUE_COLOR, null);
-    }
-
-    @Override
-    public void convertToImageDataSize(FilesConverterData data) {
-	data.setImageDataWidth(data.getParameters().getColumns() * 2);
-	data.setImageDataHeight(data.getParameters().getRows());
-    }
-
-    @Override
-    public boolean convertToImageData(FilesConverterData data) {
-	if (data == null) {
-	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
-	}
-
-	int columns = data.getParameters().getColumns();
-
-	int offset1 = 7680;
-	int offset2 = 0;
-	int xpixels = 2;
-	PaletteMapper paletteMapper = new Atari8BitPaletteMapper();
-
-	for (int y1 = 0; y1 < data.getParameters().getRows(); y1 = y1 + 1) {
-	    for (int x1 = 0; x1 < columns; x1++) {
-		int c = data.getSourceFileByte(BIT_MAP_FILE, offset1++);
-		if (c < 0) {
-		    return true;
+	@Override
+	public boolean canConvertToImage(byte[] bytes) {
+		if (bytes == null) {
+			throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 		}
-		int b = data.getSourceFileByte(BIT_MAP_FILE, offset2++);
-		if (b < 0) {
-		    return true;
-		}
-		for (int x2 = 0; x2 < 2; x2++) {
-		    int x = x1 * xpixels + x2;
+		return bytes.length == 15360;
+	}
 
-		    int color = (c & mask_4bit[x2]) >>> shift_4bit[x2];
-		    int brightness = (b & mask_4bit[x2]) >>> shift_4bit[x2];
-		    int atariColor = color << 4 | brightness;
-		    int directColor = paletteMapper.getRGBColor(atariColor);
-		    data.setDirectPixel(x, y1, directColor);
+	@Override
+	public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
+		if (data == null) {
+			throw new IllegalArgumentException("Parameter 'data' must not be null.");
+		}
+		if (bytes == null) {
+			throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 		}
 
-	    }
+		setImageSizeAndPalette(data, 40, 192, Palette.TRUE_COLOR, null);
 	}
-	return true;
-    }
+
+	@Override
+	public void convertToImageDataSize(FilesConverterData data) {
+		data.setImageDataWidth(data.getParameters().getColumns() * 2);
+		data.setImageDataHeight(data.getParameters().getRows());
+	}
+
+	@Override
+	public boolean convertToImageData(FilesConverterData data) {
+		if (data == null) {
+			throw new IllegalArgumentException("Parameter 'data' must not be null.");
+		}
+
+		int columns = data.getParameters().getColumns();
+
+		int offset1 = 7680;
+		int offset2 = 0;
+		int xpixels = 2;
+		PaletteMapper paletteMapper = new Atari8BitPaletteMapper();
+
+		for (int y1 = 0; y1 < data.getParameters().getRows(); y1 = y1 + 1) {
+			for (int x1 = 0; x1 < columns; x1++) {
+				int c = data.getSourceFileByte(BIT_MAP_FILE, offset1++);
+				if (c < 0) {
+					return true;
+				}
+				int b = data.getSourceFileByte(BIT_MAP_FILE, offset2++);
+				if (b < 0) {
+					return true;
+				}
+				for (int x2 = 0; x2 < 2; x2++) {
+					int x = x1 * xpixels + x2;
+
+					int color = (c & mask_4bit[x2]) >>> shift_4bit[x2];
+					int brightness = (b & mask_4bit[x2]) >>> shift_4bit[x2];
+					int atariColor = color << 4 | brightness;
+					int directColor = paletteMapper.getRGBColor(atariColor);
+					data.setDirectPixel(x, y1, directColor);
+				}
+
+			}
+		}
+		return true;
+	}
 }

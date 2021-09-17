@@ -23,11 +23,11 @@ import com.wudsn.ide.gfx.converter.Converter;
 
 public abstract class SpriteConverter extends Converter {
 
-    /**
-     * Source file ids.
-     */
-    public static final int SPRITE_FILE = 0;
+	/**
+	 * Source file ids.
+	 */
+	public static final int SPRITE_FILE = 0;
 
-    protected SpriteConverter() {
-    }
+	protected SpriteConverter() {
+	}
 }

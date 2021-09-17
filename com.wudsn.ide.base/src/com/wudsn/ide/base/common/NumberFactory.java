@@ -28,30 +28,29 @@ package com.wudsn.ide.base.common;
  */
 public final class NumberFactory {
 
-    private static final int MAX_INTEGERS = 2048;
-    private static final Integer[] INTEGERS;
+	private static final int MAX_INTEGERS = 2048;
+	private static final Integer[] INTEGERS;
 
-    /**
-     * Static initialization.
-     */
-    static {
-	INTEGERS = new Integer[MAX_INTEGERS];
-	for (int i = 0; i < MAX_INTEGERS; i++) {
-	    INTEGERS[i] = Integer.valueOf(i);
+	/**
+	 * Static initialization.
+	 */
+	static {
+		INTEGERS = new Integer[MAX_INTEGERS];
+		for (int i = 0; i < MAX_INTEGERS; i++) {
+			INTEGERS[i] = Integer.valueOf(i);
+		}
 	}
-    }
 
-    /**
-     * Gets the @link Integer} instance for an int value.
-     * 
-     * @param value
-     *            The int value.
-     * @return The {@link Integer} instance, not <code>null</code>.
-     */
-    public static final Integer getInteger(int value) {
-	if (0 <= value && value <= MAX_INTEGERS) {
+	/**
+	 * Gets the @link Integer} instance for an int value.
+	 * 
+	 * @param value The int value.
+	 * @return The {@link Integer} instance, not <code>null</code>.
+	 */
+	public static final Integer getInteger(int value) {
+		if (0 <= value && value <= MAX_INTEGERS) {
 
+		}
+		return Integer.valueOf(value);
 	}
-	return Integer.valueOf(value);
-    }
 }

@@ -28,12 +28,12 @@ import com.wudsn.ide.gfx.converter.PaletteMapper;
  */
 public final class Atari8BitPaletteMapper extends PaletteMapper {
 
-    public Atari8BitPaletteMapper() {
-	super(256);
-	// loadPalette("default.act");
-	loadPalette("laoo.act");
-	// loadPalette("real.act");
+	public Atari8BitPaletteMapper() {
+		super(256);
+		// loadPalette("default.act");
+		loadPalette("laoo.act");
+		// loadPalette("real.act");
 
-    }
+	}
 
 }

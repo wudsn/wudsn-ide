@@ -52,94 +52,91 @@ import com.wudsn.ide.base.common.StringUtility;
  */
 public abstract class CommonOpenEditorCommandHandler extends AbstractHandler {
 
-    private final String editorId;
+	private final String editorId;
 
-    /**
-     * Creation is protected, is only call by sub-classes.
-     * 
-     * @param editorId
-     *            The editor id, not empty and not <code>null</code>.
-     */
-    protected CommonOpenEditorCommandHandler(String editorId) {
-	if (editorId == null) {
-	    throw new IllegalArgumentException("Parameter 'editorId' must not be null.");
-	}
-	if (StringUtility.isEmpty(editorId)) {
-	    throw new IllegalArgumentException("Parameter 'editorId' must not be empty.");
-	}
-	this.editorId = editorId;
-    }
-
-    @Override
-    public final Object execute(ExecutionEvent event) throws ExecutionException {
-	List<IFile> files = new ArrayList<IFile>(3);
-	ISelection menuSelection;
-	menuSelection = HandlerUtil.getActiveMenuSelection(event);
-	ISelection menuEditorInputSelection;
-	menuEditorInputSelection = HandlerUtil.getActiveMenuEditorInput(event);
-
-	if (menuSelection instanceof IStructuredSelection) {
-	    Iterator<?> i = ((IStructuredSelection) menuSelection).iterator();
-	    while (i.hasNext()) {
-		Object object = i.next();
-		openFile(files, object);
-
-	    }
-	} else if (menuEditorInputSelection instanceof IStructuredSelection) {
-	    Iterator<?> i = ((IStructuredSelection) menuEditorInputSelection).iterator();
-	    while (i.hasNext()) {
-		Object object = i.next();
-		if (object instanceof IFileEditorInput) {
-		    IFileEditorInput fileEditorInput = (IFileEditorInput) object;
-		    openFile(files, fileEditorInput.getFile());
+	/**
+	 * Creation is protected, is only call by sub-classes.
+	 * 
+	 * @param editorId The editor id, not empty and not <code>null</code>.
+	 */
+	protected CommonOpenEditorCommandHandler(String editorId) {
+		if (editorId == null) {
+			throw new IllegalArgumentException("Parameter 'editorId' must not be null.");
 		}
-	    }
+		if (StringUtility.isEmpty(editorId)) {
+			throw new IllegalArgumentException("Parameter 'editorId' must not be empty.");
+		}
+		this.editorId = editorId;
 	}
 
-	return null;
-    }
+	@Override
+	public final Object execute(ExecutionEvent event) throws ExecutionException {
+		List<IFile> files = new ArrayList<IFile>(3);
+		ISelection menuSelection;
+		menuSelection = HandlerUtil.getActiveMenuSelection(event);
+		ISelection menuEditorInputSelection;
+		menuEditorInputSelection = HandlerUtil.getActiveMenuEditorInput(event);
 
-    /**
-     * Opens the specified file on the editor.
-     * 
-     * @param files
-     *            The modifiable list of files already opened, not
-     *            <code>null</code>.
-     * @param object
-     *            The IFile object or <code>null</code>.
-     */
-    private void openFile(List<IFile> files, Object object) {
+		if (menuSelection instanceof IStructuredSelection) {
+			Iterator<?> i = ((IStructuredSelection) menuSelection).iterator();
+			while (i.hasNext()) {
+				Object object = i.next();
+				openFile(files, object);
 
-	if (files == null) {
-	    throw new IllegalArgumentException("Parameter 'files' must not be null.");
-	}
-	if (object instanceof IFile) {
-
-	    IFile file = (IFile) object;
-	    if (!files.contains(file)) {
-		files.add(file);
-
-		IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-		IWorkbenchPage page = workbenchWindow.getActivePage();
-
-		// Open an editor on the new file.
-		try {
-		    FileEditorInput editorInput = new FileEditorInput(file);
-		    IEditorPart editor = page.findEditor(editorInput);
-		    if (editor != null) {
-			String id = editor.getEditorSite().getId();
-			if (!id.equals(editorId)) {
-			    if (!page.closeEditor(editor, true)) {
-				return;
-			    }
 			}
-		    }
-		    IDE.setDefaultEditor(file, editorId);
-		    IDE.openEditor(page, editorInput, editorId);
-		} catch (PartInitException exception) {
-		    MessageDialog.openError(workbenchWindow.getShell(), Texts.DIALOG_TITLE, exception.getMessage());
+		} else if (menuEditorInputSelection instanceof IStructuredSelection) {
+			Iterator<?> i = ((IStructuredSelection) menuEditorInputSelection).iterator();
+			while (i.hasNext()) {
+				Object object = i.next();
+				if (object instanceof IFileEditorInput) {
+					IFileEditorInput fileEditorInput = (IFileEditorInput) object;
+					openFile(files, fileEditorInput.getFile());
+				}
+			}
 		}
-	    }
+
+		return null;
 	}
-    }
+
+	/**
+	 * Opens the specified file on the editor.
+	 * 
+	 * @param files  The modifiable list of files already opened, not
+	 *               <code>null</code>.
+	 * @param object The IFile object or <code>null</code>.
+	 */
+	private void openFile(List<IFile> files, Object object) {
+
+		if (files == null) {
+			throw new IllegalArgumentException("Parameter 'files' must not be null.");
+		}
+		if (object instanceof IFile) {
+
+			IFile file = (IFile) object;
+			if (!files.contains(file)) {
+				files.add(file);
+
+				IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+				IWorkbenchPage page = workbenchWindow.getActivePage();
+
+				// Open an editor on the new file.
+				try {
+					FileEditorInput editorInput = new FileEditorInput(file);
+					IEditorPart editor = page.findEditor(editorInput);
+					if (editor != null) {
+						String id = editor.getEditorSite().getId();
+						if (!id.equals(editorId)) {
+							if (!page.closeEditor(editor, true)) {
+								return;
+							}
+						}
+					}
+					IDE.setDefaultEditor(file, editorId);
+					IDE.openEditor(page, editorInput, editorId);
+				} catch (PartInitException exception) {
+					MessageDialog.openError(workbenchWindow.getShell(), Texts.DIALOG_TITLE, exception.getMessage());
+				}
+			}
+		}
+	}
 }

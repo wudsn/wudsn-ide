@@ -31,28 +31,28 @@ import net.sf.recoil.RECOIL;
  */
 public class RecoilConverter extends Converter {
 
-    public static final int SOURCE_FILE = 1;
+	public static final int SOURCE_FILE = 1;
 
-    @Override
-    public void convertToImageDataSize(FilesConverterData data) {
-	RECOIL recoil = new RECOIL();
-	byte[] content = data.getSourceFileBytes(SOURCE_FILE);
-	boolean valid = recoil.decode(data.getParameters().getSourceFile(SOURCE_FILE).getPath(), content,
-		content.length);
-	if (valid) {
-	    data.setImageDataHeight(recoil.getHeight());
-	    data.setImageDataWidth(recoil.getWidth());
+	@Override
+	public void convertToImageDataSize(FilesConverterData data) {
+		RECOIL recoil = new RECOIL();
+		byte[] content = data.getSourceFileBytes(SOURCE_FILE);
+		boolean valid = recoil.decode(data.getParameters().getSourceFile(SOURCE_FILE).getPath(), content,
+				content.length);
+		if (valid) {
+			data.setImageDataHeight(recoil.getHeight());
+			data.setImageDataWidth(recoil.getWidth());
 
+		}
 	}
-    }
 
-    @Override
-    public boolean convertToImageData(FilesConverterData data) {
-	RECOIL recoil = new RECOIL();
-	byte[] content = data.getSourceFileBytes(SOURCE_FILE);
-	boolean valid = recoil.decode(data.getParameters().getSourceFile(SOURCE_FILE).getPath(), content,
-		content.length);
-	return valid;
-    }
+	@Override
+	public boolean convertToImageData(FilesConverterData data) {
+		RECOIL recoil = new RECOIL();
+		byte[] content = data.getSourceFileBytes(SOURCE_FILE);
+		boolean valid = recoil.decode(data.getParameters().getSourceFile(SOURCE_FILE).getPath(), content,
+				content.length);
+		return valid;
+	}
 
 }

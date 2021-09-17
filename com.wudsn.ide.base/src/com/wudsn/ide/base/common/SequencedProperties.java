@@ -31,49 +31,49 @@ import java.util.Properties;
  * @author Peter Dell
  */
 public final class SequencedProperties extends Properties {
-    /**
-     * Not used.
-     */
-    private static final long serialVersionUID = 1L;
+	/**
+	 * Not used.
+	 */
+	private static final long serialVersionUID = 1L;
 
-    private List<Object> propertyNames;
+	private List<Object> propertyNames;
 
-    public SequencedProperties() {
-	propertyNames = new ArrayList<Object>();
-    }
-
-    @Override
-    public synchronized Object put(Object key, Object value) {
-	if (propertyNames.contains(key)) {
-	    throw new IllegalArgumentException("Value for key '" + key + "' already added.");
+	public SequencedProperties() {
+		propertyNames = new ArrayList<Object>();
 	}
-	propertyNames.add(key);
-	return super.put(key, value);
-    }
 
-    /**
-     * Returns an enumeration of the keys in this hashtable.
-     * 
-     * @return an enumeration of the keys in this hashtable.
-     * @see Enumeration
-     * @see #elements()
-     * @see #keySet()
-     * @see Map
-     */
-    @Override
-    public synchronized Enumeration<Object> keys() {
-	return Collections.enumeration(propertyNames);
-    }
-
-    @Override
-    public synchronized String toString() {
-	StringBuilder builder = new StringBuilder();
-	for (Object key : propertyNames) {
-
-	    builder.append(key).append("=").append(get(key)).append("\n");
+	@Override
+	public synchronized Object put(Object key, Object value) {
+		if (propertyNames.contains(key)) {
+			throw new IllegalArgumentException("Value for key '" + key + "' already added.");
+		}
+		propertyNames.add(key);
+		return super.put(key, value);
 	}
-	return builder.toString();
 
-    }
+	/**
+	 * Returns an enumeration of the keys in this hashtable.
+	 * 
+	 * @return an enumeration of the keys in this hashtable.
+	 * @see Enumeration
+	 * @see #elements()
+	 * @see #keySet()
+	 * @see Map
+	 */
+	@Override
+	public synchronized Enumeration<Object> keys() {
+		return Collections.enumeration(propertyNames);
+	}
+
+	@Override
+	public synchronized String toString() {
+		StringBuilder builder = new StringBuilder();
+		for (Object key : propertyNames) {
+
+			builder.append(key).append("=").append(get(key)).append("\n");
+		}
+		return builder.toString();
+
+	}
 
 }

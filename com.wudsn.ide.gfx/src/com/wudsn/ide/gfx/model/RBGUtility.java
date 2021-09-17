@@ -23,41 +23,37 @@ import org.eclipse.swt.graphics.RGB;
 
 public final class RBGUtility {
 
-    /**
-     * Creation is private.
-     */
-    private RBGUtility() {
-    }
+	/**
+	 * Creation is private.
+	 */
+	private RBGUtility() {
+	}
 
-    /**
-     * Combines to RBG color values to a mixed color value.
-     * 
-     * @param color1
-     *            The first color, not <code>null</code>.
-     * @param color2
-     *            The second color, not <code>null</code>.
-     * @return The mixed color, not <code>null</code>.
-     */
-    public static RGB combineRGB(RGB color1, RGB color2) {
-	return new RGB((color1.red + color2.red) >>> 1, (color1.green + color2.green) >>> 1,
-		(color1.blue + color2.blue) >>> 1);
-    }
+	/**
+	 * Combines to RBG color values to a mixed color value.
+	 * 
+	 * @param color1 The first color, not <code>null</code>.
+	 * @param color2 The second color, not <code>null</code>.
+	 * @return The mixed color, not <code>null</code>.
+	 */
+	public static RGB combineRGB(RGB color1, RGB color2) {
+		return new RGB((color1.red + color2.red) >>> 1, (color1.green + color2.green) >>> 1,
+				(color1.blue + color2.blue) >>> 1);
+	}
 
-    /**
-     * Combines to RBG color values to a mixed color value.
-     * 
-     * @param color1
-     *            The first color.
-     * @param color2
-     *            The second color.
-     * @return The mixed color.
-     */
-    public static int combineRGBColor(int color1, int color2) {
-	int r = (((color1 >>> 16) & 0xff) + ((color2 >>> 16) & 0xff)) >>> 1;
-	int g = (((color1 >>> 8) & 0xff) + ((color2 >>> 8) & 0xff)) >>> 1;
-	int b = (((color1 >>> 0) & 0xff) + ((color2 >>> 0) & 0xff)) >>> 1;
-	return r << 16 | g << 8 | b;
+	/**
+	 * Combines to RBG color values to a mixed color value.
+	 * 
+	 * @param color1 The first color.
+	 * @param color2 The second color.
+	 * @return The mixed color.
+	 */
+	public static int combineRGBColor(int color1, int color2) {
+		int r = (((color1 >>> 16) & 0xff) + ((color2 >>> 16) & 0xff)) >>> 1;
+		int g = (((color1 >>> 8) & 0xff) + ((color2 >>> 8) & 0xff)) >>> 1;
+		int b = (((color1 >>> 0) & 0xff) + ((color2 >>> 0) & 0xff)) >>> 1;
+		return r << 16 | g << 8 | b;
 
-    }
+	}
 
 }

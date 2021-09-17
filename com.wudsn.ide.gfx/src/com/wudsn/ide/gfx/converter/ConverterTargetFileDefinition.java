@@ -20,27 +20,27 @@
 package com.wudsn.ide.gfx.converter;
 
 public final class ConverterTargetFileDefinition {
-    private int sourceFileId;
-    private String label;
+	private int sourceFileId;
+	private String label;
 
-    ConverterTargetFileDefinition() {
+	ConverterTargetFileDefinition() {
 
-    }
+	}
 
-    public int getSourceFileId() {
-	return sourceFileId;
-    }
+	public int getSourceFileId() {
+		return sourceFileId;
+	}
 
-    final void setSourceFileId(int sourceFileId) {
-	this.sourceFileId = sourceFileId;
-    }
+	final void setSourceFileId(int sourceFileId) {
+		this.sourceFileId = sourceFileId;
+	}
 
-    public String getLabel() {
-	return label;
-    }
+	public String getLabel() {
+		return label;
+	}
 
-    final void setLabel(String label) {
-	this.label = label;
-    }
+	final void setLabel(String label) {
+		this.label = label;
+	}
 
 }

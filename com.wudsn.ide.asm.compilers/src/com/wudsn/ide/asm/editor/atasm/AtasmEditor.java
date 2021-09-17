@@ -24,14 +24,14 @@ import com.wudsn.ide.asm.editor.AssemblerEditor;
 
 public final class AtasmEditor extends AssemblerEditor {
 
-    /**
-     * Creation is public. Called by the extension "org.eclipse.ui.editors".
-     */
-    public AtasmEditor() {
-    }
+	/**
+	 * Creation is public. Called by the extension "org.eclipse.ui.editors".
+	 */
+	public AtasmEditor() {
+	}
 
-    @Override
-    public String getCompilerId() {
-	return CompilerId.ATASM;
-    }
+	@Override
+	public String getCompilerId() {
+		return CompilerId.ATASM;
+	}
 }

@@ -24,14 +24,14 @@ import com.wudsn.ide.asm.editor.AssemblerEditor;
 
 public final class Asm6Editor extends AssemblerEditor {
 
-    /**
-     * Creation is public. Called by the extension "org.eclipse.ui.editors".
-     */
-    public Asm6Editor() {
-    }
+	/**
+	 * Creation is public. Called by the extension "org.eclipse.ui.editors".
+	 */
+	public Asm6Editor() {
+	}
 
-    @Override
-    public String getCompilerId() {
-	return CompilerId.ASM6;
-    }
+	@Override
+	public String getCompilerId() {
+		return CompilerId.ASM6;
+	}
 }

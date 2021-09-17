@@ -28,25 +28,25 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 final class TestCompilerSourceParser extends CompilerSourceParser {
 
-    @Override
-    protected void parseLine(int startOffset, String symbol, int symbolOffset, String instruction,
-	    int instructionOffset, String operand, String comment) {
+	@Override
+	protected void parseLine(int startOffset, String symbol, int symbolOffset, String instruction,
+			int instructionOffset, String operand, String comment) {
 
-	if (symbol.length() > 0) {
+		if (symbol.length() > 0) {
 
-	    // Check for origin statement
-	    if (symbol.equals("*")) { //$NON-NLS-1$
-		beginImplementationSection(startOffset, startOffset + symbolOffset, operand, comment);
+			// Check for origin statement
+			if (symbol.equals("*")) { //$NON-NLS-1$
+				beginImplementationSection(startOffset, startOffset + symbolOffset, operand, comment);
 
-	    } else {
-		if (instruction.equals("=")) { //$NON-NLS-1$
-		    createEquateDefinitionChild(startOffset, startOffset + symbolOffset, symbol, operand, comment);
-		} else {
-		    createLabelDefinitionChild(startOffset, startOffset + symbolOffset, symbol, comment);
+			} else {
+				if (instruction.equals("=")) { //$NON-NLS-1$
+					createEquateDefinitionChild(startOffset, startOffset + symbolOffset, symbol, operand, comment);
+				} else {
+					createLabelDefinitionChild(startOffset, startOffset + symbolOffset, symbol, comment);
 
-		}
-	    }
+				}
+			}
 
-	} // Symbol not empty
-    }
+		} // Symbol not empty
+	}
 }

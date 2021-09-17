@@ -26,13 +26,13 @@ package com.wudsn.ide.snd.player;
  */
 public interface SoundPlayerListener {
 
-    public static final int STATE = 0x1;
-    public static final int POSITION = 0x2;
-    public static final int VOLUME = 0x4;
-    public static final int ALL = STATE | POSITION | VOLUME;
+	public static final int STATE = 0x1;
+	public static final int POSITION = 0x2;
+	public static final int VOLUME = 0x4;
+	public static final int ALL = STATE | POSITION | VOLUME;
 
-    // Number of milliseconds between position update.
-    public static final int POSITION_UPDATE_INCREMENT = 1000;
+	// Number of milliseconds between position update.
+	public static final int POSITION_UPDATE_INCREMENT = 1000;
 
-    public void playerUpdated(int flag);
+	public void playerUpdated(int flag);
 }

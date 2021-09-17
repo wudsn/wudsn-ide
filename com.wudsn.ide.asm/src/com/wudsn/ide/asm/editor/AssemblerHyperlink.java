@@ -48,171 +48,165 @@ import com.wudsn.ide.base.common.TextUtility;
  */
 final class AssemblerHyperlink implements IHyperlink {
 
-    public static final String DEFAULT_EDITOR = "DEFAULT_EDITOR";
-    public static final String SYSTEM_EDITOR = "SYSTEM_EDITOR";
+	public static final String DEFAULT_EDITOR = "DEFAULT_EDITOR";
+	public static final String SYSTEM_EDITOR = "SYSTEM_EDITOR";
 
-    private IRegion region;
-    private IWorkbenchPage workbenchPage;
-    private String absoluteFilePath;
-    private URI uri;
-    private String editorId;
-    private int lineNumber;
-    private String hyperlinkText;
+	private IRegion region;
+	private IWorkbenchPage workbenchPage;
+	private String absoluteFilePath;
+	private URI uri;
+	private String editorId;
+	private int lineNumber;
+	private String hyperlinkText;
 
-    /**
-     * Creates a new hyper link.
-     * 
-     * @param region
-     *            The region of the text, not <code>null</code>.
-     * 
-     * @param workbenchPage
-     *            The active workbench page used for the new editor instance,
-     *            not <code>null</code>.
-     * 
-     * @param absoluteFilePath
-     *            The absolute file path, not <code>null</code>.
-     * @param uri
-     *            The uri to be opened, not <code>null</code>.
-     * 
-     * @param editorId
-     *            The id of the editor to be opened, not empty and not
-     *            <code>null</code>.
-     * 
-     * @param lineNumber
-     *            The liner number to position to, in case the editor is an
-     *            {@link AssemblerEditor}. The line numbers are starting at 1.
-     *            The value 0 indicates that no positioning shall take place.
-     * 
-     * @param hyperlinkText
-     *            The localized text to display in case there is more than one
-     *            hyperlink for the same location, may be empty, not
-     *            <code>null</code>.
-     */
-    AssemblerHyperlink(IRegion region, IWorkbenchPage workbenchPage, String absoluteFilePath, URI uri, String editorId,
-	    int lineNumber, String hyperlinkText) {
-	if (region == null) {
-	    throw new IllegalArgumentException("Parameter 'region' must not be null.");
-	}
-	if (workbenchPage == null) {
-	    throw new IllegalArgumentException("Parameter 'workbenchPage' must not be null.");
-	}
-	if (absoluteFilePath == null) {
-	    throw new IllegalArgumentException("Parameter 'absoluteFilePath' must not be null.");
-	}
-	if (uri == null) {
-	    throw new IllegalArgumentException("Parameter 'uri' must not be null.");
-	}
-	if (editorId == null) {
-	    throw new IllegalArgumentException("Parameter 'editorId' must not be null.");
-	}
-	if (StringUtility.isEmpty(editorId)) {
-	    throw new IllegalArgumentException("Parameter 'editorId' must not be empty.");
-	}
-	if (lineNumber < 0) {
-	    throw new IllegalArgumentException("Parameter 'lineNumber' must not be negative. Specified value is "
-		    + lineNumber + ".");
-	}
-
-	if (hyperlinkText == null) {
-	    throw new IllegalArgumentException("Parameter 'hyperlinkText' must not be null.");
-	}
-	this.region = region;
-	this.workbenchPage = workbenchPage;
-	this.absoluteFilePath = absoluteFilePath;
-	this.uri = uri;
-	this.editorId = editorId;
-	this.lineNumber = lineNumber;
-	this.hyperlinkText = hyperlinkText;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public IRegion getHyperlinkRegion() {
-	return region;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getTypeLabel() {
-	return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getHyperlinkText() {
-	return hyperlinkText;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void open() {
-	if (uri != null) {
-	    File fileToOpen = new File(absoluteFilePath);
-	    if (!fileToOpen.exists()) {
-		String message = TextUtility.format(
-		// ERROR: Target file '{0}' not exists. Do you
-		// want to create the file now?
-			Texts.ASSEMBLER_HYPERLINK_FILE_NOT_EXISTS, absoluteFilePath);
-		boolean result = MessageDialog.openQuestion(workbenchPage.getWorkbenchWindow().getShell(),
-			com.wudsn.ide.base.Texts.DIALOG_TITLE, message);
-		// Try to create the file, if OK was pressed.
-		if (result) {
-		    try {
-			FileUtility.writeString(fileToOpen, "");
-		    } catch (CoreException ex) {
-			ErrorDialog.openError(workbenchPage.getWorkbenchWindow().getShell(),
-				com.wudsn.ide.base.Texts.DIALOG_TITLE, null, ex.getStatus());
-		    }
-
-		} else {
-		    return;
+	/**
+	 * Creates a new hyper link.
+	 * 
+	 * @param region           The region of the text, not <code>null</code>.
+	 * 
+	 * @param workbenchPage    The active workbench page used for the new editor
+	 *                         instance, not <code>null</code>.
+	 * 
+	 * @param absoluteFilePath The absolute file path, not <code>null</code>.
+	 * @param uri              The uri to be opened, not <code>null</code>.
+	 * 
+	 * @param editorId         The id of the editor to be opened, not empty and not
+	 *                         <code>null</code>.
+	 * 
+	 * @param lineNumber       The liner number to position to, in case the editor
+	 *                         is an {@link AssemblerEditor}. The line numbers are
+	 *                         starting at 1. The value 0 indicates that no
+	 *                         positioning shall take place.
+	 * 
+	 * @param hyperlinkText    The localized text to display in case there is more
+	 *                         than one hyperlink for the same location, may be
+	 *                         empty, not <code>null</code>.
+	 */
+	AssemblerHyperlink(IRegion region, IWorkbenchPage workbenchPage, String absoluteFilePath, URI uri, String editorId,
+			int lineNumber, String hyperlinkText) {
+		if (region == null) {
+			throw new IllegalArgumentException("Parameter 'region' must not be null.");
 		}
-	    }
-	    IEditorPart editorPart;
-	    editorPart = null;
-	    if (editorId.equals(DEFAULT_EDITOR)) {
-
-		if (fileToOpen.exists() && fileToOpen.isFile()) {
-		    IFileStore fileStore = EFS.getLocalFileSystem().getStore(fileToOpen.toURI());
-
-		    try {
-			editorPart = IDE.openEditorOnFileStore(workbenchPage, fileStore);
-		    } catch (PartInitException ex) {
-
-			AssemblerPlugin.getInstance().logError("Cannot default editor editor for '{0}'.",
-				new Object[] { uri }, ex);
-
-		    }
-		} else {
-		    // Do something if the file does not exist
+		if (workbenchPage == null) {
+			throw new IllegalArgumentException("Parameter 'workbenchPage' must not be null.");
+		}
+		if (absoluteFilePath == null) {
+			throw new IllegalArgumentException("Parameter 'absoluteFilePath' must not be null.");
+		}
+		if (uri == null) {
+			throw new IllegalArgumentException("Parameter 'uri' must not be null.");
+		}
+		if (editorId == null) {
+			throw new IllegalArgumentException("Parameter 'editorId' must not be null.");
+		}
+		if (StringUtility.isEmpty(editorId)) {
+			throw new IllegalArgumentException("Parameter 'editorId' must not be empty.");
+		}
+		if (lineNumber < 0) {
+			throw new IllegalArgumentException(
+					"Parameter 'lineNumber' must not be negative. Specified value is " + lineNumber + ".");
 		}
 
-	    } else if (editorId.equals(SYSTEM_EDITOR)) {
-		Program.launch(absoluteFilePath);
-	    } else {
-
-		try {
-
-		    editorPart = IDE.openEditor(workbenchPage, uri, editorId, true);
-		} catch (PartInitException ex) {
-		    AssemblerPlugin.getInstance().logError("Cannot system editor editor for '{0}'.",
-			    new Object[] { uri }, ex);
+		if (hyperlinkText == null) {
+			throw new IllegalArgumentException("Parameter 'hyperlinkText' must not be null.");
 		}
-	    }
-	    if (editorPart instanceof AssemblerEditor && lineNumber > 0) {
-		AssemblerEditor assemblerEditor = (AssemblerEditor) editorPart;
-		assemblerEditor.gotoLine(lineNumber);
-	    }
-
-	    uri = null;
+		this.region = region;
+		this.workbenchPage = workbenchPage;
+		this.absoluteFilePath = absoluteFilePath;
+		this.uri = uri;
+		this.editorId = editorId;
+		this.lineNumber = lineNumber;
+		this.hyperlinkText = hyperlinkText;
 	}
-    }
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public IRegion getHyperlinkRegion() {
+		return region;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getTypeLabel() {
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getHyperlinkText() {
+		return hyperlinkText;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void open() {
+		if (uri != null) {
+			File fileToOpen = new File(absoluteFilePath);
+			if (!fileToOpen.exists()) {
+				String message = TextUtility.format(
+						// ERROR: Target file '{0}' not exists. Do you
+						// want to create the file now?
+						Texts.ASSEMBLER_HYPERLINK_FILE_NOT_EXISTS, absoluteFilePath);
+				boolean result = MessageDialog.openQuestion(workbenchPage.getWorkbenchWindow().getShell(),
+						com.wudsn.ide.base.Texts.DIALOG_TITLE, message);
+				// Try to create the file, if OK was pressed.
+				if (result) {
+					try {
+						FileUtility.writeString(fileToOpen, "");
+					} catch (CoreException ex) {
+						ErrorDialog.openError(workbenchPage.getWorkbenchWindow().getShell(),
+								com.wudsn.ide.base.Texts.DIALOG_TITLE, null, ex.getStatus());
+					}
+
+				} else {
+					return;
+				}
+			}
+			IEditorPart editorPart;
+			editorPart = null;
+			if (editorId.equals(DEFAULT_EDITOR)) {
+
+				if (fileToOpen.exists() && fileToOpen.isFile()) {
+					IFileStore fileStore = EFS.getLocalFileSystem().getStore(fileToOpen.toURI());
+
+					try {
+						editorPart = IDE.openEditorOnFileStore(workbenchPage, fileStore);
+					} catch (PartInitException ex) {
+
+						AssemblerPlugin.getInstance().logError("Cannot default editor editor for '{0}'.",
+								new Object[] { uri }, ex);
+
+					}
+				} else {
+					// Do something if the file does not exist
+				}
+
+			} else if (editorId.equals(SYSTEM_EDITOR)) {
+				Program.launch(absoluteFilePath);
+			} else {
+
+				try {
+
+					editorPart = IDE.openEditor(workbenchPage, uri, editorId, true);
+				} catch (PartInitException ex) {
+					AssemblerPlugin.getInstance().logError("Cannot system editor editor for '{0}'.",
+							new Object[] { uri }, ex);
+				}
+			}
+			if (editorPart instanceof AssemblerEditor && lineNumber > 0) {
+				AssemblerEditor assemblerEditor = (AssemblerEditor) editorPart;
+				assemblerEditor.gotoLine(lineNumber);
+			}
+
+			uri = null;
+		}
+	}
 }

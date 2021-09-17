@@ -23,51 +23,51 @@ import com.wudsn.ide.gfx.converter.FilesConverterData;
 
 public class CharMapMultiColorConverter extends CharMapConverter {
 
-    public CharMapMultiColorConverter() {
+	public CharMapMultiColorConverter() {
 
-    }
-
-    @Override
-    public void convertToImageDataSize(FilesConverterData data) {
-	data.setImageDataWidth(data.getParameters().getColumns() * (4 + data.getParameters().getSpacingWidth()));
-	data.setImageDataHeight(data.getParameters().getRows() * (8 + data.getParameters().getSpacingWidth()));
-    }
-
-    @Override
-    public boolean convertToImageData(FilesConverterData data) {
-	if (data == null) {
-	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
 
-	int offset = 0;
-	int xpixels = 4 + data.getParameters().getSpacingWidth();
-	int ypixels = 8 + data.getParameters().getSpacingWidth();
-
-	// int[] fonts = new int[] { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2,
-	// 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 3, 0, 1, 4,0 };
-	for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
-	    for (int x1 = 0; x1 < data.getParameters().getColumns(); x1++) {
-		int c = data.getSourceFileByte(CHAR_MAP_FILE, offset++) & 127;
-		if (c < 0) {
-		    return true;
-		}
-		int charset_offset = c * 8; // + fonts[y1] * 1024;
-		for (int y2 = 0; y2 < 8; y2++) {
-		    int b = data.getSourceFileByte(CHAR_SET_FILE, charset_offset++);
-
-		    if (b < 0) {
-			return true;
-		    }
-		    int y = y1 * ypixels + y2;
-		    for (int x2 = 0; x2 < 4; x2++) {
-			int x = x1 * xpixels + x2;
-
-			int color = (b & mask_2bit[x2]) >>> shift_2bit[x2];
-			data.setPalettePixel(x, y, color);
-		    }
-		}
-	    }
+	@Override
+	public void convertToImageDataSize(FilesConverterData data) {
+		data.setImageDataWidth(data.getParameters().getColumns() * (4 + data.getParameters().getSpacingWidth()));
+		data.setImageDataHeight(data.getParameters().getRows() * (8 + data.getParameters().getSpacingWidth()));
 	}
-	return true;
-    }
+
+	@Override
+	public boolean convertToImageData(FilesConverterData data) {
+		if (data == null) {
+			throw new IllegalArgumentException("Parameter 'data' must not be null.");
+		}
+
+		int offset = 0;
+		int xpixels = 4 + data.getParameters().getSpacingWidth();
+		int ypixels = 8 + data.getParameters().getSpacingWidth();
+
+		// int[] fonts = new int[] { 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 2,
+		// 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 3, 0, 1, 4,0 };
+		for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
+			for (int x1 = 0; x1 < data.getParameters().getColumns(); x1++) {
+				int c = data.getSourceFileByte(CHAR_MAP_FILE, offset++) & 127;
+				if (c < 0) {
+					return true;
+				}
+				int charset_offset = c * 8; // + fonts[y1] * 1024;
+				for (int y2 = 0; y2 < 8; y2++) {
+					int b = data.getSourceFileByte(CHAR_SET_FILE, charset_offset++);
+
+					if (b < 0) {
+						return true;
+					}
+					int y = y1 * ypixels + y2;
+					for (int x2 = 0; x2 < 4; x2++) {
+						int x = x1 * xpixels + x2;
+
+						int color = (b & mask_2bit[x2]) >>> shift_2bit[x2];
+						data.setPalettePixel(x, y, color);
+					}
+				}
+			}
+		}
+		return true;
+	}
 }

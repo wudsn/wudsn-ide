@@ -31,8 +31,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import com.wudsn.ide.asm.Texts;
 
 /**
- * Factory for {@AssemblerBreakpointsTarget}
- * instances. Used by extension
+ * Factory for {@AssemblerBreakpointsTarget} instances. Used by extension
  * "org.eclipse.debug.ui.toggleBreakpointsTargetFactories"
  * 
  * @author Peter Dell
@@ -40,46 +39,46 @@ import com.wudsn.ide.asm.Texts;
  */
 public final class AssemblerBreakpointAdapterFactory implements IToggleBreakpointsTargetFactory {
 
-    private String TARGET_ID = AssemblerBreakpointsTarget.class.getName();
-    private Set<String> defaultSet;
+	private String TARGET_ID = AssemblerBreakpointsTarget.class.getName();
+	private Set<String> defaultSet;
 
-    public AssemblerBreakpointAdapterFactory() {
-	defaultSet = new HashSet<String>();
-	defaultSet.add(TARGET_ID);
-    }
-
-    @Override
-    public Set<String> getToggleTargets(IWorkbenchPart part, ISelection selection) {
-	if (part instanceof AssemblerEditor) {
-	    return defaultSet;
+	public AssemblerBreakpointAdapterFactory() {
+		defaultSet = new HashSet<String>();
+		defaultSet.add(TARGET_ID);
 	}
-	return Collections.emptySet();
-    }
 
-    @Override
-    public String getDefaultToggleTarget(IWorkbenchPart part, ISelection selection) {
-	if (part instanceof AssemblerEditor) {
-	    return TARGET_ID;
+	@Override
+	public Set<String> getToggleTargets(IWorkbenchPart part, ISelection selection) {
+		if (part instanceof AssemblerEditor) {
+			return defaultSet;
+		}
+		return Collections.emptySet();
 	}
-	return null;
-    }
 
-    @Override
-    public IToggleBreakpointsTarget createToggleTarget(String targetID) {
-	if (TARGET_ID.equals(targetID)) {
-	    return new AssemblerBreakpointsTarget();
+	@Override
+	public String getDefaultToggleTarget(IWorkbenchPart part, ISelection selection) {
+		if (part instanceof AssemblerEditor) {
+			return TARGET_ID;
+		}
+		return null;
 	}
-	return null;
-    }
 
-    @Override
-    public String getToggleTargetName(String targetID) {
-	return Texts.ASSEMBLER_BREAKPOINT_TOGGLE_TYPE_MENU_TEXT;
-    }
+	@Override
+	public IToggleBreakpointsTarget createToggleTarget(String targetID) {
+		if (TARGET_ID.equals(targetID)) {
+			return new AssemblerBreakpointsTarget();
+		}
+		return null;
+	}
 
-    @Override
-    public String getToggleTargetDescription(String targetID) {
-	return TARGET_ID;
-    }
+	@Override
+	public String getToggleTargetName(String targetID) {
+		return Texts.ASSEMBLER_BREAKPOINT_TOGGLE_TYPE_MENU_TEXT;
+	}
+
+	@Override
+	public String getToggleTargetDescription(String targetID) {
+		return TARGET_ID;
+	}
 
 }

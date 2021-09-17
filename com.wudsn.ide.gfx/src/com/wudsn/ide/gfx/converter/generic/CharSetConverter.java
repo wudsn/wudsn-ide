@@ -23,11 +23,11 @@ import com.wudsn.ide.gfx.converter.Converter;
 
 public abstract class CharSetConverter extends Converter {
 
-    /**
-     * Source file ids.
-     */
-    public static final int CHAR_SET_FILE = 0;
+	/**
+	 * Source file ids.
+	 */
+	public static final int CHAR_SET_FILE = 0;
 
-    public CharSetConverter() {
-    }
+	public CharSetConverter() {
+	}
 }

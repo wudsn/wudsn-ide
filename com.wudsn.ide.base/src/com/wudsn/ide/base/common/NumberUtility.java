@@ -24,66 +24,61 @@ package com.wudsn.ide.base.common;
  */
 public final class NumberUtility {
 
-    /**
-     * Automatic length indicator for
-     * {@link #getLongValueDecimalString(long, int)},
-     */
-    public static final int AUTOMATIC_LENGTH = 0;
+	/**
+	 * Automatic length indicator for {@link #getLongValueDecimalString(long, int)},
+	 */
+	public static final int AUTOMATIC_LENGTH = 0;
 
-    /**
-     * Creation is private.
-     */
-    private NumberUtility() {
-    }
-
-    /**
-     * Gets the minimum length of the decimal string for a long value.
-     * 
-     * @param longValue
-     *            The non-negative long value.
-     * 
-     * @return The minimum length of the decimal string for the long value, a
-     *         positive integer.
-     */
-    public static int getLongValueDecimalLength(int longValue) {
-	return Long.toString(longValue).length();
-    }
-
-    /**
-     * Gets the decimal string for a long value.
-     * 
-     * @param longValue
-     *            The non-negative long value.
-     * 
-     * @return The string, not empty and not <code>null</code>.
-     */
-    public static String getLongValueDecimalString(long longValue) {
-	return getLongValueDecimalString(longValue, AUTOMATIC_LENGTH);
-    }
-
-    /**
-     * Gets the decimal string for a long value.
-     * 
-     * @param longValue
-     *            The non-negative long value.
-     * @param length
-     *            The minimum number of characters to be used. If the result
-     *            string is shorter, spaces will be prepended in case a length
-     *            other then {@link #AUTOMATIC_LENGTH} is specified.
-     * @return The string, not empty and not <code>null</code>.
-     */
-    public static String getLongValueDecimalString(long longValue, int length) {
-
-	String result = Long.toString(longValue);
-	if (length > AUTOMATIC_LENGTH) {
-	    int difference = length - result.length();
-	    if (difference > 0) {
-		StringBuilder builder = new StringBuilder(length);
-		builder.insert(difference, result);
-		result = builder.toString();
-	    }
+	/**
+	 * Creation is private.
+	 */
+	private NumberUtility() {
 	}
-	return result;
-    }
+
+	/**
+	 * Gets the minimum length of the decimal string for a long value.
+	 * 
+	 * @param longValue The non-negative long value.
+	 * 
+	 * @return The minimum length of the decimal string for the long value, a
+	 *         positive integer.
+	 */
+	public static int getLongValueDecimalLength(int longValue) {
+		return Long.toString(longValue).length();
+	}
+
+	/**
+	 * Gets the decimal string for a long value.
+	 * 
+	 * @param longValue The non-negative long value.
+	 * 
+	 * @return The string, not empty and not <code>null</code>.
+	 */
+	public static String getLongValueDecimalString(long longValue) {
+		return getLongValueDecimalString(longValue, AUTOMATIC_LENGTH);
+	}
+
+	/**
+	 * Gets the decimal string for a long value.
+	 * 
+	 * @param longValue The non-negative long value.
+	 * @param length    The minimum number of characters to be used. If the result
+	 *                  string is shorter, spaces will be prepended in case a length
+	 *                  other then {@link #AUTOMATIC_LENGTH} is specified.
+	 * @return The string, not empty and not <code>null</code>.
+	 */
+	public static String getLongValueDecimalString(long longValue, int length) {
+
+		String result = Long.toString(longValue);
+		if (length > AUTOMATIC_LENGTH) {
+			int difference = length - result.length();
+			if (difference > 0) {
+				StringBuilder builder = new StringBuilder(length);
+				builder.insert(difference, result);
+				result = builder.toString();
+			}
+		}
+		return result;
+	}
 
 }

@@ -26,15 +26,15 @@ package com.wudsn.ide.snd.player;
  */
 public enum Clock {
 
-    PAL(50), NTSC(60);
+	PAL(50), NTSC(60);
 
-    private int hertz;
+	private int hertz;
 
-    private Clock(int hertz) {
-	this.hertz = hertz;
-    }
+	private Clock(int hertz) {
+		this.hertz = hertz;
+	}
 
-    public int getHertz() {
-	return hertz;
-    }
+	public int getHertz() {
+		return hertz;
+	}
 }

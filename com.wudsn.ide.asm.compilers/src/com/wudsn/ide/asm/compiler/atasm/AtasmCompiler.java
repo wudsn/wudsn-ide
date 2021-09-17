@@ -30,21 +30,21 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 public final class AtasmCompiler extends Compiler {
 
-    /**
-     * Creates a new instance.
-     */
-    public AtasmCompiler() {
-    }
+	/**
+	 * Creates a new instance.
+	 */
+	public AtasmCompiler() {
+	}
 
-    @Override
-    public CompilerSourceParser createSourceParser() {
-	return new AtasmCompilerSourceParser();
-    }
+	@Override
+	public CompilerSourceParser createSourceParser() {
+		return new AtasmCompilerSourceParser();
+	}
 
-    @Override
-    public CompilerProcessLogParser createLogParser() {
+	@Override
+	public CompilerProcessLogParser createLogParser() {
 
-	return new AtasmCompilerProcessLogParser();
-    }
+		return new AtasmCompilerProcessLogParser();
+	}
 
 }

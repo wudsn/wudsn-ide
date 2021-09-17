@@ -28,12 +28,12 @@ package com.wudsn.ide.snd.player;
  */
 public abstract class SoundGenerator {
 
-    public abstract void generateBuffer();
+	public abstract void generateBuffer();
 
-    public abstract void playBuffer();
+	public abstract void playBuffer();
 
-    public abstract boolean isGenerating();
+	public abstract boolean isGenerating();
 
-    public abstract void close();
+	public abstract void close();
 
 }

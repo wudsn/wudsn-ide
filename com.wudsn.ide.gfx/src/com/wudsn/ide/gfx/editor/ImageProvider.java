@@ -27,30 +27,30 @@ import com.wudsn.ide.gfx.model.Aspect;
 
 public interface ImageProvider {
 
-    public void setImageView(ImageView imageView);
+	public void setImageView(ImageView imageView);
 
-    public void setImagePaletteView(ImagePaletteView imagePaletteView);
+	public void setImagePaletteView(ImagePaletteView imagePaletteView);
 
-    public Aspect getAspect();
+	public Aspect getAspect();
 
-    public void setAspect(Aspect value);
+	public void setAspect(Aspect value);
 
-    public boolean isShrinkToFit();
+	public boolean isShrinkToFit();
 
-    public void setShrinkToFit(boolean value);
+	public void setShrinkToFit(boolean value);
 
-    public boolean isZoomToFit();
+	public boolean isZoomToFit();
 
-    public void setZoomToFit(boolean value);
+	public void setZoomToFit(boolean value);
 
-    public ImageData getImageData();
+	public ImageData getImageData();
 
-    public ImageColorHistogram getImageColorHistogram();
+	public ImageColorHistogram getImageColorHistogram();
 
-    public boolean isPaletteChangeable();
+	public boolean isPaletteChangeable();
 
-    public void setPaletteRGBs(RGB[] rgbs);
+	public void setPaletteRGBs(RGB[] rgbs);
 
-    public void setPaletteRGB(int pixelColor, RGB rgb);
+	public void setPaletteRGB(int pixelColor, RGB rgb);
 
 }

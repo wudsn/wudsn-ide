@@ -29,93 +29,88 @@ import org.mozilla.javascript.Scriptable;
  * @since 1.6.6
  */
 public final class ConverterScriptData {
-    private String compiledScript;
-    private Context compiledContext;
-    private Scriptable compiledScope;
-    private int errorLineNumber;
+	private String compiledScript;
+	private Context compiledContext;
+	private Scriptable compiledScope;
+	private int errorLineNumber;
 
-    /**
-     * Gets the compiled script for which the compiled context and scope are
-     * cached.
-     * 
-     * @return The compiled script, maybe be empty, not <code>null</code>.
-     */
-    public String getCompiledScript() {
-	return compiledScript;
-    }
-
-    /**
-     * Sets the compiled script for which the compiled context and scope are
-     * cached.
-     * 
-     * @param compiledScript
-     *            The compiled script, may be empty, not <code>null</code>.
-     */
-    public void setCompiledScript(String compiledScript) {
-	if (compiledScript == null) {
-	    throw new IllegalArgumentException("Parameter 'compiledScript' must not be null.");
+	/**
+	 * Gets the compiled script for which the compiled context and scope are cached.
+	 * 
+	 * @return The compiled script, maybe be empty, not <code>null</code>.
+	 */
+	public String getCompiledScript() {
+		return compiledScript;
 	}
-	this.compiledScript = compiledScript;
-    }
 
-    /**
-     * Gets the compiled context which was created for the compiled script.
-     * 
-     * @return The compiled context or <code>null</code>.
-     */
-    public Context getCompiledContext() {
-	return compiledContext;
-    }
+	/**
+	 * Sets the compiled script for which the compiled context and scope are cached.
+	 * 
+	 * @param compiledScript The compiled script, may be empty, not
+	 *                       <code>null</code>.
+	 */
+	public void setCompiledScript(String compiledScript) {
+		if (compiledScript == null) {
+			throw new IllegalArgumentException("Parameter 'compiledScript' must not be null.");
+		}
+		this.compiledScript = compiledScript;
+	}
 
-    /**
-     * Sets the compiled context which was created for the compiled script.
-     * 
-     * @param compiledContext
-     *            The compiled context or <code>null</code>.
-     */
-    public void setCompiledContext(Context compiledContext) {
-	this.compiledContext = compiledContext;
+	/**
+	 * Gets the compiled context which was created for the compiled script.
+	 * 
+	 * @return The compiled context or <code>null</code>.
+	 */
+	public Context getCompiledContext() {
+		return compiledContext;
+	}
 
-    }
+	/**
+	 * Sets the compiled context which was created for the compiled script.
+	 * 
+	 * @param compiledContext The compiled context or <code>null</code>.
+	 */
+	public void setCompiledContext(Context compiledContext) {
+		this.compiledContext = compiledContext;
 
-    /**
-     * Gets the compiled scope which was created for the compiled script.
-     * 
-     * @return The compiled context or <code>null</code>.
-     */
-    public Scriptable getCompiledScope() {
-	return compiledScope;
-    }
+	}
 
-    /**
-     * Sets the compiled scope which was created for the compiled script.
-     * 
-     * @param compiledScope
-     *            The compiled scope or <code>null</code>.
-     */
-    public void setCompiledScope(Scriptable compiledScope) {
-	this.compiledScope = compiledScope;
-    }
+	/**
+	 * Gets the compiled scope which was created for the compiled script.
+	 * 
+	 * @return The compiled context or <code>null</code>.
+	 */
+	public Scriptable getCompiledScope() {
+		return compiledScope;
+	}
 
-    /**
-     * Set the line number of the first error that occurred in the script.
-     * 
-     * @param errorLineNumber
-     *            The line number of the first error that occurred in the
-     *            script, a positive integer or <code>-1</code> if there is no
-     *            error.
-     */
-    public void setErrorLineNumber(int errorLineNumber) {
-	this.errorLineNumber = errorLineNumber;
-    }
+	/**
+	 * Sets the compiled scope which was created for the compiled script.
+	 * 
+	 * @param compiledScope The compiled scope or <code>null</code>.
+	 */
+	public void setCompiledScope(Scriptable compiledScope) {
+		this.compiledScope = compiledScope;
+	}
 
-    /**
-     * Gets the line number of the first error that occurred in the script.
-     * 
-     * @return The line number of the first error that occurred in the script,a
-     *         positive integer or <code>-1</code> if there is no error.
-     */
-    public int geErrorLineNumber() {
-	return errorLineNumber;
-    }
+	/**
+	 * Set the line number of the first error that occurred in the script.
+	 * 
+	 * @param errorLineNumber The line number of the first error that occurred in
+	 *                        the script, a positive integer or <code>-1</code> if
+	 *                        there is no error.
+	 */
+	public void setErrorLineNumber(int errorLineNumber) {
+		this.errorLineNumber = errorLineNumber;
+	}
+
+	/**
+	 * Gets the line number of the first error that occurred in the script.
+	 * 
+	 * @return The line number of the first error that occurred in the script,a
+	 *         positive integer or <code>-1</code> if there is no error.
+	 */
+	public int geErrorLineNumber() {
+		return errorLineNumber;
+	}
 }

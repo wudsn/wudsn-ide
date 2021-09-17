@@ -37,42 +37,42 @@ import com.wudsn.ide.asm.runner.Runner;
  */
 public final class Altirra extends Runner {
 
-    @Override
-    public File createBreakpointsFile(CompilerFiles files) {
-	if (files == null) {
-	    throw new IllegalArgumentException("Parameter 'files' must not be null.");
-	}
-	return new File(files.outputFilePathWithoutExtension + ".atdbg");
-    }
-
-    @Override
-    public int createBreakpointsFileContent(AssemblerBreakpoint[] breakpoints, StringBuilder breakpointBuilder) {
-	if (breakpoints == null) {
-	    throw new IllegalArgumentException("Parameter 'breakpoints' must not be null.");
-	}
-	int activeBreakpoints = 0;
-	breakpointBuilder.append(".sourcemode on\n");
-	breakpointBuilder.append(".echo\n");
-	breakpointBuilder.append(".echo \"Loading executable...\"\n");
-	breakpointBuilder.append(".echo\n");
-	breakpointBuilder.append("bc *\n");
-	breakpointBuilder.append(".onexerun .echo \"Launching executable...\"\n");
-	for (IBreakpoint breakpoint : breakpoints) {
-	    try {
-		if (breakpoint.isEnabled()) {
-		    AssemblerBreakpoint assemberBreakpoint = (AssemblerBreakpoint) breakpoint;
-		    IMarker marker = breakpoint.getMarker();
-		    String sourceFilePath = marker.getResource().getLocation().toOSString();
-		    breakpointBuilder.append("bp \"`" + sourceFilePath + ":" + assemberBreakpoint.getLineNumber()
-			    + "`\"\n");
-		    activeBreakpoints++;
+	@Override
+	public File createBreakpointsFile(CompilerFiles files) {
+		if (files == null) {
+			throw new IllegalArgumentException("Parameter 'files' must not be null.");
 		}
-	    } catch (CoreException ex) {
-		throw new RuntimeException(ex);
-	    }
-
+		return new File(files.outputFilePathWithoutExtension + ".atdbg");
 	}
-	return activeBreakpoints;
-    }
+
+	@Override
+	public int createBreakpointsFileContent(AssemblerBreakpoint[] breakpoints, StringBuilder breakpointBuilder) {
+		if (breakpoints == null) {
+			throw new IllegalArgumentException("Parameter 'breakpoints' must not be null.");
+		}
+		int activeBreakpoints = 0;
+		breakpointBuilder.append(".sourcemode on\n");
+		breakpointBuilder.append(".echo\n");
+		breakpointBuilder.append(".echo \"Loading executable...\"\n");
+		breakpointBuilder.append(".echo\n");
+		breakpointBuilder.append("bc *\n");
+		breakpointBuilder.append(".onexerun .echo \"Launching executable...\"\n");
+		for (IBreakpoint breakpoint : breakpoints) {
+			try {
+				if (breakpoint.isEnabled()) {
+					AssemblerBreakpoint assemberBreakpoint = (AssemblerBreakpoint) breakpoint;
+					IMarker marker = breakpoint.getMarker();
+					String sourceFilePath = marker.getResource().getLocation().toOSString();
+					breakpointBuilder
+							.append("bp \"`" + sourceFilePath + ":" + assemberBreakpoint.getLineNumber() + "`\"\n");
+					activeBreakpoints++;
+				}
+			} catch (CoreException ex) {
+				throw new RuntimeException(ex);
+			}
+
+		}
+		return activeBreakpoints;
+	}
 
 }

@@ -37,165 +37,165 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParserTreeObjectType;
  */
 final class CompilerSourceParserTreeObjectLabelProvider extends DelegatingStyledCellLabelProvider {
 
-    /** Default tree image */
-    private final Image defaultImage;
+	/** Default tree image */
+	private final Image defaultImage;
 
-    /** Outline definition section image */
-    private final Image definitionSectionImage;
+	/** Outline definition section image */
+	private final Image definitionSectionImage;
 
-    /** Outline implementation section image */
-    private final Image implementationSectionImage;
+	/** Outline implementation section image */
+	private final Image implementationSectionImage;
 
-    /** Outline equate definition image */
-    private final Image equateDefintionImage;
+	/** Outline equate definition image */
+	private final Image equateDefintionImage;
 
-    /** Outline label definition image */
-    private final Image labelDefinitionImage;
+	/** Outline label definition image */
+	private final Image labelDefinitionImage;
 
-    /** Outline enum definition section image */
-    private final Image enumDefinitionSectionImage;
+	/** Outline enum definition section image */
+	private final Image enumDefinitionSectionImage;
 
-    /** Outline structure definition section image */
-    private final Image structureDefinitionSectionImage;
+	/** Outline structure definition section image */
+	private final Image structureDefinitionSectionImage;
 
-    /** Outline local section image */
-    private final Image localSectionImage;
+	/** Outline local section image */
+	private final Image localSectionImage;
 
-    /** Outline macro definition section image */
-    private final Image macroDefinitionSectionImage;
+	/** Outline macro definition section image */
+	private final Image macroDefinitionSectionImage;
 
-    /** Outline pages section image */
-    private final Image pagesSectionImage;
+	/** Outline pages section image */
+	private final Image pagesSectionImage;
 
-    /** Outline procedure definition section image */
-    private final Image procedureDefinitionSectionImage;
+	/** Outline procedure definition section image */
+	private final Image procedureDefinitionSectionImage;
 
-    /** Outline repeat section image */
-    private final Image repeatSectionImage;
+	/** Outline repeat section image */
+	private final Image repeatSectionImage;
 
-    /** Outline source include image */
-    private final Image sourceIncludeImage;
+	/** Outline source include image */
+	private final Image sourceIncludeImage;
 
-    /** Outline binary include image */
-    private final Image binaryIncludeImage;
+	/** Outline binary include image */
+	private final Image binaryIncludeImage;
 
-    /** Outline binary include image */
-    private final Image binaryOutputImage;
+	/** Outline binary include image */
+	private final Image binaryOutputImage;
 
-    private static class StyledLabelProvider extends LabelProvider implements IStyledLabelProvider {
+	private static class StyledLabelProvider extends LabelProvider implements IStyledLabelProvider {
+
+		/**
+		 * Creation is local.
+		 */
+		StyledLabelProvider() {
+
+		}
+
+		@Override
+		public StyledString getStyledText(Object element) {
+			if (element == null) {
+				throw new IllegalArgumentException("Parameter 'element' must not be null.");
+			}
+			if (element instanceof CompilerSourceParserTreeObject) {
+				CompilerSourceParserTreeObject elem = (CompilerSourceParserTreeObject) element;
+				return elem.getStyledString();
+			}
+
+			return new StyledString(getText(element));
+		}
+	}
 
 	/**
-	 * Creation is local.
+	 * Creates a new instance.
+	 * 
+	 * Called by
+	 * {@link AssemblerContentOutlinePage#createControl(org.eclipse.swt.widgets.Composite)}
+	 * .
 	 */
-	StyledLabelProvider() {
+	CompilerSourceParserTreeObjectLabelProvider() {
+		super(new StyledLabelProvider());
+		AssemblerPlugin plugin;
+		plugin = AssemblerPlugin.getInstance();
+		defaultImage = plugin.getImage("outline-default-16x16.gif");
+		definitionSectionImage = plugin.getImage("outline-definition-section-16x16.gif");
+		implementationSectionImage = plugin.getImage("outline-implementation-section-16x16.gif");
 
+		equateDefintionImage = plugin.getImage("outline-equate-definition-16x16.gif");
+		labelDefinitionImage = plugin.getImage("outline-label-definition-16x16.gif");
+
+		enumDefinitionSectionImage = plugin.getImage("outline-enum-definition-section-16x16.gif");
+		structureDefinitionSectionImage = plugin.getImage("outline-structure-definition-section-16x16.gif");
+		localSectionImage = plugin.getImage("outline-local-section-16x16.gif");
+		macroDefinitionSectionImage = plugin.getImage("outline-macro-definition-section-16x16.gif");
+		pagesSectionImage = plugin.getImage("outline-pages-section-16x16.gif");
+		procedureDefinitionSectionImage = plugin.getImage("outline-procedure-definition-section-16x16.gif");
+		repeatSectionImage = plugin.getImage("outline-repeat-section-16x16.gif");
+
+		sourceIncludeImage = plugin.getImage("outline-source-include-16x16.gif");
+		binaryIncludeImage = plugin.getImage("outline-binary-include-16x16.gif");
+		binaryOutputImage = plugin.getImage("outline-binary-output-16x16.gif");
 	}
 
 	@Override
-	public StyledString getStyledText(Object element) {
-	    if (element == null) {
-		throw new IllegalArgumentException("Parameter 'element' must not be null.");
-	    }
-	    if (element instanceof CompilerSourceParserTreeObject) {
-		CompilerSourceParserTreeObject elem = (CompilerSourceParserTreeObject) element;
-		return elem.getStyledString();
-	    }
+	public Image getImage(Object element) {
+		Image result;
+		if (element instanceof CompilerSourceParserTreeObject) {
+			CompilerSourceParserTreeObject elem = (CompilerSourceParserTreeObject) element;
+			int type = elem.getType();
 
-	    return new StyledString(getText(element));
+			switch (type) {
+			case CompilerSourceParserTreeObjectType.DEFINITION_SECTION:
+				result = definitionSectionImage;
+				break;
+			case CompilerSourceParserTreeObjectType.IMPLEMENTATION_SECTION:
+				result = implementationSectionImage;
+				break;
+
+			case CompilerSourceParserTreeObjectType.EQUATE_DEFINITION:
+				result = equateDefintionImage;
+				break;
+			case CompilerSourceParserTreeObjectType.LABEL_DEFINITION:
+				result = labelDefinitionImage;
+				break;
+
+			case CompilerSourceParserTreeObjectType.ENUM_DEFINITION_SECTION:
+				result = enumDefinitionSectionImage;
+				break;
+			case CompilerSourceParserTreeObjectType.STRUCTURE_DEFINITION_SECTION:
+				result = structureDefinitionSectionImage;
+				break;
+			case CompilerSourceParserTreeObjectType.LOCAL_SECTION:
+				result = localSectionImage;
+				break;
+			case CompilerSourceParserTreeObjectType.MACRO_DEFINITION_SECTION:
+				result = macroDefinitionSectionImage;
+				break;
+			case CompilerSourceParserTreeObjectType.PAGES_SECTION:
+				result = pagesSectionImage;
+				break;
+			case CompilerSourceParserTreeObjectType.PROCEDURE_DEFINITION_SECTION:
+				result = procedureDefinitionSectionImage;
+				break;
+			case CompilerSourceParserTreeObjectType.REPEAT_SECTION:
+				result = repeatSectionImage;
+				break;
+
+			case CompilerSourceParserTreeObjectType.SOURCE_INCLUDE:
+				result = sourceIncludeImage;
+				break;
+			case CompilerSourceParserTreeObjectType.BINARY_INCLUDE:
+				result = binaryIncludeImage;
+				break;
+			case CompilerSourceParserTreeObjectType.BINARY_OUTPUT:
+				result = binaryOutputImage;
+				break;
+			default:
+				result = defaultImage;
+			}
+		} else {
+			result = null;
+		}
+
+		return result;
 	}
-    }
-
-    /**
-     * Creates a new instance.
-     * 
-     * Called by
-     * {@link AssemblerContentOutlinePage#createControl(org.eclipse.swt.widgets.Composite)}
-     * .
-     */
-    CompilerSourceParserTreeObjectLabelProvider() {
-	super(new StyledLabelProvider());
-	AssemblerPlugin plugin;
-	plugin = AssemblerPlugin.getInstance();
-	defaultImage = plugin.getImage("outline-default-16x16.gif");
-	definitionSectionImage = plugin.getImage("outline-definition-section-16x16.gif");
-	implementationSectionImage = plugin.getImage("outline-implementation-section-16x16.gif");
-
-	equateDefintionImage = plugin.getImage("outline-equate-definition-16x16.gif");
-	labelDefinitionImage = plugin.getImage("outline-label-definition-16x16.gif");
-
-	enumDefinitionSectionImage = plugin.getImage("outline-enum-definition-section-16x16.gif");
-	structureDefinitionSectionImage = plugin.getImage("outline-structure-definition-section-16x16.gif");
-	localSectionImage = plugin.getImage("outline-local-section-16x16.gif");
-	macroDefinitionSectionImage = plugin.getImage("outline-macro-definition-section-16x16.gif");
-	pagesSectionImage = plugin.getImage("outline-pages-section-16x16.gif");
-	procedureDefinitionSectionImage = plugin.getImage("outline-procedure-definition-section-16x16.gif");
-	repeatSectionImage = plugin.getImage("outline-repeat-section-16x16.gif");
-
-	sourceIncludeImage = plugin.getImage("outline-source-include-16x16.gif");
-	binaryIncludeImage = plugin.getImage("outline-binary-include-16x16.gif");
-	binaryOutputImage = plugin.getImage("outline-binary-output-16x16.gif");
-    }
-
-    @Override
-    public Image getImage(Object element) {
-	Image result;
-	if (element instanceof CompilerSourceParserTreeObject) {
-	    CompilerSourceParserTreeObject elem = (CompilerSourceParserTreeObject) element;
-	    int type = elem.getType();
-
-	    switch (type) {
-	    case CompilerSourceParserTreeObjectType.DEFINITION_SECTION:
-		result = definitionSectionImage;
-		break;
-	    case CompilerSourceParserTreeObjectType.IMPLEMENTATION_SECTION:
-		result = implementationSectionImage;
-		break;
-
-	    case CompilerSourceParserTreeObjectType.EQUATE_DEFINITION:
-		result = equateDefintionImage;
-		break;
-	    case CompilerSourceParserTreeObjectType.LABEL_DEFINITION:
-		result = labelDefinitionImage;
-		break;
-
-	    case CompilerSourceParserTreeObjectType.ENUM_DEFINITION_SECTION:
-		result = enumDefinitionSectionImage;
-		break;
-	    case CompilerSourceParserTreeObjectType.STRUCTURE_DEFINITION_SECTION:
-		result = structureDefinitionSectionImage;
-		break;
-	    case CompilerSourceParserTreeObjectType.LOCAL_SECTION:
-		result = localSectionImage;
-		break;
-	    case CompilerSourceParserTreeObjectType.MACRO_DEFINITION_SECTION:
-		result = macroDefinitionSectionImage;
-		break;
-	    case CompilerSourceParserTreeObjectType.PAGES_SECTION:
-		result = pagesSectionImage;
-		break;
-	    case CompilerSourceParserTreeObjectType.PROCEDURE_DEFINITION_SECTION:
-		result = procedureDefinitionSectionImage;
-		break;
-	    case CompilerSourceParserTreeObjectType.REPEAT_SECTION:
-		result = repeatSectionImage;
-		break;
-
-	    case CompilerSourceParserTreeObjectType.SOURCE_INCLUDE:
-		result = sourceIncludeImage;
-		break;
-	    case CompilerSourceParserTreeObjectType.BINARY_INCLUDE:
-		result = binaryIncludeImage;
-		break;
-	    case CompilerSourceParserTreeObjectType.BINARY_OUTPUT:
-		result = binaryOutputImage;
-		break;
-	    default:
-		result = defaultImage;
-	    }
-	} else {
-	    result = null;
-	}
-
-	return result;
-    }
 }

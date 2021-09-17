@@ -25,113 +25,113 @@ import com.wudsn.ide.base.common.PropertiesSerializer;
 
 public final class GraphicsPropertiesSerializer extends PropertiesSerializer {
 
-    /**
-     * Creation is public.
-     */
-    public GraphicsPropertiesSerializer() {
+	/**
+	 * Creation is public.
+	 */
+	public GraphicsPropertiesSerializer() {
 
-    }
-
-    public final RGB readRGB(String key, RGB defaultValue) {
-
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
-	}
-	if (defaultValue == null) {
-	    throw new IllegalArgumentException("Parameter 'defaultValue' must not be null.");
 	}
 
-	RGB result;
+	public final RGB readRGB(String key, RGB defaultValue) {
 
-	int red = readInteger(key + ".red", 0);
-	int green = readInteger(key + ".green", 0);
-	int blue = readInteger(key + ".blue", 0);
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+		if (defaultValue == null) {
+			throw new IllegalArgumentException("Parameter 'defaultValue' must not be null.");
+		}
 
-	result = new RGB(red, green, blue);
+		RGB result;
 
-	return result;
-    }
+		int red = readInteger(key + ".red", 0);
+		int green = readInteger(key + ".green", 0);
+		int blue = readInteger(key + ".blue", 0);
 
-    public final void writeRGB(String key, RGB value) {
+		result = new RGB(red, green, blue);
 
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		return result;
 	}
-	if (value == null) {
-	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
+
+	public final void writeRGB(String key, RGB value) {
+
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+		if (value == null) {
+			throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		}
+
+		writeInteger(key + ".red", value.red);
+		writeInteger(key + ".green", value.green);
+		writeInteger(key + ".blue", value.blue);
 	}
 
-	writeInteger(key + ".red", value.red);
-	writeInteger(key + ".green", value.green);
-	writeInteger(key + ".blue", value.blue);
-    }
+	public final Aspect readXYFactor(String key, Aspect defaultValue) {
 
-    public final Aspect readXYFactor(String key, Aspect defaultValue) {
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+		if (defaultValue == null) {
+			throw new IllegalArgumentException("Parameter 'defaultValue' must not be null.");
+		}
+		Aspect result;
 
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
-	}
-	if (defaultValue == null) {
-	    throw new IllegalArgumentException("Parameter 'defaultValue' must not be null.");
-	}
-	Aspect result;
+		int factorX = readInteger(key + ".factorX", 1);
+		int factorY = readInteger(key + ".factorY", 1);
 
-	int factorX = readInteger(key + ".factorX", 1);
-	int factorY = readInteger(key + ".factorY", 1);
+		result = new Aspect(factorX, factorY);
+		return result;
+	}
 
-	result = new Aspect(factorX, factorY);
-	return result;
-    }
+	public final void writeAspect(String key, Aspect value) {
 
-    public final void writeAspect(String key, Aspect value) {
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+		if (value == null) {
+			throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		}
+		setProperty(key + ".factorX", String.valueOf(value.getFactorX()));
+		setProperty(key + ".factorY", String.valueOf(value.getFactorY()));
+	}
 
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
-	}
-	if (value == null) {
-	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
-	}
-	setProperty(key + ".factorX", String.valueOf(value.getFactorX()));
-	setProperty(key + ".factorY", String.valueOf(value.getFactorY()));
-    }
+	public final RGB[] readRGBArray(String key, RGB[] defaultValue) {
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+		if (defaultValue == null) {
+			throw new IllegalArgumentException("Parameter 'defaultValue' must not be null.");
+		}
+		RGB[] result;
 
-    public final RGB[] readRGBArray(String key, RGB[] defaultValue) {
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
-	}
-	if (defaultValue == null) {
-	    throw new IllegalArgumentException("Parameter 'defaultValue' must not be null.");
-	}
-	RGB[] result;
+		if (properties.containsKey(key)) {
+			int length = readInteger(key, 0);
+			result = new RGB[length];
+			String prefix = key + ".";
+			RGB black = new RGB(0, 0, 0);
+			for (int i = 0; i < length; i++) {
+				String valueKey = prefix + i;
+				result[i] = readRGB(valueKey, black);
+			}
+		} else {
+			result = defaultValue;
+		}
+		return result;
 
-	if (properties.containsKey(key)) {
-	    int length = readInteger(key, 0);
-	    result = new RGB[length];
-	    String prefix = key + ".";
-	    RGB black = new RGB(0, 0, 0);
-	    for (int i = 0; i < length; i++) {
-		String valueKey = prefix + i;
-		result[i] = readRGB(valueKey, black);
-	    }
-	} else {
-	    result = defaultValue;
 	}
-	return result;
 
-    }
-
-    public final void writeRGBArray(String key, RGB[] value) {
-	if (key == null) {
-	    throw new IllegalArgumentException("Parameter 'key' must not be null.");
+	public final void writeRGBArray(String key, RGB[] value) {
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+		}
+		if (value == null) {
+			throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		}
+		writeInteger(key, value.length);
+		String prefix = key + ".";
+		for (int i = 0; i < value.length; i++) {
+			String valueKey = prefix + i;
+			writeRGB(valueKey, value[i]);
+		}
 	}
-	if (value == null) {
-	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
-	}
-	writeInteger(key, value.length);
-	String prefix = key + ".";
-	for (int i = 0; i < value.length; i++) {
-	    String valueKey = prefix + i;
-	    writeRGB(valueKey, value[i]);
-	}
-    }
 }

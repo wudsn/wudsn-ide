@@ -42,82 +42,82 @@ import com.wudsn.ide.asm.compiler.CompilerSymbol;
  * @author Peter Dell
  */
 final class AcmeCompilerProcessLogParser extends CompilerProcessLogParser {
-    private BufferedReader bufferedReader;
+	private BufferedReader bufferedReader;
 
-    @Override
-    protected void initialize() {
-	bufferedReader = new BufferedReader(new StringReader(errorLog));
-    }
-
-    @Override
-    protected void findNextMarker() {
-
-	String line;
-	line = "";
-
-	while (line != null && !markerAvailable) {
-	    try {
-		line = bufferedReader.readLine();
-	    } catch (IOException ex) {
-		throw new RuntimeException("Cannot read line", ex);
-	    }
-	    if (line != null) {
-		String pattern;
-		int index;
-		pattern = "Error - File ";
-		severity = IMarker.SEVERITY_ERROR;
-		index = line.indexOf(pattern);
-		if (index < 0) {
-		    pattern = "Warning - File ";
-		    severity = IMarker.SEVERITY_WARNING;
-		    index = line.indexOf(pattern);
-		}
-		if (index >= 0) {
-
-		    index = index + pattern.length();
-		    pattern = ", line ";
-		    int i = line.indexOf(pattern);
-		    if (i == -1) {
-			continue;
-		    }
-		    filePath = line.substring(index, i);
-
-		    i = i + pattern.length();
-		    int j = i;
-		    while (line.charAt(j) != ' ' && j < line.length()) {
-			j++;
-		    }
-
-		    String lineNumberString = line.substring(i, j);
-
-		    try {
-			lineNumber = Integer.parseInt(lineNumberString);
-		    } catch (NumberFormatException ex) {
-			lineNumber = -1;
-			severity = IMarker.SEVERITY_ERROR;
-			message = ex.getMessage();
-		    }
-
-		    pattern = "): ";
-		    line = line.substring(j);
-		    j = line.indexOf(pattern);
-		    if (j > -1) {
-			j = j + pattern.length();
-			message = line.substring(j);
-		    } else {
-			message = line;
-		    }
-
-		    markerAvailable = true;
-		}
-
-	    }
+	@Override
+	protected void initialize() {
+		bufferedReader = new BufferedReader(new StringReader(errorLog));
 	}
-    }
 
-    @Override
-    public void addCompilerSymbols(List<CompilerSymbol> compilerSymbols) {
+	@Override
+	protected void findNextMarker() {
 
-    }
+		String line;
+		line = "";
+
+		while (line != null && !markerAvailable) {
+			try {
+				line = bufferedReader.readLine();
+			} catch (IOException ex) {
+				throw new RuntimeException("Cannot read line", ex);
+			}
+			if (line != null) {
+				String pattern;
+				int index;
+				pattern = "Error - File ";
+				severity = IMarker.SEVERITY_ERROR;
+				index = line.indexOf(pattern);
+				if (index < 0) {
+					pattern = "Warning - File ";
+					severity = IMarker.SEVERITY_WARNING;
+					index = line.indexOf(pattern);
+				}
+				if (index >= 0) {
+
+					index = index + pattern.length();
+					pattern = ", line ";
+					int i = line.indexOf(pattern);
+					if (i == -1) {
+						continue;
+					}
+					filePath = line.substring(index, i);
+
+					i = i + pattern.length();
+					int j = i;
+					while (line.charAt(j) != ' ' && j < line.length()) {
+						j++;
+					}
+
+					String lineNumberString = line.substring(i, j);
+
+					try {
+						lineNumber = Integer.parseInt(lineNumberString);
+					} catch (NumberFormatException ex) {
+						lineNumber = -1;
+						severity = IMarker.SEVERITY_ERROR;
+						message = ex.getMessage();
+					}
+
+					pattern = "): ";
+					line = line.substring(j);
+					j = line.indexOf(pattern);
+					if (j > -1) {
+						j = j + pattern.length();
+						message = line.substring(j);
+					} else {
+						message = line;
+					}
+
+					markerAvailable = true;
+				}
+
+			}
+		}
+	}
+
+	@Override
+	public void addCompilerSymbols(List<CompilerSymbol> compilerSymbols) {
+
+	}
 
 }

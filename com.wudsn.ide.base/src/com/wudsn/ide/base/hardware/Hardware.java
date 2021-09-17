@@ -19,12 +19,12 @@
 package com.wudsn.ide.base.hardware;
 
 /**
- * Enum for the hardware platforms. 
+ * Enum for the hardware platforms.
  * 
  * @author Peter Dell
  * 
  */
 public enum Hardware {
 
-    GENERIC, ATARI8BIT, C64
+	GENERIC, ATARI8BIT, C64
 }

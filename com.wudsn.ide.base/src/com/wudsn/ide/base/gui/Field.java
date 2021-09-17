@@ -33,68 +33,64 @@ import org.eclipse.swt.widgets.Label;
  */
 public abstract class Field {
 
-    protected Label label;
-    private ChangeListener changeListener;
+	protected Label label;
+	private ChangeListener changeListener;
 
-    /**
-     * Creation is protected.
-     */
-    protected Field() {
+	/**
+	 * Creation is protected.
+	 */
+	protected Field() {
 
-    }
-
-    /**
-     * Gets the label for the field.
-     * 
-     * @return The label, not <code>null</code>.
-     */
-    public final Label getLabel() {
-	if (label == null) {
-	    throw new IllegalStateException("Label not yet created.");
 	}
-	return label;
-    }
 
-    /**
-     * Gets the control relevant for messages decorations.
-     * 
-     * @return The control relevant for messages decorations, not
-     *         <code>null</code>.
-     */
-    public abstract Control getControl();
-
-    /**
-     * Sets the enabled state of the field.
-     * 
-     * @param enabled
-     *            The enabled state of the field.
-     */
-    public abstract void setEnabled(boolean enabled);
-
-    /**
-     * Sets the editable state of the field.
-     * 
-     * @param editable
-     *            The editable state of the field.
-     */
-    public abstract void setEditable(boolean editable);
-
-    /**
-     * Adds a change listener to this field.
-     * 
-     * @param changeListener
-     *            The change listener, not <code>null</code>.
-     */
-    public final void addChangeListener(ChangeListener changeListener) {
-	if (changeListener == null) {
-	    throw new IllegalArgumentException("Parameter 'changeListener' must not be null.");
+	/**
+	 * Gets the label for the field.
+	 * 
+	 * @return The label, not <code>null</code>.
+	 */
+	public final Label getLabel() {
+		if (label == null) {
+			throw new IllegalStateException("Label not yet created.");
+		}
+		return label;
 	}
-	this.changeListener = changeListener;
-    }
 
-    protected final void notifyChangeListenner() {
-	if (changeListener != null) {
-	    changeListener.stateChanged(new ChangeEvent(this));
+	/**
+	 * Gets the control relevant for messages decorations.
+	 * 
+	 * @return The control relevant for messages decorations, not <code>null</code>.
+	 */
+	public abstract Control getControl();
+
+	/**
+	 * Sets the enabled state of the field.
+	 * 
+	 * @param enabled The enabled state of the field.
+	 */
+	public abstract void setEnabled(boolean enabled);
+
+	/**
+	 * Sets the editable state of the field.
+	 * 
+	 * @param editable The editable state of the field.
+	 */
+	public abstract void setEditable(boolean editable);
+
+	/**
+	 * Adds a change listener to this field.
+	 * 
+	 * @param changeListener The change listener, not <code>null</code>.
+	 */
+	public final void addChangeListener(ChangeListener changeListener) {
+		if (changeListener == null) {
+			throw new IllegalArgumentException("Parameter 'changeListener' must not be null.");
+		}
+		this.changeListener = changeListener;
 	}
-    }
+
+	protected final void notifyChangeListenner() {
+		if (changeListener != null) {
+			changeListener.stateChanged(new ChangeEvent(this));
+		}
+	}
 }

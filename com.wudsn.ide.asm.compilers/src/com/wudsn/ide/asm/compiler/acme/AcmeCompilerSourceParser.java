@@ -28,32 +28,32 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 final class AcmeCompilerSourceParser extends CompilerSourceParser {
 
-    /**
-     * Creation is package local.
-     */
-    AcmeCompilerSourceParser() {
+	/**
+	 * Creation is package local.
+	 */
+	AcmeCompilerSourceParser() {
 
-    }
+	}
 
-    @Override
-    protected void parseLine(int startOffset, String symbol, int symbolOffset, String instruction,
-	    int instructionOffset, String operand, String comment) {
+	@Override
+	protected void parseLine(int startOffset, String symbol, int symbolOffset, String instruction,
+			int instructionOffset, String operand, String comment) {
 
-	if (symbol.length() > 0) {
+		if (symbol.length() > 0) {
 
-	    // Check for origin statement
-	    if (symbol.equals("*")) {
-		beginImplementationSection(startOffset, startOffset + symbolOffset, operand, comment);
+			// Check for origin statement
+			if (symbol.equals("*")) {
+				beginImplementationSection(startOffset, startOffset + symbolOffset, operand, comment);
 
-	    } else {
-		if (instruction.equals("=")) {
-		    createEquateDefinitionChild(startOffset, startOffset + symbolOffset, symbol, operand, comment);
-		} else {
-		    createLabelDefinitionChild(startOffset, startOffset + symbolOffset, symbol, comment);
+			} else {
+				if (instruction.equals("=")) {
+					createEquateDefinitionChild(startOffset, startOffset + symbolOffset, symbol, operand, comment);
+				} else {
+					createLabelDefinitionChild(startOffset, startOffset + symbolOffset, symbol, comment);
 
-		}
-	    }
+				}
+			}
 
-	} // Symbol not empty
-    }
+		} // Symbol not empty
+	}
 }

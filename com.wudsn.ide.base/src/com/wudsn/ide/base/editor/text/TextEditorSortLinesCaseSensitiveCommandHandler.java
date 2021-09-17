@@ -28,22 +28,22 @@ import java.util.Comparator;
  */
 public final class TextEditorSortLinesCaseSensitiveCommandHandler extends TextEditorSortLinesCommandHandler {
 
-    private static final Comparator<String> CASE_SENSITIVE_COMPARATOR = new CaseSensitiveComparator();
+	private static final Comparator<String> CASE_SENSITIVE_COMPARATOR = new CaseSensitiveComparator();
 
-    private static class CaseSensitiveComparator implements Comparator<String> {
+	private static class CaseSensitiveComparator implements Comparator<String> {
 
-	public CaseSensitiveComparator() {
+		public CaseSensitiveComparator() {
+		}
+
+		@Override
+		public int compare(String o1, String o2) {
+			return o1.compareTo(o2);
+		}
 	}
 
 	@Override
-	public int compare(String o1, String o2) {
-	    return o1.compareTo(o2);
+	protected Comparator<String> getComparator() {
+		return CASE_SENSITIVE_COMPARATOR;
 	}
-    }
-
-    @Override
-    protected Comparator<String> getComparator() {
-	return CASE_SENSITIVE_COMPARATOR;
-    }
 
 }

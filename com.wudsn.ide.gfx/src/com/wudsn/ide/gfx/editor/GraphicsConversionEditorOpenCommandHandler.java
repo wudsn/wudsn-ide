@@ -28,11 +28,11 @@ import com.wudsn.ide.base.editor.CommonOpenEditorCommandHandler;
  */
 public final class GraphicsConversionEditorOpenCommandHandler extends CommonOpenEditorCommandHandler {
 
-    /**
-     * Creation is public. Called by extension "org.eclipse.ui.popupMenus".
-     */
-    public GraphicsConversionEditorOpenCommandHandler() {
-	super(GraphicsConversionEditor.ID);
-    }
+	/**
+	 * Creation is public. Called by extension "org.eclipse.ui.popupMenus".
+	 */
+	public GraphicsConversionEditorOpenCommandHandler() {
+		super(GraphicsConversionEditor.ID);
+	}
 
 }

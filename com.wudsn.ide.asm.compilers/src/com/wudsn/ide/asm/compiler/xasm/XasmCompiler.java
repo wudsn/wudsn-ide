@@ -30,29 +30,29 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 public final class XasmCompiler extends Compiler {
 
-    /**
-     * Creates a new instance.
-     */
-    public XasmCompiler() {
+	/**
+	 * Creates a new instance.
+	 */
+	public XasmCompiler() {
 
-    }
+	}
 
-    @Override
-    public CompilerSourceParser createSourceParser() {
-	return new XasmCompilerSourceParser();
-    }
+	@Override
+	public CompilerSourceParser createSourceParser() {
+		return new XasmCompilerSourceParser();
+	}
 
-    @Override
-    public boolean isSuccessExitValue(int exitValue) {
-	// XASM returns 0 if there is no warning, 1 if there are only warnings,
-	// 2 if there is at least one error.
-	return exitValue == 0 || exitValue == 1;
-    }
+	@Override
+	public boolean isSuccessExitValue(int exitValue) {
+		// XASM returns 0 if there is no warning, 1 if there are only warnings,
+		// 2 if there is at least one error.
+		return exitValue == 0 || exitValue == 1;
+	}
 
-    @Override
-    public CompilerProcessLogParser createLogParser() {
+	@Override
+	public CompilerProcessLogParser createLogParser() {
 
-	return new XasmCompilerProcessLogParser();
-    }
+		return new XasmCompilerProcessLogParser();
+	}
 
 }

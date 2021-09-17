@@ -39,28 +39,28 @@ import org.eclipse.ui.handlers.HandlerUtil;
  */
 public final class AssemblerEditorOpenDeclarationCommandHandler extends AbstractHandler {
 
-    @Override
-    public Object execute(ExecutionEvent event) throws ExecutionException {
-	IEditorPart editor;
-	editor = HandlerUtil.getActiveEditorChecked(event);
-	if (!(editor instanceof AssemblerEditor)) {
-	    return null;
-	}
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		IEditorPart editor;
+		editor = HandlerUtil.getActiveEditorChecked(event);
+		if (!(editor instanceof AssemblerEditor)) {
+			return null;
+		}
 
-	AssemblerEditor assemblerEditor;
-	assemblerEditor = (AssemblerEditor) editor;
-	ITextSelection textSelection = (ITextSelection) assemblerEditor.getSite().getSelectionProvider().getSelection();
-	if (textSelection != null) {
-	    IDocument document = assemblerEditor.getDocumentProvider().getDocument(assemblerEditor.getEditorInput());
-	    int offset = textSelection.getOffset();
-	    List<AssemblerHyperlink> hyperlinks = new ArrayList<AssemblerHyperlink>();
-	    AssemblerHyperlinkDetector.detectHyperlinks(assemblerEditor, document, offset, false, hyperlinks);
-	    if (!hyperlinks.isEmpty()) {
-		AssemblerHyperlink hyperlink = hyperlinks.get(0);
-		hyperlink.open();
-	    }
+		AssemblerEditor assemblerEditor;
+		assemblerEditor = (AssemblerEditor) editor;
+		ITextSelection textSelection = (ITextSelection) assemblerEditor.getSite().getSelectionProvider().getSelection();
+		if (textSelection != null) {
+			IDocument document = assemblerEditor.getDocumentProvider().getDocument(assemblerEditor.getEditorInput());
+			int offset = textSelection.getOffset();
+			List<AssemblerHyperlink> hyperlinks = new ArrayList<AssemblerHyperlink>();
+			AssemblerHyperlinkDetector.detectHyperlinks(assemblerEditor, document, offset, false, hyperlinks);
+			if (!hyperlinks.isEmpty()) {
+				AssemblerHyperlink hyperlink = hyperlinks.get(0);
+				hyperlink.open();
+			}
+		}
+		return null;
 	}
-	return null;
-    }
 
 }

@@ -43,93 +43,91 @@ import org.eclipse.ui.texteditor.ITextEditorExtension2;
  */
 abstract class TextEditorLinesCommandHandler extends AbstractHandler {
 
-    @Override
-    public Object execute(ExecutionEvent event) throws ExecutionException {
-	IEditorPart editor;
-	editor = HandlerUtil.getActiveEditorChecked(event);
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+		IEditorPart editor;
+		editor = HandlerUtil.getActiveEditorChecked(event);
 
-	if (!(editor instanceof ITextEditor)) {
-	    return null;
-	}
-
-	// Find editor, document, selection, start and end line.
-	ITextEditor textEditor;
-	IDocument document;
-	ITextSelection selection;
-	int endLineIndex;
-	int startLineIndex;
-
-	textEditor = (ITextEditor) editor;
-
-	document = textEditor.getDocumentProvider().getDocument(textEditor.getEditorInput());
-	selection = (ITextSelection) textEditor.getSelectionProvider().getSelection();
-	endLineIndex = selection.getEndLine();
-	startLineIndex = selection.getStartLine();
-	if (startLineIndex == endLineIndex) {
-	    startLineIndex = 0;
-	    endLineIndex = document.getNumberOfLines() - 1;
-	}
-
-	try {
-	    // Collect lines.
-	    int startOffset;
-	    int length;
-
-	    startOffset = document.getLineOffset(startLineIndex);
-	    length = 0;
-
-	    List<String> lines;
-	    lines = new ArrayList<String>();
-	    for (int line = startLineIndex; line <= endLineIndex; line++) {
-		int delimiterLength = document.getLineDelimiter(line) == null ? 0 : document.getLineDelimiter(line)
-			.length();
-		String lineText = document.get(document.getLineOffset(line), document.getLineLength(line)
-			- delimiterLength);
-		lines.add(lineText);
-		length = length + lineText.length() + delimiterLength;
-	    }
-
-	    process(event.getCommand(), lines);
-
-	    int lineCount = lines.size();
-	    String lineDelimiter = document.getLineDelimiter(startLineIndex);
-	    StringBuilder replacementText = new StringBuilder();
-	    for (int i = 0; i < lineCount; i++) {
-		replacementText.append(lines.get(i));
-		if ((i < lineCount - 1) || (i == lineCount - 1) && (document.getLineDelimiter(endLineIndex) != null)) {
-		    replacementText.append(lineDelimiter);
+		if (!(editor instanceof ITextEditor)) {
+			return null;
 		}
-	    }
 
-	    if (editor instanceof ITextEditorExtension2) {
-		ITextEditorExtension2 extension = (ITextEditorExtension2) editor;
-		if (!extension.validateEditorInputState()) {
-		    return null;
+		// Find editor, document, selection, start and end line.
+		ITextEditor textEditor;
+		IDocument document;
+		ITextSelection selection;
+		int endLineIndex;
+		int startLineIndex;
+
+		textEditor = (ITextEditor) editor;
+
+		document = textEditor.getDocumentProvider().getDocument(textEditor.getEditorInput());
+		selection = (ITextSelection) textEditor.getSelectionProvider().getSelection();
+		endLineIndex = selection.getEndLine();
+		startLineIndex = selection.getStartLine();
+		if (startLineIndex == endLineIndex) {
+			startLineIndex = 0;
+			endLineIndex = document.getNumberOfLines() - 1;
 		}
-	    }
 
-	    ReplaceEdit replaceEdit = new ReplaceEdit(startOffset, length, replacementText.toString());
-	    replaceEdit.apply(document);
-	    // re-select the lines that have been processed
-	    textEditor.getSelectionProvider().setSelection(selection);
-	} catch (BadLocationException ex) {
-	    throw new ExecutionException("Error during handler execution.", ex);
+		try {
+			// Collect lines.
+			int startOffset;
+			int length;
+
+			startOffset = document.getLineOffset(startLineIndex);
+			length = 0;
+
+			List<String> lines;
+			lines = new ArrayList<String>();
+			for (int line = startLineIndex; line <= endLineIndex; line++) {
+				int delimiterLength = document.getLineDelimiter(line) == null ? 0
+						: document.getLineDelimiter(line).length();
+				String lineText = document.get(document.getLineOffset(line),
+						document.getLineLength(line) - delimiterLength);
+				lines.add(lineText);
+				length = length + lineText.length() + delimiterLength;
+			}
+
+			process(event.getCommand(), lines);
+
+			int lineCount = lines.size();
+			String lineDelimiter = document.getLineDelimiter(startLineIndex);
+			StringBuilder replacementText = new StringBuilder();
+			for (int i = 0; i < lineCount; i++) {
+				replacementText.append(lines.get(i));
+				if ((i < lineCount - 1) || (i == lineCount - 1) && (document.getLineDelimiter(endLineIndex) != null)) {
+					replacementText.append(lineDelimiter);
+				}
+			}
+
+			if (editor instanceof ITextEditorExtension2) {
+				ITextEditorExtension2 extension = (ITextEditorExtension2) editor;
+				if (!extension.validateEditorInputState()) {
+					return null;
+				}
+			}
+
+			ReplaceEdit replaceEdit = new ReplaceEdit(startOffset, length, replacementText.toString());
+			replaceEdit.apply(document);
+			// re-select the lines that have been processed
+			textEditor.getSelectionProvider().setSelection(selection);
+		} catch (BadLocationException ex) {
+			throw new ExecutionException("Error during handler execution.", ex);
+		}
+		return null;
 	}
-	return null;
-    }
 
-    /**
-     * Subclasses must process the lines given in the list. The processed list
-     * will be used to rebuild the lines in the editor.
-     * 
-     * @param command
-     *            The command which is currently executed, not <code>null</code>
-     *            .
-     * 
-     * @param lines
-     *            The modifiable list of lines, may be empty, not
-     *            <code>null</code>.
-     */
-    protected abstract void process(Command command, List<String> lines);
+	/**
+	 * Subclasses must process the lines given in the list. The processed list will
+	 * be used to rebuild the lines in the editor.
+	 * 
+	 * @param command The command which is currently executed, not <code>null</code>
+	 *                .
+	 * 
+	 * @param lines   The modifiable list of lines, may be empty, not
+	 *                <code>null</code>.
+	 */
+	protected abstract void process(Command command, List<String> lines);
 
 }

@@ -33,9 +33,10 @@ import org.eclipse.jface.text.Region;
  */
 public class PascalHoverProvider implements ITextHover {
 
-    @Override
-    public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
-    	// TODO this is logic for .project file to show nature description on hover. Replace with your language logic!
+	@Override
+	public String getHoverInfo(ITextViewer textViewer, IRegion hoverRegion) {
+		// TODO this is logic for .project file to show nature description on hover.
+		// Replace with your language logic!
 		// String contents= textViewer.getDocument().get();
 		// int offset= hoverRegion.getOffset();
 //        int endIndex= contents.indexOf("</nature>", offset);
@@ -50,11 +51,11 @@ public class PascalHoverProvider implements ITextHover {
 //            if (natureDescriptors[i].getNatureId().equals(selection))
 //                return natureDescriptors[i].getLabel();
 //        }
-        return "";
-    }
+		return "";
+	}
 
-    @Override
-    public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
-        return new Region(offset, 0);
-    }
+	@Override
+	public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
+		return new Region(offset, 0);
+	}
 }

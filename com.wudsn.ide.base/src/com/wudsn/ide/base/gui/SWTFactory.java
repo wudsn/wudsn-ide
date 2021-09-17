@@ -33,94 +33,83 @@ import org.eclipse.swt.widgets.Label;
  * @author Peter Dell
  */
 public final class SWTFactory {
-    private SWTFactory() {
-    }
+	private SWTFactory() {
+	}
 
-    /**
-     * Creates a composite that uses the parent's font and has a grid layout
-     * 
-     * @param parent
-     *            The parent to add the composite to, not <code>null</code>.
-     * @param columns
-     *            The number of columns the composite should have.
-     * @param hspan
-     *            The horizontal span the new composite should take up in the
-     *            parent.
-     * @param style
-     *            The fill style of the composite {@link GridData#GridData(int)}
-     *            .
-     * @return The new composite with a grid layout, not <code>null</code>.
-     */
-    public static Composite createComposite(Composite parent, int columns, int hspan, int style) {
-	if (parent == null) {
-	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+	/**
+	 * Creates a composite that uses the parent's font and has a grid layout
+	 * 
+	 * @param parent  The parent to add the composite to, not <code>null</code>.
+	 * @param columns The number of columns the composite should have.
+	 * @param hspan   The horizontal span the new composite should take up in the
+	 *                parent.
+	 * @param style   The fill style of the composite {@link GridData#GridData(int)}
+	 *                .
+	 * @return The new composite with a grid layout, not <code>null</code>.
+	 */
+	public static Composite createComposite(Composite parent, int columns, int hspan, int style) {
+		if (parent == null) {
+			throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+		}
+		Composite composite = new Composite(parent, SWT.NONE);
+		GridLayout gridLayout = new GridLayout(columns, false);
+		gridLayout.marginWidth = 0;
+		composite.setLayout(gridLayout);
+		composite.setFont(parent.getFont());
+		GridData gd = new GridData(style);
+		gd.horizontalSpan = hspan;
+		composite.setLayoutData(gd);
+		return composite;
 	}
-	Composite composite = new Composite(parent, SWT.NONE);
-	GridLayout gridLayout = new GridLayout(columns, false);
-	gridLayout.marginWidth = 0;
-	composite.setLayout(gridLayout);
-	composite.setFont(parent.getFont());
-	GridData gd = new GridData(style);
-	gd.horizontalSpan = hspan;
-	composite.setLayoutData(gd);
-	return composite;
-    }
 
-    /**
-     * Creates a group that uses the parent's font and has a grid layout
-     * 
-     * @param parent
-     *            The parent to add the composite to, not <code>null</code>.
-     * @param text
-     *            The group title, not <code>null</code>.
-     * @param columns
-     *            The number of columns the composite should have.
-     * @param hspan
-     *            The horizontal span the new composite should take up in the
-     *            parent.
-     * @param fill
-     *            The fill style of the composite {@link GridData}.
-     * @return The new composite with a grid layout, not <code>null</code>.
-     */
-    public static Group createGroup(Composite parent, String text, int columns, int hspan, int fill) {
-	if (parent == null) {
-	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+	/**
+	 * Creates a group that uses the parent's font and has a grid layout
+	 * 
+	 * @param parent  The parent to add the composite to, not <code>null</code>.
+	 * @param text    The group title, not <code>null</code>.
+	 * @param columns The number of columns the composite should have.
+	 * @param hspan   The horizontal span the new composite should take up in the
+	 *                parent.
+	 * @param fill    The fill style of the composite {@link GridData}.
+	 * @return The new composite with a grid layout, not <code>null</code>.
+	 */
+	public static Group createGroup(Composite parent, String text, int columns, int hspan, int fill) {
+		if (parent == null) {
+			throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+		}
+		if (text == null) {
+			throw new IllegalArgumentException("Parameter 'text' must not be null.");
+		}
+		Group group = new Group(parent, SWT.NONE);
+		GridLayout layout = new GridLayout(columns, true);
+		group.setLayout(layout);
+		group.setText(text);
+		group.setFont(parent.getFont());
+		GridData gd = new GridData(fill);
+		gd.horizontalSpan = hspan;
+		group.setLayoutData(gd);
+		return group;
 	}
-	if (text == null) {
-	    throw new IllegalArgumentException("Parameter 'text' must not be null.");
-	}
-	Group group = new Group(parent, SWT.NONE);
-	GridLayout layout = new GridLayout(columns, true);
-	group.setLayout(layout);
-	group.setText(text);
-	group.setFont(parent.getFont());
-	GridData gd = new GridData(fill);
-	gd.horizontalSpan = hspan;
-	group.setLayoutData(gd);
-	return group;
-    }
 
-    /**
-     * Create a number of labels to fill up the layout.
-     * 
-     * @param composite
-     *            The composite which is used as parent for the label, not
-     *            <code>null</code>.
-     * @param number
-     *            The number of labels to be created, a positive integer.
-     */
-    @SuppressWarnings("unused")
-    public static void createLabels(Composite composite, int number) {
-	if (composite == null) {
-	    throw new IllegalArgumentException("Parameter 'composite' must not be null.");
+	/**
+	 * Create a number of labels to fill up the layout.
+	 * 
+	 * @param composite The composite which is used as parent for the label, not
+	 *                  <code>null</code>.
+	 * @param number    The number of labels to be created, a positive integer.
+	 */
+	@SuppressWarnings("unused")
+	public static void createLabels(Composite composite, int number) {
+		if (composite == null) {
+			throw new IllegalArgumentException("Parameter 'composite' must not be null.");
+		}
+		if (number < 1) {
+			throw new IllegalArgumentException(
+					"Parameter 'number' must not be positive. Specified value is " + number + ".");
+		}
+		for (int i = 0; i < number; i++) {
+			new Label(composite, SWT.NONE);
+		}
 	}
-	if (number < 1) {
-	    throw new IllegalArgumentException("Parameter 'number' must not be positive. Specified value is " + number
-		    + ".");
-	}
-	for (int i = 0; i < number; i++) {
-	    new Label(composite, SWT.NONE);
-	}
-    }
 
 }

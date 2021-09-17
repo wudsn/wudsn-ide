@@ -48,163 +48,159 @@ import org.eclipse.swt.widgets.Display;
  */
 public final class MultiLineTextField extends Field {
 
-    static final Color LINE_NUMBER_COLOR = new Color(Display.getCurrent(), new RGB(0, 0, 255));
-    static final Color LINE_HIGHLIGHT_COLOR = new Color(Display.getCurrent(), new RGB(220, 220, 255));
+	static final Color LINE_NUMBER_COLOR = new Color(Display.getCurrent(), new RGB(0, 0, 255));
+	static final Color LINE_HIGHLIGHT_COLOR = new Color(Display.getCurrent(), new RGB(220, 220, 255));
 
-    Color parentBackground;
-    Color ownBackground;
-    private StyledText text;
-    private ModifyListener textModifyListener;
+	Color parentBackground;
+	Color ownBackground;
+	private StyledText text;
+	private ModifyListener textModifyListener;
 
-    /**
-     * Creates a text field.
-     * 
-     * @param parent
-     *            The parent composite, not <code>null</code>.
-     * @param style
-     *            The SWT style.
-     */
-    public MultiLineTextField(final Composite parent, int style) {
-	if (parent == null) {
-	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
-	}
-
-	parentBackground = parent.getBackground();
-	text = new StyledText(parent, style | SWT.MULTI);
-	ownBackground = text.getBackground();
-
-	text.addCaretListener(new CaretListener() {
-
-	    @Override
-	    public void caretMoved(CaretEvent event) {
-		StyledText text = (StyledText) event.widget;
-		text.redraw();
-	    }
-	});
-	text.addLineStyleListener(new LineStyleListener() {
-	    @Override
-	    public void lineGetStyle(LineStyleEvent event) {
-		// Set the line number
-		StyledText text = (StyledText) event.widget;
-		event.bulletIndex = text.getLineAtOffset(event.lineOffset);
-
-		// Set the style, 12 pixels wide for each digit
-		StyleRange style = new StyleRange();
-		style.metrics = new GlyphMetrics(0, 0, Integer.toString(text.getLineCount() + 1).length() * 12);
-		style.foreground = LINE_NUMBER_COLOR;
-
-		// Create and set the bullet
-		event.bullet = new Bullet(ST.BULLET_NUMBER, style);
-	    }
-	});
-
-	text.addLineBackgroundListener(new LineBackgroundListener() {
-
-	    @Override
-	    public void lineGetBackground(LineBackgroundEvent event) {
-		StyledText text = (StyledText) event.widget;
-		if (text.getEditable()) {
-		    if (text.getLineAtOffset(event.lineOffset) == text.getLineAtOffset(text.getCaretOffset())) {
-			event.lineBackground = LINE_HIGHLIGHT_COLOR;
-		    } else {
-			event.lineBackground = ownBackground;
-		    }
-		} else {
-		    event.lineBackground = parentBackground;
+	/**
+	 * Creates a text field.
+	 * 
+	 * @param parent The parent composite, not <code>null</code>.
+	 * @param style  The SWT style.
+	 */
+	public MultiLineTextField(final Composite parent, int style) {
+		if (parent == null) {
+			throw new IllegalArgumentException("Parameter 'parent' must not be null.");
 		}
-	    }
-	});
 
-	textModifyListener = new ModifyListener() {
-	    @Override
-	    public void modifyText(ModifyEvent e) {
-		MultiLineTextField.this.notifyChangeListenner();
-	    }
-	};
-    }
+		parentBackground = parent.getBackground();
+		text = new StyledText(parent, style | SWT.MULTI);
+		ownBackground = text.getBackground();
 
-    /**
-     * Gets the text control representing this text field.
-     * 
-     * @return The text control, not <code>null</code>.
-     */
-    public StyledText getText() {
-	return text;
-    }
+		text.addCaretListener(new CaretListener() {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Control getControl() {
-	return text;
-    }
+			@Override
+			public void caretMoved(CaretEvent event) {
+				StyledText text = (StyledText) event.widget;
+				text.redraw();
+			}
+		});
+		text.addLineStyleListener(new LineStyleListener() {
+			@Override
+			public void lineGetStyle(LineStyleEvent event) {
+				// Set the line number
+				StyledText text = (StyledText) event.widget;
+				event.bulletIndex = text.getLineAtOffset(event.lineOffset);
 
-    public void setVisible(boolean visible) {
-	text.setVisible(visible);
+				// Set the style, 12 pixels wide for each digit
+				StyleRange style = new StyleRange();
+				style.metrics = new GlyphMetrics(0, 0, Integer.toString(text.getLineCount() + 1).length() * 12);
+				style.foreground = LINE_NUMBER_COLOR;
 
-    }
+				// Create and set the bullet
+				event.bullet = new Bullet(ST.BULLET_NUMBER, style);
+			}
+		});
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setEnabled(boolean enabled) {
-	text.setEnabled(enabled);
-    }
+		text.addLineBackgroundListener(new LineBackgroundListener() {
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setEditable(boolean editable) {
-	text.setEditable(editable);
-	text.setBackground(editable ? ownBackground : parentBackground);
-    }
+			@Override
+			public void lineGetBackground(LineBackgroundEvent event) {
+				StyledText text = (StyledText) event.widget;
+				if (text.getEditable()) {
+					if (text.getLineAtOffset(event.lineOffset) == text.getLineAtOffset(text.getCaretOffset())) {
+						event.lineBackground = LINE_HIGHLIGHT_COLOR;
+					} else {
+						event.lineBackground = ownBackground;
+					}
+				} else {
+					event.lineBackground = parentBackground;
+				}
+			}
+		});
 
-    /**
-     * Sets the value.
-     * 
-     * @param value
-     *            The value, not <code>null</code>.
-     */
-    public void setValue(String value) {
-	if (value == null) {
-	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		textModifyListener = new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent e) {
+				MultiLineTextField.this.notifyChangeListenner();
+			}
+		};
 	}
-	if (!value.equals(text.getText())) {
-	    text.removeModifyListener(textModifyListener);
-	    text.setText(value);
-	    text.addModifyListener(textModifyListener);
+
+	/**
+	 * Gets the text control representing this text field.
+	 * 
+	 * @return The text control, not <code>null</code>.
+	 */
+	public StyledText getText() {
+		return text;
 	}
-    }
 
-    /**
-     * Gets the value.
-     * 
-     * @return The value, not <code>null</code>.
-     */
-    public String getValue() {
-	String result;
-	result = text.getText();
-	result = result.trim();
-	return result;
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Control getControl() {
+		return text;
+	}
 
-    }
+	public void setVisible(boolean visible) {
+		text.setVisible(visible);
 
-    /**
-     * Sets the selection.
-     * <p>
-     * Indexing is zero based. The range of a selection is from 0..N where N is
-     * the number of characters in the widget.
-     * 
-     * @param start
-     *            new caret position.
-     */
+	}
 
-    public void setSelection(int start) {
-	text.setSelection(start);
-	text.setFocus();
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEnabled(boolean enabled) {
+		text.setEnabled(enabled);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEditable(boolean editable) {
+		text.setEditable(editable);
+		text.setBackground(editable ? ownBackground : parentBackground);
+	}
+
+	/**
+	 * Sets the value.
+	 * 
+	 * @param value The value, not <code>null</code>.
+	 */
+	public void setValue(String value) {
+		if (value == null) {
+			throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		}
+		if (!value.equals(text.getText())) {
+			text.removeModifyListener(textModifyListener);
+			text.setText(value);
+			text.addModifyListener(textModifyListener);
+		}
+	}
+
+	/**
+	 * Gets the value.
+	 * 
+	 * @return The value, not <code>null</code>.
+	 */
+	public String getValue() {
+		String result;
+		result = text.getText();
+		result = result.trim();
+		return result;
+
+	}
+
+	/**
+	 * Sets the selection.
+	 * <p>
+	 * Indexing is zero based. The range of a selection is from 0..N where N is the
+	 * number of characters in the widget.
+	 * 
+	 * @param start new caret position.
+	 */
+
+	public void setSelection(int start) {
+		text.setSelection(start);
+		text.setFocus();
+	}
 
 }

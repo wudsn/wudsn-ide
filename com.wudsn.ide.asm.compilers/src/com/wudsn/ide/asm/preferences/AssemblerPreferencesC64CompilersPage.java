@@ -28,13 +28,12 @@ import com.wudsn.ide.asm.Hardware;
  */
 public final class AssemblerPreferencesC64CompilersPage extends AssemblerPreferencesCompilersPage {
 
-    /**
-     * Create is public. Used by extension point
-     * "org.eclipse.ui.preferencePages".
-     */
-    public AssemblerPreferencesC64CompilersPage() {
-	super(Hardware.C64);
+	/**
+	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
+	 */
+	public AssemblerPreferencesC64CompilersPage() {
+		super(Hardware.C64);
 
-    }
+	}
 
 }

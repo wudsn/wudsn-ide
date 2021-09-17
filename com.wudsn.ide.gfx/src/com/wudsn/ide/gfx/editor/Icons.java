@@ -26,18 +26,18 @@ import com.wudsn.ide.gfx.GraphicsPlugin;
 
 final class Icons {
 
-    public static final Image FIND_DEFAULT_CONVERTER;
-    public static final Image CREATE_CONVERSION;
-    public static final Image REFRESH;
-    public static final Image SAVE_IMAGE;
-    public static final Image SAVE_FILES;
+	public static final Image FIND_DEFAULT_CONVERTER;
+	public static final Image CREATE_CONVERSION;
+	public static final Image REFRESH;
+	public static final Image SAVE_IMAGE;
+	public static final Image SAVE_FILES;
 
-    static {
-	AbstractIDEPlugin plugin = GraphicsPlugin.getInstance();
-	FIND_DEFAULT_CONVERTER = plugin.getImage("searchm_obj.gif");
-	CREATE_CONVERSION = plugin.getImage("graphics-editor-16x16.gif");
-	REFRESH = plugin.getImage("refresh.gif");
-	SAVE_IMAGE = plugin.getImage("save_edit.gif");
-	SAVE_FILES = plugin.getImage("save_edit.gif");
-    }
+	static {
+		AbstractIDEPlugin plugin = GraphicsPlugin.getInstance();
+		FIND_DEFAULT_CONVERTER = plugin.getImage("searchm_obj.gif");
+		CREATE_CONVERSION = plugin.getImage("graphics-editor-16x16.gif");
+		REFRESH = plugin.getImage("refresh.gif");
+		SAVE_IMAGE = plugin.getImage("save_edit.gif");
+		SAVE_FILES = plugin.getImage("save_edit.gif");
+	}
 }

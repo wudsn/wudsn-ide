@@ -28,13 +28,12 @@ import com.wudsn.ide.asm.Hardware;
  */
 public final class AssemblerPreferencesApple2CompilersPage extends AssemblerPreferencesCompilersPage {
 
-    /**
-     * Create is public. Used by extension point
-     * "org.eclipse.ui.preferencePages".
-     */
-    public AssemblerPreferencesApple2CompilersPage() {
-	super(Hardware.APPLE2);
+	/**
+	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
+	 */
+	public AssemblerPreferencesApple2CompilersPage() {
+		super(Hardware.APPLE2);
 
-    }
+	}
 
 }

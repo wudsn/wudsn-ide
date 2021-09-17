@@ -62,209 +62,208 @@ import com.wudsn.ide.base.common.StringUtility;
  */
 final class DasmCompilerProcessLogParser extends CompilerProcessLogParser {
 
-    private Pattern pattern;
+	private Pattern pattern;
 
-    private String listLog;
-    private String listLogErrorMessage;
-    private boolean fatalErrorFound;
-    private boolean unresolvedSymbolsFound;
+	private String listLog;
+	private String listLogErrorMessage;
+	private boolean fatalErrorFound;
+	private boolean unresolvedSymbolsFound;
 
-    @Override
-    protected void initialize() {
-	pattern = Pattern.compile(".* (.*): error:");
+	@Override
+	protected void initialize() {
+		pattern = Pattern.compile(".* (.*): error:");
 
-	File listFile = new File(files.outputFolder, files.mainSourceFile.fileNameWithoutExtension + ".lst");
-	if (listFile.exists()) {
-	    try {
-		listLog = FileUtility.readString(listFile.getPath(), new FileInputStream(listFile),
-			FileUtility.MAX_SIZE_UNLIMITED);
-		listLogErrorMessage = null;
-	    } catch (FileNotFoundException ex) {
-		listLog = "";
-		listLogErrorMessage = ex.getMessage();
-	    } catch (CoreException ex) {
-		listLog = "";
-		listLogErrorMessage = ex.getStatus().getMessage();
-	    }
-	} else {
-	    listLog = "";
-	    listLogErrorMessage = "Expected list file '"
-		    + listFile.getPath()
-		    + "' does not exist. Check the compiler preferences and make sure you have set the option '-l${outputFilePathWithoutExtension}.lst'.";
-	}
-	fatalErrorFound = false;
-	unresolvedSymbolsFound = false;
-    }
-
-    @Override
-    protected void findNextMarker() {
-
-	if (listLogErrorMessage != null) {
-	    filePath = mainSourceFilePath;
-	    lineNumber = 0;
-	    severity = IMarker.SEVERITY_ERROR;
-	    message = listLogErrorMessage;
-	    markerAvailable = true;
-	    listLogErrorMessage = null;
-	    return;
-	}
-
-	int index;
-	String line;
-	Matcher matcher = pattern.matcher(listLog);
-
-	if (matcher.find()) {
-	    index = matcher.start();
-	    line = listLog.substring(index);
-	    listLog = listLog.substring(matcher.end());
-	    int numberIndex = line.indexOf(" (");
-
-	    if (numberIndex > 0) {
-
-		filePath = line.substring(0, numberIndex);
-
-		String lineNumberString;
-		int numberEndIndex = line.indexOf(')');
-		if (numberEndIndex > 0) {
-		    lineNumberString = line.substring(numberIndex + 2, numberEndIndex);
-		} else {
-		    lineNumberString = "-1";
-		}
-
-		try {
-		    lineNumber = Integer.parseInt(lineNumberString);
-
-		    int nextIndex = line.indexOf("\n");
-		    if (nextIndex > 0) {
-			message = line.substring(numberEndIndex + 10, nextIndex - 1);
-		    }
-		} catch (NumberFormatException ex) {
-		    lineNumber = -1;
-		    message = ex.getMessage();
-		}
-
-		severity = IMarker.SEVERITY_ERROR;
-		message = message.trim();
-		markerAvailable = true;
-		return;
-	    }
-	} else {
-	    index = outputLog.indexOf("Fatal assembly error: ");
-	    if (index > 0 && !fatalErrorFound) {
-		int nextIndex = outputLog.indexOf("\n", index);
-		if (nextIndex > 0) {
-		    message = outputLog.substring(index, nextIndex - 1);
-		} else {
-		    message = outputLog.substring(index);
-		}
-		fatalErrorFound = true;
-
-		severity = IMarker.SEVERITY_ERROR;
-		message = message.trim();
-		markerAvailable = true;
-		return;
-	    }
-
-	    if (fatalErrorFound) {
-		final String UNRESOLVED = "--- Unresolved Symbol List";
-		index = outputLog.lastIndexOf(UNRESOLVED);
-		if (index > 0) {
-		    unresolvedSymbolsFound = true;
-		    outputLog = outputLog.substring(index + UNRESOLVED.length()).trim();
-		}
-	    }
-	    if (unresolvedSymbolsFound) {
-		index = outputLog.indexOf('\n');
-		if (index > 0) {
-		    line = outputLog.substring(0, index - 1);
-		    if (!line.startsWith("--")) {
-			outputLog = outputLog.substring(index + 1);
-			severity = IMarker.SEVERITY_ERROR;
-			index = line.indexOf(" ");
-			if (index > 0) {
-			    line = line.substring(0, index);
+		File listFile = new File(files.outputFolder, files.mainSourceFile.fileNameWithoutExtension + ".lst");
+		if (listFile.exists()) {
+			try {
+				listLog = FileUtility.readString(listFile.getPath(), new FileInputStream(listFile),
+						FileUtility.MAX_SIZE_UNLIMITED);
+				listLogErrorMessage = null;
+			} catch (FileNotFoundException ex) {
+				listLog = "";
+				listLogErrorMessage = ex.getMessage();
+			} catch (CoreException ex) {
+				listLog = "";
+				listLogErrorMessage = ex.getStatus().getMessage();
 			}
-			message = "Unresolved symbol " + line + ".";
+		} else {
+			listLog = "";
+			listLogErrorMessage = "Expected list file '" + listFile.getPath()
+					+ "' does not exist. Check the compiler preferences and make sure you have set the option '-l${outputFilePathWithoutExtension}.lst'.";
+		}
+		fatalErrorFound = false;
+		unresolvedSymbolsFound = false;
+	}
+
+	@Override
+	protected void findNextMarker() {
+
+		if (listLogErrorMessage != null) {
+			filePath = mainSourceFilePath;
+			lineNumber = 0;
+			severity = IMarker.SEVERITY_ERROR;
+			message = listLogErrorMessage;
 			markerAvailable = true;
+			listLogErrorMessage = null;
 			return;
-		    }
 		}
-	    }
+
+		int index;
+		String line;
+		Matcher matcher = pattern.matcher(listLog);
+
+		if (matcher.find()) {
+			index = matcher.start();
+			line = listLog.substring(index);
+			listLog = listLog.substring(matcher.end());
+			int numberIndex = line.indexOf(" (");
+
+			if (numberIndex > 0) {
+
+				filePath = line.substring(0, numberIndex);
+
+				String lineNumberString;
+				int numberEndIndex = line.indexOf(')');
+				if (numberEndIndex > 0) {
+					lineNumberString = line.substring(numberIndex + 2, numberEndIndex);
+				} else {
+					lineNumberString = "-1";
+				}
+
+				try {
+					lineNumber = Integer.parseInt(lineNumberString);
+
+					int nextIndex = line.indexOf("\n");
+					if (nextIndex > 0) {
+						message = line.substring(numberEndIndex + 10, nextIndex - 1);
+					}
+				} catch (NumberFormatException ex) {
+					lineNumber = -1;
+					message = ex.getMessage();
+				}
+
+				severity = IMarker.SEVERITY_ERROR;
+				message = message.trim();
+				markerAvailable = true;
+				return;
+			}
+		} else {
+			index = outputLog.indexOf("Fatal assembly error: ");
+			if (index > 0 && !fatalErrorFound) {
+				int nextIndex = outputLog.indexOf("\n", index);
+				if (nextIndex > 0) {
+					message = outputLog.substring(index, nextIndex - 1);
+				} else {
+					message = outputLog.substring(index);
+				}
+				fatalErrorFound = true;
+
+				severity = IMarker.SEVERITY_ERROR;
+				message = message.trim();
+				markerAvailable = true;
+				return;
+			}
+
+			if (fatalErrorFound) {
+				final String UNRESOLVED = "--- Unresolved Symbol List";
+				index = outputLog.lastIndexOf(UNRESOLVED);
+				if (index > 0) {
+					unresolvedSymbolsFound = true;
+					outputLog = outputLog.substring(index + UNRESOLVED.length()).trim();
+				}
+			}
+			if (unresolvedSymbolsFound) {
+				index = outputLog.indexOf('\n');
+				if (index > 0) {
+					line = outputLog.substring(0, index - 1);
+					if (!line.startsWith("--")) {
+						outputLog = outputLog.substring(index + 1);
+						severity = IMarker.SEVERITY_ERROR;
+						index = line.indexOf(" ");
+						if (index > 0) {
+							line = line.substring(0, index);
+						}
+						message = "Unresolved symbol " + line + ".";
+						markerAvailable = true;
+						return;
+					}
+				}
+			}
+		}
+
+		return;
 	}
 
-	return;
-    }
+	/**
+	 * Type tokens in labels file:<br/>
+	 * 
+	 * ???? = unknown value<br/>
+	 * str = symbol is a string<br/>
+	 * eqm = symbol is an eqm macro<br/>
+	 * (r) = symbol has been referenced <br/>
+	 * (s) = symbol created with SET or EQM pseudo-op<br/>
+	 */
+	@Override
+	public void addCompilerSymbols(List<CompilerSymbol> compilerSymbols) {
+		final String SYMBOLS = "--- Symbol List (sorted by symbol)";
 
-    /**
-     * Type tokens in labels file:<br/>
-     * 
-     * ???? = unknown value<br/>
-     * str = symbol is a string<br/>
-     * eqm = symbol is an eqm macro<br/>
-     * (r) = symbol has been referenced <br/>
-     * (s) = symbol created with SET or EQM pseudo-op<br/>
-     */
-    @Override
-    public void addCompilerSymbols(List<CompilerSymbol> compilerSymbols) {
-	final String SYMBOLS = "--- Symbol List (sorted by symbol)";
+		String log;
+		int index;
 
-	String log;
-	int index;
+		log = outputLog;
+		index = log.indexOf(SYMBOLS);
+		if (index >= 0) {
+			log = log.substring(index + SYMBOLS.length()).trim();
 
-	log = outputLog;
-	index = log.indexOf(SYMBOLS);
-	if (index >= 0) {
-	    log = log.substring(index + SYMBOLS.length()).trim();
+			index = log.indexOf('\n');
+			while (index > 0) {
+				String line = log.substring(0, index - 1);
+				if (line.startsWith("--- End of Symbol List.")) {
+					break;
+				}
+				StringTokenizer st = new StringTokenizer(line);
+				String name = st.nextToken();
+				String hexValue = "";
+				if (st.hasMoreTokens()) {
+					hexValue = st.nextToken();
+				}
 
-	    index = log.indexOf('\n');
-	    while (index > 0) {
-		String line = log.substring(0, index - 1);
-		if (line.startsWith("--- End of Symbol List.")) {
-		    break;
+				String token = "";
+				int valueType = CompilerSymbol.NUMBER;
+				String stringValue = "";
+				while (st.hasMoreTokens()) {
+					token = st.nextToken();
+					// "str" indicates that the symbol is a string value
+					if (token.equals("str")) {
+						valueType = CompilerSymbol.STRING;
+					}
+
+					// String values are enclosed in double quotes.
+					if (valueType == CompilerSymbol.STRING && token.startsWith("\"") && token.length() >= 2
+							&& token.endsWith("\"")) {
+						stringValue = token.substring(1, token.length() - 1);
+					}
+				}
+
+				switch (valueType) {
+				case CompilerSymbol.NUMBER:
+					// Ignore unnamed symbol with value "0000"
+					if (StringUtility.isSpecified(hexValue)) {
+						compilerSymbols.add(CompilerSymbol.createNumberHexSymbol(name, hexValue));
+					}
+					break;
+				case CompilerSymbol.STRING:
+					compilerSymbols.add(CompilerSymbol.createStringSymbol(name, stringValue));
+					break;
+				default:
+					throw new IllegalStateException("Unsupported value type '" + valueType + "'.");
+				}
+
+				log = log.substring(index).trim();
+				index = log.indexOf('\n');
+
+			}
 		}
-		StringTokenizer st = new StringTokenizer(line);
-		String name = st.nextToken();
-		String hexValue = "";
-		if (st.hasMoreTokens()) {
-		    hexValue = st.nextToken();
-		}
 
-		String token = "";
-		int valueType = CompilerSymbol.NUMBER;
-		String stringValue = "";
-		while (st.hasMoreTokens()) {
-		    token = st.nextToken();
-		    // "str" indicates that the symbol is a string value
-		    if (token.equals("str")) {
-			valueType = CompilerSymbol.STRING;
-		    }
-
-		    // String values are enclosed in double quotes.
-		    if (valueType == CompilerSymbol.STRING && token.startsWith("\"") && token.length() >= 2
-			    && token.endsWith("\"")) {
-			stringValue = token.substring(1, token.length() - 1);
-		    }
-		}
-
-		switch (valueType) {
-		case CompilerSymbol.NUMBER:
-		    // Ignore unnamed symbol with value "0000"
-		    if (StringUtility.isSpecified(hexValue)) {
-			compilerSymbols.add(CompilerSymbol.createNumberHexSymbol(name, hexValue));
-		    }
-		    break;
-		case CompilerSymbol.STRING:
-		    compilerSymbols.add(CompilerSymbol.createStringSymbol(name, stringValue));
-		    break;
-		default:
-		    throw new IllegalStateException("Unsupported value type '" + valueType + "'.");
-		}
-
-		log = log.substring(index).trim();
-		index = log.indexOf('\n');
-
-	    }
 	}
-
-    }
 }

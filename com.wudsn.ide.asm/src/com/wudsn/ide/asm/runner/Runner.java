@@ -31,80 +31,77 @@ import com.wudsn.ide.asm.editor.AssemblerBreakpoint;
  */
 public class Runner {
 
-    private RunnerDefinition definition;
+	private RunnerDefinition definition;
 
-    /**
-     * Creation is protected.
-     */
-    protected Runner() {
+	/**
+	 * Creation is protected.
+	 */
+	protected Runner() {
 
-    }
-
-    /**
-     * Sets the definition of the Runner. Called by {@link RunnerRegistry} only.
-     * 
-     * @param definition
-     *            The definition if the Runner, not <code>null</code>.
-     */
-    final void setDefinition(RunnerDefinition definition) {
-	if (definition == null) {
-	    throw new IllegalArgumentException("Parameter 'type' must not be null.");
 	}
-	this.definition = definition;
-    }
 
-    /**
-     * Gets the definition of the Runner.
-     * 
-     * @return The definition of the Runner, not <code>null</code>.
-     */
-    public final RunnerDefinition getDefinition() {
-	if (definition == null) {
-	    throw new IllegalStateException("Field 'definition' must not be null.");
+	/**
+	 * Sets the definition of the Runner. Called by {@link RunnerRegistry} only.
+	 * 
+	 * @param definition The definition if the Runner, not <code>null</code>.
+	 */
+	final void setDefinition(RunnerDefinition definition) {
+		if (definition == null) {
+			throw new IllegalArgumentException("Parameter 'type' must not be null.");
+		}
+		this.definition = definition;
 	}
-	return definition;
-    }
 
-    /**
-     * Creates the {@link File} object for the breakpoints file.
-     * 
-     * @param files
-     *            The assembler editor file containing the path to the output
-     *            folder and file, not <code>null</code>.
-     * 
-     * @return The file to created (if there are breakpoints) or deleted (if
-     *         there are not), or <code>null</code> to indicate that the runner
-     *         does no support breakpoints.
-     * 
-     * @since 1.6.1
-     */
-    public File createBreakpointsFile(CompilerFiles files) {
-	if (files == null) {
-	    throw new IllegalArgumentException("Parameter 'files' must not be null.");
+	/**
+	 * Gets the definition of the Runner.
+	 * 
+	 * @return The definition of the Runner, not <code>null</code>.
+	 */
+	public final RunnerDefinition getDefinition() {
+		if (definition == null) {
+			throw new IllegalStateException("Field 'definition' must not be null.");
+		}
+		return definition;
 	}
-	return null;
-    }
 
-    /**
-     * Creates the content for the breakpoints file.
-     * 
-     * @param breakpoints
-     *            The array of defined (possibly disabled) breakpoints, may be
-     *            empty, not <code>null</code>.
-     * @param breakpointBuilder
-     *            The sting builder for create the actual file content. @
-     * 
-     * @return The number of active breakpoints or <code>0</code> if no
-     *         breakpoints are active.
-     * @since 1.6.1
-     */
-    public int createBreakpointsFileContent(AssemblerBreakpoint[] breakpoints, StringBuilder breakpointBuilder) {
-	if (breakpoints == null) {
-	    throw new IllegalArgumentException("Parameter 'breakpoints' must not be null.");
+	/**
+	 * Creates the {@link File} object for the breakpoints file.
+	 * 
+	 * @param files The assembler editor file containing the path to the output
+	 *              folder and file, not <code>null</code>.
+	 * 
+	 * @return The file to created (if there are breakpoints) or deleted (if there
+	 *         are not), or <code>null</code> to indicate that the runner does no
+	 *         support breakpoints.
+	 * 
+	 * @since 1.6.1
+	 */
+	public File createBreakpointsFile(CompilerFiles files) {
+		if (files == null) {
+			throw new IllegalArgumentException("Parameter 'files' must not be null.");
+		}
+		return null;
 	}
-	if (breakpointBuilder == null) {
-	    throw new IllegalArgumentException("Parameter 'breakpointBuilder' must not be null.");
+
+	/**
+	 * Creates the content for the breakpoints file.
+	 * 
+	 * @param breakpoints       The array of defined (possibly disabled)
+	 *                          breakpoints, may be empty, not <code>null</code>.
+	 * @param breakpointBuilder The sting builder for create the actual file
+	 *                          content. @
+	 * 
+	 * @return The number of active breakpoints or <code>0</code> if no breakpoints
+	 *         are active.
+	 * @since 1.6.1
+	 */
+	public int createBreakpointsFileContent(AssemblerBreakpoint[] breakpoints, StringBuilder breakpointBuilder) {
+		if (breakpoints == null) {
+			throw new IllegalArgumentException("Parameter 'breakpoints' must not be null.");
+		}
+		if (breakpointBuilder == null) {
+			throw new IllegalArgumentException("Parameter 'breakpointBuilder' must not be null.");
+		}
+		return 0;
 	}
-	return 0;
-    }
 }

@@ -28,17 +28,17 @@ import com.wudsn.ide.base.BasePlugin;
  */
 public abstract class RunnableWithLogging implements Runnable {
 
-    @Override
-    public final void run() {
-	try {
-	    runWithLogging();
+	@Override
+	public final void run() {
+		try {
+			runWithLogging();
 
-	} catch (Throwable th) {
-	    BasePlugin.getInstance().logError("Runnable '{0}' ended with exception.",
-		    new Object[] { getClass().getName() }, th);
+		} catch (Throwable th) {
+			BasePlugin.getInstance().logError("Runnable '{0}' ended with exception.",
+					new Object[] { getClass().getName() }, th);
+		}
 	}
-    }
 
-    protected abstract void runWithLogging();
+	protected abstract void runWithLogging();
 
 }

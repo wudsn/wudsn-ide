@@ -37,66 +37,63 @@ import com.wudsn.ide.asm.preferences.TextAttributeConverter;
  */
 final class AssemblerRuleBasedScanner extends RuleBasedScanner {
 
-    /** Default Token for the text attributes * */
-    private Token defaultToken;
+	/** Default Token for the text attributes * */
+	private Token defaultToken;
 
-    /** Key for preference store * */
-    private String preferencesKey;
+	/** Key for preference store * */
+	private String preferencesKey;
 
-    /**
-     * Creates a new instance. Called by
-     * {@link AssemblerSourceViewerConfiguration}.
-     * 
-     * @param preferencesKey
-     *            The preference key to listen to for text attribute changes,
-     *            not <code>null</code>..
-     */
-    AssemblerRuleBasedScanner(String preferencesKey) {
+	/**
+	 * Creates a new instance. Called by {@link AssemblerSourceViewerConfiguration}.
+	 * 
+	 * @param preferencesKey The preference key to listen to for text attribute
+	 *                       changes, not <code>null</code>..
+	 */
+	AssemblerRuleBasedScanner(String preferencesKey) {
 
-	if (preferencesKey == null) {
-	    throw new IllegalArgumentException("Parameter 'preferencesKey' must not be null.");
+		if (preferencesKey == null) {
+			throw new IllegalArgumentException("Parameter 'preferencesKey' must not be null.");
+		}
+
+		this.preferencesKey = preferencesKey;
+
+		AssemblerPreferences preferences = AssemblerPlugin.getInstance().getPreferences();
+		defaultToken = new Token(preferences.getEditorTextAttribute(preferencesKey));
+
+		super.setDefaultReturnToken(defaultToken);
 	}
 
-	this.preferencesKey = preferencesKey;
-
-	AssemblerPreferences preferences = AssemblerPlugin.getInstance().getPreferences();
-	defaultToken = new Token(preferences.getEditorTextAttribute(preferencesKey));
-
-	super.setDefaultReturnToken(defaultToken);
-    }
-
-    /**
-     * Dispose UI resources.
-     */
-    final void dispose() {
-	TextAttributeConverter.dispose((TextAttribute) defaultToken.getData());
-    }
-
-    /**
-     * Update the token based on the preferences. Called by
-     * {@link AssemblerSourceViewerConfiguration}.
-     * 
-     * @param preferences
-     *            The preferences, not <code>null</code>.
-     * @param changedPropertyNames
-     *            The set of changed property names, not <code>null</code>.
-     * 
-     * @return <code>true</code> If the editor has to be refreshed.
-     */
-    final boolean preferencesChanged(AssemblerPreferences preferences, Set<String> changedPropertyNames) {
-	if (preferences == null) {
-	    throw new IllegalArgumentException("Parameter 'preferences' must not be null.");
+	/**
+	 * Dispose UI resources.
+	 */
+	final void dispose() {
+		TextAttributeConverter.dispose((TextAttribute) defaultToken.getData());
 	}
-	if (changedPropertyNames == null) {
-	    throw new IllegalArgumentException("Parameter 'changedPropertyNames' must not be null.");
-	}
-	boolean refresh = false;
-	if (changedPropertyNames.contains(preferencesKey)) {
-	    TextAttributeConverter.dispose((TextAttribute) defaultToken.getData());
-	    defaultToken.setData(preferences.getEditorTextAttribute(preferencesKey));
-	    refresh = true;
-	}
-	return refresh;
 
-    }
+	/**
+	 * Update the token based on the preferences. Called by
+	 * {@link AssemblerSourceViewerConfiguration}.
+	 * 
+	 * @param preferences          The preferences, not <code>null</code>.
+	 * @param changedPropertyNames The set of changed property names, not
+	 *                             <code>null</code>.
+	 * 
+	 * @return <code>true</code> If the editor has to be refreshed.
+	 */
+	final boolean preferencesChanged(AssemblerPreferences preferences, Set<String> changedPropertyNames) {
+		if (preferences == null) {
+			throw new IllegalArgumentException("Parameter 'preferences' must not be null.");
+		}
+		if (changedPropertyNames == null) {
+			throw new IllegalArgumentException("Parameter 'changedPropertyNames' must not be null.");
+		}
+		boolean refresh = false;
+		if (changedPropertyNames.contains(preferencesKey)) {
+			TextAttributeConverter.dispose((TextAttribute) defaultToken.getData());
+			defaultToken.setData(preferences.getEditorTextAttribute(preferencesKey));
+			refresh = true;
+		}
+		return refresh;
+
+	}
 }

@@ -30,71 +30,71 @@ import com.wudsn.ide.gfx.model.PaletteUtility;
 
 public class LinearBitMapMicroPainterConverter extends LinearBitMapConverter {
 
-    public LinearBitMapMicroPainterConverter() {
+	public LinearBitMapMicroPainterConverter() {
 
-    }
-
-    @Override
-    public boolean canConvertToImage(byte[] bytes) {
-	if (bytes == null) {
-	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
-	}
-	return bytes.length == 7680 || bytes.length == 7684;
-    }
-
-    @Override
-    public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
-	if (data == null) {
-	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
-	}
-	if (bytes == null) {
-	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
-	}
-	PaletteMapper paletteMapper = new Atari8BitPaletteMapper();
-	RGB[] paletteColors;
-	if (bytes.length == 7684) {
-	    paletteColors = new RGB[4];
-	    paletteColors[0] = paletteMapper.getRGB(bytes[7680] & 0xfe);
-	    paletteColors[1] = paletteMapper.getRGB(bytes[7681] & 0xfe);
-	    paletteColors[2] = paletteMapper.getRGB(bytes[7682] & 0xfe);
-	    paletteColors[3] = paletteMapper.getRGB(bytes[7683] & 0xfe);
-	} else {
-	    paletteColors = PaletteUtility.getPaletteColors(PaletteType.ATARI_DEFAULT, Palette.MULTI_1, null);
 	}
 
-	setImageSizeAndPalette(data, 40, 192, Palette.MULTI_MANUAL, paletteColors);
-    }
-
-    @Override
-    public void convertToImageDataSize(FilesConverterData data) {
-	data.setImageDataWidth(data.getParameters().getColumns() * 4);
-	data.setImageDataHeight(data.getParameters().getRows());
-    }
-
-    @Override
-    public boolean convertToImageData(FilesConverterData data) {
-	if (data == null) {
-	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
-	}
-
-	int offset = 0;
-	int xpixels = 4;
-
-	for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
-	    for (int x1 = 0; x1 < data.getParameters().getColumns(); x1++) {
-		int b = data.getSourceFileByte(BIT_MAP_FILE, offset++);
-		if (b < 0) {
-		    return true;
+	@Override
+	public boolean canConvertToImage(byte[] bytes) {
+		if (bytes == null) {
+			throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
 		}
-		for (int x2 = 0; x2 < 4; x2++) {
-		    int x = x1 * xpixels + x2;
+		return bytes.length == 7680 || bytes.length == 7684;
+	}
 
-		    int color = (b & mask_2bit[x2]) >>> shift_2bit[x2];
-		    data.setPalettePixel(x, y1, color);
+	@Override
+	public void convertToImageSizeAndPalette(FilesConverterData data, byte[] bytes) {
+		if (data == null) {
+			throw new IllegalArgumentException("Parameter 'data' must not be null.");
+		}
+		if (bytes == null) {
+			throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
+		}
+		PaletteMapper paletteMapper = new Atari8BitPaletteMapper();
+		RGB[] paletteColors;
+		if (bytes.length == 7684) {
+			paletteColors = new RGB[4];
+			paletteColors[0] = paletteMapper.getRGB(bytes[7680] & 0xfe);
+			paletteColors[1] = paletteMapper.getRGB(bytes[7681] & 0xfe);
+			paletteColors[2] = paletteMapper.getRGB(bytes[7682] & 0xfe);
+			paletteColors[3] = paletteMapper.getRGB(bytes[7683] & 0xfe);
+		} else {
+			paletteColors = PaletteUtility.getPaletteColors(PaletteType.ATARI_DEFAULT, Palette.MULTI_1, null);
 		}
 
-	    }
+		setImageSizeAndPalette(data, 40, 192, Palette.MULTI_MANUAL, paletteColors);
 	}
-	return true;
-    }
+
+	@Override
+	public void convertToImageDataSize(FilesConverterData data) {
+		data.setImageDataWidth(data.getParameters().getColumns() * 4);
+		data.setImageDataHeight(data.getParameters().getRows());
+	}
+
+	@Override
+	public boolean convertToImageData(FilesConverterData data) {
+		if (data == null) {
+			throw new IllegalArgumentException("Parameter 'data' must not be null.");
+		}
+
+		int offset = 0;
+		int xpixels = 4;
+
+		for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
+			for (int x1 = 0; x1 < data.getParameters().getColumns(); x1++) {
+				int b = data.getSourceFileByte(BIT_MAP_FILE, offset++);
+				if (b < 0) {
+					return true;
+				}
+				for (int x2 = 0; x2 < 4; x2++) {
+					int x = x1 * xpixels + x2;
+
+					int color = (b & mask_2bit[x2]) >>> shift_2bit[x2];
+					data.setPalettePixel(x, y1, color);
+				}
+
+			}
+		}
+		return true;
+	}
 }

@@ -52,192 +52,191 @@ import com.wudsn.ide.base.common.StringUtility;
  * @author Peter Dell
  * 
  */
-public final class AssemblerEditorCompileCommandDelegate implements IActionDelegate2, IWorkbenchWindowPulldownDelegate2 {
+public final class AssemblerEditorCompileCommandDelegate
+		implements IActionDelegate2, IWorkbenchWindowPulldownDelegate2 {
 
-    private IWorkbenchWindow window;
-    private Menu menu;
+	private IWorkbenchWindow window;
+	private Menu menu;
 
-    /**
-     * Private action class.
-     * 
-     * @author Peter Dell
-     */
-    private final class CompileAndRunAction extends Action {
-	private String runnerId;
+	/**
+	 * Private action class.
+	 * 
+	 * @author Peter Dell
+	 */
+	private final class CompileAndRunAction extends Action {
+		private String runnerId;
 
-	public CompileAndRunAction(String runnerId) {
-	    if (runnerId == null) {
-		throw new IllegalArgumentException("Parameter 'runnerId' must not be null.");
-	    }
-	    this.runnerId = runnerId;
+		public CompileAndRunAction(String runnerId) {
+			if (runnerId == null) {
+				throw new IllegalArgumentException("Parameter 'runnerId' must not be null.");
+			}
+			this.runnerId = runnerId;
+		}
+
+		/**
+		 * @see org.eclipse.jface.action.IAction#run()
+		 */
+		@Override
+		public void run() {
+
+		}
+
+		@Override
+		public void runWithEvent(Event event) {
+			compileAndRun(runnerId);
+		}
 	}
 
 	/**
-	 * @see org.eclipse.jface.action.IAction#run()
+	 * Creation is public.
 	 */
-	@Override
-	public void run() {
-
+	public AssemblerEditorCompileCommandDelegate() {
 	}
 
 	@Override
-	public void runWithEvent(Event event) {
-	    compileAndRun(runnerId);
-	}
-    }
-
-    /**
-     * Creation is public.
-     */
-    public AssemblerEditorCompileCommandDelegate() {
-    }
-
-    @Override
-    public void init(IWorkbenchWindow window) {
-	this.window = window;
-    }
-
-    @Override
-    public Menu getMenu(Control parent) {
-
-	AssemblerEditor assemblerEditor = getAssemblerEditor();
-	if (assemblerEditor == null) {
-	    return null;
+	public void init(IWorkbenchWindow window) {
+		this.window = window;
 	}
 
-	AssemblerPlugin assemblerPlugin = assemblerEditor.getPlugin();
-	RunnerRegistry runnerRegistry = assemblerPlugin.getRunnerRegistry();
-	Hardware hardware = assemblerEditor.getHardware();
-	List<RunnerDefinition> runnerDefinitions = runnerRegistry.getDefinitions(hardware);
-	CompilerPreferences compilerPreferences = assemblerEditor.getCompilerPreferences();
+	@Override
+	public Menu getMenu(Control parent) {
 
-	Menu menu = new Menu(parent);
-	setMenu(menu);
-
-	// Collect all runner definition for which the executable path is
-	// maintained correctly.
-	ImageDescriptor imageDescriptor = HardwareUtility.getImageDescriptor(hardware);
-	for (RunnerDefinition runnerDefinition : runnerDefinitions) {
-	    String runnerId = runnerDefinition.getId();
-	    String runnerName = runnerDefinition.getName();
-	    // The system default application does not need an executable path.
-	    if (!runnerId.equals(RunnerId.DEFAULT_APPLICATION)) {
-		if (StringUtility.isEmpty(compilerPreferences.getRunnerExecutablePath(runnerId))) {
-		    continue;
+		AssemblerEditor assemblerEditor = getAssemblerEditor();
+		if (assemblerEditor == null) {
+			return null;
 		}
-	    }
 
-	    Action action = new CompileAndRunAction(runnerId);
-	    action.setActionDefinitionId(AssemblerEditorCompileCommand.COMPILE_AND_RUN_WITH);
-	    action.setImageDescriptor(imageDescriptor);
-	    if (runnerId.equals(compilerPreferences.getRunnerId())) {
-		runnerName = runnerName + " " + Texts.ASSEMBLER_TOOLBAR_RUN_WITH_DEFAULT_LABEL;
-	    }
-	    action.setText(runnerName);
-	    ActionContributionItem item = new ActionContributionItem(action);
-	    item.fill(menu, -1);
+		AssemblerPlugin assemblerPlugin = assemblerEditor.getPlugin();
+		RunnerRegistry runnerRegistry = assemblerPlugin.getRunnerRegistry();
+		Hardware hardware = assemblerEditor.getHardware();
+		List<RunnerDefinition> runnerDefinitions = runnerRegistry.getDefinitions(hardware);
+		CompilerPreferences compilerPreferences = assemblerEditor.getCompilerPreferences();
+
+		Menu menu = new Menu(parent);
+		setMenu(menu);
+
+		// Collect all runner definition for which the executable path is
+		// maintained correctly.
+		ImageDescriptor imageDescriptor = HardwareUtility.getImageDescriptor(hardware);
+		for (RunnerDefinition runnerDefinition : runnerDefinitions) {
+			String runnerId = runnerDefinition.getId();
+			String runnerName = runnerDefinition.getName();
+			// The system default application does not need an executable path.
+			if (!runnerId.equals(RunnerId.DEFAULT_APPLICATION)) {
+				if (StringUtility.isEmpty(compilerPreferences.getRunnerExecutablePath(runnerId))) {
+					continue;
+				}
+			}
+
+			Action action = new CompileAndRunAction(runnerId);
+			action.setActionDefinitionId(AssemblerEditorCompileCommand.COMPILE_AND_RUN_WITH);
+			action.setImageDescriptor(imageDescriptor);
+			if (runnerId.equals(compilerPreferences.getRunnerId())) {
+				runnerName = runnerName + " " + Texts.ASSEMBLER_TOOLBAR_RUN_WITH_DEFAULT_LABEL;
+			}
+			action.setText(runnerName);
+			ActionContributionItem item = new ActionContributionItem(action);
+			item.fill(menu, -1);
+		}
+
+		return menu;
 	}
 
-	return menu;
-    }
-
-    @Override
-    public Menu getMenu(Menu parent) {
-	return null;
-    }
-
-    @Override
-    public void dispose() {
-	setMenu(null);
-    }
-
-    @Override
-    public void init(IAction action) {
-	AssemblerEditor assemblerEditor = getAssemblerEditor();
-	boolean enabled = assemblerEditor != null && assemblerEditor.getCurrentIFile() != null;
-	action.setEnabled(enabled);
-
-	Hardware hardware;
-	if (assemblerEditor != null) {
-	    hardware = assemblerEditor.getHardware();
-
-	} else {
-	    hardware = Hardware.GENERIC;
-	}
-	ImageDescriptor imageDescriptor = HardwareUtility.getImageDescriptor(hardware);
-	action.setImageDescriptor(imageDescriptor);
-    }
-
-    @Override
-    public void run(IAction action) {
-	// Not invoked
-    }
-
-    @Override
-    public void runWithEvent(IAction action, Event event) {
-	try {
-	    compileAndRun(null);
-	} catch (RuntimeException ex) {
-	    AssemblerPlugin.getInstance().showError(window.getShell(), "Error in compileAndRun()", ex);
-	}
-    }
-
-    @Override
-    public void selectionChanged(IAction action, ISelection selection) {
-	init(action);
-	// TODO: Check disabling of action based on current selection.
-	// System.out.println(action.getActionDefinitionId());
-	// System.out.println(selection);
-    }
-
-    /**
-     * Helper method to correctly retain and dispose menu instances.
-     * 
-     * @param menu
-     *            The menu to be retained or <code>null</code>.
-     */
-    private void setMenu(Menu menu) {
-	if (this.menu != null) {
-	    this.menu.dispose();
-	}
-	this.menu = menu;
-    }
-
-    /**
-     * Gets the currently active assembler editor.
-     * 
-     * @return The currently active assembler editor or <code>null</code>.
-     */
-    private AssemblerEditor getAssemblerEditor() {
-	if (window == null) {
-	    return null;
+	@Override
+	public Menu getMenu(Menu parent) {
+		return null;
 	}
 
-	IWorkbenchPage workbenchPage = window.getActivePage();
-	if (workbenchPage == null) {
-	    return null;
+	@Override
+	public void dispose() {
+		setMenu(null);
 	}
-	IEditorPart editorPart = workbenchPage.getActiveEditor();
-	if (!(editorPart instanceof AssemblerEditor)) {
-	    return null;
-	}
-	return (AssemblerEditor) editorPart;
-    }
 
-    /**
-     * Call the compiler and run command with the specified runner id.
-     * 
-     * @param runnerId
-     *            The runner id or <code>null</code> to use the default.
-     */
-    final void compileAndRun(String runnerId) {
-	AssemblerEditor assemblerEditor = getAssemblerEditor();
-	if (assemblerEditor == null) {
-	    throw new IllegalStateException("Action is active but no assembler editor is active.");
+	@Override
+	public void init(IAction action) {
+		AssemblerEditor assemblerEditor = getAssemblerEditor();
+		boolean enabled = assemblerEditor != null && assemblerEditor.getCurrentIFile() != null;
+		action.setEnabled(enabled);
+
+		Hardware hardware;
+		if (assemblerEditor != null) {
+			hardware = assemblerEditor.getHardware();
+
+		} else {
+			hardware = Hardware.GENERIC;
+		}
+		ImageDescriptor imageDescriptor = HardwareUtility.getImageDescriptor(hardware);
+		action.setImageDescriptor(imageDescriptor);
 	}
-	AssemblerEditorCompileCommand.execute(assemblerEditor, AssemblerEditorFilesLogic
-		.createInstance(assemblerEditor).createCompilerFiles(), AssemblerEditorCompileCommand.COMPILE_AND_RUN,
-		runnerId);
-    }
+
+	@Override
+	public void run(IAction action) {
+		// Not invoked
+	}
+
+	@Override
+	public void runWithEvent(IAction action, Event event) {
+		try {
+			compileAndRun(null);
+		} catch (RuntimeException ex) {
+			AssemblerPlugin.getInstance().showError(window.getShell(), "Error in compileAndRun()", ex);
+		}
+	}
+
+	@Override
+	public void selectionChanged(IAction action, ISelection selection) {
+		init(action);
+		// TODO: Check disabling of action based on current selection.
+		// System.out.println(action.getActionDefinitionId());
+		// System.out.println(selection);
+	}
+
+	/**
+	 * Helper method to correctly retain and dispose menu instances.
+	 * 
+	 * @param menu The menu to be retained or <code>null</code>.
+	 */
+	private void setMenu(Menu menu) {
+		if (this.menu != null) {
+			this.menu.dispose();
+		}
+		this.menu = menu;
+	}
+
+	/**
+	 * Gets the currently active assembler editor.
+	 * 
+	 * @return The currently active assembler editor or <code>null</code>.
+	 */
+	private AssemblerEditor getAssemblerEditor() {
+		if (window == null) {
+			return null;
+		}
+
+		IWorkbenchPage workbenchPage = window.getActivePage();
+		if (workbenchPage == null) {
+			return null;
+		}
+		IEditorPart editorPart = workbenchPage.getActiveEditor();
+		if (!(editorPart instanceof AssemblerEditor)) {
+			return null;
+		}
+		return (AssemblerEditor) editorPart;
+	}
+
+	/**
+	 * Call the compiler and run command with the specified runner id.
+	 * 
+	 * @param runnerId The runner id or <code>null</code> to use the default.
+	 */
+	final void compileAndRun(String runnerId) {
+		AssemblerEditor assemblerEditor = getAssemblerEditor();
+		if (assemblerEditor == null) {
+			throw new IllegalStateException("Action is active but no assembler editor is active.");
+		}
+		AssemblerEditorCompileCommand.execute(assemblerEditor,
+				AssemblerEditorFilesLogic.createInstance(assemblerEditor).createCompilerFiles(),
+				AssemblerEditorCompileCommand.COMPILE_AND_RUN, runnerId);
+	}
 
 }

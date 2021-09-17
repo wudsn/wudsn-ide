@@ -24,8 +24,8 @@ package com.wudsn.ide.base.common;
  */
 public final class ByteArrayUtility {
 
-    public static final int KB = 1024;
-    public static final int MB = KB * KB;
+	public static final int KB = 1024;
+	public static final int MB = KB * KB;
 
-    public static final int MASK_FF = 0xff;
+	public static final int MASK_FF = 0xff;
 }

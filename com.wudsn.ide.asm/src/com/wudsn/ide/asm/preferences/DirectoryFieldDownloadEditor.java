@@ -41,93 +41,91 @@ import com.wudsn.ide.base.common.TextUtility;
  */
 final class DirectoryFieldDownloadEditor extends DirectoryFieldEditor {
 
-    Link link;
+	Link link;
 
-    public DirectoryFieldDownloadEditor(String name, String labelText, Composite parent) {
-	super(name, labelText, parent);
-    }
+	public DirectoryFieldDownloadEditor(String name, String labelText, Composite parent) {
+		super(name, labelText, parent);
+	}
 
-    /**
-     * Override the method declared in {@link FieldEditor}.
-     */
-    @Override
-    public int getNumberOfControls() {
-	return 4;
-    }
+	/**
+	 * Override the method declared in {@link FieldEditor}.
+	 */
+	@Override
+	public int getNumberOfControls() {
+		return 4;
+	}
 
-    @Override
-    protected void doFillIntoGrid(Composite parent, int numColumns) {
-	super.doFillIntoGrid(parent, numColumns - 1);
-	if (link == null) {
-	    link = new Link(parent, SWT.NONE);
-	    link.addDisposeListener(new DisposeListener() {
-		@Override
-		public void widgetDisposed(DisposeEvent event) {
-		    link = null;
+	@Override
+	protected void doFillIntoGrid(Composite parent, int numColumns) {
+		super.doFillIntoGrid(parent, numColumns - 1);
+		if (link == null) {
+			link = new Link(parent, SWT.NONE);
+			link.addDisposeListener(new DisposeListener() {
+				@Override
+				public void widgetDisposed(DisposeEvent event) {
+					link = null;
+				}
+			});
+
+			link.addListener(SWT.Selection, new Listener() {
+				@Override
+				public void handleEvent(Event event) {
+					String url = event.text;
+					if (url != null && url.length() > 0) {
+						Program.launch(event.text);
+					}
+				}
+			});
+
 		}
-	    });
+		GridData gd = new GridData();
+		gd.horizontalAlignment = GridData.FILL;
+		link.setLayoutData(gd);
+	}
 
-	    link.addListener(SWT.Selection, new Listener() {
-		@Override
-		public void handleEvent(Event event) {
-		    String url = event.text;
-		    if (url != null && url.length() > 0) {
-			Program.launch(event.text);
-		    }
+	@Override
+	protected void adjustForNumColumns(int numColumns) {
+		((GridData) getTextControl().getLayoutData()).horizontalSpan = numColumns - 3;
+	}
+
+	/**
+	 * Do not reset path to default.
+	 */
+	@Override
+	public void loadDefault() {
+	}
+
+	/**
+	 * Do not check input as file to allow selecting ".app" directories on MacOS X.
+	 * 
+	 * @return <code>true</code> in all cases.
+	 */
+	@Override
+	protected boolean checkState() {
+		return true;
+
+	}
+
+	/**
+	 * Sets the URL for the link label.
+	 * 
+	 * @param url The URL, may be empty, not <code>null</code>.
+	 */
+	public void setLinkURL(String url) {
+		if (link == null) {
+			throw new IllegalArgumentException("Parameter 'link' must not be null.");
 		}
-	    });
+		if (url == null) {
+			throw new IllegalArgumentException("Parameter 'url' must not be null.");
+		}
 
+		if (url.length() > 0) {
+			link.setText("<a href=\"" + url + "\">" + Texts.PREFERENCES_DOWNLOAD_LINK + "</a>");
+			link.setToolTipText(TextUtility.format(Texts.PREFERENCES_DOWNLOAD_LINK_TOOL_TIP, url));
+
+		} else {
+			link.setText("");
+			link.setToolTipText("");
+		}
 	}
-	GridData gd = new GridData();
-	gd.horizontalAlignment = GridData.FILL;
-	link.setLayoutData(gd);
-    }
-
-    @Override
-    protected void adjustForNumColumns(int numColumns) {
-	((GridData) getTextControl().getLayoutData()).horizontalSpan = numColumns - 3;
-    }
-
-    /**
-     * Do not reset path to default.
-     */
-    @Override
-    public void loadDefault() {
-    }
-
-    /**
-     * Do not check input as file to allow selecting ".app" directories on MacOS
-     * X.
-     * 
-     * @return <code>true</code> in all cases.
-     */
-    @Override
-    protected boolean checkState() {
-	return true;
-
-    }
-
-    /**
-     * Sets the URL for the link label.
-     * 
-     * @param url
-     *            The URL, may be empty, not <code>null</code>.
-     */
-    public void setLinkURL(String url) {
-	if (link == null) {
-	    throw new IllegalArgumentException("Parameter 'link' must not be null.");
-	}
-	if (url == null) {
-	    throw new IllegalArgumentException("Parameter 'url' must not be null.");
-	}
-
-	if (url.length() > 0) {
-	    link.setText("<a href=\"" + url + "\">" + Texts.PREFERENCES_DOWNLOAD_LINK + "</a>");
-	    link.setToolTipText(TextUtility.format(Texts.PREFERENCES_DOWNLOAD_LINK_TOOL_TIP, url));
-
-	} else {
-	    link.setText("");
-	    link.setToolTipText("");
-	}
-    }
 }

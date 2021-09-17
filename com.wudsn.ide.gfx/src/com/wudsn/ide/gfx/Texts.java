@@ -30,81 +30,81 @@ import com.wudsn.ide.gfx.editor.GraphicsConversionEditor;
  */
 public final class Texts extends NLS {
 
-    public static String FILE_SECTION_FIELD_SIZE_LABEL;
-    public static String FILE_SECTION_FIELD_SIZE_NO_DATA;
-    public static String FILE_SECTION_FIELD_OFFSET_LABEL;
+	public static String FILE_SECTION_FIELD_SIZE_LABEL;
+	public static String FILE_SECTION_FIELD_SIZE_NO_DATA;
+	public static String FILE_SECTION_FIELD_OFFSET_LABEL;
 
-    public static String FIND_DEFAULT_FILE_CONVERTER_BUTTON_TOOLTIP;
-    public static String CREATE_CONVERSION_BUTTON_TOOLTIP;
+	public static String FIND_DEFAULT_FILE_CONVERTER_BUTTON_TOOLTIP;
+	public static String CREATE_CONVERSION_BUTTON_TOOLTIP;
 
-    public static String FILES_CONVERTER_DATA_VIEW_TAB;
-    public static String IMAGE_CONVERTER_DATA_VIEW_TAB;
+	public static String FILES_CONVERTER_DATA_VIEW_TAB;
+	public static String IMAGE_CONVERTER_DATA_VIEW_TAB;
 
-    public static String CONVERTER_PARAMETERS_CONVERTER_ID_LABEL;
-    public static String REFRESH_BUTTON_TOOLTIP;
-    public static String SAVE_IMAGE_BUTTON_TOOLTIP;
-    public static String SAVE_FILES_BUTTON_TOOLTIP;
+	public static String CONVERTER_PARAMETERS_CONVERTER_ID_LABEL;
+	public static String REFRESH_BUTTON_TOOLTIP;
+	public static String SAVE_IMAGE_BUTTON_TOOLTIP;
+	public static String SAVE_FILES_BUTTON_TOOLTIP;
 
-    public static String CONVERTER_PARAMETERS_BIT_MAP_FILE_PATH_LABEL;
-    public static String CONVERTER_PARAMETERS_BIT_MAP_FILE_SECTION_LABEL;
-    public static String CONVERTER_PARAMETERS_CHAR_SET_FILE_PATH_LABEL;
-    public static String CONVERTER_PARAMETERS_CHAR_SET_FILE_SECTION_LABEL;
-    public static String CONVERTER_PARAMETERS_CHAR_MAP_FILE_PATH_LABEL;
-    public static String CONVERTER_PARAMETERS_CHAR_MAP_FILE_SECTION_LABEL;
-    public static String CONVERTER_PARAMETERS_COLOR_MAP_FILE_PATH_LABEL;
-    public static String CONVERTER_PARAMETERS_COLOR_MAP_FILE_SECTION_LABEL;
-    public static String CONVERTER_PARAMETERS_IMAGE_FILE_PATH_LABEL;
+	public static String CONVERTER_PARAMETERS_BIT_MAP_FILE_PATH_LABEL;
+	public static String CONVERTER_PARAMETERS_BIT_MAP_FILE_SECTION_LABEL;
+	public static String CONVERTER_PARAMETERS_CHAR_SET_FILE_PATH_LABEL;
+	public static String CONVERTER_PARAMETERS_CHAR_SET_FILE_SECTION_LABEL;
+	public static String CONVERTER_PARAMETERS_CHAR_MAP_FILE_PATH_LABEL;
+	public static String CONVERTER_PARAMETERS_CHAR_MAP_FILE_SECTION_LABEL;
+	public static String CONVERTER_PARAMETERS_COLOR_MAP_FILE_PATH_LABEL;
+	public static String CONVERTER_PARAMETERS_COLOR_MAP_FILE_SECTION_LABEL;
+	public static String CONVERTER_PARAMETERS_IMAGE_FILE_PATH_LABEL;
 
-    // Files to image texts
-    public static String CONVERTER_PARAMETERS_COLUMNS_LABEL;
-    public static String CONVERTER_PARAMETERS_ROWS_LABEL;
+	// Files to image texts
+	public static String CONVERTER_PARAMETERS_COLUMNS_LABEL;
+	public static String CONVERTER_PARAMETERS_ROWS_LABEL;
 
-    public static String CONVERTER_PARAMETERS_SPACING_COLOR_LABEL;
-    public static String CONVERTER_PARAMETERS_SPACING_WIDTH_LABEL;
+	public static String CONVERTER_PARAMETERS_SPACING_COLOR_LABEL;
+	public static String CONVERTER_PARAMETERS_SPACING_WIDTH_LABEL;
 
-    // Image to Files texts
-    public static String CONVERTER_PARAMETERS_USE_DEFAULT_SCRIPT_LABEL;
-    public static String CONVERTER_PARAMETERS_SCRIPT_LABEL;
+	// Image to Files texts
+	public static String CONVERTER_PARAMETERS_USE_DEFAULT_SCRIPT_LABEL;
+	public static String CONVERTER_PARAMETERS_SCRIPT_LABEL;
 
-    public static String CONVERTER_DATA_IMAGE_DATA_WIDTH_LABEL;
-    public static String CONVERTER_DATA_IMAGE_DATA_HEIGHT_LABEL;
+	public static String CONVERTER_DATA_IMAGE_DATA_WIDTH_LABEL;
+	public static String CONVERTER_DATA_IMAGE_DATA_HEIGHT_LABEL;
 
-    public static String CONVERTER_PARAMETERS_IMAGE_ASPECT_LABEL;
+	public static String CONVERTER_PARAMETERS_IMAGE_ASPECT_LABEL;
 
-    public static String CREATE_CONVERSION_DIALOG_TITLE;
-    public static String CREATE_CONVERSION_DIALOG_MESSAGE;
-    public static String SAVE_AS_DIALOG_TITLE;
-    public static String SAVE_AS_DIALOG_MESSAGE;
+	public static String CREATE_CONVERSION_DIALOG_TITLE;
+	public static String CREATE_CONVERSION_DIALOG_MESSAGE;
+	public static String SAVE_AS_DIALOG_TITLE;
+	public static String SAVE_AS_DIALOG_MESSAGE;
 
-    public static String CONVERTER_CONSOLE_TITLE;
+	public static String CONVERTER_CONSOLE_TITLE;
 
-    public static String IMAGE_VIEW_ASPECT_LABEL;
+	public static String IMAGE_VIEW_ASPECT_LABEL;
 
-    public static String IMAGE_PALETTE_VIEW_EDIT_COLOR_ACTION_LABEL;
-    public static String IMAGE_PALETTE_VIEW_EDIT_COLOR_ACTION_TOOLTIP;
-    public static String IMAGE_PALETTE_VIEW_UNUSED_COLORS_ACTION_LABEL;
-    public static String IMAGE_PALETTE_VIEW_UNUSED_COLORS_ACTION_TOOLTIP;
-    public static String IMAGE_PALETTE_VIEW_INFO_NO_IMAGE;
-    public static String IMAGE_PALETTE_VIEW_INFO_INDEXED_PALETTE_IMAGE;
-    public static String IMAGE_PALETTE_VIEW_INFO_DIRECT_PALETTE_IMAGE;
+	public static String IMAGE_PALETTE_VIEW_EDIT_COLOR_ACTION_LABEL;
+	public static String IMAGE_PALETTE_VIEW_EDIT_COLOR_ACTION_TOOLTIP;
+	public static String IMAGE_PALETTE_VIEW_UNUSED_COLORS_ACTION_LABEL;
+	public static String IMAGE_PALETTE_VIEW_UNUSED_COLORS_ACTION_TOOLTIP;
+	public static String IMAGE_PALETTE_VIEW_INFO_NO_IMAGE;
+	public static String IMAGE_PALETTE_VIEW_INFO_INDEXED_PALETTE_IMAGE;
+	public static String IMAGE_PALETTE_VIEW_INFO_DIRECT_PALETTE_IMAGE;
 
-    public static String IMAGE_PALETTE_VIEW_COLUMN_INDEX_TEXT;
-    public static String IMAGE_PALETTE_VIEW_COLUMN_COLOR_HEX_TEXT;
-    public static String IMAGE_PALETTE_VIEW_COLUMN_COLOR_BINARY_TEXT;
-    public static String IMAGE_PALETTE_VIEW_COLUMN_RGB_COLOR_TEXT;
-    public static String IMAGE_PALETTE_VIEW_COLUMN_COLOR_COUNT_TEXT;
-    public static String IMAGE_PALETTE_VIEW_COLUMN_COLOR_COUNT_PERCENT_TEXT;
+	public static String IMAGE_PALETTE_VIEW_COLUMN_INDEX_TEXT;
+	public static String IMAGE_PALETTE_VIEW_COLUMN_COLOR_HEX_TEXT;
+	public static String IMAGE_PALETTE_VIEW_COLUMN_COLOR_BINARY_TEXT;
+	public static String IMAGE_PALETTE_VIEW_COLUMN_RGB_COLOR_TEXT;
+	public static String IMAGE_PALETTE_VIEW_COLUMN_COLOR_COUNT_TEXT;
+	public static String IMAGE_PALETTE_VIEW_COLUMN_COLOR_COUNT_PERCENT_TEXT;
 
-    /**
-     * Messages for {@link GraphicsConversionEditor}.
-     */
-    public static String MESSAGE_S100 = "Source files loaded and converted in {0} ms";
-    public static String MESSAGE_E400;
+	/**
+	 * Messages for {@link GraphicsConversionEditor}.
+	 */
+	public static String MESSAGE_S100 = "Source files loaded and converted in {0} ms";
+	public static String MESSAGE_E400;
 
-    /**
-     * Initializes the constants.
-     */
-    static {
-	NLS.initializeMessages(Texts.class.getName(), Texts.class);
-    }
+	/**
+	 * Initializes the constants.
+	 */
+	static {
+		NLS.initializeMessages(Texts.class.getName(), Texts.class);
+	}
 }

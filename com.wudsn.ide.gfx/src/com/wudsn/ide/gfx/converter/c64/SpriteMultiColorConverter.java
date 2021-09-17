@@ -23,47 +23,47 @@ import com.wudsn.ide.gfx.converter.FilesConverterData;
 
 public class SpriteMultiColorConverter extends SpriteConverter {
 
-    public SpriteMultiColorConverter() {
-    }
-
-    @Override
-    public void convertToImageDataSize(FilesConverterData data) {
-	data.setImageDataWidth(data.getParameters().getColumns() * (3 * 4 + data.getParameters().getSpacingWidth()));
-	data.setImageDataHeight(data.getParameters().getRows() * (21 + data.getParameters().getSpacingWidth()));
-    }
-
-    @Override
-    public boolean convertToImageData(FilesConverterData data) {
-	if (data == null) {
-	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
+	public SpriteMultiColorConverter() {
 	}
 
-	int offset = 0;
-	int xpixels = 3 * 4 + data.getParameters().getSpacingWidth();
-	int ypixels = 21 + data.getParameters().getSpacingWidth();
+	@Override
+	public void convertToImageDataSize(FilesConverterData data) {
+		data.setImageDataWidth(data.getParameters().getColumns() * (3 * 4 + data.getParameters().getSpacingWidth()));
+		data.setImageDataHeight(data.getParameters().getRows() * (21 + data.getParameters().getSpacingWidth()));
+	}
 
-	for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
-	    for (int x1 = 0; x1 < (data.getParameters().getColumns()); x1++) {
-		for (int y2 = 0; y2 < 21; y2++) {
-		    for (int x2 = 0; x2 < 3; x2++) {
-			int b = data.getSourceFileByte(SPRITE_FILE, offset++);
-			if (b < 0) {
-			    return true;
-			}
-
-			int y = y1 * ypixels + y2;
-			for (int x3 = 0; x3 < 4; x3++) {
-			    int x = x1 * xpixels + x2 * 4 + x3;
-
-			    int color = (b & mask_2bit[x3]) >>> shift_2bit[x3];
-			    data.setPalettePixel(x, y, color);
-			}
-		    }
+	@Override
+	public boolean convertToImageData(FilesConverterData data) {
+		if (data == null) {
+			throw new IllegalArgumentException("Parameter 'data' must not be null.");
 		}
-		offset++; // 64th byte
-	    }
+
+		int offset = 0;
+		int xpixels = 3 * 4 + data.getParameters().getSpacingWidth();
+		int ypixels = 21 + data.getParameters().getSpacingWidth();
+
+		for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
+			for (int x1 = 0; x1 < (data.getParameters().getColumns()); x1++) {
+				for (int y2 = 0; y2 < 21; y2++) {
+					for (int x2 = 0; x2 < 3; x2++) {
+						int b = data.getSourceFileByte(SPRITE_FILE, offset++);
+						if (b < 0) {
+							return true;
+						}
+
+						int y = y1 * ypixels + y2;
+						for (int x3 = 0; x3 < 4; x3++) {
+							int x = x1 * xpixels + x2 * 4 + x3;
+
+							int color = (b & mask_2bit[x3]) >>> shift_2bit[x3];
+							data.setPalettePixel(x, y, color);
+						}
+					}
+				}
+				offset++; // 64th byte
+			}
+		}
+		return true;
 	}
-	return true;
-    }
 
 }

@@ -28,9 +28,9 @@ import java.util.Comparator;
  */
 public final class TextEditorSortLinesCaseInsensitiveCommandHandler extends TextEditorSortLinesCommandHandler {
 
-    @Override
-    protected Comparator<String> getComparator() {
-	return String.CASE_INSENSITIVE_ORDER;
-    }
+	@Override
+	protected Comparator<String> getComparator() {
+		return String.CASE_INSENSITIVE_ORDER;
+	}
 
 }

@@ -24,14 +24,14 @@ import com.wudsn.ide.asm.editor.AssemblerEditor;
 
 public final class DasmEditor extends AssemblerEditor {
 
-    /**
-     * Creation is public. Called by the extension "org.eclipse.ui.editors".
-     */
-    public DasmEditor() {
-    }
+	/**
+	 * Creation is public. Called by the extension "org.eclipse.ui.editors".
+	 */
+	public DasmEditor() {
+	}
 
-    @Override
-    public String getCompilerId() {
-	return CompilerId.DASM;
-    }
+	@Override
+	public String getCompilerId() {
+		return CompilerId.DASM;
+	}
 }

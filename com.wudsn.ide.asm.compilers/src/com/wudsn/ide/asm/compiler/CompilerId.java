@@ -26,13 +26,13 @@ package com.wudsn.ide.asm.compiler;
  * @since 1.6.1
  */
 public class CompilerId {
-    public static final String ACME = "acme";
-    public static final String ASM6 = "asm6";
-    public static final String ATASM = "atasm";
-    public static final String DASM = "dasm";
-    public static final String KICKASS = "kickass";
-    public static final String MADS = "mads";
-    public static final String MERLIN32 = "merlin32";
-    public static final String TASS = "tass";
-    public static final String XASM = "xasm";
+	public static final String ACME = "acme";
+	public static final String ASM6 = "asm6";
+	public static final String ATASM = "atasm";
+	public static final String DASM = "dasm";
+	public static final String KICKASS = "kickass";
+	public static final String MADS = "mads";
+	public static final String MERLIN32 = "merlin32";
+	public static final String TASS = "tass";
+	public static final String XASM = "xasm";
 }

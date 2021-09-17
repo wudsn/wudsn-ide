@@ -24,15 +24,15 @@ import com.wudsn.ide.asm.editor.AssemblerEditor;
 
 public final class TassEditor extends AssemblerEditor {
 
-    /**
-     * Creation is public. Called by the extension "org.eclipse.ui.editors".
-     */
-    public TassEditor() {
+	/**
+	 * Creation is public. Called by the extension "org.eclipse.ui.editors".
+	 */
+	public TassEditor() {
 
-    }
+	}
 
-    @Override
-    public String getCompilerId() {
-	return CompilerId.TASS;
-    }
+	@Override
+	public String getCompilerId() {
+		return CompilerId.TASS;
+	}
 }

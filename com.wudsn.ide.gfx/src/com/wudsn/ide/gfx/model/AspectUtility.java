@@ -22,71 +22,69 @@ import com.wudsn.ide.base.common.StringUtility;
 
 public final class AspectUtility {
 
-    /**
-     * Creation is private.
-     */
-    private AspectUtility() {
-    }
-
-    /**
-     * Gets the language independent string representation of an aspect.
-     * 
-     * @param value
-     *            The aspect or <code>null</code.
-     * @return The language independent string representation of the aspect, may
-     *         be empty, not <code>null</code>.
-     */
-    public static String toString(Aspect value) {
-	String result;
-	if (value == null) {
-	    result = "";
-	} else {
-	    result = value.getFactorX() + "x" + value.getFactorY();
-	}
-	return result;
-    }
-
-    /**
-     * Gets the aspect for a language independent string representation.
-     * 
-     * @param value
-     *            The language independent string representation, may be empty,
-     *            not <code>null</code>.
-     * @return The XYFactor or <code>null</code> in case the value was empty.
-     */
-    public static Aspect fromString(String value) {
-	if (value == null) {
-	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
+	/**
+	 * Creation is private.
+	 */
+	private AspectUtility() {
 	}
 
-	Aspect result;
-	int factorX;
-	int factorY;
-
-	if (StringUtility.isEmpty(value)) {
-	    result = null;
-	} else {
-	    int index = value.indexOf('x');
-	    if (index > 0) {
-		String intValue = value.substring(0, index);
-		try {
-		    factorX = Integer.parseInt(intValue);
-		} catch (NumberFormatException ex) {
-		    factorX = -1;
+	/**
+	 * Gets the language independent string representation of an aspect.
+	 * 
+	 * @param value The aspect or <code>null</code.
+	 * &#64;return The language independent string representation of the aspect, may
+	 *         be empty, not <code>null</code>.
+	 */
+	public static String toString(Aspect value) {
+		String result;
+		if (value == null) {
+			result = "";
+		} else {
+			result = value.getFactorX() + "x" + value.getFactorY();
 		}
-		intValue = value.substring(index + 1, value.length());
-		try {
-		    factorY = Integer.parseInt(intValue);
-		} catch (NumberFormatException ex) {
-		    factorY = -1;
-		}
-	    } else {
-		factorX = -1;
-		factorY = -1;
-	    }
-	    result = new Aspect(factorX, factorY);
+		return result;
 	}
-	return result;
-    }
+
+	/**
+	 * Gets the aspect for a language independent string representation.
+	 * 
+	 * @param value The language independent string representation, may be empty,
+	 *              not <code>null</code>.
+	 * @return The XYFactor or <code>null</code> in case the value was empty.
+	 */
+	public static Aspect fromString(String value) {
+		if (value == null) {
+			throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		}
+
+		Aspect result;
+		int factorX;
+		int factorY;
+
+		if (StringUtility.isEmpty(value)) {
+			result = null;
+		} else {
+			int index = value.indexOf('x');
+			if (index > 0) {
+				String intValue = value.substring(0, index);
+				try {
+					factorX = Integer.parseInt(intValue);
+				} catch (NumberFormatException ex) {
+					factorX = -1;
+				}
+				intValue = value.substring(index + 1, value.length());
+				try {
+					factorY = Integer.parseInt(intValue);
+				} catch (NumberFormatException ex) {
+					factorY = -1;
+				}
+			} else {
+				factorX = -1;
+				factorY = -1;
+			}
+			result = new Aspect(factorX, factorY);
+		}
+		return result;
+	}
 
 }

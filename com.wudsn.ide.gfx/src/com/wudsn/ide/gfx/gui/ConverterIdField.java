@@ -36,87 +36,87 @@ import com.wudsn.ide.gfx.model.ConverterDirection;
 
 public final class ConverterIdField extends Field {
 
-    private Label label;
-    private Combo combo;
-    private List<ConverterDefinition> converterDefinitions;
+	private Label label;
+	private Combo combo;
+	private List<ConverterDefinition> converterDefinitions;
 
-    public ConverterIdField(Composite parent, String labelText, ConverterDirection converterDirection) {
-	if (parent == null) {
-	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+	public ConverterIdField(Composite parent, String labelText, ConverterDirection converterDirection) {
+		if (parent == null) {
+			throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+		}
+		if (labelText == null) {
+			throw new IllegalArgumentException("Parameter 'labelText' must not be null.");
+		}
+		if (converterDirection == null) {
+			throw new IllegalArgumentException("Parameter 'converterDirection' must not be null.");
+		}
+		label = new Label(parent, SWT.NONE);
+		label.setText(labelText);
+		combo = new Combo(parent, SWT.DROP_DOWN);
+
+		GraphicsPlugin plugin = GraphicsPlugin.getInstance();
+		ConverterRegistry converterRegistry = plugin.getConverterRegistry();
+		converterDefinitions = converterRegistry.getDefinitions(converterDirection);
+
+		combo.add("");
+		for (ConverterDefinition converterDefinition : converterDefinitions) {
+			combo.add(converterDefinition.getName());
+		}
+		combo.select(0);
+
 	}
-	if (labelText == null) {
-	    throw new IllegalArgumentException("Parameter 'labelText' must not be null.");
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Control getControl() {
+		return combo;
 	}
-	if (converterDirection == null) {
-	    throw new IllegalArgumentException("Parameter 'converterDirection' must not be null.");
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEnabled(boolean enabled) {
+		label.setEnabled(enabled);
+		combo.setEnabled(enabled);
+
 	}
-	label = new Label(parent, SWT.NONE);
-	label.setText(labelText);
-	combo = new Combo(parent, SWT.DROP_DOWN);
 
-	GraphicsPlugin plugin = GraphicsPlugin.getInstance();
-	ConverterRegistry converterRegistry = plugin.getConverterRegistry();
-	converterDefinitions = converterRegistry.getDefinitions(converterDirection);
-
-	combo.add("");
-	for (ConverterDefinition converterDefinition : converterDefinitions) {
-	    combo.add(converterDefinition.getName());
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEditable(boolean editable) {
+		// There is only an SWT.READ_ONLY style but not property
 	}
-	combo.select(0);
 
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Control getControl() {
-	return combo;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setEnabled(boolean enabled) {
-	label.setEnabled(enabled);
-	combo.setEnabled(enabled);
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setEditable(boolean editable) {
-	// There is only an SWT.READ_ONLY style but not property
-    }
-
-    public void setValue(String value) {
-	if (value == null) {
-	    throw new IllegalArgumentException("Parameter 'value' must not be null.");
+	public void setValue(String value) {
+		if (value == null) {
+			throw new IllegalArgumentException("Parameter 'value' must not be null.");
+		}
+		for (int i = 0; i < converterDefinitions.size(); i++) {
+			if (value.equals(converterDefinitions.get(i).getId())) {
+				combo.select(i + 1);
+				return;
+			}
+		}
+		combo.select(0);
 	}
-	for (int i = 0; i < converterDefinitions.size(); i++) {
-	    if (value.equals(converterDefinitions.get(i).getId())) {
-		combo.select(i + 1);
-		return;
-	    }
+
+	public String getValue() {
+		int index;
+		index = combo.getSelectionIndex();
+		if (index == -1 || index == 0) {
+			return "";
+		}
+		String result = converterDefinitions.get(index - 1).getId();
+		return result;
 	}
-	combo.select(0);
-    }
 
-    public String getValue() {
-	int index;
-	index = combo.getSelectionIndex();
-	if (index == -1 || index == 0) {
-	    return "";
+	public void addSelectionListener(SelectionListener selectionListener) {
+		combo.addSelectionListener(selectionListener);
+
 	}
-	String result = converterDefinitions.get(index - 1).getId();
-	return result;
-    }
-
-    public void addSelectionListener(SelectionListener selectionListener) {
-	combo.addSelectionListener(selectionListener);
-
-    }
 }

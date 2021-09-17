@@ -24,48 +24,48 @@ import org.eclipse.core.runtime.Path;
 
 public final class IPathUtility {
 
-    /**
-     * Creation is private.
-     */
-    private IPathUtility() {
-    }
-
-    public static IPath createEmptyPath() {
-	return new Path("");
-    }
-
-    public static IPath makeRelative(IPath filePath, IPath filePathPrefix) {
-	if (filePath == null) {
-	    throw new IllegalArgumentException("Parameter 'filePath' must not be null.");
-	}
-	if (filePathPrefix == null) {
-	    throw new IllegalArgumentException("Parameter 'filePathPrefix' must not be null.");
-	}
-	if (filePath.isAbsolute() && !filePathPrefix.isEmpty()) {
-	    if (filePathPrefix.isPrefixOf(filePath)) {
-		filePath = filePath.removeFirstSegments(filePathPrefix.segmentCount());
-	    }
-	}
-	return filePath;
-    }
-
-    public static IPath makeAbsolute(IPath filePath, IPath filePathPrefix, boolean forcePrefix) {
-	if (filePath == null) {
-	    throw new IllegalArgumentException("Parameter 'filePath' must not be null.");
-	}
-	if (filePathPrefix == null) {
-	    throw new IllegalArgumentException("Parameter 'filePathPrefix' must not be null.");
+	/**
+	 * Creation is private.
+	 */
+	private IPathUtility() {
 	}
 
-	// If the file path is empty, the prefix is omitted by default.
-	// Only if forcePrefix is true, it is added.
-	if (!filePath.isEmpty() || forcePrefix) {
-	    if (!filePath.isAbsolute() && !filePathPrefix.isEmpty()) {
-		if (!filePathPrefix.isPrefixOf(filePath)) {
-		    filePath = filePathPrefix.append(filePath);
+	public static IPath createEmptyPath() {
+		return new Path("");
+	}
+
+	public static IPath makeRelative(IPath filePath, IPath filePathPrefix) {
+		if (filePath == null) {
+			throw new IllegalArgumentException("Parameter 'filePath' must not be null.");
 		}
-	    }
+		if (filePathPrefix == null) {
+			throw new IllegalArgumentException("Parameter 'filePathPrefix' must not be null.");
+		}
+		if (filePath.isAbsolute() && !filePathPrefix.isEmpty()) {
+			if (filePathPrefix.isPrefixOf(filePath)) {
+				filePath = filePath.removeFirstSegments(filePathPrefix.segmentCount());
+			}
+		}
+		return filePath;
 	}
-	return filePath;
-    }
+
+	public static IPath makeAbsolute(IPath filePath, IPath filePathPrefix, boolean forcePrefix) {
+		if (filePath == null) {
+			throw new IllegalArgumentException("Parameter 'filePath' must not be null.");
+		}
+		if (filePathPrefix == null) {
+			throw new IllegalArgumentException("Parameter 'filePathPrefix' must not be null.");
+		}
+
+		// If the file path is empty, the prefix is omitted by default.
+		// Only if forcePrefix is true, it is added.
+		if (!filePath.isEmpty() || forcePrefix) {
+			if (!filePath.isAbsolute() && !filePathPrefix.isEmpty()) {
+				if (!filePathPrefix.isPrefixOf(filePath)) {
+					filePath = filePathPrefix.append(filePath);
+				}
+			}
+		}
+		return filePath;
+	}
 }

@@ -37,94 +37,89 @@ import org.eclipse.swt.widgets.Label;
  */
 public final class CheckBoxField extends Field {
 
-    private Button button;
-    private List<Action> selectionActions;
+	private Button button;
+	private List<Action> selectionActions;
 
-    /**
-     * Creates a check box field.
-     * 
-     * @param parent
-     *            The parent composite, not <code>null</code>.
-     * @param labelText
-     *            The label text, not <code>null</code>.
-     * @param style
-     *            The SWT style.
-     */
-    public CheckBoxField(Composite parent, String labelText, int style) {
-	if (parent == null) {
-	    throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+	/**
+	 * Creates a check box field.
+	 * 
+	 * @param parent    The parent composite, not <code>null</code>.
+	 * @param labelText The label text, not <code>null</code>.
+	 * @param style     The SWT style.
+	 */
+	public CheckBoxField(Composite parent, String labelText, int style) {
+		if (parent == null) {
+			throw new IllegalArgumentException("Parameter 'parent' must not be null.");
+		}
+		if (labelText == null) {
+			throw new IllegalArgumentException("Parameter 'labelText' must not be null.");
+		}
+
+		label = new Label(parent, SWT.NONE);
+		label.setText(labelText);
+		button = new Button(parent, SWT.CHECK | style);
+		selectionActions = new ArrayList<Action>(1);
 	}
-	if (labelText == null) {
-	    throw new IllegalArgumentException("Parameter 'labelText' must not be null.");
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Control getControl() {
+		return button;
 	}
 
-	label = new Label(parent, SWT.NONE);
-	label.setText(labelText);
-	button = new Button(parent, SWT.CHECK | style);
-	selectionActions = new ArrayList<Action>(1);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Control getControl() {
-	return button;
-    }
-
-    public void setVisible(boolean visible) {
-	label.setVisible(visible);
-	button.setVisible(visible);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setEnabled(boolean enabled) {
-	label.setEnabled(enabled);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setEditable(boolean editable) {
-	button.setEnabled(editable);
-    }
-
-    /**
-     * Sets the value.
-     * 
-     * @param value
-     *            The value.
-     */
-    public void setValue(boolean value) {
-	button.setSelection(value);
-    }
-
-    /**
-     * Gets the value.
-     * 
-     * @return The value.
-     */
-    public boolean getValue() {
-
-	return button.getSelection();
-    }
-
-    /**
-     * Adds a selection action which is fire when the field content changes.
-     * 
-     * @param action
-     *            The selection action, not <code>null</code>.
-     */
-    public void addSelectionAction(Action action) {
-	if (action == null) {
-	    throw new IllegalArgumentException("Parameter 'action' must not be null.");
+	public void setVisible(boolean visible) {
+		label.setVisible(visible);
+		button.setVisible(visible);
 	}
-	selectionActions.add(action);
-	button.addSelectionListener(action);
-    }
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEnabled(boolean enabled) {
+		label.setEnabled(enabled);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEditable(boolean editable) {
+		button.setEnabled(editable);
+	}
+
+	/**
+	 * Sets the value.
+	 * 
+	 * @param value The value.
+	 */
+	public void setValue(boolean value) {
+		button.setSelection(value);
+	}
+
+	/**
+	 * Gets the value.
+	 * 
+	 * @return The value.
+	 */
+	public boolean getValue() {
+
+		return button.getSelection();
+	}
+
+	/**
+	 * Adds a selection action which is fire when the field content changes.
+	 * 
+	 * @param action The selection action, not <code>null</code>.
+	 */
+	public void addSelectionAction(Action action) {
+		if (action == null) {
+			throw new IllegalArgumentException("Parameter 'action' must not be null.");
+		}
+		selectionActions.add(action);
+		button.addSelectionListener(action);
+	}
 
 }

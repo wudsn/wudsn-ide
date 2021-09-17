@@ -30,73 +30,69 @@ import org.eclipse.core.runtime.CoreException;
  */
 public final class EmptyPlayer extends SoundPlayer {
 
-    /**
-     * Creation is public.
-     * 
-     * @param fileName
-     *            The file name of the file which could not be loaded.
-     */
-    public EmptyPlayer(String fileName) {
-	if (fileName == null) {
-	    throw new IllegalArgumentException("Parameter 'fileName' must not be null.");
-	}
-	info.title = fileName;
-    }
-
-    /**
-     * Loads a file from an input stream.
-     * 
-     * @param fileName
-     *            The file name including the file extensions, may be empty, not
-     *            <code>null</code>.
-     * @param inputStream
-     *            The input stream to read the file, not <code>null</code>.
-     * @throws CoreException
-     *             If and error occurs
-     */
-    @Override
-    public synchronized void load(String fileName, InputStream inputStream) throws CoreException {
-	if (fileName == null) {
-	    throw new IllegalArgumentException("Parameter 'fileName' must not be null.");
-	}
-	if (inputStream == null) {
-	    throw new IllegalArgumentException("Parameter 'inputStream' must not be null.");
+	/**
+	 * Creation is public.
+	 * 
+	 * @param fileName The file name of the file which could not be loaded.
+	 */
+	public EmptyPlayer(String fileName) {
+		if (fileName == null) {
+			throw new IllegalArgumentException("Parameter 'fileName' must not be null.");
+		}
+		info.title = fileName;
 	}
 
-	stop();
+	/**
+	 * Loads a file from an input stream.
+	 * 
+	 * @param fileName    The file name including the file extensions, may be empty,
+	 *                    not <code>null</code>.
+	 * @param inputStream The input stream to read the file, not <code>null</code>.
+	 * @throws CoreException If and error occurs
+	 */
+	@Override
+	public synchronized void load(String fileName, InputStream inputStream) throws CoreException {
+		if (fileName == null) {
+			throw new IllegalArgumentException("Parameter 'fileName' must not be null.");
+		}
+		if (inputStream == null) {
+			throw new IllegalArgumentException("Parameter 'inputStream' must not be null.");
+		}
 
-    }
+		stop();
 
-    @Override
-    public byte[] getExportFileContent(FileType fileType, int musicAddress) {
-	return null;
-    }
+	}
 
-    @Override
-    public synchronized void play(int song, SoundPlayerListener listener) throws CoreException {
+	@Override
+	public byte[] getExportFileContent(FileType fileType, int musicAddress) {
+		return null;
+	}
 
-	stop();
+	@Override
+	public synchronized void play(int song, SoundPlayerListener listener) throws CoreException {
 
-    }
+		stop();
 
-    @Override
-    public synchronized int getPosition() {
-	return 0;
-    }
+	}
 
-    @Override
-    public boolean isSeekSupported() {
-	return false;
-    }
+	@Override
+	public synchronized int getPosition() {
+		return 0;
+	}
 
-    @Override
-    public void seekPosition(int position) {
+	@Override
+	public boolean isSeekSupported() {
+		return false;
+	}
 
-    }
+	@Override
+	public void seekPosition(int position) {
 
-    @Override
-    public synchronized int[] getChannelVolumes() {
-	return new int[0];
-    }
+	}
+
+	@Override
+	public synchronized int[] getChannelVolumes() {
+		return new int[0];
+	}
 
 }

@@ -27,47 +27,47 @@ import org.osgi.framework.BundleContext;
  */
 public class DiskPlugin extends AbstractUIPlugin {
 
-    /**
-     * The plugin id.
-     */
-    public static final String PLUGIN_ID = "com.wudsn.ide.dsk"; //$NON-NLS-1$
+	/**
+	 * The plugin id.
+	 */
+	public static final String PLUGIN_ID = "com.wudsn.ide.dsk"; //$NON-NLS-1$
 
-    /**
-     * The shared instance.
-     */
-    private static DiskPlugin plugin;
+	/**
+	 * The shared instance.
+	 */
+	private static DiskPlugin plugin;
 
-    /**
-     * The constructor
-     */
-    public DiskPlugin() {
-    }
+	/**
+	 * The constructor
+	 */
+	public DiskPlugin() {
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void start(BundleContext context) throws Exception {
-	super.start(context);
-	plugin = this;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+		plugin = this;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void stop(BundleContext context) throws Exception {
-	plugin = null;
-	super.stop(context);
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void stop(BundleContext context) throws Exception {
+		plugin = null;
+		super.stop(context);
+	}
 
-    /**
-     * Gets the shared plugin instance.
-     * 
-     * @return The plug-in, not <code>null</code>.
-     */
-    public static DiskPlugin getInstance() {
-	return plugin;
-    }
+	/**
+	 * Gets the shared plugin instance.
+	 * 
+	 * @return The plug-in, not <code>null</code>.
+	 */
+	public static DiskPlugin getInstance() {
+		return plugin;
+	}
 
 }

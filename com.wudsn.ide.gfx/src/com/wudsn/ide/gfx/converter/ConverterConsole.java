@@ -37,63 +37,60 @@ import com.wudsn.ide.gfx.Texts;
  */
 public final class ConverterConsole {
 
-    private IConsoleManager consoleManager;
-    public MessageConsole console;
+	private IConsoleManager consoleManager;
+	public MessageConsole console;
 
-    private MessageConsoleStream messageStream;
-    private PrintStream printStream;
+	private MessageConsoleStream messageStream;
+	private PrintStream printStream;
 
-    /**
-     * Create a new console-window.
-     * 
-     */
-    public ConverterConsole() {
-	consoleManager = ConsolePlugin.getDefault().getConsoleManager();
-	console = new MessageConsole(Texts.CONVERTER_CONSOLE_TITLE, null);
-	consoleManager.addConsoles(new IConsole[] { console });
+	/**
+	 * Create a new console-window.
+	 * 
+	 */
+	public ConverterConsole() {
+		consoleManager = ConsolePlugin.getDefault().getConsoleManager();
+		console = new MessageConsole(Texts.CONVERTER_CONSOLE_TITLE, null);
+		consoleManager.addConsoles(new IConsole[] { console });
 
-	messageStream = console.newMessageStream();
-	messageStream.setActivateOnWrite(false);
-	messageStream.print("");
-	printStream = new PrintStream(messageStream);
-    }
-
-    /**
-     * Brings this console view instance to front in the console view editor
-     * part.
-     * 
-     * @param consoleView
-     *            The console view editor part, not <code>null</code>.
-     */
-
-    public void display(IConsoleView consoleView) {
-	if (consoleView == null) {
-	    throw new IllegalArgumentException("Parameter 'consoleView' must not be null.");
+		messageStream = console.newMessageStream();
+		messageStream.setActivateOnWrite(false);
+		messageStream.print("");
+		printStream = new PrintStream(messageStream);
 	}
-	consoleView.display(console);
 
-    }
+	/**
+	 * Brings this console view instance to front in the console view editor part.
+	 * 
+	 * @param consoleView The console view editor part, not <code>null</code>.
+	 */
 
-    /**
-     * Add a line to console.
-     * 
-     * @param message
-     *            The message to print, not <code>null</code>.
-     */
-    public void println(String message) {
-	if (message == null) {
-	    throw new IllegalArgumentException("Parameter 'message' must not be null.");
+	public void display(IConsoleView consoleView) {
+		if (consoleView == null) {
+			throw new IllegalArgumentException("Parameter 'consoleView' must not be null.");
+		}
+		consoleView.display(console);
+
 	}
-	messageStream.println(message);
-    }
 
-    /**
-     * Gets a print messageStream to write to this console.
-     * 
-     * @return The print messageStream, not <code>null</code>.
-     */
-    public PrintStream getPrintStream() {
-	return printStream;
-    }
+	/**
+	 * Add a line to console.
+	 * 
+	 * @param message The message to print, not <code>null</code>.
+	 */
+	public void println(String message) {
+		if (message == null) {
+			throw new IllegalArgumentException("Parameter 'message' must not be null.");
+		}
+		messageStream.println(message);
+	}
+
+	/**
+	 * Gets a print messageStream to write to this console.
+	 * 
+	 * @return The print messageStream, not <code>null</code>.
+	 */
+	public PrintStream getPrintStream() {
+		return printStream;
+	}
 
 }

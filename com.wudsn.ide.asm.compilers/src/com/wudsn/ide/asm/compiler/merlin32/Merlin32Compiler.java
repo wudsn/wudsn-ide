@@ -30,21 +30,21 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 public final class Merlin32Compiler extends Compiler {
 
-    /**
-     * Creates a new instance.
-     */
-    public Merlin32Compiler() {
-    }
+	/**
+	 * Creates a new instance.
+	 */
+	public Merlin32Compiler() {
+	}
 
-    @Override
-    public CompilerSourceParser createSourceParser() {
-	return new Merlin32CompilerSourceParser();
-    }
+	@Override
+	public CompilerSourceParser createSourceParser() {
+		return new Merlin32CompilerSourceParser();
+	}
 
-    @Override
-    public final CompilerProcessLogParser createLogParser() {
+	@Override
+	public final CompilerProcessLogParser createLogParser() {
 
-	return new Merlin32CompilerProcessLogParser();
-    }
+		return new Merlin32CompilerProcessLogParser();
+	}
 
 }

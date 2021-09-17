@@ -28,67 +28,66 @@ import org.eclipse.jface.text.TextAttribute;
  */
 final class TextAttributeListItem {
 
-    /** Display name */
-    private String displayName;
+	/** Display name */
+	private String displayName;
 
-    /** Color preference key */
-    private String preferencesKey;
+	/** Color preference key */
+	private String preferencesKey;
 
-    /** Text attribute */
-    private TextAttribute textAttribute;
+	/** Text attribute */
+	private TextAttribute textAttribute;
 
-    TextAttributeListItem(String displayName, String preferencesKey) {
-	if (displayName == null) {
-	    throw new IllegalArgumentException("Parameter 'displayName' must not be null.");
+	TextAttributeListItem(String displayName, String preferencesKey) {
+		if (displayName == null) {
+			throw new IllegalArgumentException("Parameter 'displayName' must not be null.");
+		}
+		if (preferencesKey == null) {
+			throw new IllegalArgumentException("Parameter 'preferencesKey' must not be null.");
+		}
+		this.displayName = displayName;
+		this.preferencesKey = preferencesKey;
 	}
-	if (preferencesKey == null) {
-	    throw new IllegalArgumentException("Parameter 'preferencesKey' must not be null.");
+
+	/**
+	 * Gets the preferences key.
+	 * 
+	 * @return The preferences key, not empty and not <code>null</code>.
+	 */
+	public String getPreferencesKey() {
+		return preferencesKey;
 	}
-	this.displayName = displayName;
-	this.preferencesKey = preferencesKey;
-    }
 
-    /**
-     * Gets the preferences key.
-     * 
-     * @return The preferences key, not empty and not <code>null</code>.
-     */
-    public String getPreferencesKey() {
-	return preferencesKey;
-    }
-
-    /**
-     * Gets the display name.
-     * 
-     * @return The display name, not empty and not <code>null</code>.
-     */
-    public String getDisplayName() {
-	return displayName;
-    }
-
-    /**
-     * Sets the text attribute.
-     * 
-     * @param textAttribute
-     *            The text attribute, not <code>null</code>.
-     * 
-     */
-    public void setTextAttribute(TextAttribute textAttribute) {
-	if (textAttribute == null) {
-	    throw new IllegalArgumentException("Parameter 'textAttribute' must not be null.");
+	/**
+	 * Gets the display name.
+	 * 
+	 * @return The display name, not empty and not <code>null</code>.
+	 */
+	public String getDisplayName() {
+		return displayName;
 	}
-	this.textAttribute = textAttribute;
-    }
 
-    /**
-     * Gets the text attribute.
-     * 
-     * @return The text attribute, not <code>null</code>.
-     */
-    public TextAttribute getTextAttribute() {
-	if (textAttribute == null) {
-	    throw new IllegalStateException("Field 'textAttribute' must not be null.");
+	/**
+	 * Sets the text attribute.
+	 * 
+	 * @param textAttribute The text attribute, not <code>null</code>.
+	 * 
+	 */
+	public void setTextAttribute(TextAttribute textAttribute) {
+		if (textAttribute == null) {
+			throw new IllegalArgumentException("Parameter 'textAttribute' must not be null.");
+		}
+		this.textAttribute = textAttribute;
 	}
-	return textAttribute;
-    }
+
+	/**
+	 * Gets the text attribute.
+	 * 
+	 * @return The text attribute, not <code>null</code>.
+	 */
+	public TextAttribute getTextAttribute() {
+		if (textAttribute == null) {
+			throw new IllegalStateException("Field 'textAttribute' must not be null.");
+		}
+		return textAttribute;
+	}
 }

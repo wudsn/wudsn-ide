@@ -20,5 +20,5 @@
 package com.wudsn.ide.gfx.model;
 
 public enum ConverterDirection {
-    FILES_TO_IMAGE, IMAGE_TO_FILES
+	FILES_TO_IMAGE, IMAGE_TO_FILES
 }

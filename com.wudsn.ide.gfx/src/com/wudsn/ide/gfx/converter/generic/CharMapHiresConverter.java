@@ -23,49 +23,49 @@ import com.wudsn.ide.gfx.converter.FilesConverterData;
 
 public class CharMapHiresConverter extends CharMapConverter {
 
-    public CharMapHiresConverter() {
+	public CharMapHiresConverter() {
 
-    }
-
-    @Override
-    public void convertToImageDataSize(FilesConverterData data) {
-	data.setImageDataWidth(data.getParameters().getColumns() * (8 + data.getParameters().getSpacingWidth()));
-	data.setImageDataHeight(data.getParameters().getRows() * (8 + data.getParameters().getSpacingWidth()));
-    }
-
-    @Override
-    public boolean convertToImageData(FilesConverterData data) {
-	if (data == null) {
-	    throw new IllegalArgumentException("Parameter 'data' must not be null.");
 	}
-	int offset = 0;
-	int xpixels = 8 + data.getParameters().getSpacingWidth();
-	int ypixels = 8 + data.getParameters().getSpacingWidth();
 
-	for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
-	    for (int x1 = 0; x1 < data.getParameters().getColumns(); x1++) {
-		int c = data.getSourceFileByte(CHAR_MAP_FILE, offset++) & 127;
-		if (c < 0) {
-		    return true;
-		}
-		int charset_offset = c * 8;
-		for (int y2 = 0; y2 < 8; y2++) {
-		    int b = data.getSourceFileByte(CHAR_SET_FILE, charset_offset++);
-
-		    if (b < 0) {
-			return true;
-		    }
-		    int y = y1 * ypixels + y2;
-		    for (int x2 = 0; x2 < 8; x2++) {
-			int x = x1 * xpixels + x2;
-
-			int color = (b & mask_1bit[x2]) >>> shift_1bit[x2];
-			data.setPalettePixel(x, y, color);
-		    }
-		}
-	    }
+	@Override
+	public void convertToImageDataSize(FilesConverterData data) {
+		data.setImageDataWidth(data.getParameters().getColumns() * (8 + data.getParameters().getSpacingWidth()));
+		data.setImageDataHeight(data.getParameters().getRows() * (8 + data.getParameters().getSpacingWidth()));
 	}
-	return false;
 
-    }
+	@Override
+	public boolean convertToImageData(FilesConverterData data) {
+		if (data == null) {
+			throw new IllegalArgumentException("Parameter 'data' must not be null.");
+		}
+		int offset = 0;
+		int xpixels = 8 + data.getParameters().getSpacingWidth();
+		int ypixels = 8 + data.getParameters().getSpacingWidth();
+
+		for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
+			for (int x1 = 0; x1 < data.getParameters().getColumns(); x1++) {
+				int c = data.getSourceFileByte(CHAR_MAP_FILE, offset++) & 127;
+				if (c < 0) {
+					return true;
+				}
+				int charset_offset = c * 8;
+				for (int y2 = 0; y2 < 8; y2++) {
+					int b = data.getSourceFileByte(CHAR_SET_FILE, charset_offset++);
+
+					if (b < 0) {
+						return true;
+					}
+					int y = y1 * ypixels + y2;
+					for (int x2 = 0; x2 < 8; x2++) {
+						int x = x1 * xpixels + x2;
+
+						int color = (b & mask_1bit[x2]) >>> shift_1bit[x2];
+						data.setPalettePixel(x, y, color);
+					}
+				}
+			}
+		}
+		return false;
+
+	}
 }

@@ -43,75 +43,75 @@ import com.wudsn.ide.asm.compiler.CompilerSymbol;
  */
 final class KickAssCompilerProcessLogParser extends CompilerProcessLogParser {
 
-    private BufferedReader bufferedReader;
+	private BufferedReader bufferedReader;
 
-    @Override
-    protected void initialize() {
-	bufferedReader = new BufferedReader(new StringReader(outputLog));
-    }
-
-    @Override
-    protected void findNextMarker() {
-
-	String line;
-	line = "";
-
-	while (line != null && !markerAvailable) {
-	    try {
-		line = bufferedReader.readLine();
-	    } catch (IOException ex) {
-		throw new RuntimeException("Cannot read line", ex);
-	    }
-	    if (line != null) {
-		String pattern;
-		int index;
-		pattern = "Error: ";
-		severity = IMarker.SEVERITY_ERROR;
-		index = line.indexOf(pattern);
-		if (index < 0) {
-		    pattern = "Warning: ";
-		    severity = IMarker.SEVERITY_WARNING;
-		    index = line.indexOf(pattern);
-		}
-		if (index == 0) {
-
-		    message = line.substring(index + pattern.length()).trim();
-		    try {
-			line = bufferedReader.readLine();
-		    } catch (IOException ex) {
-			throw new RuntimeException("Cannot read line", ex);
-		    }
-		    if (line != null) {
-			index = line.indexOf(',');
-			if (index > 8) {
-
-			    String lineNumberString = line.substring(8, index);
-
-			    try {
-				lineNumber = Integer.parseInt(lineNumberString);
-			    } catch (NumberFormatException ex) {
-				lineNumber = -1;
-				severity = IMarker.SEVERITY_ERROR;
-				message = ex.getMessage();
-			    }
-			} else {
-			    lineNumber = -1;
-			}
-			index = line.indexOf(" in ");
-			if (index > 0) {
-			    filePath = line.substring(index + 4);
-			}
-		    }
-		    markerAvailable = true;
-		}
-
-	    }
+	@Override
+	protected void initialize() {
+		bufferedReader = new BufferedReader(new StringReader(outputLog));
 	}
-    }
 
-    @Override
-    public void addCompilerSymbols(List<CompilerSymbol> compilerSymbols) {
+	@Override
+	protected void findNextMarker() {
 
-    }
+		String line;
+		line = "";
+
+		while (line != null && !markerAvailable) {
+			try {
+				line = bufferedReader.readLine();
+			} catch (IOException ex) {
+				throw new RuntimeException("Cannot read line", ex);
+			}
+			if (line != null) {
+				String pattern;
+				int index;
+				pattern = "Error: ";
+				severity = IMarker.SEVERITY_ERROR;
+				index = line.indexOf(pattern);
+				if (index < 0) {
+					pattern = "Warning: ";
+					severity = IMarker.SEVERITY_WARNING;
+					index = line.indexOf(pattern);
+				}
+				if (index == 0) {
+
+					message = line.substring(index + pattern.length()).trim();
+					try {
+						line = bufferedReader.readLine();
+					} catch (IOException ex) {
+						throw new RuntimeException("Cannot read line", ex);
+					}
+					if (line != null) {
+						index = line.indexOf(',');
+						if (index > 8) {
+
+							String lineNumberString = line.substring(8, index);
+
+							try {
+								lineNumber = Integer.parseInt(lineNumberString);
+							} catch (NumberFormatException ex) {
+								lineNumber = -1;
+								severity = IMarker.SEVERITY_ERROR;
+								message = ex.getMessage();
+							}
+						} else {
+							lineNumber = -1;
+						}
+						index = line.indexOf(" in ");
+						if (index > 0) {
+							filePath = line.substring(index + 4);
+						}
+					}
+					markerAvailable = true;
+				}
+
+			}
+		}
+	}
+
+	@Override
+	public void addCompilerSymbols(List<CompilerSymbol> compilerSymbols) {
+
+	}
 
 }

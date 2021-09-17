@@ -29,34 +29,34 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParserTreeObjectType;
  * 
  */
 public final class InstructionType {
-    /**
-     * Creation is private.
-     */
-    private InstructionType() {
+	/**
+	 * Creation is private.
+	 */
+	private InstructionType() {
 
-    }
+	}
 
-    // Types of directives.
-    public static final int DIRECTIVE = 100;
-    public static final int BEGIN_IMPLEMENTATION_SECTION_DIRECTIVE = 101;
-    public static final int BEGIN_FOLDING_BLOCK_DIRECTIVE = 102;
-    public static final int END_FOLDING_BLOCK_DIRECTIVE = 103;
-    public static final int END_SECTION_DIRECTIVE = 104;
+	// Types of directives.
+	public static final int DIRECTIVE = 100;
+	public static final int BEGIN_IMPLEMENTATION_SECTION_DIRECTIVE = 101;
+	public static final int BEGIN_FOLDING_BLOCK_DIRECTIVE = 102;
+	public static final int END_FOLDING_BLOCK_DIRECTIVE = 103;
+	public static final int END_SECTION_DIRECTIVE = 104;
 
-    public static final int BEGIN_ENUM_DEFINITION_SECTION_DIRECTIVE = 105;
-    public static final int BEGIN_STRUCTURE_DEFINITION_SECTION_DIRECTIVE = 106;
-    public static final int BEGIN_LOCAL_SECTION_DIRECTIVE = 107;
-    public static final int BEGIN_MACRO_DEFINITION_SECTION_DIRECTIVE = 108;
-    public static final int BEGIN_PROCEDURE_DEFINITION_SECTION_DIRECTIVE = 109;
-    public static final int BEGIN_PAGES_SECTION_DIRECTIVE = 110;
-    public static final int BEGIN_REPEAT_SECTION_DIRECTIVE = 111;
+	public static final int BEGIN_ENUM_DEFINITION_SECTION_DIRECTIVE = 105;
+	public static final int BEGIN_STRUCTURE_DEFINITION_SECTION_DIRECTIVE = 106;
+	public static final int BEGIN_LOCAL_SECTION_DIRECTIVE = 107;
+	public static final int BEGIN_MACRO_DEFINITION_SECTION_DIRECTIVE = 108;
+	public static final int BEGIN_PROCEDURE_DEFINITION_SECTION_DIRECTIVE = 109;
+	public static final int BEGIN_PAGES_SECTION_DIRECTIVE = 110;
+	public static final int BEGIN_REPEAT_SECTION_DIRECTIVE = 111;
 
-    public static final int SOURCE_INCLUDE_DIRECTIVE = 120;
-    public static final int BINARY_INCLUDE_DIRECTIVE = 121;
-    public static final int BINARY_OUTPUT_DIRECTIVE = 122;
+	public static final int SOURCE_INCLUDE_DIRECTIVE = 120;
+	public static final int BINARY_INCLUDE_DIRECTIVE = 121;
+	public static final int BINARY_OUTPUT_DIRECTIVE = 122;
 
-    // Types of opcodes.
-    public static final int LEGAL_OPCODE = 200;
-    public static final int ILLEGAL_OPCODE = 201;
-    public static final int PSEUDO_OPCODE = 202;
+	// Types of opcodes.
+	public static final int LEGAL_OPCODE = 200;
+	public static final int ILLEGAL_OPCODE = 201;
+	public static final int PSEUDO_OPCODE = 202;
 }

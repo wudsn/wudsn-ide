@@ -35,26 +35,26 @@ import org.eclipse.ui.menus.WorkbenchWindowControlContribution;
 // Asked at https://www.eclipse.org/forums/index.php/m/1833428/#msg_1833428
 public final class AssemblerEditorCompileAndRunCommandMenu extends WorkbenchWindowControlContribution {
 
-    public AssemblerEditorCompileAndRunCommandMenu() {
-	if (System.getProperty("user.name").equals("JAC")) {
-	    new Exception("JAC! Test for Startup!").printStackTrace();
+	public AssemblerEditorCompileAndRunCommandMenu() {
+		if (System.getProperty("user.name").equals("JAC")) {
+			new Exception("JAC! Test for Startup!").printStackTrace();
+		}
 	}
-    }
 
-    @AboutToShow
-    public void aboutToShow(List<MMenuElement> items) {
-	MDirectMenuItem dynamicItem = MMenuFactory.INSTANCE.createDirectMenuItem();
-	dynamicItem.setLabel("Dynamic Menu Item (" + new Date() + ")");
-	dynamicItem.setContributorURI("platform:/plugin/at.descher.eclipse.bug389063");
-	dynamicItem.setContributionURI(
-		"bundleclass://at.descher.eclipse.bug389063/at.descher.eclipse.bug389063.dynamic.DirectMenuItemAHandler");
-	items.add(dynamicItem);
+	@AboutToShow
+	public void aboutToShow(List<MMenuElement> items) {
+		MDirectMenuItem dynamicItem = MMenuFactory.INSTANCE.createDirectMenuItem();
+		dynamicItem.setLabel("Dynamic Menu Item (" + new Date() + ")");
+		dynamicItem.setContributorURI("platform:/plugin/at.descher.eclipse.bug389063");
+		dynamicItem.setContributionURI(
+				"bundleclass://at.descher.eclipse.bug389063/at.descher.eclipse.bug389063.dynamic.DirectMenuItemAHandler");
+		items.add(dynamicItem);
 
-    }
+	}
 
-    @Override
-    protected Control createControl(Composite parent) {
-	return null;
-    }
+	@Override
+	protected Control createControl(Composite parent) {
+		return null;
+	}
 
 }

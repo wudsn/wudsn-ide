@@ -30,21 +30,21 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
  */
 public final class TestCompiler extends Compiler {
 
-    /**
-     * Creates a new instance.
-     */
-    public TestCompiler() {
-    }
+	/**
+	 * Creates a new instance.
+	 */
+	public TestCompiler() {
+	}
 
-    @Override
-    public CompilerSourceParser createSourceParser() {
-	return new TestCompilerSourceParser();
-    }
+	@Override
+	public CompilerSourceParser createSourceParser() {
+		return new TestCompilerSourceParser();
+	}
 
-    @Override
-    public CompilerProcessLogParser createLogParser() {
+	@Override
+	public CompilerProcessLogParser createLogParser() {
 
-	return new TestCompilerProcessLogParser();
-    }
+		return new TestCompilerProcessLogParser();
+	}
 
 }
