@@ -83,13 +83,8 @@ public final class EnumField<T extends Enum<?>> extends Field {
 		combo = new Combo(parent, SWT.DROP_DOWN);
 
 		ResourceBundle resourceBundle;
-		try {
-			// TODO Remove when all bundles have been changed to "OSGI-INF/l10n/bundle"
-			resourceBundle = ResourceBundle.getBundle("plugin", Locale.getDefault(), enumClass.getClassLoader());
-		} catch (java.util.MissingResourceException mre) {
-			resourceBundle = ResourceBundle.getBundle("OSGI-INF/l10n/bundle", Locale.getDefault(),
-					enumClass.getClassLoader());
-		}
+		resourceBundle = ResourceBundle.getBundle("OSGI-INF/l10n/bundle", Locale.getDefault(),
+				enumClass.getClassLoader());
 
 		T[] constants = enumClass.getEnumConstants();
 

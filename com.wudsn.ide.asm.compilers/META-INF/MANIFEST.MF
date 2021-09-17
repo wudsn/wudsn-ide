@@ -5,7 +5,6 @@ Bundle-SymbolicName: com.wudsn.ide.asm.compilers;singleton:=true
 Bundle-Version: 1.7.2.qualifier
 Bundle-Vendor: Peter Dell
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Bundle-Localization: plugin
 Require-Bundle: com.wudsn.ide.asm,
  org.eclipse.ui.ide
 Bundle-ActivationPolicy: lazy

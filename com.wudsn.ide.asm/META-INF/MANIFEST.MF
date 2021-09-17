@@ -4,7 +4,6 @@ Bundle-Name: WUDSN IDE Assembler Plug-in
 Bundle-SymbolicName: com.wudsn.ide.asm;singleton:=true
 Bundle-Version: 1.7.2.qualifier
 Bundle-Activator: com.wudsn.ide.asm.AssemblerPlugin
-Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.core.filesystem,
