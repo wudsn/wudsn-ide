@@ -4,7 +4,6 @@ Bundle-Name: WUDSN IDE Hex Editor Plugin
 Bundle-SymbolicName: com.wudsn.ide.hex;singleton:=true
 Bundle-Version: 1.7.2.qualifier
 Bundle-Activator: com.wudsn.ide.hex.HexPlugin
-Bundle-Localization: plugin
 Bundle-Vendor: Peter Dell
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
