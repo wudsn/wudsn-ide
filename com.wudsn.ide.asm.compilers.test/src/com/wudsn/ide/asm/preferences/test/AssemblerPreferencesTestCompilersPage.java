@@ -18,8 +18,8 @@
  */
 package com.wudsn.ide.asm.preferences.test;
 
-import com.wudsn.ide.asm.Hardware;
 import com.wudsn.ide.asm.preferences.AssemblerPreferencesCompilersPage;
+import com.wudsn.ide.base.hardware.Hardware;
 
 /**
  * Visual editor page for the assembler preferences regarding arbitrary

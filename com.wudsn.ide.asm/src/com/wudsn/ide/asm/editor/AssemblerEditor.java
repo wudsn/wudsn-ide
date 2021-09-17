@@ -57,7 +57,6 @@ import com.wudsn.ide.asm.AssemblerPlugin;
 import com.wudsn.ide.asm.AssemblerProperties;
 import com.wudsn.ide.asm.AssemblerProperties.InvalidAssemblerPropertyException;
 import com.wudsn.ide.asm.CPU;
-import com.wudsn.ide.asm.Hardware;
 import com.wudsn.ide.asm.compiler.Compiler;
 import com.wudsn.ide.asm.compiler.CompilerDefinition;
 import com.wudsn.ide.asm.compiler.parser.CompilerSourceFile;
@@ -66,6 +65,7 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParserTreeObject;
 import com.wudsn.ide.asm.compiler.parser.CompilerSourcePartitionScanner;
 import com.wudsn.ide.asm.preferences.CompilerPreferences;
 import com.wudsn.ide.base.common.Profiler;
+import com.wudsn.ide.base.hardware.Hardware;
 
 /**
  * The assembler editor.

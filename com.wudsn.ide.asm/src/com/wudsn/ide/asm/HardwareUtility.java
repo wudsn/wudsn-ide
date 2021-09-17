@@ -22,6 +22,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 
 import com.wudsn.ide.asm.compiler.CompilerFileWriter;
 import com.wudsn.ide.asm.compiler.writer.AppleFileWriter;
+import com.wudsn.ide.base.hardware.Hardware;
 
 /**
  * Map value of {@link Hardware} to icon paths and descriptors.

@@ -50,7 +50,6 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 
 import com.wudsn.ide.asm.AssemblerPlugin;
 import com.wudsn.ide.asm.CPU;
-import com.wudsn.ide.asm.Hardware;
 import com.wudsn.ide.asm.Texts;
 import com.wudsn.ide.asm.compiler.CompilerDefinition;
 import com.wudsn.ide.asm.compiler.CompilerOutputFolderMode;
@@ -64,6 +63,7 @@ import com.wudsn.ide.base.common.ProcessWithLogs;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.gui.SWTFactory;
+import com.wudsn.ide.base.hardware.Hardware;
 
 /**
  * Visual editor page for the assembler preferences regarding compilers. There

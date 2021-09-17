@@ -51,7 +51,6 @@ import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.ide.IDE;
 
 import com.wudsn.ide.asm.AssemblerPlugin;
-import com.wudsn.ide.asm.Hardware;
 import com.wudsn.ide.asm.HardwareUtility;
 import com.wudsn.ide.asm.Texts;
 import com.wudsn.ide.asm.compiler.Compiler;
@@ -73,6 +72,7 @@ import com.wudsn.ide.base.common.MarkerUtility;
 import com.wudsn.ide.base.common.NumberUtility;
 import com.wudsn.ide.base.common.ProcessWithLogs;
 import com.wudsn.ide.base.common.StringUtility;
+import com.wudsn.ide.base.hardware.Hardware;
 
 /**
  * Implementation of the "Compile" command.

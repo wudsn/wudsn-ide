@@ -20,8 +20,8 @@
 package com.wudsn.ide.asm.preferences;
 
 import com.wudsn.ide.asm.AssemblerProperties;
-import com.wudsn.ide.asm.Hardware;
 import com.wudsn.ide.base.common.StringUtility;
+import com.wudsn.ide.base.hardware.Hardware;
 
 /**
  * Facade class to mix compiler run specific preferences into the global

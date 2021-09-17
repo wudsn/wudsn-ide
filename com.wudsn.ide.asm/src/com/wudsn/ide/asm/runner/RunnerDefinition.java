@@ -19,7 +19,7 @@
 
 package com.wudsn.ide.asm.runner;
 
-import com.wudsn.ide.asm.Hardware;
+import com.wudsn.ide.base.hardware.Hardware;
 
 /**
  * Definition of a runner. The definition contains all static meta information

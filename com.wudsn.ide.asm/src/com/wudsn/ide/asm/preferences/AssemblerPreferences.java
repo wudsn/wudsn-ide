@@ -22,11 +22,11 @@ package com.wudsn.ide.asm.preferences;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.TextAttribute;
 
-import com.wudsn.ide.asm.Hardware;
 import com.wudsn.ide.asm.editor.AssemblerContentAssistProcessorDefaultCase;
 import com.wudsn.ide.asm.editor.AssemblerEditorCompileCommandPositioningMode;
 import com.wudsn.ide.base.common.AbstractIDEPlugin;
 import com.wudsn.ide.base.common.StringUtility;
+import com.wudsn.ide.base.hardware.Hardware;
 
 /**
  * Facade class for typed access to the plugin preferences.

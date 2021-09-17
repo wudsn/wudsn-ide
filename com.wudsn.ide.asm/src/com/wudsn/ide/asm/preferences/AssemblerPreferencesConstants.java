@@ -22,7 +22,7 @@ package com.wudsn.ide.asm.preferences;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.wudsn.ide.asm.Hardware;
+import com.wudsn.ide.base.hardware.Hardware;
 
 /**
  * Constants for preferences.

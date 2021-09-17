@@ -29,7 +29,6 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Display;
 
 import com.wudsn.ide.asm.AssemblerPlugin;
-import com.wudsn.ide.asm.Hardware;
 import com.wudsn.ide.asm.HardwareUtility;
 import com.wudsn.ide.asm.compiler.CompilerDefinition;
 import com.wudsn.ide.asm.compiler.CompilerOutputFolderMode;
@@ -37,6 +36,7 @@ import com.wudsn.ide.asm.compiler.CompilerRegistry;
 import com.wudsn.ide.asm.editor.AssemblerContentAssistProcessorDefaultCase;
 import com.wudsn.ide.asm.editor.AssemblerEditorCompileCommandPositioningMode;
 import com.wudsn.ide.asm.runner.RunnerId;
+import com.wudsn.ide.base.hardware.Hardware;
 
 /**
  * Initializer for setting defaults values in the preferences.

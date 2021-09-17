@@ -44,7 +44,6 @@ import org.eclipse.help.IHelpContentProducer;
 
 import com.wudsn.ide.asm.AssemblerPlugin;
 import com.wudsn.ide.asm.CPU;
-import com.wudsn.ide.asm.Hardware;
 import com.wudsn.ide.asm.HardwareUtility;
 import com.wudsn.ide.asm.Texts;
 import com.wudsn.ide.asm.compiler.Compiler;
@@ -65,6 +64,7 @@ import com.wudsn.ide.base.common.EnumUtility;
 import com.wudsn.ide.base.common.HexUtility;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.common.TextUtility;
+import com.wudsn.ide.base.hardware.Hardware;
 
 /**
  * Dynamic help content provider. Uses static pages and the meta data from the

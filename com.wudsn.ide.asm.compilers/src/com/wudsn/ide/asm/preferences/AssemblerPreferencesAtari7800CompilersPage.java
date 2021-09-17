@@ -18,7 +18,7 @@
  */
 package com.wudsn.ide.asm.preferences;
 
-import com.wudsn.ide.asm.Hardware;
+import com.wudsn.ide.base.hardware.Hardware;
 
 /**
  * Visual editor page for the assembler preferences regarding Apple 2 compilers.

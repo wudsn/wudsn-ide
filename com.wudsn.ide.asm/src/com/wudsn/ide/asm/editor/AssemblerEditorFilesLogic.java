@@ -36,7 +36,6 @@ import com.wudsn.ide.asm.AssemblerPlugin;
 import com.wudsn.ide.asm.AssemblerProperties;
 import com.wudsn.ide.asm.AssemblerProperties.AssemblerProperty;
 import com.wudsn.ide.asm.AssemblerProperties.InvalidAssemblerPropertyException;
-import com.wudsn.ide.asm.Hardware;
 import com.wudsn.ide.asm.Texts;
 import com.wudsn.ide.asm.compiler.CompilerDefinition;
 import com.wudsn.ide.asm.compiler.CompilerFiles;
@@ -45,6 +44,7 @@ import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
 import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.MarkerUtility;
 import com.wudsn.ide.base.common.StringUtility;
+import com.wudsn.ide.base.hardware.Hardware;
 
 /**
  * Logic to handle the {@link CompilerFiles} of an {@link AssemblerEditor}

@@ -36,7 +36,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowPulldownDelegate2;
 
 import com.wudsn.ide.asm.AssemblerPlugin;
-import com.wudsn.ide.asm.Hardware;
 import com.wudsn.ide.asm.HardwareUtility;
 import com.wudsn.ide.asm.Texts;
 import com.wudsn.ide.asm.preferences.CompilerPreferences;
@@ -44,6 +43,7 @@ import com.wudsn.ide.asm.runner.RunnerDefinition;
 import com.wudsn.ide.asm.runner.RunnerId;
 import com.wudsn.ide.asm.runner.RunnerRegistry;
 import com.wudsn.ide.base.common.StringUtility;
+import com.wudsn.ide.base.hardware.Hardware;
 
 /**
  * Delegate class to provide a dynamic drop-down menu for the toolbar based on

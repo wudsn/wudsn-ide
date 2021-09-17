@@ -23,7 +23,7 @@ package com.wudsn.ide.asm;
  * 
  * @author Peter Dell
  * 
- * @sinbce 1.6.1
+ * @since 1.6.1
  */
 public enum CPU {
 

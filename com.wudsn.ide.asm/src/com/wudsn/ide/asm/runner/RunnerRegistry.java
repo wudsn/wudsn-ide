@@ -32,7 +32,7 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 
-import com.wudsn.ide.asm.Hardware;
+import com.wudsn.ide.base.hardware.Hardware;
 
 /**
  * Registry for runners, based on the extension points
