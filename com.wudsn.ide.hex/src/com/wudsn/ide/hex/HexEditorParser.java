@@ -28,169 +28,150 @@ import com.wudsn.ide.base.common.TextUtility;
 
 public abstract class HexEditorParser {
 
-    private HexEditorParserComponent owner;
-    protected Styler offsetStyler;
-    protected Styler addressStyler;
-    protected FileContent fileContent;
+	private HexEditorParserComponent owner;
+	protected Styler offsetStyler;
+	protected Styler addressStyler;
+	protected FileContent fileContent;
 
-    /**
-     * Creation is protected.
-     */
-    protected HexEditorParser() {
-
-    }
-
-    /**
-     * Initialized by owner.
-     * 
-     * @param owner
-     *            The owner, not <code>null</code>.
-     * @param offsetStyler
-     *            The offset styler, not <code>null</code>.
-     * @param addressStyler
-     *            The address styler, not <code>null</code>.
-     */
-    void init(HexEditorParserComponent owner, Styler offsetStyler, Styler addressStyler) {
-	if (owner == null) {
-	    throw new IllegalArgumentException("Parameter 'owner' must not be null.");
-	}
-	if (offsetStyler == null) {
-	    throw new IllegalArgumentException("Parameter 'offsetStyler' must not be null.");
-	}
-	if (addressStyler == null) {
-	    throw new IllegalArgumentException("Parameter 'offsetStyler' must not be null.");
-	}
-	this.owner = owner;
-	this.offsetStyler = offsetStyler;
-	this.addressStyler = addressStyler;
-	this.fileContent = owner.getFileContent();
-    }
-
-    /**
-     * Public API for parsing.
-     * 
-     * @param contentBuilder
-     *            The content builder, not <code>null</code>.
-     * @return <code>true</code> if parsing was OK, <code>false</code>otherwise.
-     */
-    public abstract boolean parse(StyledString contentBuilder);
-
-    /**
-     * Prints a block header in the context area and adds a block to the
-     * outline.
-     * 
-     * @param contentBuilder
-     *            The content builder, not <code>null</code>.
-     * @param blockHeaderText
-     *            The header text for the block, may be empty, not
-     *            <code>null</code>.
-     * @param blockHeaderNumber
-     *            The block count or <code>-1</code> if count shall not be
-     *            displayed.
-     * @param blockHeaderParameterText
-     *            The pattern text of the form "{0}-{1} ({2})"
-     * @param offset
-     *            The start offset, a non-negative integer.
-     * @param startAddress
-     *            The start address, a non-negative integer.
-     * @param endAddress
-     *            The end address, a non-negative integer.
-     * 
-     * @return The tree object representing the block.
-     */
-    protected final HexEditorContentOutlineTreeObject printBlockHeader(StyledString contentBuilder,
-	    String blockHeaderText, int blockHeaderNumber, String blockHeaderParameterText, long offset,
-	    long startAddress, long endAddress) {
-
-	if (contentBuilder == null) {
-	    throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
-	}
-	long blockLength = endAddress - startAddress + 1;
-	String blockHeaderNumberText;
-	if (blockHeaderNumber >= 0) {
-	    blockHeaderNumberText = NumberUtility.getLongValueDecimalString(blockHeaderNumber);
-	} else {
-	    blockHeaderNumberText = "";
-	}
-	int length = Math.max(4, HexUtility.getLongValueHexLength(endAddress));
-	String hexText = TextUtility.format(blockHeaderParameterText,
-		HexUtility.getLongValueHexString(startAddress, length),
-		HexUtility.getLongValueHexString(endAddress, length),
-		HexUtility.getLongValueHexString(blockLength, length));
-
-	String decimalText = TextUtility.format(blockHeaderParameterText,
-		NumberUtility.getLongValueDecimalString(startAddress),
-		NumberUtility.getLongValueDecimalString(endAddress),
-		NumberUtility.getLongValueDecimalString(blockLength));
-
-	StyledString styledString;
-	styledString = new StyledString();
-	styledString.append(blockHeaderText, offsetStyler);
-	if (blockHeaderNumber >= 0) {
-	    styledString.append(" ");
-	    styledString.append(blockHeaderNumberText, offsetStyler);
+	/**
+	 * Creation is protected.
+	 */
+	protected HexEditorParser() {
 
 	}
-	if (StringUtility.isSpecified(blockHeaderParameterText)) {
-	    styledString.append(" : ");
-	    styledString.append(hexText, addressStyler);
-	    styledString.append(" : ");
-	    styledString.append(decimalText);
+
+	/**
+	 * Initialized by owner.
+	 * 
+	 * @param owner         The owner, not <code>null</code>.
+	 * @param offsetStyler  The offset styler, not <code>null</code>.
+	 * @param addressStyler The address styler, not <code>null</code>.
+	 */
+	void init(HexEditorParserComponent owner, Styler offsetStyler, Styler addressStyler) {
+		if (owner == null) {
+			throw new IllegalArgumentException("Parameter 'owner' must not be null.");
+		}
+		if (offsetStyler == null) {
+			throw new IllegalArgumentException("Parameter 'offsetStyler' must not be null.");
+		}
+		if (addressStyler == null) {
+			throw new IllegalArgumentException("Parameter 'offsetStyler' must not be null.");
+		}
+		this.owner = owner;
+		this.offsetStyler = offsetStyler;
+		this.addressStyler = addressStyler;
+		this.fileContent = owner.getFileContent();
 	}
 
-	contentBuilder.append(blockHeaderText, offsetStyler);
-	if (blockHeaderNumber >= 0) {
-	    contentBuilder.append(" ");
-	    contentBuilder.append(blockHeaderNumberText, offsetStyler);
+	/**
+	 * Public API for parsing.
+	 * 
+	 * @param contentBuilder The content builder, not <code>null</code>.
+	 * @return <code>true</code> if parsing was OK, <code>false</code>otherwise.
+	 */
+	public abstract boolean parse(StyledString contentBuilder);
+
+	/**
+	 * Prints a block header in the context area and adds a block to the outline.
+	 * 
+	 * @param contentBuilder           The content builder, not <code>null</code>.
+	 * @param blockHeaderText          The header text for the block, may be empty,
+	 *                                 not <code>null</code>.
+	 * @param blockHeaderNumber        The block count or <code>-1</code> if count
+	 *                                 shall not be displayed.
+	 * @param blockHeaderParameterText The pattern text of the form "{0}-{1} ({2})"
+	 * @param offset                   The start offset, a non-negative integer.
+	 * @param startAddress             The start address, a non-negative integer.
+	 * @param endAddress               The end address, a non-negative integer.
+	 * 
+	 * @return The tree object representing the block.
+	 */
+	protected final HexEditorContentOutlineTreeObject printBlockHeader(StyledString contentBuilder,
+			String blockHeaderText, int blockHeaderNumber, String blockHeaderParameterText, long offset,
+			long startAddress, long endAddress) {
+
+		if (contentBuilder == null) {
+			throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
+		}
+		long blockLength = endAddress - startAddress + 1;
+		String blockHeaderNumberText;
+		if (blockHeaderNumber >= 0) {
+			blockHeaderNumberText = NumberUtility.getLongValueDecimalString(blockHeaderNumber);
+		} else {
+			blockHeaderNumberText = "";
+		}
+		int length = Math.max(4, HexUtility.getLongValueHexLength(endAddress));
+		String hexText = TextUtility.format(blockHeaderParameterText,
+				HexUtility.getLongValueHexString(startAddress, length),
+				HexUtility.getLongValueHexString(endAddress, length),
+				HexUtility.getLongValueHexString(blockLength, length));
+
+		String decimalText = TextUtility.format(blockHeaderParameterText,
+				NumberUtility.getLongValueDecimalString(startAddress),
+				NumberUtility.getLongValueDecimalString(endAddress),
+				NumberUtility.getLongValueDecimalString(blockLength));
+
+		StyledString styledString;
+		styledString = new StyledString();
+		styledString.append(blockHeaderText, offsetStyler);
+		if (blockHeaderNumber >= 0) {
+			styledString.append(" ");
+			styledString.append(blockHeaderNumberText, offsetStyler);
+
+		}
+		if (StringUtility.isSpecified(blockHeaderParameterText)) {
+			styledString.append(" : ");
+			styledString.append(hexText, addressStyler);
+			styledString.append(" : ");
+			styledString.append(decimalText);
+		}
+
+		contentBuilder.append(blockHeaderText, offsetStyler);
+		if (blockHeaderNumber >= 0) {
+			contentBuilder.append(" ");
+			contentBuilder.append(blockHeaderNumberText, offsetStyler);
+		}
+		contentBuilder.append("\n");
+		return owner.printBlockHeader(contentBuilder, styledString, offset);
 	}
-	contentBuilder.append("\n");
-	return owner.printBlockHeader(contentBuilder, styledString, offset);
-    }
 
-    /**
-     * Adds a block to the outline.
-     * 
-     * @param contentBuilder
-     *            The content builder, not <code>null</code>.
-     * @param headerStyledString
-     *            The style string for the block header in the outline, not
-     *            <code>null</code>.
-     * @param offset
-     *            The start offset, a non-negative integer.
-     * 
-     * @return The tree object representing the block.
-     */
-    protected final HexEditorContentOutlineTreeObject printBlockHeader(StyledString contentBuilder,
-	    StyledString headerStyledString, long offset) {
-	return owner.printBlockHeader(contentBuilder, headerStyledString, offset);
-    }
+	/**
+	 * Adds a block to the outline.
+	 * 
+	 * @param contentBuilder     The content builder, not <code>null</code>.
+	 * @param headerStyledString The style string for the block header in the
+	 *                           outline, not <code>null</code>.
+	 * @param offset             The start offset, a non-negative integer.
+	 * 
+	 * @return The tree object representing the block.
+	 */
+	protected final HexEditorContentOutlineTreeObject printBlockHeader(StyledString contentBuilder,
+			StyledString headerStyledString, long offset) {
+		return owner.printBlockHeader(contentBuilder, headerStyledString, offset);
+	}
 
-    /**
-     * Prints the last block in case if contains an error like the wrong number
-     * of bytes.
-     * 
-     * @param contentBuilder
-     *            The content builder, not <code>null</code>.
-     * @param errorText
-     *            The error text, not empty and not <code>null</code>.
-     * @param length
-     *            The length of the last block, a non-negative integer.
-     * @param offset
-     *            The offset of the last block, a non-negative integer.
-     */
-    protected final void printBlockWithError(StyledString contentBuilder, String errorText, long length, long offset) {
-	owner.printBlockWithError(contentBuilder, errorText, length, offset);
-    }
+	/**
+	 * Prints the last block in case if contains an error like the wrong number of
+	 * bytes.
+	 * 
+	 * @param contentBuilder The content builder, not <code>null</code>.
+	 * @param errorText      The error text, not empty and not <code>null</code>.
+	 * @param length         The length of the last block, a non-negative integer.
+	 * @param offset         The offset of the last block, a non-negative integer.
+	 */
+	protected final void printBlockWithError(StyledString contentBuilder, String errorText, long length, long offset) {
+		owner.printBlockWithError(contentBuilder, errorText, length, offset);
+	}
 
-    protected final void skipByteTextIndex(long offset) {
-	owner.skipByteTextIndex(offset);
+	protected final void skipByteTextIndex(long offset) {
+		owner.skipByteTextIndex(offset);
 
-    }
+	}
 
-    protected final long printBytes(HexEditorContentOutlineTreeObject treeObject, StyledString contentBuilder,
-	    long offset, long maxOffset, boolean withStartAddress, int startAddress) {
-	return owner.printBytes(treeObject, contentBuilder, offset, maxOffset, withStartAddress, startAddress);
+	protected final long printBytes(HexEditorContentOutlineTreeObject treeObject, StyledString contentBuilder,
+			long offset, long maxOffset, boolean withStartAddress, int startAddress) {
+		return owner.printBytes(treeObject, contentBuilder, offset, maxOffset, withStartAddress, startAddress);
 
-    }
+	}
 
 }

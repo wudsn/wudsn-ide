@@ -36,43 +36,43 @@ import com.wudsn.ide.base.common.TextUtility;
 
 public final class HexEditorSaveSelectionAsCommandHandler extends HexEditorSelectionCommandHandler {
 
-    public static final class CommandIds {
+	public static final class CommandIds {
 
-	private CommandIds() {
-	}
-
-	public static final String SAVE_SELECTION_AS = "com.wudsn.ide.hex.HexEditorSaveSelectionAsCommand";
-    }
-
-    @Override
-    protected void performAction() throws ExecutionException {
-	if (commandId.equals(CommandIds.SAVE_SELECTION_AS) && !hexEditorSelection.isEmpty()) {
-	    Shell shell = HandlerUtil.getActiveShell(event);
-	    if (shell == null) {
-		return;
-	    }
-	    byte[] content = hexEditorSelection.getBytes();
-
-	    FileDialog dialog = new FileDialog(shell, SWT.SAVE);
-	    int length = content.length;
-	    String hexLength = HexUtility.getLongValueHexString(length);
-	    String decimalLength = NumberUtility.getLongValueDecimalString(length);
-	    dialog.setText(
-		    TextUtility.format(Texts.HEX_EDITOR_SAVE_SELECTION_AS_DIALOG_TITLE, hexLength, decimalLength));
-	    dialog.setFileName(hexEditor.getSelectionSaveFilePath());
-	    String filePath = dialog.open();
-	    if (filePath != null) {
-		try {
-		    FileUtility.writeBytes(new File(filePath), content);
-		    // INFO: ${0} ({1}) bytes saved as '{2}'.
-		    hexEditor.getMessageManager().sendMessage(0, IStatus.OK, Texts.MESSAGE_I303, hexLength,
-			    decimalLength, filePath);
-		} catch (CoreException ex) {
-		    throw new ExecutionException(ex.getMessage());
+		private CommandIds() {
 		}
-	    }
+
+		public static final String SAVE_SELECTION_AS = "com.wudsn.ide.hex.HexEditorSaveSelectionAsCommand";
 	}
 
-    }
+	@Override
+	protected void performAction() throws ExecutionException {
+		if (commandId.equals(CommandIds.SAVE_SELECTION_AS) && !hexEditorSelection.isEmpty()) {
+			Shell shell = HandlerUtil.getActiveShell(event);
+			if (shell == null) {
+				return;
+			}
+			byte[] content = hexEditorSelection.getBytes();
+
+			FileDialog dialog = new FileDialog(shell, SWT.SAVE);
+			int length = content.length;
+			String hexLength = HexUtility.getLongValueHexString(length);
+			String decimalLength = NumberUtility.getLongValueDecimalString(length);
+			dialog.setText(
+					TextUtility.format(Texts.HEX_EDITOR_SAVE_SELECTION_AS_DIALOG_TITLE, hexLength, decimalLength));
+			dialog.setFileName(hexEditor.getSelectionSaveFilePath());
+			String filePath = dialog.open();
+			if (filePath != null) {
+				try {
+					FileUtility.writeBytes(new File(filePath), content);
+					// INFO: ${0} ({1}) bytes saved as '{2}'.
+					hexEditor.getMessageManager().sendMessage(0, IStatus.OK, Texts.MESSAGE_I303, hexLength,
+							decimalLength, filePath);
+				} catch (CoreException ex) {
+					throw new ExecutionException(ex.getMessage());
+				}
+			}
+		}
+
+	}
 
 }

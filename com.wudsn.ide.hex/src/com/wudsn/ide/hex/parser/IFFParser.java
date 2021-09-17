@@ -30,92 +30,92 @@ import com.wudsn.ide.hex.Texts;
 
 public final class IFFParser extends HexEditorParser {
 
-    @Override
-    public final boolean parse(StyledString contentBuilder) {
-	if (contentBuilder == null) {
-	    throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
-	}
-	boolean error;
-	long offset = 0;
-	long fileContentLength = fileContent.getLength();
-	error = parse(contentBuilder, offset, fileContentLength, null);
-	return error;
-    }
-
-    private boolean parse(StyledString contentBuilder, long offset, long fileContentLength,
-	    HexEditorContentOutlineTreeObject treeObject) {
-	boolean error;
-
-	error = (fileContentLength - offset) < 8;
-	if (!error) {
-	    while ((fileContentLength - offset) >= 8 && !error) {
-		long headerLength = 8;
-		String chunkName = getChunkName(offset);
-		long chunkLength = fileContent.getDoubleWordBigEndian(offset + 4);
-		String headerText;
-		String formTypeName = "";
-		boolean hasInnerChunks = false;
-		if (chunkName.equals("FORM")) {
-		    if (chunkLength >= 4) {
-			formTypeName = getChunkName(offset + 8);
-			headerText = TextUtility.format(Texts.HEX_EDITOR_IFF_FORM_CHUNK, chunkName, formTypeName,
-				HexUtility.getLongValueHexString(chunkLength),
-				NumberUtility.getLongValueDecimalString(chunkLength));
-			headerLength += 4;
-			chunkLength -= 4;
-			// Ignore trailing parts in the file outside of the main
-			// chunk
-			fileContentLength = offset + chunkLength;
-			hasInnerChunks = true;
-		    } else {
-			error = true;
-			headerText = null;
-		    }
-		} else {
-		    headerText = TextUtility.format(Texts.HEX_EDITOR_IFF_CHUNK, chunkName,
-			    HexUtility.getLongValueHexString(chunkLength),
-			    NumberUtility.getLongValueDecimalString(chunkLength));
+	@Override
+	public final boolean parse(StyledString contentBuilder) {
+		if (contentBuilder == null) {
+			throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
 		}
+		boolean error;
+		long offset = 0;
+		long fileContentLength = fileContent.getLength();
+		error = parse(contentBuilder, offset, fileContentLength, null);
+		return error;
+	}
 
+	private boolean parse(StyledString contentBuilder, long offset, long fileContentLength,
+			HexEditorContentOutlineTreeObject treeObject) {
+		boolean error;
+
+		error = (fileContentLength - offset) < 8;
 		if (!error) {
-		    StyledString styledString = new StyledString(headerText, offsetStyler);
-		    treeObject = printBlockHeader(contentBuilder, styledString, offset);
-		    contentBuilder.append(styledString);
-		    contentBuilder.append("\n");
-		    offset = printBytes(treeObject, contentBuilder, offset, offset + headerLength - 1, false, 0);
+			while ((fileContentLength - offset) >= 8 && !error) {
+				long headerLength = 8;
+				String chunkName = getChunkName(offset);
+				long chunkLength = fileContent.getDoubleWordBigEndian(offset + 4);
+				String headerText;
+				String formTypeName = "";
+				boolean hasInnerChunks = false;
+				if (chunkName.equals("FORM")) {
+					if (chunkLength >= 4) {
+						formTypeName = getChunkName(offset + 8);
+						headerText = TextUtility.format(Texts.HEX_EDITOR_IFF_FORM_CHUNK, chunkName, formTypeName,
+								HexUtility.getLongValueHexString(chunkLength),
+								NumberUtility.getLongValueDecimalString(chunkLength));
+						headerLength += 4;
+						chunkLength -= 4;
+						// Ignore trailing parts in the file outside of the main
+						// chunk
+						fileContentLength = offset + chunkLength;
+						hasInnerChunks = true;
+					} else {
+						error = true;
+						headerText = null;
+					}
+				} else {
+					headerText = TextUtility.format(Texts.HEX_EDITOR_IFF_CHUNK, chunkName,
+							HexUtility.getLongValueHexString(chunkLength),
+							NumberUtility.getLongValueDecimalString(chunkLength));
+				}
 
-		    if (hasInnerChunks) {
-			contentBuilder.append("\n");
+				if (!error) {
+					StyledString styledString = new StyledString(headerText, offsetStyler);
+					treeObject = printBlockHeader(contentBuilder, styledString, offset);
+					contentBuilder.append(styledString);
+					contentBuilder.append("\n");
+					offset = printBytes(treeObject, contentBuilder, offset, offset + headerLength - 1, false, 0);
 
-			parse(contentBuilder, offset, fileContentLength, treeObject);
-			offset += chunkLength;
-		    } else {
-			offset = printBytes(treeObject, contentBuilder, offset, offset + chunkLength - 1, false, 0);
-		    }
-		    contentBuilder.append("\n");
+					if (hasInnerChunks) {
+						contentBuilder.append("\n");
 
-		    // Skip padding byte
-		    if ((offset & 0x1) == 1) {
-			offset++;
-		    }
+						parse(contentBuilder, offset, fileContentLength, treeObject);
+						offset += chunkLength;
+					} else {
+						offset = printBytes(treeObject, contentBuilder, offset, offset + chunkLength - 1, false, 0);
+					}
+					contentBuilder.append("\n");
+
+					// Skip padding byte
+					if ((offset & 0x1) == 1) {
+						offset++;
+					}
+
+				}
+			}
 
 		}
-	    }
-
+		if (error) {
+			printBlockWithError(contentBuilder, Texts.HEX_EDITOR_IFF_FILE_ERROR, fileContentLength, offset);
+		}
+		return error;
 	}
-	if (error) {
-	    printBlockWithError(contentBuilder, Texts.HEX_EDITOR_IFF_FILE_ERROR, fileContentLength, offset);
-	}
-	return error;
-    }
 
-    private String getChunkName(long offset) {
-	char[] id = new char[4];
-	id[0] = (char) fileContent.getByte(offset);
-	id[1] = (char) fileContent.getByte(offset + 1);
-	id[2] = (char) fileContent.getByte(offset + 2);
-	id[3] = (char) fileContent.getByte(offset + 3);
-	return String.copyValueOf(id);
-    }
+	private String getChunkName(long offset) {
+		char[] id = new char[4];
+		id[0] = (char) fileContent.getByte(offset);
+		id[1] = (char) fileContent.getByte(offset + 1);
+		id[2] = (char) fileContent.getByte(offset + 2);
+		id[3] = (char) fileContent.getByte(offset + 3);
+		return String.copyValueOf(id);
+	}
 
 }

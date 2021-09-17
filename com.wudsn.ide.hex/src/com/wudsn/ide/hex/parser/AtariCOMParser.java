@@ -23,14 +23,14 @@ import org.eclipse.jface.viewers.StyledString;
 
 public final class AtariCOMParser extends AtariParser {
 
-    @Override
-    public boolean parse(StyledString contentBuilder) {
-	if (contentBuilder == null) {
-	    throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
+	@Override
+	public boolean parse(StyledString contentBuilder) {
+		if (contentBuilder == null) {
+			throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
+		}
+		int offset = 0;
+		int fileContentLenght = fileContent.getLength();
+		return parseAtariCOMFile(contentBuilder, offset, fileContentLenght);
 	}
-	int offset = 0;
-	int fileContentLenght = fileContent.getLength();
-	return parseAtariCOMFile(contentBuilder, offset, fileContentLenght);
-    }
 
 }

@@ -28,122 +28,117 @@ import org.eclipse.jface.viewers.StyledString;
  */
 public final class HexEditorContentOutlineTreeObject {
 
-    private final StyledString styledString;
-    private long fileStartOffset;
-    private long textStartOffset;
-    private long fileEndOffset;
-    private long textEndOffset;
+	private final StyledString styledString;
+	private long fileStartOffset;
+	private long textStartOffset;
+	private long fileEndOffset;
+	private long textEndOffset;
 
-    /**
-     * Create a new instance.
-     * 
-     * @param styledString
-     *            The styled string of the instance, may be empty not
-     *            <code>null</code>.
-     */
-    public HexEditorContentOutlineTreeObject(StyledString styledString) {
-	if (styledString == null) {
-	    throw new IllegalArgumentException("Parameter 'styledString' must not be null.");
+	/**
+	 * Create a new instance.
+	 * 
+	 * @param styledString The styled string of the instance, may be empty not
+	 *                     <code>null</code>.
+	 */
+	public HexEditorContentOutlineTreeObject(StyledString styledString) {
+		if (styledString == null) {
+			throw new IllegalArgumentException("Parameter 'styledString' must not be null.");
+		}
+		this.styledString = new StyledString().append(styledString);
 	}
-	this.styledString = new StyledString().append(styledString);
-    }
 
-    /**
-     * Gets the styled string of the object.
-     * 
-     * @return The styled string, not <code>null</code>.
-     */
-    public StyledString getStyledString() {
-	return styledString;
-    }
-
-    /**
-     * Gets the start offset of the tree object in the file.
-     * 
-     * @return The start offset, a non-negative integer.
-     */
-    public long getFileStartOffset() {
-	return fileStartOffset;
-    }
-
-    /**
-     * Sets the start offset of the tree object in the file.
-     * 
-     * @param fileOffset
-     *            The start offset, a non-negative integer or <code>-1</code> if
-     *            the offset is not defined.
-     */
-    public void setFileStartOffset(long fileOffset) {
-
-	this.fileStartOffset = fileOffset;
-    }
-
-    /**
-     * Gets the end offset of the tree object in the file.
-     * 
-     * @return The end offset, a non-negative integer or <code>-1</code> if the
-     *         offset is not defined.
-     */
-    public long getFileEndOffset() {
-	return fileEndOffset;
-    }
-
-    /**
-     * Sets the end offset of the tree object in the file or <code>-1</code> if
-     * the offset is not defined.
-     * 
-     * @param fileOffset
-     *            The end offset, a non-negative integer or <code>-1</code> if
-     *            the offset is not defined.
-     */
-    public void setFileEndOffset(long fileOffset) {
-
-	this.fileEndOffset = fileOffset;
-    }
-
-    /**
-     * Gets the start offset of the tree object in the text.
-     * 
-     * @return The offset, a non-negative integer.
-     */
-    public long getTextStartOffset() {
-	return textStartOffset;
-    }
-
-    /**
-     * Sets text start offset of the tree object in the text
-     * 
-     * @param textOffset
-     *            The offset, a non-negative integer.
-     */
-    public void setTextStartOffset(long textOffset) {
-	if (textOffset < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'textOffset' must not be negative. Specified value is " + textOffset + ".");
+	/**
+	 * Gets the styled string of the object.
+	 * 
+	 * @return The styled string, not <code>null</code>.
+	 */
+	public StyledString getStyledString() {
+		return styledString;
 	}
-	this.textStartOffset = textOffset;
-    }
 
-    /**
-     * Gets the end offset of the tree object in the text.
-     * 
-     * @return The offset, a non-negative integer.
-     */
-    public long getTextEndOffset() {
-	return textEndOffset;
-    }
-
-    /**
-     * Sets text end offset of the tree object in the text
-     * 
-     * @param textOffset
-     *            The offset, a non-negative integer.
-     */
-    public void setTextEndOffset(int textOffset) {
-	if (textOffset < 0) {
-	    throw new IllegalArgumentException(
-		    "Parameter 'textOffset' must not be negative. Specified value is " + textOffset + ".");
+	/**
+	 * Gets the start offset of the tree object in the file.
+	 * 
+	 * @return The start offset, a non-negative integer.
+	 */
+	public long getFileStartOffset() {
+		return fileStartOffset;
 	}
-	this.textEndOffset = textOffset;
-    }
+
+	/**
+	 * Sets the start offset of the tree object in the file.
+	 * 
+	 * @param fileOffset The start offset, a non-negative integer or <code>-1</code>
+	 *                   if the offset is not defined.
+	 */
+	public void setFileStartOffset(long fileOffset) {
+
+		this.fileStartOffset = fileOffset;
+	}
+
+	/**
+	 * Gets the end offset of the tree object in the file.
+	 * 
+	 * @return The end offset, a non-negative integer or <code>-1</code> if the
+	 *         offset is not defined.
+	 */
+	public long getFileEndOffset() {
+		return fileEndOffset;
+	}
+
+	/**
+	 * Sets the end offset of the tree object in the file or <code>-1</code> if the
+	 * offset is not defined.
+	 * 
+	 * @param fileOffset The end offset, a non-negative integer or <code>-1</code>
+	 *                   if the offset is not defined.
+	 */
+	public void setFileEndOffset(long fileOffset) {
+
+		this.fileEndOffset = fileOffset;
+	}
+
+	/**
+	 * Gets the start offset of the tree object in the text.
+	 * 
+	 * @return The offset, a non-negative integer.
+	 */
+	public long getTextStartOffset() {
+		return textStartOffset;
+	}
+
+	/**
+	 * Sets text start offset of the tree object in the text
+	 * 
+	 * @param textOffset The offset, a non-negative integer.
+	 */
+	public void setTextStartOffset(long textOffset) {
+		if (textOffset < 0) {
+			throw new IllegalArgumentException(
+					"Parameter 'textOffset' must not be negative. Specified value is " + textOffset + ".");
+		}
+		this.textStartOffset = textOffset;
+	}
+
+	/**
+	 * Gets the end offset of the tree object in the text.
+	 * 
+	 * @return The offset, a non-negative integer.
+	 */
+	public long getTextEndOffset() {
+		return textEndOffset;
+	}
+
+	/**
+	 * Sets text end offset of the tree object in the text
+	 * 
+	 * @param textOffset The offset, a non-negative integer.
+	 */
+	public void setTextEndOffset(int textOffset) {
+		if (textOffset < 0) {
+			throw new IllegalArgumentException(
+					"Parameter 'textOffset' must not be negative. Specified value is " + textOffset + ".");
+		}
+		this.textEndOffset = textOffset;
+	}
 }

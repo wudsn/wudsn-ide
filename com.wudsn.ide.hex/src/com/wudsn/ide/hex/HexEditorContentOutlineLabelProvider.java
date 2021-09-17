@@ -31,50 +31,50 @@ import org.eclipse.swt.graphics.Image;
  */
 final class HexEditorContentOutlineLabelProvider extends DelegatingStyledCellLabelProvider {
 
-    /** Outline segment image */
-    private final Image segmentImage;
+	/** Outline segment image */
+	private final Image segmentImage;
 
-    private static class HexEditorStyledLabelProvider extends LabelProvider implements IStyledLabelProvider {
+	private static class HexEditorStyledLabelProvider extends LabelProvider implements IStyledLabelProvider {
+
+		/**
+		 * Creation is local.
+		 */
+		HexEditorStyledLabelProvider() {
+
+		}
+
+		@Override
+		public StyledString getStyledText(Object element) {
+			if (element == null) {
+				throw new IllegalArgumentException("Parameter 'element' must not be null.");
+			}
+			HexEditorContentOutlineTreeObject treeObject;
+			treeObject = (HexEditorContentOutlineTreeObject) element;
+			return treeObject.getStyledString();
+		}
+	}
 
 	/**
-	 * Creation is local.
+	 * Creates a new instance.
+	 * 
+	 * Called by
+	 * {@link HexEditorContentOutlinePage#createControl(org.eclipse.swt.widgets.Composite)}
+	 * .
 	 */
-	HexEditorStyledLabelProvider() {
-
+	HexEditorContentOutlineLabelProvider() {
+		super(new HexEditorStyledLabelProvider());
+		HexPlugin plugin;
+		plugin = HexPlugin.getInstance();
+		segmentImage = plugin.getImage("hex-editor-segment-16x16.gif");
 	}
 
 	@Override
-	public StyledString getStyledText(Object element) {
-	    if (element == null) {
-		throw new IllegalArgumentException("Parameter 'element' must not be null.");
-	    }
-	    HexEditorContentOutlineTreeObject treeObject;
-	    treeObject = (HexEditorContentOutlineTreeObject) element;
-	    return treeObject.getStyledString();
+	public Image getImage(Object element) {
+		Image result;
+
+		result = segmentImage;
+
+		return result;
 	}
-    }
-
-    /**
-     * Creates a new instance.
-     * 
-     * Called by
-     * {@link HexEditorContentOutlinePage#createControl(org.eclipse.swt.widgets.Composite)}
-     * .
-     */
-    HexEditorContentOutlineLabelProvider() {
-	super(new HexEditorStyledLabelProvider());
-	HexPlugin plugin;
-	plugin = HexPlugin.getInstance();
-	segmentImage = plugin.getImage("hex-editor-segment-16x16.gif");
-    }
-
-    @Override
-    public Image getImage(Object element) {
-	Image result;
-
-	result = segmentImage;
-
-	return result;
-    }
 
 }

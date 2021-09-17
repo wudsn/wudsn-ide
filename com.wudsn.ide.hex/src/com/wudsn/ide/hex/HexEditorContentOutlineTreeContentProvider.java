@@ -31,63 +31,63 @@ import org.eclipse.jface.viewers.Viewer;
  */
 final class HexEditorContentOutlineTreeContentProvider implements ITreeContentProvider {
 
-    HexEditorContentOutlineTreeContentProvider() {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object[] getChildren(Object parentElement) {
-	return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getParent(Object element) {
-
-	return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasChildren(Object element) {
-	return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object[] getElements(Object inputElement) {
-	Object[] result;
-	if (inputElement instanceof List<?>) {
-	    result = ((List<?>) inputElement).toArray();
-	} else {
-	    result = null;
+	HexEditorContentOutlineTreeContentProvider() {
 	}
 
-	return result;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Object[] getChildren(Object parentElement) {
+		return null;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void dispose() {
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Object getParent(Object element) {
 
-    }
+		return null;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean hasChildren(Object element) {
+		return false;
+	}
 
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Object[] getElements(Object inputElement) {
+		Object[] result;
+		if (inputElement instanceof List<?>) {
+			result = ((List<?>) inputElement).toArray();
+		} else {
+			result = null;
+		}
+
+		return result;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void dispose() {
+
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+
+	}
 
 }

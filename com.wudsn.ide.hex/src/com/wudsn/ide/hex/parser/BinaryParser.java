@@ -26,14 +26,14 @@ import com.wudsn.ide.hex.HexEditorParser;
 
 public class BinaryParser extends HexEditorParser {
 
-    @Override
-    public boolean parse(StyledString contentBuilder) {
-	if (contentBuilder == null) {
-	    throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
+	@Override
+	public boolean parse(StyledString contentBuilder) {
+		if (contentBuilder == null) {
+			throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
+		}
+		HexEditorContentOutlineTreeObject treeObject = new HexEditorContentOutlineTreeObject(contentBuilder);
+		printBytes(treeObject, contentBuilder, 0, fileContent.getLength() - 1, false, 0);
+		return false;
 	}
-	HexEditorContentOutlineTreeObject treeObject = new HexEditorContentOutlineTreeObject(contentBuilder);
-	printBytes(treeObject, contentBuilder, 0, fileContent.getLength() - 1, false, 0);
-	return false;
-    }
 
 }

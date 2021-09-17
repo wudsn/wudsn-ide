@@ -26,26 +26,26 @@ import com.wudsn.ide.hex.HexEditorContentOutlineTreeObject;
 
 public final class AtariSAPParser extends AtariParser {
 
-    @Override
-    public boolean parse(StyledString contentBuilder) {
-	if (contentBuilder == null) {
-	    throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
-	}
-	long offset = 0;
-	int fileContentLenght = fileContent.getLength();
-	int maxOffset = fileContentLenght - 2;
-	while (offset < maxOffset && fileContent.getByte(offset) != 0xff && fileContent.getByte(offset) != 0xff) {
-	    offset++;
-	}
-	if (offset == maxOffset) {
-	    return false;
-	}
-	HexEditorContentOutlineTreeObject treeObject = printBlockHeader(contentBuilder,
-		Texts.HEX_EDITOR_ATARI_SAP_FILE_HEADER, -1, "", 0, 0, 0);
-	printBytes(treeObject, contentBuilder, 0, offset - 1, false, 0);
-	contentBuilder.append("\n");
+	@Override
+	public boolean parse(StyledString contentBuilder) {
+		if (contentBuilder == null) {
+			throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
+		}
+		long offset = 0;
+		int fileContentLenght = fileContent.getLength();
+		int maxOffset = fileContentLenght - 2;
+		while (offset < maxOffset && fileContent.getByte(offset) != 0xff && fileContent.getByte(offset) != 0xff) {
+			offset++;
+		}
+		if (offset == maxOffset) {
+			return false;
+		}
+		HexEditorContentOutlineTreeObject treeObject = printBlockHeader(contentBuilder,
+				Texts.HEX_EDITOR_ATARI_SAP_FILE_HEADER, -1, "", 0, 0, 0);
+		printBytes(treeObject, contentBuilder, 0, offset - 1, false, 0);
+		contentBuilder.append("\n");
 
-	return parseAtariCOMFile(contentBuilder, offset, fileContentLenght);
-    }
+		return parseAtariCOMFile(contentBuilder, offset, fileContentLenght);
+	}
 
 }

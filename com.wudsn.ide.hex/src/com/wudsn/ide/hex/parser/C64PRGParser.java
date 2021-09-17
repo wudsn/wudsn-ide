@@ -27,37 +27,37 @@ import com.wudsn.ide.hex.HexEditorParser;
 
 public class C64PRGParser extends HexEditorParser {
 
-    @Override
-    public boolean parse(StyledString contentBuilder) {
-	if (contentBuilder == null) {
-	    throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
+	@Override
+	public boolean parse(StyledString contentBuilder) {
+		if (contentBuilder == null) {
+			throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
+		}
+		boolean error;
+		int startAddress;
+		int endAddress;
+
+		int length = fileContent.getLength();
+		long offset = 0;
+
+		error = (length < 2);
+		if (!error) {
+			startAddress = fileContent.getByte(offset + 0) + 256 * fileContent.getByte(offset + 1);
+			endAddress = startAddress + length - 3;
+
+			HexEditorContentOutlineTreeObject treeObject;
+			treeObject = printBlockHeader(contentBuilder, Texts.HEX_EDITOR_C64_PRG_HEADER, -1,
+					Texts.HEX_EDITOR_C64_PRG_HEADER_PARAMETERS, offset, startAddress, endAddress);
+			offset = printBytes(treeObject, contentBuilder, offset, offset + 1, true, 0);
+
+			error = endAddress > 0xffff;
+			if (!error) {
+				printBytes(treeObject, contentBuilder, offset, length - 1, true, startAddress);
+			}
+		}
+		if (error) {
+			printBlockWithError(contentBuilder, Texts.HEX_EDITOR_C64_PRG_ERROR, length, offset);
+		}
+		return error;
 	}
-	boolean error;
-	int startAddress;
-	int endAddress;
-
-	int length = fileContent.getLength();
-	long offset = 0;
-
-	error = (length < 2);
-	if (!error) {
-	    startAddress = fileContent.getByte(offset + 0) + 256 * fileContent.getByte(offset + 1);
-	    endAddress = startAddress + length - 3;
-
-	    HexEditorContentOutlineTreeObject treeObject;
-	    treeObject = printBlockHeader(contentBuilder, Texts.HEX_EDITOR_C64_PRG_HEADER, -1,
-		    Texts.HEX_EDITOR_C64_PRG_HEADER_PARAMETERS, offset, startAddress, endAddress);
-	    offset = printBytes(treeObject, contentBuilder, offset, offset + 1, true, 0);
-
-	    error = endAddress > 0xffff;
-	    if (!error) {
-		printBytes(treeObject, contentBuilder, offset, length - 1, true, startAddress);
-	    }
-	}
-	if (error) {
-	    printBlockWithError(contentBuilder, Texts.HEX_EDITOR_C64_PRG_ERROR, length, offset);
-	}
-	return error;
-    }
 
 }

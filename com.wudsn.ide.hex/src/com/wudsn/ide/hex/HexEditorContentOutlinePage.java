@@ -34,52 +34,52 @@ import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
  */
 final class HexEditorContentOutlinePage extends ContentOutlinePage {
 
-    private HexEditor editor;
-    private Object input;
+	private HexEditor editor;
+	private Object input;
 
-    HexEditorContentOutlinePage(HexEditor editor) {
-	if (editor == null) {
-	    throw new IllegalArgumentException("Parameter 'editor' must not be null.");
+	HexEditorContentOutlinePage(HexEditor editor) {
+		if (editor == null) {
+			throw new IllegalArgumentException("Parameter 'editor' must not be null.");
+		}
+		this.editor = editor;
+
 	}
-	this.editor = editor;
 
-    }
+	@Override
+	public void createControl(Composite parent) {
+		super.createControl(parent);
 
-    @Override
-    public void createControl(Composite parent) {
-	super.createControl(parent);
+		TreeViewer viewer = getTreeViewer();
+		viewer.getControl().setFont(JFaceResources.getTextFont());
+		viewer.setContentProvider(new HexEditorContentOutlineTreeContentProvider());
+		viewer.setLabelProvider(new HexEditorContentOutlineLabelProvider());
+		viewer.addSelectionChangedListener(this);
+		viewer.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
 
-	TreeViewer viewer = getTreeViewer();
-	viewer.getControl().setFont(JFaceResources.getTextFont());
-	viewer.setContentProvider(new HexEditorContentOutlineTreeContentProvider());
-	viewer.setLabelProvider(new HexEditorContentOutlineLabelProvider());
-	viewer.addSelectionChangedListener(this);
-	viewer.setAutoExpandLevel(AbstractTreeViewer.ALL_LEVELS);
-
-	updateTreeView();
-    }
-
-    @Override
-    public void selectionChanged(SelectionChangedEvent event) {
-	super.selectionChanged(event);
-
-	ISelection selection = event.getSelection();
-	editor.setSelection(selection);
-    }
-
-    void setInput(Object input) {
-	if (input == null) {
-	    throw new IllegalArgumentException("Parameter 'input' must not be null.");
+		updateTreeView();
 	}
-	this.input = input;
-	updateTreeView();
-    }
 
-    private void updateTreeView() {
-	TreeViewer viewer = getTreeViewer();
-	if (viewer != null) {
-	    viewer.setInput(input);
+	@Override
+	public void selectionChanged(SelectionChangedEvent event) {
+		super.selectionChanged(event);
+
+		ISelection selection = event.getSelection();
+		editor.setSelection(selection);
 	}
-    }
+
+	void setInput(Object input) {
+		if (input == null) {
+			throw new IllegalArgumentException("Parameter 'input' must not be null.");
+		}
+		this.input = input;
+		updateTreeView();
+	}
+
+	private void updateTreeView() {
+		TreeViewer viewer = getTreeViewer();
+		if (viewer != null) {
+			viewer.setInput(input);
+		}
+	}
 
 }

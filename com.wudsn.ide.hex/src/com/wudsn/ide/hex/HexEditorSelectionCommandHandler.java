@@ -35,43 +35,43 @@ import com.wudsn.ide.base.gui.MessageManager;
  */
 public abstract class HexEditorSelectionCommandHandler extends AbstractHandler {
 
-    protected ExecutionEvent event;
-    protected String commandId;
-    protected HexEditorSelection hexEditorSelection;
-    protected HexEditor hexEditor;
-    protected MessageManager messageManager;
+	protected ExecutionEvent event;
+	protected String commandId;
+	protected HexEditorSelection hexEditorSelection;
+	protected HexEditor hexEditor;
+	protected MessageManager messageManager;
 
-    /**
-     * Creation is protected.
-     */
-    protected HexEditorSelectionCommandHandler() {
-	super();
-    }
-
-    @Override
-    public final Object execute(ExecutionEvent event) throws ExecutionException {
-	IEditorPart editorPart;
-	ISelection menuEditorInputSelection;
-	editorPart = HandlerUtil.getActiveEditor(event);
-	menuEditorInputSelection = HandlerUtil.getActiveMenuSelection(event);
-
-	if (editorPart instanceof HexEditor && menuEditorInputSelection instanceof HexEditorSelection) {
-
-	    this.event = event;
-	    this.commandId = event.getCommand().getId();
-	    this.hexEditorSelection = (HexEditorSelection) menuEditorInputSelection;
-	    this.hexEditor = ((HexEditor) editorPart);
-	    this.messageManager = hexEditor.getMessageManager();
-	    messageManager.clearMessages();
-
-	    performAction();
-
-	    messageManager.displayMessages();
-
+	/**
+	 * Creation is protected.
+	 */
+	protected HexEditorSelectionCommandHandler() {
+		super();
 	}
 
-	return null;
-    }
+	@Override
+	public final Object execute(ExecutionEvent event) throws ExecutionException {
+		IEditorPart editorPart;
+		ISelection menuEditorInputSelection;
+		editorPart = HandlerUtil.getActiveEditor(event);
+		menuEditorInputSelection = HandlerUtil.getActiveMenuSelection(event);
 
-    protected abstract void performAction() throws ExecutionException;
+		if (editorPart instanceof HexEditor && menuEditorInputSelection instanceof HexEditorSelection) {
+
+			this.event = event;
+			this.commandId = event.getCommand().getId();
+			this.hexEditorSelection = (HexEditorSelection) menuEditorInputSelection;
+			this.hexEditor = ((HexEditor) editorPart);
+			this.messageManager = hexEditor.getMessageManager();
+			messageManager.clearMessages();
+
+			performAction();
+
+			messageManager.displayMessages();
+
+		}
+
+		return null;
+	}
+
+	protected abstract void performAction() throws ExecutionException;
 }

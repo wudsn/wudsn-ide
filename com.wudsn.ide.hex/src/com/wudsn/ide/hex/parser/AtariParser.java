@@ -27,101 +27,101 @@ import com.wudsn.ide.hex.HexEditorParser;
 
 public abstract class AtariParser extends HexEditorParser {
 
-    public final static int COM_HEADER = 0xffff;
+	public final static int COM_HEADER = 0xffff;
 
-    protected final boolean parseAtariCOMFile(StyledString contentBuilder, long offset, int fileContentLength) {
-	if (contentBuilder == null) {
-	    throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
-	}
-	boolean error;
-	int startAddress;
-	int endAddress;
-
-	int blockCount;
-	long blockEnd;
-
-	// Skip offset bytes in lookup array.
-	skipByteTextIndex(offset);
-
-	HexEditorContentOutlineTreeObject treeObject;
-
-	error = (fileContentLength - offset) < 7;
-	if (!error) {
-	    startAddress = fileContent.getWord(offset + 2);
-	    endAddress = fileContent.getWord(offset + 4);
-
-	    blockCount = 1;
-	    blockEnd = offset + endAddress - startAddress + 6;
-	    treeObject = printBlockHeader(contentBuilder, Texts.HEX_EDITOR_ATARI_COM_BLOCK_HEADER, blockCount,
-		    Texts.HEX_EDITOR_ATARI_COM_BLOCK_HEADER_PARAMETERS, offset, startAddress, endAddress);
-	    offset = printBytes(treeObject, contentBuilder, offset, offset + 5, true, 0);
-
-	    boolean blockMode;
-	    blockMode = true;
-	    error = blockEnd >= fileContentLength;
-	    try {
-		while (blockMode && !error) {
-		    offset = printBytes(treeObject, contentBuilder, offset, blockEnd, true, startAddress);
-
-		    int headerLength = -1;
-		    // No more bytes left?
-		    if (offset == fileContentLength) {
-			blockMode = false;
-		    } else
-		    // At least 5 bytes available? (4 header bytes and 1 data
-		    // byte)
-		    if (fileContentLength - offset < 5) {
-			error = true;
-		    } else {
-			boolean comHeader;
-			comHeader = fileContent.getWord(offset) == COM_HEADER;
-			if (comHeader) {
-			    // At least 7 bytes available? (6 header bytes and 1
-			    // data byte)
-			    if (fileContentLength - offset < 7) {
-				error = true;
-			    } else {
-				// Inner COM header found
-				headerLength = 6;
-				startAddress = fileContent.getByte(offset + 2) + 256 * fileContent.getByte(offset + 3);
-				endAddress = fileContent.getByte(offset + 4) + 256 * fileContent.getByte(offset + 5);
-			    }
-			} else {
-			    // No inner COM header found
-			    headerLength = 4;
-			    startAddress = fileContent.getByte(offset + 0) + 256 * fileContent.getByte(offset + 1);
-			    endAddress = fileContent.getByte(offset + 2) + 256 * fileContent.getByte(offset + 3);
-			}
-			error = endAddress < startAddress;
-		    }
-
-		    if (blockMode) {
-			contentBuilder.append("\n");
-		    }
-
-		    if (blockMode && !error) {
-			blockCount++;
-			blockEnd = offset + endAddress - startAddress + headerLength;
-			if (blockEnd < fileContentLength) {
-
-			    treeObject = printBlockHeader(contentBuilder, Texts.HEX_EDITOR_ATARI_COM_BLOCK_HEADER,
-				    blockCount, Texts.HEX_EDITOR_ATARI_COM_BLOCK_HEADER_PARAMETERS, offset,
-				    startAddress, endAddress);
-			    offset = printBytes(treeObject, contentBuilder, offset, offset + headerLength - 1, true, 0);
-			} else {
-			    error = true;
-			}
-		    }
+	protected final boolean parseAtariCOMFile(StyledString contentBuilder, long offset, int fileContentLength) {
+		if (contentBuilder == null) {
+			throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
 		}
-	    } catch (RuntimeException ex) {
-		contentBuilder.append(ex.toString());
-		error = true;
-	    }
+		boolean error;
+		int startAddress;
+		int endAddress;
+
+		int blockCount;
+		long blockEnd;
+
+		// Skip offset bytes in lookup array.
+		skipByteTextIndex(offset);
+
+		HexEditorContentOutlineTreeObject treeObject;
+
+		error = (fileContentLength - offset) < 7;
+		if (!error) {
+			startAddress = fileContent.getWord(offset + 2);
+			endAddress = fileContent.getWord(offset + 4);
+
+			blockCount = 1;
+			blockEnd = offset + endAddress - startAddress + 6;
+			treeObject = printBlockHeader(contentBuilder, Texts.HEX_EDITOR_ATARI_COM_BLOCK_HEADER, blockCount,
+					Texts.HEX_EDITOR_ATARI_COM_BLOCK_HEADER_PARAMETERS, offset, startAddress, endAddress);
+			offset = printBytes(treeObject, contentBuilder, offset, offset + 5, true, 0);
+
+			boolean blockMode;
+			blockMode = true;
+			error = blockEnd >= fileContentLength;
+			try {
+				while (blockMode && !error) {
+					offset = printBytes(treeObject, contentBuilder, offset, blockEnd, true, startAddress);
+
+					int headerLength = -1;
+					// No more bytes left?
+					if (offset == fileContentLength) {
+						blockMode = false;
+					} else
+					// At least 5 bytes available? (4 header bytes and 1 data
+					// byte)
+					if (fileContentLength - offset < 5) {
+						error = true;
+					} else {
+						boolean comHeader;
+						comHeader = fileContent.getWord(offset) == COM_HEADER;
+						if (comHeader) {
+							// At least 7 bytes available? (6 header bytes and 1
+							// data byte)
+							if (fileContentLength - offset < 7) {
+								error = true;
+							} else {
+								// Inner COM header found
+								headerLength = 6;
+								startAddress = fileContent.getByte(offset + 2) + 256 * fileContent.getByte(offset + 3);
+								endAddress = fileContent.getByte(offset + 4) + 256 * fileContent.getByte(offset + 5);
+							}
+						} else {
+							// No inner COM header found
+							headerLength = 4;
+							startAddress = fileContent.getByte(offset + 0) + 256 * fileContent.getByte(offset + 1);
+							endAddress = fileContent.getByte(offset + 2) + 256 * fileContent.getByte(offset + 3);
+						}
+						error = endAddress < startAddress;
+					}
+
+					if (blockMode) {
+						contentBuilder.append("\n");
+					}
+
+					if (blockMode && !error) {
+						blockCount++;
+						blockEnd = offset + endAddress - startAddress + headerLength;
+						if (blockEnd < fileContentLength) {
+
+							treeObject = printBlockHeader(contentBuilder, Texts.HEX_EDITOR_ATARI_COM_BLOCK_HEADER,
+									blockCount, Texts.HEX_EDITOR_ATARI_COM_BLOCK_HEADER_PARAMETERS, offset,
+									startAddress, endAddress);
+							offset = printBytes(treeObject, contentBuilder, offset, offset + headerLength - 1, true, 0);
+						} else {
+							error = true;
+						}
+					}
+				}
+			} catch (RuntimeException ex) {
+				contentBuilder.append(ex.toString());
+				error = true;
+			}
+		}
+		if (error) {
+			printBlockWithError(contentBuilder, Texts.HEX_EDITOR_ATARI_COM_BLOCK_ERROR, fileContentLength, offset);
+		}
+		return error;
 	}
-	if (error) {
-	    printBlockWithError(contentBuilder, Texts.HEX_EDITOR_ATARI_COM_BLOCK_ERROR, fileContentLength, offset);
-	}
-	return error;
-    }
 
 }

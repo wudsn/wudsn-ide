@@ -22,27 +22,27 @@ package com.wudsn.ide.hex.parser;
 import org.eclipse.jface.viewers.StyledString;
 
 public final class AtariDiskImageKFileParser extends AtariDiskImageParser {
-    // The offset where the COM file starts in an Atari Disk Image (k-file).
-    public static final int ATARI_DISK_IMAGE_K_FILE_COM_FILE_OFFSET = 16 + 3 * 128;
+	// The offset where the COM file starts in an Atari Disk Image (k-file).
+	public static final int ATARI_DISK_IMAGE_K_FILE_COM_FILE_OFFSET = 16 + 3 * 128;
 
-    @Override
-    public boolean parse(StyledString contentBuilder) {
+	@Override
+	public boolean parse(StyledString contentBuilder) {
 
-	if (contentBuilder == null) {
-	    throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
+		if (contentBuilder == null) {
+			throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
+		}
+
+		boolean error = super.parse(contentBuilder);
+
+		// If the disk image is a k-file image, the contained COM file is parsed
+		// as well.
+		if (!error) {
+			// The length of the k-file is stored in $709/$70a.
+			int length = ATARI_DISK_IMAGE_K_FILE_COM_FILE_OFFSET + fileContent.getByte(0x19)
+					+ 256 * fileContent.getByte(0x1a);
+			error = parseAtariCOMFile(contentBuilder, ATARI_DISK_IMAGE_K_FILE_COM_FILE_OFFSET, length);
+		}
+		return error;
 	}
-
-	boolean error = super.parse(contentBuilder);
-
-	// If the disk image is a k-file image, the contained COM file is parsed
-	// as well.
-	if (!error) {
-	    // The length of the k-file is stored in $709/$70a.
-	    int length = ATARI_DISK_IMAGE_K_FILE_COM_FILE_OFFSET + fileContent.getByte(0x19) + 256
-		    * fileContent.getByte(0x1a);
-	    error = parseAtariCOMFile(contentBuilder, ATARI_DISK_IMAGE_K_FILE_COM_FILE_OFFSET, length);
-	}
-	return error;
-    }
 
 }

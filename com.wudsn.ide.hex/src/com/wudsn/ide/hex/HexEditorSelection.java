@@ -29,78 +29,75 @@ import org.eclipse.jface.viewers.ISelection;
  */
 final class HexEditorSelection implements ISelection {
 
-    private long startOffset;
-    private long endOffset;
-    private byte[] bytes;
+	private long startOffset;
+	private long endOffset;
+	private byte[] bytes;
 
-    /**
-     * Creates a new selection.
-     * 
-     * @param startOffset
-     *            The start offset in the original array, a non-negative number.
-     * @param endOffset
-     *            The end offset in the original array, a non-negative number
-     *            greater or equal to the start offset.
-     * @param bytes
-     *            The content of the selection, may be empty, not
-     *            <code>null</code>.
-     */
-    public HexEditorSelection(long startOffset, long endOffset, byte[] bytes) {
+	/**
+	 * Creates a new selection.
+	 * 
+	 * @param startOffset The start offset in the original array, a non-negative
+	 *                    number.
+	 * @param endOffset   The end offset in the original array, a non-negative
+	 *                    number greater or equal to the start offset.
+	 * @param bytes       The content of the selection, may be empty, not
+	 *                    <code>null</code>.
+	 */
+	public HexEditorSelection(long startOffset, long endOffset, byte[] bytes) {
 
-	if (startOffset < 0) {
-	    throw new IllegalArgumentException("Parameter 'startOffset' must not be negative, specified value is "
-		    + startOffset + ".");
+		if (startOffset < 0) {
+			throw new IllegalArgumentException(
+					"Parameter 'startOffset' must not be negative, specified value is " + startOffset + ".");
+		}
+		if (endOffset < startOffset) {
+			throw new IllegalArgumentException("Parameter 'endOffset' must not be smaller than startOffset "
+					+ startOffset + ", specified value is " + endOffset + ".");
+		}
+		if (bytes == null) {
+			throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
+		}
+		this.startOffset = startOffset;
+		this.endOffset = endOffset;
+		this.bytes = bytes;
 	}
-	if (endOffset < startOffset) {
-	    throw new IllegalArgumentException("Parameter 'endOffset' must not be smaller than startOffset "
-		    + startOffset + ", specified value is " + endOffset + ".");
+
+	@Override
+	public boolean isEmpty() {
+		return bytes.length == 0;
 	}
-	if (bytes == null) {
-	    throw new IllegalArgumentException("Parameter 'bytes' must not be null.");
+
+	/**
+	 * Gets the start offset of the selection in the original array.
+	 * 
+	 * @return The start offset in the original array, a non-negative number.
+	 * 
+	 */
+	public long getStartOffset() {
+		return startOffset;
 	}
-	this.startOffset = startOffset;
-	this.endOffset = endOffset;
-	this.bytes = bytes;
-    }
 
-    @Override
-    public boolean isEmpty() {
-	return bytes.length == 0;
-    }
+	/**
+	 * Gets the end offset in the original array.
+	 * 
+	 * @return The end offset in the original array, a non-negative number greater
+	 *         or equal to the start offset.
+	 */
+	public long getEndOffset() {
+		return endOffset;
+	}
 
-    /**
-     * Gets the start offset of the selection in the original array.
-     * 
-     * @return The start offset in the original array, a non-negative number.
-     * 
-     */
-    public long getStartOffset() {
-	return startOffset;
-    }
+	/**
+	 * Gets the content of the selection.
+	 * 
+	 * @return The content of the selection, may be empty, not <code>null</code> .
+	 */
+	public byte[] getBytes() {
+		return bytes;
+	}
 
-    /**
-     * Gets the end offset in the original array.
-     * 
-     * @return The end offset in the original array, a non-negative number
-     *         greater or equal to the start offset.
-     */
-    public long getEndOffset() {
-	return endOffset;
-    }
-
-    /**
-     * Gets the content of the selection.
-     * 
-     * @return The content of the selection, may be empty, not <code>null</code>
-     *         .
-     */
-    public byte[] getBytes() {
-	return bytes;
-    }
-
-    @Override
-    public String toString() {
-	return "HexEditorSelection from " + startOffset + " to " + endOffset + ": " + bytes.length + " bytes";
-    }
+	@Override
+	public String toString() {
+		return "HexEditorSelection from " + startOffset + " to " + endOffset + ": " + bytes.length + " bytes";
+	}
 
 }

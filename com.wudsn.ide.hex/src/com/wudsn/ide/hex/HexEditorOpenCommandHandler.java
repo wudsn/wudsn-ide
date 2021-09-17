@@ -28,10 +28,10 @@ import com.wudsn.ide.base.editor.CommonOpenEditorCommandHandler;
  */
 public final class HexEditorOpenCommandHandler extends CommonOpenEditorCommandHandler {
 
-    /**
-     * Creation is public. Called by extension "org.eclipse.ui.popupMenus".
-     */
-    public HexEditorOpenCommandHandler() {
-	super(HexEditor.ID);
-    }
+	/**
+	 * Creation is public. Called by extension "org.eclipse.ui.popupMenus".
+	 */
+	public HexEditorOpenCommandHandler() {
+		super(HexEditor.ID);
+	}
 }

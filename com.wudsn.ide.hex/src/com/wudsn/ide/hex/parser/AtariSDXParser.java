@@ -30,165 +30,164 @@ import com.wudsn.ide.hex.Texts;
 
 public class AtariSDXParser extends HexEditorParser {
 
-    public static final int NON_RELOC_HEADER = 0xfffa;
-    public static final int RELOC_HEADER = 0xfffe;
-    public static final int UPDATE_RELOC_HEADER = 0xfffd;
-    public static final int UPDATE_SYMBOLS_HEADER = 0xfffb;
-    public static final int DEFINE_SYMBOLS_HEADER = 0xfffc;
+	public static final int NON_RELOC_HEADER = 0xfffa;
+	public static final int RELOC_HEADER = 0xfffe;
+	public static final int UPDATE_RELOC_HEADER = 0xfffd;
+	public static final int UPDATE_SYMBOLS_HEADER = 0xfffb;
+	public static final int DEFINE_SYMBOLS_HEADER = 0xfffc;
 
-    @Override
-    public boolean parse(StyledString contentBuilder) {
-	if (contentBuilder == null) {
-	    throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
-	}
-
-	boolean error;
-	long offset = 0;
-
-	// Skip offset bytes in lookup array.
-	skipByteTextIndex(offset);
-
-	HexEditorContentOutlineTreeObject treeObject;
-	int fileContentLength = fileContent.getLength();
-
-	error = (fileContentLength - offset) < 7;
-	boolean first = true;
-	boolean more = true;
-	try {
-	    while (more && !error) {
-		if (!first) {
-		    contentBuilder.append("\n");
+	@Override
+	public boolean parse(StyledString contentBuilder) {
+		if (contentBuilder == null) {
+			throw new IllegalArgumentException("Parameter 'contentBuilder' must not be null.");
 		}
-		first = false;
-		if (offset == fileContentLength) {
-		    more = false;
-		} else {
-		    int header = fileContent.getWord(offset);
-		    if (header == NON_RELOC_HEADER) {
-			int startAddress = fileContent.getWord(offset + 2);
-			int endAddress = fileContent.getWord(offset + 4);
 
-			treeObject = printBlockHeader(contentBuilder, Texts.HEX_EDITOR_ATARI_SDX_NON_RELOC_BLOCK_HEADER,
-				-1, Texts.HEX_EDITOR_ATARI_SDX_NON_RELOC_BLOCK_HEADER_PARAMETERS, offset, startAddress,
-				endAddress);
-			offset = printBytes(treeObject, contentBuilder, offset, offset + 5, true, 0);
+		boolean error;
+		long offset = 0;
 
-			long blockEnd = offset + endAddress - startAddress;
+		// Skip offset bytes in lookup array.
+		skipByteTextIndex(offset);
 
-			offset = printBytes(treeObject, contentBuilder, offset, blockEnd, true, startAddress);
+		HexEditorContentOutlineTreeObject treeObject;
+		int fileContentLength = fileContent.getLength();
 
-		    } else if (header == RELOC_HEADER) {
-			int blockNumber = fileContent.getByte(offset + 2);
-			int blockId = fileContent.getByte(offset + 3);
-			int blockOffset = fileContent.getWord(offset + 4);
-			int blockLength = fileContent.getWord(offset + 6);
+		error = (fileContentLength - offset) < 7;
+		boolean first = true;
+		boolean more = true;
+		try {
+			while (more && !error) {
+				if (!first) {
+					contentBuilder.append("\n");
+				}
+				first = false;
+				if (offset == fileContentLength) {
+					more = false;
+				} else {
+					int header = fileContent.getWord(offset);
+					if (header == NON_RELOC_HEADER) {
+						int startAddress = fileContent.getWord(offset + 2);
+						int endAddress = fileContent.getWord(offset + 4);
 
-			String headerText = TextUtility.format(Texts.HEX_EDITOR_ATARI_SDX_RELOC_BLOCK_HEADER,
-				NumberUtility.getLongValueDecimalString(blockNumber),
-				HexUtility.getByteValueHexString(blockId),
-				HexUtility.getLongValueHexString(blockOffset, 4),
-				HexUtility.getLongValueHexString(blockLength, 4));
-			StyledString headerStyledString = new StyledString(headerText, offsetStyler);
-			contentBuilder.append(headerStyledString).append("\n");
-			treeObject = printBlockHeader(contentBuilder, headerStyledString, offset);
-			offset = printBytes(treeObject, contentBuilder, offset, offset + 7, true, 0);
+						treeObject = printBlockHeader(contentBuilder, Texts.HEX_EDITOR_ATARI_SDX_NON_RELOC_BLOCK_HEADER,
+								-1, Texts.HEX_EDITOR_ATARI_SDX_NON_RELOC_BLOCK_HEADER_PARAMETERS, offset, startAddress,
+								endAddress);
+						offset = printBytes(treeObject, contentBuilder, offset, offset + 5, true, 0);
 
-			long blockEnd = offset + blockLength - 1;
+						long blockEnd = offset + endAddress - startAddress;
 
-			// Print bytes only of the block is not marked as EMPTY
-			if ((blockId & 0x80) != 0x80) {
-			    offset = printBytes(treeObject, contentBuilder, offset, blockEnd, true, blockOffset);
+						offset = printBytes(treeObject, contentBuilder, offset, blockEnd, true, startAddress);
+
+					} else if (header == RELOC_HEADER) {
+						int blockNumber = fileContent.getByte(offset + 2);
+						int blockId = fileContent.getByte(offset + 3);
+						int blockOffset = fileContent.getWord(offset + 4);
+						int blockLength = fileContent.getWord(offset + 6);
+
+						String headerText = TextUtility.format(Texts.HEX_EDITOR_ATARI_SDX_RELOC_BLOCK_HEADER,
+								NumberUtility.getLongValueDecimalString(blockNumber),
+								HexUtility.getByteValueHexString(blockId),
+								HexUtility.getLongValueHexString(blockOffset, 4),
+								HexUtility.getLongValueHexString(blockLength, 4));
+						StyledString headerStyledString = new StyledString(headerText, offsetStyler);
+						contentBuilder.append(headerStyledString).append("\n");
+						treeObject = printBlockHeader(contentBuilder, headerStyledString, offset);
+						offset = printBytes(treeObject, contentBuilder, offset, offset + 7, true, 0);
+
+						long blockEnd = offset + blockLength - 1;
+
+						// Print bytes only of the block is not marked as EMPTY
+						if ((blockId & 0x80) != 0x80) {
+							offset = printBytes(treeObject, contentBuilder, offset, blockEnd, true, blockOffset);
+						}
+					} else if (header == UPDATE_RELOC_HEADER) {
+						int blockNumber = fileContent.getByte(offset + 2);
+						int blockLength = fileContent.getWord(offset + 3);
+
+						String headerText = TextUtility.format(Texts.HEX_EDITOR_ATARI_SDX_UPDATE_RELOC_BLOCK_HEADER,
+								NumberUtility.getLongValueDecimalString(blockNumber),
+								HexUtility.getLongValueHexString(blockLength, 4));
+						StyledString headerStyledString = new StyledString(headerText, offsetStyler);
+						contentBuilder.append(headerStyledString).append("\n");
+						treeObject = printBlockHeader(contentBuilder, headerStyledString, offset);
+						offset = printBytes(treeObject, contentBuilder, offset, offset + 4, true, 0);
+						long blockEnd = getBlockEnd(offset);
+						offset = printBytes(treeObject, contentBuilder, offset, blockEnd, true, 0);
+					} else if (header == UPDATE_SYMBOLS_HEADER) {
+						String symbolName = getSymbolName(offset + 2);
+						int blockLength = fileContent.getWord(offset + 10);
+
+						String headerText = TextUtility.format(Texts.HEX_EDITOR_ATARI_SDX_UPDATE_SYMBOLS_BLOCK_HEADER,
+								symbolName, HexUtility.getLongValueHexString(blockLength, 4));
+						StyledString headerStyledString = new StyledString(headerText, offsetStyler);
+						contentBuilder.append(headerStyledString).append("\n");
+						treeObject = printBlockHeader(contentBuilder, headerStyledString, offset);
+						offset = printBytes(treeObject, contentBuilder, offset, offset + 11, true, 0);
+						long blockEnd = getBlockEnd(offset);
+						offset = printBytes(treeObject, contentBuilder, offset, blockEnd, true, 0);
+					} else if (header == DEFINE_SYMBOLS_HEADER) {
+						int blockNumber = fileContent.getByte(offset + 2);
+						int blockOffset = fileContent.getWord(offset + 3);
+						String symbolName = getSymbolName(offset + 5);
+
+						String headerText = TextUtility.format(Texts.HEX_EDITOR_ATARI_SDX_DEFINE_SYMBOLS_BLOCK_HEADER,
+								NumberUtility.getLongValueDecimalString(blockNumber),
+								HexUtility.getLongValueHexString(blockOffset), symbolName);
+						StyledString headerStyledString = new StyledString(headerText, offsetStyler);
+						contentBuilder.append(headerStyledString).append("\n");
+						treeObject = printBlockHeader(contentBuilder, headerStyledString, offset);
+						offset = printBytes(treeObject, contentBuilder, offset, offset + 12, true, 0);
+					} else {
+						error = true;
+					}
+				}
 			}
-		    } else if (header == UPDATE_RELOC_HEADER) {
-			int blockNumber = fileContent.getByte(offset + 2);
-			int blockLength = fileContent.getWord(offset + 3);
-
-			String headerText = TextUtility.format(Texts.HEX_EDITOR_ATARI_SDX_UPDATE_RELOC_BLOCK_HEADER,
-				NumberUtility.getLongValueDecimalString(blockNumber),
-				HexUtility.getLongValueHexString(blockLength, 4));
-			StyledString headerStyledString = new StyledString(headerText, offsetStyler);
-			contentBuilder.append(headerStyledString).append("\n");
-			treeObject = printBlockHeader(contentBuilder, headerStyledString, offset);
-			offset = printBytes(treeObject, contentBuilder, offset, offset + 4, true, 0);
-			long blockEnd = getBlockEnd(offset);
-			offset = printBytes(treeObject, contentBuilder, offset, blockEnd, true, 0);
-		    } else if (header == UPDATE_SYMBOLS_HEADER) {
-			String symbolName = getSymbolName(offset + 2);
-			int blockLength = fileContent.getWord(offset + 10);
-
-			String headerText = TextUtility.format(Texts.HEX_EDITOR_ATARI_SDX_UPDATE_SYMBOLS_BLOCK_HEADER,
-				symbolName, HexUtility.getLongValueHexString(blockLength, 4));
-			StyledString headerStyledString = new StyledString(headerText, offsetStyler);
-			contentBuilder.append(headerStyledString).append("\n");
-			treeObject = printBlockHeader(contentBuilder, headerStyledString, offset);
-			offset = printBytes(treeObject, contentBuilder, offset, offset + 11, true, 0);
-			long blockEnd = getBlockEnd(offset);
-			offset = printBytes(treeObject, contentBuilder, offset, blockEnd, true, 0);
-		    } else if (header == DEFINE_SYMBOLS_HEADER) {
-			int blockNumber = fileContent.getByte(offset + 2);
-			int blockOffset = fileContent.getWord(offset + 3);
-			String symbolName = getSymbolName(offset + 5);
-
-			String headerText = TextUtility.format(Texts.HEX_EDITOR_ATARI_SDX_DEFINE_SYMBOLS_BLOCK_HEADER,
-				NumberUtility.getLongValueDecimalString(blockNumber),
-				HexUtility.getLongValueHexString(blockOffset), symbolName);
-			StyledString headerStyledString = new StyledString(headerText, offsetStyler);
-			contentBuilder.append(headerStyledString).append("\n");
-			treeObject = printBlockHeader(contentBuilder, headerStyledString, offset);
-			offset = printBytes(treeObject, contentBuilder, offset, offset + 12, true, 0);
-		    } else {
+		} catch (RuntimeException ex) {
+			contentBuilder.append(ex.toString());
 			error = true;
-		    }
 		}
-	    }
-	} catch (RuntimeException ex) {
-	    contentBuilder.append(ex.toString());
-	    error = true;
+
+		if (error) {
+			printBlockWithError(contentBuilder, Texts.HEX_EDITOR_ATARI_SDX_BLOCK_ERROR, fileContentLength, offset);
+		}
+		return error;
 	}
 
-	if (error) {
-	    printBlockWithError(contentBuilder, Texts.HEX_EDITOR_ATARI_SDX_BLOCK_ERROR, fileContentLength, offset);
+	/**
+	 * Gets end offset for UPDATE_RELOC_HEADER and UPDATE_SYMBOLS_HEADER.
+	 * 
+	 * @param offset The start offset, a non-negative integer.
+	 * @return The end offset, a non-negative integer.
+	 */
+	private long getBlockEnd(long offset) {
+		int fileContentLength = fileContent.getLength();
+		long i = offset;
+		long blockEnd = -1;
+		while (blockEnd < 0 && i < fileContentLength) {
+			int location = fileContent.getByte(i);
+			switch (location) {
+			case 0xfc:
+				blockEnd = i;
+				break;
+			case 0xfd:
+				i += 3;
+				break;
+			case 0xfe:
+				i += 3;
+				break;
+			default:
+				i++;
+				break;
+			}
+		}
+		return blockEnd;
 	}
-	return error;
-    }
 
-    /**
-     * Gets end offset for UPDATE_RELOC_HEADER and UPDATE_SYMBOLS_HEADER.
-     * 
-     * @param offset
-     *            The start offset, a non-negative integer.
-     * @return The end offset, a non-negative integer.
-     */
-    private long getBlockEnd(long offset) {
-	int fileContentLength = fileContent.getLength();
-	long i = offset;
-	long blockEnd = -1;
-	while (blockEnd < 0 && i < fileContentLength) {
-	    int location = fileContent.getByte(i);
-	    switch (location) {
-	    case 0xfc:
-		blockEnd = i;
-		break;
-	    case 0xfd:
-		i += 3;
-		break;
-	    case 0xfe:
-		i += 3;
-		break;
-	    default:
-		i++;
-		break;
-	    }
+	private String getSymbolName(long offset) {
+		StringBuffer buffer = new StringBuffer(8);
+		for (int i = 0; i < 8; i++) {
+			buffer.append((char) fileContent.getByte(offset + i));
+		}
+		return buffer.toString();
 	}
-	return blockEnd;
-    }
-
-    private String getSymbolName(long offset) {
-	StringBuffer buffer = new StringBuffer(8);
-	for (int i = 0; i < 8; i++) {
-	    buffer.append((char) fileContent.getByte(offset + i));
-	}
-	return buffer.toString();
-    }
 
 }

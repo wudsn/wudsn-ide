@@ -29,79 +29,77 @@ import com.wudsn.ide.asm.Texts;
  */
 public final class CompilerSyntaxUtility {
 
-    /**
-     * Creation private.
-     */
-    private CompilerSyntaxUtility() {
-
-    }
-
-    /**
-     * Gets the image path for an instruction type image.
-     * 
-     * @param instruction
-     *            The instruction, not <code>null</code>.
-     * @return The image path for the instruction type image, not empty and not
-     *         <code>null</code>.
-     */
-    public static String getTypeImagePath(Instruction instruction) {
-	if (instruction == null) {
-	    throw new IllegalArgumentException("Parameter 'instruction' must not be null.");
-	}
-	String path;
-
-	if (instruction instanceof Directive) {
-	    path = "instruction-type-directive-16x16.gif";
-	} else {
-	    Opcode opcode = (Opcode) instruction;
-	    switch (opcode.getType()) {
-	    case InstructionType.LEGAL_OPCODE:
-		path = "instruction-type-legal-opcode-16x16.gif";
-		break;
-	    case InstructionType.ILLEGAL_OPCODE:
-		path = "instruction-type-illegal-opcode-16x16.gif";
-		break;
-	    case InstructionType.PSEUDO_OPCODE:
-		path = "instruction-type-pseudo-opcode-16x16.gif";
-		break;
-	    default:
-		throw new IllegalStateException("Unknown opcode type " + opcode.getType() + ".");
-	    }
+	/**
+	 * Creation private.
+	 */
+	private CompilerSyntaxUtility() {
 
 	}
-	return path;
-    }
 
-    /**
-     * Gets the text for an instruction type.
-     * 
-     * @param instruction
-     *            The instruction, not <code>null</code>.
-     * @return The text for the instruction type image, may be empty, not
-     *         <code>null</code>.
-     */
-    public static String getTypeText(Instruction instruction) {
-	String text;
+	/**
+	 * Gets the image path for an instruction type image.
+	 * 
+	 * @param instruction The instruction, not <code>null</code>.
+	 * @return The image path for the instruction type image, not empty and not
+	 *         <code>null</code>.
+	 */
+	public static String getTypeImagePath(Instruction instruction) {
+		if (instruction == null) {
+			throw new IllegalArgumentException("Parameter 'instruction' must not be null.");
+		}
+		String path;
 
-	if (instruction instanceof Directive) {
-	    text = Texts.COMPILER_SYNTAX_INSTRUCTION_DIRECTIVE;
-	} else {
-	    Opcode opcode = (Opcode) instruction;
-	    switch (opcode.getType()) {
-	    case InstructionType.LEGAL_OPCODE:
-		text = Texts.COMPILER_SYNTAX_LEGAL_OPCODE;
-		break;
-	    case InstructionType.ILLEGAL_OPCODE:
-		text = Texts.COMPILER_SYNTAX_ILLEGAL_OPCODE;
-		break;
-	    case InstructionType.PSEUDO_OPCODE:
-		text = Texts.COMPILER_SYNTAX_PSEUDO_OPCODE;
-		break;
-	    default:
-		throw new IllegalStateException("Unknown opcode type " + opcode.getType() + ".");
-	    }
+		if (instruction instanceof Directive) {
+			path = "instruction-type-directive-16x16.gif";
+		} else {
+			Opcode opcode = (Opcode) instruction;
+			switch (opcode.getType()) {
+			case InstructionType.LEGAL_OPCODE:
+				path = "instruction-type-legal-opcode-16x16.gif";
+				break;
+			case InstructionType.ILLEGAL_OPCODE:
+				path = "instruction-type-illegal-opcode-16x16.gif";
+				break;
+			case InstructionType.PSEUDO_OPCODE:
+				path = "instruction-type-pseudo-opcode-16x16.gif";
+				break;
+			default:
+				throw new IllegalStateException("Unknown opcode type " + opcode.getType() + ".");
+			}
 
+		}
+		return path;
 	}
-	return text;
-    }
+
+	/**
+	 * Gets the text for an instruction type.
+	 * 
+	 * @param instruction The instruction, not <code>null</code>.
+	 * @return The text for the instruction type image, may be empty, not
+	 *         <code>null</code>.
+	 */
+	public static String getTypeText(Instruction instruction) {
+		String text;
+
+		if (instruction instanceof Directive) {
+			text = Texts.COMPILER_SYNTAX_INSTRUCTION_DIRECTIVE;
+		} else {
+			Opcode opcode = (Opcode) instruction;
+			switch (opcode.getType()) {
+			case InstructionType.LEGAL_OPCODE:
+				text = Texts.COMPILER_SYNTAX_LEGAL_OPCODE;
+				break;
+			case InstructionType.ILLEGAL_OPCODE:
+				text = Texts.COMPILER_SYNTAX_ILLEGAL_OPCODE;
+				break;
+			case InstructionType.PSEUDO_OPCODE:
+				text = Texts.COMPILER_SYNTAX_PSEUDO_OPCODE;
+				break;
+			default:
+				throw new IllegalStateException("Unknown opcode type " + opcode.getType() + ".");
+			}
+
+		}
+		return text;
+	}
 }
