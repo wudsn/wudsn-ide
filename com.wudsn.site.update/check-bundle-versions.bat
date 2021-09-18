@@ -10,6 +10,7 @@ call :check com.wudsn.ide.base
 call :check com.wudsn.ide.hex
 call :check com.wudsn.ide.dsk
 call :check com.wudsn.ide.gfx
+call :check com.wudsn.ide.lng
 call :check com.wudsn.ide.pas
 call :check com.wudsn.ide.snd
 

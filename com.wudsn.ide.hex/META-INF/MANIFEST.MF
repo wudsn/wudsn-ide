@@ -5,9 +5,9 @@ Bundle-SymbolicName: com.wudsn.ide.hex;singleton:=true
 Bundle-Version: 1.7.2.qualifier
 Bundle-Activator: com.wudsn.ide.hex.HexPlugin
 Bundle-Vendor: Peter Dell
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
+Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources,
+ org.eclipse.ui,
  org.eclipse.ui.ide,
  org.eclipse.ui.views,
  com.wudsn.ide.base

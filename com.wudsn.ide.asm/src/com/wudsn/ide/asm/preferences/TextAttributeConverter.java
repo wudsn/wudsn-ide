@@ -30,7 +30,7 @@ import org.eclipse.swt.widgets.Display;
 import com.wudsn.ide.base.common.StringUtility;
 
 /**
- * Convertdf go connvert the class TextAttributes into a PreferenceStore
+ * Converter to convert the class TextAttributes into a PreferenceStore
  * compatible form.
  * 
  * @author Peter Dell
