@@ -328,7 +328,7 @@ POSSIBILITY OF SUCH DAMAGES.
    </url>
 
    <plugin
-         id="com.wudsn.ide.asm"
+         id="com.wudsn.ide.lng"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -343,20 +343,6 @@ POSSIBILITY OF SUCH DAMAGES.
 
    <plugin
          id="com.wudsn.ide.gfx"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.wudsn.ide.asm.compilers"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.wudsn.ide.asm.compilers.test"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -384,14 +370,28 @@ POSSIBILITY OF SUCH DAMAGES.
          unpack="false"/>
 
    <plugin
-         id="com.wudsn.ide.pas"
+         id="com.wudsn.ide.lng"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="com.wudsn.ide.lng"
+         id="com.wudsn.ide.lng.asm"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.wudsn.ide.lng.asm.test"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+         
+   <plugin
+         id="com.wudsn.ide.lng.pas"
          download-size="0"
          install-size="0"
          version="0.0.0"

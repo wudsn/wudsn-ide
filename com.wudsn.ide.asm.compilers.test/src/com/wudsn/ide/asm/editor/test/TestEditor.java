@@ -1,6 +1,6 @@
 package com.wudsn.ide.asm.editor.test;
 
-import com.wudsn.ide.asm.editor.AssemblerEditor;
+import com.wudsn.ide.lng.editor.AssemblerEditor;
 
 public final class TestEditor extends AssemblerEditor {
 

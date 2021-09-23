@@ -176,9 +176,9 @@
         <setEntry value="org.w3c.dom.svg@default:default"/>
     </setAttribute>
     <setAttribute key="selected_workspace_bundles">
-        <setEntry value="com.wudsn.ide.asm.compilers.test@default:default"/>
-        <setEntry value="com.wudsn.ide.asm.compilers@default:default"/>
-        <setEntry value="com.wudsn.ide.asm@default:default"/>
+        <setEntry value="com.wudsn.ide.lng.compilers.test@default:default"/>
+        <setEntry value="com.wudsn.ide.lng.compilers@default:default"/>
+        <setEntry value="com.wudsn.ide.lng@default:default"/>
         <setEntry value="com.wudsn.ide.base@default:default"/>
         <setEntry value="com.wudsn.ide.dsk@default:default"/>
         <setEntry value="com.wudsn.ide.gfx@default:default"/>

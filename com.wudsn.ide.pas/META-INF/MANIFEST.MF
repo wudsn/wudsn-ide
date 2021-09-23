@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Peter Dell
-Bundle-SymbolicName: com.wudsn.ide.pas;singleton:=true
+Bundle-SymbolicName: com.wudsn.ide.lng.pas;singleton:=true
 Bundle-Version: 1.7.2.qualifier
 Bundle-Activator: com.wudsn.ide.pas.Activator
 Bundle-Vendor: WUDSN IDE Pascal Plugin

@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: WUDSN IDE Assembler Plug-in
-Bundle-SymbolicName: com.wudsn.ide.asm;singleton:=true
+Bundle-Name: WUDSN IDE Language Plug-in
+Bundle-SymbolicName: com.wudsn.ide.lng;singleton:=true
 Bundle-Version: 1.7.2.qualifier
-Bundle-Activator: com.wudsn.ide.asm.AssemblerPlugin
+Bundle-Activator: com.wudsn.ide.lng.AssemblerPlugin
 Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.core.filesystem,
@@ -27,7 +27,7 @@ Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Peter Dell
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: com.wudsn.ide.asm;
+Export-Package: com.wudsn.ide.lng;
   uses:="org.eclipse.osgi.util,
    org.eclipse.core.runtime,
    com.wudsn.ide.base.common,
@@ -35,16 +35,16 @@ Export-Package: com.wudsn.ide.asm;
    com.wudsn.ide.asm.runner,
    com.wudsn.ide.asm.preferences,
    com.wudsn.ide.asm.compiler",
- com.wudsn.ide.asm.compiler;
+ com.wudsn.ide.lng.compiler;
   uses:="org.eclipse.jface.text,
    org.eclipse.ui.console,
    org.eclipse.jface.viewers,
    com.wudsn.ide.asm,
    org.eclipse.jface.text.rules",
- com.wudsn.ide.asm.compiler.parser,
- com.wudsn.ide.asm.compiler.syntax,
- com.wudsn.ide.asm.compiler.writer,
- com.wudsn.ide.asm.editor;
+ com.wudsn.ide.lng.compiler.parser,
+ com.wudsn.ide.lng.compiler.syntax,
+ com.wudsn.ide.lng.compiler.writer,
+ com.wudsn.ide.lng.editor;
   uses:="org.eclipse.jface.text,
    org.eclipse.core.runtime,
    org.eclipse.core.commands,
@@ -71,8 +71,8 @@ Export-Package: com.wudsn.ide.asm;
    org.eclipse.jface.util,
    org.eclipse.swt.widgets,
    org.eclipse.ui.editors.text",
- com.wudsn.ide.asm.help,
- com.wudsn.ide.asm.preferences;
+ com.wudsn.ide.lng.help,
+ com.wudsn.ide.lng.preferences;
   uses:="org.eclipse.jface.text,
    org.eclipse.jface.preference,
    org.eclipse.ui,
@@ -81,5 +81,5 @@ Export-Package: com.wudsn.ide.asm;
    com.wudsn.ide.asm,
    org.eclipse.core.runtime.preferences,
    org.eclipse.swt.widgets",
- com.wudsn.ide.asm.runner;uses:="com.wudsn.ide.asm"
-Automatic-Module-Name: com.wudsn.ide.asm
+ com.wudsn.ide.lng.runner
+Automatic-Module-Name: com.wudsn.ide.lng

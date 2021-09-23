@@ -1,12 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: WUDSN IDE Assembler Compilers Plug-in
-Bundle-SymbolicName: com.wudsn.ide.asm.compilers;singleton:=true
+Bundle-SymbolicName: com.wudsn.ide.lng.asm;singleton:=true
 Bundle-Version: 1.7.2.qualifier
 Bundle-Vendor: Peter Dell
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Require-Bundle: com.wudsn.ide.asm,
+Require-Bundle: com.wudsn.ide.lng,
  org.eclipse.ui.ide
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Automatic-Module-Name: com.wudsn.ide.asm.compilers
+Automatic-Module-Name: com.wudsn.ide.lng.asm

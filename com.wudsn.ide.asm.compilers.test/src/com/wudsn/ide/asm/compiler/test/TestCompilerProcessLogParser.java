@@ -26,8 +26,8 @@ import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IMarker;
 
-import com.wudsn.ide.asm.compiler.CompilerProcessLogParser;
-import com.wudsn.ide.asm.compiler.CompilerSymbol;
+import com.wudsn.ide.lng.compiler.CompilerProcessLogParser;
+import com.wudsn.ide.lng.compiler.CompilerSymbol;
 
 /**
  * Process log parser for {@link TestCompiler}.

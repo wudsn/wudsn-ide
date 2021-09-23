@@ -4,51 +4,51 @@
  <extension
        point="org.eclipse.ui.preferencePages">
     <page
-          category="com.wudsn.ide.asm.preferences.AssemblerPreferencesPage"
-          class="com.wudsn.ide.asm.preferences.AssemblerPreferencesApple2CompilersPage"
-          id="com.wudsn.ide.asm.preferences.AssemblerPreferencesApple2CompilersPage"
-          name="%com.wudsn.ide.asm.preferences.AssemblerPreferencesApple2CompilersPage.name">
+          category="com.wudsn.ide.lng.preferences.AssemblerPreferencesPage"
+          class="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesApple2CompilersPage"
+          id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesApple2CompilersPage"
+          name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesApple2CompilersPage.name">
     </page>
     <page
-          category="com.wudsn.ide.asm.preferences.AssemblerPreferencesPage"
-          class="com.wudsn.ide.asm.preferences.AssemblerPreferencesAtari8CompilersPage"
-          id="com.wudsn.ide.asm.preferences.AssemblerPreferencesAtari8CompilersPage"
-          name="%com.wudsn.ide.asm.preferences.AssemblerPreferencesAtari8CompilersPage.name">
+          category="com.wudsn.ide.lng.preferences.AssemblerPreferencesPage"
+          class="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari8CompilersPage"
+          id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari8CompilersPage"
+          name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari8CompilersPage.name">
     </page>
     <page
-          category="com.wudsn.ide.asm.preferences.AssemblerPreferencesPage"
-          class="com.wudsn.ide.asm.preferences.AssemblerPreferencesAtari2600CompilersPage"
-          id="com.wudsn.ide.asm.preferences.AssemblerPreferencesAtari2600CompilersPage"
-          name="%com.wudsn.ide.asm.preferences.AssemblerPreferencesAtari2600CompilersPage.name">
+          category="com.wudsn.ide.lng.preferences.AssemblerPreferencesPage"
+          class="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari2600CompilersPage"
+          id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari2600CompilersPage"
+          name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari2600CompilersPage.name">
     </page>
     <page
-          category="com.wudsn.ide.asm.preferences.AssemblerPreferencesPage"
-          class="com.wudsn.ide.asm.preferences.AssemblerPreferencesAtari7800CompilersPage"
-          id="com.wudsn.ide.asm.preferences.AssemblerPreferencesAtar7800CompilersPage"
-          name="%com.wudsn.ide.asm.preferences.AssemblerPreferencesAtari7800CompilersPage.name">
+          category="com.wudsn.ide.lng.preferences.AssemblerPreferencesPage"
+          class="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari7800CompilersPage"
+          id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtar7800CompilersPage"
+          name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari7800CompilersPage.name">
     </page>
     <page
-          category="com.wudsn.ide.asm.preferences.AssemblerPreferencesPage"
-          class="com.wudsn.ide.asm.preferences.AssemblerPreferencesC64CompilersPage"
-          id="com.wudsn.ide.asm.preferences.AssemblerPreferencesC64CompilersPage"
-          name="%com.wudsn.ide.asm.preferences.AssemblerPreferencesC64CompilersPage.name">
+          category="com.wudsn.ide.lng.preferences.AssemblerPreferencesPage"
+          class="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesC64CompilersPage"
+          id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesC64CompilersPage"
+          name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesC64CompilersPage.name">
     </page>
     <page
-          category="com.wudsn.ide.asm.preferences.AssemblerPreferencesPage"
-          class="com.wudsn.ide.asm.preferences.AssemblerPreferencesNESCompilersPage"
-          id="com.wudsn.ide.asm.preferences.AssemblerPreferencesNESCompilersPage"
-          name="%com.wudsn.ide.asm.preferences.AssemblerPreferencesNESCompilersPage.name">
+          category="com.wudsn.ide.lng.preferences.AssemblerPreferencesPage"
+          class="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesNESCompilersPage"
+          id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesNESCompilersPage"
+          name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesNESCompilersPage.name">
     </page>
  </extension>
-	<extension point="com.wudsn.ide.asm.compilers">
+	<extension point="com.wudsn.ide.lng.compilers">
   <compiler
-        class="com.wudsn.ide.asm.compiler.acme.AcmeCompiler"
+        class="com.wudsn.ide.lng.asm.compiler.acme.AcmeCompiler"
         defaultHardware="C64"
         defaultParameters="-f cbm -o ${outputFilePath} ${sourceFilePath} "
         helpFilePaths="./docs"
         homePageURL="https://sourceforge.net/projects/acme-crossass"
         id="acme"
-        name="%com.wudsn.ide.asm.compiler.acme.AcmeCompiler.name"
+        name="%com.wudsn.ide.lng.asm.compiler.acme.AcmeCompiler.name"
         version="0.90 (preview)">
      <supportedCPU
            cpu="MOS6502">
@@ -65,13 +65,13 @@
     
   </compiler>
   <compiler
-        class="com.wudsn.ide.asm.compiler.asm6.Asm6Compiler"
+        class="com.wudsn.ide.lng.asm.compiler.asm6.Asm6Compiler"
         defaultHardware="NES"
         defaultParameters=" ${sourceFilePath}  ${outputFilePath}"
         helpFilePaths="./README.TXT"
         homePageURL="http://3dscapture.com/NES/asm6.zip"
         id="asm6"
-        name="%com.wudsn.ide.asm.compiler.asm6.Asm6Compiler.name"
+        name="%com.wudsn.ide.lng.asm.compiler.asm6.Asm6Compiler.name"
         version="1.6">
      <supportedCPU
            cpu="MOS6502">
@@ -81,13 +81,13 @@
      </supportedCPU>
   </compiler>
 		<compiler
-        class="com.wudsn.ide.asm.compiler.atasm.AtasmCompiler"
+        class="com.wudsn.ide.lng.asm.compiler.atasm.AtasmCompiler"
         defaultHardware="ATARI8BIT"
         defaultParameters="-s -o${outputFilePath} -l${outputFilePathWithoutExtension}.lab ${sourceFilePath}"
         helpFilePaths="./docs/atasm.pdf"
         homePageURL="http://atari.miribilist.com/atasm"
         id="atasm"
-        name="%com.wudsn.ide.asm.compiler.atasm.AtasmCompiler.name"
+        name="%com.wudsn.ide.lng.asm.compiler.atasm.AtasmCompiler.name"
         version="1.07">
              <supportedCPU
            cpu="MOS6502">
@@ -97,13 +97,13 @@
      </supportedCPU>
 		</compiler>
   <compiler
-        class="com.wudsn.ide.asm.compiler.dasm.DasmCompiler"
+        class="com.wudsn.ide.lng.asm.compiler.dasm.DasmCompiler"
         defaultHardware="ATARI2600"
         defaultParameters="${sourceFilePath} -o${outputFilePath} -f3 -v5 -s${outputFilePathWithoutExtension}.sym -l${outputFilePathWithoutExtension}.lst"
         helpFilePaths="../doc/dasm.TXT"
         homePageURL="http://dasm-dillon.sourceforge.net"
         id="dasm"
-        name="%com.wudsn.ide.asm.compiler.dasm.DasmCompiler.name"
+        name="%com.wudsn.ide.lng.asm.compiler.dasm.DasmCompiler.name"
         version="2.20.10 (preview)">
      <supportedCPU
            cpu="MOS6502">
@@ -113,13 +113,13 @@
      </supportedCPU>
   </compiler>
   <compiler
-        class="com.wudsn.ide.asm.compiler.kickass.KickAssCompiler"
+        class="com.wudsn.ide.lng.asm.compiler.kickass.KickAssCompiler"
         defaultHardware="C64"
         defaultParameters="-o ${outputFilePath} ${sourceFilePath} "
         helpFilePaths="./KickAssembler.pdf"
         homePageURL="http://www.theweb.dk/KickAssembler"
         id="kickass"
-        name="%com.wudsn.ide.asm.compiler.kickass.KickAssCompiler.name"
+        name="%com.wudsn.ide.lng.asm.compiler.kickass.KickAssCompiler.name"
         version="V3.21 (preview)">
      <supportedCPU
            cpu="MOS6502">
@@ -132,13 +132,13 @@
      </supportedCPU>
   </compiler>
 		<compiler
-        class="com.wudsn.ide.asm.compiler.mads.MadsCompiler"
+        class="com.wudsn.ide.lng.asm.compiler.mads.MadsCompiler"
         defaultHardware="ATARI8BIT"
         defaultParameters=" ${sourceFilePath} -o:${outputFilePath} -p -t:${outputFilePathWithoutExtension}.lab -l:${outputFilePathWithoutExtension}.lst "
         helpFilePaths="./doc/mads-en.html, ./doc/mads.html (pl)"
         homePageURL="http://mads.atari8.info"
         id="mads"
-        name="%com.wudsn.ide.asm.compiler.mads.MadsCompiler.name"
+        name="%com.wudsn.ide.lng.asm.compiler.mads.MadsCompiler.name"
         version="1.9.0">
              <supportedCPU
            cpu="MOS6502">
@@ -151,13 +151,13 @@
      </supportedCPU>
 		</compiler>
   <compiler
-        class="com.wudsn.ide.asm.compiler.merlin32.Merlin32Compiler"
+        class="com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32Compiler"
         defaultHardware="APPLE2"
         defaultParameters="-V  ${sourceFilePath}"
         helpFilePaths="../Documentation/Merlin32.pdf"
         homePageURL="http://www.brutaldeluxe.fr/products/crossdevtools/merlin/index.html"
         id="merlin32"
-        name="%com.wudsn.ide.asm.compiler.merlin32.Merlin32Compiler.name"
+        name="%com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32Compiler.name"
         version="1.0">
      <supportedCPU
            cpu="MOS6502">
@@ -170,13 +170,13 @@
      </supportedCPU>
   </compiler>
   <compiler
-        class="com.wudsn.ide.asm.compiler.tass.TassCompiler"
+        class="com.wudsn.ide.lng.asm.compiler.tass.TassCompiler"
         defaultHardware="C64"
         defaultParameters="-o ${outputFilePath} ${sourceFilePath} "
         helpFilePaths="./README"
         homePageURL="http://tass64.sourceforge.net"
         id="tass"
-        name="%com.wudsn.ide.asm.compiler.tass.TassCompiler.name"
+        name="%com.wudsn.ide.lng.asm.compiler.tass.TassCompiler.name"
         version="1.46 r38 (preview)">
              <supportedCPU
            cpu="MOS6502">
@@ -190,13 +190,13 @@
      
   </compiler>
 		<compiler
-        class="com.wudsn.ide.asm.compiler.xasm.XasmCompiler"
+        class="com.wudsn.ide.lng.asm.compiler.xasm.XasmCompiler"
         defaultHardware="ATARI8BIT"
         defaultParameters="/o:${outputFilePath} /p /t:${outputFilePathWithoutExtension}.lab /l:${outputFilePathWithoutExtension}.lst ${sourceFilePath}"
         helpFilePaths="./xasm.html"
         homePageURL="https://github.com/pfusik/xasm"
         id="xasm"
-        name="%com.wudsn.ide.asm.compiler.xasm.XasmCompiler.name"
+        name="%com.wudsn.ide.lng.asm.compiler.xasm.XasmCompiler.name"
         version="3.0.2">
              <supportedCPU
            cpu="MOS6502">
@@ -209,66 +209,66 @@
        id="Atari 2600 content types"
        point="org.eclipse.core.contenttype.contentTypes">
     <content-type
-          base-type="com.wudsn.ide.asm.compiler.AssemblerSourceFile"
+          base-type="com.wudsn.ide.lng.asm.compiler.AssemblerSourceFile"
           file-extensions="a"
-          id="com.wudsn.ide.asm.compiler.acme.AcmeSourceFile"
-          name="%com.wudsn.ide.asm.compiler.acme.AcmeSourceFile.name"
+          id="com.wudsn.ide.lng.asm.compiler.acme.AcmeSourceFile"
+          name="%com.wudsn.ide.lng.asm.compiler.acme.AcmeSourceFile.name"
           priority="normal">
     </content-type>
     <content-type
-          base-type="com.wudsn.ide.asm.compiler.AssemblerSourceFile"
+          base-type="com.wudsn.ide.lng.asm.compiler.AssemblerSourceFile"
           file-extensions="asm"
-          id="com.wudsn.ide.asm.compiler.asm6.Asm6SourceFile"
-          name="%com.wudsn.ide.asm.compiler.asm6.Asm6SourceFile.name"
+          id="com.wudsn.ide.lng.asm.compiler.asm6.Asm6SourceFile"
+          name="%com.wudsn.ide.lng.asm.compiler.asm6.Asm6SourceFile.name"
           priority="normal">
     </content-type>
   <content-type
-        base-type="com.wudsn.ide.asm.compiler.AssemblerSourceFile"
+        base-type="com.wudsn.ide.lng.asm.compiler.AssemblerSourceFile"
         file-extensions="asm"
-        id="com.wudsn.ide.asm.compiler.atasm.AtasmSourceFile"
-        name="%com.wudsn.ide.asm.compiler.atasm.AtasmSourceFile.name"
+        id="com.wudsn.ide.lng.asm.compiler.atasm.AtasmSourceFile"
+        name="%com.wudsn.ide.lng.asm.compiler.atasm.AtasmSourceFile.name"
         priority="normal">
   </content-type>
   <content-type
-        base-type="com.wudsn.ide.asm.compiler.AssemblerSourceFile"
+        base-type="com.wudsn.ide.lng.asm.compiler.AssemblerSourceFile"
         file-extensions="asm"
-        id="com.wudsn.ide.asm.compiler.dasm.DasmSourceFile"
-        name="%com.wudsn.ide.asm.compiler.dasm.DasmSourceFile.name"
+        id="com.wudsn.ide.lng.asm.compiler.dasm.DasmSourceFile"
+        name="%com.wudsn.ide.lng.asm.compiler.dasm.DasmSourceFile.name"
         priority="normal">
   </content-type>
     <content-type
-          base-type="com.wudsn.ide.asm.compiler.AssemblerSourceFile"
+          base-type="com.wudsn.ide.lng.asm.compiler.AssemblerSourceFile"
           file-extensions="asx"
-          id="com.wudsn.ide.asm.compiler.kickass.KickAssSourceFile"
-          name="%com.wudsn.ide.asm.compiler.kickass.KickAssSourceFile.name"
+          id="com.wudsn.ide.lng.asm.compiler.kickass.KickAssSourceFile"
+          name="%com.wudsn.ide.lng.asm.compiler.kickass.KickAssSourceFile.name"
           priority="normal">
     </content-type>
     <content-type
-          base-type="com.wudsn.ide.asm.compiler.AssemblerSourceFile"
+          base-type="com.wudsn.ide.lng.asm.compiler.AssemblerSourceFile"
           file-extensions="s"
-          id="com.wudsn.ide.asm.compiler.merlin32.Merlin32SourceFile"
-          name="%com.wudsn.ide.asm.compiler.merlin32.Merlin32SourceFile.name"
+          id="com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32SourceFile"
+          name="%com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32SourceFile.name"
           priority="high">
     </content-type>
   <content-type
-        base-type="com.wudsn.ide.asm.compiler.AssemblerSourceFile"
+        base-type="com.wudsn.ide.lng.asm.compiler.AssemblerSourceFile"
         file-extensions="asm"
-        id="com.wudsn.ide.asm.compiler.mads.MadsSourceFile"
-        name="%com.wudsn.ide.asm.compiler.mads.MadsSourceFile.name"
+        id="com.wudsn.ide.lng.asm.compiler.mads.MadsSourceFile"
+        name="%com.wudsn.ide.lng.asm.compiler.mads.MadsSourceFile.name"
         priority="high">
   </content-type>
     <content-type
-          base-type="com.wudsn.ide.asm.compiler.AssemblerSourceFile"
+          base-type="com.wudsn.ide.lng.asm.compiler.AssemblerSourceFile"
           file-extensions="asm"
-          id="com.wudsn.ide.asm.compiler.tass.TassSourceFile"
-          name="%com.wudsn.ide.asm.compiler.tass.TassSourceFile.name"
+          id="com.wudsn.ide.lng.asm.compiler.tass.TassSourceFile"
+          name="%com.wudsn.ide.lng.asm.compiler.tass.TassSourceFile.name"
           priority="normal">
     </content-type>
     <content-type
-          base-type="com.wudsn.ide.asm.compiler.AssemblerSourceFile"
+          base-type="com.wudsn.ide.lng.asm.compiler.AssemblerSourceFile"
           file-extensions="asx"
-          id="com.wudsn.ide.asm.compiler.xasm.XasmSourceFile"
-          name="%com.wudsn.ide.asm.compiler.xasm.XasmSourceFile.name"
+          id="com.wudsn.ide.lng.asm.compiler.xasm.XasmSourceFile"
+          name="%com.wudsn.ide.lng.asm.compiler.xasm.XasmSourceFile.name"
           priority="normal">
     </content-type>
 	</extension>
@@ -277,253 +277,113 @@
        id="Atari 2600 editors"
        point="org.eclipse.ui.editors">
     <editor
-          class="com.wudsn.ide.asm.editor.acme.AcmeEditor"
+          class="com.wudsn.ide.lng.asm.compiler.acme.AcmeEditor"
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="true"
           extensions="a"
           icon="icons/editor-acme-16x16.gif"
-          id="com.wudsn.ide.asm.editor.acme.AcmeEditor"
-          name="%com.wudsn.ide.asm.editor.acme.AcmeEditor.name">
+          id="com.wudsn.ide.lng.asm.compiler.acme.AcmeEditor"
+          name="%com.wudsn.ide.lng.asm.compiler.acme.AcmeEditor.name">
        <contentTypeBinding
-             contentTypeId="com.wudsn.ide.asm.compiler.acme.AcmeSourceFile">
+             contentTypeId="com.wudsn.ide.lng.asm.compiler.acme.AcmeSourceFile">
        </contentTypeBinding>
     </editor>
     <editor
-          class="com.wudsn.ide.asm.editor.asm6.Asm6Editor"
+          class="com.wudsn.ide.lng.asm.compiler.asm6.Asm6Editor"
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="false"
           extensions="asm"
           icon="icons/editor-asm6-16x16.gif"
-          id="com.wudsn.ide.asm.editor.asm6.Asm6Editor"
-          name="%com.wudsn.ide.asm.editor.asm6.Asm6Editor.name">
+          id="com.wudsn.ide.lng.asm.compiler.asm6.Asm6Editor"
+          name="%com.wudsn.ide.lng.asm.compiler.asm6.Asm6Editor.name">
        <contentTypeBinding
-             contentTypeId="com.wudsn.ide.asm.compiler.asm6.Asm6SourceFile">
+             contentTypeId="com.wudsn.ide.lng.asm.compiler.asm6.Asm6SourceFile">
        </contentTypeBinding>
     </editor>
     <editor
-          class="com.wudsn.ide.asm.editor.atasm.AtasmEditor"
+          class="com.wudsn.ide.lng.asm.compiler.atasm.AtasmEditor"
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="false"
           extensions="asm"
           icon="icons/editor-atasm-16x16.gif"
-          id="com.wudsn.ide.asm.editor.atasm.AtasmEditor"
-          name="%com.wudsn.ide.asm.editor.atasm.AtasmEditor.name">
+          id="com.wudsn.ide.lng.asm.compiler.atasm.AtasmEditor"
+          name="%com.wudsn.ide.lng.asm.compiler.atasm.AtasmEditor.name">
        <contentTypeBinding
-             contentTypeId="com.wudsn.ide.asm.compiler.atasm.AtasmSourceFile">
+             contentTypeId="com.wudsn.ide.lng.asm.compiler.atasm.AtasmSourceFile">
        </contentTypeBinding>
     </editor>
   <editor
-        class="com.wudsn.ide.asm.editor.dasm.DasmEditor"
+        class="com.wudsn.ide.lng.asm.compiler.dasm.DasmEditor"
         contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
         default="false"
         extensions="asm"
         icon="icons/editor-dasm-16x16.gif"
-        id="com.wudsn.ide.asm.editor.dasm.DasmEditor"
-        name="%com.wudsn.ide.asm.editor.dasm.DasmEditor.name">
+        id="com.wudsn.ide.lng.asm.compiler.dasm.DasmEditor"
+        name="%com.wudsn.ide.lng.asm.compiler.dasm.DasmEditor.name">
      <contentTypeBinding
-           contentTypeId="com.wudsn.ide.asm.compiler.dasm.DasmSourceFile">
+           contentTypeId="com.wudsn.ide.lng.asm.compiler.dasm.DasmSourceFile">
      </contentTypeBinding>
   </editor>
     <editor
-          class="com.wudsn.ide.asm.editor.kickass.KickAssEditor"
+          class="com.wudsn.ide.lng.asm.compiler.kickass.KickAssEditor"
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="true"
           extensions="asm"
           icon="icons/editor-kickass-16x16.gif"
-          id="com.wudsn.ide.asm.editor.kickass.KickAssEditor"
-          name="%com.wudsn.ide.asm.editor.kickass.KickAssEditor.name">
+          id="com.wudsn.ide.lng.asm.compiler.kickass.KickAssEditor"
+          name="%com.wudsn.ide.lng.asm.compiler.kickass.KickAssEditor.name">
        <contentTypeBinding
-             contentTypeId="com.wudsn.ide.asm.compiler.kickass.KickAssSourceFile">
+             contentTypeId="com.wudsn.ide.lng.asm.compiler.kickass.KickAssSourceFile">
        </contentTypeBinding>
     </editor>
     <editor
-          class="com.wudsn.ide.asm.editor.mads.MadsEditor"
+          class="com.wudsn.ide.lng.asm.compiler.mads.MadsEditor"
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="true"
           extensions="asm"
           icon="icons/editor-mads-16x16.gif"
-          id="com.wudsn.ide.asm.editor.mads.MadsEditor"
-          name="%com.wudsn.ide.asm.editor.mads.MadsEditor.name">
+          id="com.wudsn.ide.lng.asm.compiler.mads.MadsEditor"
+          name="%com.wudsn.ide.lng.asm.compiler.mads.MadsEditor.name">
        <contentTypeBinding
-             contentTypeId="com.wudsn.ide.asm.compiler.mads.MadsSourceFile">
+             contentTypeId="com.wudsn.ide.lng.asm.compiler.mads.MadsSourceFile">
        </contentTypeBinding>
     </editor>
     <editor
-          class="com.wudsn.ide.asm.editor.merlin32.Merlin32Editor"
+          class="com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32Editor"
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="false"
           extensions="s"
           icon="icons/editor-merlin32-16x16.gif"
-          id="com.wudsn.ide.asm.editor.merlin32.Merlin32Editor"
-          name="%com.wudsn.ide.asm.editor.merlin32.Merlin32Editor.name">
+          id="com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32Editor"
+          name="%com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32Editor.name">
        <contentTypeBinding
-             contentTypeId="com.wudsn.ide.asm.compiler.merlin32.Merlin32SourceFile">
+             contentTypeId="com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32SourceFile">
        </contentTypeBinding>
     </editor>
     <editor
-          class="com.wudsn.ide.asm.editor.tass.TassEditor"
+          class="com.wudsn.ide.lng.asm.compiler.tass.TassEditor"
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="false"
           extensions="asm"
           icon="icons/editor-tass-16x16.gif"
-          id="com.wudsn.ide.asm.editor.tass.TassEditor"
-          name="%com.wudsn.ide.asm.editor.tass.TassEditor.name">
+          id="com.wudsn.ide.lng.asm.compiler.tass.TassEditor"
+          name="%com.wudsn.ide.lng.asm.compiler.tass.TassEditor.name">
        <contentTypeBinding
-             contentTypeId="com.wudsn.ide.asm.compiler.tass.TassSourceFile">
+             contentTypeId="com.wudsn.ide.lng.asm.compiler.tass.TassSourceFile">
        </contentTypeBinding>
     </editor>
     <editor
-          class="com.wudsn.ide.asm.editor.xasm.XasmEditor"
+          class="com.wudsn.ide.lng.asm.compiler.xasm.XasmEditor"
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="true"
           extensions="asx"
           icon="icons/editor-xasm-16x16.gif"
-          id="com.wudsn.ide.asm.editor.xasm.XasmEditor"
-          name="%com.wudsn.ide.asm.editor.xasm.XasmEditor.name">
+          id="com.wudsn.ide.lng.asm.compiler.xasm.XasmEditor"
+          name="%com.wudsn.ide.lng.asm.compiler.xasm.XasmEditor.name">
        <contentTypeBinding
-             contentTypeId="com.wudsn.ide.asm.compiler.xasm.XasmSourceFile">
+             contentTypeId="com.wudsn.ide.lng.asm.compiler.xasm.XasmSourceFile">
        </contentTypeBinding>
     </editor>
  	</extension>
- <extension
-       id="Apple II runners"
-       point="com.wudsn.ide.asm.runners">
-    <runner
-          defaultCommandLine="${runnerExecutablePath} -d1 ${outputFilePathWithoutExtension}.dsk"
-          hardware="APPLE2"
-          homePageURL="https://github.com/AppleWin/AppleWin"
-          id="applewin"
-          name="%com.wudsn.ide.asm.runner.apple2.applewin.name">
-    </runner>
-    <runner
-          defaultCommandLine="java -jar ${runnerExecutablePath} -computer.s6card disk -s6.d1 ${outputFilePathWithoutExtension}.dsk"
-          hardware="APPLE2"
-          homePageURL="https://sites.google.com/site/brendanrobert/projects/jace"
-          id="jace"
-          name="%com.wudsn.ide.asm.runner.apple2.jace.name">
-    </runner>
-    <runner
-          defaultCommandLine="${runnerExecutablePath} ${outputFilePathWithoutExtension}.dsk"
-          hardware="APPLE2"
-          homePageURL="http://virtu.codeplex.com"
-          id="virtu"
-          name="%com.wudsn.ide.asm.runner.apple2.virtu.name">
-    </runner>
-    <runner
-          defaultCommandLine="open ${runnerExecutablePath} ${outputFilePathWithoutExtension}.dsk"
-          hardware="APPLE2"
-          homePageURL="http://www.virtualii.com"
-          id="virtualii"
-          name="%com.wudsn.ide.asm.runner.apple2.virtualii.name">
-    </runner>
- </extension>
- <extension
-       id="Atari 2600 runners"
-       point="com.wudsn.ide.asm.runners">
-    <runner
-          defaultCommandLine="${runnerExecutablePath} ${outputFilePath}"
-          hardware="ATARI2600"
-          homePageURL="http://stella.sourceforge.net"
-          id="stella"
-          name="%com.wudsn.ide.asm.runner.atari2600.stella.name">
-    </runner>
- </extension>
- <extension
-       id="Atari 8-bit runners"
-       point="com.wudsn.ide.asm.runners">
-    <runner
-          class="com.wudsn.ide.asm.runner.atari8.Altirra"
-          defaultCommandLine="${runnerExecutablePath} /singleinstance ${outputFilePath}"
-          hardware="ATARI8BIT"
-          homePageURL="http://www.virtualdub.org/altirra.html"
-          id="altirra"
-          name="%com.wudsn.ide.asm.runner.atari8.altirra.name">
-    </runner>
-    <runner
-          defaultCommandLine="xterm -iconic -e atari800 -run ${outputFilePath}"
-          hardware="ATARI8BIT"
-          homePageURL="http://atari800.sourceforge.net"
-          id="atari800"
-          name="%com.wudsn.ide.asm.runner.atari8.atari800.name">
-    </runner>
-    <runner
-          class="com.wudsn.ide.asm.runner.atari8.Atari800Win"
-          defaultCommandLine="${runnerExecutablePath} -run ${outputFilePath}"
-          hardware="ATARI8BIT"
-          homePageURL="http://a800win.atari-area.prv.pl"
-          id="atari800_win"
-          name="%com.wudsn.ide.asm.runner.atari8.atari800_win.name">
-    </runner>
-    <runner
-          defaultCommandLine="open -a ${runnerExecutablePath} ${outputFilePath}"
-          hardware="ATARI8BIT"
-          homePageURL="http://www.atarimac.com/atari800macx.php"
-          id="atari800_macx"
-          name="%com.wudsn.ide.asm.runner.atari8.atari800_macx.name">
-    </runner>
-    <runner
-          defaultCommandLine="${runnerExecutablePath} -image.1 ${outputFilePath}"
-          hardware="ATARI8BIT"
-          homePageURL="http://www.xl-project.com"
-          id="atari_plus_plus"
-          name="%com.wudsn.ide.asm.runner.atari8.atari_plus_plus.name">
-    </runner>
- </extension>
- <extension
-       id="Atari7800 runners"
-       point="com.wudsn.ide.asm.runners">
-    <runner
-          defaultCommandLine="${runnerExecutablePath} ${outputFilePath}"
-          hardware="ATARI7800"
-          homePageURL="http://emu7800.sourceforge.net"
-          id="emu7800"
-          name="%com.wudsn.ide.asm.runner.atari7800.emu7800.name">
-    </runner>
- </extension>
-
-
-
- <extension
-       id="C64 runners"
-       point="com.wudsn.ide.asm.runners">
-     <runner
-           defaultCommandLine="${runnerExecutablePath} ${outputFilePath}"
-           hardware="C64"
-           homePageURL="http://www.ccs64.com"
-           id="ccs64"
-           name="%com.wudsn.ide.asm.runner.c64.ccs64.name">
-    </runner>
-     <runner
-           defaultCommandLine="${runnerExecutablePath} -autostart ${outputFilePath}"
-           hardware="C64"
-           homePageURL="http://vice-emu.sourceforge.net"
-           id="vice"
-           name="%com.wudsn.ide.asm.runner.c64.vice.name">
-     </runner>
-    </extension>
- <extension
-       id="NES runners"
-       point="com.wudsn.ide.asm.runners">
-    <runner
-          defaultCommandLine="${runnerExecutablePath} ${outputFilePath}"
-          hardware="NES"
-          homePageURL="http://www.byuu.org/bsnes"
-          id="bsnes"
-          name="%com.wudsn.ide.asm.runner.nes.bsnes.name">
-    </runner>
-    <runner
-          defaultCommandLine="${runnerExecutablePath} ${outputFilePath}"
-          hardware="NES"
-          homePageURL="http://www.fceux.comux"
-          id="fceux"
-          name="%com.wudsn.ide.asm.runner.nes.fceux.name">
-    </runner>
-    <runner
-          defaultCommandLine="${runnerExecutablePath} ${outputFilePath}"
-          hardware="NES"
-          homePageURL="http://www.qmtpro.com/~nes/nintendulator"
-          id="nintendulator"
-          name="%com.wudsn.ide.asm.runner.nes.nintendulator.name">
-    </runner>
- </extension>
+ 
 </plugin>

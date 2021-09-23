@@ -1,0 +1,111 @@
+/**
+ * Copyright (C) 2009 - 2021 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+ *
+ * This file is part of WUDSN IDE.
+ * 
+ * WUDSN IDE is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * WUDSN IDE is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package com.wudsn.ide.lng.asm.compiler.asm6;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.List;
+
+import org.eclipse.core.resources.IMarker;
+
+import com.wudsn.ide.lng.compiler.CompilerProcessLogParser;
+import com.wudsn.ide.lng.compiler.CompilerSymbol;
+
+/**
+ * Process log parser for {@link Asm6Compiler}.
+ * 
+ * Sample error message:
+ * 
+ * <pre>
+ * include/ASM6-Reference-Source-Include.asm(2): Illegal instruction.
+ * include/ASM6-Reference-Source-Include.asm(4): Illegal instruction.
+ * </pre>
+ * 
+ * @author Peter Dell
+ */
+final class Asm6CompilerProcessLogParser extends CompilerProcessLogParser {
+
+	private BufferedReader bufferedReader;
+
+	@Override
+	protected void initialize() {
+		bufferedReader = new BufferedReader(new StringReader(errorLog));
+	}
+
+	@Override
+	protected void findNextMarker() {
+
+		String line;
+		line = "";
+
+		while (line != null && !markerAvailable) {
+			try {
+				line = bufferedReader.readLine();
+			} catch (IOException ex) {
+				throw new RuntimeException("Cannot read line", ex);
+			}
+			if (line != null) {
+				String pattern;
+				int index;
+				pattern = "): ";
+				severity = IMarker.SEVERITY_ERROR;
+				index = line.indexOf(pattern);
+				if (index < 2) {
+					pattern = "): ";
+					severity = IMarker.SEVERITY_WARNING;
+					index = line.indexOf(pattern);
+				}
+				if (index > 2) {
+
+					int i = index - 2;
+					while (line.charAt(i) != '(' && i >= 0) {
+						i--;
+					}
+
+					if (line.charAt(i) == '(') {
+						String lineNumberString = line.substring(i + 1, index);
+
+						try {
+							lineNumber = Integer.parseInt(lineNumberString);
+						} catch (NumberFormatException ex) {
+							lineNumber = -1;
+							severity = IMarker.SEVERITY_ERROR;
+							message = ex.getMessage();
+						}
+					} else {
+						lineNumber = -1;
+					}
+					message = line.substring(index + pattern.length()).trim();
+
+					filePath = line.substring(0, i);
+					markerAvailable = true;
+				}
+
+			}
+		}
+	}
+
+	@Override
+	public void addCompilerSymbols(List<CompilerSymbol> compilerSymbols) {
+
+	}
+
+}

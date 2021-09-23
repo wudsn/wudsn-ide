@@ -4,18 +4,18 @@
  <extension
        point="org.eclipse.ui.preferencePages">
     <page
-          category="com.wudsn.ide.asm.preferences.AssemblerPreferencesPage"
+          category="com.wudsn.ide.lng.preferences.AssemblerPreferencesPage"
           class="com.wudsn.ide.asm.preferences.test.AssemblerPreferencesTestCompilersPage"
           id="com.wudsn.ide.asm.preferences.test.AssemblerPreferencesTestCompilersPage"
           name="%com.wudsn.ide.asm.preferences.test.AssemblerPreferencesTestCompilersPage.name">
     </page>
  </extension>
-	<extension point="com.wudsn.ide.asm.compilers">
+	<extension point="com.wudsn.ide.lng.compilers">
 		<compiler
         class="com.wudsn.ide.asm.compiler.test.TestCompiler"
         defaultParameters="-o${outputFilePath} ${sourceFilePath}"
         defaultHardware="TEST"
-        homePageURL="http://www.wudsn.com"
+        homePageURL="https://www.wudsn.com"
         id="test"
         name="%com.wudsn.ide.asm.compiler.test.TestCompiler.name"
         version="none">
@@ -40,13 +40,13 @@
 		<editor class="com.wudsn.ide.asm.editor.test.TestEditor"
 			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
 			default="false" extensions="asm" icon="icons/editor-test-16x16.gif"
-			id="com.wudsn.ide.asm.editor.test.TestEditor" name="%com.wudsn.ide.asm.editor.test.TestEditor.name">
-			<contentTypeBinding contentTypeId="com.wudsn.ide.asm.editor.test.TestSourceFile">
+			id="com.wudsn.ide.lng.editor.test.TestEditor" name="%com.wudsn.ide.asm.editor.test.TestEditor.name">
+			<contentTypeBinding contentTypeId="com.wudsn.ide.lng.editor.test.TestSourceFile">
 			</contentTypeBinding>
 		</editor>
 	</extension>
  <extension
-       point="com.wudsn.ide.asm.runners">
+       point="com.wudsn.ide.lng.runners">
     <runner
           defaultCommandLine="${runnerExecutablePath} ${outputFilePath}"
           hardware="TEST"

@@ -19,7 +19,7 @@
 
 package com.wudsn.ide.asm.compiler.test;
 
-import com.wudsn.ide.asm.compiler.parser.CompilerSourceParser;
+import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
 
 /**
  * Source parser for {@link TestCompiler}.
