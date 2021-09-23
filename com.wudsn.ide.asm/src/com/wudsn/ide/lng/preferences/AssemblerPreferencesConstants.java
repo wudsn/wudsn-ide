@@ -147,18 +147,18 @@ public final class AssemblerPreferencesConstants {
 	}
 
 	/**
-	 * Determines if preference key name represents a setting for compiler opcodes
+	 * Determines if preference key name represents a setting for compiler targets
 	 * visibility.
 	 * 
 	 * @param name The name of the preferences key, not <code>null</code>.
 	 * @return <code>true</code> if preference key name represents a setting for
 	 *         compiler opcodes visibility, <code>false</code> otherwise.
 	 */
-	public static boolean isCompilerCPUName(String name) {
+	public static boolean isCompilerTargetName(String name) {
 		if (name == null) {
 			throw new IllegalArgumentException("Parameter 'name' must not be null.");
 		}
-		boolean result = name.startsWith("compiler.") && name.endsWith(".cpu");
+		boolean result = name.startsWith("compiler.") && name.endsWith(".target");
 		return result;
 	}
 
@@ -180,22 +180,22 @@ public final class AssemblerPreferencesConstants {
 	}
 
 	/**
-	 * Gets preference key name for the compiler CPU visibility.
+	 * Gets preference key name for the compiler Target visibility.
 	 * 
 	 * @param compilerId The compiler id, not <code>null</code>.
 	 * @param hardware   The hardware, not <code>null</code>.
 	 * 
-	 * @return The preference key name for the compiler CPU, not empty and not
+	 * @return The preference key name for the compiler Target, not empty and not
 	 *         <code>null</code>.
 	 */
-	static String getCompilerCPUName(String compilerId, Hardware hardware) {
+	static String getCompilerTargetName(String compilerId, Hardware hardware) {
 		if (compilerId == null) {
 			throw new IllegalArgumentException("Parameter 'compilerId' must not be null.");
 		}
 		if (hardware == null) {
 			throw new IllegalArgumentException("Parameter 'hardware' must not be null.");
 		}
-		return getCompilerHardwarePrefix(compilerId, hardware) + ".cpu"; //$NON-NLS-1$
+		return getCompilerHardwarePrefix(compilerId, hardware) + ".target"; //$NON-NLS-1$
 	}
 
 	/**

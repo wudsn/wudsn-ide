@@ -23,18 +23,19 @@ import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesCompilersPage;
 
 /**
- * Visual editor page for the assembler preferences regarding Apple 2 compilers.
+ * Visual editor page for the assembler preferences regarding arbitrary
+ * compilers.
  * 
  * @author Peter Dell
  * 
  */
-public final class AssemblerPreferencesAtari7800CompilersPage extends LanguagePreferencesCompilersPage {
+public final class AssemblerPreferencesTestCompilersPage extends LanguagePreferencesCompilersPage {
 
 	/**
 	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
 	 */
-	public AssemblerPreferencesAtari7800CompilersPage() {
-		super(Language.ASM, Hardware.ATARI7800);
+	public AssemblerPreferencesTestCompilersPage() {
+		super(Language.ASM,Hardware.TEST);
 
 	}
 

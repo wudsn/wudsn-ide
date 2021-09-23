@@ -20,6 +20,7 @@
 package com.wudsn.ide.lng.preferences;
 
 import java.util.ArrayList;
+import com.wudsn.ide.lng.Language;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -55,7 +56,7 @@ import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.gui.SWTFactory;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.AssemblerPlugin;
-import com.wudsn.ide.lng.CPU;
+import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerOutputFolderMode;
@@ -66,13 +67,13 @@ import com.wudsn.ide.lng.runner.RunnerId;
 import com.wudsn.ide.lng.runner.RunnerRegistry;
 
 /**
- * Visual editor page for the assembler preferences regarding compilers. There
+ * Visual editor page for the language preferences regarding compilers. There
  * is a separate page per {@link Hardware}. Subclasses only implement the
  * constructor.
  * 
  * @author Peter Dell
  */
-public abstract class AssemblerPreferencesCompilersPage extends FieldEditorPreferencePage
+public abstract class LanguagePreferencesCompilersPage extends FieldEditorPreferencePage
 		implements IWorkbenchPreferencePage {
 
 	private static final class Tab {
@@ -166,6 +167,11 @@ public abstract class AssemblerPreferencesCompilersPage extends FieldEditorPrefe
 	}
 
 	/**
+	 * The language.
+	 */
+	final Language langauge;
+
+	/**
 	 * The type of hardware used to filter the compilers and emulators.
 	 */
 	final Hardware hardware;
@@ -193,11 +199,15 @@ public abstract class AssemblerPreferencesCompilersPage extends FieldEditorPrefe
 	 * @param hardware The type of hardware used to filter the compilers and
 	 *                 emulators, not <code>null</code>.
 	 */
-	protected AssemblerPreferencesCompilersPage(Hardware hardware) {
+	protected LanguagePreferencesCompilersPage(Language language, Hardware hardware) {
 		super(GRID);
+		if (language == null) {
+			throw new IllegalArgumentException("Parameter 'language' must not be null.");
+		}
 		if (hardware == null) {
 			throw new IllegalArgumentException("Parameter 'hardware' must not be null.");
 		}
+		this.langauge = language;
 		this.hardware = hardware;
 		plugin = AssemblerPlugin.getInstance();
 		IPreferenceStore preferencesStore = plugin.getPreferenceStore();
@@ -311,25 +321,25 @@ public abstract class AssemblerPreferencesCompilersPage extends FieldEditorPrefe
 
 		Composite composite;
 
-		// Field: cpu
+		// Field: target
 		composite = SWTFactory.createComposite(tabContent, 2, 3, GridData.FILL_HORIZONTAL);
 
-		// Filtering of CPU based on hardware is currently not implemented
+		// Filtering of Target based on hardware is currently not implemented
 		// because expansion boards like a W65816 board might be there/added
 		// for a hardware.
-		List<CPU> cpus = compilerDefinition.getSupportedCPUs();
-		String[][] entryNamesAndValues = new String[cpus.size()][];
+		List<Target> targets = compilerDefinition.getSupportedTargets();
+		String[][] entryNamesAndValues = new String[targets.size()][];
 		int i = 0;
-		for (CPU cpu : cpus) {
+		for (Target target : targets) {
 			entryNamesAndValues[i] = new String[2];
-			entryNamesAndValues[i][1] = cpu.name();
-			entryNamesAndValues[i][0] = EnumUtility.getText(cpu);
+			entryNamesAndValues[i][1] = target.name();
+			entryNamesAndValues[i][0] = EnumUtility.getText(target);
 			i++;
 		}
 
 		FieldEditor comboFieldEditor = new ComboFieldEditor(
-				AssemblerPreferencesConstants.getCompilerCPUName(compilerId, hardware),
-				Texts.PREFERENCES_COMPILER_CPU_LABEL, entryNamesAndValues, composite);
+				AssemblerPreferencesConstants.getCompilerTargetName(compilerId, hardware),
+				Texts.PREFERENCES_COMPILER_TARGET_LABEL, entryNamesAndValues, composite);
 		comboFieldEditor.setEnabled(entryNamesAndValues.length > 1, composite);
 		addField(comboFieldEditor);
 

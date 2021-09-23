@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.wudsn.ide.lng.CPU;
+import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
 import com.wudsn.ide.lng.compiler.syntax.Opcode.OpcodeAddressingMode;
 
@@ -64,9 +64,9 @@ public final class InstructionSet {
 	 * @param compilerSyntax   The compiler syntax, not <code>null</code>.
 	 * 
 	 * @param instructionsList The non-filtered list of compiler instructions.
-	 * @param cpu              The cpu to filter by, not <code>null</code>.
+	 * @param target           The target to filter by, not <code>null</code>.
 	 */
-	InstructionSet(CompilerSyntax compilerSyntax, List<Instruction> instructionsList, CPU cpu) {
+	InstructionSet(CompilerSyntax compilerSyntax, List<Instruction> instructionsList, Target target) {
 
 		if (compilerSyntax == null) {
 			throw new IllegalArgumentException("Parameter 'compilerSyntax' must not be null.");
@@ -74,8 +74,8 @@ public final class InstructionSet {
 		if (instructionsList == null) {
 			throw new IllegalArgumentException("Parameter 'instructionsList' must not be null.");
 		}
-		if (cpu == null) {
-			throw new IllegalArgumentException("Parameter 'cpu' must not be null.");
+		if (target == null) {
+			throw new IllegalArgumentException("Parameter 'target' must not be null.");
 		}
 		// Compute the list of all include instructions.
 		this.compilerSyntax = compilerSyntax;
@@ -94,7 +94,7 @@ public final class InstructionSet {
 		StringBuilder instructionPartCharacters = new StringBuilder(2048);
 
 		for (Instruction instruction : instructionsList) {
-			if (!instruction.getCPUs().contains(cpu)) {
+			if (!instruction.getCPUs().contains(target)) {
 				continue;
 			}
 			this.instructionsList.add(instruction);
@@ -121,8 +121,8 @@ public final class InstructionSet {
 				Opcode opcode = (Opcode) instruction;
 				for (OpcodeAddressingMode opcodeAddressingMode : opcode.getAddressingModes()) {
 					// Even if an instruction is supported by all CPUs, not all
-					// addressing modes may be supported by the CPU,
-					if (opcodeAddressingMode.getCPUs().contains(cpu)) {
+					// addressing modes may be supported by the Target,
+					if (opcodeAddressingMode.getCPUs().contains(target)) {
 						List<OpcodeAddressingMode> list = opcodeAddessingModesList
 								.get(opcodeAddressingMode.getOpcodeValue());
 						if (list == null) {
@@ -212,7 +212,7 @@ public final class InstructionSet {
 
 	/**
 	 * Gets list of opcode address modes for the given opcode value. Only instances
-	 * that are support by the CPU of the instruction set are returned.
+	 * that are support by the Target of the instruction set are returned.
 	 * 
 	 * @param opcodeValue The opcode value.
 	 * @return The list of opcode address modes, may be empty, not

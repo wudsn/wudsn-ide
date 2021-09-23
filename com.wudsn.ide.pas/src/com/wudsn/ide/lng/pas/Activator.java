@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.wudsn.ide.pas;
+package com.wudsn.ide.lng.pas;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -29,7 +29,7 @@ import org.osgi.framework.BundleContext;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "com.wudsn.ide.pas"; //$NON-NLS-1$
+	public static final String PLUGIN_ID = "com.wudsn.ide.lng.pas"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;

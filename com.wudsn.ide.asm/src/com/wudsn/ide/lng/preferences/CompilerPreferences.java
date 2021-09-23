@@ -21,7 +21,7 @@ package com.wudsn.ide.lng.preferences;
 
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.CPU;
+import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.compiler.CompilerOutputFolderMode;
 import com.wudsn.ide.lng.runner.RunnerId;
 
@@ -76,21 +76,21 @@ public final class CompilerPreferences {
 	}
 
 	/**
-	 * Gets the CPU for which the instructions shall be active.
+	 * Gets the Target for which the instructions shall be active.
 	 * 
-	 * @return The CPU, not <code>null</code>.
+	 * @return The Target, not <code>null</code>.
 	 * 
 	 * @since 1.6.1
 	 */
-	public CPU getCPU() {
-		CPU result;
-		String cpuString = assemblerPreferences
-				.getString(AssemblerPreferencesConstants.getCompilerCPUName(compilerId, hardware));
+	public Target getTarget() {
+		Target result;
+		String targetString = assemblerPreferences
+				.getString(AssemblerPreferencesConstants.getCompilerTargetName(compilerId, hardware));
 
-		if (StringUtility.isEmpty(cpuString)) {
-			result = CPU.MOS6502;
+		if (StringUtility.isEmpty(targetString)) {
+			result = Target.MOS6502;
 		} else {
-			result = CPU.valueOf(cpuString);
+			result = Target.valueOf(targetString);
 		}
 		return result;
 	}
@@ -102,7 +102,7 @@ public final class CompilerPreferences {
 	 */
 	@Deprecated
 	public boolean isIllegalOpcodesVisible() {
-		return getCPU() == CPU.MOS6502_ILLEGAL;
+		return getTarget() == Target.MOS6502_ILLEGAL;
 	}
 
 	/**
@@ -112,7 +112,7 @@ public final class CompilerPreferences {
 	 */
 	@Deprecated
 	public boolean isW65816OpcodesVisible() {
-		return getCPU() == CPU.MOS65816;
+		return getTarget() == Target.MOS65816;
 	}
 
 	/**

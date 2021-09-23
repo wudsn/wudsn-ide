@@ -19,7 +19,8 @@
 package com.wudsn.ide.lng.asm.preferences;
 
 import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.preferences.AssemblerPreferencesCompilersPage;
+import com.wudsn.ide.lng.Language;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesCompilersPage;
 
 /**
  * Visual editor page for the assembler preferences regarding Apple 2 compilers.
@@ -27,13 +28,13 @@ import com.wudsn.ide.lng.preferences.AssemblerPreferencesCompilersPage;
  * @author Peter Dell
  * 
  */
-public final class AssemblerPreferencesAtari2600CompilersPage extends AssemblerPreferencesCompilersPage {
+public final class AssemblerPreferencesAtari2600CompilersPage extends LanguagePreferencesCompilersPage {
 
 	/**
 	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
 	 */
 	public AssemblerPreferencesAtari2600CompilersPage() {
-		super(Hardware.ATARI2600);
+		super(Language.ASM,Hardware.ATARI2600);
 
 	}
 

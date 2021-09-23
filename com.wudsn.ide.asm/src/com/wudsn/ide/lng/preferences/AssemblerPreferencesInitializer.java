@@ -123,8 +123,8 @@ public final class AssemblerPreferencesInitializer extends AbstractPreferenceIni
 				if (hardware.equals(Hardware.GENERIC)) {
 					continue;
 				}
-				store.setDefault(AssemblerPreferencesConstants.getCompilerCPUName(compilerId, hardware),
-						compilerDefinition.getSupportedCPUs().get(0).toString());
+				store.setDefault(AssemblerPreferencesConstants.getCompilerTargetName(compilerId, hardware),
+						compilerDefinition.getSupportedTargets().get(0).toString());
 
 				name = AssemblerPreferencesConstants.getCompilerParametersName(compilerId, hardware);
 				store.setDefault(name, compilerDefinition.getDefaultParameters());

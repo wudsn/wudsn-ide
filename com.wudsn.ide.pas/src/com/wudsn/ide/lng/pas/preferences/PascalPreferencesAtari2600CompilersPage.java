@@ -16,25 +16,25 @@
  * You should have received a copy of the GNU General Public License
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.wudsn.ide.asm.preferences.test;
+package com.wudsn.ide.lng.pas.preferences;
 
 import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.preferences.AssemblerPreferencesCompilersPage;
+import com.wudsn.ide.lng.Language;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesCompilersPage;
 
 /**
- * Visual editor page for the assembler preferences regarding arbitrary
- * compilers.
+ * Visual editor page for the assembler preferences regarding Apple 2 compilers.
  * 
  * @author Peter Dell
  * 
  */
-public final class AssemblerPreferencesTestCompilersPage extends AssemblerPreferencesCompilersPage {
+public final class PascalPreferencesAtari2600CompilersPage extends LanguagePreferencesCompilersPage {
 
 	/**
 	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
 	 */
-	public AssemblerPreferencesTestCompilersPage() {
-		super(Hardware.TEST);
+	public PascalPreferencesAtari2600CompilersPage() {
+		super(Language.ASM,Hardware.ATARI2600);
 
 	}
 

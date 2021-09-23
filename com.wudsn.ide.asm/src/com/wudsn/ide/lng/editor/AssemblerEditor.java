@@ -57,7 +57,7 @@ import com.wudsn.ide.base.common.Profiler;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.AssemblerPlugin;
 import com.wudsn.ide.lng.AssemblerProperties;
-import com.wudsn.ide.lng.CPU;
+import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.AssemblerProperties.InvalidAssemblerPropertyException;
 import com.wudsn.ide.lng.compiler.Compiler;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
@@ -189,14 +189,14 @@ public abstract class AssemblerEditor extends TextEditor {
 	 * @return The compiler source parser for this editor, not <code>null</code> .
 	 */
 	public final CompilerSourceParser createCompilerSourceParser() {
-		CPU cpu;
+		Target target;
 		CompilerSourceParser result;
 		if (compiler == null) {
 			throw new IllegalStateException("Field 'compiler' must not be null.");
 		}
-		cpu = getCompilerPreferences().getCPU();
+		target = getCompilerPreferences().getTarget();
 		result = compiler.createSourceParser();
-		result.init(compiler.getDefinition().getSyntax().getInstructionSet(cpu));
+		result.init(compiler.getDefinition().getSyntax().getInstructionSet(target));
 		return result;
 	}
 

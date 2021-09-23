@@ -501,7 +501,7 @@ final class AssemblerSourceScanner extends RuleBasedScanner {
 				token.setData(preferences.getEditorTextAttribute(propertyName));
 				refresh = true;
 
-			} else if (AssemblerPreferencesConstants.isCompilerCPUName(propertyName)) {
+			} else if (AssemblerPreferencesConstants.isCompilerTargetName(propertyName)) {
 				CompilerSourceParser compilerSourceParser = editor.createCompilerSourceParser();
 				wordRule.setCompilerSourceParser(compilerSourceParser);
 				wordRule.setInstructions();

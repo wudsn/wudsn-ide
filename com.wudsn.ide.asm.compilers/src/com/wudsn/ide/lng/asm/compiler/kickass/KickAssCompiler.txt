@@ -46,7 +46,7 @@
 			}
 			title = result.toString();
 		    }
-		    System.out.println("	<constant cpu=\"" + cpuString
+		    System.out.println("	<constant target=\"" + cpuString
 			    + "\" name=\"" + name + "\" title=\"" + title
 			    + "\"/>");
 		}

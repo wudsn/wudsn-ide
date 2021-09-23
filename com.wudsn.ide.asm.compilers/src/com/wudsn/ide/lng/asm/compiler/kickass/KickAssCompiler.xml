@@ -4,51 +4,51 @@
 	identifierStartCharacters="_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" identifierPartCharacters="_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" identifierSeparatorCharacter="." labelDefinitionSuffixCharacter=":"
 	macroUsagePrefixCharacter=":" instructionsCaseSensitive="true" sourceIncludeDefaultExtension="">
 
-	<directive cpus="*" name=".align" title="_A_l_i_g_n memory" type="DIRECTIVE" proposal=".align _"/>
-	<directive cpus="*" name=".assert" title="_A_s_s_e_r_t" type="DIRECTIVE" proposal=".assert _"/>
-	<directive cpus="*" name=".asserterror" title="_A_s_s_e_r_t _e_r_r_o_r" type="DIRECTIVE" proposal=".asserterror _"/>
-	<directive cpus="*" name=".by" title="Define _b_ytes" type="DIRECTIVE" proposal=".by _"/>
-	<directive cpus="*" name=".byte" title="Define _b_y_t_e" type="DIRECTIVE" proposal=".byte _"/>
-	<directive cpus="*" name=".const" title="Define _c_o_n_s_tants" type="DIRECTIVE" proposal=".const _"/>
-	<directive cpus="*" name=".define" title="_D_e_f_i_n_e symbols" type="DIRECTIVE" proposal=".define _"/>
-	<directive cpus="*" name=".dw" title="_Define _words" type="DIRECTIVE" proposal=".dw _"/>
-	<directive cpus="*" name=".dword" title="Define _double _w_o_r_ds" type="DIRECTIVE" proposal=".dword _"/>
-	<!-- Commented out intentionally <directive cpus="*" name=".easteregg"
+	<directive targets="*" name=".align" title="_A_l_i_g_n memory" type="DIRECTIVE" proposal=".align _"/>
+	<directive targets="*" name=".assert" title="_A_s_s_e_r_t" type="DIRECTIVE" proposal=".assert _"/>
+	<directive targets="*" name=".asserterror" title="_A_s_s_e_r_t _e_r_r_o_r" type="DIRECTIVE" proposal=".asserterror _"/>
+	<directive targets="*" name=".by" title="Define _b_ytes" type="DIRECTIVE" proposal=".by _"/>
+	<directive targets="*" name=".byte" title="Define _b_y_t_e" type="DIRECTIVE" proposal=".byte _"/>
+	<directive targets="*" name=".const" title="Define _c_o_n_s_tants" type="DIRECTIVE" proposal=".const _"/>
+	<directive targets="*" name=".define" title="_D_e_f_i_n_e symbols" type="DIRECTIVE" proposal=".define _"/>
+	<directive targets="*" name=".dw" title="_Define _words" type="DIRECTIVE" proposal=".dw _"/>
+	<directive targets="*" name=".dword" title="Define _double _w_o_r_ds" type="DIRECTIVE" proposal=".dword _"/>
+	<!-- Commented out intentionally <directive targets="*" name=".easteregg"
 		title="Create _e_a_s_t_e_r_e_g_g.prg file" type="DIRECTIVE" proposal=".easteregg
 		_"/> -->
-	<directive cpus="*" name="else" title="_E_l_s_e" type="DIRECTIVE" proposal="else_"/> <!-- "else" is considered part of the ".IF" directive -->
-	<directive cpus="*" name=".enum" title="Define _e_n_u_meration" type="BEGIN_ENUM_DEFINITION_SECTION_DIRECTIVE" proposal=".enum _"/>
-	<directive cpus="*" name=".error" title="Generate _e_r_r_o_r" type="DIRECTIVE" proposal=".error _"/>
-	<directive cpus="*" name=".eval" title="_E_v_a_luate expression" type="DIRECTIVE" proposal=".eval _"/>
-	<directive cpus="*" name=".filenamespace" title="Set _f_i_l_e _n_a_m_e_s_p_a_c_e" type="DIRECTIVE" proposal=".filenamespace _"/>
-	<directive cpus="*" name=".fill" title="_F_i_l_l memory with a given byte" type="DIRECTIVE" proposal=".fill _"/>
-	<directive cpus="*" name=".for" title="Begin _f_o_r loop" type="DIRECTIVE" proposal=".for _"/>
-	<directive cpus="*" name=".function" title="Define _f_u_n_c_t_i_o_n" type="DIRECTIVE" proposal=".function _"/>
-	<directive cpus="*" name=".if" title="_I_f" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal=".if _ {\n}"/>
-	<directive cpus="*" name=".import" title="_I_m_p_o_r_t contents of file" type="SOURCE_INCLUDE_DIRECTIVE" proposal=".import &quot;_&quot;"/> <!-- first argument is source/binary/c64/text -->
-	<directive cpus="*" name=".importonce" title="_I_m_p_o_r_t contents of file only _o_n_c_e" type="DIRECTIVE" proposal=".importonce_"/>
-	<directive cpus="*" name=".label" title="Define _l_a_b_e_l" type="DIRECTIVE" proposal=".label _"/>
-	<directive cpus="*" name=".macro" title="Define _m_a_c_r_o" type="BEGIN_MACRO_DEFINITION_SECTION_DIRECTIVE" proposal=".macro _ {\n.}"/>
-	<directive cpus="*" name=".namespace" title="Begin local _n_a_m_e_s_p_a_c_e block" type="BEGIN_LOCAL_SECTION_DIRECTIVE" proposal=".namespace _{\n}"/>
-	<directive cpus="*" name=".pc" title="Set _program _counter" type="BEGIN_IMPLEMENTATION_SECTION_DIRECTIVE" proposal=".pc = _"/>
-	<directive cpus="*" name=".print" title="_P_r_i_n_t string or value during output pass" type="DIRECTIVE" proposal=".print &quot;_&quot;"/>
-	<directive cpus="*" name=".printnow" title="_P_r_i_n_t string or value _n_o_w during current pass" type="DIRECTIVE" proposal=".printnow &quot;_&quot;"/>
-	<directive cpus="*" name=".pseudocommand" title="Define _p_s_e_u_d_o_c_o_m_m_a_n_d" type="DIRECTIVE" proposal=".pseudocommand _ {\n.}"/>
-	<directive cpus="*" name=".pseudopc" title="Set _p_s_e_u_d_o _program _counter" type="DIRECTIVE" proposal=".pseudopc = _"/>
-	<directive cpus="*" name=".return" title="_R_e_t_u_r_n value of a function" type="DIRECTIVE" proposal=".return _"/>
-	<directive cpus="*" name=".struct" title="Define _s_t_r_u_c_t" type="BEGIN_STRUCTURE_DEFINITION_SECTION_DIRECTIVE" proposal=".struct _ {\n}"/>
-	<directive cpus="*" name=".symbol" title="_S_y_m_b_o_l" type="DIRECTIVE" proposal=".symbol _"/>
-	<directive cpus="*" name=".te" title="Define _t_ext" type="DIRECTIVE" proposal=".te &quot;_&quot;"/>
-	<directive cpus="*" name=".text" title="Define _t_e_x_t" type="DIRECTIVE" proposal=".text &quot;_&quot;"/>
-	<directive cpus="*" name=".var" title="Define _v_a_riables" type="DIRECTIVE" proposal=".var_"/>
-	<directive cpus="*" name=".wo" title="Define _w_ords" type="DIRECTIVE" proposal=".wo _"/>
-	<directive cpus="*" name=".word" title="Define _w_o_r_ds" type="DIRECTIVE" proposal=".word _"/>
+	<directive targets="*" name="else" title="_E_l_s_e" type="DIRECTIVE" proposal="else_"/> <!-- "else" is considered part of the ".IF" directive -->
+	<directive targets="*" name=".enum" title="Define _e_n_u_meration" type="BEGIN_ENUM_DEFINITION_SECTION_DIRECTIVE" proposal=".enum _"/>
+	<directive targets="*" name=".error" title="Generate _e_r_r_o_r" type="DIRECTIVE" proposal=".error _"/>
+	<directive targets="*" name=".eval" title="_E_v_a_luate expression" type="DIRECTIVE" proposal=".eval _"/>
+	<directive targets="*" name=".filenamespace" title="Set _f_i_l_e _n_a_m_e_s_p_a_c_e" type="DIRECTIVE" proposal=".filenamespace _"/>
+	<directive targets="*" name=".fill" title="_F_i_l_l memory with a given byte" type="DIRECTIVE" proposal=".fill _"/>
+	<directive targets="*" name=".for" title="Begin _f_o_r loop" type="DIRECTIVE" proposal=".for _"/>
+	<directive targets="*" name=".function" title="Define _f_u_n_c_t_i_o_n" type="DIRECTIVE" proposal=".function _"/>
+	<directive targets="*" name=".if" title="_I_f" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal=".if _ {\n}"/>
+	<directive targets="*" name=".import" title="_I_m_p_o_r_t contents of file" type="SOURCE_INCLUDE_DIRECTIVE" proposal=".import &quot;_&quot;"/> <!-- first argument is source/binary/c64/text -->
+	<directive targets="*" name=".importonce" title="_I_m_p_o_r_t contents of file only _o_n_c_e" type="DIRECTIVE" proposal=".importonce_"/>
+	<directive targets="*" name=".label" title="Define _l_a_b_e_l" type="DIRECTIVE" proposal=".label _"/>
+	<directive targets="*" name=".macro" title="Define _m_a_c_r_o" type="BEGIN_MACRO_DEFINITION_SECTION_DIRECTIVE" proposal=".macro _ {\n.}"/>
+	<directive targets="*" name=".namespace" title="Begin local _n_a_m_e_s_p_a_c_e block" type="BEGIN_LOCAL_SECTION_DIRECTIVE" proposal=".namespace _{\n}"/>
+	<directive targets="*" name=".pc" title="Set _program _counter" type="BEGIN_IMPLEMENTATION_SECTION_DIRECTIVE" proposal=".pc = _"/>
+	<directive targets="*" name=".print" title="_P_r_i_n_t string or value during output pass" type="DIRECTIVE" proposal=".print &quot;_&quot;"/>
+	<directive targets="*" name=".printnow" title="_P_r_i_n_t string or value _n_o_w during current pass" type="DIRECTIVE" proposal=".printnow &quot;_&quot;"/>
+	<directive targets="*" name=".pseudocommand" title="Define _p_s_e_u_d_o_c_o_m_m_a_n_d" type="DIRECTIVE" proposal=".pseudocommand _ {\n.}"/>
+	<directive targets="*" name=".pseudopc" title="Set _p_s_e_u_d_o _program _counter" type="DIRECTIVE" proposal=".pseudopc = _"/>
+	<directive targets="*" name=".return" title="_R_e_t_u_r_n value of a function" type="DIRECTIVE" proposal=".return _"/>
+	<directive targets="*" name=".struct" title="Define _s_t_r_u_c_t" type="BEGIN_STRUCTURE_DEFINITION_SECTION_DIRECTIVE" proposal=".struct _ {\n}"/>
+	<directive targets="*" name=".symbol" title="_S_y_m_b_o_l" type="DIRECTIVE" proposal=".symbol _"/>
+	<directive targets="*" name=".te" title="Define _t_ext" type="DIRECTIVE" proposal=".te &quot;_&quot;"/>
+	<directive targets="*" name=".text" title="Define _t_e_x_t" type="DIRECTIVE" proposal=".text &quot;_&quot;"/>
+	<directive targets="*" name=".var" title="Define _v_a_riables" type="DIRECTIVE" proposal=".var_"/>
+	<directive targets="*" name=".wo" title="Define _w_ords" type="DIRECTIVE" proposal=".wo _"/>
+	<directive targets="*" name=".word" title="Define _w_o_r_ds" type="DIRECTIVE" proposal=".word _"/>
 
 	<!-- Build in high level directives ! -->
-	<directive cpus="*" name="LoadBinary" title="_L_o_a_d _b_i_n_a_r_y file" type="BINARY_INCLUDE_DIRECTIVE" proposal="LoadBinary(&quot;_&quot;)"/>
-	<directive cpus="*" name="LoadSid" title="_L_o_a_d _S_I_D module file" type="BINARY_INCLUDE_DIRECTIVE" proposal="LoadSid(&quot;_&quot;)"/>
-	<directive cpus="*" name="LoadPicture" title="_L_o_a_d _p_i_c_t_u_r_e file" type="BINARY_INCLUDE_DIRECTIVE" proposal="LoadPicture(&quot;_&quot;)"/>
-	<directive cpus="*" name="createFile" title="_C_r_e_a_t_e _f_i_l_e" type="BINARY_OUTPUT_DIRECTIVE" proposal="createFile(&quot;_&quot;)"/>
+	<directive targets="*" name="LoadBinary" title="_L_o_a_d _b_i_n_a_r_y file" type="BINARY_INCLUDE_DIRECTIVE" proposal="LoadBinary(&quot;_&quot;)"/>
+	<directive targets="*" name="LoadSid" title="_L_o_a_d _S_I_D module file" type="BINARY_INCLUDE_DIRECTIVE" proposal="LoadSid(&quot;_&quot;)"/>
+	<directive targets="*" name="LoadPicture" title="_L_o_a_d _p_i_c_t_u_r_e file" type="BINARY_INCLUDE_DIRECTIVE" proposal="LoadPicture(&quot;_&quot;)"/>
+	<directive targets="*" name="createFile" title="_C_r_e_a_t_e _f_i_l_e" type="BINARY_OUTPUT_DIRECTIVE" proposal="createFile(&quot;_&quot;)"/>
 
 	<!-- Other functions, maily operands used for expressions... TODO
 		abs
@@ -99,302 +99,302 @@
 	-->
 
 	<!-- Scientific constants ! -->
-	<constant cpus="*" name="PI" title="_P_I=3.14159265"/>
-	<constant cpus="*" name="E" title="_e=2.71828183"/>
+	<constant targets="*" name="PI" title="_P_I=3.14159265"/>
+	<constant targets="*" name="E" title="_e=2.71828183"/>
 
 	<!-- Addressing mode constants ! -->
-	<constant cpus="*" name="AT_ABSOLUTE" title="_Addressing _type _a_b_s_o_l_u_t_e: $nnnn"/>
-	<constant cpus="*" name="AT_ABSOLUTEX" title="_Addressing _type _a_b_s_o_l_u_t_e, indexed with _X: $nnnn,x"/>
-	<constant cpus="*" name="AT_ABSOLUTEY" title="_Addressing _type _a_b_s_o_l_u_t_e, indexed with _Y: $nnnn,y"/>
-	<constant cpus="*" name="AT_IMMEDIATE" title="_Addressing _type _i_m_m_e_d_i_a_t_e: #$nn"/>
-	<constant cpus="*" name="AT_INDIRECT" title="_Addressing _type _i_n_d_i_r_e_c_t: ($nnnn)"/>
-	<constant cpus="*" name="AT_IZEROPAGEX" title="_Addressing _type _indirect _z_e_r_o _p_a_g_e, indexed with _X: ($nn,x)"/>
-	<constant cpus="*" name="AT_IZEROPAGEY" title="_Addressing _type _indirect _z_e_r_o _p_a_g_e, indexed with _Y: ($nn),y"/>
-	<constant cpus="*" name="AT_NONE" title="_Addressing _type _n_o_n_e"/>
-	<constant cpus="*" name="AT_ZEROPAGE" title="_Addressing _type _z_e_r_o _p_a_g_e, $nn"/>
+	<constant targets="*" name="AT_ABSOLUTE" title="_Addressing _type _a_b_s_o_l_u_t_e: $nnnn"/>
+	<constant targets="*" name="AT_ABSOLUTEX" title="_Addressing _type _a_b_s_o_l_u_t_e, indexed with _X: $nnnn,x"/>
+	<constant targets="*" name="AT_ABSOLUTEY" title="_Addressing _type _a_b_s_o_l_u_t_e, indexed with _Y: $nnnn,y"/>
+	<constant targets="*" name="AT_IMMEDIATE" title="_Addressing _type _i_m_m_e_d_i_a_t_e: #$nn"/>
+	<constant targets="*" name="AT_INDIRECT" title="_Addressing _type _i_n_d_i_r_e_c_t: ($nnnn)"/>
+	<constant targets="*" name="AT_IZEROPAGEX" title="_Addressing _type _indirect _z_e_r_o _p_a_g_e, indexed with _X: ($nn,x)"/>
+	<constant targets="*" name="AT_IZEROPAGEY" title="_Addressing _type _indirect _z_e_r_o _p_a_g_e, indexed with _Y: ($nn),y"/>
+	<constant targets="*" name="AT_NONE" title="_Addressing _type _n_o_n_e"/>
+	<constant targets="*" name="AT_ZEROPAGE" title="_Addressing _type _z_e_r_o _p_a_g_e, $nn"/>
 
 	<!-- C64 color constants ! -->
-	<constant cpus="*" name="BLACK" title="Color _b_l_a_c_k ($00)"/>
-	<constant cpus="*" name="BLUE" title="Color _b_l_u_e ($06)"/>
-	<constant cpus="*" name="BROWN" title="Color _b_r_o_w_n ($09)"/>
-	<constant cpus="*" name="CYAN" title="Color _c_y_a_n ($03)"/>
-	<constant cpus="*" name="DARK_GRAY" title="Color _d_a_r_k _g_r_a_y ($0b)"/>
-	<constant cpus="*" name="DARK_GREY" title="Color _d_a_r_k _g_r_e_y ($0b)"/>
-	<constant cpus="*" name="GRAY" title="Color _g_r_a_y ($0c)"/>
-	<constant cpus="*" name="GREEN" title="Color _g_r_e_e_n ($05)"/>
-	<constant cpus="*" name="GREY" title="Color _g_r_e_y ($0c)"/>
-	<constant cpus="*" name="LIGHT_BLUE" title="Color _l_i_g_h_t _b_l_u_e ($0e)"/>
-	<constant cpus="*" name="LIGHT_GRAY" title="Color _l_i_g_h_t _g_r_a_y ($0f)"/>
-	<constant cpus="*" name="LIGHT_GREEN" title="Color _l_i_g_h_t _g_r_e_e_n ($0d)"/>
-	<constant cpus="*" name="LIGHT_GREY" title="Color _l_i_g_h_t _g_r_e_y ($0f)"/>
-	<constant cpus="*" name="LIGHT_RED" title="Color _l_i_g_h_t _r_e_d ($0a)"/>
-	<constant cpus="*" name="ORANGE" title="Color _o_r_a_n_g_e ($08)"/>
-	<constant cpus="*" name="PURPLE" title="Color _p_u_r_p_l_e ($04)"/>
-	<constant cpus="*" name="RED" title="Color _r_e_d ($02)"/>
-	<constant cpus="*" name="WHITE" title="Color _w_h_i_t_e ($01)"/>
-	<constant cpus="*" name="YELLOW" title="Color _y_e_l_l_o_w ($07)"/>
+	<constant targets="*" name="BLACK" title="Color _b_l_a_c_k ($00)"/>
+	<constant targets="*" name="BLUE" title="Color _b_l_u_e ($06)"/>
+	<constant targets="*" name="BROWN" title="Color _b_r_o_w_n ($09)"/>
+	<constant targets="*" name="CYAN" title="Color _c_y_a_n ($03)"/>
+	<constant targets="*" name="DARK_GRAY" title="Color _d_a_r_k _g_r_a_y ($0b)"/>
+	<constant targets="*" name="DARK_GREY" title="Color _d_a_r_k _g_r_e_y ($0b)"/>
+	<constant targets="*" name="GRAY" title="Color _g_r_a_y ($0c)"/>
+	<constant targets="*" name="GREEN" title="Color _g_r_e_e_n ($05)"/>
+	<constant targets="*" name="GREY" title="Color _g_r_e_y ($0c)"/>
+	<constant targets="*" name="LIGHT_BLUE" title="Color _l_i_g_h_t _b_l_u_e ($0e)"/>
+	<constant targets="*" name="LIGHT_GRAY" title="Color _l_i_g_h_t _g_r_a_y ($0f)"/>
+	<constant targets="*" name="LIGHT_GREEN" title="Color _l_i_g_h_t _g_r_e_e_n ($0d)"/>
+	<constant targets="*" name="LIGHT_GREY" title="Color _l_i_g_h_t _g_r_e_y ($0f)"/>
+	<constant targets="*" name="LIGHT_RED" title="Color _l_i_g_h_t _r_e_d ($0a)"/>
+	<constant targets="*" name="ORANGE" title="Color _o_r_a_n_g_e ($08)"/>
+	<constant targets="*" name="PURPLE" title="Color _p_u_r_p_l_e ($04)"/>
+	<constant targets="*" name="RED" title="Color _r_e_d ($02)"/>
+	<constant targets="*" name="WHITE" title="Color _w_h_i_t_e ($01)"/>
+	<constant targets="*" name="YELLOW" title="Color _y_e_l_l_o_w ($07)"/>
 
 	<!-- C64 image type constants for "LoadBinary()" ! -->
-	<constant cpus="*" name="BF_C64FILE" title="_Binary _file format _C_6_4 program _f_i_l_e; the first two bytes are skipped"/>
-	<constant cpus="*" name="BF_KOALA" title="_Binary _file format _K_o_a_l_a Paint file"/>
-	<constant cpus="*" name="BF_FLI" title="_Binary _file format Blackmail _F_L_I editor file"/>
-	<constant cpus="*" name="BF_BITMAP_SINGLECOLOR" title="_Binary _file format Timanthes _b_i_t_m_a_p _s_i_n_g_l_e _c_o_l_o_r file"/>
+	<constant targets="*" name="BF_C64FILE" title="_Binary _file format _C_6_4 program _f_i_l_e; the first two bytes are skipped"/>
+	<constant targets="*" name="BF_KOALA" title="_Binary _file format _K_o_a_l_a Paint file"/>
+	<constant targets="*" name="BF_FLI" title="_Binary _file format Blackmail _F_L_I editor file"/>
+	<constant targets="*" name="BF_BITMAP_SINGLECOLOR" title="_Binary _file format Timanthes _b_i_t_m_a_p _s_i_n_g_l_e _c_o_l_o_r file"/>
 
 	<!-- Opcode constants for MOS6502 legal opcodes ! -->
-	<constant cpus="*" name="ADC_ABS" title="Opcode _A_D_C _a_b_solute"/>
-	<constant cpus="*" name="ADC_ABSX" title="Opcode _A_D_C _a_b_solute,_x"/>
-	<constant cpus="*" name="ADC_ABSY" title="Opcode _A_D_C _a_b_solute,_y"/>
-	<constant cpus="*" name="ADC_IMM" title="Opcode _A_D_C #_i_m_mediate"/>
-	<constant cpus="*" name="ADC_IZPX" title="Opcode _A_D_C (_indirect _zero_page,_x)"/>
-	<constant cpus="*" name="ADC_IZPY" title="Opcode _A_D_C (_indirect _zero_page),_y"/>
-	<constant cpus="*" name="ADC_ZP" title="Opcode _A_D_C _zero_page"/>
-	<constant cpus="*" name="ADC_ZPX" title="Opcode _A_D_C _zero_page,_x"/>
-	<constant cpus="*" name="AND_ABS" title="Opcode _A_N_D _a_b_solute"/>
-	<constant cpus="*" name="AND_ABSX" title="Opcode _A_N_D _a_b_solute,_x"/>
-	<constant cpus="*" name="AND_ABSY" title="Opcode _A_N_D _a_b_solute,_y"/>
-	<constant cpus="*" name="AND_IMM" title="Opcode _A_N_D #_i_m_mediate"/>
-	<constant cpus="*" name="AND_IZPX" title="Opcode _A_N_D (_indirect _zero_page,_x)"/>
-	<constant cpus="*" name="AND_IZPY" title="Opcode _A_N_D (_indirect _zero_page),_y"/>
-	<constant cpus="*" name="AND_ZP" title="Opcode _A_N_D _zero_page"/>
-	<constant cpus="*" name="AND_ZPX" title="Opcode _A_N_D _zero_page,_x"/>
-	<constant cpus="*" name="ASL" title="Opcode _A_S_L"/>
-	<constant cpus="*" name="ASL_ABS" title="Opcode _A_S_L _a_b_solute"/>
-	<constant cpus="*" name="ASL_ABSX" title="Opcode _A_S_L _a_b_solute,_x"/>
-	<constant cpus="*" name="ASL_ZP" title="Opcode _A_S_L _zero_page"/>
-	<constant cpus="*" name="ASL_ZPX" title="Opcode _A_S_L _zero_page,_x"/>
-	<constant cpus="*" name="BCC_REL" title="Opcode _B_C_C _r_e_lative"/>
-	<constant cpus="*" name="BCS_REL" title="Opcode _B_C_S _r_e_lative"/>
-	<constant cpus="*" name="BEQ_REL" title="Opcode _B_E_Q _r_e_lative"/>
-	<constant cpus="*" name="BIT_ABS" title="Opcode _B_I_T _a_b_solute"/>
-	<constant cpus="*" name="BIT_ABSX" title="Opcode _B_I_T _a_b_solute,_x"/>
-	<constant cpus="*" name="BIT_ZP" title="Opcode _B_I_T _zero_page"/>
-	<constant cpus="*" name="BIT_ZPX" title="Opcode _B_I_T _zero_page,_x"/>
-	<constant cpus="*" name="BMI_REL" title="Opcode _B_M_I _r_e_lative"/>
-	<constant cpus="*" name="BNE_REL" title="Opcode _B_N_E _r_e_lative"/>
-	<constant cpus="*" name="BPL_REL" title="Opcode _B_P_L _r_e_lative"/>
-	<constant cpus="*" name="BRK" title="Opcode _B_R_K"/>
-	<constant cpus="*" name="BVC_REL" title="Opcode _B_V_C _r_e_lative"/>
-	<constant cpus="*" name="BVS_REL" title="Opcode _B_V_S _r_e_lative"/>
-	<constant cpus="*" name="CLC" title="Opcode _C_L_C"/>
-	<constant cpus="*" name="CLD" title="Opcode _C_L_D"/>
-	<constant cpus="*" name="CLI" title="Opcode _C_L_I"/>
-	<constant cpus="*" name="CLV" title="Opcode _C_L_V"/>
-	<constant cpus="*" name="CMP_ABS" title="Opcode _C_M_P _a_b_solute"/>
-	<constant cpus="*" name="CMP_ABSX" title="Opcode _C_M_P _a_b_solute,_x"/>
-	<constant cpus="*" name="CMP_ABSY" title="Opcode _C_M_P _a_b_solute,_y"/>
-	<constant cpus="*" name="CMP_IMM" title="Opcode _C_M_P #_i_m_mediate"/>
-	<constant cpus="*" name="CMP_IZPX" title="Opcode _C_M_P (_indirect _zero_page,_x)"/>
-	<constant cpus="*" name="CMP_IZPY" title="Opcode _C_M_P (_indirect _zero_page),_y"/>
-	<constant cpus="*" name="CMP_ZP" title="Opcode _C_M_P _zero_page"/>
-	<constant cpus="*" name="CMP_ZPX" title="Opcode _C_M_P _zero_page,_x"/>
-	<constant cpus="*" name="CPX_ABS" title="Opcode _C_P_X _a_b_solute"/>
-	<constant cpus="*" name="CPX_IMM" title="Opcode _C_P_X #_i_m_mediate"/>
-	<constant cpus="*" name="CPX_ZP" title="Opcode _C_P_X _zero_page"/>
-	<constant cpus="*" name="CPY_ABS" title="Opcode _C_P_Y _a_b_solute"/>
-	<constant cpus="*" name="CPY_IMM" title="Opcode _C_P_Y #_i_m_mediate"/>
-	<constant cpus="*" name="CPY_ZP" title="Opcode _C_P_Y _zero_page"/>
-	<constant cpus="*" name="DEC_ABS" title="Opcode _D_E_C _a_b_solute"/>
-	<constant cpus="*" name="DEC_ABSX" title="Opcode _D_E_C _a_b_solute,_x"/>
-	<constant cpus="*" name="DEC_ZP" title="Opcode _D_E_C _zero_page"/>
-	<constant cpus="*" name="DEC_ZPX" title="Opcode _D_E_C _zero_page,_x"/>
-	<constant cpus="*" name="DEX" title="Opcode _D_E_X"/>
-	<constant cpus="*" name="DEY" title="Opcode _D_E_Y"/>
-	<constant cpus="*" name="EOR_ABS" title="Opcode _E_O_R _a_b_solute"/>
-	<constant cpus="*" name="EOR_ABSX" title="Opcode _E_O_R _a_b_solute,_x"/>
-	<constant cpus="*" name="EOR_ABSY" title="Opcode _E_O_R _a_b_solute,_y"/>
-	<constant cpus="*" name="EOR_IMM" title="Opcode _E_O_R #_i_m_mediate"/>
-	<constant cpus="*" name="EOR_IZPX" title="Opcode _E_O_R (_indirect _zero_page,_x)"/>
-	<constant cpus="*" name="EOR_IZPY" title="Opcode _E_O_R (_indirect _zero_page),_y"/>
-	<constant cpus="*" name="EOR_ZP" title="Opcode _E_O_R _zero_page"/>
-	<constant cpus="*" name="EOR_ZPX" title="Opcode _E_O_R _zero_page,_x"/>
-	<constant cpus="*" name="INC_ABS" title="Opcode _I_N_C _a_b_solute"/>
-	<constant cpus="*" name="INC_ABSX" title="Opcode _I_N_C _a_b_solute,_x"/>
-	<constant cpus="*" name="INC_ZP" title="Opcode _I_N_C _zero_page"/>
-	<constant cpus="*" name="INC_ZPX" title="Opcode _I_N_C _zero_page,_x"/>
-	<constant cpus="*" name="INX" title="Opcode _I_N_X"/>
-	<constant cpus="*" name="INY" title="Opcode _I_N_Y"/>
-	<constant cpus="*" name="JMP_ABS" title="Opcode _J_M_P _a_b_solute"/>
-	<constant cpus="*" name="JMP_IND" title="Opcode _J_M_P (_i_n_direct)"/>
-	<constant cpus="*" name="JSR_ABS" title="Opcode _J_S_R _a_b_solute"/>
-	<constant cpus="*" name="LDA_ABS" title="Opcode _L_D_A _a_b_solute"/>
-	<constant cpus="*" name="LDA_ABSX" title="Opcode _L_D_A _a_b_solute,_x"/>
-	<constant cpus="*" name="LDA_ABSY" title="Opcode _L_D_A _a_b_solute,_y"/>
-	<constant cpus="*" name="LDA_IMM" title="Opcode _L_D_A #_i_m_mediate"/>
-	<constant cpus="*" name="LDA_IZPX" title="Opcode _L_D_A (_indirect _zero_page,_x)"/>
-	<constant cpus="*" name="LDA_IZPY" title="Opcode _L_D_A (_indirect _zero_page),_y"/>
-	<constant cpus="*" name="LDA_ZP" title="Opcode _L_D_A _zero_page"/>
-	<constant cpus="*" name="LDA_ZPX" title="Opcode _L_D_A _zero_page,_x"/>
-	<constant cpus="*" name="LDX_ABS" title="Opcode _L_D_X _a_b_solute"/>
-	<constant cpus="*" name="LDX_ABSY" title="Opcode _L_D_X _a_b_solute,_y"/>
-	<constant cpus="*" name="LDX_IMM" title="Opcode _L_D_X #_i_m_mediate"/>
-	<constant cpus="*" name="LDX_ZP" title="Opcode _L_D_X _zero_page"/>
-	<constant cpus="*" name="LDX_ZPY" title="Opcode _L_D_X _zero_page,_y"/>
-	<constant cpus="*" name="LDY_ABS" title="Opcode _L_D_Y _a_b_solute"/>
-	<constant cpus="*" name="LDY_ABSX" title="Opcode _L_D_Y _a_b_solute,_x"/>
-	<constant cpus="*" name="LDY_IMM" title="Opcode _L_D_Y #_i_m_mediate"/>
-	<constant cpus="*" name="LDY_ZP" title="Opcode _L_D_Y _zero_page"/>
-	<constant cpus="*" name="LDY_ZPX" title="Opcode _L_D_Y _zero_page,_x"/>
-	<constant cpus="*" name="LSR" title="Opcode _L_S_R"/>
-	<constant cpus="*" name="LSR_ABS" title="Opcode _L_S_R _a_b_solute"/>
-	<constant cpus="*" name="LSR_ABSX" title="Opcode _L_S_R _a_b_solute,_x"/>
-	<constant cpus="*" name="LSR_ZP" title="Opcode _L_S_R _zero_page"/>
-	<constant cpus="*" name="LSR_ZPX" title="Opcode _L_S_R _zero_page,_x"/>
-	<constant cpus="*" name="NOP" title="Opcode _N_O_P"/>
-	<constant cpus="*" name="ORA_ABS" title="Opcode _O_R_A _a_b_solute"/>
-	<constant cpus="*" name="ORA_ABSX" title="Opcode _O_R_A _a_b_solute,_x"/>
-	<constant cpus="*" name="ORA_ABSY" title="Opcode _O_R_A _a_b_solute,_y"/>
-	<constant cpus="*" name="ORA_IMM" title="Opcode _O_R_A #_i_m_mediate"/>
-	<constant cpus="*" name="ORA_IZPX" title="Opcode _O_R_A (_indirect _zero_page,_x)"/>
-	<constant cpus="*" name="ORA_IZPY" title="Opcode _O_R_A (_indirect _zero_page),_y"/>
-	<constant cpus="*" name="ORA_ZP" title="Opcode _O_R_A _zero_page"/>
-	<constant cpus="*" name="ORA_ZPX" title="Opcode _O_R_A _zero_page,_x"/>
-	<constant cpus="*" name="PHA" title="Opcode _P_H_A"/>
-	<constant cpus="*" name="PHP" title="Opcode _P_H_P"/>
-	<constant cpus="*" name="PLA" title="Opcode _P_L_A"/>
-	<constant cpus="*" name="PLP" title="Opcode _P_L_P"/>
-	<constant cpus="*" name="ROL" title="Opcode _R_O_L"/>
-	<constant cpus="*" name="ROL_ABS" title="Opcode _R_O_L _a_b_solute"/>
-	<constant cpus="*" name="ROL_ABSX" title="Opcode _R_O_L _a_b_solute,_x"/>
-	<constant cpus="*" name="ROL_ZP" title="Opcode _R_O_L _zero_page"/>
-	<constant cpus="*" name="ROL_ZPX" title="Opcode _R_O_L _zero_page,_x"/>
-	<constant cpus="*" name="ROR" title="Opcode _R_O_R"/>
-	<constant cpus="*" name="ROR_ABS" title="Opcode _R_O_R _a_b_solute"/>
-	<constant cpus="*" name="ROR_ABSX" title="Opcode _R_O_R _a_b_solute,_x"/>
-	<constant cpus="*" name="ROR_ZP" title="Opcode _R_O_R _zero_page"/>
-	<constant cpus="*" name="ROR_ZPX" title="Opcode _R_O_R _zero_page,_x"/>
-	<constant cpus="*" name="RTI" title="Opcode _R_T_I"/>
-	<constant cpus="*" name="RTS" title="Opcode _R_T_S"/>
-	<constant cpus="*" name="SBC_ABS" title="Opcode _S_B_C _a_b_solute"/>
-	<constant cpus="*" name="SBC_ABSX" title="Opcode _S_B_C _a_b_solute,_x"/>
-	<constant cpus="*" name="SBC_ABSY" title="Opcode _S_B_C _a_b_solute,_y"/>
-	<constant cpus="*" name="SBC_IMM" title="Opcode _S_B_C #_i_m_mediate"/>
-	<constant cpus="*" name="SBC_IZPX" title="Opcode _S_B_C (_indirect _zero_page,_x)"/>
-	<constant cpus="*" name="SBC_IZPY" title="Opcode _S_B_C (_indirect _zero_page),_y"/>
-	<constant cpus="*" name="SBC_ZP" title="Opcode _S_B_C _zero_page"/>
-	<constant cpus="*" name="SBC_ZPX" title="Opcode _S_B_C _zero_page,_x"/>
-	<constant cpus="*" name="SEC" title="Opcode _S_E_C"/>
-	<constant cpus="*" name="SED" title="Opcode _S_E_D"/>
-	<constant cpus="*" name="SEI" title="Opcode _S_E_I"/>
-	<constant cpus="*" name="STA_ABS" title="Opcode _S_T_A _a_b_solute"/>
-	<constant cpus="*" name="STA_ABSX" title="Opcode _S_T_A _a_b_solute,_x"/>
-	<constant cpus="*" name="STA_ABSY" title="Opcode _S_T_A _a_b_solute,_y"/>
-	<constant cpus="*" name="STA_IZPX" title="Opcode _S_T_A (_indirect _zero_page,_x)"/>
-	<constant cpus="*" name="STA_IZPY" title="Opcode _S_T_A (_indirect _zero_page),_y"/>
-	<constant cpus="*" name="STA_ZP" title="Opcode _S_T_A _zero_page"/>
-	<constant cpus="*" name="STA_ZPX" title="Opcode _S_T_A _zero_page,_x"/>
-	<constant cpus="*" name="STX_ABS" title="Opcode _S_T_X _a_b_solute"/>
-	<constant cpus="*" name="STX_ZP" title="Opcode _S_T_X _zero_page"/>
-	<constant cpus="*" name="STX_ZPY" title="Opcode _S_T_X _zero_page,_y"/>
-	<constant cpus="*" name="STY_ABS" title="Opcode _S_T_Y _a_b_solute"/>
-	<constant cpus="*" name="STY_ZP" title="Opcode _S_T_Y _zero_page"/>
-	<constant cpus="*" name="STY_ZPX" title="Opcode _S_T_Y _zero_page,_x"/>
-	<constant cpus="*" name="TAX" title="Opcode _T_A_X"/>
-	<constant cpus="*" name="TAY" title="Opcode _T_A_Y"/>
-	<constant cpus="*" name="TSX" title="Opcode _T_S_X"/>
-	<constant cpus="*" name="TXA" title="Opcode _T_X_A"/>
-	<constant cpus="*" name="TXS" title="Opcode _T_X_S"/>
-	<constant cpus="*" name="TYA" title="Opcode _T_Y_A"/>
+	<constant targets="*" name="ADC_ABS" title="Opcode _A_D_C _a_b_solute"/>
+	<constant targets="*" name="ADC_ABSX" title="Opcode _A_D_C _a_b_solute,_x"/>
+	<constant targets="*" name="ADC_ABSY" title="Opcode _A_D_C _a_b_solute,_y"/>
+	<constant targets="*" name="ADC_IMM" title="Opcode _A_D_C #_i_m_mediate"/>
+	<constant targets="*" name="ADC_IZPX" title="Opcode _A_D_C (_indirect _zero_page,_x)"/>
+	<constant targets="*" name="ADC_IZPY" title="Opcode _A_D_C (_indirect _zero_page),_y"/>
+	<constant targets="*" name="ADC_ZP" title="Opcode _A_D_C _zero_page"/>
+	<constant targets="*" name="ADC_ZPX" title="Opcode _A_D_C _zero_page,_x"/>
+	<constant targets="*" name="AND_ABS" title="Opcode _A_N_D _a_b_solute"/>
+	<constant targets="*" name="AND_ABSX" title="Opcode _A_N_D _a_b_solute,_x"/>
+	<constant targets="*" name="AND_ABSY" title="Opcode _A_N_D _a_b_solute,_y"/>
+	<constant targets="*" name="AND_IMM" title="Opcode _A_N_D #_i_m_mediate"/>
+	<constant targets="*" name="AND_IZPX" title="Opcode _A_N_D (_indirect _zero_page,_x)"/>
+	<constant targets="*" name="AND_IZPY" title="Opcode _A_N_D (_indirect _zero_page),_y"/>
+	<constant targets="*" name="AND_ZP" title="Opcode _A_N_D _zero_page"/>
+	<constant targets="*" name="AND_ZPX" title="Opcode _A_N_D _zero_page,_x"/>
+	<constant targets="*" name="ASL" title="Opcode _A_S_L"/>
+	<constant targets="*" name="ASL_ABS" title="Opcode _A_S_L _a_b_solute"/>
+	<constant targets="*" name="ASL_ABSX" title="Opcode _A_S_L _a_b_solute,_x"/>
+	<constant targets="*" name="ASL_ZP" title="Opcode _A_S_L _zero_page"/>
+	<constant targets="*" name="ASL_ZPX" title="Opcode _A_S_L _zero_page,_x"/>
+	<constant targets="*" name="BCC_REL" title="Opcode _B_C_C _r_e_lative"/>
+	<constant targets="*" name="BCS_REL" title="Opcode _B_C_S _r_e_lative"/>
+	<constant targets="*" name="BEQ_REL" title="Opcode _B_E_Q _r_e_lative"/>
+	<constant targets="*" name="BIT_ABS" title="Opcode _B_I_T _a_b_solute"/>
+	<constant targets="*" name="BIT_ABSX" title="Opcode _B_I_T _a_b_solute,_x"/>
+	<constant targets="*" name="BIT_ZP" title="Opcode _B_I_T _zero_page"/>
+	<constant targets="*" name="BIT_ZPX" title="Opcode _B_I_T _zero_page,_x"/>
+	<constant targets="*" name="BMI_REL" title="Opcode _B_M_I _r_e_lative"/>
+	<constant targets="*" name="BNE_REL" title="Opcode _B_N_E _r_e_lative"/>
+	<constant targets="*" name="BPL_REL" title="Opcode _B_P_L _r_e_lative"/>
+	<constant targets="*" name="BRK" title="Opcode _B_R_K"/>
+	<constant targets="*" name="BVC_REL" title="Opcode _B_V_C _r_e_lative"/>
+	<constant targets="*" name="BVS_REL" title="Opcode _B_V_S _r_e_lative"/>
+	<constant targets="*" name="CLC" title="Opcode _C_L_C"/>
+	<constant targets="*" name="CLD" title="Opcode _C_L_D"/>
+	<constant targets="*" name="CLI" title="Opcode _C_L_I"/>
+	<constant targets="*" name="CLV" title="Opcode _C_L_V"/>
+	<constant targets="*" name="CMP_ABS" title="Opcode _C_M_P _a_b_solute"/>
+	<constant targets="*" name="CMP_ABSX" title="Opcode _C_M_P _a_b_solute,_x"/>
+	<constant targets="*" name="CMP_ABSY" title="Opcode _C_M_P _a_b_solute,_y"/>
+	<constant targets="*" name="CMP_IMM" title="Opcode _C_M_P #_i_m_mediate"/>
+	<constant targets="*" name="CMP_IZPX" title="Opcode _C_M_P (_indirect _zero_page,_x)"/>
+	<constant targets="*" name="CMP_IZPY" title="Opcode _C_M_P (_indirect _zero_page),_y"/>
+	<constant targets="*" name="CMP_ZP" title="Opcode _C_M_P _zero_page"/>
+	<constant targets="*" name="CMP_ZPX" title="Opcode _C_M_P _zero_page,_x"/>
+	<constant targets="*" name="CPX_ABS" title="Opcode _C_P_X _a_b_solute"/>
+	<constant targets="*" name="CPX_IMM" title="Opcode _C_P_X #_i_m_mediate"/>
+	<constant targets="*" name="CPX_ZP" title="Opcode _C_P_X _zero_page"/>
+	<constant targets="*" name="CPY_ABS" title="Opcode _C_P_Y _a_b_solute"/>
+	<constant targets="*" name="CPY_IMM" title="Opcode _C_P_Y #_i_m_mediate"/>
+	<constant targets="*" name="CPY_ZP" title="Opcode _C_P_Y _zero_page"/>
+	<constant targets="*" name="DEC_ABS" title="Opcode _D_E_C _a_b_solute"/>
+	<constant targets="*" name="DEC_ABSX" title="Opcode _D_E_C _a_b_solute,_x"/>
+	<constant targets="*" name="DEC_ZP" title="Opcode _D_E_C _zero_page"/>
+	<constant targets="*" name="DEC_ZPX" title="Opcode _D_E_C _zero_page,_x"/>
+	<constant targets="*" name="DEX" title="Opcode _D_E_X"/>
+	<constant targets="*" name="DEY" title="Opcode _D_E_Y"/>
+	<constant targets="*" name="EOR_ABS" title="Opcode _E_O_R _a_b_solute"/>
+	<constant targets="*" name="EOR_ABSX" title="Opcode _E_O_R _a_b_solute,_x"/>
+	<constant targets="*" name="EOR_ABSY" title="Opcode _E_O_R _a_b_solute,_y"/>
+	<constant targets="*" name="EOR_IMM" title="Opcode _E_O_R #_i_m_mediate"/>
+	<constant targets="*" name="EOR_IZPX" title="Opcode _E_O_R (_indirect _zero_page,_x)"/>
+	<constant targets="*" name="EOR_IZPY" title="Opcode _E_O_R (_indirect _zero_page),_y"/>
+	<constant targets="*" name="EOR_ZP" title="Opcode _E_O_R _zero_page"/>
+	<constant targets="*" name="EOR_ZPX" title="Opcode _E_O_R _zero_page,_x"/>
+	<constant targets="*" name="INC_ABS" title="Opcode _I_N_C _a_b_solute"/>
+	<constant targets="*" name="INC_ABSX" title="Opcode _I_N_C _a_b_solute,_x"/>
+	<constant targets="*" name="INC_ZP" title="Opcode _I_N_C _zero_page"/>
+	<constant targets="*" name="INC_ZPX" title="Opcode _I_N_C _zero_page,_x"/>
+	<constant targets="*" name="INX" title="Opcode _I_N_X"/>
+	<constant targets="*" name="INY" title="Opcode _I_N_Y"/>
+	<constant targets="*" name="JMP_ABS" title="Opcode _J_M_P _a_b_solute"/>
+	<constant targets="*" name="JMP_IND" title="Opcode _J_M_P (_i_n_direct)"/>
+	<constant targets="*" name="JSR_ABS" title="Opcode _J_S_R _a_b_solute"/>
+	<constant targets="*" name="LDA_ABS" title="Opcode _L_D_A _a_b_solute"/>
+	<constant targets="*" name="LDA_ABSX" title="Opcode _L_D_A _a_b_solute,_x"/>
+	<constant targets="*" name="LDA_ABSY" title="Opcode _L_D_A _a_b_solute,_y"/>
+	<constant targets="*" name="LDA_IMM" title="Opcode _L_D_A #_i_m_mediate"/>
+	<constant targets="*" name="LDA_IZPX" title="Opcode _L_D_A (_indirect _zero_page,_x)"/>
+	<constant targets="*" name="LDA_IZPY" title="Opcode _L_D_A (_indirect _zero_page),_y"/>
+	<constant targets="*" name="LDA_ZP" title="Opcode _L_D_A _zero_page"/>
+	<constant targets="*" name="LDA_ZPX" title="Opcode _L_D_A _zero_page,_x"/>
+	<constant targets="*" name="LDX_ABS" title="Opcode _L_D_X _a_b_solute"/>
+	<constant targets="*" name="LDX_ABSY" title="Opcode _L_D_X _a_b_solute,_y"/>
+	<constant targets="*" name="LDX_IMM" title="Opcode _L_D_X #_i_m_mediate"/>
+	<constant targets="*" name="LDX_ZP" title="Opcode _L_D_X _zero_page"/>
+	<constant targets="*" name="LDX_ZPY" title="Opcode _L_D_X _zero_page,_y"/>
+	<constant targets="*" name="LDY_ABS" title="Opcode _L_D_Y _a_b_solute"/>
+	<constant targets="*" name="LDY_ABSX" title="Opcode _L_D_Y _a_b_solute,_x"/>
+	<constant targets="*" name="LDY_IMM" title="Opcode _L_D_Y #_i_m_mediate"/>
+	<constant targets="*" name="LDY_ZP" title="Opcode _L_D_Y _zero_page"/>
+	<constant targets="*" name="LDY_ZPX" title="Opcode _L_D_Y _zero_page,_x"/>
+	<constant targets="*" name="LSR" title="Opcode _L_S_R"/>
+	<constant targets="*" name="LSR_ABS" title="Opcode _L_S_R _a_b_solute"/>
+	<constant targets="*" name="LSR_ABSX" title="Opcode _L_S_R _a_b_solute,_x"/>
+	<constant targets="*" name="LSR_ZP" title="Opcode _L_S_R _zero_page"/>
+	<constant targets="*" name="LSR_ZPX" title="Opcode _L_S_R _zero_page,_x"/>
+	<constant targets="*" name="NOP" title="Opcode _N_O_P"/>
+	<constant targets="*" name="ORA_ABS" title="Opcode _O_R_A _a_b_solute"/>
+	<constant targets="*" name="ORA_ABSX" title="Opcode _O_R_A _a_b_solute,_x"/>
+	<constant targets="*" name="ORA_ABSY" title="Opcode _O_R_A _a_b_solute,_y"/>
+	<constant targets="*" name="ORA_IMM" title="Opcode _O_R_A #_i_m_mediate"/>
+	<constant targets="*" name="ORA_IZPX" title="Opcode _O_R_A (_indirect _zero_page,_x)"/>
+	<constant targets="*" name="ORA_IZPY" title="Opcode _O_R_A (_indirect _zero_page),_y"/>
+	<constant targets="*" name="ORA_ZP" title="Opcode _O_R_A _zero_page"/>
+	<constant targets="*" name="ORA_ZPX" title="Opcode _O_R_A _zero_page,_x"/>
+	<constant targets="*" name="PHA" title="Opcode _P_H_A"/>
+	<constant targets="*" name="PHP" title="Opcode _P_H_P"/>
+	<constant targets="*" name="PLA" title="Opcode _P_L_A"/>
+	<constant targets="*" name="PLP" title="Opcode _P_L_P"/>
+	<constant targets="*" name="ROL" title="Opcode _R_O_L"/>
+	<constant targets="*" name="ROL_ABS" title="Opcode _R_O_L _a_b_solute"/>
+	<constant targets="*" name="ROL_ABSX" title="Opcode _R_O_L _a_b_solute,_x"/>
+	<constant targets="*" name="ROL_ZP" title="Opcode _R_O_L _zero_page"/>
+	<constant targets="*" name="ROL_ZPX" title="Opcode _R_O_L _zero_page,_x"/>
+	<constant targets="*" name="ROR" title="Opcode _R_O_R"/>
+	<constant targets="*" name="ROR_ABS" title="Opcode _R_O_R _a_b_solute"/>
+	<constant targets="*" name="ROR_ABSX" title="Opcode _R_O_R _a_b_solute,_x"/>
+	<constant targets="*" name="ROR_ZP" title="Opcode _R_O_R _zero_page"/>
+	<constant targets="*" name="ROR_ZPX" title="Opcode _R_O_R _zero_page,_x"/>
+	<constant targets="*" name="RTI" title="Opcode _R_T_I"/>
+	<constant targets="*" name="RTS" title="Opcode _R_T_S"/>
+	<constant targets="*" name="SBC_ABS" title="Opcode _S_B_C _a_b_solute"/>
+	<constant targets="*" name="SBC_ABSX" title="Opcode _S_B_C _a_b_solute,_x"/>
+	<constant targets="*" name="SBC_ABSY" title="Opcode _S_B_C _a_b_solute,_y"/>
+	<constant targets="*" name="SBC_IMM" title="Opcode _S_B_C #_i_m_mediate"/>
+	<constant targets="*" name="SBC_IZPX" title="Opcode _S_B_C (_indirect _zero_page,_x)"/>
+	<constant targets="*" name="SBC_IZPY" title="Opcode _S_B_C (_indirect _zero_page),_y"/>
+	<constant targets="*" name="SBC_ZP" title="Opcode _S_B_C _zero_page"/>
+	<constant targets="*" name="SBC_ZPX" title="Opcode _S_B_C _zero_page,_x"/>
+	<constant targets="*" name="SEC" title="Opcode _S_E_C"/>
+	<constant targets="*" name="SED" title="Opcode _S_E_D"/>
+	<constant targets="*" name="SEI" title="Opcode _S_E_I"/>
+	<constant targets="*" name="STA_ABS" title="Opcode _S_T_A _a_b_solute"/>
+	<constant targets="*" name="STA_ABSX" title="Opcode _S_T_A _a_b_solute,_x"/>
+	<constant targets="*" name="STA_ABSY" title="Opcode _S_T_A _a_b_solute,_y"/>
+	<constant targets="*" name="STA_IZPX" title="Opcode _S_T_A (_indirect _zero_page,_x)"/>
+	<constant targets="*" name="STA_IZPY" title="Opcode _S_T_A (_indirect _zero_page),_y"/>
+	<constant targets="*" name="STA_ZP" title="Opcode _S_T_A _zero_page"/>
+	<constant targets="*" name="STA_ZPX" title="Opcode _S_T_A _zero_page,_x"/>
+	<constant targets="*" name="STX_ABS" title="Opcode _S_T_X _a_b_solute"/>
+	<constant targets="*" name="STX_ZP" title="Opcode _S_T_X _zero_page"/>
+	<constant targets="*" name="STX_ZPY" title="Opcode _S_T_X _zero_page,_y"/>
+	<constant targets="*" name="STY_ABS" title="Opcode _S_T_Y _a_b_solute"/>
+	<constant targets="*" name="STY_ZP" title="Opcode _S_T_Y _zero_page"/>
+	<constant targets="*" name="STY_ZPX" title="Opcode _S_T_Y _zero_page,_x"/>
+	<constant targets="*" name="TAX" title="Opcode _T_A_X"/>
+	<constant targets="*" name="TAY" title="Opcode _T_A_Y"/>
+	<constant targets="*" name="TSX" title="Opcode _T_S_X"/>
+	<constant targets="*" name="TXA" title="Opcode _T_X_A"/>
+	<constant targets="*" name="TXS" title="Opcode _T_X_S"/>
+	<constant targets="*" name="TYA" title="Opcode _T_Y_A"/>
 
 	<!-- Opcodes and constants for MOS6502 illegal opcodes ! -->
 	<!-- anc2, sbc2, ... -->
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="AHX_ABSY" title="Opcode _A_H_X _a_b_solute,_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="AHX_IZPY" title="Opcode _A_H_X (_indirect _zero_page),_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ALR_IMM" title="Opcode _A_L_R #_i_m_mediate"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ANC2_IMM" title="Opcode _A_N_C_2 #_i_m_mediate"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ANC_IMM" title="Opcode _A_N_C #_i_m_mediate"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ARR_IMM" title="Opcode _A_R_R #_i_m_mediate"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="AXS_IMM" title="Opcode _A_X_S #_i_m_mediate"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP_ABS" title="Opcode _D_C_P _a_b_solute"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP_ABSX" title="Opcode _D_C_P _a_b_solute,_x"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP_ABSY" title="Opcode _D_C_P _a_b_solute,_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP_IZPX" title="Opcode _D_C_P (_indirect _zero_page,_x)"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP_IZPY" title="Opcode _D_C_P (_indirect _zero_page),_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP_ZP" title="Opcode _D_C_P _zero_page"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP_ZPX" title="Opcode _D_C_P _zero_page,_x"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC_ABS" title="Opcode _I_S_C _a_b_solute"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC_ABSX" title="Opcode _I_S_C _a_b_solute,_x"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC_ABSY" title="Opcode _I_S_C _a_b_solute,_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC_IZPX" title="Opcode _I_S_C (_indirect _zero_page,_x)"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC_IZPY" title="Opcode _I_S_C (_indirect _zero_page),_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC_ZP" title="Opcode _I_S_C _zero_page"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC_ZPX" title="Opcode _I_S_C _zero_page,_x"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="LAS_ABSY" title="Opcode _L_A_S _a_b_solute,_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX_ABS" title="Opcode _L_A_X _a_b_solute"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX_ABSY" title="Opcode _L_A_X _a_b_solute,_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX_IMM" title="Opcode _L_A_X #_i_m_mediate"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX_IZPX" title="Opcode _L_A_X (_indirect _zero_page,_x)"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX_IZPY" title="Opcode _L_A_X (_indirect _zero_page),_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX_ZP" title="Opcode _L_A_X _zero_page"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX_ZPY" title="Opcode _L_A_X _zero_page,_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA_ABS" title="Opcode _R_L_A _a_b_solute"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA_ABSX" title="Opcode _R_L_A _a_b_solute,_x"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA_ABSY" title="Opcode _R_L_A _a_b_solute,_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA_IZPX" title="Opcode _R_L_A (_indirect _zero_page,_x)"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA_IZPY" title="Opcode _R_L_A (_indirect _zero_page),_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA_ZP" title="Opcode _R_L_A _zero_page"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA_ZPX" title="Opcode _R_L_A _zero_page,_x"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA_ABS" title="Opcode _R_R_A _a_b_solute"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA_ABSX" title="Opcode _R_R_A _a_b_solute,_x"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA_ABSY" title="Opcode _R_R_A _a_b_solute,_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA_IZPX" title="Opcode _R_R_A (_indirect _zero_page,_x)"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA_IZPY" title="Opcode _R_R_A (_indirect _zero_page),_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA_ZP" title="Opcode _R_R_A _zero_page"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA_ZPX" title="Opcode _R_R_A _zero_page,_x"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SAX_ABS" title="Opcode _S_A_X _a_b_solute"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SAX_IZPX" title="Opcode _S_A_X (_indirect _zero_page,_x)"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SAX_ZP" title="Opcode _S_A_X _zero_page"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SAX_ZPY" title="Opcode _S_A_X _zero_page,_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SBC2_IMM" title="Opcode _S_B_C_2 #_i_m_mediate"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SHX_ABSY" title="Opcode _S_H_X _a_b_solute,_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SHY_ABSX" title="Opcode _S_H_Y _a_b_solute,_x"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO_ABS" title="Opcode _S_L_O _a_b_solute"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO_ABSX" title="Opcode _S_L_O _a_b_solute,_x"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO_ABSY" title="Opcode _S_L_O _a_b_solute,_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO_IZPX" title="Opcode _S_L_O (_indirect _zero_page,_x)"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO_IZPY" title="Opcode _S_L_O (_indirect _zero_page),_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO_ZP" title="Opcode _S_L_O _zero_page"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO_ZPX" title="Opcode _S_L_O _zero_page,_x"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE_ABS" title="Opcode _S_R_E _a_b_solute"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE_ABSX" title="Opcode _S_R_E _a_b_solute,_x"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE_ABSY" title="Opcode _S_R_E _a_b_solute,_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE_IZPX" title="Opcode _S_R_E (_indirect _zero_page,_x)"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE_IZPY" title="Opcode _S_R_E (_indirect _zero_page),_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE_ZP" title="Opcode _S_R_E _zero_page"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE_ZPX" title="Opcode _S_R_E _zero_page,_x"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="TAS_ABSY" title="Opcode _T_A_S _a_b_solute,_y"/>
-	<constant cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="XAA_IMM" title="Opcode _X_A_A #_i_m_mediate"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="AHX_ABSY" title="Opcode _A_H_X _a_b_solute,_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="AHX_IZPY" title="Opcode _A_H_X (_indirect _zero_page),_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ALR_IMM" title="Opcode _A_L_R #_i_m_mediate"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ANC2_IMM" title="Opcode _A_N_C_2 #_i_m_mediate"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ANC_IMM" title="Opcode _A_N_C #_i_m_mediate"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ARR_IMM" title="Opcode _A_R_R #_i_m_mediate"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="AXS_IMM" title="Opcode _A_X_S #_i_m_mediate"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP_ABS" title="Opcode _D_C_P _a_b_solute"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP_ABSX" title="Opcode _D_C_P _a_b_solute,_x"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP_ABSY" title="Opcode _D_C_P _a_b_solute,_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP_IZPX" title="Opcode _D_C_P (_indirect _zero_page,_x)"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP_IZPY" title="Opcode _D_C_P (_indirect _zero_page),_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP_ZP" title="Opcode _D_C_P _zero_page"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP_ZPX" title="Opcode _D_C_P _zero_page,_x"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC_ABS" title="Opcode _I_S_C _a_b_solute"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC_ABSX" title="Opcode _I_S_C _a_b_solute,_x"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC_ABSY" title="Opcode _I_S_C _a_b_solute,_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC_IZPX" title="Opcode _I_S_C (_indirect _zero_page,_x)"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC_IZPY" title="Opcode _I_S_C (_indirect _zero_page),_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC_ZP" title="Opcode _I_S_C _zero_page"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC_ZPX" title="Opcode _I_S_C _zero_page,_x"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="LAS_ABSY" title="Opcode _L_A_S _a_b_solute,_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX_ABS" title="Opcode _L_A_X _a_b_solute"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX_ABSY" title="Opcode _L_A_X _a_b_solute,_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX_IMM" title="Opcode _L_A_X #_i_m_mediate"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX_IZPX" title="Opcode _L_A_X (_indirect _zero_page,_x)"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX_IZPY" title="Opcode _L_A_X (_indirect _zero_page),_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX_ZP" title="Opcode _L_A_X _zero_page"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX_ZPY" title="Opcode _L_A_X _zero_page,_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA_ABS" title="Opcode _R_L_A _a_b_solute"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA_ABSX" title="Opcode _R_L_A _a_b_solute,_x"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA_ABSY" title="Opcode _R_L_A _a_b_solute,_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA_IZPX" title="Opcode _R_L_A (_indirect _zero_page,_x)"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA_IZPY" title="Opcode _R_L_A (_indirect _zero_page),_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA_ZP" title="Opcode _R_L_A _zero_page"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA_ZPX" title="Opcode _R_L_A _zero_page,_x"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA_ABS" title="Opcode _R_R_A _a_b_solute"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA_ABSX" title="Opcode _R_R_A _a_b_solute,_x"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA_ABSY" title="Opcode _R_R_A _a_b_solute,_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA_IZPX" title="Opcode _R_R_A (_indirect _zero_page,_x)"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA_IZPY" title="Opcode _R_R_A (_indirect _zero_page),_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA_ZP" title="Opcode _R_R_A _zero_page"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA_ZPX" title="Opcode _R_R_A _zero_page,_x"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SAX_ABS" title="Opcode _S_A_X _a_b_solute"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SAX_IZPX" title="Opcode _S_A_X (_indirect _zero_page,_x)"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SAX_ZP" title="Opcode _S_A_X _zero_page"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SAX_ZPY" title="Opcode _S_A_X _zero_page,_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SBC2_IMM" title="Opcode _S_B_C_2 #_i_m_mediate"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SHX_ABSY" title="Opcode _S_H_X _a_b_solute,_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SHY_ABSX" title="Opcode _S_H_Y _a_b_solute,_x"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO_ABS" title="Opcode _S_L_O _a_b_solute"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO_ABSX" title="Opcode _S_L_O _a_b_solute,_x"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO_ABSY" title="Opcode _S_L_O _a_b_solute,_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO_IZPX" title="Opcode _S_L_O (_indirect _zero_page,_x)"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO_IZPY" title="Opcode _S_L_O (_indirect _zero_page),_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO_ZP" title="Opcode _S_L_O _zero_page"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO_ZPX" title="Opcode _S_L_O _zero_page,_x"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE_ABS" title="Opcode _S_R_E _a_b_solute"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE_ABSX" title="Opcode _S_R_E _a_b_solute,_x"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE_ABSY" title="Opcode _S_R_E _a_b_solute,_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE_IZPX" title="Opcode _S_R_E (_indirect _zero_page,_x)"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE_IZPY" title="Opcode _S_R_E (_indirect _zero_page),_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE_ZP" title="Opcode _S_R_E _zero_page"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE_ZPX" title="Opcode _S_R_E _zero_page,_x"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="TAS_ABSY" title="Opcode _T_A_S _a_b_solute,_y"/>
+	<constant targets="MOS6502_ILLEGAL,MOS6502_DTV" name="XAA_IMM" title="Opcode _X_A_A #_i_m_mediate"/>
 
 	<!-- Opcode constants for MOS6502_DTV ! -->
-	<constant cpus="MOS6502_DTV" name="BRA_REL" title="Opcode _B_R_A _r_e_lative"/>
-	<constant cpus="MOS6502_DTV" name="SAC_IMM" title="Opcode _S_A_C #_i_m_mediate"/>
-	<constant cpus="MOS6502_DTV" name="SIR_IMM" title="Opcode _S_I_R #_i_m_mediate"/>
+	<constant targets="MOS6502_DTV" name="BRA_REL" title="Opcode _B_R_A _r_e_lative"/>
+	<constant targets="MOS6502_DTV" name="SAC_IMM" title="Opcode _S_A_C #_i_m_mediate"/>
+	<constant targets="MOS6502_DTV" name="SIR_IMM" title="Opcode _S_I_R #_i_m_mediate"/>
 
-	<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ANC" title="_A_nd byte with accumulator and set _carry" proposal="ANC _" opcodes="$0b" flags="N,Z,C" addressing="Immediate"/>
-	<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ANC2" title="_A_nd byte with accumulator and set _carry, _2nd opcode" proposal="ANC2 _" opcodes="$2b" flags="N,Z,C" addressing="Immediate"/>
-	<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ARR" title="_And byte with accumulator then _rotate one bit _right in accumulator" opcodes="$6b" proposal="ARR _" flags="N,V,Z,C" addressing="Immediate"/>
-	<!--<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ATX" title="_And byte with accumulator, then _transfer accumulator to _X register" opcode="$cb" proposal="ATX _" flags="N,Z" addressing="Immediate"/>-->
-	<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="AXS" title="_And _X register with accumulator and store result in X register, then _subtract byte from X register (without borrow)" proposal="AXS _" flags="N,Z,C" addressing="Immediate"/>
-	<!--<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="AX7" title="_And _X register with accumulator then and result with _7 and store in memory" proposal="AX7 _" flags="-" addressing="Absolute,Y ;(Indirect),Y"/> -->
-	<!-- <illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="AXE" title="_And _X register with accumulator but _exact operation unknown" proposal="AXE _" addressing="Immediate"/> -->
-	<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP" title="_De_crement memory by one and com_pare with memory" proposal="DCP _" opcodes="$c7,$d7,$c3,$d3,$cf,$df,$db" flags="C"
+	<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ANC" title="_A_nd byte with accumulator and set _carry" proposal="ANC _" opcodes="$0b" flags="N,Z,C" addressing="Immediate"/>
+	<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ANC2" title="_A_nd byte with accumulator and set _carry, _2nd opcode" proposal="ANC2 _" opcodes="$2b" flags="N,Z,C" addressing="Immediate"/>
+	<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ARR" title="_And byte with accumulator then _rotate one bit _right in accumulator" opcodes="$6b" proposal="ARR _" flags="N,V,Z,C" addressing="Immediate"/>
+	<!--<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ATX" title="_And byte with accumulator, then _transfer accumulator to _X register" opcode="$cb" proposal="ATX _" flags="N,Z" addressing="Immediate"/>-->
+	<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="AXS" title="_And _X register with accumulator and store result in X register, then _subtract byte from X register (without borrow)" proposal="AXS _" flags="N,Z,C" addressing="Immediate"/>
+	<!--<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="AX7" title="_And _X register with accumulator then and result with _7 and store in memory" proposal="AX7 _" flags="-" addressing="Absolute,Y ;(Indirect),Y"/> -->
+	<!-- <illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="AXE" title="_And _X register with accumulator but _exact operation unknown" proposal="AXE _" addressing="Immediate"/> -->
+	<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="DCP" title="_De_crement memory by one and com_pare with memory" proposal="DCP _" opcodes="$c7,$d7,$c3,$d3,$cf,$df,$db" flags="C"
 		addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y;(Indirect,X); (Indirect),Y"/>
-	<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC" title="_Increase memory by one, then _subtract memory from accumulator (without _carry)" proposal="ISC _" opcodes="$e7,$f7,$e3,$f3,$ef,$ff,$fb" flags="N,V,Z,C"
+	<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="ISC" title="_Increase memory by one, then _subtract memory from accumulator (without _carry)" proposal="ISC _" opcodes="$e7,$f7,$e3,$f3,$ef,$ff,$fb" flags="N,V,Z,C"
 		addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y;(Indirect,X); (Indirect),Y"/>
-	<!-- <illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="JAM" title="_J_a_m processor, i.e. stop program counter" proposal="JAM_" flags="-" addressing="Implied"/> -->
-	<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="LAS" title="_Load _accumulator, X register and _stack pointer with with memory anded stack pointer" proposal="LAS _" opcodes="$bb" flags="N,Z" addressing="Absolute,Y"/>
-	<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX" title="_Load _accumulator and _X register with memory" proposal="LAX _" opcodes="$ab,$a7,$b7,$a3,$b3,$af,$bf" flags="N,Z" addressing="Zero Page; Zero Page,Y; Absolute; Absolute,Y;(Indirect,X);(Indirect),Y"/>
-	<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA" title="_Rotate one bit _left in memory, then and _accumulator with memory" proposal="RLA _" opcodes="$27,$37,$23,$33,$2f,$3f,$3b" flags="N,Z,C"
+	<!-- <illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="JAM" title="_J_a_m processor, i.e. stop program counter" proposal="JAM_" flags="-" addressing="Implied"/> -->
+	<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="LAS" title="_Load _accumulator, X register and _stack pointer with with memory anded stack pointer" proposal="LAS _" opcodes="$bb" flags="N,Z" addressing="Absolute,Y"/>
+	<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="LAX" title="_Load _accumulator and _X register with memory" proposal="LAX _" opcodes="$ab,$a7,$b7,$a3,$b3,$af,$bf" flags="N,Z" addressing="Zero Page; Zero Page,Y; Absolute; Absolute,Y;(Indirect,X);(Indirect),Y"/>
+	<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RLA" title="_Rotate one bit _left in memory, then and _accumulator with memory" proposal="RLA _" opcodes="$27,$37,$23,$33,$2f,$3f,$3b" flags="N,Z,C"
 		addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y;(Indirect,X); (Indirect),Y"/>
-	<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA" title="_Rotate one bit _right in memory, then add memory to _accumulator (with carry)" proposal="RRA _" opcodes="$67,$77,$63,$73,$6f,$7f,$7b" flags="N,V,Z,C"
+	<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="RRA" title="_Rotate one bit _right in memory, then add memory to _accumulator (with carry)" proposal="RRA _" opcodes="$67,$77,$63,$73,$6f,$7f,$7b" flags="N,V,Z,C"
 		addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y;(Indirect,X); (Indirect),Y"/>
-	<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SAX" title="_Store _accumulator anded with _X register" proposal="SAX _" opcodes="$87,$97,$83,$8f" flags="N,Z" addressing="Zero Page;Zero Page,Y;(Indirect,X);Absolute"/>
-	<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SBC2" title="_Su_btract from accumulator with _carry, _2nd opcode" proposal="SBC2 _" opcodes="$eb" flags="N,Z,C" addressing="Immediate"/>
-	<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO" title="_Shift _left one bit in memory, then _or accumulator with memory" proposal="SLO _" opcodes="$07,$17,$03,$13,$0f,$1f,$1b" flags="N,Z,C"
+	<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SAX" title="_Store _accumulator anded with _X register" proposal="SAX _" opcodes="$87,$97,$83,$8f" flags="N,Z" addressing="Zero Page;Zero Page,Y;(Indirect,X);Absolute"/>
+	<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SBC2" title="_Su_btract from accumulator with _carry, _2nd opcode" proposal="SBC2 _" opcodes="$eb" flags="N,Z,C" addressing="Immediate"/>
+	<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SLO" title="_Shift _left one bit in memory, then _or accumulator with memory" proposal="SLO _" opcodes="$07,$17,$03,$13,$0f,$1f,$1b" flags="N,Z,C"
 		addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y; (Indirect,X); (Indirect),Y"/>
-	<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE" title="_Shift _right one bit in memory, then _eor accumulator with memory" proposal="SRE _" opcodes="$47,$57,$43,$53,$4f,$5f,$5b" flags="N,Z,C"
+	<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SRE" title="_Shift _right one bit in memory, then _eor accumulator with memory" proposal="SRE _" opcodes="$47,$57,$43,$53,$4f,$5f,$5b" flags="N,Z,C"
 		addressing="Zero Page; Zero Page,X; Absolute; Absolute,X; Absolute,Y;(Indirect,X);(Indirect),Y"/>
-	<!-- <illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SXA" title="_Store _X register _anded with high byte of the target address of the argument +1" proposal="SXA _" flags="-" addressing="Absolute,Y"/> -->
-	<!-- <illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="SYA" title="_Store _Y register _anded with high byte of the target address of the argument +1" proposal="SYA _" flags="-" addressing="Absolute,x"/> -->
-	<illegalopcode cpus="MOS6502_ILLEGAL,MOS6502_DTV" name="TAS" title="_Transfer X register anded with _accumulator in stack pointer, then and stack pointer with the high byte of the target address of the argument +1. _Store result in memory." proposal="TAS _"
+	<!-- <illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SXA" title="_Store _X register _anded with high byte of the target address of the argument +1" proposal="SXA _" flags="-" addressing="Absolute,Y"/> -->
+	<!-- <illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="SYA" title="_Store _Y register _anded with high byte of the target address of the argument +1" proposal="SYA _" flags="-" addressing="Absolute,x"/> -->
+	<illegalopcode targets="MOS6502_ILLEGAL,MOS6502_DTV" name="TAS" title="_Transfer X register anded with _accumulator in stack pointer, then and stack pointer with the high byte of the target address of the argument +1. _Store result in memory." proposal="TAS _"
 		opcodes="$9b" flags="-" addressing="Absolute,Y"/>
 </instructionset>

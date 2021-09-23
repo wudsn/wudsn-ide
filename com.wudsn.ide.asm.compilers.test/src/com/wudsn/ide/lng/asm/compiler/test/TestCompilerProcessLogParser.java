@@ -17,7 +17,7 @@
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.wudsn.ide.asm.compiler.test;
+package com.wudsn.ide.lng.asm.compiler.test;
 
 import java.util.List;
 import java.util.StringTokenizer;

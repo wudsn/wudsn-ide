@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: WUDSN IDE Assembler Test Compilers Plug-in
-Bundle-SymbolicName: com.wudsn.ide.lng.asm.test;singleton:=true
+Bundle-SymbolicName: com.wudsn.ide.lng.asm.compiler.test;singleton:=true
 Bundle-Version: 1.7.2.qualifier
 Bundle-Vendor: Peter Dell
 Bundle-RequiredExecutionEnvironment: JavaSE-11

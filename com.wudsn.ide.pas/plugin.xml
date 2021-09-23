@@ -21,21 +21,21 @@
    <extension
          point="org.eclipse.ui.genericeditor.presentationReconcilers">
       <presentationReconciler
-            class="com.wudsn.ide.pas.editor.PascalReconciler"
+            class="com.wudsn.ide.lng.pas.editor.PascalReconciler"
             contentType="com.wudsn.ide.pas.compiler.PascalSourceFile">
       </presentationReconciler>
    </extension>
    <extension
          point="org.eclipse.ui.genericeditor.hoverProviders">
       <hoverProvider
-            class="com.wudsn.ide.pas.editor.PascalHoverProvider"
+            class="com.wudsn.ide.lng.pas.editor.PascalHoverProvider"
             contentType="com.wudsn.ide.pas.compiler.PascalSourceFile">
       </hoverProvider>
    </extension>
    <extension
          point="org.eclipse.ui.genericeditor.contentAssistProcessors">
       <contentAssistProcessor
-            class="com.wudsn.ide.pas.editor.PascalContentAssistProcessor"
+            class="com.wudsn.ide.lng.pas.editor.PascalContentAssistProcessor"
             contentType="com.wudsn.ide.pas.compiler.PascalSourceFile">
       </contentAssistProcessor>
    </extension>
@@ -44,7 +44,7 @@
       <participant
             contentTypeId="com.wudsn.ide.pas.compiler.PascalSourceFile"
             extensions="pas"
-            class="com.wudsn.ide.pas.editor.ValidatorDocumentSetupParticipant">
+            class="com.wudsn.ide.lng.pas.editor.ValidatorDocumentSetupParticipant">
       </participant>
    </extension>
 

@@ -40,7 +40,7 @@ import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.wudsn.ide.base.common.StringUtility;
-import com.wudsn.ide.lng.CPU;
+import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
 
 /**
@@ -242,8 +242,8 @@ public final class CompilerSyntax {
 			} else {
 
 				// Begin parsing of instructions.
-				String cpusString;
-				Set<CPU> cpus;
+				String targetsString;
+				Set<Target> targets;
 				String name;
 				String title;
 				String proposal;
@@ -255,12 +255,12 @@ public final class CompilerSyntax {
 					throw new SAXException("No name specified for '" + qName + "'.");
 				}
 
-				cpusString = attributes.getValue("cpus");
-				if (cpusString == null) {
-					throw new SAXException("No CPUs specified for '" + name + "'.");
+				targetsString = attributes.getValue("targets");
+				if (targetsString == null) {
+					throw new SAXException("No targets specified for '" + name + "'.");
 				}
-				cpus = new TreeSet<CPU>();
-				StringTokenizer tokenizer = new StringTokenizer(cpusString, ",");
+				targets = new TreeSet<Target>();
+				StringTokenizer tokenizer = new StringTokenizer(targetsString, ",");
 				while (tokenizer.hasMoreTokens()) {
 					String token = tokenizer.nextToken();
 					boolean found = false;
@@ -268,23 +268,24 @@ public final class CompilerSyntax {
 					// Wild card?
 					if (token.endsWith("*")) {
 						token = token.substring(0, token.length() - 1);
-						for (CPU cpu : CPU.values()) {
-							if (cpu.name().startsWith(token) || cpu == CPU.MOS65C02 && token.equals("MOS6502")) {
-								cpus.add(cpu);
+						for (Target target : Target.values()) {
+							// TODO: Why special logic here for MOS65C02?
+							if (target.name().startsWith(token) || target == Target.MOS65C02 && token.equals("MOS6502")) {
+								targets.add(target);
 								found = true;
 							}
 						}
 					} else {
 						// Exact match
-						for (CPU cpu : CPU.values()) {
-							if (cpu.name().equals(token)) {
-								cpus.add(cpu);
+						for (Target target : Target.values()) {
+							if (target.name().equals(token)) {
+								targets.add(target);
 								found = true;
 							}
 						}
 					}
 					if (!found) {
-						throw new SAXException("No cpu matches the cpus '" + cpusString + "' for '" + name + "'.");
+						throw new SAXException("No target matches the target '" + targetsString + "' for '" + name + "'.");
 					}
 				}
 
@@ -359,7 +360,7 @@ public final class CompilerSyntax {
 						throw new SAXException(
 								"Unknown directive type '" + typeString + "' for directive '" + name + "'.");
 					}
-					instructionsList.add(new Directive(cpus, type, instructionsCaseSensitive, name, title, proposal));
+					instructionsList.add(new Directive(targets, type, instructionsCaseSensitive, name, title, proposal));
 				} else if (qName.equals("opcode") || qName.equals("illegalopcode") || qName.equals("pseudoopcode")) {
 
 					if (qName.equals("opcode")) {
@@ -389,8 +390,8 @@ public final class CompilerSyntax {
 						name = name.toLowerCase();
 						proposal = proposal.toLowerCase();
 					}
-					instructionsList.add(new Opcode(cpus, type, instructionsCaseSensitive, name, title, proposal,
-							cpus.contains(CPU.MOS65816), flags, modes));
+					instructionsList.add(new Opcode(targets, type, instructionsCaseSensitive, name, title, proposal,
+							targets.contains(Target.MOS65816), flags, modes));
 				}
 			}
 		}
@@ -429,7 +430,7 @@ public final class CompilerSyntax {
 	private String sourceIncludeDefaultExtension;
 
 	private List<Instruction> instructionList;
-	private Map<CPU, InstructionSet> instructionSets;
+	private Map<Target, InstructionSet> instructionSets;
 
 	/**
 	 * Creates new instance. Called by {@link CompilerRegistry}.
@@ -615,7 +616,7 @@ public final class CompilerSyntax {
 		instructionList = Collections.unmodifiableList(xmlHandler.instructionsList);
 
 		// Create instruction set map.
-		instructionSets = new TreeMap<CPU, InstructionSet>();
+		instructionSets = new TreeMap<Target, InstructionSet>();
 	}
 
 	static boolean[] createBooleanArray(String string) {
@@ -895,25 +896,25 @@ public final class CompilerSyntax {
 	}
 
 	/**
-	 * Gets the instruction set for a CPU.
+	 * Gets the instruction set for a Target.
 	 * 
-	 * @param cpu The CPU this which the allowed list of instructions shall be
+	 * @param target The Target this which the allowed list of instructions shall be
 	 *            returned, not <code>null</code>.
 	 * @return The set of instructions supported by the compiler for the specified
-	 *         CPU, not <code>null</code>.
+	 *         Target, not <code>null</code>.
 	 * 
 	 * @since 1.6.1
 	 */
-	public InstructionSet getInstructionSet(CPU cpu) {
-		if (cpu == null) {
-			throw new IllegalArgumentException("Parameter 'cpu' must not be null.");
+	public InstructionSet getInstructionSet(Target target) {
+		if (target == null) {
+			throw new IllegalArgumentException("Parameter 'target' must not be null.");
 		}
 		InstructionSet result;
 		synchronized (instructionSets) {
-			result = instructionSets.get(cpu);
+			result = instructionSets.get(target);
 			if (result == null) {
-				result = new InstructionSet(this, instructionList, cpu);
-				instructionSets.put(cpu, result);
+				result = new InstructionSet(this, instructionList, target);
+				instructionSets.put(target, result);
 			}
 		}
 

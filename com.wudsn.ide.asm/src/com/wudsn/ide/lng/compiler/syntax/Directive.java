@@ -21,11 +21,11 @@ package com.wudsn.ide.lng.compiler.syntax;
 
 import java.util.Set;
 
-import com.wudsn.ide.lng.CPU;
+import com.wudsn.ide.lng.Target;
 
 public final class Directive extends Instruction {
 
-	Directive(Set<CPU> cpus, int type, boolean caseSensitive, String name, String title, String proposal) {
+	Directive(Set<Target> cpus, int type, boolean caseSensitive, String name, String title, String proposal) {
 		super(cpus, type, caseSensitive, name, title, proposal);
 
 		switch (type) {

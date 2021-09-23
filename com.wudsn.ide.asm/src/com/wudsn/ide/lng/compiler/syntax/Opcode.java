@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import com.wudsn.ide.lng.CPU;
+import com.wudsn.ide.lng.Target;
 
 public final class Opcode extends Instruction {
 
@@ -32,11 +32,11 @@ public final class Opcode extends Instruction {
 
 	public final static class OpcodeAddressingMode {
 		private Opcode opcode;
-		private Set<CPU> cpus;
+		private Set<Target> cpus;
 		private String addressingMode;
 		private int opcodeValue;
 
-		OpcodeAddressingMode(Opcode opcode, Set<CPU> cpus, String addressingMode, int opcodeValue) {
+		OpcodeAddressingMode(Opcode opcode, Set<Target> cpus, String addressingMode, int opcodeValue) {
 			if (opcode == null) {
 				throw new IllegalArgumentException("Parameter 'opcode' must not be null.");
 			}
@@ -63,7 +63,7 @@ public final class Opcode extends Instruction {
 			return opcode;
 		}
 
-		public Set<CPU> getCPUs() {
+		public Set<Target> getCPUs() {
 			return cpus;
 		}
 
@@ -133,7 +133,7 @@ public final class Opcode extends Instruction {
 	private String modes;
 	private List<OpcodeAddressingMode> addressingModes;
 
-	Opcode(Set<CPU> cpus, int type, boolean instructionsCaseSensitive, String name, String title, String proposal,
+	Opcode(Set<Target> cpus, int type, boolean instructionsCaseSensitive, String name, String title, String proposal,
 			boolean w65816, String flags, String modes) {
 
 		super(cpus, type, instructionsCaseSensitive, name, title, proposal);
@@ -157,7 +157,7 @@ public final class Opcode extends Instruction {
 		this.flags = flags;
 		this.modes = modes;
 		addressingModes = new ArrayList<OpcodeAddressingMode>();
-		Set<CPU> addressingModeCPUs = cpus;
+		Set<Target> addressingModeCPUs = cpus;
 		for (String mode : modes.split(",")) {
 			mode = mode.trim();
 			String values[] = mode.split("=");
@@ -167,9 +167,9 @@ public final class Opcode extends Instruction {
 			if (index >= 0) {
 				String[] cpuNameList = value.substring(index + 1, value.length() - 1).split(";");
 				value = value.substring(0, index);
-				addressingModeCPUs = new TreeSet<CPU>();
+				addressingModeCPUs = new TreeSet<Target>();
 				for (String cpuName : cpuNameList) {
-					addressingModeCPUs.add(CPU.valueOf(cpuName));
+					addressingModeCPUs.add(Target.valueOf(cpuName));
 				}
 			}
 			int opcode = Integer.parseInt(value, 16);

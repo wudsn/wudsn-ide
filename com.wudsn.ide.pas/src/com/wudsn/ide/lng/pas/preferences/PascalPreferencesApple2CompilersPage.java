@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.wudsn.ide.lng.asm.preferences;
+package com.wudsn.ide.lng.pas.preferences;
 
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.Language;
@@ -28,13 +28,13 @@ import com.wudsn.ide.lng.preferences.LanguagePreferencesCompilersPage;
  * @author Peter Dell
  * 
  */
-public final class AssemblerPreferencesAtari7800CompilersPage extends LanguagePreferencesCompilersPage {
+public final class PascalPreferencesApple2CompilersPage extends LanguagePreferencesCompilersPage {
 
 	/**
 	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
 	 */
-	public AssemblerPreferencesAtari7800CompilersPage() {
-		super(Language.ASM, Hardware.ATARI7800);
+	public PascalPreferencesApple2CompilersPage() {
+		super(Language.PAS, Hardware.APPLE2);
 
 	}
 

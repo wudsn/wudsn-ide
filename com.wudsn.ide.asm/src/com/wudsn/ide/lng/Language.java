@@ -19,13 +19,12 @@
 package com.wudsn.ide.lng;
 
 /**
- * Enum for the supported CPUs. Used for restricting the visible instructions.
+ * Enum for the hardware platforms.
  * 
  * @author Peter Dell
  * 
- * @since 1.6.1
  */
-public enum CPU {
+public enum Language {
 
-	MOS6502, MOS6502_ILLEGAL, MOS65C02, MOS6502_DTV, MOS65816
+	ASM, PAS
 }

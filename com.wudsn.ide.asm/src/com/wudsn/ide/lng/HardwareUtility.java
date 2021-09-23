@@ -27,6 +27,7 @@ import com.wudsn.ide.lng.compiler.writer.AppleFileWriter;
  * 
  * @author Peter Dell
  * 
+ * TODO: Move to right place/class
  */
 public final class HardwareUtility {
 

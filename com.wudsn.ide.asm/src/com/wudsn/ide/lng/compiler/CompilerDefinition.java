@@ -33,7 +33,7 @@ import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.AssemblerPlugin;
-import com.wudsn.ide.lng.CPU;
+import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
 
@@ -56,7 +56,7 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	private String homePageURL;
 
 	// Editing and source parsing.
-	private List<CPU> supportedCPUs;
+	private List<Target> supportedCPUs;
 	private CompilerSyntax syntax;
 
 	// Compiling.
@@ -299,7 +299,7 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	 *                      not <code>null</code>.
 	 * @since 1.6.1
 	 */
-	final void setSupportedCPUs(List<CPU> supportedCPUs) {
+	final void setSupportedCPUs(List<Target> supportedCPUs) {
 		if (supportedCPUs == null) {
 			throw new IllegalArgumentException("Parameter 'supportedCPUs' must not be null.");
 		}
@@ -311,14 +311,14 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 
 	/**
 	 * Gets the unmodifiable list of CPUs supported by this compiler. The first
-	 * entry defines the default CPU.
+	 * entry defines the default Target.
 	 * 
 	 * @return The unmodifiable list of CPUs supported by this compiler, not empty
 	 *         and, not <code>null</code>.
 	 * 
 	 * @since 1.6.1
 	 */
-	public final List<CPU> getSupportedCPUs() {
+	public final List<Target> getSupportedTargets() {
 		if (supportedCPUs == null) {
 			throw new IllegalStateException("Field 'supportedCPUs' must not be null.");
 		}

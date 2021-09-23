@@ -1,4 +1,4 @@
-package com.wudsn.ide.asm.editor.test;
+package com.wudsn.ide.lng.asm.compiler.test;
 
 import com.wudsn.ide.lng.editor.AssemblerEditor;
 

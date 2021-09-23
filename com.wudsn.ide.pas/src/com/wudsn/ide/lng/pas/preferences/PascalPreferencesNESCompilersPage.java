@@ -16,35 +16,26 @@
  * You should have received a copy of the GNU General Public License
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
+package com.wudsn.ide.lng.pas.preferences;
 
-package com.wudsn.ide.asm.compiler.test;
-
-import com.wudsn.ide.lng.compiler.Compiler;
-import com.wudsn.ide.lng.compiler.CompilerProcessLogParser;
-import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
+import com.wudsn.ide.base.hardware.Hardware;
+import com.wudsn.ide.lng.Language;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesCompilersPage;
 
 /**
- * Compiler class for TEST.
+ * Visual editor page for the assembler preferences regarding NES compilers.
  * 
  * @author Peter Dell
+ * 
  */
-public final class TestCompiler extends Compiler {
+public final class PascalPreferencesNESCompilersPage extends LanguagePreferencesCompilersPage {
 
 	/**
-	 * Creates a new instance.
+	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
 	 */
-	public TestCompiler() {
-	}
+	public PascalPreferencesNESCompilersPage() {
+		super(Language.ASM,Hardware.NES);
 
-	@Override
-	public CompilerSourceParser createSourceParser() {
-		return new TestCompilerSourceParser();
-	}
-
-	@Override
-	public CompilerProcessLogParser createLogParser() {
-
-		return new TestCompilerProcessLogParser();
 	}
 
 }

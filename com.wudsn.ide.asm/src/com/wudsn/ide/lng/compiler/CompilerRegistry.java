@@ -33,7 +33,7 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 
 import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.CPU;
+import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
 
 /**
@@ -100,14 +100,14 @@ public final class CompilerRegistry {
 					compilerDefinition.setDefaultParameters(configurationElement.getAttribute("defaultParameters"));
 
 					configurationElement.getChildren("supportedCPU");
-					IConfigurationElement[] supportedCPUArray;
-					supportedCPUArray = configurationElement.getChildren("supportedCPU");
-					List<CPU> supportedCPUs = new ArrayList<CPU>(supportedCPUArray.length);
-					for (IConfigurationElement supportedCPU : supportedCPUArray) {
-						supportedCPUs.add(CPU.valueOf(supportedCPU.getAttribute("cpu")));
+					IConfigurationElement[] supportedTargetsArray;
+					supportedTargetsArray = configurationElement.getChildren("supportedCPU");
+					List<Target> supportedTargets = new ArrayList<Target>(supportedTargetsArray.length);
+					for (IConfigurationElement supportedCPU : supportedTargetsArray) {
+						supportedTargets.add(Target.valueOf(supportedCPU.getAttribute("target")));
 					}
-					supportedCPUs = Collections.unmodifiableList(supportedCPUs);
-					compilerDefinition.setSupportedCPUs(supportedCPUs);
+					supportedTargets = Collections.unmodifiableList(supportedTargets);
+					compilerDefinition.setSupportedCPUs(supportedTargets);
 					compilerDefinition
 							.setDefaultHardware(Hardware.valueOf(configurationElement.getAttribute("defaultHardware")));
 

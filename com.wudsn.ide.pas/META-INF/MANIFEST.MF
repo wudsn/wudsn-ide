@@ -3,9 +3,10 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Peter Dell
 Bundle-SymbolicName: com.wudsn.ide.lng.pas;singleton:=true
 Bundle-Version: 1.7.2.qualifier
-Bundle-Activator: com.wudsn.ide.pas.Activator
+Bundle-Activator: com.wudsn.ide.lng.pas.Activator
 Bundle-Vendor: WUDSN IDE Pascal Plugin
-Require-Bundle: org.eclipse.core.resources,
+Require-Bundle: com.wudsn.ide.lng,
+ org.eclipse.core.resources,
  org.eclipse.core.runtime,
  org.eclipse.jface.text,
  org.eclipse.ui,

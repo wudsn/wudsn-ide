@@ -139,9 +139,9 @@
       </complexType>
    </element>
 
-   <element name="supportedCPU">
+   <element name="supportedTarget">
       <complexType>
-         <attribute name="cpu">
+         <attribute name="target">
             <annotation>
                <documentation>
                   

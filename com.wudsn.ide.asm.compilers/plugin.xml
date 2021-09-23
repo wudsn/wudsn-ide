@@ -50,18 +50,18 @@
         id="acme"
         name="%com.wudsn.ide.lng.asm.compiler.acme.AcmeCompiler.name"
         version="0.90 (preview)">
-     <supportedCPU
-           cpu="MOS6502">
-     </supportedCPU>
-     <supportedCPU
-           cpu="MOS65C02">
-     </supportedCPU>
-     <supportedCPU
-           cpu="MOS6502_ILLEGAL">
-     </supportedCPU>
-     <supportedCPU
-           cpu="MOS65816">
-     </supportedCPU>
+     <supportedTarget
+           target="MOS6502">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS65C02">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS6502_ILLEGAL">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS65816">
+     </supportedTarget>
     
   </compiler>
   <compiler
@@ -73,12 +73,12 @@
         id="asm6"
         name="%com.wudsn.ide.lng.asm.compiler.asm6.Asm6Compiler.name"
         version="1.6">
-     <supportedCPU
-           cpu="MOS6502">
-     </supportedCPU>
-     <supportedCPU
-           cpu="MOS6502_ILLEGAL">
-     </supportedCPU>
+     <supportedTarget
+           target="MOS6502">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS6502_ILLEGAL">
+     </supportedTarget>
   </compiler>
 		<compiler
         class="com.wudsn.ide.lng.asm.compiler.atasm.AtasmCompiler"
@@ -89,12 +89,12 @@
         id="atasm"
         name="%com.wudsn.ide.lng.asm.compiler.atasm.AtasmCompiler.name"
         version="1.07">
-             <supportedCPU
-           cpu="MOS6502">
-     </supportedCPU>
-     <supportedCPU
-           cpu="MOS6502_ILLEGAL">
-     </supportedCPU>
+             <supportedTarget
+           target="MOS6502">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS6502_ILLEGAL">
+     </supportedTarget>
 		</compiler>
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.dasm.DasmCompiler"
@@ -105,12 +105,12 @@
         id="dasm"
         name="%com.wudsn.ide.lng.asm.compiler.dasm.DasmCompiler.name"
         version="2.20.10 (preview)">
-     <supportedCPU
-           cpu="MOS6502">
-     </supportedCPU>
-     <supportedCPU
-           cpu="MOS6502_ILLEGAL">
-     </supportedCPU>
+     <supportedTarget
+           target="MOS6502">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS6502_ILLEGAL">
+     </supportedTarget>
   </compiler>
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.kickass.KickAssCompiler"
@@ -121,15 +121,15 @@
         id="kickass"
         name="%com.wudsn.ide.lng.asm.compiler.kickass.KickAssCompiler.name"
         version="V3.21 (preview)">
-     <supportedCPU
-           cpu="MOS6502">
-     </supportedCPU>
-     <supportedCPU
-           cpu="MOS6502_ILLEGAL">
-     </supportedCPU>
-     <supportedCPU
-           cpu="MOS6502_DTV">
-     </supportedCPU>
+     <supportedTarget
+           target="MOS6502">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS6502_ILLEGAL">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS6502_DTV">
+     </supportedTarget>
   </compiler>
 		<compiler
         class="com.wudsn.ide.lng.asm.compiler.mads.MadsCompiler"
@@ -140,15 +140,15 @@
         id="mads"
         name="%com.wudsn.ide.lng.asm.compiler.mads.MadsCompiler.name"
         version="1.9.0">
-             <supportedCPU
-           cpu="MOS6502">
-     </supportedCPU>
-     <supportedCPU
-           cpu="MOS6502_ILLEGAL">
-     </supportedCPU>
-     <supportedCPU
-           cpu="MOS65816">
-     </supportedCPU>
+             <supportedTarget
+           target="MOS6502">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS6502_ILLEGAL">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS65816">
+     </supportedTarget>
 		</compiler>
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32Compiler"
@@ -159,15 +159,15 @@
         id="merlin32"
         name="%com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32Compiler.name"
         version="1.0">
-     <supportedCPU
-           cpu="MOS6502">
-     </supportedCPU>
-     <supportedCPU
-           cpu="MOS65C02">
-     </supportedCPU>
-     <supportedCPU
-           cpu="MOS65816">
-     </supportedCPU>
+     <supportedTarget
+           target="MOS6502">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS65C02">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS65816">
+     </supportedTarget>
   </compiler>
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.tass.TassCompiler"
@@ -178,15 +178,15 @@
         id="tass"
         name="%com.wudsn.ide.lng.asm.compiler.tass.TassCompiler.name"
         version="1.46 r38 (preview)">
-             <supportedCPU
-           cpu="MOS6502">
-     </supportedCPU>
-     <supportedCPU
-           cpu="MOS6502_ILLEGAL">
-     </supportedCPU>
-     <supportedCPU
-           cpu="MOS65C02">
-     </supportedCPU>
+             <supportedTarget
+           target="MOS6502">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS6502_ILLEGAL">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS65C02">
+     </supportedTarget>
      
   </compiler>
 		<compiler
@@ -198,9 +198,9 @@
         id="xasm"
         name="%com.wudsn.ide.lng.asm.compiler.xasm.XasmCompiler.name"
         version="3.0.2">
-             <supportedCPU
-           cpu="MOS6502">
-     </supportedCPU>
+             <supportedTarget
+           target="MOS6502">
+     </supportedTarget>
 		</compiler>
 
 	</extension>

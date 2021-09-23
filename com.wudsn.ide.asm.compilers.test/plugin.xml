@@ -5,26 +5,26 @@
        point="org.eclipse.ui.preferencePages">
     <page
           category="com.wudsn.ide.lng.preferences.AssemblerPreferencesPage"
-          class="com.wudsn.ide.asm.preferences.test.AssemblerPreferencesTestCompilersPage"
+          class="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesTestCompilersPage"
           id="com.wudsn.ide.asm.preferences.test.AssemblerPreferencesTestCompilersPage"
           name="%com.wudsn.ide.asm.preferences.test.AssemblerPreferencesTestCompilersPage.name">
     </page>
  </extension>
 	<extension point="com.wudsn.ide.lng.compilers">
 		<compiler
-        class="com.wudsn.ide.asm.compiler.test.TestCompiler"
+        class="com.wudsn.ide.lng.asm.test.TestCompiler"
         defaultParameters="-o${outputFilePath} ${sourceFilePath}"
         defaultHardware="TEST"
         homePageURL="https://www.wudsn.com"
         id="test"
-        name="%com.wudsn.ide.asm.compiler.test.TestCompiler.name"
+        name="%com.wudsn.ide.lng.asm.test.TestCompiler.name"
         version="none">
-     <supportedCPU
-           cpu="MOS6502">
-     </supportedCPU>
-     <supportedCPU
-           cpu="MOS6502_ILLEGAL">
-     </supportedCPU>
+     <supportedTarget
+           target="MOS6502">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS6502_ILLEGAL">
+     </supportedTarget>
 		</compiler>
 
 	</extension>
@@ -37,7 +37,7 @@
 	</extension>
 
 	<extension point="org.eclipse.ui.editors">
-		<editor class="com.wudsn.ide.asm.editor.test.TestEditor"
+		<editor class="com.wudsn.ide.lng.asm.compiler.test.TestEditor"
 			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
 			default="false" extensions="asm" icon="icons/editor-test-16x16.gif"
 			id="com.wudsn.ide.lng.editor.test.TestEditor" name="%com.wudsn.ide.asm.editor.test.TestEditor.name">

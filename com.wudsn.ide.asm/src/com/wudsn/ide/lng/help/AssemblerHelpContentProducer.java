@@ -49,7 +49,7 @@ import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.base.hardware.HardwareUtility;
 import com.wudsn.ide.lng.AssemblerPlugin;
-import com.wudsn.ide.lng.CPU;
+import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.Compiler;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
@@ -99,7 +99,7 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 	public static final String SECTION_MANUAL = "manual";
 	public static final String SECTION_MANUAL_FILE = "file";
 
-	public static final String SCHEMA_CPU = "cpu/";
+	public static final String SCHEMA_TARGET = "target/";
 
 	private static final String ICONS_PATH = "/help/topic/com.wudsn.ide.lng/icons/";
 
@@ -114,7 +114,7 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 				return getCompilerInputStream(href);
 			} else if (href.startsWith(SCHEMA_HARDWARE)) {
 				return getHardwareInputStream(href);
-			} else if (href.startsWith(SCHEMA_CPU)) {
+			} else if (href.startsWith(SCHEMA_TARGET)) {
 				return getCPUInputStream(href);
 			} else if (href.endsWith(".html")) { // Web site documents
 				return getHTMLInputStream(href);
@@ -338,7 +338,7 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 		writer.writeTableRow(Texts.TOC_ASSEMBLER_DEFAULT_HARDWARE_LABEL, HTMLWriter
 				.getImage(ICONS_PATH + HardwareUtility.getImagePath(hardware), hardware.name(), hardware.name()));
 
-		List<CPU> cpus = compilerDefinition.getSupportedCPUs();
+		List<Target> cpus = compilerDefinition.getSupportedTargets();
 		writer.beginTableRow();
 		writer.writeTableHeader(Texts.TOC_ASSEMBLER_SUPPORTED_CPUS_LABEL);
 		StringBuilder builder = new StringBuilder();
@@ -437,9 +437,9 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 		List<Instruction> pseudoOpcodes = new ArrayList<Instruction>();
 		List<Instruction> w65816Opcodes = new ArrayList<Instruction>();
 
-		List<CPU> cpus = compilerDefinition.getSupportedCPUs();
-		for (CPU cpu : cpus) {
-			for (Instruction instruction : syntax.getInstructionSet(cpu).getInstructions()) {
+		List<Target> cpus = compilerDefinition.getSupportedTargets();
+		for (Target target : cpus) {
+			for (Instruction instruction : syntax.getInstructionSet(target).getInstructions()) {
 
 				if (instruction instanceof Directive) {
 					if (!directives.contains(instruction)) {
@@ -598,19 +598,19 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 		if (href == null) {
 			throw new IllegalArgumentException("Parameter 'href' must not be null.");
 		}
-		String path = getPath(SCHEMA_CPU, href);
+		String path = getPath(SCHEMA_TARGET, href);
 		if (path == null) {
 			return null;
 		}
 
-		CPU cpu = CPU.valueOf(path.toUpperCase());
+		Target target = Target.valueOf(path.toUpperCase());
 		AssemblerPlugin assemblerPlugin = AssemblerPlugin.getInstance();
 		CompilerRegistry compilerRegistry = assemblerPlugin.getCompilerRegistry();
 
 		HTMLWriter writer = createHeader();
 
 		writer.beginTable();
-		writer.writeTableRow(Texts.TOC_CPU_NAME_LABEL, EnumUtility.getText(cpu));
+		writer.writeTableRow(Texts.TOC_CPU_NAME_LABEL, EnumUtility.getText(target));
 		writer.end();
 
 		writer.begin("br", null);
@@ -627,7 +627,7 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 		InstructionSet[] instructionSets = new InstructionSet[compilerDefinitions.size()];
 		for (int c = 0; c < compilerDefinitionCount; c++) {
 			CompilerDefinition compilerDefinition = compilerDefinitions.get(c);
-			instructionSets[c] = compilerDefinition.getSyntax().getInstructionSet(cpu);
+			instructionSets[c] = compilerDefinition.getSyntax().getInstructionSet(target);
 			writer.writeTableHeader(compilerDefinition.getName());
 
 		}

@@ -24,14 +24,14 @@ import java.util.List;
 import java.util.Set;
 
 import com.wudsn.ide.base.common.NumberFactory;
-import com.wudsn.ide.lng.CPU;
+import com.wudsn.ide.lng.Target;
 
 public abstract class Instruction implements Comparable<Instruction> {
 
 	public static final char CURSOR = '_';
 	public static final char NEWLINE = '\n';
 
-	private Set<CPU> cpus;
+	private Set<Target> cpus;
 	private int type;
 	private String name;
 	private String upperCaseName;
@@ -42,7 +42,7 @@ public abstract class Instruction implements Comparable<Instruction> {
 	private int[] styledTitleOffsets;
 	private String proposal;
 
-	protected Instruction(Set<CPU> cpus, int type, boolean caseSensitive, String name, String title, String proposal) {
+	protected Instruction(Set<Target> cpus, int type, boolean caseSensitive, String name, String title, String proposal) {
 		if (cpus == null) {
 			throw new IllegalArgumentException("Parameter 'cpus' must not be null.");
 		}
@@ -130,7 +130,7 @@ public abstract class Instruction implements Comparable<Instruction> {
 		}
 	}
 
-	public Set<CPU> getCPUs() {
+	public Set<Target> getCPUs() {
 		return cpus;
 	}
 

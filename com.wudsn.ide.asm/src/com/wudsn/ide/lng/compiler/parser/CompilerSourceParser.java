@@ -141,7 +141,7 @@ public abstract class CompilerSourceParser {
 	}
 
 	/**
-	 * Gets the instruction for the currently active CPU.
+	 * Gets the instruction for the currently active Target.
 	 * 
 	 * @return The instruction set, not <code>null</code>.
 	 * 

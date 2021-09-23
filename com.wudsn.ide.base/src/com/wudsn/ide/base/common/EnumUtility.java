@@ -52,7 +52,7 @@ public final class EnumUtility {
 		try {
 			ResourceBundle resourceBundle;
 
-			resourceBundle = ResourceBundle.getBundle("plugin", Locale.getDefault(), enumClass.getClassLoader());
+			resourceBundle = ResourceBundle.getBundle("OSGI-INF/l10n/bundle", Locale.getDefault(), enumClass.getClassLoader());
 			result = resourceBundle.getString(key);
 		} catch (MissingResourceException ex) {
 			result = enumValue.name() + " - Text missing";

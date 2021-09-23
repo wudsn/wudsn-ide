@@ -17,36 +17,34 @@
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.wudsn.ide.asm.compiler.test;
+package com.wudsn.ide.lng.asm.compiler.test;
 
+import com.wudsn.ide.lng.compiler.Compiler;
+import com.wudsn.ide.lng.compiler.CompilerProcessLogParser;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
 
 /**
- * Source parser for {@link TestCompiler}.
+ * Compiler class for TEST.
  * 
  * @author Peter Dell
  */
-final class TestCompilerSourceParser extends CompilerSourceParser {
+public final class TestCompiler extends Compiler {
+
+	/**
+	 * Creates a new instance.
+	 */
+	public TestCompiler() {
+	}
 
 	@Override
-	protected void parseLine(int startOffset, String symbol, int symbolOffset, String instruction,
-			int instructionOffset, String operand, String comment) {
-
-		if (symbol.length() > 0) {
-
-			// Check for origin statement
-			if (symbol.equals("*")) { //$NON-NLS-1$
-				beginImplementationSection(startOffset, startOffset + symbolOffset, operand, comment);
-
-			} else {
-				if (instruction.equals("=")) { //$NON-NLS-1$
-					createEquateDefinitionChild(startOffset, startOffset + symbolOffset, symbol, operand, comment);
-				} else {
-					createLabelDefinitionChild(startOffset, startOffset + symbolOffset, symbol, comment);
-
-				}
-			}
-
-		} // Symbol not empty
+	public CompilerSourceParser createSourceParser() {
+		return new TestCompilerSourceParser();
 	}
+
+	@Override
+	public CompilerProcessLogParser createLogParser() {
+
+		return new TestCompilerProcessLogParser();
+	}
+
 }

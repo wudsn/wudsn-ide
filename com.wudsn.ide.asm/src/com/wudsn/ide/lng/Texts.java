@@ -170,7 +170,7 @@ public final class Texts extends NLS {
 	/**
 	 * Preferences: compiler.
 	 */
-	public static String PREFERENCES_COMPILER_CPU_LABEL;
+	public static String PREFERENCES_COMPILER_TARGET_LABEL;
 
 	public static String PREFERENCES_COMPILER_EXECUTABLE_PATH_LABEL;
 	public static String PREFERENCES_COMPILER_HARDWARE_ACTIVE_LABEL;

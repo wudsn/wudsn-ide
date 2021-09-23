@@ -40,7 +40,7 @@ import org.eclipse.help.IUAElement;
 import com.wudsn.ide.base.common.EnumUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.AssemblerPlugin;
-import com.wudsn.ide.lng.CPU;
+import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
@@ -346,11 +346,11 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 	}
 
 	private static List<ITopic> createCPUTopics() {
-		List<ITopic> cpuTopics = new ArrayList<ITopic>(CPU.values().length - 1);
-		for (CPU cpu : CPU.values()) {
-			String href = AssemblerHelpContentProducer.SCHEMA_CPU + cpu.name().toLowerCase()
+		List<ITopic> cpuTopics = new ArrayList<ITopic>(Target.values().length - 1);
+		for (Target target : Target.values()) {
+			String href = AssemblerHelpContentProducer.SCHEMA_TARGET + target.name().toLowerCase()
 					+ AssemblerHelpContentProducer.EXTENSION;
-			cpuTopics.add(createTopic("", EnumUtility.getText(cpu), href, null));
+			cpuTopics.add(createTopic("", EnumUtility.getText(target), href, null));
 		}
 		return cpuTopics;
 	}

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.wudsn.ide.pas.editor;
+package com.wudsn.ide.lng.pas.editor;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;

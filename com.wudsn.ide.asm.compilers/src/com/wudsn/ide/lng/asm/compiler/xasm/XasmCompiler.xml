@@ -15,252 +15,252 @@
 	sourceIncludeDefaultExtension="asx">
 
 	<directive
-		cpus="*"
+		targets="*"
 		name="DTA"
 		title="Define _da_t_a"
 		type="DIRECTIVE"
 		proposal="DTA _"/>
 	<directive
-		cpus="*"
+		targets="*"
 		name="EIF"
 		title="_End _i_f"
 		type="BEGIN_FOLDING_BLOCK_DIRECTIVE"
 		proposal="EIF_"/>
 	<directive
-		cpus="*"
+		targets="*"
 		name="ELI"
 		title="_E_lse _if"
 		type="END_FOLDING_BLOCK_DIRECTIVE"
 		proposal="ELI _"/>
 	<directive
-		cpus="*"
+		targets="*"
 		name="ELS"
 		title="_E_l_se"
 		type="DIRECTIVE"
 		proposal="ELS _"/>
 	<directive
-		cpus="*"
+		targets="*"
 		name="END"
 		title="_E_n_d block or assembly"
 		type="END_SECTION_DIRECTIVE"
 		proposal="END_"/>
 	<directive
-		cpus="*"
+		targets="*"
 		name="EQU"
 		title="Set _e_q_uate"
 		type="DIRECTIVE"
 		proposal="EQU _"/>
 	<directive
-		cpus="*"
+		targets="*"
 		name="ERT"
 		title="_E_rror if _true"
 		type="DIRECTIVE"
 		proposal="ERT _"/>
 	<directive
-		cpus="*"
+		targets="*"
 		name="ICL"
 		title="_In_c_lude another source file"
 		type="SOURCE_INCLUDE_DIRECTIVE"
 		proposal="ICL &quot;_&quot;"/>
 	<directive
-		cpus="*"
+		targets="*"
 		name="IFT"
 		title="_I_f _true"
 		type="BEGIN_FOLDING_BLOCK_DIRECTIVE"
 		proposal="IFT _"/>
 	<directive
-		cpus="*"
+		targets="*"
 		name="INI"
 		title="Set _i_n_it address"
 		type="DIRECTIVE"
 		proposal="INI _"/>
 	<directive
-		cpus="*"
+		targets="*"
 		name="INS"
 		title="_I_n_sert contents of file"
 		type="BINARY_INCLUDE_DIRECTIVE"
 		proposal="INS &quot;_&quot;"/>
 	<directive
-		cpus="*"
+		targets="*"
 		name="OPT"
 		title="Set assembly _o_p_tions"
 		type="DIRECTIVE"
 		proposal="OPT _"/>
 	<directive
-		cpus="*"
+		targets="*"
 		name="ORG"
 		title="Set _o_ri_gin"
 		type="BEGIN_IMPLEMENTATION_SECTION_DIRECTIVE"
 		proposal="ORG _"/>
 	<directive
-		cpus="*"
+		targets="*"
 		name="RUN"
 		title="Set _r_u_n address"
 		type="DIRECTIVE"
 		proposal="RUN _"/>
 
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="ADD"
 		title="_A_d_d to accumulator without carry"
 		proposal="ADD _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="INW"
 		title="_I_ncrement _word by one"
 		proposal="INW _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="JCC"
 		title="_Jump if _carry _clear"
 		proposal="JCC _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="JCS"
 		title="_Jump if _carry _set"
 		proposal="JCS _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="JEQ"
 		title="_Jump if _e_qual / zero"
 		proposal="JEQ _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="JMI"
 		title="_Jump if _m_inus"
 		proposal="JMI _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="JNE"
 		title="_Jump if _not _equal / zero"
 		proposal="JNE _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="JPL"
 		title="_Jump if _p_lus"
 		proposal="JPL _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="JVC"
 		title="_Jump if o_verflow _clear"
 		proposal="JVC _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="JVS"
 		title="_Jump if o_verflow _set"
 		proposal="JVS _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="MVA"
 		title="_Mo_ve byte using _accumulator"
 		proposal="MVA _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="MVX"
 		title="_Mo_ve byte using _X register"
 		proposal="MVX _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="MVY"
 		title="_Mo_ve byte using _Y register"
 		proposal="MVY _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="MWA"
 		title="_Move _word using _accumulator"
 		proposal="MWA _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="MWX"
 		title="_Move _word using _X register"
 		proposal="MWX _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="MWY"
 		title="_Move _word using _Y register"
 		proposal="MWY _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="RCC"
 		title="_Repeat if _carry _clear"
 		proposal="RCC _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="RCS"
 		title="_Repeat if _carry _set"
 		proposal="RCS _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="REQ"
 		title="_Repeat if _e_qual / zero"
 		proposal="REQ _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="RMI"
 		title="_Repeat if _m_inus"
 		proposal="RMI _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="RNE"
 		title="_Repeat if _not _equal / zero"
 		proposal="RNE _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="RPL"
 		title="_Repeat if _p_lus"
 		proposal="RPL _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="RVC"
 		title="_Repeat if o_verflow _clear"
 		proposal="RVC _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="RVS"
 		title="_Repeat if o_verflow _set"
 		proposal="RVS _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="SCC"
 		title="_Skip if _carry _clear"
 		proposal="SCC _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="SCS"
 		title="_Skip if _carry _set"
 		proposal="SCS _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="SEQ"
 		title="_Skip if _e_qual / zero"
 		proposal="SEQ _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="SMI"
 		title="_Skip if _m_inus"
 		proposal="SMI _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="SNE"
 		title="_Skip if _not _equal / zero"
 		proposal="SNE _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="SPL"
 		title="_Skip if _p_lus"
 		proposal="SPL _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="SUB"
 		title="_S_u_btract from accumulator without carry"
 		proposal="SUB _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="SVC"
 		title="_Skip if o_verflow _clear"
 		proposal="SVC _"/>
 	<pseudoopcode
-		cpus="*"
+		targets="*"
 		name="SVS"
 		title="_Skip if o_verflow _set"
 		proposal="SVS _"/>

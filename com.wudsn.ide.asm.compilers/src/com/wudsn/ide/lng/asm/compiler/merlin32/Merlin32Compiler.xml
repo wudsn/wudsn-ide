@@ -6,75 +6,75 @@
 	sourceIncludeDefaultExtension="s"
 >
 	<!-- 6502 Pseudo Opcodes -->
-	<pseudoopcode cpus="*" name="BGE" title="_Branch _greater or _equal" proposal="BGE _"/>
-	<pseudoopcode cpus="*" name="BLT" title="_Branch _less _than" proposal="BLT _"/>
+	<pseudoopcode targets="*" name="BGE" title="_Branch _greater or _equal" proposal="BGE _"/>
+	<pseudoopcode targets="*" name="BLT" title="_Branch _less _than" proposal="BLT _"/>
 	<!-- 65816 Opcodes -->
-	<opcode cpus="MOS65816" name="ADCL" title="_A_dd to accumulator with _carry (_long)" proposal="ADCL _"
+	<opcode targets="MOS65816" name="ADCL" title="_A_dd to accumulator with _carry (_long)" proposal="ADCL _"
 		modes="idl=$67,abl=$6f,idly=$77,alx=$7f"/>
-	<opcode cpus="MOS65816" name="ANDL" title="Binary _a_n_d with accumulator (_long)" proposal="ANDL _"
+	<opcode targets="MOS65816" name="ANDL" title="Binary _a_n_d with accumulator (_long)" proposal="ANDL _"
 		modes="idl=$27,abl=$2f,idly=$37,alx=$3f"/>
-	<opcode cpus="MOS65816" name="CMPL" title="_Co_m_pare with accumulator (_long)" proposal="CMPL _"
+	<opcode targets="MOS65816" name="CMPL" title="_Co_m_pare with accumulator (_long)" proposal="CMPL _"
 		modes="idl=$c7,abl=$cf,idly=$d7,alx=$df"/>
-	<opcode cpus="MOS65816" name="EORL" title="Binary _exclusive-_o_r with accumulator (_long)" proposal="EORL _"
+	<opcode targets="MOS65816" name="EORL" title="Binary _exclusive-_o_r with accumulator (_long)" proposal="EORL _"
 		modes="idl=$47,abl=$4f,idly=$57,alx=$5f"/>
-	<opcode cpus="MOS65816" name="JMPL" title="_Ju_m_p to new address (_long)" proposal="JMPL _" modes="abl=$5c,ial=$7c"/>
-	<opcode cpus="MOS65816" name="JSRL" title="_Jump to _sub _routine (_long)" proposal="JSRL _" modes="abs=$22"/>
-	<opcode cpus="MOS65816" name="LDAL" title="_Loa_d _accumulator (_long)" proposal="LDAL _" modes="idl=$a7,ibl=$af,idly=$b7,alx=$bf"/>
-	<opcode cpus="MOS65816" name="ORAL" title="Binary _o_r with _accumulator (_long)" proposal="ORAL _"
+	<opcode targets="MOS65816" name="JMPL" title="_Ju_m_p to new address (_long)" proposal="JMPL _" modes="abl=$5c,ial=$7c"/>
+	<opcode targets="MOS65816" name="JSRL" title="_Jump to _sub _routine (_long)" proposal="JSRL _" modes="abs=$22"/>
+	<opcode targets="MOS65816" name="LDAL" title="_Loa_d _accumulator (_long)" proposal="LDAL _" modes="idl=$a7,ibl=$af,idly=$b7,alx=$bf"/>
+	<opcode targets="MOS65816" name="ORAL" title="Binary _o_r with _accumulator (_long)" proposal="ORAL _"
 		modes="idl=$07,abl=$0f,idl=$17,alx=$1f"/>
-	<opcode cpus="MOS65816" name="SBCL" title="_Su_btract from accumulator with _carry (_long)" proposal="SBCL _"
+	<opcode targets="MOS65816" name="SBCL" title="_Su_btract from accumulator with _carry (_long)" proposal="SBCL _"
 		modes="idl=$e7,abl=$ef,idly=$f7,alx=$ff"/>
-	<opcode cpus="MOS65816" name="STAL" title="_S_tore _accumulator in memory (_long)" proposal="STAL _"
+	<opcode targets="MOS65816" name="STAL" title="_S_tore _accumulator in memory (_long)" proposal="STAL _"
 		modes="idl=$87,abl=$8f,idly=$97,alx=$9f"/>
 	<!-- Directives -->
-	<directive cpus="*" name="ADR" title="Define _a_dd_ress" type="DIRECTIVE" proposal="ADR _"/>
-	<directive cpus="*" name="ADRL" title="Define _a_dd_ress (_long )" type="DIRECTIVE" proposal="ADRL _"/>
-	<directive cpus="*" name="ALI" title="Linker: Set boundary _a_l_ignment" type="DIRECTIVE" proposal="ALI _NONE/BANK/PAGE"/>
-	<directive cpus="*" name="ASC" title="Define _A_S_CII string" type="DIRECTIVE" proposal="ASC '_'"/>
-	<directive cpus="*" name="ASM" title="Linker: Set _a_sse_mbly file" type="SOURCE_INCLUDE_DIRECTIVE" proposal="ASM '_'"/>
-	<directive cpus="*" name="AUX" title="Linker: Set GS/OS file _a_u_xiliary type" type="DIRECTIVE" proposal="AUX _"/>
-	<directive cpus="*" name="BSZ" title="Set _bank _si_ze" type="DIRECTIVE" proposal="BSZ _"/>
-	<directive cpus="*" name="CHK" title="Insert _c_hec_ksum" type="DIRECTIVE" proposal="CHK_"/>
-	<directive cpus="*" name="DA" title="_Define _address" type="DIRECTIVE" proposal="DA _"/>
-	<directive cpus="*" name="DAT" title="Insert current _d_a_te" type="DIRECTIVE" proposal="DAT _"/>
-	<directive cpus="*" name="DB" title="_Define _byte" type="DIRECTIVE" proposal="DB _"/>
-	<directive cpus="*" name="DCI" title="Define _dextral _character _inverted text" type="DIRECTIVE" proposal="DCI '_'"/>
-	<directive cpus="*" name="DDB" title="_Define _double _byte" type="DIRECTIVE" proposal="DDB _"/>
-	<directive cpus="*" name="DEND" title="_Dummy section _e_n_d" type="END_SECTION_DIRECTIVE" proposal="DEND_"/>
-	<directive cpus="*" name="DFB" title="_De_fine _byte" type="DIRECTIVE" proposal="DFB _"/>
-	<directive cpus="*" name="DO" title="_D_o if expression not zero" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal="DO _\nFIN"/>
-	<directive cpus="*" name="DS" title="_Define _storage" type="DIRECTIVE" proposal="DS _"/>
-	<directive cpus="*" name="DSK" title="Set _di_s_k binary output file" type="BINARY_OUTPUT_DIRECTIVE" proposal="DSK '_'"/>
-	<directive cpus="*" name="DUM" title="_D_u_mmy section" type="BEGIN_IMPLEMENTATION_SECTION_DIRECTIVE" proposal="DUM _\nDEND"/>
-	<directive cpus="*" name="DW" title="_Define _word" type="DIRECTIVE" proposal="DW _"/>
-	<directive cpus="*" name="ELSE" title="_E_l_s_e" type="DIRECTIVE" proposal="ELSE_"/>
-	<directive cpus="*" name="END" title="_E_n_d assembly" type="DIRECTIVE" proposal="END_"/>
-	<directive cpus="*" name="ENT" title="Define label as an _e_n_try label in a REL Segment" type="DIRECTIVE" proposal="ENT_"/>
-	<directive cpus="*" name="EQU" title="Define _e_q_uate" type="DIRECTIVE" proposal="EQU _"/>
-	<directive cpus="*" name="ERR" title="Force _e_r_ror if expression not zero" type="DIRECTIVE" proposal="ERR _"/>
-	<directive cpus="*" name="EXT" title="Define label as _e_x_ternal to the current REL segment" type="DIRECTIVE"
+	<directive targets="*" name="ADR" title="Define _a_dd_ress" type="DIRECTIVE" proposal="ADR _"/>
+	<directive targets="*" name="ADRL" title="Define _a_dd_ress (_long )" type="DIRECTIVE" proposal="ADRL _"/>
+	<directive targets="*" name="ALI" title="Linker: Set boundary _a_l_ignment" type="DIRECTIVE" proposal="ALI _NONE/BANK/PAGE"/>
+	<directive targets="*" name="ASC" title="Define _A_S_CII string" type="DIRECTIVE" proposal="ASC '_'"/>
+	<directive targets="*" name="ASM" title="Linker: Set _a_sse_mbly file" type="SOURCE_INCLUDE_DIRECTIVE" proposal="ASM '_'"/>
+	<directive targets="*" name="AUX" title="Linker: Set GS/OS file _a_u_xiliary type" type="DIRECTIVE" proposal="AUX _"/>
+	<directive targets="*" name="BSZ" title="Set _bank _si_ze" type="DIRECTIVE" proposal="BSZ _"/>
+	<directive targets="*" name="CHK" title="Insert _c_hec_ksum" type="DIRECTIVE" proposal="CHK_"/>
+	<directive targets="*" name="DA" title="_Define _address" type="DIRECTIVE" proposal="DA _"/>
+	<directive targets="*" name="DAT" title="Insert current _d_a_te" type="DIRECTIVE" proposal="DAT _"/>
+	<directive targets="*" name="DB" title="_Define _byte" type="DIRECTIVE" proposal="DB _"/>
+	<directive targets="*" name="DCI" title="Define _dextral _character _inverted text" type="DIRECTIVE" proposal="DCI '_'"/>
+	<directive targets="*" name="DDB" title="_Define _double _byte" type="DIRECTIVE" proposal="DDB _"/>
+	<directive targets="*" name="DEND" title="_Dummy section _e_n_d" type="END_SECTION_DIRECTIVE" proposal="DEND_"/>
+	<directive targets="*" name="DFB" title="_De_fine _byte" type="DIRECTIVE" proposal="DFB _"/>
+	<directive targets="*" name="DO" title="_D_o if expression not zero" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal="DO _\nFIN"/>
+	<directive targets="*" name="DS" title="_Define _storage" type="DIRECTIVE" proposal="DS _"/>
+	<directive targets="*" name="DSK" title="Set _di_s_k binary output file" type="BINARY_OUTPUT_DIRECTIVE" proposal="DSK '_'"/>
+	<directive targets="*" name="DUM" title="_D_u_mmy section" type="BEGIN_IMPLEMENTATION_SECTION_DIRECTIVE" proposal="DUM _\nDEND"/>
+	<directive targets="*" name="DW" title="_Define _word" type="DIRECTIVE" proposal="DW _"/>
+	<directive targets="*" name="ELSE" title="_E_l_s_e" type="DIRECTIVE" proposal="ELSE_"/>
+	<directive targets="*" name="END" title="_E_n_d assembly" type="DIRECTIVE" proposal="END_"/>
+	<directive targets="*" name="ENT" title="Define label as an _e_n_try label in a REL Segment" type="DIRECTIVE" proposal="ENT_"/>
+	<directive targets="*" name="EQU" title="Define _e_q_uate" type="DIRECTIVE" proposal="EQU _"/>
+	<directive targets="*" name="ERR" title="Force _e_r_ror if expression not zero" type="DIRECTIVE" proposal="ERR _"/>
+	<directive targets="*" name="EXT" title="Define label as _e_x_ternal to the current REL segment" type="DIRECTIVE"
 		proposal="EXT_"/>
-	<directive cpus="*" name="FIN" title="_F _i_nish IF or DO" type="END_FOLDING_BLOCK_DIRECTIVE" proposal="FIN_"/>
-	<directive cpus="*" name="FLS" title="Define _f_la_shing text" type="DIRECTIVE" proposal="FLS '_'"/>
-	<directive cpus="*" name="HEX" title="Define _h_e_xadecimal data" type="DIRECTIVE" proposal="HEX _"/>
-	<directive cpus="*" name="IF" title="Do _i_f expression not zero" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal="IF _\nFIN"/>
-	<directive cpus="*" name="INV" title="Define _i_n_verse text" type="DIRECTIVE" proposal="INV '_'"/>
-	<directive cpus="*" name="KND" title="Linker: Set segment _ki_n_d and attributes" type="DIRECTIVE" proposal="KND _"/>
-	<directive cpus="*" name="LNA" title="Linker: Set _load segment _n_ame" type="DIRECTIVE" proposal="LNA '_'"/>
-	<directive cpus="*" name="LNK" title="Set _li_n_ker binary output file" type="BINARY_OUTPUT_DIRECTIVE" proposal="LNK '_'"/>
-	<directive cpus="*" name="LUP" title="Begin loop (_l_uu_p) block" type="BEGIN_REPEAT_SECTION_DIRECTIVE" proposal="LUP _"/>
-	<directive cpus="MOS65816" name="MX" title="Set _M and _X register size" type="DIRECTIVE" proposal="MX _"/>
-	<directive cpus="*" name="ORG" title="Set _o_ri_gin" type="BEGIN_IMPLEMENTATION_SECTION_DIRECTIVE" proposal="ORG _"/>
-	<directive cpus="*" name="PMC" title="_Put _macro _call" type="DIRECTIVE" proposal="PMC _"/>
-	<directive cpus="*" name="PUT" title="_P_u_t source include file at this location" type="SOURCE_INCLUDE_DIRECTIVE" proposal="PUT '_'"/>
-	<directive cpus="*" name="PUTBIN" title="_P_u_t _b_i_nary include file at this location" type="BINARY_INCLUDE_DIRECTIVE" proposal="PUTBIN '_'"/>
-	<directive cpus="*" name="REL" title="Activate _r_e_locatable mode" type="DIRECTIVE" proposal="REL_"/>
-	<directive cpus="*" name="REV" title="Define _r_e_verse text" type="DIRECTIVE" proposal="REV '_'"/>
-	<directive cpus="*" name="SAV" title="_S_a_ve output binary file" type="BINARY_OUTPUT_DIRECTIVE" proposal="SAV '_'"/>
-	<directive cpus="*" name="SNA" title="Linker: Set _segment _n_ame" type="DIRECTIVE" proposal="SNA '_'"/>
-	<directive cpus="*" name="STR" title="Define _s_t_ring with leading length byte" type="DIRECTIVE" proposal="STR '_'"/>
-	<directive cpus="*" name="STRL" title="Define _s_t_ring with leading length word (_long)" type="DIRECTIVE" proposal="STRL '_'"/>
-	<directive cpus="*" name="TYP" title="Set ProDOS output file _t_y_pe " type="DIRECTIVE" proposal="TYP $06_"/>
-	<directive cpus="*" name="USE" title ="_U_s_e source include file at this location" type="SOURCE_INCLUDE_DIRECTIVE" proposal="USE '_'"/>
-	<directive cpus="*" name="XPL" title="Linker: Add E_x_press_Load segment" type="DIRECTIVE" proposal="XPL_"/>
+	<directive targets="*" name="FIN" title="_F _i_nish IF or DO" type="END_FOLDING_BLOCK_DIRECTIVE" proposal="FIN_"/>
+	<directive targets="*" name="FLS" title="Define _f_la_shing text" type="DIRECTIVE" proposal="FLS '_'"/>
+	<directive targets="*" name="HEX" title="Define _h_e_xadecimal data" type="DIRECTIVE" proposal="HEX _"/>
+	<directive targets="*" name="IF" title="Do _i_f expression not zero" type="BEGIN_FOLDING_BLOCK_DIRECTIVE" proposal="IF _\nFIN"/>
+	<directive targets="*" name="INV" title="Define _i_n_verse text" type="DIRECTIVE" proposal="INV '_'"/>
+	<directive targets="*" name="KND" title="Linker: Set segment _ki_n_d and attributes" type="DIRECTIVE" proposal="KND _"/>
+	<directive targets="*" name="LNA" title="Linker: Set _load segment _n_ame" type="DIRECTIVE" proposal="LNA '_'"/>
+	<directive targets="*" name="LNK" title="Set _li_n_ker binary output file" type="BINARY_OUTPUT_DIRECTIVE" proposal="LNK '_'"/>
+	<directive targets="*" name="LUP" title="Begin loop (_l_uu_p) block" type="BEGIN_REPEAT_SECTION_DIRECTIVE" proposal="LUP _"/>
+	<directive targets="MOS65816" name="MX" title="Set _M and _X register size" type="DIRECTIVE" proposal="MX _"/>
+	<directive targets="*" name="ORG" title="Set _o_ri_gin" type="BEGIN_IMPLEMENTATION_SECTION_DIRECTIVE" proposal="ORG _"/>
+	<directive targets="*" name="PMC" title="_Put _macro _call" type="DIRECTIVE" proposal="PMC _"/>
+	<directive targets="*" name="PUT" title="_P_u_t source include file at this location" type="SOURCE_INCLUDE_DIRECTIVE" proposal="PUT '_'"/>
+	<directive targets="*" name="PUTBIN" title="_P_u_t _b_i_nary include file at this location" type="BINARY_INCLUDE_DIRECTIVE" proposal="PUTBIN '_'"/>
+	<directive targets="*" name="REL" title="Activate _r_e_locatable mode" type="DIRECTIVE" proposal="REL_"/>
+	<directive targets="*" name="REV" title="Define _r_e_verse text" type="DIRECTIVE" proposal="REV '_'"/>
+	<directive targets="*" name="SAV" title="_S_a_ve output binary file" type="BINARY_OUTPUT_DIRECTIVE" proposal="SAV '_'"/>
+	<directive targets="*" name="SNA" title="Linker: Set _segment _n_ame" type="DIRECTIVE" proposal="SNA '_'"/>
+	<directive targets="*" name="STR" title="Define _s_t_ring with leading length byte" type="DIRECTIVE" proposal="STR '_'"/>
+	<directive targets="*" name="STRL" title="Define _s_t_ring with leading length word (_long)" type="DIRECTIVE" proposal="STRL '_'"/>
+	<directive targets="*" name="TYP" title="Set ProDOS output file _t_y_pe " type="DIRECTIVE" proposal="TYP $06_"/>
+	<directive targets="*" name="USE" title ="_U_s_e source include file at this location" type="SOURCE_INCLUDE_DIRECTIVE" proposal="USE '_'"/>
+	<directive targets="*" name="XPL" title="Linker: Add E_x_press_Load segment" type="DIRECTIVE" proposal="XPL_"/>
 </instructionset>

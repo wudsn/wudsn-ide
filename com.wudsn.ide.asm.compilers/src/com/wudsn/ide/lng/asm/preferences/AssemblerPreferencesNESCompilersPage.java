@@ -19,7 +19,8 @@
 package com.wudsn.ide.lng.asm.preferences;
 
 import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.preferences.AssemblerPreferencesCompilersPage;
+import com.wudsn.ide.lng.Language;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesCompilersPage;
 
 /**
  * Visual editor page for the assembler preferences regarding NES compilers.
@@ -27,13 +28,13 @@ import com.wudsn.ide.lng.preferences.AssemblerPreferencesCompilersPage;
  * @author Peter Dell
  * 
  */
-public final class AssemblerPreferencesNESCompilersPage extends AssemblerPreferencesCompilersPage {
+public final class AssemblerPreferencesNESCompilersPage extends LanguagePreferencesCompilersPage {
 
 	/**
 	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
 	 */
 	public AssemblerPreferencesNESCompilersPage() {
-		super(Hardware.NES);
+		super(Language.ASM,Hardware.NES);
 
 	}
 
