@@ -1,20 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="com.wudsn.ide.lng.preferences.LanguagesPreferencesPage"
+            class="com.wudsn.ide.lng.pas.preferences.PascalPreferencesPage"
+            id="com.wudsn.ide.lng.pas.preferences.PascalPreferencesPage"
+            name="%com.wudsn.ide.lng.pas.preferences.PascalPreferencesPage.name">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="com.wudsn.ide.lng.pas.preferences.PascalPreferencesPage"
+            class="com.wudsn.ide.lng.pas.preferences.PascalPreferencesApple2CompilersPage"
+            id="com.wudsn.ide.lng.pas.preferences.PascalPreferencesApple2CompilersPage"
+            name="%com.wudsn.ide.lng.pas.preferences.PascalPreferencesApple2CompilersPage.name">
+      </page>
+      <page
+            category="com.wudsn.ide.lng.pas.preferences.PascalPreferencesPage"
+            class="com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari8CompilersPage"
+            id="com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari8CompilersPage"
+            name="%com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari8CompilersPage.name">
+      </page>
+      <page
+            category="com.wudsn.ide.lng.pas.preferences.PascalPreferencesPage"
+            class="com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari2600CompilersPage"
+            id="com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari2600CompilersPage"
+            name="%com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari2600CompilersPage.name">
+      </page>
+      <page
+            category="com.wudsn.ide.lng.pas.preferences.PascalPreferencesPage"
+            class="com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari7800CompilersPage"
+            id="com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtar7800CompilersPage"
+            name="%com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari7800CompilersPage.name">
+      </page>
+      <page
+            category="com.wudsn.ide.lng.pas.preferences.PascalPreferencesPage"
+            class="com.wudsn.ide.lng.pas.preferences.PascalPreferencesC64CompilersPage"
+            id="com.wudsn.ide.lng.pas.preferences.PascalPreferencesC64CompilersPage"
+            name="%com.wudsn.ide.lng.pas.preferences.PascalPreferencesC64CompilersPage.name">
+      </page>
+      <page
+            category="com.wudsn.ide.lng.pas.preferences.PascalPreferencesPage"
+            class="com.wudsn.ide.lng.pas.preferences.PascalPreferencesNESCompilersPage"
+            id="com.wudsn.ide.lng.pas.preferences.PascalPreferencesNESCompilersPage"
+            name="%com.wudsn.ide.lng.pas.preferences.PascalPreferencesNESCompilersPage.name">
+      </page>
+   </extension>
 
    <extension
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
             base-type="org.eclipse.core.runtime.text"
             file-extensions="pas"
-            id="com.wudsn.ide.pas.compiler.PascalSourceFile"
-            name="%com.wudsn.ide.pas.compiler.PascalSourceFile.name">
+            id="com.wudsn.ide.lng.pas.compiler.PascalSourceFile"
+            name="%com.wudsn.ide.lng.pas.compiler.PascalSourceFile.name">
+      </content-type>
+   </extension>
+   <extension
+         id="Atari 2600 content types"
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            base-type="com.wudsn.ide.lng.pas.compiler.PascalSourceFile"
+            file-extensions="pas"
+            id="com.wudsn.ide.lng.pas.compiler.mp.MadPascalSourceFile"
+            name="%com.wudsn.ide.lng.pas.compiler.mp.MadPascalSourceFile.name"
+            priority="normal">
       </content-type>
    </extension>
    <extension
          point="org.eclipse.ui.editors">
       <editorContentTypeBinding
-            contentTypeId="com.wudsn.ide.pas.compiler.PascalSourceFile"
+            contentTypeId="com.wudsn.ide.lng.pas.compiler.PascalSourceFile"
             editorId="org.eclipse.ui.genericeditor.GenericEditor">
       </editorContentTypeBinding>
    </extension>
@@ -22,27 +81,27 @@
          point="org.eclipse.ui.genericeditor.presentationReconcilers">
       <presentationReconciler
             class="com.wudsn.ide.lng.pas.editor.PascalReconciler"
-            contentType="com.wudsn.ide.pas.compiler.PascalSourceFile">
+            contentType="com.wudsn.ide.lng.pas.compiler.PascalSourceFile">
       </presentationReconciler>
    </extension>
    <extension
          point="org.eclipse.ui.genericeditor.hoverProviders">
       <hoverProvider
             class="com.wudsn.ide.lng.pas.editor.PascalHoverProvider"
-            contentType="com.wudsn.ide.pas.compiler.PascalSourceFile">
+            contentType="com.wudsn.ide.lng.pas.compiler.PascalSourceFile">
       </hoverProvider>
    </extension>
    <extension
          point="org.eclipse.ui.genericeditor.contentAssistProcessors">
       <contentAssistProcessor
             class="com.wudsn.ide.lng.pas.editor.PascalContentAssistProcessor"
-            contentType="com.wudsn.ide.pas.compiler.PascalSourceFile">
+            contentType="com.wudsn.ide.lng.pas.compiler.PascalSourceFile">
       </contentAssistProcessor>
    </extension>
    <extension
          point="org.eclipse.core.filebuffers.documentSetup">
       <participant
-            contentTypeId="com.wudsn.ide.pas.compiler.PascalSourceFile"
+            contentTypeId="com.wudsn.ide.lng.pas.compiler.PascalSourceFile"
             extensions="pas"
             class="com.wudsn.ide.lng.pas.editor.ValidatorDocumentSetupParticipant">
       </participant>
