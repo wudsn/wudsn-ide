@@ -39,12 +39,12 @@ import org.eclipse.help.IUAElement;
 
 import com.wudsn.ide.base.common.EnumUtility;
 import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
-import com.wudsn.ide.lng.preferences.AssemblerPreferences;
+import com.wudsn.ide.lng.preferences.LanguagePreferences;
 
 /**
  * Dynamic help content provider. Uses static pages and the meta data from the
@@ -107,7 +107,7 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 
 		@Override
 		public String getContributorId() {
-			return AssemblerPlugin.ID;
+			return LanguagePlugin.ID;
 		}
 
 		@Override
@@ -164,7 +164,7 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 			label = resourceBundle.getString(key);
 		} catch (MissingResourceException ex) {
 			label = href + " - Text missing";
-			AssemblerPlugin.getInstance().logError("Resource for enum value {0} is missing.", new Object[] { key }, ex);
+			LanguagePlugin.getInstance().logError("Resource for enum value {0} is missing.", new Object[] { key }, ex);
 		}
 		return createTopic("", label, href, null);
 	}
@@ -195,8 +195,8 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 	}
 
 	static ITopic[] createTopics() {
-		AssemblerPlugin assemblerPlugin = AssemblerPlugin.getInstance();
-		CompilerRegistry compilerRegistry = assemblerPlugin.getCompilerRegistry();
+		LanguagePlugin languagePlugin = LanguagePlugin.getInstance();
+		CompilerRegistry compilerRegistry = languagePlugin.getCompilerRegistry();
 		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions();
 
 		List<ITopic> ideTopics = createIDETopics();
@@ -245,8 +245,8 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 					+ AssemblerHelpContentProducer.SECTION_INSTRUCTIONS + AssemblerHelpContentProducer.EXTENSION;
 			ITopic opcodesTopic = createTopic("", Texts.TOC_ASSEMBLER_INSTRUCTIONS_TOPIC_LABEL, href, null);
 
-			AssemblerPreferences assemblerPreferences = AssemblerPlugin.getInstance().getPreferences();
-			String compilerExecutablePath = assemblerPreferences.getCompilerExecutablePath(compilerDefinition.getId());
+			LanguagePreferences languagePreferences = LanguagePlugin.getInstance().getPreferences();
+			String compilerExecutablePath = languagePreferences.getCompilerExecutablePath(compilerDefinition.getId());
 
 			String icon = "";
 			List<ITopic> manualTopics = new ArrayList<ITopic>();

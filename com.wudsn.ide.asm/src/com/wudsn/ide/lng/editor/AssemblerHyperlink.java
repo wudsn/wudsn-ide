@@ -38,7 +38,7 @@ import org.eclipse.ui.ide.IDE;
 import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.common.TextUtility;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Texts;
 
 /**
@@ -181,7 +181,7 @@ final class AssemblerHyperlink implements IHyperlink {
 						editorPart = IDE.openEditorOnFileStore(workbenchPage, fileStore);
 					} catch (PartInitException ex) {
 
-						AssemblerPlugin.getInstance().logError("Cannot default editor editor for '{0}'.",
+						LanguagePlugin.getInstance().logError("Cannot default editor editor for '{0}'.",
 								new Object[] { uri }, ex);
 
 					}
@@ -197,7 +197,7 @@ final class AssemblerHyperlink implements IHyperlink {
 
 					editorPart = IDE.openEditor(workbenchPage, uri, editorId, true);
 				} catch (PartInitException ex) {
-					AssemblerPlugin.getInstance().logError("Cannot system editor editor for '{0}'.",
+					LanguagePlugin.getInstance().logError("Cannot system editor editor for '{0}'.",
 							new Object[] { uri }, ex);
 				}
 			}

@@ -30,7 +30,7 @@ import org.eclipse.core.runtime.Path;
 
 import com.wudsn.ide.base.common.NumberUtility;
 import com.wudsn.ide.base.common.TextUtility;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Texts;
 
 /**
@@ -250,7 +250,7 @@ public abstract class CompilerProcessLogParser {
 							}
 						}
 					} catch (CoreException ex) {
-						AssemblerPlugin.getInstance().logError("Could not retrieve members of {0}",
+						LanguagePlugin.getInstance().logError("Could not retrieve members of {0}",
 								new Object[] { iFile }, ex);
 					}
 				}

@@ -30,7 +30,7 @@ import org.eclipse.swt.widgets.Display;
 
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.base.hardware.HardwareUtility;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerOutputFolderMode;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
@@ -43,23 +43,23 @@ import com.wudsn.ide.lng.runner.RunnerId;
  * 
  * @author Peter Dell
  */
-public final class AssemblerPreferencesInitializer extends AbstractPreferenceInitializer {
+public final class LanguagePreferencesInitializer extends AbstractPreferenceInitializer {
 
 	/**
 	 * Creation must be public default.
 	 */
-	public AssemblerPreferencesInitializer() {
+	public LanguagePreferencesInitializer() {
 	}
 
 	@Override
 	public void initializeDefaultPreferences() {
-		IPreferenceStore store = AssemblerPlugin.getInstance().getPreferenceStore();
+		IPreferenceStore store = LanguagePlugin.getInstance().getPreferenceStore();
 
 		initializeEditorPreferences(store);
 
 		initializeCompilerPreferences(store);
 
-		AssemblerPlugin.getInstance().savePreferences();
+		LanguagePlugin.getInstance().savePreferences();
 	}
 
 	private void initializeEditorPreferences(IPreferenceStore store) {
@@ -70,39 +70,39 @@ public final class AssemblerPreferencesInitializer extends AbstractPreferenceIni
 		Display display = Display.getCurrent();
 
 		TextAttribute textAttribute = new TextAttribute(new Color(display, 0, 128, 0), null, SWT.ITALIC);
-		store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT,
+		store.setDefault(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT,
 				TextAttributeConverter.toString(textAttribute));
 
 		textAttribute = new TextAttribute(new Color(display, 0, 0, 255), null, SWT.NORMAL);
-		store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_STRING,
+		store.setDefault(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_STRING,
 				TextAttributeConverter.toString(textAttribute));
 
 		textAttribute = new TextAttribute(new Color(display, 0, 0, 255), null, SWT.BOLD);
-		store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_NUMBER,
+		store.setDefault(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_NUMBER,
 				TextAttributeConverter.toString(textAttribute));
 
 		textAttribute = new TextAttribute(new Color(display, 128, 64, 0), null, SWT.BOLD);
-		store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_DIRECTVE,
+		store.setDefault(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_DIRECTVE,
 				TextAttributeConverter.toString(textAttribute));
 
 		textAttribute = new TextAttribute(new Color(display, 0, 0, 128), null, SWT.BOLD);
-		store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL,
+		store.setDefault(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL,
 				TextAttributeConverter.toString(textAttribute));
 
 		textAttribute = new TextAttribute(new Color(display, 255, 32, 32), null, SWT.BOLD);
-		store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL,
+		store.setDefault(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL,
 				TextAttributeConverter.toString(textAttribute));
 
 		textAttribute = new TextAttribute(new Color(display, 32, 128, 32), null, SWT.BOLD);
-		store.setDefault(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO,
+		store.setDefault(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO,
 				TextAttributeConverter.toString(textAttribute));
 
 		// Content assist.
-		store.setDefault(AssemblerPreferencesConstants.EDITOR_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE,
+		store.setDefault(LanguagePreferencesConstants.EDITOR_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE,
 				AssemblerContentAssistProcessorDefaultCase.LOWER_CASE);
 
 		// Compiling.
-		store.setDefault(AssemblerPreferencesConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE,
+		store.setDefault(LanguagePreferencesConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE,
 				AssemblerEditorCompileCommandPositioningMode.FIRST_ERROR_OR_WARNING);
 	}
 
@@ -111,7 +111,7 @@ public final class AssemblerPreferencesInitializer extends AbstractPreferenceIni
 			throw new IllegalArgumentException("Parameter 'store' must not be null.");
 		}
 
-		CompilerRegistry compilerRegistry = AssemblerPlugin.getInstance().getCompilerRegistry();
+		CompilerRegistry compilerRegistry = LanguagePlugin.getInstance().getCompilerRegistry();
 
 		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions();
 		for (CompilerDefinition compilerDefinition : compilerDefinitions) {
@@ -123,16 +123,16 @@ public final class AssemblerPreferencesInitializer extends AbstractPreferenceIni
 				if (hardware.equals(Hardware.GENERIC)) {
 					continue;
 				}
-				store.setDefault(AssemblerPreferencesConstants.getCompilerTargetName(compilerId, hardware),
+				store.setDefault(LanguagePreferencesConstants.getCompilerTargetName(compilerId, hardware),
 						compilerDefinition.getSupportedTargets().get(0).toString());
 
-				name = AssemblerPreferencesConstants.getCompilerParametersName(compilerId, hardware);
+				name = LanguagePreferencesConstants.getCompilerParametersName(compilerId, hardware);
 				store.setDefault(name, compilerDefinition.getDefaultParameters());
-				name = AssemblerPreferencesConstants.getCompilerOutputFolderModeName(compilerId, hardware);
+				name = LanguagePreferencesConstants.getCompilerOutputFolderModeName(compilerId, hardware);
 				store.setDefault(name, CompilerOutputFolderMode.TEMP_FOLDER);
-				name = AssemblerPreferencesConstants.getCompilerOutputFileExtensionName(compilerId, hardware);
+				name = LanguagePreferencesConstants.getCompilerOutputFileExtensionName(compilerId, hardware);
 				store.setDefault(name, HardwareUtility.getDefaultFileExtension(hardware));
-				name = AssemblerPreferencesConstants.getCompilerRunnerIdName(compilerId, hardware);
+				name = LanguagePreferencesConstants.getCompilerRunnerIdName(compilerId, hardware);
 				store.setDefault(name, RunnerId.DEFAULT_APPLICATION);
 			}
 

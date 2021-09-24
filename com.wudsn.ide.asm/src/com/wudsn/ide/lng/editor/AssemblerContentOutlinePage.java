@@ -51,7 +51,7 @@ import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 
 import com.wudsn.ide.base.common.Profiler;
 import com.wudsn.ide.base.common.RunnableWithLogging;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceFile;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObject;
@@ -93,7 +93,7 @@ final class AssemblerContentOutlinePage extends ContentOutlinePage {
 				throw new IllegalArgumentException("Parameter 'treeViewer' must not be null.");
 			}
 			setToolTipText(Texts.ASSEMBLER_CONTENT_OUTLINE_SORT_BUTTON_TOOL_TIP);
-			ImageDescriptor imageDescriptor = AbstractUIPlugin.imageDescriptorFromPlugin(AssemblerPlugin.ID,
+			ImageDescriptor imageDescriptor = AbstractUIPlugin.imageDescriptorFromPlugin(LanguagePlugin.ID,
 					"icons/outline-sort.gif");
 			setImageDescriptor(imageDescriptor);
 			this.editor = editor;

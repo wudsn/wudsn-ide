@@ -16,26 +16,27 @@
  * You should have received a copy of the GNU General Public License
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.wudsn.ide.lng.asm.preferences;
 
-import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.Language;
-import com.wudsn.ide.lng.preferences.LanguagePreferencesCompilersPage;
+package com.wudsn.ide.lng.preferences;
+
+import java.util.Set;
 
 /**
- * Visual editor page for the assembler preferences regarding NES compilers.
+ * Listener interface for global preferences changes.
  * 
  * @author Peter Dell
  * 
+ * @sine 1.7.0
  */
-public final class AssemblerPreferencesNESCompilersPage extends LanguagePreferencesCompilersPage {
+public interface LanguagePreferencesChangeListener {
 
 	/**
-	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
+	 * Notify of changed properties.
+	 * 
+	 * @param preferences          The assembler preferences containing the new
+	 *                             values, not <code>null</code>.
+	 * @param changedPropertyNames The set of names of properties that have been
+	 *                             changed, may be empty, not <code>null</code>.
 	 */
-	public AssemblerPreferencesNESCompilersPage() {
-		super(Language.ASM, Hardware.NES);
-
-	}
-
+	public void preferencesChanged(LanguagePreferences preferences, Set<String> changedPropertyNames);
 }

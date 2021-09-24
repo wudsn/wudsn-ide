@@ -34,9 +34,9 @@ import org.osgi.framework.BundleContext;
 import com.wudsn.ide.base.common.AbstractIDEPlugin;
 import com.wudsn.ide.lng.compiler.CompilerConsole;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
-import com.wudsn.ide.lng.preferences.AssemblerPreferences;
-import com.wudsn.ide.lng.preferences.AssemblerPreferencesChangeListener;
-import com.wudsn.ide.lng.preferences.AssemblerPreferencesConstants;
+import com.wudsn.ide.lng.preferences.LanguagePreferences;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesChangeListener;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants;
 import com.wudsn.ide.lng.runner.RunnerRegistry;
 
 /**
@@ -44,7 +44,7 @@ import com.wudsn.ide.lng.runner.RunnerRegistry;
  * 
  * @author Peter Dell
  */
-public final class AssemblerPlugin extends AbstractIDEPlugin {
+public final class LanguagePlugin extends AbstractIDEPlugin {
 
 	/**
 	 * The plugin id.
@@ -54,13 +54,13 @@ public final class AssemblerPlugin extends AbstractIDEPlugin {
 	/**
 	 * The shared instance.
 	 */
-	private static AssemblerPlugin plugin;
+	private static LanguagePlugin plugin;
 
 	/**
 	 * The preferences.
 	 */
-	private AssemblerPreferences preferences;
-	private ListenerList<AssemblerPreferencesChangeListener> preferencesChangeListeners;
+	private LanguagePreferences preferences;
+	private ListenerList<LanguagePreferencesChangeListener> preferencesChangeListeners;
 
 	/**
 	 * The compiler registry.
@@ -85,9 +85,9 @@ public final class AssemblerPlugin extends AbstractIDEPlugin {
 	/**
 	 * Creates a new instance. Must be public for dynamic instantiation.
 	 */
-	public AssemblerPlugin() {
+	public LanguagePlugin() {
 		preferences = null;
-		preferencesChangeListeners = new ListenerList<AssemblerPreferencesChangeListener>(ListenerList.IDENTITY);
+		preferencesChangeListeners = new ListenerList<LanguagePreferencesChangeListener>(ListenerList.IDENTITY);
 		compilerRegistry = new CompilerRegistry();
 		compilerConsole = null;
 		runnerRegistry = new RunnerRegistry();
@@ -108,7 +108,7 @@ public final class AssemblerPlugin extends AbstractIDEPlugin {
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		preferences = new AssemblerPreferences(getPreferenceStore());
+		preferences = new LanguagePreferences(getPreferenceStore());
 		plugin = this;
 		try {
 			compilerRegistry.init();
@@ -132,7 +132,7 @@ public final class AssemblerPlugin extends AbstractIDEPlugin {
 			public void propertyChange(PropertyChangeEvent event) {
 				if (event.getProperty().equals(JFaceResources.TEXT_FONT)
 						|| event.getProperty().equals(BLOCK_SELECTION_MODE_FONT)) {
-					firePreferencesChangeEvent(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTES);
+					firePreferencesChangeEvent(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTES);
 				}
 
 			}
@@ -154,7 +154,7 @@ public final class AssemblerPlugin extends AbstractIDEPlugin {
 	 * 
 	 * @return The plug-in, not <code>null</code>.
 	 */
-	public static AssemblerPlugin getInstance() {
+	public static LanguagePlugin getInstance() {
 		if (plugin == null) {
 			throw new IllegalStateException("Plugin not initialized or already stopped");
 		}
@@ -202,7 +202,7 @@ public final class AssemblerPlugin extends AbstractIDEPlugin {
 	 * 
 	 * @return The preferences, not <code>null</code>.
 	 */
-	public AssemblerPreferences getPreferences() {
+	public LanguagePreferences getPreferences() {
 		if (preferences == null) {
 			throw new IllegalStateException("Field 'preferences' must not be null.");
 		}
@@ -215,7 +215,7 @@ public final class AssemblerPlugin extends AbstractIDEPlugin {
 	 * @param listener The listener, not <code>null</code>.
 	 * @since 1.6.3
 	 */
-	public void addPreferencesChangeListener(AssemblerPreferencesChangeListener listener) {
+	public void addPreferencesChangeListener(LanguagePreferencesChangeListener listener) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Parameter 'listener' must not be null.");
 		}
@@ -228,7 +228,7 @@ public final class AssemblerPlugin extends AbstractIDEPlugin {
 	 * @param listener The listener, not <code>null</code>.
 	 * @since 1.6.3
 	 */
-	public void removePreferencesChangeListener(AssemblerPreferencesChangeListener listener) {
+	public void removePreferencesChangeListener(LanguagePreferencesChangeListener listener) {
 		if (listener == null) {
 			throw new IllegalArgumentException("Parameter 'listener' must not be null.");
 		}
@@ -250,7 +250,7 @@ public final class AssemblerPlugin extends AbstractIDEPlugin {
 		if (!changedPropertyNames.isEmpty()) {
 
 			for (Object listener : preferencesChangeListeners.getListeners()) {
-				((AssemblerPreferencesChangeListener) listener).preferencesChanged(preferences, changedPropertyNames);
+				((LanguagePreferencesChangeListener) listener).preferencesChanged(preferences, changedPropertyNames);
 			}
 		}
 	}

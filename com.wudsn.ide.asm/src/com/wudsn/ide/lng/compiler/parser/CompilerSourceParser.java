@@ -34,7 +34,7 @@ import org.eclipse.jface.text.IRegion;
 import com.wudsn.ide.base.BasePlugin;
 import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.StringUtility;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.AssemblerProperties;
 import com.wudsn.ide.lng.compiler.Compiler;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
@@ -967,7 +967,7 @@ public abstract class CompilerSourceParser {
 						section.addChild(newChild);
 					}
 				} else {
-					AssemblerPlugin.getInstance().log("Include file '{0}' was already parsed. Stopping recursion.",
+					LanguagePlugin.getInstance().log("Include file '{0}' was already parsed. Stopping recursion.",
 							new Object[] { newSourceFile.getDocumentFile().getPath() });
 				}
 				endSection(endOffset);

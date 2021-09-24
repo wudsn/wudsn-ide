@@ -57,7 +57,7 @@ import com.wudsn.ide.base.common.NumberUtility;
 import com.wudsn.ide.base.common.ProcessWithLogs;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.HardwareUtility;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.Compiler;
@@ -91,13 +91,13 @@ final class AssemblerEditorCompileCommand {
 	/**
 	 * The owning plugin.
 	 */
-	private AssemblerPlugin plugin;
+	private LanguagePlugin plugin;
 
 	/**
 	 * Creation is private.
 	 */
 	private AssemblerEditorCompileCommand() {
-		plugin = AssemblerPlugin.getInstance();
+		plugin = LanguagePlugin.getInstance();
 	}
 
 	/**
@@ -769,7 +769,7 @@ final class AssemblerEditorCompileCommand {
 				message = ex.getClass().getName();
 			}
 			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, message);
-			AssemblerPlugin.getInstance().logError("Error in addCompilerSymbols()", null, ex);
+			LanguagePlugin.getInstance().logError("Error in addCompilerSymbols()", null, ex);
 
 		} catch (CoreException ex) {
 			String message = ex.getMessage();

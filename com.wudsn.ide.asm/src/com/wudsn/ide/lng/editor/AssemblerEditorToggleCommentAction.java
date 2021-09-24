@@ -30,7 +30,7 @@ import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.texteditor.TextEditorAction;
 
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 
 /**
  * Action to toggle a comment.
@@ -123,7 +123,7 @@ final class AssemblerEditorToggleCommentAction extends TextEditorAction {
 				}
 			}
 		} catch (BadLocationException ex) {
-			AssemblerPlugin.getInstance().logError("Cannot find location", null, ex);
+			LanguagePlugin.getInstance().logError("Cannot find location", null, ex);
 		}
 
 		return true;

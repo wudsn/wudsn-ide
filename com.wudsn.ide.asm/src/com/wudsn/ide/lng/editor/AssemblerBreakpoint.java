@@ -30,7 +30,7 @@ import org.eclipse.ui.IEditorInput;
 
 import com.wudsn.ide.base.common.NumberUtility;
 import com.wudsn.ide.base.common.TextUtility;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Texts;
 
 /**
@@ -52,7 +52,7 @@ public final class AssemblerBreakpoint extends LineBreakpoint {
 	/**
 	 * Grouping ID for all breakpoint of this type.
 	 */
-	public static final String DEBUG_MODEL_ID = AssemblerPlugin.ID;
+	public static final String DEBUG_MODEL_ID = LanguagePlugin.ID;
 
 	/**
 	 * Marker type as defined by the extension "org.eclipse.core.resources.markers"

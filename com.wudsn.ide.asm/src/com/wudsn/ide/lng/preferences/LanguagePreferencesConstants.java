@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2009 - 2021 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
+R * Copyright (C) 2009 - 2021 <a href="https://www.wudsn.com" target="_top">Peter Dell</a>
  *
  * This file is part of WUDSN IDE.
  * 
@@ -29,12 +29,12 @@ import com.wudsn.ide.base.hardware.Hardware;
  * 
  * @author Peter Dell
  */
-public final class AssemblerPreferencesConstants {
+public final class LanguagePreferencesConstants {
 
 	/**
 	 * Creation is private.
 	 */
-	private AssemblerPreferencesConstants() {
+	private LanguagePreferencesConstants() {
 	}
 
 	/**

@@ -99,15 +99,14 @@ public final class CompilerRegistry {
 					compilerDefinition.setHomePageURL(configurationElement.getAttribute("homePageURL"));
 					compilerDefinition.setDefaultParameters(configurationElement.getAttribute("defaultParameters"));
 
-					configurationElement.getChildren("supportedCPU");
 					IConfigurationElement[] supportedTargetsArray;
-					supportedTargetsArray = configurationElement.getChildren("supportedCPU");
+					supportedTargetsArray = configurationElement.getChildren("supportedTarget");
 					List<Target> supportedTargets = new ArrayList<Target>(supportedTargetsArray.length);
-					for (IConfigurationElement supportedCPU : supportedTargetsArray) {
-						supportedTargets.add(Target.valueOf(supportedCPU.getAttribute("target")));
+					for (IConfigurationElement supportedTarget : supportedTargetsArray) {
+						supportedTargets.add(Target.valueOf(supportedTarget.getAttribute("target")));
 					}
 					supportedTargets = Collections.unmodifiableList(supportedTargets);
-					compilerDefinition.setSupportedCPUs(supportedTargets);
+					compilerDefinition.setSupportedTargets(supportedTargets);
 					compilerDefinition
 							.setDefaultHardware(Hardware.valueOf(configurationElement.getAttribute("defaultHardware")));
 

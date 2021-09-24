@@ -29,7 +29,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 
 import com.wudsn.ide.base.common.FileUtility;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.compiler.CompilerProcessLogParser;
 import com.wudsn.ide.lng.compiler.CompilerSymbol;
 import com.wudsn.ide.lng.compiler.CompilerSymbolType;
@@ -214,7 +214,7 @@ final class MadsCompilerProcessLogParser extends CompilerProcessLogParser {
 									value);
 							compilerSymbols.add(compilerSymbol);
 						} catch (NumberFormatException ex) {
-							AssemblerPlugin.getInstance().logError("Cannot parse value {1} of symbol {0}.",
+							LanguagePlugin.getInstance().logError("Cannot parse value {1} of symbol {0}.",
 									new Object[] { name, valueString }, ex);
 						}
 

@@ -41,8 +41,8 @@ import com.wudsn.ide.lng.compiler.syntax.Instruction;
 import com.wudsn.ide.lng.compiler.syntax.InstructionSet;
 import com.wudsn.ide.lng.compiler.syntax.InstructionType;
 import com.wudsn.ide.lng.compiler.syntax.Opcode;
-import com.wudsn.ide.lng.preferences.AssemblerPreferences;
-import com.wudsn.ide.lng.preferences.AssemblerPreferencesConstants;
+import com.wudsn.ide.lng.preferences.LanguagePreferences;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants;
 import com.wudsn.ide.lng.preferences.TextAttributeConverter;
 
 /**
@@ -396,27 +396,27 @@ final class AssemblerSourceScanner extends RuleBasedScanner {
 	private void createTokens() {
 
 		// Numbers
-		numberToken = createToken(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_NUMBER);
+		numberToken = createToken(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_NUMBER);
 
 		// Instructions
-		directiveToken = createToken(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_DIRECTVE);
-		legalOpcodeToken = createToken(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL);
-		illegalOpcodeToken = createToken(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL);
-		pseudoOpcodeToken = createToken(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO);
+		directiveToken = createToken(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_DIRECTVE);
+		legalOpcodeToken = createToken(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL);
+		illegalOpcodeToken = createToken(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL);
+		pseudoOpcodeToken = createToken(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO);
 
 		// Identifiers
-		equateIdentifierToken = createToken(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE);
-		labelIdentifierToken = createToken(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LABEL);
+		equateIdentifierToken = createToken(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE);
+		labelIdentifierToken = createToken(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LABEL);
 		enumDefinitionSectionIdentifierToken = createToken(
-				AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION);
+				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION);
 		structureDefinitionSectionIdentifierToken = createToken(
-				AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION);
+				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION);
 		localSectionIdentifierToken = createToken(
-				AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION);
+				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION);
 		macroDefinitionSectionIdentifierToken = createToken(
-				AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION);
+				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION);
 		procedureDefinitionSectionIdentifierToken = createToken(
-				AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION);
+				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION);
 
 	}
 
@@ -431,7 +431,7 @@ final class AssemblerSourceScanner extends RuleBasedScanner {
 		if (textAttributeName == null) {
 			throw new IllegalArgumentException("Parameter 'textAttributeName' must not be null.");
 		}
-		AssemblerPreferences preferences;
+		LanguagePreferences preferences;
 		Token token;
 		preferences = editor.getPlugin().getPreferences();
 		token = new Token(preferences.getEditorTextAttribute(textAttributeName));
@@ -486,7 +486,7 @@ final class AssemblerSourceScanner extends RuleBasedScanner {
 	 * 
 	 * @return <code>true</code> If the editor has to be refreshed.
 	 */
-	final boolean preferencesChanged(AssemblerPreferences preferences, Set<String> changedPropertyNames) {
+	final boolean preferencesChanged(LanguagePreferences preferences, Set<String> changedPropertyNames) {
 		if (preferences == null) {
 			throw new IllegalArgumentException("Parameter 'preferences' must not be null.");
 		}
@@ -501,7 +501,7 @@ final class AssemblerSourceScanner extends RuleBasedScanner {
 				token.setData(preferences.getEditorTextAttribute(propertyName));
 				refresh = true;
 
-			} else if (AssemblerPreferencesConstants.isCompilerTargetName(propertyName)) {
+			} else if (LanguagePreferencesConstants.isCompilerTargetName(propertyName)) {
 				CompilerSourceParser compilerSourceParser = editor.createCompilerSourceParser();
 				wordRule.setCompilerSourceParser(compilerSourceParser);
 				wordRule.setInstructions();

@@ -58,7 +58,8 @@ import org.eclipse.ui.model.WorkbenchViewerComparator;
 
 import com.wudsn.ide.base.common.ProcessWithLogs;
 import com.wudsn.ide.base.gui.SWTFactory;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
+import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
@@ -67,11 +68,11 @@ import com.wudsn.ide.lng.editor.AssemblerEditor;
 import com.wudsn.ide.lng.editor.AssemblerEditorCompileCommandPositioningMode;
 
 /**
- * Visual editor page for the assembler preferences.
+ * Visual editor page for the language preferences.
  * 
  * @author Peter Dell
  */
-public final class AssemblerPreferencesPage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
+public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
 	private abstract class TextAttributeSelectionListener implements SelectionListener {
 
@@ -100,9 +101,14 @@ public final class AssemblerPreferencesPage extends FieldEditorPreferencePage im
 	}
 
 	/**
+	 * The language.
+	 */
+	private Language language;
+	
+	/**
 	 * The owning plugin.
 	 */
-	private AssemblerPlugin plugin;
+	private LanguagePlugin plugin;
 
 	/**
 	 * The set of property names for which the value was changed since the page was
@@ -148,41 +154,45 @@ public final class AssemblerPreferencesPage extends FieldEditorPreferencePage im
 	/**
 	 * Creation must be public default.
 	 */
-	public AssemblerPreferencesPage() {
+	public LanguagePreferencesPage(Language language) {
 		super(GRID);
-		plugin = AssemblerPlugin.getInstance();
+		if (language == null) {
+			throw new IllegalArgumentException("Parameter 'language' must not be null.");
+		}
+		this.language = language;
+		plugin = LanguagePlugin.getInstance();
 		setPreferenceStore(plugin.getPreferenceStore());
 		changedPropertyNames = new TreeSet<String>();
 		textAttributeListItemKeys = new String[][] {
 				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_COMMENT_NAME,
-						AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT },
+						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT },
 				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_NUMBER_NAME,
-						AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_NUMBER },
+						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_NUMBER },
 				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_STRING_NAME,
-						AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_STRING },
+						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_STRING },
 				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_DIRECTIVE,
-						AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_DIRECTVE },
+						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_DIRECTVE },
 				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_OPCODE_LEGAL_NAME,
-						AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL },
+						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL },
 				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_OPCODE_ILLEGAL_NAME,
-						AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL },
+						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL },
 				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_OPCODE_PSEUDO_NAME,
-						AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO },
+						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO },
 
 				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE,
-						AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE },
+						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE },
 				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_LABEL,
-						AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LABEL },
+						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LABEL },
 				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION,
-						AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION },
+						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION },
 				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION,
-						AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION },
+						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION },
 				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION,
-						AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION },
+						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION },
 				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION,
-						AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION },
+						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION },
 				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION,
-						AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION } };
+						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION } };
 	}
 
 	@Override
@@ -418,7 +428,7 @@ public final class AssemblerPreferencesPage extends FieldEditorPreferencePage im
 		};
 
 		FieldEditor choiceFieldEditor = new RadioGroupFieldEditor(
-				AssemblerPreferencesConstants.EDITOR_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE,
+				LanguagePreferencesConstants.EDITOR_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE,
 				Texts.PREFERENCES_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE_LABEL, 2, labelsAndValues, space);
 		addField(choiceFieldEditor);
 
@@ -434,7 +444,7 @@ public final class AssemblerPreferencesPage extends FieldEditorPreferencePage im
 		};
 
 		choiceFieldEditor = new RadioGroupFieldEditor(
-				AssemblerPreferencesConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE,
+				LanguagePreferencesConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE,
 				Texts.PREFERENCES_COMPILE_COMMAND_POSITIONING_MODE_LABEL, 2, labelsAndValues, space);
 		addField(choiceFieldEditor);
 
@@ -463,7 +473,7 @@ public final class AssemblerPreferencesPage extends FieldEditorPreferencePage im
 			Composite composite;
 
 			String name;
-			name = AssemblerPreferencesConstants.getCompilerExecutablePathName(compilerId);
+			name = LanguagePreferencesConstants.getCompilerExecutablePathName(compilerId);
 
 			// Field: executablePath
 			composite = SWTFactory.createComposite(tabContent, 4, 2, GridData.FILL_HORIZONTAL);

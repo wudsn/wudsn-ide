@@ -24,7 +24,7 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObject;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObjectType;
 
@@ -114,8 +114,8 @@ final class CompilerSourceParserTreeObjectLabelProvider extends DelegatingStyled
 	 */
 	CompilerSourceParserTreeObjectLabelProvider() {
 		super(new StyledLabelProvider());
-		AssemblerPlugin plugin;
-		plugin = AssemblerPlugin.getInstance();
+		LanguagePlugin plugin;
+		plugin = LanguagePlugin.getInstance();
 		defaultImage = plugin.getImage("outline-default-16x16.gif");
 		definitionSectionImage = plugin.getImage("outline-definition-section-16x16.gif");
 		implementationSectionImage = plugin.getImage("outline-implementation-section-16x16.gif");

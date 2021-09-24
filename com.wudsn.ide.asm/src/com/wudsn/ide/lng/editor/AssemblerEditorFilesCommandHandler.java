@@ -26,7 +26,7 @@ import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.compiler.CompilerFiles;
 
 /**
@@ -61,7 +61,7 @@ public abstract class AssemblerEditorFilesCommandHandler extends AbstractHandler
 			execute(event, assemblerEditor, files);
 		} else {
 			try {
-				AssemblerPlugin.getInstance().showError(assemblerEditor.getSite().getShell(),
+				LanguagePlugin.getInstance().showError(assemblerEditor.getSite().getShell(),
 						"Operation '" + event.getCommand().getName()
 								+ "' is not possible because the file in the editor is not located in the workspace.",
 						new Exception("Cannot resolve compiler files of " + assemblerEditor.getEditorInput()));

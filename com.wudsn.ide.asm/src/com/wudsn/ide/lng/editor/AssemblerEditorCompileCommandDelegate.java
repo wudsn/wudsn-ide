@@ -38,7 +38,7 @@ import org.eclipse.ui.IWorkbenchWindowPulldownDelegate2;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.base.hardware.HardwareUtility;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.preferences.CompilerPreferences;
 import com.wudsn.ide.lng.runner.RunnerDefinition;
@@ -106,8 +106,8 @@ public final class AssemblerEditorCompileCommandDelegate
 			return null;
 		}
 
-		AssemblerPlugin assemblerPlugin = assemblerEditor.getPlugin();
-		RunnerRegistry runnerRegistry = assemblerPlugin.getRunnerRegistry();
+		LanguagePlugin languagePlugin = assemblerEditor.getPlugin();
+		RunnerRegistry runnerRegistry = languagePlugin.getRunnerRegistry();
 		Hardware hardware = assemblerEditor.getHardware();
 		List<RunnerDefinition> runnerDefinitions = runnerRegistry.getDefinitions(hardware);
 		CompilerPreferences compilerPreferences = assemblerEditor.getCompilerPreferences();
@@ -179,7 +179,7 @@ public final class AssemblerEditorCompileCommandDelegate
 		try {
 			compileAndRun(null);
 		} catch (RuntimeException ex) {
-			AssemblerPlugin.getInstance().showError(window.getShell(), "Error in compileAndRun()", ex);
+			LanguagePlugin.getInstance().showError(window.getShell(), "Error in compileAndRun()", ex);
 		}
 	}
 

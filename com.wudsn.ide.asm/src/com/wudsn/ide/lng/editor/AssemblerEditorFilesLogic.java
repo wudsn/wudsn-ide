@@ -36,7 +36,7 @@ import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.MarkerUtility;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.AssemblerProperties;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.AssemblerProperties.AssemblerProperty;
@@ -110,7 +110,7 @@ public final class AssemblerEditorFilesLogic {
 						document = new Document(mainSource);
 						mainSourceFileProperties = CompilerSourceParser.getDocumentProperties(document);
 					} catch (CoreException ex) {
-						AssemblerPlugin plugin = AssemblerPlugin.getInstance();
+						LanguagePlugin plugin = LanguagePlugin.getInstance();
 
 						plugin.logError("Cannot read main source file '{0'}", new Object[] { mainSourceFile.getPath() },
 								ex);
@@ -203,7 +203,7 @@ public final class AssemblerEditorFilesLogic {
 				try {
 					iFile.deleteMarkers(IMarker.PROBLEM, true, IResource.DEPTH_ZERO);
 				} catch (CoreException ex) {
-					AssemblerPlugin.getInstance().logError("Cannot remove markers", null, ex);
+					LanguagePlugin.getInstance().logError("Cannot remove markers", null, ex);
 				}
 				// ERROR: Hardware not specified. Specify one of the
 				// following valid values '{0}'.

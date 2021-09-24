@@ -33,7 +33,7 @@ import com.wudsn.ide.lng.editor.AssemblerEditorCompileCommandPositioningMode;
  * 
  * @author Peter Dell
  */
-public final class AssemblerPreferences {
+public final class LanguagePreferences {
 
 	/**
 	 * The preference store to which all calls are delegated.
@@ -45,7 +45,7 @@ public final class AssemblerPreferences {
 	 * 
 	 * @param preferenceStore The preference store, not <code>null</code>.
 	 */
-	public AssemblerPreferences(IPreferenceStore preferenceStore) {
+	public LanguagePreferences(IPreferenceStore preferenceStore) {
 		if (preferenceStore == null) {
 			throw new IllegalArgumentException("Parameter 'preferenceStore' must not be null.");
 		}
@@ -56,7 +56,7 @@ public final class AssemblerPreferences {
 	 * Gets the text attribute for a token type.
 	 * 
 	 * @param name The name of the preferences for the token type, see
-	 *             {@link AssemblerPreferencesConstants}.
+	 *             {@link LanguagePreferencesConstants}.
 	 * 
 	 * @return The text attribute, not <code>null</code>.
 	 */
@@ -74,7 +74,7 @@ public final class AssemblerPreferences {
 	 *         See {@link AssemblerContentAssistProcessorDefaultCase}.
 	 */
 	public String getEditorContentAssistProcessorDefaultCase() {
-		return getString(AssemblerPreferencesConstants.EDITOR_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE);
+		return getString(LanguagePreferencesConstants.EDITOR_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE);
 	}
 
 	/**
@@ -85,7 +85,7 @@ public final class AssemblerPreferences {
 	 * @since 1.6.1
 	 */
 	public String getEditorCompileCommandPositioningMode() {
-		return getString(AssemblerPreferencesConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE);
+		return getString(LanguagePreferencesConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE);
 	}
 
 	/**
@@ -103,7 +103,7 @@ public final class AssemblerPreferences {
 		if (StringUtility.isEmpty(compilerId)) {
 			throw new IllegalArgumentException("Parameter 'compilerId' must not be empty.");
 		}
-		return getString(AssemblerPreferencesConstants.getCompilerExecutablePathName(compilerId));
+		return getString(LanguagePreferencesConstants.getCompilerExecutablePathName(compilerId));
 	}
 
 	/**

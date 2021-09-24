@@ -17,26 +17,20 @@
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.wudsn.ide.lng.preferences;
+package com.wudsn.ide.lng.asm.preferences;
 
-import java.util.Set;
+import com.wudsn.ide.lng.Language;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesPage;
 
 /**
- * Listener interface for global preferences changes.
+ * Visual editor page for the assembler preferences.
  * 
  * @author Peter Dell
- * 
- * @sine 1.7.0
  */
-public interface AssemblerPreferencesChangeListener {
+public final class AssemblerPreferencesPage extends LanguagePreferencesPage {
 
-	/**
-	 * Notify of changed properties.
-	 * 
-	 * @param preferences          The assembler preferences containing the new
-	 *                             values, not <code>null</code>.
-	 * @param changedPropertyNames The set of names of properties that have been
-	 *                             changed, may be empty, not <code>null</code>.
-	 */
-	public void preferencesChanged(AssemblerPreferences preferences, Set<String> changedPropertyNames);
+	public AssemblerPreferencesPage() {
+		super(Language.ASM);
+	}
+	
 }

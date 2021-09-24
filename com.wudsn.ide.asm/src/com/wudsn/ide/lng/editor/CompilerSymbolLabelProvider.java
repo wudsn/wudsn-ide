@@ -21,7 +21,7 @@ package com.wudsn.ide.lng.editor;
 
 import org.eclipse.swt.graphics.Image;
 
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.compiler.CompilerSymbol;
 import com.wudsn.ide.lng.compiler.CompilerSymbolType;
 
@@ -55,8 +55,8 @@ final class CompilerSymbolLabelProvider {
 	private final Image procedureDefinitionSectionImage;
 
 	CompilerSymbolLabelProvider() {
-		AssemblerPlugin plugin;
-		plugin = AssemblerPlugin.getInstance();
+		LanguagePlugin plugin;
+		plugin = LanguagePlugin.getInstance();
 		defaultImage = plugin.getImage("outline-default-16x16.gif");
 
 		equateDefintionImage = plugin.getImage("outline-equate-definition-16x16.gif");

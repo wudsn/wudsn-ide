@@ -55,7 +55,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import com.wudsn.ide.base.common.Profiler;
 import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.AssemblerProperties;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.AssemblerProperties.InvalidAssemblerPropertyException;
@@ -75,7 +75,7 @@ import com.wudsn.ide.lng.preferences.CompilerPreferences;
  */
 public abstract class AssemblerEditor extends TextEditor {
 
-	private AssemblerPlugin plugin;
+	private LanguagePlugin plugin;
 	private AssemblerEditorFilesLogic filesLogic;
 
 	private Compiler compiler;
@@ -128,7 +128,7 @@ public abstract class AssemblerEditor extends TextEditor {
 	protected final void initializeEditor() {
 		super.initializeEditor();
 
-		plugin = AssemblerPlugin.getInstance();
+		plugin = LanguagePlugin.getInstance();
 		compiler = plugin.getCompilerRegistry().getCompiler(getCompilerId());
 
 		setSourceViewerConfiguration(new AssemblerSourceViewerConfiguration(this, getPreferenceStore()));
@@ -140,7 +140,7 @@ public abstract class AssemblerEditor extends TextEditor {
 	 * 
 	 * @return The plugin this compiler instance belongs to, not <code>null</code>.
 	 */
-	public final AssemblerPlugin getPlugin() {
+	public final LanguagePlugin getPlugin() {
 		if (plugin == null) {
 			throw new IllegalStateException("Field 'plugin' must not be null.");
 		}
@@ -281,7 +281,7 @@ public abstract class AssemblerEditor extends TextEditor {
 	 * content.
 	 * 
 	 * Called by {@link #updateIdentifiers(CompilerSourceFile)} and
-	 * {@link AssemblerSourceViewerConfiguration#preferencesChanged(com.wudsn.ide.lng.preferences.AssemblerPreferences, java.util.Set)}
+	 * {@link AssemblerSourceViewerConfiguration#preferencesChanged(com.wudsn.ide.lng.preferences.LanguagePreferences, java.util.Set)}
 	 * .
 	 */
 	final void refreshSourceViewer() {

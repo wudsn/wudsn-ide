@@ -32,7 +32,7 @@ import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
@@ -56,7 +56,7 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	private String homePageURL;
 
 	// Editing and source parsing.
-	private List<Target> supportedCPUs;
+	private List<Target> supportedTargets;
 	private CompilerSyntax syntax;
 
 	// Compiling.
@@ -245,12 +245,12 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 			// displayed because the path to the compiler executable
 			// is not set in the preferences.
 			throw new CoreException(
-					new Status(IStatus.ERROR, AssemblerPlugin.ID, TextUtility.format(Texts.MESSAGE_E130, name)));
+					new Status(IStatus.ERROR, LanguagePlugin.ID, TextUtility.format(Texts.MESSAGE_E130, name)));
 		}
 		if (!hasHelpFile()) {
 			// ERROR: The compiler '{0}' does not specify a help file path.
 			throw new CoreException(
-					new Status(IStatus.ERROR, AssemblerPlugin.ID, TextUtility.format(Texts.MESSAGE_E102, name)));
+					new Status(IStatus.ERROR, LanguagePlugin.ID, TextUtility.format(Texts.MESSAGE_E102, name)));
 		}
 
 		String localeLanguage = Locale.getDefault().getLanguage();
@@ -285,7 +285,7 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 			// ERROR: Help for the '{0}' compiler cannot be displayed because no
 			// help file was found in the paths '{1}' for the compiler
 			// executable path '{0}'.
-			throw new CoreException(new Status(IStatus.ERROR, AssemblerPlugin.ID,
+			throw new CoreException(new Status(IStatus.ERROR, LanguagePlugin.ID,
 					TextUtility.format(Texts.MESSAGE_E131, name, helpFilePaths, compilerExecutablePath)));
 		}
 		return result;
@@ -293,20 +293,20 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	}
 
 	/**
-	 * Sets the list of supported CPUs Called by {@link CompilerRegistry} only.
+	 * Sets the list of supported targets. Called by {@link CompilerRegistry} only.
 	 * 
-	 * @param supportedCPUs The unmodifiable list of supported CPUs, not empty and
+	 * @param supportedTargets The unmodifiable list of supported CPUs, not empty and
 	 *                      not <code>null</code>.
 	 * @since 1.6.1
 	 */
-	final void setSupportedCPUs(List<Target> supportedCPUs) {
-		if (supportedCPUs == null) {
-			throw new IllegalArgumentException("Parameter 'supportedCPUs' must not be null.");
+	final void setSupportedTargets(List<Target> supportedTargets) {
+		if (supportedTargets == null) {
+			throw new IllegalArgumentException("Parameter 'supportedTargets' must not be null.");
 		}
-		if (supportedCPUs.isEmpty()) {
-			throw new IllegalArgumentException("Parameter 'supportedCPUs' must not be empty.");
+		if (supportedTargets.isEmpty()) {
+			throw new IllegalArgumentException("Parameter 'supportedTargets' must not be empty.");
 		}
-		this.supportedCPUs = supportedCPUs;
+		this.supportedTargets = supportedTargets;
 	}
 
 	/**
@@ -319,10 +319,10 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	 * @since 1.6.1
 	 */
 	public final List<Target> getSupportedTargets() {
-		if (supportedCPUs == null) {
+		if (supportedTargets == null) {
 			throw new IllegalStateException("Field 'supportedCPUs' must not be null.");
 		}
-		return supportedCPUs;
+		return supportedTargets;
 	}
 
 	/**

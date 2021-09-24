@@ -25,8 +25,8 @@ import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.Token;
 
-import com.wudsn.ide.lng.AssemblerPlugin;
-import com.wudsn.ide.lng.preferences.AssemblerPreferences;
+import com.wudsn.ide.lng.LanguagePlugin;
+import com.wudsn.ide.lng.preferences.LanguagePreferences;
 import com.wudsn.ide.lng.preferences.TextAttributeConverter;
 
 /**
@@ -57,7 +57,7 @@ final class AssemblerRuleBasedScanner extends RuleBasedScanner {
 
 		this.preferencesKey = preferencesKey;
 
-		AssemblerPreferences preferences = AssemblerPlugin.getInstance().getPreferences();
+		LanguagePreferences preferences = LanguagePlugin.getInstance().getPreferences();
 		defaultToken = new Token(preferences.getEditorTextAttribute(preferencesKey));
 
 		super.setDefaultReturnToken(defaultToken);
@@ -80,7 +80,7 @@ final class AssemblerRuleBasedScanner extends RuleBasedScanner {
 	 * 
 	 * @return <code>true</code> If the editor has to be refreshed.
 	 */
-	final boolean preferencesChanged(AssemblerPreferences preferences, Set<String> changedPropertyNames) {
+	final boolean preferencesChanged(LanguagePreferences preferences, Set<String> changedPropertyNames) {
 		if (preferences == null) {
 			throw new IllegalArgumentException("Parameter 'preferences' must not be null.");
 		}

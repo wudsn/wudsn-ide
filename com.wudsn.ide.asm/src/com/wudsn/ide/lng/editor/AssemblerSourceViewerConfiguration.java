@@ -38,9 +38,9 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 
 import com.wudsn.ide.lng.compiler.parser.CompilerSourcePartitionScanner;
-import com.wudsn.ide.lng.preferences.AssemblerPreferences;
-import com.wudsn.ide.lng.preferences.AssemblerPreferencesChangeListener;
-import com.wudsn.ide.lng.preferences.AssemblerPreferencesConstants;
+import com.wudsn.ide.lng.preferences.LanguagePreferences;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesChangeListener;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants;
 
 /**
  * Source configuration for the assembler editor. Provides syntax highlighting.
@@ -51,7 +51,7 @@ import com.wudsn.ide.lng.preferences.AssemblerPreferencesConstants;
  * @author Andy Reek
  */
 final class AssemblerSourceViewerConfiguration extends TextSourceViewerConfiguration
-		implements AssemblerPreferencesChangeListener {
+		implements LanguagePreferencesChangeListener {
 
 	/**
 	 * The underlying assembler editor.
@@ -134,7 +134,7 @@ final class AssemblerSourceViewerConfiguration extends TextSourceViewerConfigura
 	}
 
 	@Override
-	public void preferencesChanged(AssemblerPreferences preferences, Set<String> changedPropertyNames) {
+	public void preferencesChanged(LanguagePreferences preferences, Set<String> changedPropertyNames) {
 		if (preferences == null) {
 			throw new IllegalArgumentException("Parameter 'preferences' must not be null.");
 		}
@@ -174,18 +174,18 @@ final class AssemblerSourceViewerConfiguration extends TextSourceViewerConfigura
 		DefaultDamagerRepairer dr;
 
 		commentSingleScanner = new AssemblerRuleBasedScanner(
-				AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT);
+				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT);
 		dr = new DefaultDamagerRepairer(commentSingleScanner);
 		reconciler.setDamager(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_SINGLE);
 		reconciler.setRepairer(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_SINGLE);
 
 		commentMultipleScanner = new AssemblerRuleBasedScanner(
-				AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT);
+				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT);
 		dr = new DefaultDamagerRepairer(commentMultipleScanner);
 		reconciler.setDamager(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_MULTIPLE);
 		reconciler.setRepairer(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_MULTIPLE);
 
-		stringScanner = new AssemblerRuleBasedScanner(AssemblerPreferencesConstants.EDITOR_TEXT_ATTRIBUTE_STRING);
+		stringScanner = new AssemblerRuleBasedScanner(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_STRING);
 		dr = new DefaultDamagerRepairer(stringScanner);
 		reconciler.setDamager(dr, CompilerSourcePartitionScanner.PARTITION_STRING);
 		reconciler.setRepairer(dr, CompilerSourcePartitionScanner.PARTITION_STRING);

@@ -38,7 +38,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.TextStyle;
 
 import com.wudsn.ide.base.common.StringUtility;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.compiler.CompilerFiles;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceFile;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
@@ -50,7 +50,7 @@ import com.wudsn.ide.lng.compiler.syntax.Instruction;
 import com.wudsn.ide.lng.compiler.syntax.InstructionSet;
 import com.wudsn.ide.lng.compiler.syntax.InstructionType;
 import com.wudsn.ide.lng.compiler.syntax.Opcode;
-import com.wudsn.ide.lng.preferences.AssemblerPreferences;
+import com.wudsn.ide.lng.preferences.LanguagePreferences;
 
 /**
  * Class for content assist. Creates the content assist list.
@@ -171,7 +171,7 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 
 		this.editor = editor;
 
-		AssemblerPlugin plugin = editor.getPlugin();
+		LanguagePlugin plugin = editor.getPlugin();
 		directiveImage = plugin.getImage("instruction-type-directive-16x16.gif");
 		legalOpcodeImage = plugin.getImage("instruction-type-legal-opcode-16x16.gif");
 		illegalOpcodeImage = plugin.getImage("instruction-type-illegal-opcode-16x16.gif");
@@ -304,7 +304,7 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 		if (proposalList == null) {
 			throw new IllegalArgumentException("Parameter 'proposalList' must not be null.");
 		}
-		AssemblerPreferences assemblerPreferences = editor.getPlugin().getPreferences();
+		LanguagePreferences languagePreferences = editor.getPlugin().getPreferences();
 
 		int offset = region.getOffset();
 		boolean lowerCase;
@@ -313,7 +313,7 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 		// example "."
 		if (StringUtility.isEmpty(prefix) || !Character.isLetter(prefix.charAt(prefix.length() - 1))) {
 			String defaultCase;
-			defaultCase = assemblerPreferences.getEditorContentAssistProcessorDefaultCase();
+			defaultCase = languagePreferences.getEditorContentAssistProcessorDefaultCase();
 			lowerCase = AssemblerContentAssistProcessorDefaultCase.LOWER_CASE.equals(defaultCase);
 		} else {
 			char lastchar = prefix.charAt(prefix.length() - 1);

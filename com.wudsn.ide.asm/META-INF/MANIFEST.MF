@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: WUDSN IDE Language Plug-in
 Bundle-SymbolicName: com.wudsn.ide.lng;singleton:=true
 Bundle-Version: 1.7.2.qualifier
-Bundle-Activator: com.wudsn.ide.lng.AssemblerPlugin
+Bundle-Activator: com.wudsn.ide.lng.LanguagePlugin
 Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
  org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.core.filesystem,

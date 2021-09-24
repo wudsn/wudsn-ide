@@ -31,9 +31,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
-import com.wudsn.ide.lng.preferences.AssemblerPreferences;
+import com.wudsn.ide.lng.preferences.LanguagePreferences;
 
 /**
  * Event handler for the "Compiler Help" command.
@@ -57,8 +57,8 @@ public final class AssemblerEditorCompilerHelpCommandHandler extends AbstractHan
 		assemblerEditor = (AssemblerEditor) editor;
 
 		CompilerDefinition compilerDefinition = assemblerEditor.getCompilerDefinition();
-		AssemblerPreferences assemblerPreferences = AssemblerPlugin.getInstance().getPreferences();
-		String compilerExecutablePath = assemblerPreferences.getCompilerExecutablePath(compilerDefinition.getId());
+		LanguagePreferences languagePreferences = LanguagePlugin.getInstance().getPreferences();
+		String compilerExecutablePath = languagePreferences.getCompilerExecutablePath(compilerDefinition.getId());
 
 		try {
 			File file = compilerDefinition.getHelpFile(compilerExecutablePath);

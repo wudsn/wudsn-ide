@@ -170,7 +170,7 @@ final class Merlin32CompilerProcessLogParser extends CompilerProcessLogParser {
 		// value);
 		// compilerSymbols.add(compilerSymbol);
 		// } catch (NumberFormatException ex) {
-		// AssemblerPlugin.getInstance().logError("Cannot parse value {1} of symbol
+		// LanguagePlugin.getInstance().logError("Cannot parse value {1} of symbol
 		// {0}.",
 		// new Object[] { name, valueString }, ex);
 		// }

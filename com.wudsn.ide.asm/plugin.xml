@@ -8,7 +8,7 @@
    <extension
          point="org.eclipse.core.runtime.preferences">
       <initializer
-            class="com.wudsn.ide.lng.preferences.AssemblerPreferencesInitializer">
+            class="com.wudsn.ide.lng.preferences.LanguagePreferencesInitializer">
       </initializer>
    </extension>
    <extension
@@ -24,10 +24,11 @@
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
-            class="com.wudsn.ide.lng.preferences.AssemblerPreferencesPage"
-            id="com.wudsn.ide.lng.preferences.AssemblerPreferencesPage"
-            name="%com.wudsn.ide.lng.preferences.AssemblerPreferencesPage.name"/>
+            class="com.wudsn.ide.lng.preferences.LanguagesPreferencesPage"
+            id="com.wudsn.ide.lng.preferences.LanguagesPreferencesPage"
+            name="%com.wudsn.ide.lng.preferences.LanguagesPreferencesPage.name"/>
    </extension>
+
    <extension
          point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
       <hyperlinkDetector
@@ -397,8 +398,8 @@
        point="org.eclipse.ui.preferenceTransfer">
     <transfer
           icon="icons/hardware-generic-16x16.gif"
-          id="com.wudsn.ide.lng.preferences.AssemblerPreferences"
-          name="%com.wudsn.ide.lng.preferences.AssemblerPreferences.name">
+          id="com.wudsn.ide.lng.preferences.LanguagePreferences"
+          name="%com.wudsn.ide.lng.preferences.LanguagePreferences.name">
        <mapping
              scope="instance">
           <entry

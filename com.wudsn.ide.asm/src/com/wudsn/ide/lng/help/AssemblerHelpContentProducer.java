@@ -48,7 +48,7 @@ import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.base.hardware.HardwareUtility;
-import com.wudsn.ide.lng.AssemblerPlugin;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.Compiler;
@@ -105,7 +105,7 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 
 	@Override
 	public InputStream getInputStream(String pluginID, String href, Locale locale) {
-		if (AssemblerPlugin.ID.equals(pluginID)) {
+		if (LanguagePlugin.ID.equals(pluginID)) {
 			int index = href.indexOf("?");
 			if (index >= 0) {
 				href = href.substring(0, index);
@@ -134,7 +134,7 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 		if (href == null) {
 			throw new IllegalArgumentException("Parameter 'href' must not be null.");
 		}
-		AssemblerPlugin plugin = AssemblerPlugin.getInstance();
+		LanguagePlugin plugin = LanguagePlugin.getInstance();
 		IPath path = new Path(href);
 		InputStream result;
 		try {
@@ -258,8 +258,8 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 		}
 		String compilerId = path.substring(0, index);
 		String section = path.substring(index + 1);
-		AssemblerPlugin assemblerPlugin = AssemblerPlugin.getInstance();
-		CompilerRegistry compilerRegistry = assemblerPlugin.getCompilerRegistry();
+		LanguagePlugin languagePlugin = LanguagePlugin.getInstance();
+		CompilerRegistry compilerRegistry = languagePlugin.getCompilerRegistry();
 
 		// Find non-empty compiler executable path.
 		Compiler compiler = compilerRegistry.getCompiler(compilerId);
@@ -268,7 +268,7 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 			return getInputStream(getCompilerGeneralSection(compiler));
 		} else if (section.startsWith(SECTION_MANUAL)) {
 
-			String compilerExecutablePath = assemblerPlugin.getPreferences().getCompilerExecutablePath(compilerId);
+			String compilerExecutablePath = languagePlugin.getPreferences().getCompilerExecutablePath(compilerId);
 			if (StringUtility.isEmpty(compilerExecutablePath)) {
 				// ERROR: Help for the '{0}' compiler cannot be
 				// displayed because the path to the compiler executable
@@ -547,8 +547,8 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 			return null;
 		}
 		Hardware hardware = Hardware.valueOf(path.toUpperCase());
-		AssemblerPlugin assemblerPlugin = AssemblerPlugin.getInstance();
-		RunnerRegistry runnerRegistry = assemblerPlugin.getRunnerRegistry();
+		LanguagePlugin languagePlugin = LanguagePlugin.getInstance();
+		RunnerRegistry runnerRegistry = languagePlugin.getRunnerRegistry();
 
 		HTMLWriter writer = createHeader();
 
@@ -604,8 +604,8 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 		}
 
 		Target target = Target.valueOf(path.toUpperCase());
-		AssemblerPlugin assemblerPlugin = AssemblerPlugin.getInstance();
-		CompilerRegistry compilerRegistry = assemblerPlugin.getCompilerRegistry();
+		LanguagePlugin languagePlugin = LanguagePlugin.getInstance();
+		CompilerRegistry compilerRegistry = languagePlugin.getCompilerRegistry();
 
 		HTMLWriter writer = createHeader();
 

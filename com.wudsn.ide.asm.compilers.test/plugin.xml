@@ -6,45 +6,10 @@
     <page
           category="com.wudsn.ide.lng.preferences.AssemblerPreferencesPage"
           class="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesTestCompilersPage"
-          id="com.wudsn.ide.asm.preferences.test.AssemblerPreferencesTestCompilersPage"
-          name="%com.wudsn.ide.asm.preferences.test.AssemblerPreferencesTestCompilersPage.name">
+          id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesTestCompilersPage"
+          name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesTestCompilersPage.name">
     </page>
  </extension>
-	<extension point="com.wudsn.ide.lng.compilers">
-		<compiler
-        class="com.wudsn.ide.lng.asm.test.TestCompiler"
-        defaultParameters="-o${outputFilePath} ${sourceFilePath}"
-        defaultHardware="TEST"
-        homePageURL="https://www.wudsn.com"
-        id="test"
-        name="%com.wudsn.ide.lng.asm.test.TestCompiler.name"
-        version="none">
-     <supportedTarget
-           target="MOS6502">
-     </supportedTarget>
-     <supportedTarget
-           target="MOS6502_ILLEGAL">
-     </supportedTarget>
-		</compiler>
-
-	</extension>
-
-	<extension point="org.eclipse.core.contenttype.contentTypes">
-		<content-type base-type="com.wudsn.ide.asm.editor.AssemblerSourceFile"
-			file-extensions="asm" id="com.wudsn.ide.asm.editor.test.TestSourceFile"
-			name="%com.wudsn.ide.asm.editor.test.TestSourceFile.name" priority="normal">
-		</content-type>
-	</extension>
-
-	<extension point="org.eclipse.ui.editors">
-		<editor class="com.wudsn.ide.lng.asm.compiler.test.TestEditor"
-			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-			default="false" extensions="asm" icon="icons/editor-test-16x16.gif"
-			id="com.wudsn.ide.lng.editor.test.TestEditor" name="%com.wudsn.ide.asm.editor.test.TestEditor.name">
-			<contentTypeBinding contentTypeId="com.wudsn.ide.lng.editor.test.TestSourceFile">
-			</contentTypeBinding>
-		</editor>
-	</extension>
  <extension
        point="com.wudsn.ide.lng.runners">
     <runner
@@ -60,5 +25,40 @@
           name="%com.wudsn.ide.asm.runner.test.runner2.name">
     </runner>
  </extension>
+	<extension point="com.wudsn.ide.lng.compilers">
+		<compiler
+        class="com.wudsn.ide.lng.asm.compiler.test.TestCompiler"
+        defaultParameters="-o${outputFilePath} ${sourceFilePath}"
+        defaultHardware="TEST"
+        homePageURL="https://www.wudsn.com"
+        id="test"
+        name="%com.wudsn.ide.lng.asm.compiler.test.TestCompiler.name"
+        version="none">
+     <supportedTarget
+           target="MOS6502">
+     </supportedTarget>
+     <supportedTarget
+           target="MOS6502_ILLEGAL">
+     </supportedTarget>
+		</compiler>
+
+	</extension>
+
+	<extension point="org.eclipse.core.contenttype.contentTypes">
+		<content-type base-type="com.wudsn.ide.lng.asm.compiler.AssemblerSourceFile"
+			file-extensions="asm" id="com.wudsn.ide.lng.asm.compiler.test.TestSourceFile"
+			name="%com.wudsn.ide.lng.asm.compiler.test.TestSourceFile.name" priority="normal">
+		</content-type>
+	</extension>
+
+	<extension point="org.eclipse.ui.editors">
+		<editor class="com.wudsn.ide.lng.asm.compiler.test.TestEditor"
+			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+			default="false" extensions="asm" icon="icons/editor-test-16x16.gif"
+			id="com.wudsn.ide.lng.asm.compiler.test.TestEditor" name="%com.wudsn.ide.lng.asm.compiler.test.TestEditor.name">
+			<contentTypeBinding contentTypeId="com.wudsn.ide.lng.editor.test.TestSourceFile">
+			</contentTypeBinding>
+		</editor>
+	</extension>
 
 </plugin>
