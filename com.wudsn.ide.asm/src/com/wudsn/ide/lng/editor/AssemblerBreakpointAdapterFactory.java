@@ -73,7 +73,7 @@ public final class AssemblerBreakpointAdapterFactory implements IToggleBreakpoin
 
 	@Override
 	public String getToggleTargetName(String targetID) {
-		return Texts.ASSEMBLER_BREAKPOINT_TOGGLE_TYPE_MENU_TEXT;
+		return Texts.COMPILER_BREAKPOINT_TOGGLE_TYPE_MENU_TEXT;
 	}
 
 	@Override

@@ -92,7 +92,7 @@ final class AssemblerContentOutlinePage extends ContentOutlinePage {
 			if (treeViewer == null) {
 				throw new IllegalArgumentException("Parameter 'treeViewer' must not be null.");
 			}
-			setToolTipText(Texts.ASSEMBLER_CONTENT_OUTLINE_SORT_BUTTON_TOOL_TIP);
+			setToolTipText(Texts.COMPILER_CONTENT_OUTLINE_SORT_BUTTON_TOOL_TIP);
 			ImageDescriptor imageDescriptor = AbstractUIPlugin.imageDescriptorFromPlugin(LanguagePlugin.ID,
 					"icons/outline-sort.gif");
 			setImageDescriptor(imageDescriptor);

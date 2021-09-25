@@ -129,7 +129,7 @@ public final class AssemblerBreakpoint extends LineBreakpoint {
 				marker.setAttribute(IBreakpoint.ENABLED, Boolean.TRUE);
 				marker.setAttribute(IMarker.LINE_NUMBER, lineNumber);
 				marker.setAttribute(IBreakpoint.ID, getModelIdentifier());
-				marker.setAttribute(IMarker.MESSAGE, TextUtility.format(Texts.ASSEMBLER_BREAKPOINT_MARKER_MESSAGE,
+				marker.setAttribute(IMarker.MESSAGE, TextUtility.format(Texts.COMPILER_BREAKPOINT_MARKER_MESSAGE,
 						resource.getName(), NumberUtility.getLongValueDecimalString(lineNumber), description));
 
 			}

@@ -109,7 +109,7 @@ public final class CompilerSourceFile {
 		// Sections.
 		definitionSection = new CompilerSourceParserTreeObject(this, 0,
 				CompilerSourceParserTreeObjectType.DEFINITION_SECTION, "DefinitionSection",
-				Texts.ASSEMBLER_CONTENT_OUTLINE_TREE_TYPE_DEFINITION_SECTION, "");
+				Texts.COMPILER_CONTENT_OUTLINE_TREE_TYPE_DEFINITION_SECTION, "");
 		implementationSections = new ArrayList<CompilerSourceParserTreeObject>();
 		sectionStack = new ArrayList<CompilerSourceParserTreeObject>();
 	}

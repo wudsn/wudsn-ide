@@ -154,7 +154,7 @@ final class AssemblerHyperlink implements IHyperlink {
 				String message = TextUtility.format(
 						// ERROR: Target file '{0}' not exists. Do you
 						// want to create the file now?
-						Texts.ASSEMBLER_HYPERLINK_FILE_NOT_EXISTS, absoluteFilePath);
+						Texts.COMPILER_HYPERLINK_FILE_NOT_EXISTS, absoluteFilePath);
 				boolean result = MessageDialog.openQuestion(workbenchPage.getWorkbenchWindow().getShell(),
 						com.wudsn.ide.base.Texts.DIALOG_TITLE, message);
 				// Try to create the file, if OK was pressed.

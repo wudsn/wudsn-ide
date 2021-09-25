@@ -329,18 +329,18 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 
 		writer.beginTable(true);
 
-		writer.writeTableRow(Texts.TOC_ASSEMBLER_NAME_LABEL, compilerDefinition.getName());
+		writer.writeTableRow(Texts.TOC_COMPILER_NAME_LABEL, compilerDefinition.getName());
 
-		writer.writeTableRow(Texts.TOC_ASSEMBLER_HOME_PAGE_LABEL,
+		writer.writeTableRow(Texts.TOC_COMPILER_HOME_PAGE_LABEL,
 				HTMLWriter.getLink(compilerDefinition.getHomePageURL(), compilerDefinition.getHomePageURL()));
 
 		Hardware hardware = compilerDefinition.getDefaultHardware();
-		writer.writeTableRow(Texts.TOC_ASSEMBLER_DEFAULT_HARDWARE_LABEL, HTMLWriter
+		writer.writeTableRow(Texts.TOC_COMPILER_DEFAULT_HARDWARE_LABEL, HTMLWriter
 				.getImage(ICONS_PATH + HardwareUtility.getImagePath(hardware), hardware.name(), hardware.name()));
 
 		List<Target> cpus = compilerDefinition.getSupportedTargets();
 		writer.beginTableRow();
-		writer.writeTableHeader(Texts.TOC_ASSEMBLER_SUPPORTED_CPUS_LABEL);
+		writer.writeTableHeader(Texts.TOC_COMPILER_SUPPORTED_TARGETS_LABEL);
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < cpus.size(); i++) {
 			builder.append(EnumUtility.getText(cpus.get(i)));
@@ -352,52 +352,52 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 		writer.end();
 
 		writer.beginTableRow();
-		writer.writeTableHeader(Texts.TOC_ASSEMBLER_DEFAULT_PARAMETERS_LABEL);
+		writer.writeTableHeader(Texts.TOC_COMPILER_DEFAULT_PARAMETERS_LABEL);
 
 		writer.writeTableCell(compilerDefinition.getDefaultParameters());
 		writer.end();
 
 		CompilerSyntax compilerSyntax = compilerDefinition.getSyntax();
 
-		writer.writeTableRow(Texts.TOC_ASSEMBLER_SYNTAX_IDENTIFIERS_CASE_SENSITIVE,
-				compilerSyntax.areIdentifiersCaseSensitive() ? Texts.TOC_ASSEMBLER_SYNTAX_YES
-						: Texts.TOC_ASSEMBLER_SYNTAX_NO);
+		writer.writeTableRow(Texts.TOC_COMPILER_SYNTAX_IDENTIFIERS_CASE_SENSITIVE,
+				compilerSyntax.areIdentifiersCaseSensitive() ? Texts.TOC_COMPILER_SYNTAX_YES
+						: Texts.TOC_COMPILER_SYNTAX_NO);
 
-		writer.writeTableRowCode(Texts.TOC_ASSEMBLER_SYNTAX_IDENTIFIER_START_CHARACTERS,
+		writer.writeTableRowCode(Texts.TOC_COMPILER_SYNTAX_IDENTIFIER_START_CHARACTERS,
 				getCompilerGeneralCharactersWrapped(compilerSyntax.getIdentifierStartCharacters()));
 
-		writer.writeTableRowCode(Texts.TOC_ASSEMBLER_SYNTAX_IDENTIFIER_PART_CHARACTERS,
+		writer.writeTableRowCode(Texts.TOC_COMPILER_SYNTAX_IDENTIFIER_PART_CHARACTERS,
 				getCompilerGeneralCharactersWrapped(compilerSyntax.getIdentifierPartCharacters()));
 
-		writer.writeTableRowCode(Texts.TOC_ASSEMBLER_SYNTAX_IDENTIFIER_SEPARATOR_CHARACTER,
+		writer.writeTableRowCode(Texts.TOC_COMPILER_SYNTAX_IDENTIFIER_SEPARATOR_CHARACTER,
 				compilerSyntax.getIdentifierSeparatorCharacter());
 
-		writer.writeTableRow(Texts.TOC_ASSEMBLER_SYNTAX_INSTRUCTIONS_CASE_SENSITIVE,
-				compilerSyntax.areInstructionsCaseSensitive() ? Texts.TOC_ASSEMBLER_SYNTAX_YES
-						: Texts.TOC_ASSEMBLER_SYNTAX_NO);
+		writer.writeTableRow(Texts.TOC_COMPILER_SYNTAX_INSTRUCTIONS_CASE_SENSITIVE,
+				compilerSyntax.areInstructionsCaseSensitive() ? Texts.TOC_COMPILER_SYNTAX_YES
+						: Texts.TOC_COMPILER_SYNTAX_NO);
 
-		writer.writeTableRowCode(Texts.TOC_ASSEMBLER_SYNTAX_BLOCK_DEFINITION_CHARACTERS,
+		writer.writeTableRowCode(Texts.TOC_COMPILER_SYNTAX_BLOCK_DEFINITION_CHARACTERS,
 				compilerSyntax.getBlockDefinitionCharacters());
 
-		writer.writeTableRowCode(Texts.TOC_ASSEMBLER_SYNTAX_COMPLETION_PROPOSAL_AUTO_ACTIVATION_CHARACTERS,
+		writer.writeTableRowCode(Texts.TOC_COMPILER_SYNTAX_COMPLETION_PROPOSAL_AUTO_ACTIVATION_CHARACTERS,
 				new String(compilerSyntax.getCompletionProposalAutoActivationCharacters()));
 
-		writer.writeTableRowCode(Texts.TOC_ASSEMBLER_SYNTAX_LABEL_DEFINITION_SUFFIX_CHARACTER,
+		writer.writeTableRowCode(Texts.TOC_COMPILER_SYNTAX_LABEL_DEFINITION_SUFFIX_CHARACTER,
 				compilerSyntax.getLabelDefinitionSuffixCharacter());
 
-		writer.writeTableRowCode(Texts.TOC_ASSEMBLER_SYNTAX_MACRO_USAGE_PREFIX_CHARACTER,
+		writer.writeTableRowCode(Texts.TOC_COMPILER_SYNTAX_MACRO_USAGE_PREFIX_CHARACTER,
 				compilerSyntax.getMacroUsagePrefixCharacter());
 
-		writer.writeTableRowCode(Texts.TOC_ASSEMBLER_SYNTAX_SOURCE_INCLUDE_DEFAULT_EXTENSION,
+		writer.writeTableRowCode(Texts.TOC_COMPILER_SYNTAX_SOURCE_INCLUDE_DEFAULT_EXTENSION,
 				compilerSyntax.getSourceIncludeDefaultExtension());
 
-		writer.writeTableRowCode(Texts.TOC_ASSEMBLER_SYNTAX_MULTIPLE_LINES_COMMENT_DELIMITERS,
+		writer.writeTableRowCode(Texts.TOC_COMPILER_SYNTAX_MULTIPLE_LINES_COMMENT_DELIMITERS,
 				HTMLWriter.getString(compilerSyntax.getMultipleLinesCommentDelimiters()));
 
-		writer.writeTableRowCode(Texts.TOC_ASSEMBLER_SYNTAX_SINGLE_LINE_COMMENT_DELIMITERS,
+		writer.writeTableRowCode(Texts.TOC_COMPILER_SYNTAX_SINGLE_LINE_COMMENT_DELIMITERS,
 				HTMLWriter.getString(compilerSyntax.getSingleLineCommentDelimiters()));
 
-		writer.writeTableRowCode(Texts.TOC_ASSEMBLER_SYNTAX_STRING_DELIMITERS,
+		writer.writeTableRowCode(Texts.TOC_COMPILER_SYNTAX_STRING_DELIMITERS,
 				HTMLWriter.getString(compilerSyntax.getStringDelimiters()));
 
 		writer.end();
@@ -480,11 +480,11 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 			}
 		}
 
-		getCompilerInstructions(result, Texts.TOC_ASSEMBLER_INSTRUCTION_TYPE_DIRECTIVES_LABEL, directives);
-		getCompilerInstructions(result, Texts.TOC_ASSEMBLER_INSTRUCTION_TYPE_LEGAL_OPCODES_LABEL, legalOpcodes);
-		getCompilerInstructions(result, Texts.TOC_ASSEMBLER_INSTRUCTION_TYPE_PSEUDO_OPCODES_LABEL, pseudoOpcodes);
-		getCompilerInstructions(result, Texts.TOC_ASSEMBLER_INSTRUCTION_TYPE_ILLEGAL_OPCODES_LABEL, illegalOpcodes);
-		getCompilerInstructions(result, Texts.TOC_ASSEMBLER_INSTRUCTION_TYPE_W65816_OPCODES_LABEL, w65816Opcodes);
+		getCompilerInstructions(result, Texts.TOC_COMPILER_INSTRUCTION_TYPE_DIRECTIVES_LABEL, directives);
+		getCompilerInstructions(result, Texts.TOC_COMPILER_INSTRUCTION_TYPE_LEGAL_OPCODES_LABEL, legalOpcodes);
+		getCompilerInstructions(result, Texts.TOC_COMPILER_INSTRUCTION_TYPE_PSEUDO_OPCODES_LABEL, pseudoOpcodes);
+		getCompilerInstructions(result, Texts.TOC_COMPILER_INSTRUCTION_TYPE_ILLEGAL_OPCODES_LABEL, illegalOpcodes);
+		getCompilerInstructions(result, Texts.TOC_COMPILER_INSTRUCTION_TYPE_W65816_OPCODES_LABEL, w65816Opcodes);
 
 		return result;
 	}
@@ -511,9 +511,9 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 
 		writer.beginTable();
 		writer.beginTableRow();
-		writer.writeTableHeader(Texts.TOC_ASSEMBLER_INSTRUCTION_TYPE_LABEL);
-		writer.writeTableHeader(Texts.TOC_ASSEMBLER_INSTRUCTION_NAME_LABEL);
-		writer.writeTableHeader(Texts.TOC_ASSEMBLER_INSTRUCTION_DESCRIPTION_LABEL);
+		writer.writeTableHeader(Texts.TOC_COMPILER_INSTRUCTION_TYPE_LABEL);
+		writer.writeTableHeader(Texts.TOC_COMPILER_INSTRUCTION_NAME_LABEL);
+		writer.writeTableHeader(Texts.TOC_COMPILER_INSTRUCTION_DESCRIPTION_LABEL);
 
 		writer.end();
 
@@ -610,7 +610,7 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 		HTMLWriter writer = createHeader();
 
 		writer.beginTable();
-		writer.writeTableRow(Texts.TOC_CPU_NAME_LABEL, EnumUtility.getText(target));
+		writer.writeTableRow(Texts.TOC_TARGET_NAME_LABEL, EnumUtility.getText(target));
 		writer.end();
 
 		writer.begin("br", null);
@@ -619,8 +619,8 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 		writer.beginTable();
 		writer.beginTableRow();
 
-		writer.writeTableHeader(Texts.TOC_CPU_OPCODE_LABEL);
-		writer.writeTableHeader(Texts.TOC_ASSEMBLER_INSTRUCTION_DESCRIPTION_LABEL);
+		writer.writeTableHeader(Texts.TOC_TARGET_OPCODE_LABEL);
+		writer.writeTableHeader(Texts.TOC_COMPILER_INSTRUCTION_DESCRIPTION_LABEL);
 
 		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions();
 		int compilerDefinitionCount = compilerDefinitions.size();

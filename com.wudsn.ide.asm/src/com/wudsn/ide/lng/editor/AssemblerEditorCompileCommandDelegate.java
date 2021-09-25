@@ -132,7 +132,7 @@ public final class AssemblerEditorCompileCommandDelegate
 			action.setActionDefinitionId(AssemblerEditorCompileCommand.COMPILE_AND_RUN_WITH);
 			action.setImageDescriptor(imageDescriptor);
 			if (runnerId.equals(compilerPreferences.getRunnerId())) {
-				runnerName = runnerName + " " + Texts.ASSEMBLER_TOOLBAR_RUN_WITH_DEFAULT_LABEL;
+				runnerName = runnerName + " " + Texts.COMPILER_TOOLBAR_RUN_WITH_DEFAULT_LABEL;
 			}
 			action.setText(runnerName);
 			ActionContributionItem item = new ActionContributionItem(action);

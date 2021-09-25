@@ -209,7 +209,7 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 		topics.add(createTopic("", Texts.TOC_IDE_TOPIC_LABEL, "", createTopicsArray(ideTopics)));
 		topics.add(createTopic("", Texts.TOC_ASSEMBLERS_TOPIC_LABEL, "", createTopicsArray(assemblerTopics)));
 		topics.add(createTopic("", Texts.TOC_HARDWARES_TOPIC_LABEL, "", createTopicsArray(hardwareTopics)));
-		topics.add(createTopic("", Texts.TOC_CPUS_TOPIC_LABEL, "", createTopicsArray(cpuTopics)));
+		topics.add(createTopic("", Texts.TOC_TARGETS_TOPIC_LABEL, "", createTopicsArray(cpuTopics)));
 
 		return createTopicsArray(topics);
 	}
@@ -239,11 +239,11 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 			String href = AssemblerHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getId() + "/"
 					+ AssemblerHelpContentProducer.SECTION_GENERAL + AssemblerHelpContentProducer.EXTENSION;
 
-			ITopic generalTopic = createTopic("", Texts.TOC_ASSEMBLER_GENERAL_TOPIC_LABEL, href, null);
+			ITopic generalTopic = createTopic("", Texts.TOC_COMPILER_GENERAL_TOPIC_LABEL, href, null);
 
 			href = AssemblerHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getId() + "/"
 					+ AssemblerHelpContentProducer.SECTION_INSTRUCTIONS + AssemblerHelpContentProducer.EXTENSION;
-			ITopic opcodesTopic = createTopic("", Texts.TOC_ASSEMBLER_INSTRUCTIONS_TOPIC_LABEL, href, null);
+			ITopic opcodesTopic = createTopic("", Texts.TOC_COMPILER_INSTRUCTIONS_TOPIC_LABEL, href, null);
 
 			LanguagePreferences languagePreferences = LanguagePlugin.getInstance().getPreferences();
 			String compilerExecutablePath = languagePreferences.getCompilerExecutablePath(compilerDefinition.getId());
@@ -295,7 +295,7 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 						+ AssemblerHelpContentProducer.SECTION_MANUAL + ".html";
 			}
 
-			ITopic manualTopic = createTopic(icon, Texts.TOC_ASSEMBLER_MANUAL_TOPIC_LABEL, href,
+			ITopic manualTopic = createTopic(icon, Texts.TOC_COMPILER_MANUAL_TOPIC_LABEL, href,
 					createTopicsArray(manualTopics));
 
 			assemblerTopics.add(createTopic("", compilerDefinition.getName(), "",

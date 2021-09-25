@@ -206,21 +206,21 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 			case CompilerSourceParserFileReferenceType.SOURCE:
 				hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
 						assemblerEditor.getClass().getName(), 0,
-						Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_SOURCE_WITH_ASSEMBLER_EDITOR));
+						Texts.COMPILER_HYPERLINK_DETECTOR_OPEN_SOURCE_WITH_LANGUAGE_EDITOR));
 				break;
 			case CompilerSourceParserFileReferenceType.BINARY:
 				hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri, HexEditor.ID, 0,
-						Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_HEX_EDITOR));
+						Texts.COMPILER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_HEX_EDITOR));
 				if (canShowMultipleHyperlinks) {
 					hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
 							GraphicsConversionEditor.ID, 0,
-							Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_GRAPHICS_EDITOR));
+							Texts.COMPILER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_GRAPHICS_EDITOR));
 					hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
 							AssemblerHyperlink.DEFAULT_EDITOR, 0,
-							Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_DEFAULT_EDITOR));
+							Texts.COMPILER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_DEFAULT_EDITOR));
 					hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
 							AssemblerHyperlink.SYSTEM_EDITOR, 0,
-							Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_SYSTEM_EDITOR));
+							Texts.COMPILER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_SYSTEM_EDITOR));
 				}
 				break;
 			default:
@@ -317,11 +317,11 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 
 			String hyperlinkText;
 			if (inSameFile) {
-				hyperlinkText = TextUtility.format(Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_IDENTIFIER,
+				hyperlinkText = TextUtility.format(Texts.COMPILER_HYPERLINK_DETECTOR_OPEN_IDENTIFIER,
 						CompilerSourceParserTreeObjectType.getText(element.getType()), element.getCompoundName(),
 						NumberUtility.getLongValueDecimalString(elementLineNumber));
 			} else {
-				hyperlinkText = TextUtility.format(Texts.ASSEMBLER_HYPERLINK_DETECTOR_OPEN_IDENTIFIER_IN_INCLUDE,
+				hyperlinkText = TextUtility.format(Texts.COMPILER_HYPERLINK_DETECTOR_OPEN_IDENTIFIER_IN_INCLUDE,
 						CompilerSourceParserTreeObjectType.getText(element.getType()), element.getCompoundName(),
 						NumberUtility.getLongValueDecimalString(elementLineNumber), fileName);
 			}
