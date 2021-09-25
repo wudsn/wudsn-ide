@@ -20,9 +20,9 @@
 package com.wudsn.ide.lng.asm.compiler.tass;
 
 import com.wudsn.ide.lng.asm.compiler.CompilerId;
-import com.wudsn.ide.lng.editor.AssemblerEditor;
+import com.wudsn.ide.lng.editor.LanguageEditor;
 
-public final class TassEditor extends AssemblerEditor {
+public final class TassEditor extends LanguageEditor {
 
 	/**
 	 * Creation is public. Called by the extension "org.eclipse.ui.editors".

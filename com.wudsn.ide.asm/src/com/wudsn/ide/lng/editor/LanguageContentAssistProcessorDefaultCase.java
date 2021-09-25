@@ -25,12 +25,12 @@ package com.wudsn.ide.lng.editor;
  * @author Peter Dell
  * 
  */
-public final class AssemblerContentAssistProcessorDefaultCase {
+public final class LanguageContentAssistProcessorDefaultCase {
 
 	/**
 	 * Creation is private.
 	 */
-	private AssemblerContentAssistProcessorDefaultCase() {
+	private LanguageContentAssistProcessorDefaultCase() {
 
 	}
 

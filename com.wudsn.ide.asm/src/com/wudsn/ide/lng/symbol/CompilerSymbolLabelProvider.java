@@ -17,7 +17,7 @@
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.wudsn.ide.lng.editor;
+package com.wudsn.ide.lng.symbol;
 
 import org.eclipse.swt.graphics.Image;
 

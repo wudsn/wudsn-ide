@@ -38,12 +38,12 @@ import com.wudsn.ide.lng.LanguagePlugin;
  * @author Peter Dell
  * @author Andy Reek
  */
-final class AssemblerEditorToggleCommentAction extends TextEditorAction {
+final class LanguageEditorToggleCommentAction extends TextEditorAction {
 
 	/**
 	 * The owning editor.
 	 */
-	private final AssemblerEditor editor;
+	private final LanguageEditor editor;
 
 	/**
 	 * The editor's source viewer.
@@ -56,11 +56,11 @@ final class AssemblerEditorToggleCommentAction extends TextEditorAction {
 	 * @param bundle       The resource bundle, not <code>null</code>.
 	 * @param prefix       The resource bundle key prefix, not <code>null</code>.
 	 * 
-	 * @param editor       The assembler editor, not <code>null</code>.
-	 * @param sourceViewer The assembler editor's source viewer.
+	 * @param editor       The editor, not <code>null</code>.
+	 * @param sourceViewer The editor's source viewer.
 	 * 
 	 */
-	AssemblerEditorToggleCommentAction(ResourceBundle bundle, String prefix, AssemblerEditor editor,
+	LanguageEditorToggleCommentAction(ResourceBundle bundle, String prefix, LanguageEditor editor,
 			SourceViewer sourceViewer) {
 		super(bundle, prefix, editor);
 		if (editor == null) {

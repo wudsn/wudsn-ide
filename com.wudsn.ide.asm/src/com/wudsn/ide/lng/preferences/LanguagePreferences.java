@@ -25,8 +25,8 @@ import org.eclipse.jface.text.TextAttribute;
 import com.wudsn.ide.base.common.AbstractIDEPlugin;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.editor.AssemblerContentAssistProcessorDefaultCase;
-import com.wudsn.ide.lng.editor.AssemblerEditorCompileCommandPositioningMode;
+import com.wudsn.ide.lng.editor.LanguageContentAssistProcessorDefaultCase;
+import com.wudsn.ide.lng.editor.LanguageEditorCompileCommandPositioningMode;
 
 /**
  * Facade class for typed access to the plugin preferences.
@@ -71,7 +71,7 @@ public final class LanguagePreferences {
 	 * Gets the default case content assist.
 	 * 
 	 * @return The default case content assist, may be empty, not <code>null</code>.
-	 *         See {@link AssemblerContentAssistProcessorDefaultCase}.
+	 *         See {@link LanguageContentAssistProcessorDefaultCase}.
 	 */
 	public String getEditorContentAssistProcessorDefaultCase() {
 		return getString(LanguagePreferencesConstants.EDITOR_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE);
@@ -81,7 +81,7 @@ public final class LanguagePreferences {
 	 * Gets the compile command positioning mode.
 	 * 
 	 * @return The positioning mode, may be empty, not <code>null</code>. See
-	 *         {@link AssemblerEditorCompileCommandPositioningMode}.
+	 *         {@link LanguageEditorCompileCommandPositioningMode}.
 	 * @since 1.6.1
 	 */
 	public String getEditorCompileCommandPositioningMode() {

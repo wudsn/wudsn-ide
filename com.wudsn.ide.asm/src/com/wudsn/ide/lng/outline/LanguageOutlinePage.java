@@ -17,7 +17,7 @@
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.wudsn.ide.lng.editor;
+package com.wudsn.ide.lng.outline;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -55,15 +55,17 @@ import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceFile;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObject;
+import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObjectLabelProvider;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObjectType;
+import com.wudsn.ide.lng.editor.LanguageEditor;
 
 /**
- * Outline page for the assembler editor.
+ * Outline page for the language editor.
  * 
  * @author Peter Dell.
  * @author Andy Reek
  */
-final class AssemblerContentOutlinePage extends ContentOutlinePage {
+public final class LanguageOutlinePage extends ContentOutlinePage {
 
 	/*
 	 * Toggle action to toggle the sorting in the outline tree. The state of the
@@ -74,7 +76,7 @@ final class AssemblerContentOutlinePage extends ContentOutlinePage {
 	private static final class OutlineViewerSortAction extends Action {
 		private static final QualifiedName CHECKED = new QualifiedName("OutlineViewerSortAction", "Checked");
 
-		final AssemblerEditor editor;
+		final LanguageEditor editor;
 		final TreeViewer treeViewer;
 
 		/**
@@ -84,7 +86,7 @@ final class AssemblerContentOutlinePage extends ContentOutlinePage {
 		 *                   <code>null</code>.
 		 * @param treeViewer The tree viewer which displays the outline.
 		 */
-		public OutlineViewerSortAction(AssemblerEditor editor, TreeViewer treeViewer) {
+		public OutlineViewerSortAction(LanguageEditor editor, TreeViewer treeViewer) {
 			super("", AS_CHECK_BOX);
 			if (editor == null) {
 				throw new IllegalArgumentException("Parameter 'editor' must not be null.");
@@ -256,12 +258,12 @@ final class AssemblerContentOutlinePage extends ContentOutlinePage {
 	private final static class EditorUpdater extends RunnableWithLogging {
 		private final Profiler profiler;
 
-		private final AssemblerEditor editor;
-		private final AssemblerContentOutlinePage outlinePage;
+		private final LanguageEditor editor;
+		private final LanguageOutlinePage outlinePage;
 		private final TreeViewer viewer;
-		private final AssemblerContentOutlineTreeContentProvider contentProvider;
+		private final LanguageOutlineTreeContentProvider contentProvider;
 
-		EditorUpdater(AssemblerEditor editor, AssemblerContentOutlinePage outlinePage, TreeViewer viewer) {
+		EditorUpdater(LanguageEditor editor, LanguageOutlinePage outlinePage, TreeViewer viewer) {
 			if (editor == null) {
 				throw new IllegalArgumentException("Parameter 'editor' must not be null.");
 			}
@@ -274,13 +276,13 @@ final class AssemblerContentOutlinePage extends ContentOutlinePage {
 			this.editor = editor;
 			this.outlinePage = outlinePage;
 			this.viewer = viewer;
-			this.contentProvider = (AssemblerContentOutlineTreeContentProvider) viewer.getContentProvider();
+			this.contentProvider = (LanguageOutlineTreeContentProvider) viewer.getContentProvider();
 			profiler = new Profiler(this);
 
 		}
 
 		/**
-		 * Triggers a new {@link AssemblerContentOutlineTreeContentProvider#parse} run
+		 * Triggers a new {@link LanguageOutlineTreeContentProvider#parse} run
 		 * and updates the display.
 		 */
 		@Override
@@ -405,7 +407,7 @@ final class AssemblerContentOutlinePage extends ContentOutlinePage {
 	/**
 	 * The owning editor.
 	 */
-	final AssemblerEditor editor;
+	final LanguageEditor editor;
 
 	/**
 	 * The visual components.
@@ -422,9 +424,9 @@ final class AssemblerContentOutlinePage extends ContentOutlinePage {
 	/**
 	 * Creates a new instance.
 	 * 
-	 * @param editor The assembler editor, not <code>null</code>.
+	 * @param editor The language editor, not <code>null</code>.
 	 */
-	AssemblerContentOutlinePage(AssemblerEditor editor) {
+	public LanguageOutlinePage(LanguageEditor editor) {
 		if (editor == null) {
 			throw new IllegalArgumentException("Parameter 'editor' must not be null.");
 		}
@@ -436,7 +438,7 @@ final class AssemblerContentOutlinePage extends ContentOutlinePage {
 	 * 
 	 * @param input The new input, not <code>null</code>.
 	 */
-	final void setInput(IEditorInput input) {
+	public final void setInput(IEditorInput input) {
 		if (input == null) {
 			throw new IllegalArgumentException("Parameter 'input' must not be null.");
 		}
@@ -472,7 +474,7 @@ final class AssemblerContentOutlinePage extends ContentOutlinePage {
 		IToolBarManager toolBarManager = getSite().getActionBars().getToolBarManager();
 
 		// Configure the content.
-		treeViewer.setContentProvider(new AssemblerContentOutlineTreeContentProvider(this));
+		treeViewer.setContentProvider(new LanguageOutlineTreeContentProvider(this));
 		treeViewer.setLabelProvider(new CompilerSourceParserTreeObjectLabelProvider());
 		treeViewer.setComparator(treeViewerComparator);
 		treeViewer.addSelectionChangedListener(this);
@@ -507,8 +509,8 @@ final class AssemblerContentOutlinePage extends ContentOutlinePage {
 				if (object instanceof CompilerSourceParserTreeObject) {
 
 					CompilerSourceParserTreeObject treeObject;
-					AssemblerContentOutlineTreeContentProvider contentProvider;
-					contentProvider = (AssemblerContentOutlineTreeContentProvider) getTreeViewer().getContentProvider();
+					LanguageOutlineTreeContentProvider contentProvider;
+					contentProvider = (LanguageOutlineTreeContentProvider) getTreeViewer().getContentProvider();
 					treeObject = (CompilerSourceParserTreeObject) object;
 
 					// If this is the tree object from another (source
@@ -539,9 +541,9 @@ final class AssemblerContentOutlinePage extends ContentOutlinePage {
 	 * @return The compiler source file of the last parse process or
 	 *         <code>null</code>.
 	 */
-	final CompilerSourceFile getCompilerSourceFile() {
-		AssemblerContentOutlineTreeContentProvider contentProvider;
-		contentProvider = (AssemblerContentOutlineTreeContentProvider) getTreeViewer().getContentProvider();
+	public final CompilerSourceFile getCompilerSourceFile() {
+		LanguageOutlineTreeContentProvider contentProvider;
+		contentProvider = (LanguageOutlineTreeContentProvider) getTreeViewer().getContentProvider();
 		CompilerSourceFile compilerSourceFile = contentProvider.getCompilerSourceFile();
 		return compilerSourceFile;
 	}

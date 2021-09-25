@@ -17,7 +17,7 @@
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.wudsn.ide.lng.editor;
+package com.wudsn.ide.lng.compiler.parser;
 
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -25,8 +25,6 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 
 import com.wudsn.ide.lng.LanguagePlugin;
-import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObject;
-import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObjectType;
 
 /**
  * LabelProvider for the {@link CompilerSourceParserTreeObject} instances in the
@@ -35,7 +33,7 @@ import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObjectType;
  * @author Peter Dell
  * @author Daniel Mitte
  */
-final class CompilerSourceParserTreeObjectLabelProvider extends DelegatingStyledCellLabelProvider {
+public final class CompilerSourceParserTreeObjectLabelProvider extends DelegatingStyledCellLabelProvider {
 
 	/** Default tree image */
 	private final Image defaultImage;
@@ -108,11 +106,8 @@ final class CompilerSourceParserTreeObjectLabelProvider extends DelegatingStyled
 	/**
 	 * Creates a new instance.
 	 * 
-	 * Called by
-	 * {@link AssemblerContentOutlinePage#createControl(org.eclipse.swt.widgets.Composite)}
-	 * .
 	 */
-	CompilerSourceParserTreeObjectLabelProvider() {
+	public CompilerSourceParserTreeObjectLabelProvider() {
 		super(new StyledLabelProvider());
 		LanguagePlugin plugin;
 		plugin = LanguagePlugin.getInstance();

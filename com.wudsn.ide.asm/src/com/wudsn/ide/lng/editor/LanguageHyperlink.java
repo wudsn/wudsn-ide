@@ -46,7 +46,7 @@ import com.wudsn.ide.lng.Texts;
  * 
  * @author Peter Dell
  */
-final class AssemblerHyperlink implements IHyperlink {
+final class LanguageHyperlink implements IHyperlink {
 
 	public static final String DEFAULT_EDITOR = "DEFAULT_EDITOR";
 	public static final String SYSTEM_EDITOR = "SYSTEM_EDITOR";
@@ -74,7 +74,7 @@ final class AssemblerHyperlink implements IHyperlink {
 	 *                         <code>null</code>.
 	 * 
 	 * @param lineNumber       The liner number to position to, in case the editor
-	 *                         is an {@link AssemblerEditor}. The line numbers are
+	 *                         is an {@link LanguageEditor}. The line numbers are
 	 *                         starting at 1. The value 0 indicates that no
 	 *                         positioning shall take place.
 	 * 
@@ -82,7 +82,7 @@ final class AssemblerHyperlink implements IHyperlink {
 	 *                         than one hyperlink for the same location, may be
 	 *                         empty, not <code>null</code>.
 	 */
-	AssemblerHyperlink(IRegion region, IWorkbenchPage workbenchPage, String absoluteFilePath, URI uri, String editorId,
+	LanguageHyperlink(IRegion region, IWorkbenchPage workbenchPage, String absoluteFilePath, URI uri, String editorId,
 			int lineNumber, String hyperlinkText) {
 		if (region == null) {
 			throw new IllegalArgumentException("Parameter 'region' must not be null.");
@@ -201,9 +201,9 @@ final class AssemblerHyperlink implements IHyperlink {
 							new Object[] { uri }, ex);
 				}
 			}
-			if (editorPart instanceof AssemblerEditor && lineNumber > 0) {
-				AssemblerEditor assemblerEditor = (AssemblerEditor) editorPart;
-				assemblerEditor.gotoLine(lineNumber);
+			if (editorPart instanceof LanguageEditor && lineNumber > 0) {
+				LanguageEditor languageEditor = (LanguageEditor) editorPart;
+				languageEditor.gotoLine(lineNumber);
 			}
 
 			uri = null;

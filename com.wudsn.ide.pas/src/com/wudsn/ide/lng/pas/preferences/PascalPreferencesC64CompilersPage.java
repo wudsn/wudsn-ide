@@ -23,7 +23,7 @@ import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesCompilersPage;
 
 /**
- * Visual editor page for the assembler preferences regarding C64 compilers.
+ * Visual editor page for the Pascal preferences regarding C64 compilers.
  * 
  * @author Peter Dell
  * 

@@ -27,25 +27,25 @@ import org.eclipse.jface.text.reconciler.IReconcilingStrategy;
 import org.eclipse.jface.text.reconciler.IReconcilingStrategyExtension;
 
 /**
- * The reconciling strategy for the AssemblerEditor. Builds the folding
+ * The reconciling strategy for the LanguageEditor. Builds the folding
  * structure for folding and notifies the editor.
  * 
  * @author Peter Dell
  * @author Andy Reek
  */
-final class AssemblerReconcilingStategy implements IReconcilingStrategy, IReconcilingStrategyExtension {
+final class LanguageReconcilingStategy implements IReconcilingStrategy, IReconcilingStrategyExtension {
 
-	private final AssemblerEditor editor;
+	private final LanguageEditor editor;
 	private IDocument document;
 
 	/**
 	 * Creates a new instance. Called by
-	 * {@link AssemblerSourceViewerConfiguration#getReconciler(org.eclipse.jface.text.source.ISourceViewer)}
+	 * {@link LanguageSourceViewerConfiguration#getReconciler(org.eclipse.jface.text.source.ISourceViewer)}
 	 * .
 	 * 
-	 * * @param editor The underlying assembler editor, not <code>null</code>.
+	 * * @param editor The underlying language editor, not <code>null</code>.
 	 */
-	AssemblerReconcilingStategy(AssemblerEditor editor) {
+	LanguageReconcilingStategy(LanguageEditor editor) {
 		if (editor == null) {
 			throw new IllegalArgumentException("Parameter 'editor' must not be null.");
 		}

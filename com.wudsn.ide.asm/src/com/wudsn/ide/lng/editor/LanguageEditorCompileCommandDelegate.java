@@ -52,7 +52,7 @@ import com.wudsn.ide.lng.runner.RunnerRegistry;
  * @author Peter Dell
  * 
  */
-public final class AssemblerEditorCompileCommandDelegate
+public final class LanguageEditorCompileCommandDelegate
 		implements IActionDelegate2, IWorkbenchWindowPulldownDelegate2 {
 
 	private IWorkbenchWindow window;
@@ -90,7 +90,7 @@ public final class AssemblerEditorCompileCommandDelegate
 	/**
 	 * Creation is public.
 	 */
-	public AssemblerEditorCompileCommandDelegate() {
+	public LanguageEditorCompileCommandDelegate() {
 	}
 
 	@Override
@@ -101,16 +101,16 @@ public final class AssemblerEditorCompileCommandDelegate
 	@Override
 	public Menu getMenu(Control parent) {
 
-		AssemblerEditor assemblerEditor = getAssemblerEditor();
-		if (assemblerEditor == null) {
+		LanguageEditor languageEditor = getLanguageEditor();
+		if (languageEditor == null) {
 			return null;
 		}
 
-		LanguagePlugin languagePlugin = assemblerEditor.getPlugin();
+		LanguagePlugin languagePlugin = languageEditor.getPlugin();
 		RunnerRegistry runnerRegistry = languagePlugin.getRunnerRegistry();
-		Hardware hardware = assemblerEditor.getHardware();
+		Hardware hardware = languageEditor.getHardware();
 		List<RunnerDefinition> runnerDefinitions = runnerRegistry.getDefinitions(hardware);
-		CompilerPreferences compilerPreferences = assemblerEditor.getCompilerPreferences();
+		CompilerPreferences compilerPreferences = languageEditor.getCompilerPreferences();
 
 		Menu menu = new Menu(parent);
 		setMenu(menu);
@@ -129,7 +129,7 @@ public final class AssemblerEditorCompileCommandDelegate
 			}
 
 			Action action = new CompileAndRunAction(runnerId);
-			action.setActionDefinitionId(AssemblerEditorCompileCommand.COMPILE_AND_RUN_WITH);
+			action.setActionDefinitionId(LanguageEditorCompileCommand.COMPILE_AND_RUN_WITH);
 			action.setImageDescriptor(imageDescriptor);
 			if (runnerId.equals(compilerPreferences.getRunnerId())) {
 				runnerName = runnerName + " " + Texts.COMPILER_TOOLBAR_RUN_WITH_DEFAULT_LABEL;
@@ -154,13 +154,13 @@ public final class AssemblerEditorCompileCommandDelegate
 
 	@Override
 	public void init(IAction action) {
-		AssemblerEditor assemblerEditor = getAssemblerEditor();
-		boolean enabled = assemblerEditor != null && assemblerEditor.getCurrentIFile() != null;
+		LanguageEditor languageEditor = getLanguageEditor();
+		boolean enabled = languageEditor != null && languageEditor.getCurrentIFile() != null;
 		action.setEnabled(enabled);
 
 		Hardware hardware;
-		if (assemblerEditor != null) {
-			hardware = assemblerEditor.getHardware();
+		if (languageEditor != null) {
+			hardware = languageEditor.getHardware();
 
 		} else {
 			hardware = Hardware.GENERIC;
@@ -204,11 +204,11 @@ public final class AssemblerEditorCompileCommandDelegate
 	}
 
 	/**
-	 * Gets the currently active assembler editor.
+	 * Gets the currently active language editor.
 	 * 
-	 * @return The currently active assembler editor or <code>null</code>.
+	 * @return The currently active language editor or <code>null</code>.
 	 */
-	private AssemblerEditor getAssemblerEditor() {
+	private LanguageEditor getLanguageEditor() {
 		if (window == null) {
 			return null;
 		}
@@ -218,10 +218,10 @@ public final class AssemblerEditorCompileCommandDelegate
 			return null;
 		}
 		IEditorPart editorPart = workbenchPage.getActiveEditor();
-		if (!(editorPart instanceof AssemblerEditor)) {
+		if (!(editorPart instanceof LanguageEditor)) {
 			return null;
 		}
-		return (AssemblerEditor) editorPart;
+		return (LanguageEditor) editorPart;
 	}
 
 	/**
@@ -230,13 +230,13 @@ public final class AssemblerEditorCompileCommandDelegate
 	 * @param runnerId The runner id or <code>null</code> to use the default.
 	 */
 	final void compileAndRun(String runnerId) {
-		AssemblerEditor assemblerEditor = getAssemblerEditor();
-		if (assemblerEditor == null) {
-			throw new IllegalStateException("Action is active but no assembler editor is active.");
+		LanguageEditor languageEditor = getLanguageEditor();
+		if (languageEditor == null) {
+			throw new IllegalStateException("Action is active but no language editor is active.");
 		}
-		AssemblerEditorCompileCommand.execute(assemblerEditor,
-				AssemblerEditorFilesLogic.createInstance(assemblerEditor).createCompilerFiles(),
-				AssemblerEditorCompileCommand.COMPILE_AND_RUN, runnerId);
+		LanguageEditorCompileCommand.execute(languageEditor,
+				LanguageEditorFilesLogic.createInstance(languageEditor).createCompilerFiles(),
+				LanguageEditorCompileCommand.COMPILE_AND_RUN, runnerId);
 	}
 
 }

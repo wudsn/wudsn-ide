@@ -21,7 +21,7 @@ package com.wudsn.ide.lng.preferences;
 
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.AssemblerProperties;
+import com.wudsn.ide.lng.LanguageProperties;
 
 /**
  * Facade class to mix compiler run specific preferences into the global
@@ -33,10 +33,10 @@ import com.wudsn.ide.lng.AssemblerProperties;
 public final class CompilerRunPreferences {
 
 	private CompilerPreferences compilerPreferences;
-	private AssemblerProperties mainSourceFileProperties;
+	private LanguageProperties mainSourceFileProperties;
 
 	public CompilerRunPreferences(CompilerPreferences compilerPreferences,
-			AssemblerProperties mainSourceFileProperties) {
+			LanguageProperties mainSourceFileProperties) {
 		if (compilerPreferences == null) {
 			throw new IllegalArgumentException("Parameter 'compilerPreferences' must not be null.");
 		}

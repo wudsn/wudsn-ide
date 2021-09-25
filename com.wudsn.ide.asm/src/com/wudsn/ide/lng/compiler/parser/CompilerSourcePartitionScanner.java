@@ -34,7 +34,7 @@ import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
 
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
-import com.wudsn.ide.lng.editor.AssemblerEditor;
+import com.wudsn.ide.lng.editor.LanguageEditor;
 
 /**
  * A partition scanner for the comments and strings.
@@ -63,7 +63,7 @@ public final class CompilerSourcePartitionScanner extends RuleBasedPartitionScan
 	 * Creates a new instance.
 	 * 
 	 * Called by
-	 * {@link AssemblerEditor#init(org.eclipse.ui.IEditorSite, org.eclipse.ui.IEditorInput)}
+	 * {@link LanguageEditor#init(org.eclipse.ui.IEditorSite, org.eclipse.ui.IEditorInput)}
 	 * .
 	 * 
 	 * @param compilerSyntax The compiler syntax, not <code>null</code>.

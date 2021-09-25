@@ -60,6 +60,7 @@ import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.HardwareUtility;
 import com.wudsn.ide.lng.Texts;
+import com.wudsn.ide.lng.breakpoint.LanguageBreakpoint;
 import com.wudsn.ide.lng.compiler.Compiler;
 import com.wudsn.ide.lng.compiler.CompilerConsole;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
@@ -73,20 +74,21 @@ import com.wudsn.ide.lng.preferences.CompilerRunPreferences;
 import com.wudsn.ide.lng.runner.Runner;
 import com.wudsn.ide.lng.runner.RunnerDefinition;
 import com.wudsn.ide.lng.runner.RunnerId;
+import com.wudsn.ide.lng.symbol.CompilerSymbolsView;
 
 /**
  * Implementation of the "Compile" command.
  * 
  * @author Peter Dell
  */
-final class AssemblerEditorCompileCommand {
+final class LanguageEditorCompileCommand {
 
 	/**
 	 * Commands.
 	 */
-	public static final String COMPILE = "com.wudsn.ide.lng.editor.AssemblerEditorCompileCommand";
-	public static final String COMPILE_AND_RUN = "com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunCommand";
-	public static final String COMPILE_AND_RUN_WITH = "com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunWithCommand";
+	public static final String COMPILE = "com.wudsn.ide.lng.editor.LanguageEditorCompileCommand";
+	public static final String COMPILE_AND_RUN = "com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunCommand";
+	public static final String COMPILE_AND_RUN_WITH = "com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunWithCommand";
 
 	/**
 	 * The owning plugin.
@@ -96,7 +98,7 @@ final class AssemblerEditorCompileCommand {
 	/**
 	 * Creation is private.
 	 */
-	private AssemblerEditorCompileCommand() {
+	private LanguageEditorCompileCommand() {
 		plugin = LanguagePlugin.getInstance();
 	}
 
@@ -121,20 +123,20 @@ final class AssemblerEditorCompileCommand {
 	/**
 	 * Executes a compile command.
 	 * 
-	 * @param assemblerEditor The assembler editor, not <code>null</code>.
-	 * @param files           The compiler files, not <code>null</code>.
-	 * @param commandId       The command id, see {@link #COMPILE},
-	 *                        {@link #COMPILE_AND_RUN} ,
-	 *                        {@link #COMPILE_AND_RUN_WITH}.
-	 * @param runnerId        The runner id, may be empty or <code>null</code>.
+	 * @param languageEditor The language editor, not <code>null</code>.
+	 * @param files          The compiler files, not <code>null</code>.
+	 * @param commandId      The command id, see {@link #COMPILE},
+	 *                       {@link #COMPILE_AND_RUN} ,
+	 *                       {@link #COMPILE_AND_RUN_WITH}.
+	 * @param runnerId       The runner id, may be empty or <code>null</code>.
 	 * 
 	 * @throws RuntimeException
 	 */
-	public static void execute(AssemblerEditor assemblerEditor, CompilerFiles files, String commandId, String runnerId)
+	public static void execute(LanguageEditor languageEditor, CompilerFiles files, String commandId, String runnerId)
 			throws RuntimeException {
 
-		if (assemblerEditor == null) {
-			throw new IllegalArgumentException("Parameter 'assemblerEditor' must not be null.");
+		if (languageEditor == null) {
+			throw new IllegalArgumentException("Parameter 'languageEditor' must not be null.");
 		}
 		if (files == null) {
 			throw new IllegalArgumentException("Parameter 'files' must not be null.");
@@ -148,15 +150,15 @@ final class AssemblerEditorCompileCommand {
 			return;
 		}
 
-		assemblerEditor.doSave(null);
+		languageEditor.doSave(null);
 
-		IWorkbenchPage page = assemblerEditor.getSite().getPage();
+		IWorkbenchPage page = languageEditor.getSite().getPage();
 
-		AssemblerEditorCompileCommand instance;
-		instance = new AssemblerEditorCompileCommand();
+		LanguageEditorCompileCommand instance;
+		instance = new LanguageEditorCompileCommand();
 
 		try {
-			instance.executeInternal(assemblerEditor, files, commandId, runnerId);
+			instance.executeInternal(languageEditor, files, commandId, runnerId);
 		} catch (RuntimeException ex) {
 			throw ex;
 		}
@@ -181,11 +183,11 @@ final class AssemblerEditorCompileCommand {
 		}
 	}
 
-	private boolean executeInternal(AssemblerEditor assemblerEditor, CompilerFiles files, String commandId,
+	private boolean executeInternal(LanguageEditor languageEditor, CompilerFiles files, String commandId,
 			String runnerId) {
 
-		if (assemblerEditor == null) {
-			throw new IllegalArgumentException("Parameter 'assemblerEditor' must not be null.");
+		if (languageEditor == null) {
+			throw new IllegalArgumentException("Parameter 'languageEditor' must not be null.");
 		}
 		if (files == null) {
 			throw new IllegalArgumentException("Parameter 'files' must not be null.");
@@ -194,28 +196,28 @@ final class AssemblerEditorCompileCommand {
 			throw new IllegalArgumentException("Parameter 'commandId' must not be null.");
 		}
 
-		AssemblerEditorFilesLogic assemblerEditorFilesLogic = AssemblerEditorFilesLogic.createInstance(assemblerEditor);
+		LanguageEditorFilesLogic languageEditorFilesLogic = LanguageEditorFilesLogic.createInstance(languageEditor);
 
 		// Remove existing problem markers from all files.
-		if (!assemblerEditorFilesLogic.removeMarkers(files)) {
+		if (!languageEditorFilesLogic.removeMarkers(files)) {
 			return false;
 		}
 
 		// Determine and check hardware.
-		Hardware hardware = assemblerEditorFilesLogic.getHardware(files);
+		Hardware hardware = languageEditorFilesLogic.getHardware(files);
 		if (hardware == null) {
 			return false;
 		}
 
 		// Check files based on the compiler definition.
-		if (!assemblerEditorFilesLogic.validateOutputFile(files)) {
+		if (!languageEditorFilesLogic.validateOutputFile(files)) {
 			return false;
 		}
 
 		// Create wrapper for run properties.
-		CompilerDefinition compilerDefinition = assemblerEditor.getCompilerDefinition();
+		CompilerDefinition compilerDefinition = languageEditor.getCompilerDefinition();
 		CompilerRunPreferences compilerRunPreferences = new CompilerRunPreferences(
-				assemblerEditor.getCompilerPreferences(), files.mainSourceFile.assemblerProperties);
+				languageEditor.getCompilerPreferences(), files.mainSourceFile.languageProperties);
 
 		// Check if output file is modifiable in case it already exists.
 		long outputFileLastModified = -1;
@@ -348,7 +350,7 @@ final class AssemblerEditorCompileCommand {
 		compilerConsole.println(compilerProcess.getOutputLog());
 
 		// Compiling is over, check the result.
-		Compiler compiler = assemblerEditor.getCompiler();
+		Compiler compiler = languageEditor.getCompiler();
 		boolean compilerSuccess = compiler.isSuccessExitValue(compilerProcess.getExitValue());
 		if (compilerSuccess) {
 			if (files.outputFile.exists()) {
@@ -370,7 +372,7 @@ final class AssemblerEditorCompileCommand {
 
 						if (commandId.equals(COMPILE_AND_RUN) || commandId.equals(COMPILE_AND_RUN_WITH)) {
 
-							openOutputFile(assemblerEditor, files, compilerRunPreferences, compilerConsole, runnerId);
+							openOutputFile(languageEditor, files, compilerRunPreferences, compilerConsole, runnerId);
 
 						}
 					} else {
@@ -394,7 +396,7 @@ final class AssemblerEditorCompileCommand {
 
 		// Output an additional message if the reason for the compiler's exit
 		// value is not already contained in the error messages.
-		boolean errorFound = parseLogs(assemblerEditor, files, compilerProcess);
+		boolean errorFound = parseLogs(languageEditor, files, compilerProcess);
 		if (!compilerSuccess && !errorFound) {
 			// ERROR: Compiler process ended with error code {0}. Check the
 			// error messages and the console log.
@@ -408,15 +410,15 @@ final class AssemblerEditorCompileCommand {
 	/**
 	 * Creates or deletes the breakpoints file based on the runner.
 	 * 
-	 * @param assemblerEditor The assembler editor, not <code>null</code>.
-	 * @param files           The assembler files, not <code>null</code>.
-	 * @param runner          The runner, not <code>null</code>.
+	 * @param languageEditor The language editor, not <code>null</code>.
+	 * @param files          The compiler files, not <code>null</code>.
+	 * @param runner         The runner, not <code>null</code>.
 	 * 
 	 * @since 1.6.1
 	 */
-	private void createBreakpointsFile(AssemblerEditor assemblerEditor, CompilerFiles files, Runner runner) {
-		if (assemblerEditor == null) {
-			throw new IllegalArgumentException("Parameter 'assemblerEditor' must not be null.");
+	private void createBreakpointsFile(LanguageEditor languageEditor, CompilerFiles files, Runner runner) {
+		if (languageEditor == null) {
+			throw new IllegalArgumentException("Parameter 'languageEditor' must not be null.");
 		}
 		if (files == null) {
 			throw new IllegalArgumentException("Parameter 'files' must not be null.");
@@ -428,7 +430,7 @@ final class AssemblerEditorCompileCommand {
 		IBreakpointManager breakpointManager = DebugPlugin.getDefault().getBreakpointManager();
 		IBreakpoint breakpoints[];
 		if (breakpointManager.isEnabled()) {
-			breakpoints = breakpointManager.getBreakpoints(AssemblerBreakpoint.DEBUG_MODEL_ID);
+			breakpoints = breakpointManager.getBreakpoints(LanguageBreakpoint.DEBUG_MODEL_ID);
 		} else {
 			breakpoints = new IBreakpoint[0];
 		}
@@ -444,10 +446,10 @@ final class AssemblerEditorCompileCommand {
 
 		// If breakpoints are present, a breakpoints file is generated.
 		if (breakpoints.length >= 0) {
-			AssemblerBreakpoint[] assemblerBreakpoints = new AssemblerBreakpoint[breakpoints.length];
-			System.arraycopy(breakpoints, 0, assemblerBreakpoints, 0, breakpoints.length);
+			LanguageBreakpoint[] languageBreakpoints = new LanguageBreakpoint[breakpoints.length];
+			System.arraycopy(breakpoints, 0, languageBreakpoints, 0, breakpoints.length);
 			StringBuilder breakpointBuilder = new StringBuilder();
-			int activeBreakpointCount = runner.createBreakpointsFileContent(assemblerBreakpoints, breakpointBuilder);
+			int activeBreakpointCount = runner.createBreakpointsFileContent(languageBreakpoints, breakpointBuilder);
 			try {
 				FileUtility.writeString(breakpointsFile, breakpointBuilder.toString());
 			} catch (CoreException ex) {
@@ -473,11 +475,11 @@ final class AssemblerEditorCompileCommand {
 		}
 	}
 
-	private void openOutputFile(AssemblerEditor assemblerEditor, CompilerFiles files,
+	private void openOutputFile(LanguageEditor languageEditor, CompilerFiles files,
 			CompilerRunPreferences compilerRunPreferences, CompilerConsole compilerConsole, String runnerId) {
 
-		if (assemblerEditor == null) {
-			throw new IllegalArgumentException("Parameter 'assemblerEditor' must not be null.");
+		if (languageEditor == null) {
+			throw new IllegalArgumentException("Parameter 'languageEditor' must not be null.");
 		}
 		if (files == null) {
 			throw new IllegalArgumentException("Parameter 'files' must not be null.");
@@ -509,7 +511,7 @@ final class AssemblerEditorCompileCommand {
 			return;
 		}
 
-		createBreakpointsFile(assemblerEditor, files, runner);
+		createBreakpointsFile(languageEditor, files, runner);
 
 		String runnerCommandLine;
 		runnerCommandLine = compilerRunPreferences.getRunnerCommandLine(runnerId);
@@ -631,10 +633,10 @@ final class AssemblerEditorCompileCommand {
 		return parameter;
 	}
 
-	private boolean parseLogs(AssemblerEditor assemblerEditor, CompilerFiles files, ProcessWithLogs compileProcess) {
+	private boolean parseLogs(LanguageEditor languageEditor, CompilerFiles files, ProcessWithLogs compileProcess) {
 
-		if (assemblerEditor == null) {
-			throw new IllegalArgumentException("Parameter 'assemblerEditor' must not be null.");
+		if (languageEditor == null) {
+			throw new IllegalArgumentException("Parameter 'languageEditor' must not be null.");
 		}
 		if (files == null) {
 			throw new IllegalArgumentException("Parameter 'files' must not be null.");
@@ -642,7 +644,7 @@ final class AssemblerEditorCompileCommand {
 		if (compileProcess == null) {
 			throw new IllegalArgumentException("Parameter 'compileProcess' must not be null.");
 		}
-		Compiler compiler = assemblerEditor.getCompiler();
+		Compiler compiler = languageEditor.getCompiler();
 		CompilerProcessLogParser logParser = compiler.createLogParser();
 
 		// Line parser with main source file and logs.
@@ -674,9 +676,9 @@ final class AssemblerEditorCompileCommand {
 				markerProxy = markerProxy.getDetailMarker();
 			}
 		}
-		boolean errorOccurred = positionToFirstErrorOrWarning(assemblerEditor, markers);
+		boolean errorOccurred = positionToFirstErrorOrWarning(languageEditor, markers);
 
-		parseCompilerSymbols(assemblerEditor, files, logParser);
+		parseCompilerSymbols(languageEditor, files, logParser);
 
 		return errorOccurred;
 	}
@@ -685,15 +687,16 @@ final class AssemblerEditorCompileCommand {
 	 * Positions to the first error or warning in any file for which markers have
 	 * been created.
 	 * 
-	 * @param assemblerEditor The assembler editor, not <code>null</code>. Used as
-	 *                        basis for opening another editor when required.
-	 * @param markers         The modifiable list of marker, may be empty, not
-	 *                        <code>null</code>.
+	 * @param languageEditor The language editor, not <code>null</code>. Used as
+	 *                       basis for opening another editor when required.
+	 * @param markers        The modifiable list of marker, may be empty, not
+	 *                       <code>null</code>.
 	 * @return <code>true</code> if an error was found.
 	 */
-	private boolean positionToFirstErrorOrWarning(AssemblerEditor assemblerEditor, List<IMarker> markers) {
-		if (assemblerEditor == null) {
-			throw new IllegalArgumentException("Parameter 'assemblerEditor' must not be null.");
+	private boolean positionToFirstErrorOrWarning(LanguageEditor languageEditor, List<IMarker> markers) {
+
+		if (languageEditor == null) {
+			throw new IllegalArgumentException("Parameter 'languageEditor' must not be null.");
 		}
 		if (markers == null) {
 			throw new IllegalArgumentException("Parameter 'markers' must not be null.");
@@ -714,7 +717,7 @@ final class AssemblerEditorCompileCommand {
 		});
 
 		String positioningMode = plugin.getPreferences().getEditorCompileCommandPositioningMode();
-		boolean ignoreWarnings = positioningMode.equals(AssemblerEditorCompileCommandPositioningMode.FIRST_ERROR);
+		boolean ignoreWarnings = positioningMode.equals(LanguageEditorCompileCommandPositioningMode.FIRST_ERROR);
 		IMarker firstWarningMarker = null;
 		IMarker firstErrorMarker = null;
 		for (IMarker marker : markers) {
@@ -743,16 +746,16 @@ final class AssemblerEditorCompileCommand {
 		}
 
 		if (firstMarker != null) {
-			MarkerUtility.gotoMarker(assemblerEditor, firstMarker);
+			MarkerUtility.gotoMarker(languageEditor, firstMarker);
 		}
 		return firstErrorMarker != null;
 	}
 
-	private void parseCompilerSymbols(AssemblerEditor assemblerEditor, CompilerFiles files,
+	private void parseCompilerSymbols(LanguageEditor languageEditor, CompilerFiles files,
 			CompilerProcessLogParser logParser) {
 
-		if (assemblerEditor == null)
-			throw new IllegalArgumentException("Parameter 'assemblerEditor' must not be null.");
+		if (languageEditor == null)
+			throw new IllegalArgumentException("Parameter 'languageEditor' must not be null.");
 		if (files == null)
 			throw new IllegalArgumentException("Parameter 'files' must not be null.");
 		if (logParser == null)
@@ -781,7 +784,7 @@ final class AssemblerEditorCompileCommand {
 		}
 
 		// Display symbols.
-		IViewReference[] references = assemblerEditor.getSite().getPage().getViewReferences();
+		IViewReference[] references = languageEditor.getSite().getPage().getViewReferences();
 		for (IViewReference reference : references) {
 			if (reference.getId().equals(CompilerSymbolsView.ID)) {
 				CompilerSymbolsView compilerSymbolsView = (CompilerSymbolsView) reference.getView(true);

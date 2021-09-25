@@ -35,7 +35,7 @@ import com.wudsn.ide.base.BasePlugin;
 import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.lng.LanguagePlugin;
-import com.wudsn.ide.lng.AssemblerProperties;
+import com.wudsn.ide.lng.LanguageProperties;
 import com.wudsn.ide.lng.compiler.Compiler;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
 import com.wudsn.ide.lng.compiler.syntax.Instruction;
@@ -81,19 +81,19 @@ public abstract class CompilerSourceParser {
 	private boolean logEnabled = false;
 
 	/**
-	 * Extract all {@link AssemblerProperties} properties from a document.
+	 * Extract all {@link LanguageProperties} properties from a document.
 	 * 
 	 * @param document The document, not <code>null</code>.
 	 * @return The properties, may be empty, not <code>null</code>.
 	 */
-	public static AssemblerProperties getDocumentProperties(IDocument document) {
+	public static LanguageProperties getDocumentProperties(IDocument document) {
 		if (document == null) {
 			throw new IllegalArgumentException("Parameter 'document' must not be null.");
 		}
 		String content = document.get();
-		AssemblerProperties properties = new AssemblerProperties();
+		LanguageProperties properties = new LanguageProperties();
 
-		int index1 = content.indexOf(AssemblerProperties.PREFIX);
+		int index1 = content.indexOf(LanguageProperties.PREFIX);
 		while (index1 >= 0) {
 
 			int indexEqualSign = content.indexOf('=', index1);
@@ -116,7 +116,7 @@ public abstract class CompilerSourceParser {
 				}
 				properties.put(key, value, lineNumber);
 			}
-			index1 = content.indexOf(AssemblerProperties.PREFIX, indexNewLine);
+			index1 = content.indexOf(LanguageProperties.PREFIX, indexNewLine);
 		}
 		return properties;
 	}

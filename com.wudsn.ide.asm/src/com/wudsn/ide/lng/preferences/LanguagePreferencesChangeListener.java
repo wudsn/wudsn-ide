@@ -33,7 +33,7 @@ public interface LanguagePreferencesChangeListener {
 	/**
 	 * Notify of changed properties.
 	 * 
-	 * @param preferences          The assembler preferences containing the new
+	 * @param preferences          The language preferences containing the new
 	 *                             values, not <code>null</code>.
 	 * @param changedPropertyNames The set of names of properties that have been
 	 *                             changed, may be empty, not <code>null</code>.

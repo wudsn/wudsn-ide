@@ -20,9 +20,9 @@
 package com.wudsn.ide.lng.asm.compiler.xasm;
 
 import com.wudsn.ide.lng.asm.compiler.CompilerId;
-import com.wudsn.ide.lng.editor.AssemblerEditor;
+import com.wudsn.ide.lng.editor.LanguageEditor;
 
-public final class XasmEditor extends AssemblerEditor {
+public final class XasmEditor extends LanguageEditor {
 
 	/**
 	 * Creation is public. Called by the extension "org.eclipse.ui.editors".

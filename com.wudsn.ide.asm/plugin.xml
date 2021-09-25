@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
+
    <extension-point id="compilers" name="Compilers" schema="schema/compilers.exsd"/>  
    <extension-point id="runners" name="Runners" schema="schema/runners.exsd"/>
-
 
    <extension
          point="org.eclipse.core.runtime.preferences">
@@ -16,8 +16,8 @@
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
             base-type="org.eclipse.core.runtime.text"
-            id="com.wudsn.ide.lng.compiler.AssemblerSourceFile"
-            name="%com.wudsn.ide.lng.compiler.AssemblerSourceFile.name"
+            id="com.wudsn.ide.lng.compiler.LanguageSourceFile"
+            name="%com.wudsn.ide.lng.compiler.LanguageSourceFile.name"
             priority="normal">
       </content-type>
    </extension> 
@@ -33,147 +33,147 @@
          point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
       <hyperlinkDetector
             activate="true"
-            class="com.wudsn.ide.lng.editor.AssemblerHyperlinkDetector"
-            id="com.wudsn.ide.lng.editor.AssemblerHyperlinkDetector"
-            name="%com.wudsn.ide.lng.editor.AssemblerHyperlinkDetector.name"
-            targetId="com.wudsn.ide.lng.editor.AssemblerHyperlinkDetectorEditorTarget">
+            class="com.wudsn.ide.lng.editor.LanguageHyperlinkDetector"
+            id="com.wudsn.ide.lng.editor.LanguageHyperlinkDetector"
+            name="%com.wudsn.ide.lng.editor.LanguageHyperlinkDetector.name"
+            targetId="com.wudsn.ide.lng.editor.LanguageHyperlinkDetectorEditorTarget">
       </hyperlinkDetector>
    </extension>
    <extension
          point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectorTargets">
       <target
-            id="com.wudsn.ide.lng.editor.AssemblerHyperlinkDetectorEditorTarget"
-            name="%com.wudsn.ide.lng.editor.AssemblerHyperlinkDetectorEditorTarget.name">
+            id="com.wudsn.ide.lng.editor.LanguageHyperlinkDetectorEditorTarget"
+            name="%com.wudsn.ide.lng.editor.LanguageHyperlinkDetectorEditorTarget.name">
       </target>
    </extension>
    <extension
          point="org.eclipse.ui.commands">
       <category
-            id="com.wudsn.ide.lng.editor.AssemblerEditorCommands"
-            name="%com.wudsn.ide.lng.editor.AssemblerEditorCommands.name">
+            id="com.wudsn.ide.lng.editor.LanguageEditorCommands"
+            name="%com.wudsn.ide.lng.editor.LanguageEditorCommands.name">
       </category>
       <command
-            categoryId="com.wudsn.ide.lng.editor.AssemblerEditorCommands"
-            id="com.wudsn.ide.lng.editor.AssemblerEditorOpenSourceFolderCommand"
-            name="%com.wudsn.ide.lng.editor.AssemblerEditorOpenSourceFolderCommand.name">
+            categoryId="com.wudsn.ide.lng.editor.LanguageEditorCommands"
+            id="com.wudsn.ide.lng.editor.LanguageEditorOpenSourceFolderCommand"
+            name="%com.wudsn.ide.lng.editor.LanguageEditorOpenSourceFolderCommand.name">
       </command>
       <command
-            categoryId="com.wudsn.ide.lng.editor.AssemblerEditorCommands"
-            id="com.wudsn.ide.lng.editor.AssemblerEditorOpenOutputFolderCommand"
-            name="%com.wudsn.ide.lng.editor.AssemblerEditorOpenOutputFolderCommand.name">
+            categoryId="com.wudsn.ide.lng.editor.LanguageEditorCommands"
+            id="com.wudsn.ide.lng.editor.LanguageEditorOpenOutputFolderCommand"
+            name="%com.wudsn.ide.lng.editor.LanguageEditorOpenOutputFolderCommand.name">
       </command>
       <command
-            categoryId="com.wudsn.ide.lng.editor.AssemblerEditorCommands"
-            id="com.wudsn.ide.lng.editor.AssemblerEditorCompileCommand"
-            name="%com.wudsn.ide.lng.editor.AssemblerEditorCompileCommand.name">
+            categoryId="com.wudsn.ide.lng.editor.LanguageEditorCommands"
+            id="com.wudsn.ide.lng.editor.LanguageEditorCompileCommand"
+            name="%com.wudsn.ide.lng.editor.LanguageEditorCompileCommand.name">
       </command>
       <command
-            categoryId="com.wudsn.ide.lng.editor.AssemblerEditorCommands"
-            id="com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunCommand"
-            name="%com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunCommand.name">
+            categoryId="com.wudsn.ide.lng.editor.LanguageEditorCommands"
+            id="com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunCommand"
+            name="%com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunCommand.name">
       </command>
       <command
-            categoryId="com.wudsn.ide.lng.editor.AssemblerEditorCommands"
-            id="com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunWithCommand"
-            name="%com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunWithCommand.name">
+            categoryId="com.wudsn.ide.lng.editor.LanguageEditorCommands"
+            id="com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunWithCommand"
+            name="%com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunWithCommand.name">
       </command>
       <command
-            categoryId="com.wudsn.ide.lng.editor.AssemblerEditorCommands"
-            id="com.wudsn.ide.lng.editor.AssemblerEditorCompilerHelpCommand"
-            name="%com.wudsn.ide.lng.editor.AssemblerEditorCompilerHelpCommand.name">
+            categoryId="com.wudsn.ide.lng.editor.LanguageEditorCommands"
+            id="com.wudsn.ide.lng.editor.LanguageEditorCompilerHelpCommand"
+            name="%com.wudsn.ide.lng.editor.LanguageEditorCompilerHelpCommand.name">
       </command>
       <command
-            categoryId="com.wudsn.ide.lng.editor.AssemblerEditorCommands"
-            id="com.wudsn.ide.lng.editor.AssemblerEditorOpenDeclarationCommand"
-            name="%com.wudsn.ide.lng.editor.AssemblerEditorOpenDeclarationCommand.name">
+            categoryId="com.wudsn.ide.lng.editor.LanguageEditorCommands"
+            id="com.wudsn.ide.lng.editor.LanguageEditorOpenDeclarationCommand"
+            name="%com.wudsn.ide.lng.editor.LanguageEditorOpenDeclarationCommand.name">
       </command>
       <command
-            categoryId="com.wudsn.ide.lng.editor.AssemblerEditorCommands"
-            id="com.wudsn.ide.lng.editor.AssemblerEditorToggleCommentCommand"
-            name="%com.wudsn.ide.lng.editor.AssemblerEditorToggleCommentCommand.name">
+            categoryId="com.wudsn.ide.lng.editor.LanguageEditorCommands"
+            id="com.wudsn.ide.lng.editor.LanguageEditorToggleCommentCommand"
+            name="%com.wudsn.ide.lng.editor.LanguageEditorToggleCommentCommand.name">
       </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="com.wudsn.ide.lng.editor.AssemblerEditorOpenFolderCommandHandler"
-            commandId="com.wudsn.ide.lng.editor.AssemblerEditorOpenSourceFolderCommand">
+            class="com.wudsn.ide.lng.editor.LanguageEditorOpenFolderCommandHandler"
+            commandId="com.wudsn.ide.lng.editor.LanguageEditorOpenSourceFolderCommand">
          <activeWhen>
             <with
                   variable="activeEditor">
                <instanceof
-                     value="com.wudsn.ide.lng.editor.AssemblerEditor">
+                     value="com.wudsn.ide.lng.editor.LanguageEditor">
                </instanceof>
             </with></activeWhen>
       </handler>
       <handler
-            class="com.wudsn.ide.lng.editor.AssemblerEditorOpenFolderCommandHandler"
-            commandId="com.wudsn.ide.lng.editor.AssemblerEditorOpenOutputFolderCommand">
+            class="com.wudsn.ide.lng.editor.LanguageEditorOpenFolderCommandHandler"
+            commandId="com.wudsn.ide.lng.editor.LanguageEditorOpenOutputFolderCommand">
          <activeWhen>
             <with
                   variable="activeEditor">
                <instanceof
-                     value="com.wudsn.ide.lng.editor.AssemblerEditor">
+                     value="com.wudsn.ide.lng.editor.LanguageEditor">
                </instanceof>
             </with>
          </activeWhen>
       </handler>
       <handler
-            class="com.wudsn.ide.lng.editor.AssemblerEditorCompileCommandHandler"
-            commandId="com.wudsn.ide.lng.editor.AssemblerEditorCompileCommand">
+            class="com.wudsn.ide.lng.editor.LanguageEditorCompileCommandHandler"
+            commandId="com.wudsn.ide.lng.editor.LanguageEditorCompileCommand">
          <activeWhen>
             <with
                   variable="activeEditor">
                <instanceof
-                     value="com.wudsn.ide.lng.editor.AssemblerEditor">
+                     value="com.wudsn.ide.lng.editor.LanguageEditor">
                </instanceof>
             </with>
          </activeWhen>
       </handler>
       <handler
-            class="com.wudsn.ide.lng.editor.AssemblerEditorCompileCommandHandler"
-            commandId="com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunCommand">
+            class="com.wudsn.ide.lng.editor.LanguageEditorCompileCommandHandler"
+            commandId="com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunCommand">
          <activeWhen>
             <with
                   variable="activeEditor">
                <instanceof
-                     value="com.wudsn.ide.lng.editor.AssemblerEditor">
+                     value="com.wudsn.ide.lng.editor.LanguageEditor">
                </instanceof>
             </with>
          </activeWhen>
       </handler>
       <handler
-            class="com.wudsn.ide.lng.editor.AssemblerEditorCompileCommandHandler"
-            commandId="com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunWithCommand">
+            class="com.wudsn.ide.lng.editor.LanguageEditorCompileCommandHandler"
+            commandId="com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunWithCommand">
          <activeWhen>
             <with
                   variable="activeEditor">
                <instanceof
-                     value="com.wudsn.ide.lng.editor.AssemblerEditor">
+                     value="com.wudsn.ide.lng.editor.LanguageEditor">
                </instanceof>
             </with>
          </activeWhen>
       </handler>
       <handler
-            class="com.wudsn.ide.lng.editor.AssemblerEditorCompilerHelpCommandHandler"
-            commandId="com.wudsn.ide.lng.editor.AssemblerEditorCompilerHelpCommand">
+            class="com.wudsn.ide.lng.editor.LanguageEditorCompilerHelpCommandHandler"
+            commandId="com.wudsn.ide.lng.editor.LanguageEditorCompilerHelpCommand">
          <activeWhen>
             <with
                   variable="activeEditor">
                <instanceof
-                     value="com.wudsn.ide.lng.editor.AssemblerEditor">
+                     value="com.wudsn.ide.lng.editor.LanguageEditor">
                </instanceof>
             </with>
          </activeWhen>
       </handler>
       <handler
-            class="com.wudsn.ide.lng.editor.AssemblerEditorOpenDeclarationCommandHandler"
-            commandId="com.wudsn.ide.lng.editor.AssemblerEditorOpenDeclarationCommand">
+            class="com.wudsn.ide.lng.editor.LanguageEditorOpenDeclarationCommandHandler"
+            commandId="com.wudsn.ide.lng.editor.LanguageEditorOpenDeclarationCommand">
          <activeWhen>
             <with
                   variable="activeEditor">
                <instanceof
-                     value="com.wudsn.ide.lng.editor.AssemblerEditor">
+                     value="com.wudsn.ide.lng.editor.LanguageEditor">
                </instanceof>
             </with>
          </activeWhen>
@@ -182,25 +182,25 @@
    <extension
          point="org.eclipse.ui.bindings">
       <key
-            commandId="com.wudsn.ide.lng.editor.AssemblerEditorCompileCommand"
+            commandId="com.wudsn.ide.lng.editor.LanguageEditorCompileCommand"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+M2+9">
       </key>
       <key
-            commandId="com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunCommand"
+            commandId="com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunCommand"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+M2+0">
       </key>
       <key
-            commandId="com.wudsn.ide.lng.editor.AssemblerEditorToggleCommentCommand"
+            commandId="com.wudsn.ide.lng.editor.LanguageEditorToggleCommentCommand"
             contextId="org.eclipse.ui.textEditorScope"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+7">
       </key>
       <key
-            commandId="com.wudsn.ide.lng.editor.AssemblerEditorOpenDeclarationCommand"
+            commandId="com.wudsn.ide.lng.editor.LanguageEditorOpenDeclarationCommand"
             contextId="org.eclipse.ui.textEditorScope"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="F3">
@@ -217,60 +217,60 @@
       <menuContribution
             locationURI="menu:org.eclipse.ui.main.menu?after=additions">
          <menu
-               id="com.wudsn.ide.lng.editor.AssemblerEditorAssemblerMenu"
-               label="%com.wudsn.ide.lng.editor.AssemblerEditorAssemblerMenu.label"
-               mnemonic="%com.wudsn.ide.lng.editor.AssemblerEditorAssemblerMenu.mnemonic">
+               id="com.wudsn.ide.lng.editor.LanguageEditorCompilerMenu"
+               label="%com.wudsn.ide.lng.editor.LanguageEditorCompilerMenu.label"
+               mnemonic="%com.wudsn.ide.lng.editor.LanguageEditorCompilerMenu.mnemonic">
             <visibleWhen
                   checkEnabled="false">
                <with
                      variable="activeEditor">
                   <instanceof
-                        value="com.wudsn.ide.lng.editor.AssemblerEditor">
+                        value="com.wudsn.ide.lng.editor.LanguageEditor">
                   </instanceof>
                </with>
             </visibleWhen>
             <command
-                  commandId="com.wudsn.ide.lng.editor.AssemblerEditorOpenSourceFolderCommand"
-                  mnemonic="%com.wudsn.ide.lng.editor.AssemblerEditorOpenSourceFolderCommand.mnemonic">
+                  commandId="com.wudsn.ide.lng.editor.LanguageEditorOpenSourceFolderCommand"
+                  mnemonic="%com.wudsn.ide.lng.editor.LanguageEditorOpenSourceFolderCommand.mnemonic">
             </command>
             <command
-                  commandId="com.wudsn.ide.lng.editor.AssemblerEditorOpenOutputFolderCommand"
-                  mnemonic="%com.wudsn.ide.lng.editor.AssemblerEditorOpenOutputFolderCommand.mnemonic">
+                  commandId="com.wudsn.ide.lng.editor.LanguageEditorOpenOutputFolderCommand"
+                  mnemonic="%com.wudsn.ide.lng.editor.LanguageEditorOpenOutputFolderCommand.mnemonic">
             </command>
             <separator
-                  name="com.wudsn.ide.lng.editor.AssemblerEditorAssemblerMenuSeparator1"
+                  name="com.wudsn.ide.lng.editor.LanguageEditorCompilerMenuSeparator1"
                   visible="true">
             </separator>
             <command
-                  commandId="com.wudsn.ide.lng.editor.AssemblerEditorCompileCommand"
-                  id="com.wudsn.ide.lng.editor.AssemblerEditorCompileCommand"
-                  mnemonic="%com.wudsn.ide.lng.editor.AssemblerEditorCompileCommand.mnemonic">
+                  commandId="com.wudsn.ide.lng.editor.LanguageEditorCompileCommand"
+                  id="com.wudsn.ide.lng.editor.LanguageEditorCompileCommand"
+                  mnemonic="%com.wudsn.ide.lng.editor.LanguageEditorCompileCommand.mnemonic">
             </command>
             <command
-                  commandId="com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunCommand"
-                  id="com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunCommand"
-                  mnemonic="%com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunCommand.mnemonic">
+                  commandId="com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunCommand"
+                  id="com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunCommand"
+                  mnemonic="%com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunCommand.mnemonic">
             </command>
             <separator
-                  name="com.wudsn.ide.lng.editor.AssemblerEditorAssemblerMenuSeparator2"
+                  name="com.wudsn.ide.lng.editor.LanguageEditorCompilerMenuSeparator2"
                   visible="true">
             </separator>
             <command
-                  commandId="com.wudsn.ide.lng.editor.AssemblerEditorCompilerHelpCommand"
-                  mnemonic="%com.wudsn.ide.lng.editor.AssemblerEditorCompilerHelpCommand.mnemonic">
+                  commandId="com.wudsn.ide.lng.editor.LanguageEditorCompilerHelpCommand"
+                  mnemonic="%com.wudsn.ide.lng.editor.LanguageEditorCompilerHelpCommand.mnemonic">
             </command>
          </menu>
       </menuContribution>
       
       <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
-            label="%com.wudsn.ide.lng.editor.AssemblerEditorAssemblerMenu.label"
+            label="%com.wudsn.ide.lng.editor.LanguageEditorCompilerMenu.label"
          <toolbar
-               id="com.wudsn.ide.lng.editor.AssemblerEditorToolbar"
-               label="%com.wudsn.ide.lng.editor.AssemblerEditorAssemblerToolbar.label">
+               id="com.wudsn.ide.lng.editor.LanguageEditorToolbar"
+               label="%com.wudsn.ide.lng.editor.LanguageEditorCompilerToolbar.label">
             <dynamic
-                  class="com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunCommandMenu"
-                  id="com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunCommandMenu">
+                  class="com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunCommandMenu"
+                  id="com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunCommandMenu">
                <visibleWhen
                      checkEnabled="true">
                </visibleWhen>
@@ -282,16 +282,16 @@
       <menuContribution
             locationURI="popup:#TextEditorContext?after=com.wudsn.ide.base.editor.CommonOpenFolderCommand">
          <command
-               commandId="com.wudsn.ide.lng.editor.AssemblerEditorOpenDeclarationCommand"
-               id="com.wudsn.ide.lng.editor.AssemblerEditorOpenDeclarationCommand"
+               commandId="com.wudsn.ide.lng.editor.LanguageEditorOpenDeclarationCommand"
+               id="com.wudsn.ide.lng.editor.LanguageEditorOpenDeclarationCommand"
                style="push">
          </command>
       </menuContribution>
       <menuContribution
             locationURI="popup:#TextEditorContext?after=com.wudsn.ide.base.editor.text.TextEditorSortMenu">
          <command
-               commandId="com.wudsn.ide.lng.editor.AssemblerEditorToggleCommentCommand"
-               id="com.wudsn.ide.lng.editor.AssemblerEditorToggleCommentCommand"
+               commandId="com.wudsn.ide.lng.editor.LanguageEditorToggleCommentCommand"
+               id="com.wudsn.ide.lng.editor.LanguageEditorToggleCommentCommand"
                style="push">
          </command>
          <command
@@ -304,7 +304,7 @@
    <extension
          point="org.eclipse.help.toc">
       <tocProvider
-            class="com.wudsn.ide.lng.help.AssemblerTocProvider">
+            class="com.wudsn.ide.lng.help.LanguageTocProvider">
       </tocProvider>
       <tocIcon
             id="pdf"
@@ -314,24 +314,24 @@
    <extension
          point="org.eclipse.help.contentProducer">
       <contentProducer
-            producer="com.wudsn.ide.lng.help.AssemblerHelpContentProducer">
+            producer="com.wudsn.ide.lng.help.LanguageHelpContentProducer">
       </contentProducer>
    </extension>
     <extension
-          name="Assembler Action Set for Toolbar"
+          name="Compiler Action Set for Toolbar"
           point="org.eclipse.ui.actionSets">
     <actionSet
-          id="com.wudsn.ide.lng.editor.AssemblerEditorAssemblerActionSet"
-          label="%com.wudsn.ide.lng.editor.AssemblerEditorAssemblerMenu.label"
+          id="com.wudsn.ide.lng.editor.LanguageEditorCompilerActionSet"
+          label="%com.wudsn.ide.lng.editor.LanguageEditorCompilerMenu.label"
           visible="true">
        <action
-             class="com.wudsn.ide.lng.editor.AssemblerEditorCompileCommandDelegate"
-             definitionId="com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunCommand"
+             class="com.wudsn.ide.lng.editor.LanguageEditorCompileCommandDelegate"
+             definitionId="com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunCommand"
              icon="icons/hardware-generic-16x16.gif"
-             id="com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunAction"
-             label="%com.wudsn.ide.lng.editor.AssemblerEditorCompileAndRunCommand.name"
+             id="com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunAction"
+             label="%com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunCommand.name"
              style="pulldown"
-             toolbarPath="com.wudsn.ide.lng.editor.AssemblerEditorToolbar">
+             toolbarPath="com.wudsn.ide.lng.editor.LanguageEditorToolbar">
        </action>
     </actionSet>
  </extension>
@@ -352,23 +352,23 @@
  <extension
        point="org.eclipse.debug.core.breakpoints">
     <breakpoint
-          class="com.wudsn.ide.lng.editor.AssemblerBreakpoint"
-          id="assemblerBreakpoint"
+          class="com.wudsn.ide.lng.breakpoint.LanguageBreakpoint"
+          id="languageBreakpoint"
           markerType="org.eclipse.debug.core.lineBreakpointMarker"
-          name="%com.wudsn.ide.lng.editor.AssemblerBreakpoint.name">
+          name="%com.wudsn.ide.lng.editor.LanguageBreakpoint.name">
     </breakpoint>
  </extension>
  <extension
        point="org.eclipse.debug.ui.toggleBreakpointsTargetFactories">
     <toggleTargetFactory
-          class="com.wudsn.ide.lng.editor.AssemblerBreakpointAdapterFactory"
-          id="com.wudsn.ide.lng.editor.AssemblerBreakpointAdapterFactory">
+          class="com.wudsn.ide.lng.breakpoint.LanguageBreakpointAdapterFactory"
+          id="com.wudsn.ide.lng.editor.LanguageBreakpointAdapterFactory">
     </toggleTargetFactory>
  </extension>
  <extension
        point="org.eclipse.debug.ui.debugModelPresentations">
     <debugModelPresentation
-          class="com.wudsn.ide.lng.editor.AssemblerBreakpoinDebugModelPresentation"
+          class="com.wudsn.ide.lng.breakpoint.LanguageBreakpoinDebugModelPresentation"
           id="com.wudsn.ide.asm">
     </debugModelPresentation>
  </extension>
@@ -383,12 +383,12 @@
              class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
              definitionId="org.eclipse.debug.ui.commands.ToggleBreakpoint"
              id="org.eclipse.debug.ui.commands.ToggleBreakpoint"
-                label="%com.wudsn.ide.lng.editor.AssemblerEditorToggleBreakpointCommand.name"
+                label="%com.wudsn.ide.lng.editor.LanguageEditorToggleBreakpointCommand.name"
              menubarPath="additions">
        </action>
        <action
              class="org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
-             id="com.wudsn.ide.lng.editor.AssemblerEditorRulerEnableDisableBreakpointAction"
+             id="com.wudsn.ide.lng.editor.LanguageEditorRulerEnableDisableBreakpointAction"
              label="Enable/Disable Breakpoint (label is overridden by action at runtime)"
              menubarPath="additions">
        </action>
@@ -412,7 +412,7 @@
        point="org.eclipse.ui.views">
     <view
           category="org.eclipse.debug.ui"
-          class="com.wudsn.ide.lng.editor.CompilerSymbolsView"
+          class="com.wudsn.ide.lng.symbol.CompilerSymbolsView"
           icon="icons/outline-label-definition-16x16.gif"
           id="com.wudsn.ide.lng.editor.CompilerSymbolsView"
           name="%com.wudsn.ide.lng.editor.CompilerSymbolsView.name"

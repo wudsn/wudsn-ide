@@ -33,9 +33,9 @@ import org.eclipse.ui.menus.WorkbenchWindowControlContribution;
 // TODO: This should become a replacement for the action/actionSet based dynamic menu
 // See also https://wiki.eclipse.org/Menu_Contributions
 // Asked at https://www.eclipse.org/forums/index.php/m/1833428/#msg_1833428
-public final class AssemblerEditorCompileAndRunCommandMenu extends WorkbenchWindowControlContribution {
+public final class LanguageEditorCompileAndRunCommandMenu extends WorkbenchWindowControlContribution {
 
-	public AssemblerEditorCompileAndRunCommandMenu() {
+	public LanguageEditorCompileAndRunCommandMenu() {
 		if (System.getProperty("user.name").equals("JAC")) {
 			new Exception("JAC! Test for Startup!").printStackTrace();
 		}

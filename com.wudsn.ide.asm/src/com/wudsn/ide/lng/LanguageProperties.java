@@ -26,19 +26,19 @@ import org.eclipse.core.resources.IMarker;
 
 import com.wudsn.ide.base.common.StringUtility;
 
-public final class AssemblerProperties {
+public final class LanguageProperties {
 
 	/**
 	 * A single key value pair.
 	 * 
 	 * @since 1.6.1
 	 */
-	public static final class AssemblerProperty {
+	public static final class LanguageProperty {
 		public final String key;
 		public final String value;
 		public final int lineNumber;
 
-		AssemblerProperty(String key, String value, int lineNumber) {
+		LanguageProperty(String key, String value, int lineNumber) {
 			this.key = key;
 			this.value = value;
 			this.lineNumber = lineNumber;
@@ -51,11 +51,11 @@ public final class AssemblerProperties {
 	}
 
 	@SuppressWarnings("serial")
-	public final static class InvalidAssemblerPropertyException extends Exception {
-		public final AssemblerProperty property;
+	public final static class InvalidLanguagePropertyException extends Exception {
+		public final LanguageProperty property;
 		public final IMarker marker;
 
-		public InvalidAssemblerPropertyException(AssemblerProperty property, IMarker marker) {
+		public InvalidLanguagePropertyException(LanguageProperty property, IMarker marker) {
 			if (property == null) {
 				throw new IllegalArgumentException("Parameter 'property' must not be null.");
 			}
@@ -75,13 +75,13 @@ public final class AssemblerProperties {
 	public final static String OUTPUT_FILE_EXTENSION = "@com.wudsn.ide.lng.outputfileextension";
 	public final static String OUTPUT_FILE = "@com.wudsn.ide.lng.outputfile";
 
-	private Map<String, AssemblerProperty> properties;
+	private Map<String, LanguageProperty> properties;
 
 	/**
 	 * Creation is public.
 	 */
-	public AssemblerProperties() {
-		properties = new TreeMap<String, AssemblerProperties.AssemblerProperty>();
+	public LanguageProperties() {
+		properties = new TreeMap<String, LanguageProperties.LanguageProperty>();
 	}
 
 	/**
@@ -109,7 +109,7 @@ public final class AssemblerProperties {
 					"Parameter 'lineNumber' must not be negative. Specified value is " + lineNumber + ".");
 		}
 		if (!properties.containsKey(key)) {
-			AssemblerProperty property = new AssemblerProperty(key, value, lineNumber);
+			LanguageProperty property = new LanguageProperty(key, value, lineNumber);
 			properties.put(key, property);
 		}
 	}
@@ -122,7 +122,7 @@ public final class AssemblerProperties {
 	 * 
 	 * @since 1.6.1
 	 */
-	public AssemblerProperty get(String key) {
+	public LanguageProperty get(String key) {
 		if (key == null) {
 			throw new IllegalArgumentException("Parameter 'key' must not be null.");
 		}

@@ -34,8 +34,8 @@ import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerOutputFolderMode;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
-import com.wudsn.ide.lng.editor.AssemblerContentAssistProcessorDefaultCase;
-import com.wudsn.ide.lng.editor.AssemblerEditorCompileCommandPositioningMode;
+import com.wudsn.ide.lng.editor.LanguageContentAssistProcessorDefaultCase;
+import com.wudsn.ide.lng.editor.LanguageEditorCompileCommandPositioningMode;
 import com.wudsn.ide.lng.runner.RunnerId;
 
 /**
@@ -99,11 +99,11 @@ public final class LanguagePreferencesInitializer extends AbstractPreferenceInit
 
 		// Content assist.
 		store.setDefault(LanguagePreferencesConstants.EDITOR_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE,
-				AssemblerContentAssistProcessorDefaultCase.LOWER_CASE);
+				LanguageContentAssistProcessorDefaultCase.LOWER_CASE);
 
 		// Compiling.
 		store.setDefault(LanguagePreferencesConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE,
-				AssemblerEditorCompileCommandPositioningMode.FIRST_ERROR_OR_WARNING);
+				LanguageEditorCompileCommandPositioningMode.FIRST_ERROR_OR_WARNING);
 	}
 
 	private void initializeCompilerPreferences(IPreferenceStore store) {

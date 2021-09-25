@@ -43,50 +43,50 @@ import com.wudsn.ide.lng.preferences.LanguagePreferencesChangeListener;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants;
 
 /**
- * Source configuration for the assembler editor. Provides syntax highlighting.
+ * Source configuration for the language editor. Provides syntax highlighting.
  * 
- * Created and disposed by {@link AssemblerEditor}.
+ * Created and disposed by {@link LanguageEditor}.
  * 
  * @author Peter Dell
  * @author Andy Reek
  */
-final class AssemblerSourceViewerConfiguration extends TextSourceViewerConfiguration
+final class LanguageSourceViewerConfiguration extends TextSourceViewerConfiguration
 		implements LanguagePreferencesChangeListener {
 
 	/**
-	 * The underlying assembler editor.
+	 * The underlying language editor.
 	 */
-	private AssemblerEditor editor;
+	private LanguageEditor editor;
 
 	/**
 	 * Rule scanner for single line comments.
 	 */
-	private AssemblerRuleBasedScanner commentSingleScanner;
+	private LanguageRuleBasedScanner commentSingleScanner;
 
 	/**
 	 * Rule scanner for multiple lines comments.
 	 */
-	private AssemblerRuleBasedScanner commentMultipleScanner;
+	private LanguageRuleBasedScanner commentMultipleScanner;
 
 	/**
 	 * Rule scanner for strings.
 	 */
-	private AssemblerRuleBasedScanner stringScanner;
+	private LanguageRuleBasedScanner stringScanner;
 
 	/**
-	 * Rule scanner for assembler instructions.
+	 * Rule scanner for language instructions.
 	 */
-	private AssemblerSourceScanner instructionScanner;
+	private LanguageSourceScanner instructionScanner;
 
 	/**
-	 * Creates a new instance. Called by {@link AssemblerEditor#initializeEditor()}.
+	 * Creates a new instance. Called by {@link LanguageEditor#initializeEditor()}.
 	 * 
-	 * @param editor          The underlying assembler editor, not
+	 * @param editor          The underlying language editor, not
 	 *                        <code>null</code>.
 	 * 
 	 * @param preferenceStore The preferences store, not <code>null</code>.
 	 */
-	AssemblerSourceViewerConfiguration(AssemblerEditor editor, IPreferenceStore preferenceStore) {
+	LanguageSourceViewerConfiguration(LanguageEditor editor, IPreferenceStore preferenceStore) {
 		super(preferenceStore);
 		if (editor == null) {
 			throw new IllegalArgumentException("Parameter 'editor' must not be null.");
@@ -98,11 +98,11 @@ final class AssemblerSourceViewerConfiguration extends TextSourceViewerConfigura
 
 	/**
 	 * Called by
-	 * {@link AssemblerEditor#updateIdentifiers(com.wudsn.ide.lng.compiler.parser.CompilerSourceFile)}
+	 * {@link LanguageEditor#updateIdentifiers(com.wudsn.ide.lng.compiler.parser.CompilerSourceFile)}
 	 * 
 	 * @return The instruction scanner, not <code>null</code>.
 	 */
-	final AssemblerSourceScanner getAssemblerInstructionScanner() {
+	final LanguageSourceScanner getInstructionScanner() {
 		if (instructionScanner == null) {
 			throw new IllegalStateException("Instruction scanner not yet created");
 		}
@@ -111,7 +111,7 @@ final class AssemblerSourceViewerConfiguration extends TextSourceViewerConfigura
 
 	/**
 	 * Remove all rule scanners from property change listener. Used by
-	 * {@link AssemblerEditor#dispose()}.
+	 * {@link LanguageEditor#dispose()}.
 	 */
 	final void dispose() {
 		if (commentSingleScanner != null) {
@@ -154,7 +154,7 @@ final class AssemblerSourceViewerConfiguration extends TextSourceViewerConfigura
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
 		ContentAssistant assistant = new ContentAssistant();
-		assistant.setContentAssistProcessor(new AssemblerContentAssistProcessor(editor),
+		assistant.setContentAssistProcessor(new LanguageContentAssistProcessor(editor),
 				IDocument.DEFAULT_CONTENT_TYPE);
 		assistant.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_ABOVE);
 		assistant.enableAutoActivation(true);
@@ -173,24 +173,24 @@ final class AssemblerSourceViewerConfiguration extends TextSourceViewerConfigura
 		PresentationReconciler reconciler = new PresentationReconciler();
 		DefaultDamagerRepairer dr;
 
-		commentSingleScanner = new AssemblerRuleBasedScanner(
+		commentSingleScanner = new LanguageRuleBasedScanner(
 				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT);
 		dr = new DefaultDamagerRepairer(commentSingleScanner);
 		reconciler.setDamager(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_SINGLE);
 		reconciler.setRepairer(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_SINGLE);
 
-		commentMultipleScanner = new AssemblerRuleBasedScanner(
+		commentMultipleScanner = new LanguageRuleBasedScanner(
 				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT);
 		dr = new DefaultDamagerRepairer(commentMultipleScanner);
 		reconciler.setDamager(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_MULTIPLE);
 		reconciler.setRepairer(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_MULTIPLE);
 
-		stringScanner = new AssemblerRuleBasedScanner(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_STRING);
+		stringScanner = new LanguageRuleBasedScanner(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_STRING);
 		dr = new DefaultDamagerRepairer(stringScanner);
 		reconciler.setDamager(dr, CompilerSourcePartitionScanner.PARTITION_STRING);
 		reconciler.setRepairer(dr, CompilerSourcePartitionScanner.PARTITION_STRING);
 
-		instructionScanner = new AssemblerSourceScanner(editor);
+		instructionScanner = new LanguageSourceScanner(editor);
 		dr = new DefaultDamagerRepairer(instructionScanner);
 		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
@@ -203,7 +203,7 @@ final class AssemblerSourceViewerConfiguration extends TextSourceViewerConfigura
 		if (sourceViewer == null) {
 			throw new IllegalArgumentException("Parameter 'sourceViewer' must not be null.");
 		}
-		IReconcilingStrategy reconcilingStrategy = new AssemblerReconcilingStategy(editor);
+		IReconcilingStrategy reconcilingStrategy = new LanguageReconcilingStategy(editor);
 
 		MonoReconciler reconciler = new MonoReconciler(reconcilingStrategy, false);
 		reconciler.setProgressMonitor(new NullProgressMonitor());
@@ -215,7 +215,7 @@ final class AssemblerSourceViewerConfiguration extends TextSourceViewerConfigura
 	@Override
 	protected Map<String, IAdaptable> getHyperlinkDetectorTargets(ISourceViewer sourceViewer) {
 		Map<String, IAdaptable> targets = super.getHyperlinkDetectorTargets(sourceViewer);
-		targets.put(AssemblerHyperlinkDetector.TARGET, editor);
+		targets.put(LanguageHyperlinkDetector.TARGET, editor);
 		return targets;
 	}
 

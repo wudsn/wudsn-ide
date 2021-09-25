@@ -30,20 +30,20 @@ import com.wudsn.ide.lng.compiler.CompilerFiles;
  * 
  * @author Peter Dell
  */
-public final class AssemblerEditorOpenFolderCommandHandler extends AssemblerEditorFilesCommandHandler {
+public final class LanguageEditorOpenFolderCommandHandler extends LanguageEditorFilesCommandHandler {
 
-	public static final String OPEN_SOURCE_FOLDER = "com.wudsn.ide.lng.editor.AssemblerEditorOpenSourceFolderCommand";
-	public static final String OPEN_OUTPUT_FOLDER = "com.wudsn.ide.lng.editor.AssemblerEditorOpenOutputFolderCommand";
+	public static final String OPEN_SOURCE_FOLDER = "com.wudsn.ide.lng.editor.LanguageEditorOpenSourceFolderCommand";
+	public static final String OPEN_OUTPUT_FOLDER = "com.wudsn.ide.lng.editor.LanguageEditorOpenOutputFolderCommand";
 
 	@Override
-	protected void execute(ExecutionEvent event, AssemblerEditor assemblerEditor, CompilerFiles files)
+	protected void execute(ExecutionEvent event, LanguageEditor languageEditor, CompilerFiles files)
 			throws ExecutionException {
 
 		if (event == null) {
 			throw new IllegalArgumentException("Parameter 'event' must not be null.");
 		}
-		if (assemblerEditor == null) {
-			throw new IllegalArgumentException("Parameter 'assemblerEditor' must not be null.");
+		if (languageEditor == null) {
+			throw new IllegalArgumentException("Parameter 'languageEditor' must not be null.");
 		}
 		if (files == null) {
 			throw new IllegalArgumentException("Parameter 'files' must not be null.");

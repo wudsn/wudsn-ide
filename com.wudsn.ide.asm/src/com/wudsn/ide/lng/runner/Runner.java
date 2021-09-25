@@ -21,8 +21,8 @@ package com.wudsn.ide.lng.runner;
 
 import java.io.File;
 
+import com.wudsn.ide.lng.breakpoint.LanguageBreakpoint;
 import com.wudsn.ide.lng.compiler.CompilerFiles;
-import com.wudsn.ide.lng.editor.AssemblerBreakpoint;
 
 /**
  * Base class for runner implementations.
@@ -67,7 +67,7 @@ public class Runner {
 	/**
 	 * Creates the {@link File} object for the breakpoints file.
 	 * 
-	 * @param files The assembler editor file containing the path to the output
+	 * @param files The language editor file containing the path to the output
 	 *              folder and file, not <code>null</code>.
 	 * 
 	 * @return The file to created (if there are breakpoints) or deleted (if there
@@ -95,7 +95,7 @@ public class Runner {
 	 *         are active.
 	 * @since 1.6.1
 	 */
-	public int createBreakpointsFileContent(AssemblerBreakpoint[] breakpoints, StringBuilder breakpointBuilder) {
+	public int createBreakpointsFileContent(LanguageBreakpoint[] breakpoints, StringBuilder breakpointBuilder) {
 		if (breakpoints == null) {
 			throw new IllegalArgumentException("Parameter 'breakpoints' must not be null.");
 		}

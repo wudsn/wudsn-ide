@@ -17,7 +17,7 @@
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.wudsn.ide.lng.editor;
+package com.wudsn.ide.lng.breakpoint;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -34,7 +34,7 @@ import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Texts;
 
 /**
- * Implementation class for assembler breakpoints. See
+ * Implementation class for language breakpoints. See
  * http://eclipse.org/articles/Article-Debugger/how-to.html for details.
  * 
  * @author Peter Dell
@@ -42,7 +42,7 @@ import com.wudsn.ide.lng.Texts;
  * 
  */
 
-public final class AssemblerBreakpoint extends LineBreakpoint {
+public final class LanguageBreakpoint extends LineBreakpoint {
 
 	/**
 	 * Attributes stored with the marker.
@@ -67,7 +67,7 @@ public final class AssemblerBreakpoint extends LineBreakpoint {
 	 * <code>setMarker(...)</code> method is called to restore this breakpoint's
 	 * attributes.
 	 */
-	public AssemblerBreakpoint() {
+	public LanguageBreakpoint() {
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public final class AssemblerBreakpoint extends LineBreakpoint {
 	 *                    <code>null</code>.
 	 * @throws CoreException if unable to create the breakpoint
 	 */
-	public AssemblerBreakpoint(final String editorId, IEditorInput editorInput, final IResource resource,
+	public LanguageBreakpoint(final String editorId, IEditorInput editorInput, final IResource resource,
 			final int lineNumber, final String description) throws CoreException {
 		if (editorId == null) {
 			throw new IllegalArgumentException("Parameter 'editorId' must not be null.");
@@ -129,7 +129,7 @@ public final class AssemblerBreakpoint extends LineBreakpoint {
 				marker.setAttribute(IBreakpoint.ENABLED, Boolean.TRUE);
 				marker.setAttribute(IMarker.LINE_NUMBER, lineNumber);
 				marker.setAttribute(IBreakpoint.ID, getModelIdentifier());
-				marker.setAttribute(IMarker.MESSAGE, TextUtility.format(Texts.COMPILER_BREAKPOINT_MARKER_MESSAGE,
+				marker.setAttribute(IMarker.MESSAGE, TextUtility.format(Texts.LANGUAGE_BREAKPOINT_MARKER_MESSAGE,
 						resource.getName(), NumberUtility.getLongValueDecimalString(lineNumber), description));
 
 			}

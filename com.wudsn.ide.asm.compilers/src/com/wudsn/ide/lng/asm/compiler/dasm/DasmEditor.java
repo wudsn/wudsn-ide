@@ -20,9 +20,9 @@
 package com.wudsn.ide.lng.asm.compiler.dasm;
 
 import com.wudsn.ide.lng.asm.compiler.CompilerId;
-import com.wudsn.ide.lng.editor.AssemblerEditor;
+import com.wudsn.ide.lng.editor.LanguageEditor;
 
-public final class DasmEditor extends AssemblerEditor {
+public final class DasmEditor extends LanguageEditor {
 
 	/**
 	 * Creation is public. Called by the extension "org.eclipse.ui.editors".

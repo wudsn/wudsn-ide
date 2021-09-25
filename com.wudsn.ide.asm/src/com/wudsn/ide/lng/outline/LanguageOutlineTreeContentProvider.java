@@ -17,7 +17,7 @@
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.wudsn.ide.lng.editor;
+package com.wudsn.ide.lng.outline;
 
 import java.util.List;
 
@@ -30,19 +30,20 @@ import com.wudsn.ide.base.common.Profiler;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceFile;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObject;
+import com.wudsn.ide.lng.editor.LanguageEditor;
 
 /**
- * Tree content provider to {@link AssemblerContentOutlinePage}.
+ * Tree content provider to {@link LanguageOutlinePage}.
  * 
  * @author Peter Dell
  * @author Andy Reek
  */
-final class AssemblerContentOutlineTreeContentProvider implements ITreeContentProvider {
+final class LanguageOutlineTreeContentProvider implements ITreeContentProvider {
 
 	/**
 	 * The surrounding content outline page.
 	 */
-	private final AssemblerContentOutlinePage assemblerContentOutlinePage;
+	private final LanguageOutlinePage languageOutlinePage;
 
 	/**
 	 * The last editor input which was parsed.
@@ -56,16 +57,16 @@ final class AssemblerContentOutlineTreeContentProvider implements ITreeContentPr
 
 	/**
 	 * Called by
-	 * {@link AssemblerContentOutlinePage#createControl(org.eclipse.swt.widgets.Composite)}
+	 * {@link LanguageOutlinePage#createControl(org.eclipse.swt.widgets.Composite)}
 	 * .
 	 * 
-	 * @param assemblerContentOutlinePage The outline page, not <code>null</code>.
+	 * @param languageOutlinePage The outline page, not <code>null</code>.
 	 */
-	AssemblerContentOutlineTreeContentProvider(AssemblerContentOutlinePage assemblerContentOutlinePage) {
-		if (assemblerContentOutlinePage == null) {
-			throw new IllegalArgumentException("Parameter 'assemblerContentOutlinePage' must not be null.");
+	LanguageOutlineTreeContentProvider(LanguageOutlinePage languageOutlinePage) {
+		if (languageOutlinePage == null) {
+			throw new IllegalArgumentException("Parameter 'languageOutlinePage' must not be null.");
 		}
-		this.assemblerContentOutlinePage = assemblerContentOutlinePage;
+		this.languageOutlinePage = languageOutlinePage;
 	}
 
 	/**
@@ -158,7 +159,7 @@ final class AssemblerContentOutlineTreeContentProvider implements ITreeContentPr
 	 */
 	private void parse() {
 
-		AssemblerEditor editor = this.assemblerContentOutlinePage.editor;
+		LanguageEditor editor = this.languageOutlinePage.editor;
 		IDocument document = editor.getDocumentProvider().getDocument(editor.getEditorInput());
 
 		if (document != null) {

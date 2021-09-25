@@ -40,7 +40,7 @@ import com.wudsn.ide.lng.preferences.LanguagePreferences;
  * 
  * @author Peter Dell
  */
-public final class AssemblerEditorCompilerHelpCommandHandler extends AbstractHandler {
+public final class LanguageEditorCompilerHelpCommandHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -49,14 +49,14 @@ public final class AssemblerEditorCompilerHelpCommandHandler extends AbstractHan
 
 		IEditorPart editor;
 		editor = HandlerUtil.getActiveEditorChecked(event);
-		if (!(editor instanceof AssemblerEditor)) {
+		if (!(editor instanceof LanguageEditor)) {
 			return null;
 		}
 
-		AssemblerEditor assemblerEditor;
-		assemblerEditor = (AssemblerEditor) editor;
+		LanguageEditor languageEditor;
+		languageEditor = (LanguageEditor) editor;
 
-		CompilerDefinition compilerDefinition = assemblerEditor.getCompilerDefinition();
+		CompilerDefinition compilerDefinition = languageEditor.getCompilerDefinition();
 		LanguagePreferences languagePreferences = LanguagePlugin.getInstance().getPreferences();
 		String compilerExecutablePath = languagePreferences.getCompilerExecutablePath(compilerDefinition.getId());
 

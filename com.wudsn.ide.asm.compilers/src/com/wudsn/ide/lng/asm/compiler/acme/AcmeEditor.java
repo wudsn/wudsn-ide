@@ -20,9 +20,9 @@
 package com.wudsn.ide.lng.asm.compiler.acme;
 
 import com.wudsn.ide.lng.asm.compiler.CompilerId;
-import com.wudsn.ide.lng.editor.AssemblerEditor;
+import com.wudsn.ide.lng.editor.LanguageEditor;
 
-public final class AcmeEditor extends AssemblerEditor {
+public final class AcmeEditor extends LanguageEditor {
 
 	/**
 	 * Creation is public. Called by the extension "org.eclipse.ui.editors".

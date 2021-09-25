@@ -25,12 +25,12 @@ package com.wudsn.ide.lng.editor;
  * @author Peter Dell
  * 
  */
-public final class AssemblerEditorCompileCommandPositioningMode {
+public final class LanguageEditorCompileCommandPositioningMode {
 
 	/**
 	 * Creation is private.
 	 */
-	private AssemblerEditorCompileCommandPositioningMode() {
+	private LanguageEditorCompileCommandPositioningMode() {
 
 	}
 

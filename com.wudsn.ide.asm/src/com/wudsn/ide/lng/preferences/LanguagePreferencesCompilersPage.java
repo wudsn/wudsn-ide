@@ -61,7 +61,7 @@ import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerOutputFolderMode;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
-import com.wudsn.ide.lng.editor.AssemblerEditor;
+import com.wudsn.ide.lng.editor.LanguageEditor;
 import com.wudsn.ide.lng.runner.RunnerDefinition;
 import com.wudsn.ide.lng.runner.RunnerId;
 import com.wudsn.ide.lng.runner.RunnerRegistry;
@@ -222,11 +222,11 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 			throw new IllegalArgumentException("Parameter 'workbench' must not be null.");
 		}
 		IEditorPart editor = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		if (editor instanceof AssemblerEditor) {
-			AssemblerEditor assemblerEditor;
-			assemblerEditor = (AssemblerEditor) editor;
-			activeCompilerId = assemblerEditor.getCompilerDefinition().getId();
-			activeRunnerId = assemblerEditor.getCompilerPreferences().getRunnerId();
+		if (editor instanceof LanguageEditor) {
+			LanguageEditor languageEditor;
+			languageEditor = (LanguageEditor) editor;
+			activeCompilerId = languageEditor.getCompilerDefinition().getId();
+			activeRunnerId = languageEditor.getCompilerPreferences().getRunnerId();
 		} else {
 			activeCompilerId = "";
 			activeRunnerId = "";

@@ -30,16 +30,16 @@ import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.compiler.CompilerFiles;
 
 /**
- * Base class for commands which operate on the current file of an assembler
+ * Base class for commands which operate on the current file of an language
  * editor, in case the file is within the work space. The base class ensures
- * that the corresponding command is disabled, if there is no active assembler
+ * that the corresponding command is disabled, if there is no active language
  * editor or the editor contains a file from outside of the work space.
  * 
  * @author Peter Dell
  */
-public abstract class AssemblerEditorFilesCommandHandler extends AbstractHandler {
+public abstract class LanguageEditorFilesCommandHandler extends AbstractHandler {
 
-	public AssemblerEditorFilesCommandHandler() {
+	public LanguageEditorFilesCommandHandler() {
 		super();
 	}
 
@@ -47,24 +47,24 @@ public abstract class AssemblerEditorFilesCommandHandler extends AbstractHandler
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IEditorPart editor;
 		editor = HandlerUtil.getActiveEditorChecked(event);
-		if (!(editor instanceof AssemblerEditor)) {
+		if (!(editor instanceof LanguageEditor)) {
 			return null;
 		}
 
-		AssemblerEditor assemblerEditor;
-		assemblerEditor = (AssemblerEditor) editor;
+		LanguageEditor languageEditor;
+		languageEditor = (LanguageEditor) editor;
 
 		CompilerFiles files;
-		files = AssemblerEditorFilesLogic.createInstance(assemblerEditor).createCompilerFiles();
+		files = LanguageEditorFilesLogic.createInstance(languageEditor).createCompilerFiles();
 
 		if (files != null) {
-			execute(event, assemblerEditor, files);
+			execute(event, languageEditor, files);
 		} else {
 			try {
-				LanguagePlugin.getInstance().showError(assemblerEditor.getSite().getShell(),
+				LanguagePlugin.getInstance().showError(languageEditor.getSite().getShell(),
 						"Operation '" + event.getCommand().getName()
 								+ "' is not possible because the file in the editor is not located in the workspace.",
-						new Exception("Cannot resolve compiler files of " + assemblerEditor.getEditorInput()));
+						new Exception("Cannot resolve compiler files of " + languageEditor.getEditorInput()));
 			} catch (NotDefinedException ignore) {
 				// Ignore
 			}
@@ -75,14 +75,14 @@ public abstract class AssemblerEditorFilesCommandHandler extends AbstractHandler
 	/**
 	 * Perform the action on the current editor and file.
 	 * 
-	 * @param event           The event, not <code>null</code>.
-	 * @param assemblerEditor The assembler editor, not <code>null</code> and with
-	 *                        current files which are not <code>null</code>.
-	 * @param files           The current compiler files of the editor, not
-	 *                        <code>null</code> .
+	 * @param event          The event, not <code>null</code>.
+	 * @param languageEditor The language editor, not <code>null</code> and with
+	 *                       current files which are not <code>null</code>.
+	 * @param files          The current compiler files of the editor, not
+	 *                       <code>null</code> .
 	 * @throws ExecutionException if an exception occurred during execution.
 	 */
-	protected abstract void execute(ExecutionEvent event, AssemblerEditor assemblerEditor, CompilerFiles files)
+	protected abstract void execute(ExecutionEvent event, LanguageEditor languageEditor, CompilerFiles files)
 			throws ExecutionException;
 
 }

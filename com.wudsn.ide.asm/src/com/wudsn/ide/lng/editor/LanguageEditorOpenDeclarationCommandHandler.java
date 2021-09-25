@@ -37,26 +37,26 @@ import org.eclipse.ui.handlers.HandlerUtil;
  * 
  * @since 1.7.0
  */
-public final class AssemblerEditorOpenDeclarationCommandHandler extends AbstractHandler {
+public final class LanguageEditorOpenDeclarationCommandHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IEditorPart editor;
 		editor = HandlerUtil.getActiveEditorChecked(event);
-		if (!(editor instanceof AssemblerEditor)) {
+		if (!(editor instanceof LanguageEditor)) {
 			return null;
 		}
 
-		AssemblerEditor assemblerEditor;
-		assemblerEditor = (AssemblerEditor) editor;
-		ITextSelection textSelection = (ITextSelection) assemblerEditor.getSite().getSelectionProvider().getSelection();
+		LanguageEditor languageEditor;
+		languageEditor = (LanguageEditor) editor;
+		ITextSelection textSelection = (ITextSelection) languageEditor.getSite().getSelectionProvider().getSelection();
 		if (textSelection != null) {
-			IDocument document = assemblerEditor.getDocumentProvider().getDocument(assemblerEditor.getEditorInput());
+			IDocument document = languageEditor.getDocumentProvider().getDocument(languageEditor.getEditorInput());
 			int offset = textSelection.getOffset();
-			List<AssemblerHyperlink> hyperlinks = new ArrayList<AssemblerHyperlink>();
-			AssemblerHyperlinkDetector.detectHyperlinks(assemblerEditor, document, offset, false, hyperlinks);
+			List<LanguageHyperlink> hyperlinks = new ArrayList<LanguageHyperlink>();
+			LanguageHyperlinkDetector.detectHyperlinks(languageEditor, document, offset, false, hyperlinks);
 			if (!hyperlinks.isEmpty()) {
-				AssemblerHyperlink hyperlink = hyperlinks.get(0);
+				LanguageHyperlink hyperlink = hyperlinks.get(0);
 				hyperlink.open();
 			}
 		}

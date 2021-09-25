@@ -63,9 +63,9 @@ import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
-import com.wudsn.ide.lng.editor.AssemblerContentAssistProcessorDefaultCase;
-import com.wudsn.ide.lng.editor.AssemblerEditor;
-import com.wudsn.ide.lng.editor.AssemblerEditorCompileCommandPositioningMode;
+import com.wudsn.ide.lng.editor.LanguageContentAssistProcessorDefaultCase;
+import com.wudsn.ide.lng.editor.LanguageEditor;
+import com.wudsn.ide.lng.editor.LanguageEditorCompileCommandPositioningMode;
 
 /**
  * Visual editor page for the language preferences.
@@ -198,10 +198,10 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 	@Override
 	public void init(IWorkbench workbench) {
 		IEditorPart editor = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		if (editor instanceof AssemblerEditor) {
-			AssemblerEditor assemblerEditor;
-			assemblerEditor = (AssemblerEditor) editor;
-			activeCompilerId = assemblerEditor.getCompilerDefinition().getId();
+		if (editor instanceof LanguageEditor) {
+			LanguageEditor languageEditor;
+			languageEditor = (LanguageEditor) editor;
+			activeCompilerId = languageEditor.getCompilerDefinition().getId();
 
 		}
 		changedPropertyNames.clear();
@@ -419,11 +419,11 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		labelsAndValues = new String[][] { {
 
 				Texts.PREFERENCES_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE_LOWER_CASE_TEXT,
-				AssemblerContentAssistProcessorDefaultCase.LOWER_CASE },
+				LanguageContentAssistProcessorDefaultCase.LOWER_CASE },
 				{
 
 						Texts.PREFERENCES_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE_UPPER_CASE_TEXT,
-						AssemblerContentAssistProcessorDefaultCase.UPPER_CASE }
+						LanguageContentAssistProcessorDefaultCase.UPPER_CASE }
 
 		};
 
@@ -435,11 +435,11 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		labelsAndValues = new String[][] { {
 
 				Texts.PREFERENCES_COMPILE_COMMAND_POSITIONING_MODE_FIRST_ERROR_OR_WARNING_TEXT,
-				AssemblerEditorCompileCommandPositioningMode.FIRST_ERROR_OR_WARNING },
+				LanguageEditorCompileCommandPositioningMode.FIRST_ERROR_OR_WARNING },
 				{
 
 						Texts.PREFERENCES_COMPILE_COMMAND_POSITIONING_MODE_FIRST_ERROR_TEXT,
-						AssemblerEditorCompileCommandPositioningMode.FIRST_ERROR }
+						LanguageEditorCompileCommandPositioningMode.FIRST_ERROR }
 
 		};
 

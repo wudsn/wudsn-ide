@@ -23,7 +23,7 @@ import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesCompilersPage;
 
 /**
- * Visual editor page for the assembler preferences regarding Apple 2 compilers.
+ * Visual editor page for the Pascal preferences regarding Apple 2 compilers.
  * 
  * @author Peter Dell
  * 

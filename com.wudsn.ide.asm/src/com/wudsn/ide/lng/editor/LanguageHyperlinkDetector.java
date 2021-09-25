@@ -53,20 +53,20 @@ import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
  * 
  * @author Peter Dell
  */
-public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector {
+public final class LanguageHyperlinkDetector extends AbstractHyperlinkDetector {
 
 	/**
 	 * Hyperlink detector target as defined in the extension
 	 * "org.eclipse.ui.workbench.texteditor.hyperlinkDetectorTargets".
 	 */
-	public static final String TARGET = "com.wudsn.ide.lng.editor.AssemblerHyperlinkDetectorEditorTarget";
+	public static final String TARGET = "com.wudsn.ide.lng.editor.LanguageHyperlinkDetectorEditorTarget";
 
 	/**
 	 * Creates a new instance. Called by extension point
 	 * "org.eclipse.ui.workbench.texteditor.hyperlinkDetectors".
 	 * 
 	 */
-	public AssemblerHyperlinkDetector() {
+	public LanguageHyperlinkDetector() {
 	}
 
 	/**
@@ -94,16 +94,16 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 	@Override
 	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, IRegion region, boolean canShowMultipleHyperlinks) {
 
-		List<AssemblerHyperlink> hyperlinks;
-		hyperlinks = new ArrayList<AssemblerHyperlink>(2);
+		List<LanguageHyperlink> hyperlinks;
+		hyperlinks = new ArrayList<LanguageHyperlink>(2);
 
 		if (region == null || textViewer == null)
 			return null;
 
-		AssemblerEditor assemblerEditor;
+		LanguageEditor languageEditor;
 
-		assemblerEditor = getAdapter(AssemblerEditor.class);
-		if (assemblerEditor == null) {
+		languageEditor = getAdapter(LanguageEditor.class);
+		if (languageEditor == null) {
 			return null;
 		}
 
@@ -114,7 +114,7 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 
 		int offset = region.getOffset();
 
-		detectHyperlinks(assemblerEditor, document, offset, canShowMultipleHyperlinks, hyperlinks);
+		detectHyperlinks(languageEditor, document, offset, canShowMultipleHyperlinks, hyperlinks);
 
 		if (!hyperlinks.isEmpty()) {
 			return hyperlinks.toArray(new IHyperlink[hyperlinks.size()]);
@@ -123,8 +123,8 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 
 	}
 
-	final static void detectHyperlinks(AssemblerEditor assemblerEditor, IDocument document, int offset,
-			boolean canShowMultipleHyperlinks, List<AssemblerHyperlink> hyperlinks) {
+	final static void detectHyperlinks(LanguageEditor languageEditor, IDocument document, int offset,
+			boolean canShowMultipleHyperlinks, List<LanguageHyperlink> hyperlinks) {
 		IRegion lineInfo;
 		int lineNumber;
 		String line;
@@ -141,17 +141,17 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 		if (offsetInLine >= line.length()) {
 			return;
 		}
-		detectInclude(assemblerEditor, lineInfo, lineNumber, line, offsetInLine, canShowMultipleHyperlinks, hyperlinks);
+		detectInclude(languageEditor, lineInfo, lineNumber, line, offsetInLine, canShowMultipleHyperlinks, hyperlinks);
 		if (hyperlinks.isEmpty()) {
-			detectIdentifier(assemblerEditor, lineInfo, lineNumber, line, offsetInLine, canShowMultipleHyperlinks,
+			detectIdentifier(languageEditor, lineInfo, lineNumber, line, offsetInLine, canShowMultipleHyperlinks,
 					hyperlinks);
 		}
 	}
 
-	private static void detectInclude(AssemblerEditor assemblerEditor, IRegion lineInfo, int lineNumber, String line,
-			int offsetInLine, boolean canShowMultipleHyperlinks, List<AssemblerHyperlink> hyperlinks) {
+	private static void detectInclude(LanguageEditor languageEditor, IRegion lineInfo, int lineNumber, String line,
+			int offsetInLine, boolean canShowMultipleHyperlinks, List<LanguageHyperlink> hyperlinks) {
 		// Try to detect binary or source includes
-		CompilerSourceParser compilerSourceParser = assemblerEditor.createCompilerSourceParser();
+		CompilerSourceParser compilerSourceParser = languageEditor.createCompilerSourceParser();
 		CompilerSourceParserFileReference fileReference;
 		fileReference = new CompilerSourceParserFileReference();
 		compilerSourceParser.detectFileReference(line, fileReference);
@@ -184,7 +184,7 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 
 			// Perform resolution of relative paths and compiler specific
 			// default extension.
-			File currentDirectory = assemblerEditor.getCurrentDirectory();
+			File currentDirectory = languageEditor.getCurrentDirectory();
 			String absoluteFilePath = compilerSourceParser.getIncludeAbsoluteFilePath(fileReference.getType(),
 					currentDirectory, filePath);
 			if (absoluteFilePath == null) {
@@ -196,7 +196,7 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 
 			IRegion linkRegion = new Region(lineInfo.getOffset() + startQuoteOffset + 1, filePath.length());
 
-			IEditorSite site = assemblerEditor.getEditorSite();
+			IEditorSite site = languageEditor.getEditorSite();
 			if (site == null) {
 				return;
 			}
@@ -204,22 +204,22 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 
 			switch (fileReference.getType()) {
 			case CompilerSourceParserFileReferenceType.SOURCE:
-				hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
-						assemblerEditor.getClass().getName(), 0,
-						Texts.COMPILER_HYPERLINK_DETECTOR_OPEN_SOURCE_WITH_LANGUAGE_EDITOR));
+				hyperlinks.add(new LanguageHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
+						languageEditor.getClass().getName(), 0, TextUtility
+								.format(Texts.COMPILER_HYPERLINK_DETECTOR_OPEN_SOURCE_WITH_LANGUAGE_EDITOR, "TODO"))); // TODO
 				break;
 			case CompilerSourceParserFileReferenceType.BINARY:
-				hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri, HexEditor.ID, 0,
+				hyperlinks.add(new LanguageHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri, HexEditor.ID, 0,
 						Texts.COMPILER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_HEX_EDITOR));
 				if (canShowMultipleHyperlinks) {
-					hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
+					hyperlinks.add(new LanguageHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
 							GraphicsConversionEditor.ID, 0,
 							Texts.COMPILER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_GRAPHICS_EDITOR));
-					hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
-							AssemblerHyperlink.DEFAULT_EDITOR, 0,
+					hyperlinks.add(new LanguageHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
+							LanguageHyperlink.DEFAULT_EDITOR, 0,
 							Texts.COMPILER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_DEFAULT_EDITOR));
-					hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
-							AssemblerHyperlink.SYSTEM_EDITOR, 0,
+					hyperlinks.add(new LanguageHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
+							LanguageHyperlink.SYSTEM_EDITOR, 0,
 							Texts.COMPILER_HYPERLINK_DETECTOR_OPEN_BINARY_WITH_SYSTEM_EDITOR));
 				}
 				break;
@@ -230,10 +230,10 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 		}
 	}
 
-	private static void detectIdentifier(AssemblerEditor assemblerEditor, IRegion lineInfo, int lineNumber, String line,
-			int offsetInLine, boolean canShowMultipleHyperlinks, List<AssemblerHyperlink> hyperlinks) {
+	private static void detectIdentifier(LanguageEditor languageEditor, IRegion lineInfo, int lineNumber, String line,
+			int offsetInLine, boolean canShowMultipleHyperlinks, List<LanguageHyperlink> hyperlinks) {
 
-		CompilerSyntax compilerSyntax = assemblerEditor.createCompilerSourceParser().getCompilerSyntax();
+		CompilerSyntax compilerSyntax = languageEditor.createCompilerSourceParser().getCompilerSyntax();
 
 		int startIdentifierOffset = offsetInLine;
 		int endIdentifierOffset = offsetInLine;
@@ -257,7 +257,7 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 			endIdentifierOffset++;
 		}
 		String identifier = line.substring(startIdentifierOffset, endIdentifierOffset);
-		CompilerSourceFile compilerSourceFile = assemblerEditor.getCompilerSourceFile();
+		CompilerSourceFile compilerSourceFile = languageEditor.getCompilerSourceFile();
 		if (compilerSourceFile == null) {
 			return;
 		}
@@ -268,7 +268,7 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 			return;
 		}
 
-		IEditorSite site = assemblerEditor.getEditorSite();
+		IEditorSite site = languageEditor.getEditorSite();
 		if (site == null) {
 			return;
 		}
@@ -302,7 +302,7 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 			}
 
 			// Ignore if the found element is the start element only.
-			File currentFile = assemblerEditor.getCurrentFile();
+			File currentFile = languageEditor.getCurrentFile();
 			boolean inSameFile = foundElements.size() == 1 && currentFile != null
 					&& currentFile.getPath().equals(absoluteFilePath);
 
@@ -325,8 +325,8 @@ public final class AssemblerHyperlinkDetector extends AbstractHyperlinkDetector 
 						CompilerSourceParserTreeObjectType.getText(element.getType()), element.getCompoundName(),
 						NumberUtility.getLongValueDecimalString(elementLineNumber), fileName);
 			}
-			hyperlinks.add(new AssemblerHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
-					assemblerEditor.getClass().getName(), elementLineNumber, hyperlinkText));
+			hyperlinks.add(new LanguageHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
+					languageEditor.getClass().getName(), elementLineNumber, hyperlinkText));
 		}
 	}
 

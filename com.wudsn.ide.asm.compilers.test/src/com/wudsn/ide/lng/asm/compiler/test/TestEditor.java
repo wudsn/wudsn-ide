@@ -1,8 +1,8 @@
 package com.wudsn.ide.lng.asm.compiler.test;
 
-import com.wudsn.ide.lng.editor.AssemblerEditor;
+import com.wudsn.ide.lng.editor.LanguageEditor;
 
-public final class TestEditor extends AssemblerEditor {
+public final class TestEditor extends LanguageEditor {
 
 	/**
 	 * Creation is public. Called by the extension "org.eclipse.ui.editors".

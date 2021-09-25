@@ -17,7 +17,7 @@
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.wudsn.ide.lng.editor;
+package com.wudsn.ide.lng.breakpoint;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -28,28 +28,30 @@ import org.eclipse.debug.ui.actions.IToggleBreakpointsTargetFactory;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchPart;
 
+import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.lng.Texts;
+import com.wudsn.ide.lng.editor.LanguageEditor;
 
 /**
- * Factory for {@AssemblerBreakpointsTarget} instances. Used by extension
+ * Factory for {@LanguageBreakpointsTarget} instances. Used by extension
  * "org.eclipse.debug.ui.toggleBreakpointsTargetFactories"
  * 
  * @author Peter Dell
  * @since 1.6.1
  */
-public final class AssemblerBreakpointAdapterFactory implements IToggleBreakpointsTargetFactory {
+public final class LanguageBreakpointAdapterFactory implements IToggleBreakpointsTargetFactory {
 
-	private String TARGET_ID = AssemblerBreakpointsTarget.class.getName();
+	private String TARGET_ID = LanguageBreakpointsTarget.class.getName();
 	private Set<String> defaultSet;
 
-	public AssemblerBreakpointAdapterFactory() {
+	public LanguageBreakpointAdapterFactory() {
 		defaultSet = new HashSet<String>();
 		defaultSet.add(TARGET_ID);
 	}
 
 	@Override
 	public Set<String> getToggleTargets(IWorkbenchPart part, ISelection selection) {
-		if (part instanceof AssemblerEditor) {
+		if (part instanceof LanguageEditor) {
 			return defaultSet;
 		}
 		return Collections.emptySet();
@@ -57,7 +59,7 @@ public final class AssemblerBreakpointAdapterFactory implements IToggleBreakpoin
 
 	@Override
 	public String getDefaultToggleTarget(IWorkbenchPart part, ISelection selection) {
-		if (part instanceof AssemblerEditor) {
+		if (part instanceof LanguageEditor) {
 			return TARGET_ID;
 		}
 		return null;
@@ -66,14 +68,14 @@ public final class AssemblerBreakpointAdapterFactory implements IToggleBreakpoin
 	@Override
 	public IToggleBreakpointsTarget createToggleTarget(String targetID) {
 		if (TARGET_ID.equals(targetID)) {
-			return new AssemblerBreakpointsTarget();
+			return new LanguageBreakpointsTarget();
 		}
 		return null;
 	}
 
 	@Override
 	public String getToggleTargetName(String targetID) {
-		return Texts.COMPILER_BREAKPOINT_TOGGLE_TYPE_MENU_TEXT;
+		return TextUtility.format( Texts.LANGUAGE_BREAKPOINT_TOGGLE_TYPE_MENU_TEXT, "TODO: 2121");// TODO
 	}
 
 	@Override

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.wudsn.ide.lng.editor;
+package com.wudsn.ide.lng.breakpoint;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -34,12 +34,13 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 
 import com.wudsn.ide.base.common.StringUtility;
+import com.wudsn.ide.lng.editor.LanguageEditor;
 
 /**
- * Target which creates {@link AssemblerBreakpoint} instances. Used by
- * {@link AssemblerBreakpointAdapterFactory}.
+ * Target which creates {@link LanguageBreakpoint} instances. Used by
+ * {@link LanguageBreakpointAdapterFactory}.
  */
-public final class AssemblerBreakpointsTarget implements IToggleBreakpointsTarget {
+public final class LanguageBreakpointsTarget implements IToggleBreakpointsTarget {
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -49,15 +50,15 @@ public final class AssemblerBreakpointsTarget implements IToggleBreakpointsTarge
 	 */
 	@Override
 	public void toggleLineBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
-		AssemblerEditor assemblerEditor = getEditor(part);
-		if (assemblerEditor != null) {
+		LanguageEditor languageEditor = getEditor(part);
+		if (languageEditor != null) {
 			IBreakpointManager breakPointManager = DebugPlugin.getDefault().getBreakpointManager();
-			String editorId = assemblerEditor.getClass().getName();
-			IEditorInput editorInput = assemblerEditor.getEditorInput();
+			String editorId = languageEditor.getClass().getName();
+			IEditorInput editorInput = languageEditor.getEditorInput();
 			IResource resource = editorInput.getAdapter(IResource.class);
 			ITextSelection textSelection = (ITextSelection) selection;
 			int lineNumber = textSelection.getStartLine();
-			IBreakpoint[] breakpoints = breakPointManager.getBreakpoints(AssemblerBreakpoint.DEBUG_MODEL_ID);
+			IBreakpoint[] breakpoints = breakPointManager.getBreakpoints(LanguageBreakpoint.DEBUG_MODEL_ID);
 			for (int i = 0; i < breakpoints.length; i++) {
 				IBreakpoint breakpoint = breakpoints[i];
 				if (resource.equals(breakpoint.getMarker().getResource())) {
@@ -70,8 +71,8 @@ public final class AssemblerBreakpointsTarget implements IToggleBreakpointsTarge
 			}
 			// Create line breakpoint (doc line numbers start at 0)
 			String description;
-			IDocumentProvider provider = assemblerEditor.getDocumentProvider();
-			IDocument document = provider.getDocument(assemblerEditor.getEditorInput());
+			IDocumentProvider provider = languageEditor.getDocumentProvider();
+			IDocument document = provider.getDocument(languageEditor.getEditorInput());
 			try {
 				int startOffset = document.getLineOffset(lineNumber);
 				int lineLength = document.getLineLength(lineNumber);
@@ -85,7 +86,7 @@ public final class AssemblerBreakpointsTarget implements IToggleBreakpointsTarge
 			if (StringUtility.isEmpty(description)) {
 				return;
 			}
-			AssemblerBreakpoint breakpoint = new AssemblerBreakpoint(editorId, editorInput, resource, lineNumber + 1,
+			LanguageBreakpoint breakpoint = new LanguageBreakpoint(editorId, editorInput, resource, lineNumber + 1,
 					description);
 			breakPointManager.addBreakpoint(breakpoint);
 		}
@@ -149,17 +150,17 @@ public final class AssemblerBreakpointsTarget implements IToggleBreakpointsTarge
 	}
 
 	/**
-	 * Determines of the specified workbench part is an assembler editor with a
+	 * Determines of the specified workbench part is an language editor with a
 	 * valid resource.
 	 * 
 	 * @param part The editor part or <code>null</code>.
-	 * @return The assembler editor or <code>null</code>.
+	 * @return The language editor or <code>null</code>.
 	 */
-	private AssemblerEditor getEditor(IWorkbenchPart part) {
-		if (part instanceof AssemblerEditor) {
-			AssemblerEditor assemblerEditor = (AssemblerEditor) part;
-			if (assemblerEditor.getCurrentFile() != null) {
-				return assemblerEditor;
+	private LanguageEditor getEditor(IWorkbenchPart part) {
+		if (part instanceof LanguageEditor) {
+			LanguageEditor languageEditor = (LanguageEditor) part;
+			if (languageEditor.getCurrentFile() != null) {
+				return languageEditor;
 			}
 		}
 		return null;

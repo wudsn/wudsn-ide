@@ -35,6 +35,7 @@ Export-Package: com.wudsn.ide.lng;
    com.wudsn.ide.asm.runner,
    com.wudsn.ide.asm.preferences,
    com.wudsn.ide.asm.compiler",
+ com.wudsn.ide.lng.breakpoint,
  com.wudsn.ide.lng.compiler;
   uses:="org.eclipse.jface.text,
    org.eclipse.ui.console,

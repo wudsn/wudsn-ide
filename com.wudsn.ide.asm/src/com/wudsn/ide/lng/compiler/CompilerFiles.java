@@ -25,8 +25,8 @@ import org.eclipse.core.resources.IFile;
 
 import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.StringUtility;
-import com.wudsn.ide.lng.AssemblerProperties;
-import com.wudsn.ide.lng.AssemblerProperties.AssemblerProperty;
+import com.wudsn.ide.lng.LanguageProperties;
+import com.wudsn.ide.lng.LanguageProperties.LanguageProperty;
 import com.wudsn.ide.lng.preferences.CompilerPreferences;
 
 /**
@@ -50,19 +50,19 @@ public final class CompilerFiles {
 		public final String fileName;
 		public final String fileNameWithoutExtension;
 
-		public final AssemblerProperties assemblerProperties;
+		public final LanguageProperties languageProperties;
 
-		SourceFile(IFile iFile, AssemblerProperties assemblerProperties) {
+		SourceFile(IFile iFile, LanguageProperties languageProperties) {
 
 			if (iFile == null) {
 				throw new IllegalArgumentException("Parameter 'iFile' must not be null.");
 			}
-			if (assemblerProperties == null) {
-				throw new IllegalArgumentException("Parameter 'assemblerProperties' must not be null.");
+			if (languageProperties == null) {
+				throw new IllegalArgumentException("Parameter 'languageProperties' must not be null.");
 			}
 
 			this.iFile = iFile;
-			this.assemblerProperties = assemblerProperties;
+			this.languageProperties = languageProperties;
 
 			// Source file.
 			filePath = iFile.getLocation().toOSString();
@@ -92,10 +92,10 @@ public final class CompilerFiles {
 	 */
 	public final SourceFile mainSourceFile;
 
-	public final AssemblerProperty outputFolderModeProperty;
+	public final LanguageProperty outputFolderModeProperty;
 	public final String outputFolderMode;
 
-	public final AssemblerProperty outputFolderProperty;
+	public final LanguageProperty outputFolderProperty;
 	public final File outputFolder;
 	public final String outputFolderPath;
 
@@ -103,10 +103,10 @@ public final class CompilerFiles {
 	public final String outputFilePath;
 	public final String outputFilePathWithoutExtension;
 
-	public final AssemblerProperty outputFileProperty;
+	public final LanguageProperty outputFileProperty;
 	public final String outputFileName;
 	public final String outputFileNameWithoutExtension;
-	public final AssemblerProperty outputFileExtensionProperty;
+	public final LanguageProperty outputFileExtensionProperty;
 	public final String outputFileExtension;
 	public final String outputFileNameShortWithoutExtension;
 
@@ -114,8 +114,8 @@ public final class CompilerFiles {
 	public final String symbolsFilePath;
 	public final String symbolsFileName;
 
-	public CompilerFiles(IFile mainSourceIFile, AssemblerProperties mainSourceFileAssemblerProperties,
-			IFile sourceIFile, AssemblerProperties sourceFileAssemblerProperties,
+	public CompilerFiles(IFile mainSourceIFile, LanguageProperties mainSourceFileLanguageProperties,
+			IFile sourceIFile, LanguageProperties sourceFileLanguageProperties,
 			CompilerPreferences compilerPreferences) {
 
 		if (mainSourceIFile == null) {
@@ -127,8 +127,8 @@ public final class CompilerFiles {
 		if (compilerPreferences == null) {
 			throw new IllegalArgumentException("Parameter 'compilerPreferences' must not be null.");
 		}
-		this.mainSourceFile = new SourceFile(mainSourceIFile, mainSourceFileAssemblerProperties);
-		this.sourceFile = new SourceFile(sourceIFile, sourceFileAssemblerProperties);
+		this.mainSourceFile = new SourceFile(mainSourceIFile, mainSourceFileLanguageProperties);
+		this.sourceFile = new SourceFile(sourceIFile, sourceFileLanguageProperties);
 
 		// Output folder mode
 		// Can be overridden via annotation property in main source file
@@ -137,10 +137,10 @@ public final class CompilerFiles {
 		String localOutputFileExtension = compilerPreferences.getOutputFileExtension();
 
 		// Properties which override the preferences
-		outputFolderModeProperty = mainSourceFileAssemblerProperties.get(AssemblerProperties.OUTPUT_FOLDER_MODE);
-		outputFolderProperty = mainSourceFileAssemblerProperties.get(AssemblerProperties.OUTPUT_FOLDER);
-		outputFileExtensionProperty = mainSourceFileAssemblerProperties.get(AssemblerProperties.OUTPUT_FILE_EXTENSION);
-		outputFileProperty = mainSourceFileAssemblerProperties.get(AssemblerProperties.OUTPUT_FILE);
+		outputFolderModeProperty = mainSourceFileLanguageProperties.get(LanguageProperties.OUTPUT_FOLDER_MODE);
+		outputFolderProperty = mainSourceFileLanguageProperties.get(LanguageProperties.OUTPUT_FOLDER);
+		outputFileExtensionProperty = mainSourceFileLanguageProperties.get(LanguageProperties.OUTPUT_FILE_EXTENSION);
+		outputFileProperty = mainSourceFileLanguageProperties.get(LanguageProperties.OUTPUT_FILE);
 
 		// The following sequence sets the instance fields "outputFolder" and
 		// "outputFileNameWithoutExtension" as well as the

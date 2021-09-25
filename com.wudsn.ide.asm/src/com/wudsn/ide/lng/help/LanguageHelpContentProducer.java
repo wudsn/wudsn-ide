@@ -77,7 +77,7 @@ import com.wudsn.ide.lng.runner.RunnerRegistry;
  *        TODO Complete opcode entries in Compiler.xml, also for extended and
  *        illegal opcodes
  */
-public final class AssemblerHelpContentProducer implements IHelpContentProducer {
+public final class LanguageHelpContentProducer implements IHelpContentProducer {
 
 	// In order to get the navigation breadcrumbs automatically,
 	// the files have to have this suffix (see BreadcrumbsFilter).
@@ -610,7 +610,7 @@ public final class AssemblerHelpContentProducer implements IHelpContentProducer 
 		HTMLWriter writer = createHeader();
 
 		writer.beginTable();
-		writer.writeTableRow(Texts.TOC_TARGET_NAME_LABEL, EnumUtility.getText(target));
+		writer.writeTableRow(Texts.TOC_TARGETS_NAME_LABEL, EnumUtility.getText(target));
 		writer.end();
 
 		writer.begin("br", null);

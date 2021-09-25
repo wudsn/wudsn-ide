@@ -20,9 +20,9 @@
 package com.wudsn.ide.lng.asm.compiler.merlin32;
 
 import com.wudsn.ide.lng.asm.compiler.CompilerId;
-import com.wudsn.ide.lng.editor.AssemblerEditor;
+import com.wudsn.ide.lng.editor.LanguageEditor;
 
-public final class Merlin32Editor extends AssemblerEditor {
+public final class Merlin32Editor extends LanguageEditor {
 
 	/**
 	 * Creation is public. Called by the extension "org.eclipse.ui.editors".

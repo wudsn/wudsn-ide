@@ -23,7 +23,7 @@ import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesCompilersPage;
 
 /**
- * Visual editor page for the assembler preferences regarding NES compilers.
+ * Visual editor page for the Pascal preferences regarding NES compilers.
  * 
  * @author Peter Dell
  * 

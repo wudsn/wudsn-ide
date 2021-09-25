@@ -35,7 +35,7 @@ import com.wudsn.ide.lng.preferences.TextAttributeConverter;
  * @author Peter Dell
  * @author Daniel Mitte
  */
-final class AssemblerRuleBasedScanner extends RuleBasedScanner {
+final class LanguageRuleBasedScanner extends RuleBasedScanner {
 
 	/** Default Token for the text attributes * */
 	private Token defaultToken;
@@ -44,12 +44,12 @@ final class AssemblerRuleBasedScanner extends RuleBasedScanner {
 	private String preferencesKey;
 
 	/**
-	 * Creates a new instance. Called by {@link AssemblerSourceViewerConfiguration}.
+	 * Creates a new instance. Called by {@link LanguageSourceViewerConfiguration}.
 	 * 
 	 * @param preferencesKey The preference key to listen to for text attribute
 	 *                       changes, not <code>null</code>..
 	 */
-	AssemblerRuleBasedScanner(String preferencesKey) {
+	LanguageRuleBasedScanner(String preferencesKey) {
 
 		if (preferencesKey == null) {
 			throw new IllegalArgumentException("Parameter 'preferencesKey' must not be null.");
@@ -72,7 +72,7 @@ final class AssemblerRuleBasedScanner extends RuleBasedScanner {
 
 	/**
 	 * Update the token based on the preferences. Called by
-	 * {@link AssemblerSourceViewerConfiguration}.
+	 * {@link LanguageSourceViewerConfiguration}.
 	 * 
 	 * @param preferences          The preferences, not <code>null</code>.
 	 * @param changedPropertyNames The set of changed property names, not

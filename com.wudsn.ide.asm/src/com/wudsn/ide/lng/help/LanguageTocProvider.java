@@ -54,7 +54,7 @@ import com.wudsn.ide.lng.preferences.LanguagePreferences;
  * 
  * @since 1.6.1
  */
-public final class AssemblerTocProvider extends AbstractTocProvider {
+public final class LanguageTocProvider extends AbstractTocProvider {
 
 	private static final class Toc implements IToc {
 		private ITopic[] topics;
@@ -142,7 +142,7 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 
 	}
 
-	public AssemblerTocProvider() {
+	public LanguageTocProvider() {
 	}
 
 	@Override
@@ -159,8 +159,8 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 		String key = href;
 		try {
 			ResourceBundle resourceBundle;
-			resourceBundle = ResourceBundle.getBundle("com/wudsn/ide/asm/help/AssemblerTocProvider",
-					Locale.getDefault(), AssemblerTocProvider.class.getClassLoader());
+			resourceBundle = ResourceBundle.getBundle("com/wudsn/ide/asm/help/LanguageTocProvider",
+					Locale.getDefault(), LanguageTocProvider.class.getClassLoader());
 			label = resourceBundle.getString(key);
 		} catch (MissingResourceException ex) {
 			label = href + " - Text missing";
@@ -200,14 +200,14 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions();
 
 		List<ITopic> ideTopics = createIDETopics();
-		List<ITopic> assemblerTopics = createAssemblerTopics(compilerDefinitions);
+		List<ITopic> compilerTopics = createCompilerTopics(compilerDefinitions);
 		List<ITopic> hardwareTopics = createHardwareTopics();
-		List<ITopic> cpuTopics = createCPUTopics();
+		List<ITopic> cpuTopics = createTargetTopics();
 
 		List<ITopic> topics = new ArrayList<ITopic>();
 
 		topics.add(createTopic("", Texts.TOC_IDE_TOPIC_LABEL, "", createTopicsArray(ideTopics)));
-		topics.add(createTopic("", Texts.TOC_ASSEMBLERS_TOPIC_LABEL, "", createTopicsArray(assemblerTopics)));
+		topics.add(createTopic("", Texts.TOC_COMPILERS_TOPIC_LABEL, "", createTopicsArray(compilerTopics)));
 		topics.add(createTopic("", Texts.TOC_HARDWARES_TOPIC_LABEL, "", createTopicsArray(hardwareTopics)));
 		topics.add(createTopic("", Texts.TOC_TARGETS_TOPIC_LABEL, "", createTopicsArray(cpuTopics)));
 
@@ -226,23 +226,23 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 		return topics;
 	}
 
-	private static List<ITopic> createAssemblerTopics(List<CompilerDefinition> compilerDefinitions) {
+	private static List<ITopic> createCompilerTopics(List<CompilerDefinition> compilerDefinitions) {
 		if (compilerDefinitions == null) {
 			throw new IllegalArgumentException("Parameter 'compilerDefinitions' must not be null.");
 		}
 		int size = compilerDefinitions.size();
-		List<ITopic> assemblerTopics = new ArrayList<ITopic>(size);
+		List<ITopic> compilerTopics = new ArrayList<ITopic>(size);
 
 		for (int i = 0; i < size; i++) {
 			CompilerDefinition compilerDefinition = compilerDefinitions.get(i);
 
-			String href = AssemblerHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getId() + "/"
-					+ AssemblerHelpContentProducer.SECTION_GENERAL + AssemblerHelpContentProducer.EXTENSION;
+			String href = LanguageHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getId() + "/"
+					+ LanguageHelpContentProducer.SECTION_GENERAL + LanguageHelpContentProducer.EXTENSION;
 
 			ITopic generalTopic = createTopic("", Texts.TOC_COMPILER_GENERAL_TOPIC_LABEL, href, null);
 
-			href = AssemblerHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getId() + "/"
-					+ AssemblerHelpContentProducer.SECTION_INSTRUCTIONS + AssemblerHelpContentProducer.EXTENSION;
+			href = LanguageHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getId() + "/"
+					+ LanguageHelpContentProducer.SECTION_INSTRUCTIONS + LanguageHelpContentProducer.EXTENSION;
 			ITopic opcodesTopic = createTopic("", Texts.TOC_COMPILER_INSTRUCTIONS_TOPIC_LABEL, href, null);
 
 			LanguagePreferences languagePreferences = LanguagePlugin.getInstance().getPreferences();
@@ -267,8 +267,8 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 					extension = ".html";
 				}
 
-				href = AssemblerHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getId() + "/"
-						+ AssemblerHelpContentProducer.SECTION_MANUAL + extension;
+				href = LanguageHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getId() + "/"
+						+ LanguageHelpContentProducer.SECTION_MANUAL + extension;
 
 				if (file.isDirectory()) {
 					File[] files = file.listFiles();
@@ -282,7 +282,7 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 							}
 
 							manualTopics.add(createTopic("", file2.getName(),
-									href + "?" + AssemblerHelpContentProducer.SECTION_MANUAL_FILE + "=" + encodedPath,
+									href + "?" + LanguageHelpContentProducer.SECTION_MANUAL_FILE + "=" + encodedPath,
 									null));
 						}
 					}
@@ -291,17 +291,17 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 					href = "";
 				}
 			} catch (CoreException ex) {
-				href = AssemblerHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getId() + "/"
-						+ AssemblerHelpContentProducer.SECTION_MANUAL + ".html";
+				href = LanguageHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getId() + "/"
+						+ LanguageHelpContentProducer.SECTION_MANUAL + ".html";
 			}
 
 			ITopic manualTopic = createTopic(icon, Texts.TOC_COMPILER_MANUAL_TOPIC_LABEL, href,
 					createTopicsArray(manualTopics));
 
-			assemblerTopics.add(createTopic("", compilerDefinition.getName(), "",
+			compilerTopics.add(createTopic("", compilerDefinition.getName(), "",
 					new ITopic[] { generalTopic, opcodesTopic, manualTopic }));
 		}
-		return assemblerTopics;
+		return compilerTopics;
 	}
 
 	private static List<ITopic> createHardwareTopics() {
@@ -338,18 +338,18 @@ public final class AssemblerTocProvider extends AbstractTocProvider {
 				// Nothing available.
 
 			}
-			String href = AssemblerHelpContentProducer.SCHEMA_HARDWARE + hardware.name().toLowerCase()
-					+ AssemblerHelpContentProducer.EXTENSION;
+			String href = LanguageHelpContentProducer.SCHEMA_HARDWARE + hardware.name().toLowerCase()
+					+ LanguageHelpContentProducer.EXTENSION;
 			hardwareTopics.add(createTopic("", EnumUtility.getText(hardware), href, createTopicsArray(chipTopics)));
 		}
 		return hardwareTopics;
 	}
 
-	private static List<ITopic> createCPUTopics() {
+	private static List<ITopic> createTargetTopics() {
 		List<ITopic> cpuTopics = new ArrayList<ITopic>(Target.values().length - 1);
 		for (Target target : Target.values()) {
-			String href = AssemblerHelpContentProducer.SCHEMA_TARGET + target.name().toLowerCase()
-					+ AssemblerHelpContentProducer.EXTENSION;
+			String href = LanguageHelpContentProducer.SCHEMA_TARGET + target.name().toLowerCase()
+					+ LanguageHelpContentProducer.EXTENSION;
 			cpuTopics.add(createTopic("", EnumUtility.getText(target), href, null));
 		}
 		return cpuTopics;

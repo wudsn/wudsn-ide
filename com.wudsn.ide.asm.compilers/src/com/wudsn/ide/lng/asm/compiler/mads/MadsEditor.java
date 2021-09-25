@@ -20,9 +20,9 @@
 package com.wudsn.ide.lng.asm.compiler.mads;
 
 import com.wudsn.ide.lng.asm.compiler.CompilerId;
-import com.wudsn.ide.lng.editor.AssemblerEditor;
+import com.wudsn.ide.lng.editor.LanguageEditor;
 
-public final class MadsEditor extends AssemblerEditor {
+public final class MadsEditor extends LanguageEditor {
 
 	/**
 	 * Creation is public. Called by the extension "org.eclipse.ui.editors".

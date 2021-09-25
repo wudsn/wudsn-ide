@@ -56,31 +56,32 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import com.wudsn.ide.base.common.Profiler;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.LanguagePlugin;
-import com.wudsn.ide.lng.AssemblerProperties;
+import com.wudsn.ide.lng.LanguageProperties;
 import com.wudsn.ide.lng.Target;
-import com.wudsn.ide.lng.AssemblerProperties.InvalidAssemblerPropertyException;
+import com.wudsn.ide.lng.LanguageProperties.InvalidLanguagePropertyException;
 import com.wudsn.ide.lng.compiler.Compiler;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceFile;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObject;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourcePartitionScanner;
+import com.wudsn.ide.lng.outline.LanguageOutlinePage;
 import com.wudsn.ide.lng.preferences.CompilerPreferences;
 
 /**
- * The assembler editor.
+ * The language editor.
  * 
  * @author Peter Dell
  * @author Andy Reek
  */
-public abstract class AssemblerEditor extends TextEditor {
+public abstract class LanguageEditor extends TextEditor {
 
 	private LanguagePlugin plugin;
-	private AssemblerEditorFilesLogic filesLogic;
+	private LanguageEditorFilesLogic filesLogic;
 
 	private Compiler compiler;
 
-	private AssemblerContentOutlinePage contentOutlinePage;
+	private LanguageOutlinePage contentOutlinePage;
 	private ProjectionAnnotationModel annotationModel;
 
 	private Hardware hardware;
@@ -90,8 +91,8 @@ public abstract class AssemblerEditor extends TextEditor {
 	 * super constructor inverts the flow of control, so {@link #initializeEditor}
 	 * is called before the code in this constructor is executed.
 	 */
-	protected AssemblerEditor() {
-		filesLogic = AssemblerEditorFilesLogic.createInstance(this);
+	protected LanguageEditor() {
+		filesLogic = LanguageEditorFilesLogic.createInstance(this);
 	}
 
 	/**
@@ -99,7 +100,7 @@ public abstract class AssemblerEditor extends TextEditor {
 	 * 
 	 * @return The files logic, not <code>null</code>.
 	 */
-	public AssemblerEditorFilesLogic getFilesLogic() {
+	public LanguageEditorFilesLogic getFilesLogic() {
 		return filesLogic;
 	}
 
@@ -131,7 +132,7 @@ public abstract class AssemblerEditor extends TextEditor {
 		plugin = LanguagePlugin.getInstance();
 		compiler = plugin.getCompilerRegistry().getCompiler(getCompilerId());
 
-		setSourceViewerConfiguration(new AssemblerSourceViewerConfiguration(this, getPreferenceStore()));
+		setSourceViewerConfiguration(new LanguageSourceViewerConfiguration(this, getPreferenceStore()));
 
 	}
 
@@ -218,13 +219,13 @@ public abstract class AssemblerEditor extends TextEditor {
 					compiler.getDefinition().getSyntax());
 			partitionScanner.createDocumentPartitioner(document);
 
-			AssemblerProperties properties = CompilerSourceParser.getDocumentProperties(document);
+			LanguageProperties properties = CompilerSourceParser.getDocumentProperties(document);
 
 			IFile iFile = getCurrentIFile();
 			if (iFile != null) {
 				try {
 					hardware = filesLogic.getHardware(iFile, properties);
-				} catch (InvalidAssemblerPropertyException ex) {
+				} catch (InvalidLanguagePropertyException ex) {
 					// Do not use MarkerUtility.gotoMarker to make sure this
 					// editor instance is used.
 					IDE.gotoMarker(this, ex.marker);
@@ -240,7 +241,7 @@ public abstract class AssemblerEditor extends TextEditor {
 		super.createActions();
 
 		ResourceBundle bundle = ResourceBundle.getBundle("com.wudsn.ide.lng.Actions", Locale.getDefault(),
-				AssemblerEditor.class.getClassLoader());
+				LanguageEditor.class.getClassLoader());
 
 		String actionDefintionId;
 		String actionId;
@@ -252,9 +253,9 @@ public abstract class AssemblerEditor extends TextEditor {
 		markAsStateDependentAction(actionId, true);
 
 		SourceViewer sourceViewer = (SourceViewer) getSourceViewer();
-		actionDefintionId = "com.wudsn.ide.lng.editor.AssemblerEditorToggleCommentCommand";
+		actionDefintionId = "com.wudsn.ide.lng.editor.LanguageEditorToggleCommentCommand";
 		actionId = actionDefintionId;
-		action = new AssemblerEditorToggleCommentAction(bundle, actionId + ".", this, sourceViewer);
+		action = new LanguageEditorToggleCommentAction(bundle, actionId + ".", this, sourceViewer);
 		action.setActionDefinitionId(actionId);
 		setAction(actionId, action);
 		markAsStateDependentAction(actionId, true);
@@ -281,7 +282,7 @@ public abstract class AssemblerEditor extends TextEditor {
 	 * content.
 	 * 
 	 * Called by {@link #updateIdentifiers(CompilerSourceFile)} and
-	 * {@link AssemblerSourceViewerConfiguration#preferencesChanged(com.wudsn.ide.lng.preferences.LanguagePreferences, java.util.Set)}
+	 * {@link LanguageSourceViewerConfiguration#preferencesChanged(com.wudsn.ide.lng.preferences.LanguagePreferences, java.util.Set)}
 	 * .
 	 */
 	final void refreshSourceViewer() {
@@ -293,8 +294,8 @@ public abstract class AssemblerEditor extends TextEditor {
 
 	@Override
 	public final void dispose() {
-		AssemblerSourceViewerConfiguration asvc;
-		asvc = (AssemblerSourceViewerConfiguration) getSourceViewerConfiguration();
+		LanguageSourceViewerConfiguration asvc;
+		asvc = (LanguageSourceViewerConfiguration) getSourceViewerConfiguration();
 		asvc.dispose();
 		super.dispose();
 	}
@@ -304,7 +305,7 @@ public abstract class AssemblerEditor extends TextEditor {
 	public <T> T getAdapter(Class<T> adapter) {
 		if (IContentOutlinePage.class.equals(adapter)) {
 			if (contentOutlinePage == null) {
-				contentOutlinePage = new AssemblerContentOutlinePage(this);
+				contentOutlinePage = new LanguageOutlinePage(this);
 				// This causes double parsing upon starting with a new file
 				// currently.
 				updateContentOutlinePage();
@@ -316,7 +317,7 @@ public abstract class AssemblerEditor extends TextEditor {
 
 	/**
 	 * Updates the content in view of the outline page. Called by
-	 * {@link AssemblerReconcilingStategy#parse}.
+	 * {@link LanguageReconcilingStategy#parse}.
 	 */
 	final void updateContentOutlinePage() {
 		if (contentOutlinePage != null) {
@@ -390,14 +391,18 @@ public abstract class AssemblerEditor extends TextEditor {
 	 * Update the identifiers to be highlighted
 	 * 
 	 * @param compilerSourceFile The compiler source file or <code>null</code>.
+	 * 
+	 *                           Note: Only public for {@link LanguageOutlinePage}
+	 *                           TODO: Make this an event handler interface/MVP
+	 *                           registration
 	 */
-	final void updateIdentifiers(CompilerSourceFile compilerSourceFile) {
+	public final void updateIdentifiers(CompilerSourceFile compilerSourceFile) {
 		Profiler profiler = new Profiler(this.getClass());
 
-		AssemblerSourceViewerConfiguration asvc;
-		AssemblerSourceScanner ais;
-		asvc = (AssemblerSourceViewerConfiguration) getSourceViewerConfiguration();
-		ais = asvc.getAssemblerInstructionScanner();
+		LanguageSourceViewerConfiguration asvc;
+		LanguageSourceScanner ais;
+		asvc = (LanguageSourceViewerConfiguration) getSourceViewerConfiguration();
+		ais = asvc.getInstructionScanner();
 
 		List<CompilerSourceParserTreeObject> newIdentifiers;
 		if (compilerSourceFile == null) {
@@ -414,12 +419,14 @@ public abstract class AssemblerEditor extends TextEditor {
 
 	/**
 	 * Update the folding structure with a given list of foldingPositions. Used by
-	 * the editor updater of {@link AssemblerReconcilingStategy}.
+	 * the editor updater of {@link LanguageReconcilingStategy}.
 	 * 
 	 * @param foldingPositions The list of foldingPositions, may be empty, not
-	 *                         <code>null</code>.
+	 *                         <code>null</code>. Note: Only public for
+	 *                         {@link LanguageOutlinePage} TODO: Make this an event
+	 *                         handler interface/MVP registration
 	 */
-	final void updateFoldingStructure(List<Position> foldingPositions) {
+	public final void updateFoldingStructure(List<Position> foldingPositions) {
 		if (foldingPositions == null) {
 			throw new IllegalArgumentException("Parameter 'foldingPositions' must not be null.");
 		}

@@ -23,7 +23,7 @@ import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesCompilersPage;
 
 /**
- * Visual editor page for the assembler preferences regarding Atari 8-bit
+ * Visual editor page for the Pascal preferences regarding Atari 8-bit
  * compilers.
  * 
  * @author Peter Dell

@@ -51,9 +51,9 @@ import com.wudsn.ide.lng.preferences.TextAttributeConverter;
  * @author Peter Dell
  * @author Andy Reek
  */
-final class AssemblerSourceScanner extends RuleBasedScanner {
+final class LanguageSourceScanner extends RuleBasedScanner {
 
-	private final class AssemblerWordRule implements IRule {
+	private final class LanguageWordRule implements IRule {
 		public final class State {
 			public CompilerSourceParser compilerSourceParser;
 
@@ -84,7 +84,7 @@ final class AssemblerSourceScanner extends RuleBasedScanner {
 			}
 		}
 
-		// State of the AssemblerWordRule instance.
+		// State of the LanguageWordRule instance.
 		State state;
 
 		/** Buffer used for pattern detection in evaluate() only. */
@@ -92,7 +92,7 @@ final class AssemblerSourceScanner extends RuleBasedScanner {
 		private StringBuilder identifierBuffer = new StringBuilder();
 		private StringBuilder numberBuffer = new StringBuilder();
 
-		public AssemblerWordRule() {
+		public LanguageWordRule() {
 
 		}
 
@@ -347,7 +347,7 @@ final class AssemblerSourceScanner extends RuleBasedScanner {
 		}
 	}
 
-	private AssemblerEditor editor;
+	private LanguageEditor editor;
 	private Map<String, Token> tokens;
 
 	// Numbers
@@ -369,16 +369,16 @@ final class AssemblerSourceScanner extends RuleBasedScanner {
 	IToken procedureDefinitionSectionIdentifierToken;
 
 	// Word rule
-	private AssemblerWordRule wordRule;
+	private LanguageWordRule wordRule;
 
 	/**
 	 * Creates a new instance. Called by the
-	 * {@link AssemblerSourceViewerConfiguration}.
+	 * {@link LanguageSourceViewerConfiguration}.
 	 * 
-	 * @param editor The underlying AssemblerEditor for the code scanner, not
+	 * @param editor The underlying LanguageEditor for the code scanner, not
 	 *               <code>null</code>.
 	 */
-	AssemblerSourceScanner(AssemblerEditor editor) {
+	LanguageSourceScanner(LanguageEditor editor) {
 		if (editor == null) {
 			throw new IllegalArgumentException("Parameter 'editor' must not be null.");
 		}
@@ -445,7 +445,7 @@ final class AssemblerSourceScanner extends RuleBasedScanner {
 	private void createRules() {
 
 		// Instructions, identifiers and numbers.
-		wordRule = new AssemblerWordRule();
+		wordRule = new LanguageWordRule();
 		List<IRule> rules = new ArrayList<IRule>(4);
 		rules.add(wordRule);
 		setRules(rules.toArray(new IRule[rules.size()]));
@@ -478,7 +478,7 @@ final class AssemblerSourceScanner extends RuleBasedScanner {
 
 	/**
 	 * Update the token based on the preferences. Called by
-	 * {@link AssemblerSourceViewerConfiguration}.
+	 * {@link LanguageSourceViewerConfiguration}.
 	 * 
 	 * @param preferences          The preferences, not <code>null</code>.
 	 * @param changedPropertyNames The set of changed property names, not

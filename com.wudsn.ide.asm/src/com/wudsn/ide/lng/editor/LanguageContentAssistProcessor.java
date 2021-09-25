@@ -44,6 +44,7 @@ import com.wudsn.ide.lng.compiler.parser.CompilerSourceFile;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserLineCallback;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObject;
+import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObjectLabelProvider;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
 import com.wudsn.ide.lng.compiler.syntax.Directive;
 import com.wudsn.ide.lng.compiler.syntax.Instruction;
@@ -58,7 +59,7 @@ import com.wudsn.ide.lng.preferences.LanguagePreferences;
  * @author Peter Dell
  * @author Daniel Mitte
  */
-final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
+final class LanguageContentAssistProcessor implements IContentAssistProcessor {
 
 	/**
 	 * Empty styler
@@ -145,7 +146,7 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 		}
 	}
 
-	private AssemblerEditor editor;
+	private LanguageEditor editor;
 
 	private Image directiveImage;
 	private Image legalOpcodeImage;
@@ -158,13 +159,13 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 	 * Creates a new instance.
 	 * 
 	 * Called by
-	 * {@link AssemblerSourceViewerConfiguration#getContentAssistant(org.eclipse.jface.text.source.ISourceViewer)}
+	 * {@link LanguageSourceViewerConfiguration#getContentAssistant(org.eclipse.jface.text.source.ISourceViewer)}
 	 * .
 	 * 
-	 * @param editor The assembler editor for which this instance is created, not
+	 * @param editor The language editor for which this instance is created, not
 	 *               <code>null</code>.
 	 */
-	AssemblerContentAssistProcessor(AssemblerEditor editor) {
+	LanguageContentAssistProcessor(LanguageEditor editor) {
 		if (editor == null) {
 			throw new IllegalArgumentException("Parameter 'editor' must not be null.");
 		}
@@ -209,9 +210,9 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 			lineOffset = -1;
 		}
 
-		// Parse the current assembler file and try to find the line in the
+		// Parse the current compiler file and try to find the line in the
 		// correct source file.
-		CompilerFiles files = AssemblerEditorFilesLogic.createInstance(editor).createCompilerFiles();
+		CompilerFiles files = LanguageEditorFilesLogic.createInstance(editor).createCompilerFiles();
 		if (files == null) {
 			return null;
 		}
@@ -314,7 +315,7 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 		if (StringUtility.isEmpty(prefix) || !Character.isLetter(prefix.charAt(prefix.length() - 1))) {
 			String defaultCase;
 			defaultCase = languagePreferences.getEditorContentAssistProcessorDefaultCase();
-			lowerCase = AssemblerContentAssistProcessorDefaultCase.LOWER_CASE.equals(defaultCase);
+			lowerCase = LanguageContentAssistProcessorDefaultCase.LOWER_CASE.equals(defaultCase);
 		} else {
 			char lastchar = prefix.charAt(prefix.length() - 1);
 			lowerCase = ((lastchar < 'a') || (lastchar > 'z')) ? false : true;
@@ -394,7 +395,7 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 				proposal = proposal.replace("\n", "\n\t");
 				newCursorOffset = offset + proposalIndex;
 
-				proposalList.add(new AssemblerInstructionCompletionProposal(proposal, offset, region.getLength(),
+				proposalList.add(new LanguageInstructionCompletionProposal(proposal, offset, region.getLength(),
 						newCursorOffset, image, displayString, styledDisplayString, null));
 			}
 		}
@@ -457,7 +458,7 @@ final class AssemblerContentAssistProcessor implements IContentAssistProcessor {
 
 				int newCursorOffset = regionOffset + proposal.length();
 
-				proposalList.add(new AssemblerInstructionCompletionProposal(proposal, regionOffset, regionLength,
+				proposalList.add(new LanguageInstructionCompletionProposal(proposal, regionOffset, regionLength,
 						newCursorOffset, image, displayString, styledDisplayString, null));
 			}
 		}

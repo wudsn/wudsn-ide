@@ -17,7 +17,7 @@
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.wudsn.ide.lng.editor;
+package com.wudsn.ide.lng.breakpoint;
 
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.ui.IDebugModelPresentation;
@@ -34,13 +34,13 @@ import org.eclipse.ui.ide.IDE;
 
 /**
  * Implementation class for extension
- * "com.wudsn.ide.lng.editor.AssemblerBreakpoinDebugModelPresentation". This is
+ * "com.wudsn.ide.lng.editor.LanguageBreakpoinDebugModelPresentation". This is
  * the binding logic which enables navigation from transient and persistent
  * break point markers to the corresponding editor.
  * 
  * @author Peter Dell
  */
-public class AssemblerBreakpoinDebugModelPresentation implements IDebugModelPresentation {
+public class LanguageBreakpoinDebugModelPresentation implements IDebugModelPresentation {
 
 	@Override
 	public void dispose() {
@@ -62,8 +62,8 @@ public class AssemblerBreakpoinDebugModelPresentation implements IDebugModelPres
 
 	@Override
 	public IEditorInput getEditorInput(Object element) {
-		AssemblerBreakpoint assemblerBreakpoint = (AssemblerBreakpoint) element;
-		IEditorInput result = assemblerBreakpoint.getEditorInput();
+		LanguageBreakpoint languageBreakpoint = (LanguageBreakpoint) element;
+		IEditorInput result = languageBreakpoint.getEditorInput();
 		if (result == null) {
 			IWorkbenchWindow activeWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 			if (activeWindow == null) {
@@ -75,7 +75,7 @@ public class AssemblerBreakpoinDebugModelPresentation implements IDebugModelPres
 			}
 			IEditorPart part;
 			try {
-				part = IDE.openEditor(activePage, assemblerBreakpoint.getMarker(), false);
+				part = IDE.openEditor(activePage, languageBreakpoint.getMarker(), false);
 			} catch (PartInitException ex) {
 				return null;
 			}
@@ -86,8 +86,8 @@ public class AssemblerBreakpoinDebugModelPresentation implements IDebugModelPres
 
 	@Override
 	public String getEditorId(IEditorInput input, Object element) {
-		AssemblerBreakpoint assemblerBreakpoint = (AssemblerBreakpoint) element;
-		return assemblerBreakpoint.getEditorId();
+		LanguageBreakpoint languageBreakpoint = (LanguageBreakpoint) element;
+		return languageBreakpoint.getEditorId();
 	}
 
 	@Override
