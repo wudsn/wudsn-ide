@@ -64,6 +64,26 @@
       </command>
       <command
             categoryId="com.wudsn.ide.lng.editor.LanguageEditorCommands"
+            id="com.wudsn.ide.lng.editor.LanguageEditorAssembleCommand"
+            name="%com.wudsn.ide.lng.editor.LanguageEditorAssembleCommand.name">
+      </command>
+      <command
+            categoryId="com.wudsn.ide.lng.editor.LanguageEditorCommands"
+            id="com.wudsn.ide.lng.editor.LanguageEditorAssembleAndRunCommand"
+            name="%com.wudsn.ide.lng.editor.LanguageEditorAssembleAndRunCommand.name">
+      </command>
+      <command
+            categoryId="com.wudsn.ide.lng.editor.LanguageEditorCommands"
+            id="com.wudsn.ide.lng.editor.LanguageEditorAssembleAndRunWithCommand"
+            name="%com.wudsn.ide.lng.editor.LanguageEditorAssembleAndRunWithCommand.name">
+      </command>
+      <command
+            categoryId="com.wudsn.ide.lng.editor.LanguageEditorCommands"
+            id="com.wudsn.ide.lng.editor.LanguageEditorAssemblerHelpCommand"
+            name="%com.wudsn.ide.lng.editor.LanguageEditorAssemblerHelpCommand.name">
+      </command>
+      <command
+            categoryId="com.wudsn.ide.lng.editor.LanguageEditorCommands"
             id="com.wudsn.ide.lng.editor.LanguageEditorCompileCommand"
             name="%com.wudsn.ide.lng.editor.LanguageEditorCompileCommand.name">
       </command>
@@ -109,6 +129,54 @@
       <handler
             class="com.wudsn.ide.lng.editor.LanguageEditorOpenFolderCommandHandler"
             commandId="com.wudsn.ide.lng.editor.LanguageEditorOpenOutputFolderCommand">
+         <activeWhen>
+            <with
+                  variable="activeEditor">
+               <instanceof
+                     value="com.wudsn.ide.lng.editor.LanguageEditor">
+               </instanceof>
+            </with>
+         </activeWhen>
+      </handler>
+      <handler
+            class="com.wudsn.ide.lng.editor.LanguageEditorCompileCommandHandler"
+            commandId="com.wudsn.ide.lng.editor.LanguageEditorAssembleCommand">
+         <activeWhen>
+            <with
+                  variable="activeEditor">
+               <instanceof
+                     value="com.wudsn.ide.lng.editor.LanguageEditor">
+               </instanceof>
+            </with>
+         </activeWhen>
+      </handler>
+      <handler
+            class="com.wudsn.ide.lng.editor.LanguageEditorCompileCommandHandler"
+            commandId="com.wudsn.ide.lng.editor.LanguageEditorAssembleAndRunCommand">
+         <activeWhen>
+            <with
+                  variable="activeEditor">
+               <instanceof
+                     value="com.wudsn.ide.lng.editor.LanguageEditor">
+               </instanceof>
+            </with>
+         </activeWhen>
+      </handler>
+      <handler
+            class="com.wudsn.ide.lng.editor.LanguageEditorCompileCommandHandler"
+            commandId="com.wudsn.ide.lng.editor.LanguageEditorAssembleAndRunWithCommand">
+         <activeWhen>
+            <with
+                  variable="activeEditor">
+               <instanceof
+                     value="com.wudsn.ide.lng.editor.LanguageEditor">
+               </instanceof>
+            </with>
+         </activeWhen>
+      </handler>
+      <handler
+            class="com.wudsn.ide.lng.editor.LanguageEditorCompilerHelpCommandHandler"
+            commandId="com.wudsn.ide.lng.editor.LanguageEditorAssemblerHelpCommand">
          <activeWhen>
             <with
                   variable="activeEditor">
@@ -217,6 +285,50 @@
       <menuContribution
             locationURI="menu:org.eclipse.ui.main.menu?after=additions">
          <menu
+               id="com.wudsn.ide.lng.editor.LanguageEditorAssemblerMenu"
+               label="%com.wudsn.ide.lng.editor.LanguageEditorAssemblerMenu.label"
+               mnemonic="%com.wudsn.ide.lng.editor.LanguageEditorAssemblerMenu.mnemonic">
+            <visibleWhen
+                  checkEnabled="false">
+               <with
+                     variable="activeEditor">
+                  <instanceof
+                        value="com.wudsn.ide.lng.editor.LanguageEditor">
+                  </instanceof>
+               </with>
+            </visibleWhen>
+            <command
+                  commandId="com.wudsn.ide.lng.editor.LanguageEditorOpenSourceFolderCommand"
+                  mnemonic="%com.wudsn.ide.lng.editor.LanguageEditorOpenSourceFolderCommand.mnemonic">
+            </command>
+            <command
+                  commandId="com.wudsn.ide.lng.editor.LanguageEditorOpenOutputFolderCommand"
+                  mnemonic="%com.wudsn.ide.lng.editor.LanguageEditorOpenOutputFolderCommand.mnemonic">
+            </command>
+            <separator
+                  name="com.wudsn.ide.lng.editor.LanguageEditorAssemblerMenuSeparator1"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="com.wudsn.ide.lng.editor.LanguageEditorAssembleCommand"
+                  id="com.wudsn.ide.lng.editor.LanguageEditorAssembleCommand"
+                  mnemonic="%com.wudsn.ide.lng.editor.LanguageEditorAssembleCommand.mnemonic">
+            </command>
+            <command
+                  commandId="com.wudsn.ide.lng.editor.LanguageEditorAssembleAndRunCommand"
+                  id="com.wudsn.ide.lng.editor.LanguageEditorAssembleAndRunCommand"
+                  mnemonic="%com.wudsn.ide.lng.editor.LanguageEditorAssembleAndRunCommand.mnemonic">
+            </command>
+            <separator
+                  name="com.wudsn.ide.lng.editor.LanguageEditorAssemblerMenuSeparator2"
+                  visible="true">
+            </separator>
+            <command
+                  commandId="com.wudsn.ide.lng.editor.LanguageEditorAssemblerHelpCommand"
+                  mnemonic="%com.wudsn.ide.lng.editor.LanguageEditorAssemblerHelpCommand.mnemonic">
+            </command>
+         </menu>
+         <menu
                id="com.wudsn.ide.lng.editor.LanguageEditorCompilerMenu"
                label="%com.wudsn.ide.lng.editor.LanguageEditorCompilerMenu.label"
                mnemonic="%com.wudsn.ide.lng.editor.LanguageEditorCompilerMenu.mnemonic">
@@ -265,6 +377,17 @@
       <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
             label="%com.wudsn.ide.lng.editor.LanguageEditorCompilerMenu.label"
+         <toolbar
+               id="com.wudsn.ide.lng.editor.LanguageEditorAssemblerToolbar"
+               label="%com.wudsn.ide.lng.editor.LanguageEditorAssemblerToolbar.label">
+            <dynamic
+                  class="com.wudsn.ide.lng.editor.LanguageEditorAssembleAndRunCommandMenu"
+                  id="com.wudsn.ide.lng.editor.LanguageEditorAssembleAndRunCommandMenu">
+               <visibleWhen
+                     checkEnabled="true">
+               </visibleWhen>
+            </dynamic>
+         </toolbar>
          <toolbar
                id="com.wudsn.ide.lng.editor.LanguageEditorToolbar"
                label="%com.wudsn.ide.lng.editor.LanguageEditorCompilerToolbar.label">
