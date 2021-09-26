@@ -25,7 +25,6 @@ import org.eclipse.osgi.util.NLS;
 //COMPILER_HYPERLINK_DETECTOR_OPEN_SOURCE_WITH_LANGUAGE_EDITOR=Öffnen mit {0} Editor
 //LANGUAGE_BREAKPOINT_TOGGLE_TYPE_MENU_TEXT={0} Breakpoints
 //
-//TOC_COMPILERS_TOPIC_LABEL={0}
 //MESSAGE_E100=Path to '{0}' {1} executable is not set in the '{2}' preferences.
 //MESSAGE_E101=The {0} '{1}' does not specify default parameters.
 //MESSAGE_E102=The {1} '{1}' does not specify a help file path.
@@ -224,6 +223,7 @@ public final class Texts extends NLS {
 	public static String TOC_COMPILER_GENERAL_TOPIC_LABEL;
 	public static String TOC_COMPILER_NAME_LABEL;
 	public static String TOC_COMPILER_HOME_PAGE_LABEL;
+	public static String TOC_COMPILER_HELP_DOCUMENTS_LABEL;
 	public static String TOC_COMPILER_DEFAULT_HARDWARE_LABEL;
 	public static String TOC_COMPILER_SUPPORTED_TARGETS_LABEL;
 	public static String TOC_COMPILER_DEFAULT_PARAMETERS_LABEL;
@@ -248,7 +248,9 @@ public final class Texts extends NLS {
 	public static String TOC_HARDWARE_DEFAULT_PARAMETERS_LABEL;
 
 	public static String TOC_TARGETS_TOPIC_LABEL;
-	public static String TOC_TARGETS_NAME_LABEL;
+	public static String TOC_TARGET_NAME_LABEL;
+	public static String TOC_TARGET_LANGUAGE_LABEL;
+
 	public static String TOC_TARGET_OPCODE_LABEL;
 
 	/**

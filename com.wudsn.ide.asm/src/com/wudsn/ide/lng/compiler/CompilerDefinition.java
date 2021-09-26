@@ -22,19 +22,20 @@ package com.wudsn.ide.lng.compiler;
 import java.io.File;
 import java.util.List;
 import java.util.Locale;
-import java.util.StringTokenizer;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
-import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.hardware.Hardware;
+import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguagePlugin;
+import com.wudsn.ide.lng.LanguageUtility;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
+import com.wudsn.ide.lng.compiler.CompilerHelp.HelpDocument;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
 
 /**
@@ -47,7 +48,7 @@ import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
 public final class CompilerDefinition implements Comparable<CompilerDefinition> {
 
 	// Language
-	private String language;
+	private Language language;
 
 	// Id
 	private String id;
@@ -55,7 +56,7 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	private String className;
 
 	// Installation and use.
-	private String helpFilePaths;
+	private String helpDocumentPaths;
 	private String homePageURL;
 
 	// Editing and source parsing.
@@ -81,7 +82,7 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	 * 
 	 * @return The key that uniquely identifies the compiler, not <code>null</code>.
 	 */
-	public static String getKey(String language, String id) {
+	public static String getKey(Language language, String id) {
 		if (language == null) {
 			throw new IllegalStateException("Field 'language' must not be null for this or for argument.");
 		}
@@ -89,7 +90,7 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 			throw new IllegalStateException("Field 'id' must not be null for this or for argument.");
 
 		}
-		return language + "/" + id;
+		return language.name() + "/" + id;
 	}
 
 	/**
@@ -115,15 +116,15 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 		if (StringUtility.isEmpty(language)) {
 			throw new IllegalArgumentException("Parameter 'language' must not be empty.");
 		}
-		this.language = language;
+		this.language = Language.valueOf(language);
 	}
 
 	/**
 	 * Gets the language of the compiler.
 	 * 
-	 * @return The language of the compiler, not empty and not <code>null</code>.
+	 * @return The language of the compiler, not <code>null</code>.
 	 */
-	public final String getLanguage() {
+	public final Language getLanguage() {
 		if (language == null) {
 			throw new IllegalStateException("Field 'language' must not be null.");
 		}
@@ -243,43 +244,46 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	 * Sets the help file paths to locate the help file for the compiler. Called by
 	 * {@link CompilerRegistry} only.
 	 * 
-	 * @param helpFilePaths The relative file path to locate the help file for the
-	 *                      compiler based on the folder of the executable. ".",
-	 *                      ".." and "/" may be used to specify the path. A path may
-	 *                      end with a language in the form "(en)". Multiple paths
-	 *                      are separated by ",". May be empty or <code>null</code>.
+	 * @param helpDocumentPaths The relative file path starting with "." to locate
+	 *                          the help file for the compiler based on the folder
+	 *                          of the executable. ".". ".." and "/" may be used to
+	 *                          specify the file path. Alternatively the path can be
+	 *                          an absolute URL. A path may end with a language in
+	 *                          the form "(en)". Multiple paths are separated by
+	 *                          ",". May be empty or <code>null</code>.
 	 */
-	final void setHelpFilePaths(String helpFilePaths) {
-		if (helpFilePaths == null) {
-			helpFilePaths = "";
+	final void setHelpDocumentPaths(String helpDocumentPaths) {
+		if (helpDocumentPaths == null) {
+			helpDocumentPaths = "";
 		}
-		this.helpFilePaths = helpFilePaths;
+		this.helpDocumentPaths = helpDocumentPaths;
 	}
 
 	/**
 	 * Gets the help file paths to locate the help file for the compiler.
 	 * 
-	 * @return The relative file path to locate the help file for the compiler based
-	 *         on the folder of the executable. ".", ".." and "/" may be used to
-	 *         specify the path. A path may end with a language in the form
-	 *         "(en)".Multiple paths are separated by ",". The result may be empty,
-	 *         not <code>null</code>.
+	 * @return The relative file path starting with "." to locate the help file for
+	 *         the compiler based on the folder of the executable. ".". ".." and "/"
+	 *         may be used to specify the file path. Alternatively the path can be
+	 *         an absolute URL. A path may end with a language in the form "(en)".
+	 *         Multiple paths are separated by ",". May be empty or
+	 *         <code>null</code>.
 	 */
-	public final String getHelpFilePaths() {
-		if (helpFilePaths == null) {
-			throw new IllegalStateException("Field 'helpFilePaths' must not be null.");
+	public final String getHelpDocumentPaths() {
+		if (helpDocumentPaths == null) {
+			throw new IllegalStateException("Field 'helpDocumentPaths' must not be null.");
 		}
-		return helpFilePaths;
+		return helpDocumentPaths;
 	}
 
 	/**
-	 * Determines if this compiler offers a help file at all.
+	 * Determines if this compiler offers help at all.
 	 * 
 	 * @return <code>true</code> if this compiler offers a help file,
 	 *         <code>false</code> otherwise.
 	 */
-	public final boolean hasHelpFile() {
-		return StringUtility.isSpecified(helpFilePaths);
+	public final boolean hasHelpDocumentPaths() {
+		return StringUtility.isSpecified(helpDocumentPaths);
 	}
 
 	/**
@@ -294,57 +298,82 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	 *                       does not specify a help path or no help file can be
 	 *                       found.
 	 */
-	public final File getHelpFile(String compilerExecutablePath) throws CoreException {
+	public final List<HelpDocument> getHelpDocuments(String compilerExecutablePath) throws CoreException {
 		if (compilerExecutablePath == null) {
 			throw new IllegalArgumentException("Parameter 'compilerExecutablePath' must not be null.");
 		}
-		if (StringUtility.isEmpty(compilerExecutablePath)) {
-			// ERROR: Help for the '{0}' compiler cannot be
-			// displayed because the path to the compiler executable
-			// is not set in the preferences.
-			throw new CoreException(
-					new Status(IStatus.ERROR, LanguagePlugin.ID, TextUtility.format(Texts.MESSAGE_E130, name)));
+		String compilerText = LanguageUtility.getCompilerTextLower(language);
+		if (!hasHelpDocumentPaths()) {
+			// INFO: The {0} '{1}' does not specify help document paths.
+			throw new CoreException(new Status(IStatus.INFO, LanguagePlugin.ID,
+					TextUtility.format(Texts.MESSAGE_E102, compilerText, name)));
 		}
-		if (!hasHelpFile()) {
-			// ERROR: The compiler '{0}' does not specify a help file path.
-			throw new CoreException(
-					new Status(IStatus.ERROR, LanguagePlugin.ID, TextUtility.format(Texts.MESSAGE_E102, name)));
+		String compilerPreferencesText = LanguageUtility.getCompilerPreferencesText(language);
+		if (StringUtility.isEmpty(compilerExecutablePath)) {
+			// ERROR: Help for the '{0}' {1} cannot be displayed because the path to the
+			// compiler executable is not set in the {2} preferences.
+			throw new CoreException(new Status(IStatus.ERROR, LanguagePlugin.ID,
+					TextUtility.format(Texts.MESSAGE_E130, name, compilerText, compilerPreferencesText)));
 		}
 
+		return CompilerHelp.getHelpDocuments(helpDocumentPaths, compilerExecutablePath);
+
+	}
+
+	public final HelpDocument getHelpForCurrentLocale(String compilerExecutablePath) throws CoreException {
+		List<HelpDocument> helpDocuments = getHelpDocuments(compilerExecutablePath);
+
 		String localeLanguage = Locale.getDefault().getLanguage();
-		File firstFile = null;
-		File firstLanguageFile = null;
-		StringTokenizer tokenizer = new StringTokenizer(helpFilePaths, ",");
-		while (tokenizer.hasMoreTokens()) {
-			String helpFilePath = tokenizer.nextToken().trim();
-			String helpFileLanguage = "";
-			int index = helpFilePath.lastIndexOf("(");
-			if (index > 0) {
-				helpFileLanguage = helpFilePath.substring(index + 1, index + 3);
-				helpFilePath = helpFilePath.substring(0, index - 1).trim();
-			}
-			File file = FileUtility
-					.getCanonicalFile(new File(new File(compilerExecutablePath).getParent(), helpFilePath));
-			if (file.exists()) {
+
+		// Find the first existing local file and the first existing local file with
+		// matching language.
+		HelpDocument firstFile = null;
+		HelpDocument firstLanguageFile = null;
+		for (HelpDocument helpDocument : helpDocuments) {
+
+			if (helpDocument.file != null && helpDocument.file.exists()) {
 				if (firstFile == null) {
-					firstFile = file;
+					firstFile = helpDocument;
 				}
-				if (firstLanguageFile == null && helpFileLanguage.equals(localeLanguage)) {
-					firstLanguageFile = file;
+				if (firstLanguageFile == null && helpDocument.language.equals(localeLanguage)) {
+					firstLanguageFile = helpDocument;
 				}
 			}
 		}
+
 		// Use language specific file if present, use first file otherwise.
-		File result = firstLanguageFile;
+		HelpDocument result = firstLanguageFile;
 		if (result == null) {
 			result = firstFile;
 		}
+
+		// No local file specified or found. Try the URIs.
 		if (result == null) {
-			// ERROR: Help for the '{0}' compiler cannot be displayed because no
-			// help file was found in the paths '{1}' for the compiler
-			// executable path '{0}'.
-			throw new CoreException(new Status(IStatus.ERROR, LanguagePlugin.ID,
-					TextUtility.format(Texts.MESSAGE_E131, name, helpFilePaths, compilerExecutablePath)));
+			for (HelpDocument helpDocument : helpDocuments) {
+				if (helpDocument.uri != null) {
+					if (firstFile == null) {
+						firstFile = helpDocument;
+					}
+					if (firstLanguageFile == null && helpDocument.language.equals(localeLanguage)) {
+						firstLanguageFile = helpDocument;
+					}
+				}
+			}
+
+			// Use language specific URI if present, use first URI otherwise.
+			result = firstLanguageFile;
+			if (result == null) {
+				result = firstFile;
+			}
+		}
+
+		// No local file specified or found and no URIs found.
+		if (result == null) {
+
+			// ERROR: Help for the '{0}' {1} cannot be displayed because no help file was
+			// found in the paths '{2}' relative to the executable path '{3}'.
+			throw new CoreException(new Status(IStatus.ERROR, LanguagePlugin.ID, TextUtility.format(Texts.MESSAGE_E131,
+					name, LanguageUtility.getCompilerTextLower(language), helpDocumentPaths, compilerExecutablePath)));
 		}
 		return result;
 

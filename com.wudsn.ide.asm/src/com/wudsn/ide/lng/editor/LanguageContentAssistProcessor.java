@@ -305,7 +305,7 @@ final class LanguageContentAssistProcessor implements IContentAssistProcessor {
 		if (proposalList == null) {
 			throw new IllegalArgumentException("Parameter 'proposalList' must not be null.");
 		}
-		LanguagePreferences languagePreferences = editor.getPlugin().getPreferences();
+		LanguagePreferences languagePreferences = editor.getLanguagePreferences();
 
 		int offset = region.getOffset();
 		boolean lowerCase;

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<instructionset
+	completionProposalAutoActivationCharacters=".#"
+	singleLineCommentDelimiters="//"
+	multipleLinesCommentDelimiters="{ } (* *)"
+	stringDelimiterCharacters="'"
+	blockDefinitionCharacters=""
+	identifiersCaseSensitive="false"
+	identifierStartCharacters="_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+	identifierPartCharacters="_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+	identifierSeparatorCharacter="."
+	labelDefinitionSuffixCharacter=""
+	macroUsagePrefixCharacter=""
+	instructionsCaseSensitive="false"
+	sourceIncludeDefaultExtension="pas">
+
+</instructionset>
+

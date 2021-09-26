@@ -19,7 +19,7 @@
 
 package com.wudsn.ide.lng.compiler.syntax;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -31,18 +31,56 @@ public final class Opcode extends Instruction {
 	public static final int MAX_OPCODES = 256;
 
 	public final static class OpcodeAddressingMode {
+
+		private static Map<String, String> addressingModeText;
+
+		static {
+			addressingModeText = new TreeMap<String, String>();
+
+			// 6502 mode.
+			addressingModeText.put("abs", " abs"); // Absolute
+			addressingModeText.put("abx", " abs,x"); // Absolute withX
+			addressingModeText.put("aby", " abs,y"); // Absolute with Y
+			addressingModeText.put("imm", " #$nn"); // Immediate
+			addressingModeText.put("imp", ""); // Implied
+			addressingModeText.put("ind", " (abs)"); // Indirect absolute
+			addressingModeText.put("izx", " (zp,x)"); // Indirect zero page with X
+			addressingModeText.put("izy", " (zp),y"); // Indirect zero page with Y
+			addressingModeText.put("rel", " rel"); // Relative
+			addressingModeText.put("zp", " zp"); // Zero page
+			addressingModeText.put("zpx", " zp,x"); // Zero page with X
+			addressingModeText.put("zpy", " zp,y"); // Zero page with Y
+
+			// 65816 modes. Some are equals to 6502 mode, but have different a code.
+			addressingModeText.put("abl", " abs (long)"); // Absolute long
+			addressingModeText.put("alx", " abs,x (long)"); // Absolute long with X
+			addressingModeText.put("bm", " $nn,$mm"); // Block move
+			addressingModeText.put("dp", " dp"); // Direct page
+			addressingModeText.put("dpx", " dp,x"); // Direct page with X
+			addressingModeText.put("dpy", " dp,y"); // Direct page with Y
+			addressingModeText.put("ial", " (abs) (long)"); // Indirect absolute long
+			addressingModeText.put("idl", " (abs) (long)"); // Indirect absolute long for JMP
+			addressingModeText.put("iax", " (abs,x) (long)"); // Indirect absolute long with X
+			addressingModeText.put("idly", " (abs),y (long)"); // Indirect absolute long with Y
+			addressingModeText.put("idp", " (dp)"); // Indirect direct page
+			addressingModeText.put("isy", " ($00,S),Y"); // Stack indirect with Y in first 64k
+			addressingModeText.put("rell", " rel (long)"); // Relative long
+			addressingModeText.put("sr", "$00,S"); // Stack in first 64k
+
+		}
+
 		private Opcode opcode;
-		private Set<Target> cpus;
+		private Set<Target> targets;
 		private String addressingMode;
 		private int opcodeValue;
 
-		OpcodeAddressingMode(Opcode opcode, Set<Target> cpus, String addressingMode, int opcodeValue) {
+		OpcodeAddressingMode(Opcode opcode, Set<Target> targets, String addressingMode, int opcodeValue) {
 			if (opcode == null) {
 				throw new IllegalArgumentException("Parameter 'opcode' must not be null.");
 			}
-			if (cpus == null) {
+			if (targets == null) {
 				throw new IllegalArgumentException(
-						"Parameter 'cpus' must not be null for opcode '" + opcode.getName() + "'.");
+						"Parameter 'targets' must not be null for opcode '" + opcode.getName() + "'.");
 			}
 			if (addressingMode == null) {
 				throw new IllegalArgumentException(
@@ -54,7 +92,7 @@ public final class Opcode extends Instruction {
 
 			}
 			this.opcode = opcode;
-			this.cpus = cpus;
+			this.targets = targets;
 			this.addressingMode = addressingMode;
 			this.opcodeValue = opcodeValue;
 		}
@@ -64,7 +102,7 @@ public final class Opcode extends Instruction {
 		}
 
 		public Set<Target> getCPUs() {
-			return cpus;
+			return targets;
 		}
 
 		public String getAddressingMode() {
@@ -74,47 +112,9 @@ public final class Opcode extends Instruction {
 		public String getFormattedText() {
 
 			StringBuffer result = new StringBuffer(opcode.getName());
-			if (addressingMode.equals("imp")) {
-
-			} else if (addressingMode.equals("imm")) {
-				result.append(" #$nn");
-			} else if (addressingMode.equals("zp")) {
-				result.append(" zp");
-			} else if (addressingMode.equals("zpx")) {
-				result.append(" zp,x");
-			} else if (addressingMode.equals("zpy")) {
-				result.append(" zp,y");
-			} else if (addressingMode.equals("izx")) {
-				result.append(" (zp,x)");
-			} else if (addressingMode.equals("izy")) {
-				result.append(" (zp),y");
-			} else if (addressingMode.equals("abs")) {
-				result.append(" abs");
-			} else if (addressingMode.equals("abx")) {
-				result.append(" abs,x");
-			} else if (addressingMode.equals("aby")) {
-				result.append(" abs,y");
-			} else if (addressingMode.equals("ind")) {
-				result.append(" (abs)");
-			} else if (addressingMode.equals("rel")) {
-				result.append(" rel");
-			} else
-
-			// 65816 modes
-			if (addressingMode.equals("abl")) {
-				result.append(" adr (long)");
-			} else if (addressingMode.equals("bm")) {
-				result.append(" $nn,$nn");
-			} else if (addressingMode.equals("dp")) {
-				result.append(" (zp)");
-			} else if (addressingMode.equals("ial")) {
-				result.append(" abs (long)");
-			} else if (addressingMode.equals("iax")) {
-				result.append(" (abs,x)");
-			} else if (addressingMode.equals("idp")) {
-				result.append(" (zp)");
-			} else if (addressingMode.equals("rell")) {
-				result.append(" rel (long)");
+			String text = addressingModeText.get(addressingMode);
+			if (text != null) {
+				result.append(text);
 			} else {
 				throw new RuntimeException(
 						"Unmapped addressing mode " + addressingMode + " for opcode " + opcode.getName());

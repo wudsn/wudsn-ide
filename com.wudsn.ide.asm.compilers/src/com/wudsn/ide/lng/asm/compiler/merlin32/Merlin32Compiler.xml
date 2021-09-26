@@ -19,7 +19,7 @@
 		modes="idl=$47,abl=$4f,idly=$57,alx=$5f"/>
 	<opcode targets="MOS65816" name="JMPL" title="_Ju_m_p to new address (_long)" proposal="JMPL _" modes="abl=$5c,ial=$7c"/>
 	<opcode targets="MOS65816" name="JSRL" title="_Jump to _sub _routine (_long)" proposal="JSRL _" modes="abs=$22"/>
-	<opcode targets="MOS65816" name="LDAL" title="_Loa_d _accumulator (_long)" proposal="LDAL _" modes="idl=$a7,ibl=$af,idly=$b7,alx=$bf"/>
+	<opcode targets="MOS65816" name="LDAL" title="_Loa_d _accumulator (_long)" proposal="LDAL _" modes="idl=$a7,abl=$af,idly=$b7,alx=$bf"/>
 	<opcode targets="MOS65816" name="ORAL" title="Binary _o_r with _accumulator (_long)" proposal="ORAL _"
 		modes="idl=$07,abl=$0f,idl=$17,alx=$1f"/>
 	<opcode targets="MOS65816" name="SBCL" title="_Su_btract from accumulator with _carry (_long)" proposal="SBCL _"

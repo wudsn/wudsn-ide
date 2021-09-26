@@ -507,7 +507,7 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 	public boolean performOk() {
 		if (super.performOk()) {
 			saveChanges();
-			plugin.firePreferencesChangeEvent(changedPropertyNames);
+			plugin.firePreferencesChangeEvent(language, changedPropertyNames);
 			return true;
 		}
 		return false;

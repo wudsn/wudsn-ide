@@ -66,6 +66,7 @@ import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObject;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourcePartitionScanner;
 import com.wudsn.ide.lng.outline.LanguageOutlinePage;
 import com.wudsn.ide.lng.preferences.CompilerPreferences;
+import com.wudsn.ide.lng.preferences.LanguagePreferences;
 
 /**
  * The language editor.
@@ -154,12 +155,21 @@ public abstract class LanguageEditor extends TextEditor {
 	}
 
 	/**
+	 * Gets the language preferences.
+	 * 
+	 * @return The language preferences, not <code>null</code>.
+	 */
+	public final LanguagePreferences getLanguagePreferences() {
+		return plugin.getLanguagePreferences(getCompilerDefinition().getLanguage());
+	}
+
+	/**
 	 * Gets the compiler preferences.
 	 * 
 	 * @return The compiler preferences, not <code>null</code>.
 	 */
 	public final CompilerPreferences getCompilerPreferences() {
-		return plugin.getPreferences().getCompilerPreferences(getCompilerDefinition(), getHardware());
+		return getLanguagePreferences().getCompilerPreferences(getCompilerDefinition(), getHardware());
 	}
 
 	/**

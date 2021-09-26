@@ -33,6 +33,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
+import com.wudsn.ide.lng.compiler.CompilerHelp.HelpDocument;
 import com.wudsn.ide.lng.preferences.LanguagePreferences;
 
 /**
@@ -57,12 +58,17 @@ public final class LanguageEditorCompilerHelpCommandHandler extends AbstractHand
 		languageEditor = (LanguageEditor) editor;
 
 		CompilerDefinition compilerDefinition = languageEditor.getCompilerDefinition();
-		LanguagePreferences languagePreferences = LanguagePlugin.getInstance().getPreferences();
+		LanguagePreferences languagePreferences = languageEditor.getLanguagePreferences();
 		String compilerExecutablePath = languagePreferences.getCompilerExecutablePath(compilerDefinition.getId());
 
 		try {
-			File file = compilerDefinition.getHelpFile(compilerExecutablePath);
-			Program.launch(file.getPath());
+			HelpDocument helpDocument = compilerDefinition.getHelpForCurrentLocale(compilerExecutablePath);
+			if (helpDocument.file != null) {
+				Program.launch(helpDocument.file.getPath());
+			} else {
+				Program.launch(helpDocument.uri.toString());
+
+			}
 
 		} catch (CoreException ex) {
 			// ERROR: Display text from core exception.

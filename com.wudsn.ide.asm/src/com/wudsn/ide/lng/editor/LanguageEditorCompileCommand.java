@@ -56,8 +56,10 @@ import com.wudsn.ide.base.common.MarkerUtility;
 import com.wudsn.ide.base.common.NumberUtility;
 import com.wudsn.ide.base.common.ProcessWithLogs;
 import com.wudsn.ide.base.common.StringUtility;
+import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.LanguagePlugin;
+import com.wudsn.ide.lng.LanguageUtility;
 import com.wudsn.ide.lng.HardwareUtility;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.breakpoint.LanguageBreakpoint;
@@ -246,20 +248,23 @@ final class LanguageEditorCompileCommand {
 		}
 
 		// Get and check path to compiler executable.
-		String compilerExecutablePath = plugin.getPreferences().getCompilerExecutablePath(compilerDefinition.getId());
+		String compilerDefinitionText = LanguageUtility.getCompilerTextLower(compilerDefinition.getLanguage());
+		String compilerPreferencesText = LanguageUtility.getCompilerPreferencesText(compilerDefinition.getLanguage());
+
+		String compilerExecutablePath = languageEditor.getLanguagePreferences()
+				.getCompilerExecutablePath(compilerDefinition.getId());
 		if (StringUtility.isEmpty(compilerExecutablePath)) {
-			// ERROR: Path to '{0}' compiler executable is not set in the
-			// preferences.
-			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E100,
-					compilerDefinition.getName());
+			// ERROR: Path to '{0}' {1} executable is not set in the '{2}' preferences.
+			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E100, compilerDefinitionText,
+					compilerDefinition.getName(), compilerPreferencesText);
 			return false;
 		}
 		File compilerExecutableFile = new File(compilerExecutablePath);
 		if (!compilerExecutableFile.exists()) {
-			// Path to '{0}' compiler executable in the preferences points
-			// to non-existing file '{1}'.
-			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E103, compilerDefinition.getName(),
-					compilerExecutablePath);
+			// ERROR: Path to '{0}' {1} executable in the {2} preferences points to
+			// non-existing file '{3}'.
+			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E103, compilerDefinitionText,
+					compilerDefinition.getName(), compilerPreferencesText, compilerExecutablePath);
 			return false;
 		}
 
@@ -278,9 +283,10 @@ final class LanguageEditorCompileCommand {
 		compilerParameters = compilerParameters.trim();
 		String compilerParameterArray[] = compilerParameters.split(" ");
 		if (compilerParameterArray.length == 0) {
-			// ERROR: The compiler '{0}' does not specify default
+			// ERROR: The {0} '{1}' does not specify default
 			// parameters.
-			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E101);
+			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E101, compilerDefinitionText,
+					compilerDefinition.getId());
 			return false;
 		}
 
@@ -716,7 +722,7 @@ final class LanguageEditorCompileCommand {
 
 		});
 
-		String positioningMode = plugin.getPreferences().getEditorCompileCommandPositioningMode();
+		String positioningMode = languageEditor.getLanguagePreferences().getEditorCompileCommandPositioningMode();
 		boolean ignoreWarnings = positioningMode.equals(LanguageEditorCompileCommandPositioningMode.FIRST_ERROR);
 		IMarker firstWarningMarker = null;
 		IMarker firstErrorMarker = null;

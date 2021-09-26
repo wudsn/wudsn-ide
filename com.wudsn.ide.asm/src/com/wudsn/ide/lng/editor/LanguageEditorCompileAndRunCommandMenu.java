@@ -37,7 +37,7 @@ public final class LanguageEditorCompileAndRunCommandMenu extends WorkbenchWindo
 
 	public LanguageEditorCompileAndRunCommandMenu() {
 		if (System.getProperty("user.name").equals("JAC")) {
-			new Exception("JAC! Test for Startup!").printStackTrace();
+//			new Exception("JAC! Test for Startup!").printStackTrace();
 		}
 	}
 

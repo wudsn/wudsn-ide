@@ -16,22 +16,34 @@
  * You should have received a copy of the GNU General Public License
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.wudsn.ide.lng.pas.compiler.mp;
+package com.wudsn.ide.lng;
 
-import com.wudsn.ide.lng.compiler.Compiler;
-import com.wudsn.ide.lng.compiler.CompilerProcessLogParser;
-import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
+/**
+ * Enum for the supported targets. Used for restricting the visible instructions.
+ * 
+ * @author Peter Dell
+ * 
+ * @since 1.7.2
+ */
+public final class TargetUtility {
 
-public class MadPascalCompiler extends Compiler {
+	private TargetUtility() {
 
-	@Override
-	public CompilerSourceParser createSourceParser() {
-		return new MadPascalCompilerSourceParser();
 	}
 
-	@Override
-	public CompilerProcessLogParser createLogParser() {
-		return new MadPascalCompilerProcessLogParser();
+	/**
+	 * Gets the language for a target.
+	 * 
+	 * @param target The target, not <code>null</code>.
+	 * @return The language, not <code>null</code>.
+	 */
+	public static Language getLanguage(Target target) {
+		if (target == null) {
+			throw new IllegalArgumentException("Parameter 'target' must not be null.");
+		}
+		if (target.equals(Target.PASCAL)) {
+			return Language.PAS;
+		}
+		return Language.ASM;
 	}
-
 }

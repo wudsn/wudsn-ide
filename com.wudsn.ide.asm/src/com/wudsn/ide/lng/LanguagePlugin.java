@@ -40,6 +40,7 @@ import com.wudsn.ide.lng.compiler.CompilerRegistry;
 import com.wudsn.ide.lng.preferences.LanguagePreferences;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesChangeListener;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants;
+import com.wudsn.ide.lng.preferences.LanguagesPreferences;
 import com.wudsn.ide.lng.runner.RunnerRegistry;
 
 /**
@@ -64,7 +65,7 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 	/**
 	 * The preferences.
 	 */
-	private LanguagePreferences preferences;
+	private LanguagesPreferences preferences;
 	private ListenerList<LanguagePreferencesChangeListener> preferencesChangeListeners;
 
 	/**
@@ -117,7 +118,7 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
-		preferences = new LanguagePreferences(getPreferenceStore());
+		preferences = new LanguagesPreferences(getPreferenceStore());
 		plugin = this;
 		try {
 			compilerRegistry.init();
@@ -141,7 +142,9 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 			public void propertyChange(PropertyChangeEvent event) {
 				if (event.getProperty().equals(JFaceResources.TEXT_FONT)
 						|| event.getProperty().equals(BLOCK_SELECTION_MODE_FONT)) {
-					firePreferencesChangeEvent(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTES);
+					for (Language language : languages) {
+						firePreferencesChangeEvent(language, LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTES);
+					}
 				}
 
 			}
@@ -221,11 +224,18 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 	 * 
 	 * @return The preferences, not <code>null</code>.
 	 */
-	public LanguagePreferences getPreferences() {
+	public LanguagesPreferences getPreferences() {
 		if (preferences == null) {
 			throw new IllegalStateException("Field 'preferences' must not be null.");
 		}
 		return preferences;
+	}
+
+	public LanguagePreferences getLanguagePreferences(Language language) {
+		if (language == null) {
+			throw new IllegalArgumentException("Parameter 'language' must not be null.");
+		}
+		return getPreferences().getLanguagePreferences(language);
 	}
 
 	/**
@@ -257,19 +267,22 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 	/**
 	 * Fire the change events for all registered listeners.
 	 * 
+	 * @param language
+	 * 
 	 * @param changedPropertyNames The set of property changed property names, not
 	 *                             <code>null</code>.
 	 * 
 	 * @since 1.6.3
 	 */
-	public void firePreferencesChangeEvent(Set<String> changedPropertyNames) {
+	public void firePreferencesChangeEvent(Language language, Set<String> changedPropertyNames) {
 		if (changedPropertyNames == null) {
 			throw new IllegalArgumentException("Parameter 'changedPropertyNames' must not be null.");
 		}
 		if (!changedPropertyNames.isEmpty()) {
-
+			LanguagePreferences languagPreferences = getLanguagePreferences(language);
 			for (Object listener : preferencesChangeListeners.getListeners()) {
-				((LanguagePreferencesChangeListener) listener).preferencesChanged(preferences, changedPropertyNames);
+				((LanguagePreferencesChangeListener) listener).preferencesChanged(languagPreferences,
+						changedPropertyNames);
 			}
 		}
 	}

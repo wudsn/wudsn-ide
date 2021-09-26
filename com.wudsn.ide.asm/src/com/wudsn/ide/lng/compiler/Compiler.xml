@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <!-- Common 6502 opcodes used by all compilers -->
-<!-- See http://www.65xx.com/wdc/documentation/w65c816s.pdf for the description of the 16bit opcodes. -->
+<!-- See https://www.westerndesigncenter.com/wdc/documentation/w65c816s.pdf for the description of the 16bit opcodes. -->
 <!-- http://www.westerndesigncenter.com/wdc/datasheets/Programmanual.pdf -->
 
 <opcodes>

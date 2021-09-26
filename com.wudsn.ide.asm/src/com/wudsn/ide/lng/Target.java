@@ -19,7 +19,7 @@
 package com.wudsn.ide.lng;
 
 /**
- * Enum for the supported CPUs. Used for restricting the visible instructions.
+ * Enum for the supported targets. Used for restricting the visible instructions.
  * 
  * @author Peter Dell
  * 

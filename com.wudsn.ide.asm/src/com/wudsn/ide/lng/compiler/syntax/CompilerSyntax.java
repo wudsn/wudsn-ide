@@ -486,6 +486,9 @@ public final class CompilerSyntax {
 			try {
 
 				InputStream inputStream = compilerClass.getResourceAsStream(syntaxFileName);
+				if (inputStream==null) {
+					throw new RuntimeException("Cannot create parser for file '" + syntaxFileName + "'. Resource not found in class path.");
+				}
 				parser.parse(inputStream, xmlHandler);
 			} catch (SAXParseException ex) {
 				throw new RuntimeException("Cannot create parser for file '" + syntaxFileName + "'. Error in line "

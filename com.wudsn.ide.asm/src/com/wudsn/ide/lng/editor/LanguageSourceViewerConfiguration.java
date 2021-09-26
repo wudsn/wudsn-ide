@@ -81,8 +81,7 @@ final class LanguageSourceViewerConfiguration extends TextSourceViewerConfigurat
 	/**
 	 * Creates a new instance. Called by {@link LanguageEditor#initializeEditor()}.
 	 * 
-	 * @param editor          The underlying language editor, not
-	 *                        <code>null</code>.
+	 * @param editor          The underlying language editor, not <code>null</code>.
 	 * 
 	 * @param preferenceStore The preferences store, not <code>null</code>.
 	 */
@@ -154,8 +153,7 @@ final class LanguageSourceViewerConfiguration extends TextSourceViewerConfigurat
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
 		ContentAssistant assistant = new ContentAssistant();
-		assistant.setContentAssistProcessor(new LanguageContentAssistProcessor(editor),
-				IDocument.DEFAULT_CONTENT_TYPE);
+		assistant.setContentAssistProcessor(new LanguageContentAssistProcessor(editor), IDocument.DEFAULT_CONTENT_TYPE);
 		assistant.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_ABOVE);
 		assistant.enableAutoActivation(true);
 		assistant.enableAutoInsert(true);
@@ -173,19 +171,22 @@ final class LanguageSourceViewerConfiguration extends TextSourceViewerConfigurat
 		PresentationReconciler reconciler = new PresentationReconciler();
 		DefaultDamagerRepairer dr;
 
-		commentSingleScanner = new LanguageRuleBasedScanner(
+		LanguagePreferences languagePreferences = editor.getLanguagePreferences();
+
+		commentSingleScanner = new LanguageRuleBasedScanner(languagePreferences,
 				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT);
 		dr = new DefaultDamagerRepairer(commentSingleScanner);
 		reconciler.setDamager(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_SINGLE);
 		reconciler.setRepairer(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_SINGLE);
 
-		commentMultipleScanner = new LanguageRuleBasedScanner(
+		commentMultipleScanner = new LanguageRuleBasedScanner(languagePreferences,
 				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT);
 		dr = new DefaultDamagerRepairer(commentMultipleScanner);
 		reconciler.setDamager(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_MULTIPLE);
 		reconciler.setRepairer(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_MULTIPLE);
 
-		stringScanner = new LanguageRuleBasedScanner(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_STRING);
+		stringScanner = new LanguageRuleBasedScanner(languagePreferences,
+				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_STRING);
 		dr = new DefaultDamagerRepairer(stringScanner);
 		reconciler.setDamager(dr, CompilerSourcePartitionScanner.PARTITION_STRING);
 		reconciler.setRepairer(dr, CompilerSourcePartitionScanner.PARTITION_STRING);

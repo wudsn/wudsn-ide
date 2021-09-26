@@ -433,7 +433,7 @@ final class LanguageSourceScanner extends RuleBasedScanner {
 		}
 		LanguagePreferences preferences;
 		Token token;
-		preferences = editor.getPlugin().getPreferences();
+		preferences = editor.getLanguagePreferences();
 		token = new Token(preferences.getEditorTextAttribute(textAttributeName));
 		tokens.put(textAttributeName, token);
 		return token;

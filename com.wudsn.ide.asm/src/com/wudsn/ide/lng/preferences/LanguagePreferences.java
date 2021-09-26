@@ -25,9 +25,11 @@ import org.eclipse.jface.text.TextAttribute;
 import com.wudsn.ide.base.common.AbstractIDEPlugin;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
+import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.editor.LanguageContentAssistProcessorDefaultCase;
 import com.wudsn.ide.lng.editor.LanguageEditorCompileCommandPositioningMode;
+
 /**
  * Facade class for typed access to the plugin preferences.
  * 
@@ -38,35 +40,29 @@ public final class LanguagePreferences {
 	/**
 	 * The preference store to which all calls are delegated.
 	 */
-	private IPreferenceStore preferenceStore;
+	private LanguagesPreferences languagesPreferences;
+	private Language language;
 
 	/**
 	 * Created by {@link AbstractIDEPlugin} only.
 	 * 
-	 * @param preferenceStore The preference store, not <code>null</code>.
+	 * @param languagesPreferences The languages preferences, not <code>null</code>.
 	 */
-	public LanguagePreferences(IPreferenceStore preferenceStore) {
-		if (preferenceStore == null) {
-			throw new IllegalArgumentException("Parameter 'preferenceStore' must not be null.");
+	public LanguagePreferences(LanguagesPreferences languagesPreferences, Language language) {
+		if (languagesPreferences == null) {
+			throw new IllegalArgumentException("Parameter 'languagesPreferences' must not be null.");
 		}
-		this.preferenceStore = preferenceStore;
+		if (language == null) {
+			throw new IllegalArgumentException("Parameter 'language' must not be null.");
+		}
+		this.languagesPreferences = languagesPreferences;
+		this.language = language;
 	}
 
-	/**
-	 * Gets the text attribute for a token type.
-	 * 
-	 * @param name The name of the preferences for the token type, see
-	 *             {@link LanguagePreferencesConstants}.
-	 * 
-	 * @return The text attribute, not <code>null</code>.
-	 */
-	public TextAttribute getEditorTextAttribute(String name) {
-		if (name == null) {
-			throw new IllegalArgumentException("Parameter 'name' must not be null.");
-		}
-		return TextAttributeConverter.fromString(preferenceStore.getString(name));
+	public Language getLanguage() {
+		return language;
 	}
-
+	
 	/**
 	 * Gets the default case content assist.
 	 * 
@@ -109,9 +105,10 @@ public final class LanguagePreferences {
 	/**
 	 * Gets the preferences for a compiler.
 	 * 
-	 * @param compilerDefinition The compiler definition, not empty and not <code>null</code>.
-	 * @param hardware   The preferences or <code>null</code> if the compiler is not
-	 *                   active for that hardware.
+	 * @param compilerDefinition The compiler definition, not empty and not
+	 *                           <code>null</code>.
+	 * @param hardware           The preferences or <code>null</code> if the
+	 *                           compiler is not active for that hardware.
 	 * 
 	 * @return The compiler preferences, not <code>null</code>.
 	 */
@@ -128,6 +125,21 @@ public final class LanguagePreferences {
 	}
 
 	/**
+	 * Gets the current value of the boolean preference with the given name. Returns
+	 * the default value <code>false</code> if there is no preference with the given
+	 * name, or if the current value cannot be treated as a boolean.
+	 * 
+	 * @param name The name of the preference, not <code>null</code>.
+	 * @return The preference value.
+	 */
+	boolean getBoolean(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException("Parameter 'name' must not be null.");
+		}
+		return languagesPreferences.getBoolean(language.name() + "." + name);
+	}
+
+	/**
 	 * Gets the current value of the string-valued preference with the given name.
 	 * Returns the default-default value (the empty string <code>""</code> ) if
 	 * there is no preference with the given name, or if the current value cannot be
@@ -138,32 +150,25 @@ public final class LanguagePreferences {
 	 */
 	String getString(String name) {
 		if (name == null) {
-			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+			throw new IllegalArgumentException("Parameter 'name' must not be null.");
 		}
-		String result;
-		result = preferenceStore.getString(name);
-		if (result == null) {
-			result = "";
-		} else {
-			result = result.trim();
-		}
-
-		return result;
+		return languagesPreferences.getString(language.name() + "." + name);
 	}
 
 	/**
-	 * Gets the current value of the boolean preference with the given name. Returns
-	 * the default-default value <code>false</code> if there is no preference with
-	 * the given name, or if the current value cannot be treated as a boolean.
+	 * Gets the text attribute for a token type.
 	 * 
-	 * @param name The name of the preference, not <code>null</code>.
-	 * @return The preference value.
+	 * @param name The name of the preferences for the token type, see
+	 *             {@link LanguagePreferencesConstants}.
+	 * 
+	 * @return The text attribute, not <code>null</code>.
 	 */
-	boolean getBoolean(String name) {
+	public TextAttribute getEditorTextAttribute(String name) {
 		if (name == null) {
-			throw new IllegalArgumentException("Parameter 'key' must not be null.");
+			throw new IllegalArgumentException("Parameter 'name' must not be null.");
 		}
-		return preferenceStore.getBoolean(name);
+		return languagesPreferences.getEditorTextAttribute(language.name() + "." + name);
+
 	}
 
 }

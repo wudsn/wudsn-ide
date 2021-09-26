@@ -16,22 +16,44 @@
  * You should have received a copy of the GNU General Public License
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package com.wudsn.ide.lng.pas.compiler.mp;
 
-import com.wudsn.ide.lng.compiler.Compiler;
-import com.wudsn.ide.lng.compiler.CompilerProcessLogParser;
-import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
+import java.io.BufferedReader;
+import java.io.StringReader;
+import java.util.List;
 
-public class MadPascalCompiler extends Compiler {
+import org.eclipse.core.runtime.CoreException;
+
+import com.wudsn.ide.lng.compiler.CompilerProcessLogParser;
+import com.wudsn.ide.lng.compiler.CompilerSymbol;
+
+/**
+ * Process log parser for {@link MadsCompiler}.
+ * 
+ * @author Peter Dell
+ */
+final class MadPascalCompilerProcessLogParser extends CompilerProcessLogParser {
+
+	private BufferedReader bufferedReader;
 
 	@Override
-	public CompilerSourceParser createSourceParser() {
-		return new MadPascalCompilerSourceParser();
+	protected void initialize() {
+		bufferedReader = new BufferedReader(new StringReader(outputLog));
 	}
 
 	@Override
-	public CompilerProcessLogParser createLogParser() {
-		return new MadPascalCompilerProcessLogParser();
+	protected void findNextMarker() {
+
+
+	}
+
+	@Override
+	public void addCompilerSymbols(List<CompilerSymbol> compilerSymbols) throws CoreException {
+		if (compilerSymbols == null) {
+			throw new IllegalArgumentException("Parameter 'compilerSymbols' must not be null.");
+		}
+
 	}
 
 }

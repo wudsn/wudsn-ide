@@ -457,7 +457,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 			throw new IllegalArgumentException("Parameter 'tab' must not be null.");
 		}
 
-		LanguagePreferences languagePreferences = plugin.getPreferences();
+		LanguagePreferences languagePreferences = plugin.getLanguagePreferences(language);
 
 		boolean enabled = StringUtility.isSpecified(languagePreferences.getCompilerExecutablePath(tab.compilerId));
 

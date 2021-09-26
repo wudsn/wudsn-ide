@@ -97,7 +97,7 @@ public final class CompilerRegistry {
 					compilerDefinition.setId(configurationElement.getAttribute("id"));
 					compilerDefinition.setName(configurationElement.getAttribute("name"));
 					compilerDefinition.setClassName(configurationElement.getAttribute("class"));
-					compilerDefinition.setHelpFilePaths(configurationElement.getAttribute("helpFilePaths"));
+					compilerDefinition.setHelpDocumentPaths(configurationElement.getAttribute("helpDocumentPaths"));
 					compilerDefinition.setHomePageURL(configurationElement.getAttribute("homePageURL"));
 					compilerDefinition.setDefaultParameters(configurationElement.getAttribute("defaultParameters"));
 
@@ -192,7 +192,7 @@ public final class CompilerRegistry {
 		}
 		List<CompilerDefinition> result = new ArrayList<CompilerDefinition>();
 		for (CompilerDefinition compilerDefinition : compilerDefinitionList) {
-			if (compilerDefinition.getLanguage().equals(language.name())) {
+			if (compilerDefinition.getLanguage().equals(language)) {
 				result.add(compilerDefinition);
 			}
 		}
