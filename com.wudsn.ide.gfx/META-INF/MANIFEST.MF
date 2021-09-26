@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: WUDSN IDE Graphics Plug-in
+Bundle-Name: WUDSN IDE Graphics Plugin
 Bundle-SymbolicName: com.wudsn.ide.gfx;singleton:=true
 Bundle-Version: 1.7.2.qualifier
 Bundle-Activator: com.wudsn.ide.gfx.GraphicsPlugin
