@@ -31,7 +31,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerHelp.HelpDocument;
-import com.wudsn.ide.lng.preferences.LanguagePreferences;
+import com.wudsn.ide.lng.preferences.CompilerPreferences;
 
 /**
  * Event handler for the "Compiler Help" command.
@@ -55,8 +55,8 @@ public final class LanguageEditorCompilerHelpCommandHandler extends AbstractHand
 		languageEditor = (LanguageEditor) editor;
 
 		CompilerDefinition compilerDefinition = languageEditor.getCompilerDefinition();
-		LanguagePreferences languagePreferences = languageEditor.getLanguagePreferences();
-		String compilerExecutablePath = languagePreferences.getCompilerExecutablePath(compilerDefinition.getId());
+		CompilerPreferences compilerPreferences = languageEditor.getCompilerPreferences();
+		String compilerExecutablePath = compilerPreferences.getCompilerExecutablePath();
 
 		try {
 			HelpDocument helpDocument = compilerDefinition.getHelpForCurrentLocale(compilerExecutablePath);

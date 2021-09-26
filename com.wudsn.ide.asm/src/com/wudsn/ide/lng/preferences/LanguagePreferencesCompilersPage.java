@@ -67,8 +67,8 @@ import com.wudsn.ide.lng.runner.RunnerId;
 import com.wudsn.ide.lng.runner.RunnerRegistry;
 
 /**
- * Visual editor page for the language preferences regarding compilers. There
- * is a separate page per {@link Hardware}. Subclasses only implement the
+ * Visual editor page for the language preferences regarding compilers. There is
+ * a separate page per {@link Hardware}. Subclasses only implement the
  * constructor.
  * 
  * @author Peter Dell
@@ -78,6 +78,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 
 	private static final class Tab {
 
+		public final CompilerDefinition compilerDefinition;
 		public final String compilerId;
 		public final int tabIndex;
 		public final TabItem tabItem;
@@ -87,9 +88,10 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 		public boolean initialized;
 		public boolean enabled;
 
-		public Tab(String compilerId, int tabIndex, TabItem tabItem, Control enabledControl, Control disabledControl,
-				List<ControlDecoration> controlDecorations) {
-			this.compilerId = compilerId;
+		public Tab(CompilerDefinition compilerDefinition, int tabIndex, TabItem tabItem, Control enabledControl,
+				Control disabledControl, List<ControlDecoration> controlDecorations) {
+			this.compilerDefinition = compilerDefinition;
+			this.compilerId = compilerDefinition.getId();
 			this.tabIndex = tabIndex;
 			this.tabItem = tabItem;
 			this.enabledControl = enabledControl;
@@ -438,7 +440,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 		Composite disabledControl = SWTFactory.createComposite(tabFolder, 1, 1, GridData.FILL_BOTH);
 		label = new Label(disabledControl, SWT.NONE);
 		label.setText(TextUtility.format(Texts.MESSAGE_E100, compilerDefinition.getName()));
-		Tab tab = new Tab(compilerId, tabs.size(), tabItem, tabContent, disabledControl, controlDecorations);
+		Tab tab = new Tab(compilerDefinition, tabs.size(), tabItem, tabContent, disabledControl, controlDecorations);
 		tabs.put(compilerId, tab);
 
 	}
@@ -458,8 +460,9 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 		}
 
 		LanguagePreferences languagePreferences = plugin.getLanguagePreferences(language);
-
-		boolean enabled = StringUtility.isSpecified(languagePreferences.getCompilerExecutablePath(tab.compilerId));
+		CompilerPreferences compilerPreferences = languagePreferences.getCompilerPreferences(tab.compilerDefinition,
+				hardware);
+		boolean enabled = StringUtility.isSpecified(compilerPreferences.getCompilerExecutablePath());
 
 		if (!tab.initialized || enabled != tab.enabled) {
 			tab.initialized = true;
@@ -572,8 +575,8 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 
 			// Field: illegalOpcodesVisible
 			composite = SWTFactory.createComposite(tabContent, 2, 3, GridData.FILL_HORIZONTAL);
-			FieldEditor booleanFieldEditor = new BooleanFieldEditor(LanguagePreferencesConstants
-					.getCompilerRunnerWaitForCompletionName(compilerId, hardware, runnerId),
+			FieldEditor booleanFieldEditor = new BooleanFieldEditor(
+					LanguagePreferencesConstants.getCompilerRunnerWaitForCompletionName(compilerId, hardware, runnerId),
 					Texts.PREFERENCES_COMPILER_RUNNER_WAIT_FOR_COMPLETION_LABEL, composite);
 
 			addField(booleanFieldEditor);

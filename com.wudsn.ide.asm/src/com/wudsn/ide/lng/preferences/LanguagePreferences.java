@@ -22,7 +22,6 @@ package com.wudsn.ide.lng.preferences;
 import org.eclipse.jface.text.TextAttribute;
 
 import com.wudsn.ide.base.common.AbstractIDEPlugin;
-import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
@@ -81,24 +80,6 @@ public final class LanguagePreferences {
 	 */
 	public String getEditorCompileCommandPositioningMode() {
 		return getString(LanguagePreferencesConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE);
-	}
-
-	/**
-	 * Gets the executable path for the compiler.
-	 * 
-	 * @param compilerId The compiler id, not empty and not <code>null</code>.
-	 * 
-	 * @return The executable path for the compiler, may be empty, not
-	 *         <code>null</code>.
-	 */
-	public String getCompilerExecutablePath(String compilerId) {
-		if (compilerId == null) {
-			throw new IllegalArgumentException("Parameter 'compilerId' must not be null.");
-		}
-		if (StringUtility.isEmpty(compilerId)) {
-			throw new IllegalArgumentException("Parameter 'compilerId' must not be empty.");
-		}
-		return getString(LanguagePreferencesConstants.getCompilerExecutablePathName(compilerId));
 	}
 
 	/**

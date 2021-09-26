@@ -53,7 +53,6 @@ import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.TargetUtility;
 import com.wudsn.ide.lng.Texts;
-import com.wudsn.ide.lng.compiler.Compiler;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerHelp.HelpDocument;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
@@ -65,6 +64,7 @@ import com.wudsn.ide.lng.compiler.syntax.InstructionSet;
 import com.wudsn.ide.lng.compiler.syntax.InstructionType;
 import com.wudsn.ide.lng.compiler.syntax.Opcode;
 import com.wudsn.ide.lng.compiler.syntax.Opcode.OpcodeAddressingMode;
+import com.wudsn.ide.lng.preferences.CompilerPreferences;
 import com.wudsn.ide.lng.preferences.LanguagePreferences;
 import com.wudsn.ide.lng.runner.RunnerDefinition;
 import com.wudsn.ide.lng.runner.RunnerId;
@@ -302,26 +302,27 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		// Find non-empty compiler executable path.
 		Language language = Language.valueOf(languageString);
 		String compilerKey = CompilerDefinition.getKey(language, compilerId);
-		Compiler compiler = compilerRegistry.getCompilerByKey(compilerKey);
+		CompilerDefinition compilerDefinition = compilerRegistry.getCompilerByKey(compilerKey).getDefinition();
 
 		if (section.startsWith(SECTION_GENERAL)) {
-			return getInputStream(getCompilerGeneralSection(compiler));
+			return getInputStream(getCompilerGeneralSection(compilerDefinition));
 		} else if (section.startsWith(SECTION_MANUAL)) {
 			LanguagePreferences languagePreferences = languagePlugin.getLanguagePreferences(language);
-			String compilerExecutablePath = languagePreferences.getCompilerExecutablePath(compilerId);
+			CompilerPreferences compilerPreferences = languagePreferences.getCompilerPreferences(compilerDefinition,
+					Hardware.GENERIC);
+			String compilerExecutablePath = compilerPreferences.getCompilerExecutablePath();
 			if (StringUtility.isEmpty(compilerExecutablePath)) {
 				// ERROR: Help for the '{0}' compiler cannot be
 				// displayed because the path to the compiler executable
 				// is not set in the preferences.
-				String message = TextUtility.format(Texts.MESSAGE_E130,
-						new String[] { compiler.getDefinition().getName() });
+				String message = TextUtility.format(Texts.MESSAGE_E130, compilerDefinition.getName());
 				HTMLWriter writer = createHeader();
 				writer.writeText(message);
 				return getInputStream(writer);
 			}
 
 			try {
-				HelpDocument helpDocDocument = compiler.getDefinition().getHelpForCurrentLocale(compilerExecutablePath);
+				HelpDocument helpDocDocument = compilerDefinition.getHelpForCurrentLocale(compilerExecutablePath);
 				File file = helpDocDocument.file;
 				if (file == null) {
 					throw new RuntimeException(
@@ -360,15 +361,16 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 			}
 
 		} else if (section.equals(SECTION_INSTRUCTIONS)) {
-			return getInputStream(getCompilerInstructionsSection(compiler.getDefinition()));
+			return getInputStream(getCompilerInstructionsSection(compilerDefinition));
 
 		}
 		return null;
 	}
 
-	private HTMLWriter getCompilerGeneralSection(Compiler compiler) {
-		CompilerDefinition compilerDefinition = compiler.getDefinition();
-
+	private HTMLWriter getCompilerGeneralSection(CompilerDefinition compilerDefinition) {
+		if (compilerDefinition == null) {
+			throw new IllegalArgumentException("Parameter 'compilerDefinition' must not be null.");
+		}
 		HTMLWriter writer = createHeader();
 
 		writer.beginTable(true);

@@ -65,6 +65,16 @@ public final class CompilerPreferences {
 	}
 
 	/**
+	 * Gets the executable path for the compiler.
+	 * 
+	 * @return The executable path for the runner, may be empty, not
+	 *         <code>null</code>.
+	 */
+	public String getCompilerExecutablePath() {
+		return languagePreferences.getString(LanguagePreferencesConstants.getCompilerExecutablePathName(compilerId));
+	}
+
+	/**
 	 * Gets the hardware for which the compiler is invoked.
 	 * 
 	 * @return The hardware, not <code>null</code>.

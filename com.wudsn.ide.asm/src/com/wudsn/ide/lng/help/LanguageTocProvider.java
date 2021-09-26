@@ -47,6 +47,7 @@ import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerHelp.HelpDocument;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
+import com.wudsn.ide.lng.preferences.CompilerPreferences;
 import com.wudsn.ide.lng.preferences.LanguagePreferences;
 
 /**
@@ -267,7 +268,9 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 
 			LanguagePreferences languagePreferences = LanguagePlugin.getInstance()
 					.getLanguagePreferences(compilerDefinition.getLanguage());
-			String compilerExecutablePath = languagePreferences.getCompilerExecutablePath(compilerDefinition.getId());
+			CompilerPreferences compilerPreferences = languagePreferences.getCompilerPreferences(compilerDefinition,
+					Hardware.GENERIC);
+			String compilerExecutablePath = compilerPreferences.getCompilerExecutablePath();
 
 			String icon = "";
 			List<ITopic> manualTopics = new ArrayList<ITopic>();
