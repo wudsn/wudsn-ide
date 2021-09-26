@@ -56,12 +56,20 @@
             <sequence>
             </sequence>
          </choice>
-         <attribute name="language" type="string" use="required">
+         <attribute name="language" use="required">
             <annotation>
                <documentation>
                   The technical ID of the language.
                </documentation>
             </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="ASM">
+                  </enumeration>
+                  <enumeration value="PAS">
+                  </enumeration>
+               </restriction>
+            </simpleType>
          </attribute>
          <attribute name="id" type="string" use="required">
             <annotation>
@@ -165,6 +173,8 @@
                   <enumeration value="MOS6502_DTV">
                   </enumeration>
                   <enumeration value="MOS65816">
+                  </enumeration>
+                  <enumeration value="PASCAL">
                   </enumeration>
                </restriction>
             </simpleType>
