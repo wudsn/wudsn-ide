@@ -11,7 +11,7 @@
     <booleanAttribute key="clearws" value="false"/>
     <booleanAttribute key="clearwslog" value="false"/>
     <stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/WUDSN-IDE"/>
-    <booleanAttribute key="default" value="true"/>
+    <booleanAttribute key="default" value="false"/>
     <setAttribute key="deselected_workspace_bundles">
         <setEntry value="com.wudsn.ide.lng.compilers.test"/>
         <setEntry value="org.eclipse.debug.ui"/>
@@ -43,8 +43,17 @@
     <stringAttribute key="product" value="org.eclipse.platform.ide"/>
     <setAttribute key="selected_features">
         <setEntry value="com.wudsn.ide.feature:default"/>
-        <setEntry value="org.eclipse.egit.gitflow.feature:default"/>
-        <setEntry value="org.eclipse.egit:default"/>
+        <setEntry value="org.eclipse.e4.rcp:default"/>
+        <setEntry value="org.eclipse.ecf.core.feature:default"/>
+        <setEntry value="org.eclipse.ecf.core.ssl.feature:default"/>
+        <setEntry value="org.eclipse.ecf.filetransfer.feature:default"/>
+        <setEntry value="org.eclipse.ecf.filetransfer.httpclient45.feature:default"/>
+        <setEntry value="org.eclipse.ecf.filetransfer.ssl.feature:default"/>
+        <setEntry value="org.eclipse.emf.common:default"/>
+        <setEntry value="org.eclipse.emf.ecore:default"/>
+        <setEntry value="org.eclipse.equinox.p2.core.feature:default"/>
+        <setEntry value="org.eclipse.equinox.p2.extras.feature:default"/>
+        <setEntry value="org.eclipse.equinox.p2.rcp.feature:default"/>
         <setEntry value="org.eclipse.equinox.p2.user.ui:default"/>
         <setEntry value="org.eclipse.help:default"/>
         <setEntry value="org.eclipse.platform:default"/>
@@ -197,17 +206,17 @@
         <setEntry value="org.w3c.dom.svg@default:default"/>
     </setAttribute>
     <setAttribute key="selected_workspace_bundles">
-        <setEntry value="com.wudsn.ide.lng.compilers@default:default"/>
-        <setEntry value="com.wudsn.ide.lng@default:default"/>
         <setEntry value="com.wudsn.ide.base@default:default"/>
         <setEntry value="com.wudsn.ide.dsk@default:default"/>
         <setEntry value="com.wudsn.ide.gfx@default:default"/>
+        <setEntry value="com.wudsn.ide.lng.compilers@default:default"/>
+        <setEntry value="com.wudsn.ide.lng@default:default"/>
         <setEntry value="com.wudsn.ide.snd@default:default"/>
     </setAttribute>
     <booleanAttribute key="show_selected_only" value="false"/>
     <stringAttribute key="templateConfig" value="${target_home}\configuration\config.ini"/>
     <booleanAttribute key="tracing" value="false"/>
-    <booleanAttribute key="useCustomFeatures" value="false"/>
+    <booleanAttribute key="useCustomFeatures" value="true"/>
     <booleanAttribute key="useDefaultConfig" value="true"/>
     <booleanAttribute key="useDefaultConfigArea" value="true"/>
     <booleanAttribute key="useProduct" value="false"/>
