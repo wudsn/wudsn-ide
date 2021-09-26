@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: WUDSN IDE Runners Plugin
+Bundle-SymbolicName: com.wudsn.ide.lng.run;singleton:=true
+Bundle-Version: 1.7.2.qualifier
+Bundle-Vendor: Peter Dell
+Automatic-Module-Name: com.wudsn.ide.lng.run
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: com.wudsn.ide.lng
