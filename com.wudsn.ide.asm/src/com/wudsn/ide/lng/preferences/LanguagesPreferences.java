@@ -23,12 +23,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.TextAttribute;
 
 import com.wudsn.ide.base.common.AbstractIDEPlugin;
-import com.wudsn.ide.base.common.StringUtility;
-import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.Language;
-import com.wudsn.ide.lng.compiler.CompilerDefinition;
-import com.wudsn.ide.lng.editor.LanguageContentAssistProcessorDefaultCase;
-import com.wudsn.ide.lng.editor.LanguageEditorCompileCommandPositioningMode;
 /**
  * Facade class for typed access to the plugin preferences.
  * 

@@ -19,7 +19,6 @@
 
 package com.wudsn.ide.lng.preferences;
 
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.TextAttribute;
 
 import com.wudsn.ide.base.common.AbstractIDEPlugin;

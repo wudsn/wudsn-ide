@@ -41,7 +41,6 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.help.IHelpContentProducer;
-import org.w3c.dom.html.HTMLUListElement;
 
 import com.wudsn.ide.base.common.EnumUtility;
 import com.wudsn.ide.base.common.HexUtility;
@@ -56,7 +55,6 @@ import com.wudsn.ide.lng.TargetUtility;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.Compiler;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
-import com.wudsn.ide.lng.compiler.CompilerHelp;
 import com.wudsn.ide.lng.compiler.CompilerHelp.HelpDocument;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
