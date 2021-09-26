@@ -19,7 +19,6 @@
 
 package com.wudsn.ide.lng.asm.compiler.tass;
 
-import com.wudsn.ide.lng.asm.compiler.CompilerId;
 import com.wudsn.ide.lng.editor.LanguageEditor;
 
 public final class TassEditor extends LanguageEditor {
@@ -31,8 +30,4 @@ public final class TassEditor extends LanguageEditor {
 
 	}
 
-	@Override
-	public String getCompilerId() {
-		return CompilerId.TASS;
-	}
 }

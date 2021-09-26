@@ -244,6 +244,13 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		return params;
 	}
 
+	/**
+	 * Gets the input stream for a compiler.
+	 * 
+	 * @param href Hyperlink reference in the form
+	 *             /compiler/<language>/<compilerId>/section.
+	 * @return The input stream or <code>null</code> if the path is not valid.
+	 */
 	private InputStream getCompilerInputStream(String href) {
 		if (href == null) {
 			throw new IllegalArgumentException("Parameter 'href' must not be null.");
@@ -257,13 +264,22 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		if (index <= 0) {
 			return null;
 		}
+		String language = path.substring(0, index);
+		path = path.substring(index + 1);
+		index = path.indexOf("/");
+		if (index <= 0) {
+			return null;
+		}
 		String compilerId = path.substring(0, index);
-		String section = path.substring(index + 1);
+		path = path.substring(index + 1);
+
+		String section = path;
 		LanguagePlugin languagePlugin = LanguagePlugin.getInstance();
 		CompilerRegistry compilerRegistry = languagePlugin.getCompilerRegistry();
 
 		// Find non-empty compiler executable path.
-		Compiler compiler = compilerRegistry.getCompiler(compilerId);
+		String compilerKey = CompilerDefinition.getKey(language, compilerId);
+		Compiler compiler = compilerRegistry.getCompilerByKey(compilerKey);
 
 		if (section.startsWith(SECTION_GENERAL)) {
 			return getInputStream(getCompilerGeneralSection(compiler));
@@ -594,7 +610,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		return getInputStream(writer);
 	}
 
-	private InputStream getCPUInputStream( Language language, String href) {
+	private InputStream getCPUInputStream(Language language, String href) {
 
 		if (href == null) {
 			throw new IllegalArgumentException("Parameter 'href' must not be null.");
@@ -623,7 +639,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		writer.writeTableHeader(Texts.TOC_TARGET_OPCODE_LABEL);
 		writer.writeTableHeader(Texts.TOC_COMPILER_INSTRUCTION_DESCRIPTION_LABEL);
 
-		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions(language); 
+		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
 		int compilerDefinitionCount = compilerDefinitions.size();
 		InstructionSet[] instructionSets = new InstructionSet[compilerDefinitions.size()];
 		for (int c = 0; c < compilerDefinitionCount; c++) {

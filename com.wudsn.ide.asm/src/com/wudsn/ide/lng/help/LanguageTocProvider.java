@@ -255,13 +255,15 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 		for (int i = 0; i < size; i++) {
 			CompilerDefinition compilerDefinition = compilerDefinitions.get(i);
 
-			String href = LanguageHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getId() + "/"
-					+ LanguageHelpContentProducer.SECTION_GENERAL + LanguageHelpContentProducer.EXTENSION;
+			String hrefCompiler = LanguageHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getLanguage() + "/"
+					+ compilerDefinition.getId() + "/";
+			String href = hrefCompiler + LanguageHelpContentProducer.SECTION_GENERAL
+					+ LanguageHelpContentProducer.EXTENSION;
 
 			ITopic generalTopic = createTopic("", Texts.TOC_COMPILER_GENERAL_TOPIC_LABEL, href, null);
 
-			href = LanguageHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getId() + "/"
-					+ LanguageHelpContentProducer.SECTION_INSTRUCTIONS + LanguageHelpContentProducer.EXTENSION;
+			href = hrefCompiler + LanguageHelpContentProducer.SECTION_INSTRUCTIONS
+					+ LanguageHelpContentProducer.EXTENSION;
 			ITopic opcodesTopic = createTopic("", Texts.TOC_COMPILER_INSTRUCTIONS_TOPIC_LABEL, href, null);
 
 			LanguagePreferences languagePreferences = LanguagePlugin.getInstance().getPreferences();
@@ -286,8 +288,7 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 					extension = ".html";
 				}
 
-				href = LanguageHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getId() + "/"
-						+ LanguageHelpContentProducer.SECTION_MANUAL + extension;
+				href = hrefCompiler + LanguageHelpContentProducer.SECTION_MANUAL + extension;
 
 				if (file.isDirectory()) {
 					File[] files = file.listFiles();
@@ -310,8 +311,7 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 					href = "";
 				}
 			} catch (CoreException ex) {
-				href = LanguageHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getId() + "/"
-						+ LanguageHelpContentProducer.SECTION_MANUAL + ".html";
+				href = hrefCompiler + LanguageHelpContentProducer.SECTION_MANUAL + ".html";
 			}
 
 			ITopic manualTopic = createTopic(icon, Texts.TOC_COMPILER_MANUAL_TOPIC_LABEL, href,

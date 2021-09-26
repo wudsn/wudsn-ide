@@ -93,7 +93,7 @@ public final class CompilerRegistry {
 				try {
 					CompilerDefinition compilerDefinition;
 					compilerDefinition = new CompilerDefinition();
-					compilerDefinition.setId(configurationElement.getAttribute("language"));
+					compilerDefinition.setLanguage(configurationElement.getAttribute("language"));
 					compilerDefinition.setId(configurationElement.getAttribute("id"));
 					compilerDefinition.setName(configurationElement.getAttribute("name"));
 					compilerDefinition.setClassName(configurationElement.getAttribute("class"));
@@ -145,13 +145,13 @@ public final class CompilerRegistry {
 			throw new IllegalArgumentException("Parameter 'compilerDefinition' must not be null.");
 		}
 
-		String id = compilerDefinition.getId();
+		String key = compilerDefinition.getKey();
 		Compiler compiler;
 		try {
 			// The class loading must be delegated to the framework.
 			compiler = (Compiler) configurationElement.createExecutableExtension("class");
 		} catch (CoreException ex) {
-			throw new RuntimeException("Cannot create compiler instance for id '" + id + "'.", ex);
+			throw new RuntimeException("Cannot create compiler instance for key '" + key + "'.", ex);
 		}
 
 		// Build the list of common and specific syntax definition files.
@@ -160,7 +160,7 @@ public final class CompilerRegistry {
 		compilerClasses.add(Compiler.class);
 
 		CompilerSyntax syntax;
-		syntax = new CompilerSyntax(id);
+		syntax = new CompilerSyntax(key);
 
 		syntax.loadXMLData(compilerClasses);
 
@@ -168,27 +168,66 @@ public final class CompilerRegistry {
 
 		compiler.setDefinition(compilerDefinition);
 
-		compiler = compilerMap.put(id, compiler);
+		compiler = compilerMap.put(key, compiler);
 		if (compiler != null) {
-			throw new RuntimeException(
-					"Compiler id '" + id + "' is already registered to class '" + compiler.getClass().getName() + "'.");
+			throw new RuntimeException("Compiler id '" + key + "' is already registered to class '"
+					+ compiler.getClass().getName() + "'.");
 		}
 
 	}
 
 	/**
-	 * Gets the unmodifiable list of compiler definitions for a language, sorted by their key.
+	 * Gets the unmodifiable list of compiler definitions for a language, sorted by
+	 * their key.
 	 * 
-	 * @param language The language or <code>null</code>.
+	 * @param language The language, not <code>null</code>.
 	 * @return The unmodifiable list of compiler definitions, sorted by their key,
 	 *         may be empty, not <code>null</code>
 	 * 
 	 * @since 1.6.1
 	 */
 	public List<CompilerDefinition> getCompilerDefinitions(Language language) {
-		
-		List<CompilerDefinition> result=new ArrayList<CompilerDefinition>();
-		return compilerDefinitionList;
+		if (language == null) {
+			throw new IllegalArgumentException("Parameter 'language' must not be null.");
+		}
+		List<CompilerDefinition> result = new ArrayList<CompilerDefinition>();
+		for (CompilerDefinition compilerDefinition : compilerDefinitionList) {
+			if (compilerDefinition.getLanguage().equals(language.name())) {
+				result.add(compilerDefinition);
+			}
+		}
+		return Collections.unmodifiableList(result);
+	}
+
+	/**
+	 * Gets the compiler for a given class. Instances of compiler are stateless
+	 * singletons within the plugin.
+	 * 
+	 * @param key The compiler key, not <code>null</code>.
+	 * 
+	 * @return The compiler, not <code>null</code>.
+	 */
+	public Compiler getCompilerByEditorClassName(String editorClassName) {
+		if (editorClassName == null) {
+			throw new IllegalArgumentException("Parameter 'editorClassName' must not be null.");
+		}
+		final String SUFFIX = "Editor";
+		int index = editorClassName.lastIndexOf(SUFFIX);
+		if (index < 0 || index + SUFFIX.length() != editorClassName.length()) {
+			throw new IllegalArgumentException("Parameter 'editorClassName' must end with 'Editor'.");
+
+		}
+		String compilerClassName = editorClassName.substring(0, index) + "Compiler";
+		synchronized (compilerMap) {
+			for (Compiler compiler : compilerMap.values()) {
+				if (compiler.getClass().getName().equals(compilerClassName)) {
+					return compiler;
+				}
+			}
+		}
+
+		throw new IllegalArgumentException("Unknown compiler class '" + compilerClassName + "'.");
+
 	}
 
 	/**
@@ -199,13 +238,12 @@ public final class CompilerRegistry {
 	 * 
 	 * @return The compiler, not <code>null</code>.
 	 */
-	public Compiler getCompiler(String key) {
+	public Compiler getCompilerByKey(String key) {
 		if (key == null) {
 			throw new IllegalArgumentException("Parameter 'key' must not be null.");
 		}
 		Compiler result;
 		synchronized (compilerMap) {
-
 			result = compilerMap.get(key);
 		}
 		if (result == null) {

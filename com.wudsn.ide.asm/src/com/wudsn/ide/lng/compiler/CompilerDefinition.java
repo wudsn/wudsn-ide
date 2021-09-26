@@ -76,12 +76,12 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	}
 
 	/**
-	 * Gets the key that uniquely identifies the compiler. They key has the format
+	 * Gets the key that uniquely identifies a compiler. They key has the format
 	 * "<language>/<id>".
 	 * 
 	 * @return The key that uniquely identifies the compiler, not <code>null</code>.
 	 */
-	public String getKey() {
+	public static String getKey(String language, String id) {
 		if (language == null) {
 			throw new IllegalStateException("Field 'language' must not be null for this or for argument.");
 		}
@@ -90,6 +90,16 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 
 		}
 		return language + "/" + id;
+	}
+
+	/**
+	 * Gets the key that uniquely identifies the compiler. They key has the format
+	 * "<language>/<id>".
+	 * 
+	 * @return The key that uniquely identifies the compiler, not <code>null</code>.
+	 */
+	public String getKey() {
+		return getKey(language, id);
 	}
 
 	/**

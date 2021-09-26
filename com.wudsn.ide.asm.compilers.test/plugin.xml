@@ -4,7 +4,7 @@
  <extension
        point="org.eclipse.ui.preferencePages">
     <page
-          category="com.wudsn.ide.lng.preferences.AssemblerPreferencesPage"
+          category="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesPage"
           class="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesTestCompilersPage"
           id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesTestCompilersPage"
           name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesTestCompilersPage.name">

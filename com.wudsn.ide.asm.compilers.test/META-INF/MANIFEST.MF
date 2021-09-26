@@ -5,6 +5,7 @@ Bundle-SymbolicName: com.wudsn.ide.lng.asm.test;singleton:=true
 Bundle-Version: 1.7.2.qualifier
 Bundle-Vendor: Peter Dell
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Require-Bundle: com.wudsn.ide.lng
+Require-Bundle: com.wudsn.ide.lng,
+ com.wudsn.ide.lng.asm
 Bundle-ActivationPolicy: lazy
 Automatic-Module-Name: com.wudsn.ide.asm.compilers.test

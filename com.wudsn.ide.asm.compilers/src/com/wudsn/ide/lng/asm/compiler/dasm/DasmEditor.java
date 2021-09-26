@@ -19,7 +19,6 @@
 
 package com.wudsn.ide.lng.asm.compiler.dasm;
 
-import com.wudsn.ide.lng.asm.compiler.CompilerId;
 import com.wudsn.ide.lng.editor.LanguageEditor;
 
 public final class DasmEditor extends LanguageEditor {
@@ -30,8 +29,4 @@ public final class DasmEditor extends LanguageEditor {
 	public DasmEditor() {
 	}
 
-	@Override
-	public String getCompilerId() {
-		return CompilerId.DASM;
-	}
 }

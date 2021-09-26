@@ -19,7 +19,6 @@
 
 package com.wudsn.ide.lng.asm.compiler.atasm;
 
-import com.wudsn.ide.lng.asm.compiler.CompilerId;
 import com.wudsn.ide.lng.editor.LanguageEditor;
 
 public final class AtasmEditor extends LanguageEditor {
@@ -28,10 +27,5 @@ public final class AtasmEditor extends LanguageEditor {
 	 * Creation is public. Called by the extension "org.eclipse.ui.editors".
 	 */
 	public AtasmEditor() {
-	}
-
-	@Override
-	public String getCompilerId() {
-		return CompilerId.ATASM;
 	}
 }

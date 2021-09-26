@@ -16,19 +16,14 @@
  * You should have received a copy of the GNU General Public License
  * along with WUDSN IDE.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-package com.wudsn.ide.lng.asm.compiler.merlin32;
+package com.wudsn.ide.lng.pas.compiler.mp;
 
 import com.wudsn.ide.lng.editor.LanguageEditor;
 
-public final class Merlin32Editor extends LanguageEditor {
-
+public class MadPascalEditor extends LanguageEditor {
 	/**
 	 * Creation is public. Called by the extension "org.eclipse.ui.editors".
 	 */
-	public Merlin32Editor() {
-
+	public MadPascalEditor() {
 	}
-
 }
-	

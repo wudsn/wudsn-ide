@@ -19,7 +19,6 @@
 
 package com.wudsn.ide.lng.asm.compiler.asm6;
 
-import com.wudsn.ide.lng.asm.compiler.CompilerId;
 import com.wudsn.ide.lng.editor.LanguageEditor;
 
 public final class Asm6Editor extends LanguageEditor {
@@ -30,8 +29,4 @@ public final class Asm6Editor extends LanguageEditor {
 	public Asm6Editor() {
 	}
 
-	@Override
-	public String getCompilerId() {
-		return CompilerId.ASM6;
-	}
 }

@@ -106,5 +106,21 @@
             class="com.wudsn.ide.lng.pas.editor.ValidatorDocumentSetupParticipant">
       </participant>
    </extension>
+   <extension
+         point="com.wudsn.ide.lng.compilers">
+      <compiler
+            class="com.wudsn.ide.lng.pas.compiler.mp.MadPascalCompiler"
+            defaultHardware="ATARI8BIT"
+            defaultParameters="${sourceFilePath} "
+            helpFilePaths="https://mads.atari8.info/doc/en/index.html"
+            homePageURL="https://github.com/tebe6502/Mad-Pascal/releases"
+            id="MP"
+            language="PAS"
+            name="%com.wudsn.ide.lng.pas.compiler.mp.MadPascalCompiler.name"
+            version="1.6.5">
+         <supportedTarget
+               target="PASCAL"></supportedTarget>
+      </compiler>
+   </extension>
 
 </plugin>

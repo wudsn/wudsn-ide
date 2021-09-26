@@ -48,7 +48,6 @@ import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.IDocumentProvider;
-import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
@@ -130,14 +129,13 @@ public abstract class LanguageEditor extends TextEditor {
 	 * 
 	 * @return The compiler id for this editor, not empty and not <code>null</code>.
 	 */
-	protected abstract String getCompilerId();
 
 	@Override
 	protected final void initializeEditor() {
 		super.initializeEditor();
 
 		plugin = LanguagePlugin.getInstance();
-		compiler = plugin.getCompilerRegistry().getCompiler(getCompilerId());
+		compiler = plugin.getCompilerRegistry().getCompilerByEditorClassName(getClass().getName());
 
 		setSourceViewerConfiguration(new LanguageSourceViewerConfiguration(this, getPreferenceStore()));
 
@@ -161,7 +159,7 @@ public abstract class LanguageEditor extends TextEditor {
 	 * @return The compiler preferences, not <code>null</code>.
 	 */
 	public final CompilerPreferences getCompilerPreferences() {
-		return plugin.getPreferences().getCompilerPreferences(getCompilerId(), getHardware());
+		return plugin.getPreferences().getCompilerPreferences(getCompilerDefinition(), getHardware());
 	}
 
 	/**

@@ -11,8 +11,4 @@ public final class TestEditor extends LanguageEditor {
 
 	}
 
-	@Override
-	public String getCompilerId() {
-		return "test";
-	}
 }

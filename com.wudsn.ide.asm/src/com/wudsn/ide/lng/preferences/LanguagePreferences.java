@@ -25,9 +25,9 @@ import org.eclipse.jface.text.TextAttribute;
 import com.wudsn.ide.base.common.AbstractIDEPlugin;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
+import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.editor.LanguageContentAssistProcessorDefaultCase;
 import com.wudsn.ide.lng.editor.LanguageEditorCompileCommandPositioningMode;
-
 /**
  * Facade class for typed access to the plugin preferences.
  * 
@@ -109,23 +109,21 @@ public final class LanguagePreferences {
 	/**
 	 * Gets the preferences for a compiler.
 	 * 
-	 * @param compilerId The compiler id, not empty and not <code>null</code>.
+	 * @param compilerDefinition The compiler definition, not empty and not <code>null</code>.
 	 * @param hardware   The preferences or <code>null</code> if the compiler is not
 	 *                   active for that hardware.
 	 * 
 	 * @return The compiler preferences, not <code>null</code>.
 	 */
-	public CompilerPreferences getCompilerPreferences(String compilerId, Hardware hardware) {
-		if (compilerId == null) {
-			throw new IllegalArgumentException("Parameter 'compilerId' must not be null.");
+	public CompilerPreferences getCompilerPreferences(CompilerDefinition compilerDefinition, Hardware hardware) {
+		if (compilerDefinition == null) {
+			throw new IllegalArgumentException("Parameter 'compilerDefinition' must not be null.");
 		}
-		if (StringUtility.isEmpty(compilerId)) {
-			throw new IllegalArgumentException("Parameter 'compilerId' must not be empty.");
-		}
+
 		if (hardware == null) {
 			throw new IllegalArgumentException("Parameter 'hardware' must not be null.");
 		}
-		return new CompilerPreferences(this, compilerId, hardware);
+		return new CompilerPreferences(this, compilerDefinition.getId(), hardware);
 
 	}
 

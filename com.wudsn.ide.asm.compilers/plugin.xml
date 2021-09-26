@@ -58,6 +58,7 @@
         helpFilePaths="./docs"
         homePageURL="https://sourceforge.net/projects/acme-crossass"
         id="acme"
+        language="ASM"
         name="%com.wudsn.ide.lng.asm.compiler.acme.AcmeCompiler.name"
         version="0.90 (preview)">
      <supportedTarget
@@ -81,6 +82,7 @@
         helpFilePaths="./README.TXT"
         homePageURL="http://3dscapture.com/NES/asm6.zip"
         id="asm6"
+        language="ASM"
         name="%com.wudsn.ide.lng.asm.compiler.asm6.Asm6Compiler.name"
         version="1.6">
      <supportedTarget
@@ -90,13 +92,14 @@
            target="MOS6502_ILLEGAL">
      </supportedTarget>
   </compiler>
-		<compiler
+  <compiler
         class="com.wudsn.ide.lng.asm.compiler.atasm.AtasmCompiler"
         defaultHardware="ATARI8BIT"
         defaultParameters="-s -o${outputFilePath} -l${outputFilePathWithoutExtension}.lab ${sourceFilePath}"
         helpFilePaths="./docs/atasm.pdf"
         homePageURL="http://atari.miribilist.com/atasm"
         id="atasm"
+        language="ASM"
         name="%com.wudsn.ide.lng.asm.compiler.atasm.AtasmCompiler.name"
         version="1.07">
              <supportedTarget
@@ -113,6 +116,7 @@
         helpFilePaths="../doc/dasm.TXT"
         homePageURL="http://dasm-dillon.sourceforge.net"
         id="dasm"
+        language="ASM"
         name="%com.wudsn.ide.lng.asm.compiler.dasm.DasmCompiler.name"
         version="2.20.10 (preview)">
      <supportedTarget
@@ -129,6 +133,7 @@
         helpFilePaths="./KickAssembler.pdf"
         homePageURL="http://www.theweb.dk/KickAssembler"
         id="kickass"
+        language="ASM"
         name="%com.wudsn.ide.lng.asm.compiler.kickass.KickAssCompiler.name"
         version="V3.21 (preview)">
      <supportedTarget
@@ -141,13 +146,14 @@
            target="MOS6502_DTV">
      </supportedTarget>
   </compiler>
-		<compiler
+  <compiler
         class="com.wudsn.ide.lng.asm.compiler.mads.MadsCompiler"
         defaultHardware="ATARI8BIT"
         defaultParameters=" ${sourceFilePath} -o:${outputFilePath} -p -t:${outputFilePathWithoutExtension}.lab -l:${outputFilePathWithoutExtension}.lst "
         helpFilePaths="./doc/mads-en.html, ./doc/mads.html (pl)"
         homePageURL="http://mads.atari8.info"
         id="mads"
+        language="ASM"
         name="%com.wudsn.ide.lng.asm.compiler.mads.MadsCompiler.name"
         version="1.9.0">
              <supportedTarget
@@ -159,7 +165,7 @@
      <supportedTarget
            target="MOS65816">
      </supportedTarget>
-		</compiler>
+  </compiler>
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32Compiler"
         defaultHardware="APPLE2"
@@ -167,6 +173,7 @@
         helpFilePaths="../Documentation/Merlin32.pdf"
         homePageURL="http://www.brutaldeluxe.fr/products/crossdevtools/merlin/index.html"
         id="merlin32"
+        language="ASM"
         name="%com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32Compiler.name"
         version="1.0">
      <supportedTarget
@@ -186,6 +193,7 @@
         helpFilePaths="./README"
         homePageURL="http://tass64.sourceforge.net"
         id="tass"
+        language="ASM"
         name="%com.wudsn.ide.lng.asm.compiler.tass.TassCompiler.name"
         version="1.46 r38 (preview)">
              <supportedTarget
@@ -199,13 +207,14 @@
      </supportedTarget>
      
   </compiler>
-		<compiler
+  <compiler
         class="com.wudsn.ide.lng.asm.compiler.xasm.XasmCompiler"
         defaultHardware="ATARI8BIT"
         defaultParameters="/o:${outputFilePath} /p /t:${outputFilePathWithoutExtension}.lab /l:${outputFilePathWithoutExtension}.lst ${sourceFilePath}"
         helpFilePaths="./xasm.html"
         homePageURL="https://github.com/pfusik/xasm"
         id="xasm"
+        language="ASM"
         name="%com.wudsn.ide.lng.asm.compiler.xasm.XasmCompiler.name"
         version="3.0.2">
              <supportedTarget
@@ -394,6 +403,6 @@
              contentTypeId="com.wudsn.ide.lng.asm.compiler.xasm.XasmSourceFile">
        </contentTypeBinding>
     </editor>
- 	</extension>
+  </extension>
  
 </plugin>
