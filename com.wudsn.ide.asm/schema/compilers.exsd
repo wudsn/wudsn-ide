@@ -112,10 +112,14 @@
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="helpFilePaths" type="string">
+         <attribute name="helpDocumentPaths" type="string">
             <annotation>
                <documentation>
-                  The relative paths to the help documents. Multiple paths are separated by comma. Each path is evluated based on the absolute path of the compiler executable in the preferences.
+                  The relative paths to the local help documents. 
+Multiple paths are separated by comma.
+Adding a language constraint in parentheses like &quot;./doc-de.html (de)&quot; acts as filter.
+Each file path is evluated based on the absolute path of the compiler executable in the preferences.
+Alternatively abolute URLs to web sites can be specified. They are used, if not file paths match.
                </documentation>
             </annotation>
          </attribute>
