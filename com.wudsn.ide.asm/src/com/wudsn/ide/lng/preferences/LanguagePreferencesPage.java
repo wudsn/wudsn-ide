@@ -459,7 +459,7 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 
 		// Create the editors for all compilers of the hardware.
 		CompilerRegistry compilerRegistry = plugin.getCompilerRegistry();
-		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions();
+		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
 
 		for (CompilerDefinition compilerDefinition : compilerDefinitions) {
 			String compilerId = compilerDefinition.getId();

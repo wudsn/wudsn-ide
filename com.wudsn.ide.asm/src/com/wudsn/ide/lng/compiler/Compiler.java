@@ -28,7 +28,6 @@ import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
  */
 public abstract class Compiler {
 
-	// See {@link CompilerId} for predefined ids.
 	private CompilerDefinition definition;
 
 	/**

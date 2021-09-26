@@ -19,7 +19,10 @@
 
 package com.wudsn.ide.lng;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -55,6 +58,8 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 	 * The shared instance.
 	 */
 	private static LanguagePlugin plugin;
+
+	private List<Language> languages;
 
 	/**
 	 * The preferences.
@@ -92,6 +97,10 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 		compilerConsole = null;
 		runnerRegistry = new RunnerRegistry();
 		properties = new HashMap<QualifiedName, String>(10);
+		languages = new ArrayList<Language>(2);
+		languages.add(Language.ASM);
+		languages.add(Language.PAS);
+		languages = Collections.unmodifiableList(languages);
 	}
 
 	/**
@@ -159,6 +168,16 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 			throw new IllegalStateException("Plugin not initialized or already stopped");
 		}
 		return plugin;
+	}
+
+	/**
+	 * Gets the unmodifiable list of supported languages.
+	 * 
+	 * @return The unmodifiable list of supported languages, may be empty, not
+	 *         <code>null</code>,
+	 */
+	public List<Language> getLanguages() {
+		return languages;
 	}
 
 	/**

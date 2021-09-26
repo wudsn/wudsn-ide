@@ -31,6 +31,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 
 import com.wudsn.ide.base.BasePlugin;
+import com.wudsn.ide.base.common.ResourceBundleUtility;
 
 /**
  * Combo field offering the elements of an enum class in generic and type safe
@@ -83,8 +84,7 @@ public final class EnumField<T extends Enum<?>> extends Field {
 		combo = new Combo(parent, SWT.DROP_DOWN);
 
 		ResourceBundle resourceBundle;
-		resourceBundle = ResourceBundle.getBundle("OSGI-INF/l10n/bundle", Locale.getDefault(),
-				enumClass.getClassLoader());
+		resourceBundle = ResourceBundleUtility.getResourceBundle(enumClass);
 
 		T[] constants = enumClass.getEnumConstants();
 

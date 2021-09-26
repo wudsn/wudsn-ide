@@ -46,6 +46,9 @@ import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
  */
 public final class CompilerDefinition implements Comparable<CompilerDefinition> {
 
+	// Language
+	private String language;
+
 	// Id
 	private String id;
 	private String name;
@@ -70,6 +73,51 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	 */
 	CompilerDefinition() {
 
+	}
+
+	/**
+	 * Gets the key that uniquely identifies the compiler. They key has the format
+	 * "<language>/<id>".
+	 * 
+	 * @return The key that uniquely identifies the compiler, not <code>null</code>.
+	 */
+	public String getKey() {
+		if (language == null) {
+			throw new IllegalStateException("Field 'language' must not be null for this or for argument.");
+		}
+		if (id == null) {
+			throw new IllegalStateException("Field 'id' must not be null for this or for argument.");
+
+		}
+		return language + "/" + id;
+	}
+
+	/**
+	 * Sets the language of the compiler. Called by {@link CompilerRegistry} only.
+	 * 
+	 * @param language The language of the compiler, not empty and not
+	 *                 <code>null</code>.
+	 */
+	final void setLanguage(String language) {
+		if (language == null) {
+			throw new IllegalArgumentException("Parameter 'language' must not be null.");
+		}
+		if (StringUtility.isEmpty(language)) {
+			throw new IllegalArgumentException("Parameter 'language' must not be empty.");
+		}
+		this.language = language;
+	}
+
+	/**
+	 * Gets the language of the compiler.
+	 * 
+	 * @return The language of the compiler, not empty and not <code>null</code>.
+	 */
+	public final String getLanguage() {
+		if (language == null) {
+			throw new IllegalStateException("Field 'language' must not be null.");
+		}
+		return language;
 	}
 
 	/**
@@ -295,8 +343,8 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	/**
 	 * Sets the list of supported targets. Called by {@link CompilerRegistry} only.
 	 * 
-	 * @param supportedTargets The unmodifiable list of supported CPUs, not empty and
-	 *                      not <code>null</code>.
+	 * @param supportedTargets The unmodifiable list of supported CPUs, not empty
+	 *                         and not <code>null</code>.
 	 * @since 1.6.1
 	 */
 	final void setSupportedTargets(List<Target> supportedTargets) {
@@ -408,17 +456,13 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 		if (o == null) {
 			throw new IllegalArgumentException("Parameter 'o' must not be null.");
 		}
-		if (id == null || o.id == null) {
-			if (id == null) {
-				throw new IllegalStateException("Field 'id' must not be null for this or for argument.");
-			}
-		}
-		return id.compareTo(o.id);
+
+		return getKey().compareTo(o.getKey());
 	}
 
 	@Override
 	public String toString() {
-		return id;
+		return getKey();
 	}
 
 }

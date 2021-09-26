@@ -38,7 +38,9 @@ import org.eclipse.help.ITopic2;
 import org.eclipse.help.IUAElement;
 
 import com.wudsn.ide.base.common.EnumUtility;
+import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.hardware.Hardware;
+import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
@@ -158,9 +160,10 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 		String label;
 		String key = href;
 		try {
+			Class<LanguageTocProvider> clazz = LanguageTocProvider.class;
 			ResourceBundle resourceBundle;
-			resourceBundle = ResourceBundle.getBundle("com/wudsn/ide/asm/help/LanguageTocProvider",
-					Locale.getDefault(), LanguageTocProvider.class.getClassLoader());
+			resourceBundle = ResourceBundle.getBundle(clazz.getName().replace('.', '/'), Locale.getDefault(),
+					clazz.getClassLoader());
 			label = resourceBundle.getString(key);
 		} catch (MissingResourceException ex) {
 			label = href + " - Text missing";
@@ -195,23 +198,38 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 	}
 
 	static ITopic[] createTopics() {
-		LanguagePlugin languagePlugin = LanguagePlugin.getInstance();
-		CompilerRegistry compilerRegistry = languagePlugin.getCompilerRegistry();
-		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions();
-
-		List<ITopic> ideTopics = createIDETopics();
-		List<ITopic> compilerTopics = createCompilerTopics(compilerDefinitions);
-		List<ITopic> hardwareTopics = createHardwareTopics();
-		List<ITopic> cpuTopics = createTargetTopics();
-
 		List<ITopic> topics = new ArrayList<ITopic>();
 
+		LanguagePlugin languagePlugin = LanguagePlugin.getInstance();
+
+		List<ITopic> ideTopics = createIDETopics();
 		topics.add(createTopic("", Texts.TOC_IDE_TOPIC_LABEL, "", createTopicsArray(ideTopics)));
-		topics.add(createTopic("", Texts.TOC_COMPILERS_TOPIC_LABEL, "", createTopicsArray(compilerTopics)));
+
+		List<ITopic> languagesTopics = createLanguagesTopics(languagePlugin);
+		topics.add(createTopic("", Texts.TOC_LANGUAGES_TOPIC_LABEL, "", createTopicsArray(languagesTopics)));
+
+		List<ITopic> hardwareTopics = createHardwareTopics();
 		topics.add(createTopic("", Texts.TOC_HARDWARES_TOPIC_LABEL, "", createTopicsArray(hardwareTopics)));
+
+		List<ITopic> cpuTopics = createTargetTopics();
 		topics.add(createTopic("", Texts.TOC_TARGETS_TOPIC_LABEL, "", createTopicsArray(cpuTopics)));
 
 		return createTopicsArray(topics);
+	}
+
+	private static List<ITopic> createLanguagesTopics(LanguagePlugin languagePlugin) {
+		List<ITopic> topics = new ArrayList<ITopic>();
+		for (Language language : languagePlugin.getLanguages()) {
+			CompilerRegistry compilerRegistry = languagePlugin.getCompilerRegistry();
+
+			List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
+
+			List<ITopic> compilerTopics = createCompilersTopics(compilerDefinitions);
+			topics.add(
+					createTopic("", TextUtility.format(Texts.TOC_COMPILERS_TOPIC_LABEL, EnumUtility.getText(language)),
+							"", createTopicsArray(compilerTopics)));
+		}
+		return topics;
 	}
 
 	private static List<ITopic> createIDETopics() {
@@ -226,7 +244,8 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 		return topics;
 	}
 
-	private static List<ITopic> createCompilerTopics(List<CompilerDefinition> compilerDefinitions) {
+	private static List<ITopic> createCompilersTopics(List<CompilerDefinition> compilerDefinitions) {
+
 		if (compilerDefinitions == null) {
 			throw new IllegalArgumentException("Parameter 'compilerDefinitions' must not be null.");
 		}

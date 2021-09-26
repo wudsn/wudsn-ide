@@ -33,6 +33,7 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 
 import com.wudsn.ide.base.hardware.Hardware;
+import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
 
@@ -92,6 +93,7 @@ public final class CompilerRegistry {
 				try {
 					CompilerDefinition compilerDefinition;
 					compilerDefinition = new CompilerDefinition();
+					compilerDefinition.setId(configurationElement.getAttribute("language"));
 					compilerDefinition.setId(configurationElement.getAttribute("id"));
 					compilerDefinition.setName(configurationElement.getAttribute("name"));
 					compilerDefinition.setClassName(configurationElement.getAttribute("class"));
@@ -175,38 +177,40 @@ public final class CompilerRegistry {
 	}
 
 	/**
-	 * Gets the unmodifiable list of compiler definitions, sorted by their id.
+	 * Gets the unmodifiable list of compiler definitions for a language, sorted by their key.
 	 * 
-	 * 
-	 * @return The unmodifiable list of compiler definitions, sorted by their id,
+	 * @param language The language or <code>null</code>.
+	 * @return The unmodifiable list of compiler definitions, sorted by their key,
 	 *         may be empty, not <code>null</code>
 	 * 
 	 * @since 1.6.1
 	 */
-	public List<CompilerDefinition> getCompilerDefinitions() {
+	public List<CompilerDefinition> getCompilerDefinitions(Language language) {
+		
+		List<CompilerDefinition> result=new ArrayList<CompilerDefinition>();
 		return compilerDefinitionList;
 	}
 
 	/**
-	 * Gets the compiler for a given id. Instances of compiler are stateless
+	 * Gets the compiler for a given key. Instances of compiler are stateless
 	 * singletons within the plugin.
 	 * 
-	 * @param compilerId The compiler id, not <code>null</code>.
+	 * @param key The compiler key, not <code>null</code>.
 	 * 
 	 * @return The compiler, not <code>null</code>.
 	 */
-	public Compiler getCompiler(String compilerId) {
-		if (compilerId == null) {
-			throw new IllegalArgumentException("Parameter 'compilerId' must not be null.");
+	public Compiler getCompiler(String key) {
+		if (key == null) {
+			throw new IllegalArgumentException("Parameter 'key' must not be null.");
 		}
 		Compiler result;
 		synchronized (compilerMap) {
 
-			result = compilerMap.get(compilerId);
+			result = compilerMap.get(key);
 		}
 		if (result == null) {
 
-			throw new IllegalArgumentException("Unknown compiler id '" + compilerId + "'.");
+			throw new IllegalArgumentException("Unknown compiler id '" + key + "'.");
 		}
 
 		return result;

@@ -28,10 +28,11 @@
 	<extension point="com.wudsn.ide.lng.compilers">
 		<compiler
         class="com.wudsn.ide.lng.asm.compiler.test.TestCompiler"
-        defaultParameters="-o${outputFilePath} ${sourceFilePath}"
         defaultHardware="TEST"
+        defaultParameters="-o${outputFilePath} ${sourceFilePath}"
         homePageURL="https://www.wudsn.com"
         id="test"
+        language="ASM"
         name="%com.wudsn.ide.lng.asm.compiler.test.TestCompiler.name"
         version="none">
      <supportedTarget

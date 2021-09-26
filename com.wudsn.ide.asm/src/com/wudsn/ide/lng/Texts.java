@@ -218,6 +218,8 @@ public final class Texts extends NLS {
 
 	public static String TOC_IDE_TOPIC_LABEL;
 
+	public static String TOC_LANGUAGES_TOPIC_LABEL;
+
 	public static String TOC_COMPILERS_TOPIC_LABEL;
 	public static String TOC_COMPILER_GENERAL_TOPIC_LABEL;
 	public static String TOC_COMPILER_NAME_LABEL;

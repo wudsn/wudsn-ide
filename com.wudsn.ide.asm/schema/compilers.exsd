@@ -2,9 +2,9 @@
 <!-- Schema file written by PDE -->
 <schema targetNamespace="com.wudsn.ide.lng" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
-      <appinfo>
+      <appInfo>
          <meta.schema plugin="com.wudsn.ide.lng" id="compilers" name="Compilers"/>
-      </appinfo>
+      </appInfo>
       <documentation>
          This extension point allows for adding new assemblers and compilers to the WUDSN IDE.
       </documentation>
@@ -12,9 +12,9 @@
 
    <element name="extension">
       <annotation>
-         <appinfo>
+         <appInfo>
             <meta.element />
-         </appinfo>
+         </appInfo>
       </annotation>
       <complexType>
          <sequence minOccurs="1" maxOccurs="unbounded">
@@ -39,9 +39,9 @@
                <documentation>
                   
                </documentation>
-               <appinfo>
+               <appInfo>
                   <meta.attribute translatable="true"/>
-               </appinfo>
+               </appInfo>
             </annotation>
          </attribute>
       </complexType>
@@ -51,15 +51,22 @@
       <complexType>
          <choice>
             <sequence>
-               <element ref="supportedCPU" minOccurs="1" maxOccurs="unbounded"/>
+               <element ref="supportedTarget" minOccurs="1" maxOccurs="unbounded"/>
             </sequence>
             <sequence>
             </sequence>
          </choice>
+         <attribute name="language" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The technical ID of the language.
+               </documentation>
+            </annotation>
+         </attribute>
          <attribute name="id" type="string" use="required">
             <annotation>
                <documentation>
-                  The technical id of the compiler. Must consist of lower case letters or digits.
+                  The technical ID of the compiler. Must consist of lower case letters or digits. Must be unique without one language.
                </documentation>
             </annotation>
          </attribute>
@@ -68,9 +75,9 @@
                <documentation>
                   Translatable name of the compiler. Typically contains only upper case letters.
                </documentation>
-               <appinfo>
+               <appInfo>
                   <meta.attribute translatable="true"/>
-               </appinfo>
+               </appInfo>
             </annotation>
          </attribute>
          <attribute name="class" type="string" use="required">
@@ -78,9 +85,9 @@
                <documentation>
                   The name of the compiler class.
                </documentation>
-               <appinfo>
+               <appInfo>
                   <meta.attribute kind="java" basedOn="com.wudsn.ide.lng.compiler.Compiler:"/>
-               </appinfo>
+               </appInfo>
             </annotation>
          </attribute>
          <attribute name="version" type="string" use="required">
@@ -166,9 +173,9 @@
    </element>
 
    <annotation>
-      <appinfo>
+      <appInfo>
          <meta.section type="since"/>
-      </appinfo>
+      </appInfo>
       <documentation>
          WUDSN IDE 1.1.0
       </documentation>
@@ -176,9 +183,9 @@
 
 
    <annotation>
-      <appinfo>
+      <appInfo>
          <meta.section type="apiinfo"/>
-      </appinfo>
+      </appInfo>
       <documentation>
          To implement this extension point, you have to create a sub-class of com.wudsn.ide.lng.compiler.Compiler, a sub-class of com.wudsn.ide.lng.compiler.parser.CompilerSourceParser and a sub-class of com.wudsn.ide.lng.compiler.CompilerLogParser. In the constructor of the compiler you have to set the source parser instance. In the &quot;createLogParser&quot; method of the compiler you have to create a new instance of the corresponding log parser.
       </documentation>
@@ -186,9 +193,9 @@
 
 
    <annotation>
-      <appinfo>
+      <appInfo>
          <meta.section type="copyright"/>
-      </appinfo>
+      </appInfo>
       <documentation>
          (c) 2009 Peter Dell
       </documentation>

@@ -48,6 +48,7 @@ import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.base.hardware.HardwareUtility;
+import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
@@ -115,7 +116,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 			} else if (href.startsWith(SCHEMA_HARDWARE)) {
 				return getHardwareInputStream(href);
 			} else if (href.startsWith(SCHEMA_TARGET)) {
-				return getCPUInputStream(href);
+				return getCPUInputStream(Language.ASM, href); // TODO: Language handling
 			} else if (href.endsWith(".html")) { // Web site documents
 				return getHTMLInputStream(href);
 			}
@@ -593,7 +594,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		return getInputStream(writer);
 	}
 
-	private InputStream getCPUInputStream(String href) {
+	private InputStream getCPUInputStream( Language language, String href) {
 
 		if (href == null) {
 			throw new IllegalArgumentException("Parameter 'href' must not be null.");
@@ -622,7 +623,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		writer.writeTableHeader(Texts.TOC_TARGET_OPCODE_LABEL);
 		writer.writeTableHeader(Texts.TOC_COMPILER_INSTRUCTION_DESCRIPTION_LABEL);
 
-		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions();
+		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions(language); 
 		int compilerDefinitionCount = compilerDefinitions.size();
 		InstructionSet[] instructionSets = new InstructionSet[compilerDefinitions.size()];
 		for (int c = 0; c < compilerDefinitionCount; c++) {

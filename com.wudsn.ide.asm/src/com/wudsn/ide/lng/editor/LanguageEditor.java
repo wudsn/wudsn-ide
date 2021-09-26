@@ -25,7 +25,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import org.eclipse.core.resources.IFile;
@@ -54,11 +53,12 @@ import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import com.wudsn.ide.base.common.Profiler;
+import com.wudsn.ide.base.common.ResourceBundleUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.LanguageProperties;
-import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.LanguageProperties.InvalidLanguagePropertyException;
+import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.compiler.Compiler;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceFile;
@@ -75,6 +75,13 @@ import com.wudsn.ide.lng.preferences.CompilerPreferences;
  * @author Andy Reek
  */
 public abstract class LanguageEditor extends TextEditor {
+
+	private static final class Actions {
+
+		public static final String LanguageContentAssistProposal = "com.wudsn.ide.lng.editor.LanguageContentAssistProposal";
+		public static final String LanguageEditorToggleCommentCommand = "com.wudsn.ide.lng.editor.LanguageEditorToggleCommentCommand";
+		public static final String RulerDoubleClick = "RulerDoubleClick";
+	}
 
 	private LanguagePlugin plugin;
 	private LanguageEditorFilesLogic filesLogic;
@@ -240,21 +247,20 @@ public abstract class LanguageEditor extends TextEditor {
 	protected final void createActions() {
 		super.createActions();
 
-		ResourceBundle bundle = ResourceBundle.getBundle("com.wudsn.ide.lng.Actions", Locale.getDefault(),
-				LanguageEditor.class.getClassLoader());
+		ResourceBundle bundle = ResourceBundleUtility.getResourceBundle(Actions.class);
 
 		String actionDefintionId;
 		String actionId;
-		actionDefintionId = ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS;
-		actionId = "com.wudsn.ide.lng.editor.ContentAssistProposal";
+		actionDefintionId = LanguageEditorActionDefinitionIds.LanguageContentAssistProposal;
+		actionId = Actions.LanguageContentAssistProposal;
 		IAction action = new TextOperationAction(bundle, actionId + ".", this, ISourceViewer.CONTENTASSIST_PROPOSALS);
 		action.setActionDefinitionId(actionDefintionId);
 		setAction(actionId, action);
 		markAsStateDependentAction(actionId, true);
 
 		SourceViewer sourceViewer = (SourceViewer) getSourceViewer();
-		actionDefintionId = "com.wudsn.ide.lng.editor.LanguageEditorToggleCommentCommand";
-		actionId = actionDefintionId;
+		actionDefintionId = LanguageEditorActionDefinitionIds.LanguageEditorToggleCommentCommand;
+		actionId = Actions.LanguageEditorToggleCommentCommand;
 		action = new LanguageEditorToggleCommentAction(bundle, actionId + ".", this, sourceViewer);
 		action.setActionDefinitionId(actionId);
 		setAction(actionId, action);
@@ -262,8 +268,8 @@ public abstract class LanguageEditor extends TextEditor {
 
 		// Register rule double click.
 		ToggleBreakpointAction toggleBreakpointAction;
-		actionDefintionId = "org.eclipse.debug.ui.commands.ToggleBreakpoint";
-		actionId = "RulerDoubleClick";
+		actionDefintionId = LanguageEditorActionDefinitionIds.ToggleBreakpoint;
+		actionId = Actions.RulerDoubleClick;
 		action.setActionDefinitionId(actionId);
 		toggleBreakpointAction = new ToggleBreakpointAction(this, getDocumentProvider().getDocument(getEditorInput()),
 				getVerticalRuler());

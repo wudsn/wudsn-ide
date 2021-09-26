@@ -169,7 +169,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 	/**
 	 * The language.
 	 */
-	final Language langauge;
+	final Language language;
 
 	/**
 	 * The type of hardware used to filter the compilers and emulators.
@@ -207,7 +207,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 		if (hardware == null) {
 			throw new IllegalArgumentException("Parameter 'hardware' must not be null.");
 		}
-		this.langauge = language;
+		this.language = language;
 		this.hardware = hardware;
 		plugin = LanguagePlugin.getInstance();
 		IPreferenceStore preferencesStore = plugin.getPreferenceStore();
@@ -253,7 +253,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 
 		// Create the editors for all compilers of the hardware.
 		CompilerRegistry compilerRegistry = plugin.getCompilerRegistry();
-		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions();
+		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
 
 		tabFolder = new TabFolder(parent, SWT.FLAT);
 		for (CompilerDefinition compilerDefinition : compilerDefinitions) {

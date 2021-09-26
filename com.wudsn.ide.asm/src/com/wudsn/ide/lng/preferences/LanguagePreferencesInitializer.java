@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.Display;
 
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.base.hardware.HardwareUtility;
+import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerOutputFolderMode;
@@ -111,31 +112,34 @@ public final class LanguagePreferencesInitializer extends AbstractPreferenceInit
 			throw new IllegalArgumentException("Parameter 'store' must not be null.");
 		}
 
-		CompilerRegistry compilerRegistry = LanguagePlugin.getInstance().getCompilerRegistry();
+		LanguagePlugin languagePlugin = LanguagePlugin.getInstance();
+		CompilerRegistry compilerRegistry = languagePlugin.getCompilerRegistry();
+		for (Language language : languagePlugin.getLanguages()) {
 
-		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions();
-		for (CompilerDefinition compilerDefinition : compilerDefinitions) {
-			String compilerId;
-			String name;
-			compilerId = compilerDefinition.getId();
+			List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
+			for (CompilerDefinition compilerDefinition : compilerDefinitions) {
+				String compilerId;
+				String name;
+				compilerId = compilerDefinition.getId();
 
-			for (Hardware hardware : Hardware.values()) {
-				if (hardware.equals(Hardware.GENERIC)) {
-					continue;
+				for (Hardware hardware : Hardware.values()) {
+					if (hardware.equals(Hardware.GENERIC)) {
+						continue;
+					}
+					store.setDefault(LanguagePreferencesConstants.getCompilerTargetName(compilerId, hardware),
+							compilerDefinition.getSupportedTargets().get(0).toString());
+
+					name = LanguagePreferencesConstants.getCompilerParametersName(compilerId, hardware);
+					store.setDefault(name, compilerDefinition.getDefaultParameters());
+					name = LanguagePreferencesConstants.getCompilerOutputFolderModeName(compilerId, hardware);
+					store.setDefault(name, CompilerOutputFolderMode.TEMP_FOLDER);
+					name = LanguagePreferencesConstants.getCompilerOutputFileExtensionName(compilerId, hardware);
+					store.setDefault(name, HardwareUtility.getDefaultFileExtension(hardware));
+					name = LanguagePreferencesConstants.getCompilerRunnerIdName(compilerId, hardware);
+					store.setDefault(name, RunnerId.DEFAULT_APPLICATION);
 				}
-				store.setDefault(LanguagePreferencesConstants.getCompilerTargetName(compilerId, hardware),
-						compilerDefinition.getSupportedTargets().get(0).toString());
 
-				name = LanguagePreferencesConstants.getCompilerParametersName(compilerId, hardware);
-				store.setDefault(name, compilerDefinition.getDefaultParameters());
-				name = LanguagePreferencesConstants.getCompilerOutputFolderModeName(compilerId, hardware);
-				store.setDefault(name, CompilerOutputFolderMode.TEMP_FOLDER);
-				name = LanguagePreferencesConstants.getCompilerOutputFileExtensionName(compilerId, hardware);
-				store.setDefault(name, HardwareUtility.getDefaultFileExtension(hardware));
-				name = LanguagePreferencesConstants.getCompilerRunnerIdName(compilerId, hardware);
-				store.setDefault(name, RunnerId.DEFAULT_APPLICATION);
 			}
-
 		}
 	}
 }

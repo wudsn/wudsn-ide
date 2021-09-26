@@ -381,7 +381,7 @@
                id="com.wudsn.ide.lng.editor.LanguageEditorAssemblerToolbar"
                label="%com.wudsn.ide.lng.editor.LanguageEditorAssemblerToolbar.label">
             <dynamic
-                  class="com.wudsn.ide.lng.editor.LanguageEditorAssembleAndRunCommandMenu"
+                  class="com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunCommandMenu"
                   id="com.wudsn.ide.lng.editor.LanguageEditorAssembleAndRunCommandMenu">
                <visibleWhen
                      checkEnabled="true">
@@ -478,21 +478,21 @@
           class="com.wudsn.ide.lng.breakpoint.LanguageBreakpoint"
           id="languageBreakpoint"
           markerType="org.eclipse.debug.core.lineBreakpointMarker"
-          name="%com.wudsn.ide.lng.editor.LanguageBreakpoint.name">
+          name="%com.wudsn.ide.lng.breakpoint.LanguageBreakpoint.name">
     </breakpoint>
  </extension>
  <extension
        point="org.eclipse.debug.ui.toggleBreakpointsTargetFactories">
     <toggleTargetFactory
           class="com.wudsn.ide.lng.breakpoint.LanguageBreakpointAdapterFactory"
-          id="com.wudsn.ide.lng.editor.LanguageBreakpointAdapterFactory">
+          id="com.wudsn.ide.lng.breakpoint.LanguageBreakpointAdapterFactory">
     </toggleTargetFactory>
  </extension>
  <extension
        point="org.eclipse.debug.ui.debugModelPresentations">
     <debugModelPresentation
           class="com.wudsn.ide.lng.breakpoint.LanguageBreakpoinDebugModelPresentation"
-          id="com.wudsn.ide.asm">
+          id="com.wudsn.ide.lng">
     </debugModelPresentation>
  </extension>
  
@@ -521,8 +521,8 @@
        point="org.eclipse.ui.preferenceTransfer">
     <transfer
           icon="icons/hardware-generic-16x16.gif"
-          id="com.wudsn.ide.lng.preferences.LanguagePreferences"
-          name="%com.wudsn.ide.lng.preferences.LanguagePreferences.name">
+          id="com.wudsn.ide.lng.preferences.LanguagesPreferences"
+          name="%com.wudsn.ide.lng.preferences.LanguagesPreferences.name">
        <mapping
              scope="instance">
           <entry
