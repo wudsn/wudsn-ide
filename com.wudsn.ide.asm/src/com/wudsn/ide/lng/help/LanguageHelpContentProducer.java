@@ -41,6 +41,7 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.help.IHelpContentProducer;
+import org.w3c.dom.html.HTMLUListElement;
 
 import com.wudsn.ide.base.common.EnumUtility;
 import com.wudsn.ide.base.common.HexUtility;
@@ -51,9 +52,12 @@ import com.wudsn.ide.base.hardware.HardwareUtility;
 import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Target;
+import com.wudsn.ide.lng.TargetUtility;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.Compiler;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
+import com.wudsn.ide.lng.compiler.CompilerHelp;
+import com.wudsn.ide.lng.compiler.CompilerHelp.HelpDocument;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntaxUtility;
@@ -63,6 +67,7 @@ import com.wudsn.ide.lng.compiler.syntax.InstructionSet;
 import com.wudsn.ide.lng.compiler.syntax.InstructionType;
 import com.wudsn.ide.lng.compiler.syntax.Opcode;
 import com.wudsn.ide.lng.compiler.syntax.Opcode.OpcodeAddressingMode;
+import com.wudsn.ide.lng.preferences.LanguagePreferences;
 import com.wudsn.ide.lng.runner.RunnerDefinition;
 import com.wudsn.ide.lng.runner.RunnerId;
 import com.wudsn.ide.lng.runner.RunnerRegistry;
@@ -116,7 +121,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 			} else if (href.startsWith(SCHEMA_HARDWARE)) {
 				return getHardwareInputStream(href);
 			} else if (href.startsWith(SCHEMA_TARGET)) {
-				return getCPUInputStream(Language.ASM, href); // TODO: Language handling
+				return getTargetInputStream(href);
 			} else if (href.endsWith(".html")) { // Web site documents
 				return getHTMLInputStream(href);
 			}
@@ -245,6 +250,25 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 	}
 
 	/**
+	 * Gets the href for a compiler.
+	 * 
+	 * @param section   The section or <code>null</code>.
+	 * @param extension The extension or <code>null</code>.
+	 * @return The href to a compiler including a trailing slash, not
+	 *         <code>null</code>.
+	 **/
+	public static String getComplierHref(CompilerDefinition compilerDefinition, String section, String extension) {
+		if (compilerDefinition == null) {
+			throw new IllegalArgumentException("Parameter 'compilerDefinition' must not be null.");
+		}
+		String result = SCHEMA_COMPILER + compilerDefinition.getLanguage() + "/" + compilerDefinition.getId() + "/";
+		if (section != null) {
+			result += section + (extension == null ? EXTENSION : extension);
+		}
+		return result;
+	}
+
+	/**
 	 * Gets the input stream for a compiler.
 	 * 
 	 * @param href Hyperlink reference in the form
@@ -264,7 +288,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		if (index <= 0) {
 			return null;
 		}
-		String language = path.substring(0, index);
+		String languageString = path.substring(0, index);
 		path = path.substring(index + 1);
 		index = path.indexOf("/");
 		if (index <= 0) {
@@ -278,14 +302,15 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		CompilerRegistry compilerRegistry = languagePlugin.getCompilerRegistry();
 
 		// Find non-empty compiler executable path.
+		Language language = Language.valueOf(languageString);
 		String compilerKey = CompilerDefinition.getKey(language, compilerId);
 		Compiler compiler = compilerRegistry.getCompilerByKey(compilerKey);
 
 		if (section.startsWith(SECTION_GENERAL)) {
 			return getInputStream(getCompilerGeneralSection(compiler));
 		} else if (section.startsWith(SECTION_MANUAL)) {
-
-			String compilerExecutablePath = languagePlugin.getPreferences().getCompilerExecutablePath(compilerId);
+			LanguagePreferences languagePreferences = languagePlugin.getLanguagePreferences(language);
+			String compilerExecutablePath = languagePreferences.getCompilerExecutablePath(compilerId);
 			if (StringUtility.isEmpty(compilerExecutablePath)) {
 				// ERROR: Help for the '{0}' compiler cannot be
 				// displayed because the path to the compiler executable
@@ -298,8 +323,12 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 			}
 
 			try {
-				File file = compiler.getDefinition().getHelpFile(compilerExecutablePath);
-
+				HelpDocument helpDocDocument = compiler.getDefinition().getHelpForCurrentLocale(compilerExecutablePath);
+				File file = helpDocDocument.file;
+				if (file == null) {
+					throw new RuntimeException(
+							"Method getCompilerInputStream() must only be called for existing files or folders.");
+				}
 				// Handle file requests within the help directory.
 				List<String> fileNames = getQueryParameters(href).get(SECTION_MANUAL_FILE);
 				String fileName;
@@ -350,6 +379,9 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 
 		writer.writeTableRow(Texts.TOC_COMPILER_HOME_PAGE_LABEL,
 				HTMLWriter.getLink(compilerDefinition.getHomePageURL(), compilerDefinition.getHomePageURL()));
+
+		String helpDocumentPaths = compilerDefinition.getHelpDocumentPaths().replace(",", HTMLConstants.BR);
+		writer.writeTableRowCode(Texts.TOC_COMPILER_HELP_DOCUMENTS_LABEL, helpDocumentPaths);
 
 		Hardware hardware = compilerDefinition.getDefaultHardware();
 		writer.writeTableRow(Texts.TOC_COMPILER_DEFAULT_HARDWARE_LABEL, HTMLWriter
@@ -610,7 +642,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		return getInputStream(writer);
 	}
 
-	private InputStream getCPUInputStream(Language language, String href) {
+	private InputStream getTargetInputStream(String href) {
 
 		if (href == null) {
 			throw new IllegalArgumentException("Parameter 'href' must not be null.");
@@ -627,7 +659,9 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		HTMLWriter writer = createHeader();
 
 		writer.beginTable();
-		writer.writeTableRow(Texts.TOC_TARGETS_NAME_LABEL, EnumUtility.getText(target));
+		writer.writeTableRow(Texts.TOC_TARGET_NAME_LABEL, EnumUtility.getText(target));
+		Language language = TargetUtility.getLanguage(target);
+		writer.writeTableRow(Texts.TOC_TARGET_LANGUAGE_LABEL, EnumUtility.getText(language));
 		writer.end();
 
 		writer.begin("br", null);
@@ -640,24 +674,28 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		writer.writeTableHeader(Texts.TOC_COMPILER_INSTRUCTION_DESCRIPTION_LABEL);
 
 		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
-		int compilerDefinitionCount = compilerDefinitions.size();
-		InstructionSet[] instructionSets = new InstructionSet[compilerDefinitions.size()];
-		for (int c = 0; c < compilerDefinitionCount; c++) {
-			CompilerDefinition compilerDefinition = compilerDefinitions.get(c);
-			instructionSets[c] = compilerDefinition.getSyntax().getInstructionSet(target);
-			writer.writeTableHeader(compilerDefinition.getName());
+		List<InstructionSet> instructionSets = new ArrayList<InstructionSet>();
+		for (CompilerDefinition compilerDefinition : compilerDefinitions) {
+			if (compilerDefinition.getSupportedTargets().contains(target)) {
+				String compilerHref = "../"
+						+ LanguageHelpContentProducer.getComplierHref(compilerDefinition, SECTION_GENERAL, null);
+
+				writer.writeTableHeader(HTMLWriter.getLink(compilerHref, compilerDefinition.getName()));
+
+				instructionSets.add(compilerDefinition.getSyntax().getInstructionSet(target));
+			}
 
 		}
+
 		writer.end();
 
-		List<String> cellContents = new ArrayList<String>(compilerDefinitionCount);
+		List<String> cellContents = new ArrayList<String>(instructionSets.size());
 
 		for (int opcode = 0; opcode < Opcode.MAX_OPCODES; opcode++) {
 			String opcodeText = null;
 			cellContents.clear();
 
-			for (int c = 0; c < compilerDefinitionCount; c++) {
-				InstructionSet instructionSet = instructionSets[c];
+			for (InstructionSet instructionSet : instructionSets) {
 				List<OpcodeAddressingMode> opcodeAddressingModes = instructionSet.getOpcodeAddressingModes(opcode);
 				StringBuffer cellBuffer = new StringBuffer();
 				for (int m = 0; m < opcodeAddressingModes.size(); m++) {
@@ -680,7 +718,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 				writer.writeTableCell(HexUtility.getByteValueHexString(opcode));
 				writer.writeTableCell(opcodeText);
 
-				for (int c = 0; c < compilerDefinitionCount; c++) {
+				for (int c = 0; c < instructionSets.size(); c++) {
 
 					writer.writeTableCell(cellContents.get(c));
 

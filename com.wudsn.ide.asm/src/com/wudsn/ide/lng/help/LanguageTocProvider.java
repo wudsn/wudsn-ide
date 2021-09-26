@@ -45,6 +45,7 @@ import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
+import com.wudsn.ide.lng.compiler.CompilerHelp.HelpDocument;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
 import com.wudsn.ide.lng.preferences.LanguagePreferences;
 
@@ -218,9 +219,9 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 	}
 
 	private static List<ITopic> createLanguagesTopics(LanguagePlugin languagePlugin) {
+		CompilerRegistry compilerRegistry = languagePlugin.getCompilerRegistry();
 		List<ITopic> topics = new ArrayList<ITopic>();
 		for (Language language : languagePlugin.getLanguages()) {
-			CompilerRegistry compilerRegistry = languagePlugin.getCompilerRegistry();
 
 			List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
 
@@ -255,63 +256,72 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 		for (int i = 0; i < size; i++) {
 			CompilerDefinition compilerDefinition = compilerDefinitions.get(i);
 
-			String hrefCompiler = LanguageHelpContentProducer.SCHEMA_COMPILER + compilerDefinition.getLanguage() + "/"
-					+ compilerDefinition.getId() + "/";
-			String href = hrefCompiler + LanguageHelpContentProducer.SECTION_GENERAL
-					+ LanguageHelpContentProducer.EXTENSION;
+			String href = LanguageHelpContentProducer.getComplierHref(compilerDefinition,
+					LanguageHelpContentProducer.SECTION_GENERAL, null);
 
 			ITopic generalTopic = createTopic("", Texts.TOC_COMPILER_GENERAL_TOPIC_LABEL, href, null);
 
-			href = hrefCompiler + LanguageHelpContentProducer.SECTION_INSTRUCTIONS
-					+ LanguageHelpContentProducer.EXTENSION;
+			href = LanguageHelpContentProducer.getComplierHref(compilerDefinition,
+					LanguageHelpContentProducer.SECTION_INSTRUCTIONS, null);
 			ITopic opcodesTopic = createTopic("", Texts.TOC_COMPILER_INSTRUCTIONS_TOPIC_LABEL, href, null);
 
-			LanguagePreferences languagePreferences = LanguagePlugin.getInstance().getPreferences();
+			LanguagePreferences languagePreferences = LanguagePlugin.getInstance()
+					.getLanguagePreferences(compilerDefinition.getLanguage());
 			String compilerExecutablePath = languagePreferences.getCompilerExecutablePath(compilerDefinition.getId());
 
 			String icon = "";
 			List<ITopic> manualTopics = new ArrayList<ITopic>();
 			try {
-				File file = compilerDefinition.getHelpFile(compilerExecutablePath);
+				HelpDocument helpDocument = compilerDefinition.getHelpForCurrentLocale(compilerExecutablePath);
+				if (helpDocument.file != null) {
+					File file = helpDocument.file;
 
-				// Appending the help file path with the correct file
-				// extension allows in-place display for example for ".html"
-				// files.
-				String extension = file.getPath();
-				int index = extension.lastIndexOf('.');
-				if (index > 0) {
-					extension = extension.substring(index);
-					if (extension.equalsIgnoreCase(".pdf")) {
-						icon = "pdf";
+					// Appending the help file path with the correct file
+					// extension allows in-place display for example for ".html"
+					// files.
+					String extension = file.getPath();
+					int index = extension.lastIndexOf('.');
+					if (index > 0) {
+						extension = extension.substring(index);
+						if (extension.equalsIgnoreCase(".pdf")) {
+							icon = "pdf";
+						}
+					} else {
+						extension = ".html";
+					}
+
+					href = LanguageHelpContentProducer.getComplierHref(compilerDefinition,
+							LanguageHelpContentProducer.SECTION_MANUAL, extension);
+
+					if (file.isDirectory()) {
+						File[] files = file.listFiles();
+						if (files != null) {
+							for (File file2 : files) {
+								String encodedPath;
+								try {
+									encodedPath = URLEncoder.encode(file2.getName(), "UTF-8");
+								} catch (UnsupportedEncodingException ex) {
+									throw new IllegalArgumentException(
+											"Cannot encode file name '" + file2.getName() + "'");
+								}
+
+								manualTopics.add(createTopic(
+										"", file2.getName(), href + "?"
+												+ LanguageHelpContentProducer.SECTION_MANUAL_FILE + "=" + encodedPath,
+										null));
+							}
+						}
+						// if the file is folder, the manual does not have own
+						// content but only sub-topics
+						href = "";
 					}
 				} else {
-					extension = ".html";
-				}
-
-				href = hrefCompiler + LanguageHelpContentProducer.SECTION_MANUAL + extension;
-
-				if (file.isDirectory()) {
-					File[] files = file.listFiles();
-					if (files != null) {
-						for (File file2 : files) {
-							String encodedPath;
-							try {
-								encodedPath = URLEncoder.encode(file2.getName(), "UTF-8");
-							} catch (UnsupportedEncodingException ex) {
-								throw new IllegalArgumentException("Cannot encode file name '" + file2.getName() + "'");
-							}
-
-							manualTopics.add(createTopic("", file2.getName(),
-									href + "?" + LanguageHelpContentProducer.SECTION_MANUAL_FILE + "=" + encodedPath,
-									null));
-						}
-					}
-					// if the file is folder, the manual does not have own
-					// content but only sub-topics
-					href = "";
+					href = helpDocument.uri.toString(); // TODO Check if this works
 				}
 			} catch (CoreException ex) {
-				href = hrefCompiler + LanguageHelpContentProducer.SECTION_MANUAL + ".html";
+
+				href = LanguageHelpContentProducer.getComplierHref(compilerDefinition,
+						LanguageHelpContentProducer.SECTION_MANUAL, null);
 			}
 
 			ITopic manualTopic = createTopic(icon, Texts.TOC_COMPILER_MANUAL_TOPIC_LABEL, href,
