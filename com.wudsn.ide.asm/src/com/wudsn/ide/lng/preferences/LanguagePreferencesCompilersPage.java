@@ -79,7 +79,6 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 	private static final class Tab {
 
 		public final CompilerDefinition compilerDefinition;
-		public final String compilerId;
 		public final int tabIndex;
 		public final TabItem tabItem;
 		public final Control enabledControl;
@@ -91,7 +90,6 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 		public Tab(CompilerDefinition compilerDefinition, int tabIndex, TabItem tabItem, Control enabledControl,
 				Control disabledControl, List<ControlDecoration> controlDecorations) {
 			this.compilerDefinition = compilerDefinition;
-			this.compilerId = compilerDefinition.getId();
 			this.tabIndex = tabIndex;
 			this.tabItem = tabItem;
 			this.enabledControl = enabledControl;
@@ -462,7 +460,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 		LanguagePreferences languagePreferences = plugin.getLanguagePreferences(language);
 		CompilerPreferences compilerPreferences = languagePreferences.getCompilerPreferences(tab.compilerDefinition,
 				hardware);
-		boolean enabled = StringUtility.isSpecified(compilerPreferences.getCompilerExecutablePath());
+		boolean enabled = StringUtility.isSpecified(compilerPreferences.getCompilerExecutablePathOrDefault());
 
 		if (!tab.initialized || enabled != tab.enabled) {
 			tab.initialized = true;

@@ -224,6 +224,7 @@ public final class Texts extends NLS {
 	public static String TOC_COMPILER_NAME_LABEL;
 	public static String TOC_COMPILER_HOME_PAGE_LABEL;
 	public static String TOC_COMPILER_HELP_DOCUMENTS_LABEL;
+	public static String TOC_COMPILER_DEFAULT_PATHS_LABEL;
 	public static String TOC_COMPILER_DEFAULT_HARDWARE_LABEL;
 	public static String TOC_COMPILER_SUPPORTED_TARGETS_LABEL;
 	public static String TOC_COMPILER_DEFAULT_PARAMETERS_LABEL;

@@ -78,7 +78,7 @@ public final class HardwareUtility {
 	}
 
 	/**
-	 * Gets the image path for a hardware image.
+	 * Gets the relative image path for a hardware image.
 	 * 
 	 * @param hardware The hardware, not <code>null</code>.
 	 * @return The image path for the hardware image, not empty and not

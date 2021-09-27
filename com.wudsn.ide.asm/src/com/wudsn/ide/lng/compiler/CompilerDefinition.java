@@ -35,6 +35,7 @@ import com.wudsn.ide.lng.LanguageUtility;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerHelp.HelpDocument;
+import com.wudsn.ide.lng.compiler.CompilerPaths.CompilerPath;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
 
 /**
@@ -297,7 +298,7 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	 *                       does not specify a help path or no help file can be
 	 *                       found.
 	 */
-	public final List<HelpDocument> getHelpDocuments(String compilerExecutablePath) throws CoreException {
+	public final List<HelpDocument> getInstalledHelpDocuments(String compilerExecutablePath) throws CoreException {
 		if (compilerExecutablePath == null) {
 			throw new IllegalArgumentException("Parameter 'compilerExecutablePath' must not be null.");
 		}
@@ -315,12 +316,17 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 					TextUtility.format(Texts.MESSAGE_E130, name, compilerText, compilerPreferencesText)));
 		}
 
+		return getHelpDocuments(compilerExecutablePath);
+
+	}
+
+	public final List<HelpDocument> getHelpDocuments(String compilerExecutablePath)  {
 		return CompilerHelp.getHelpDocuments(helpDocumentPaths, compilerExecutablePath);
 
 	}
 
 	public final HelpDocument getHelpForCurrentLocale(String compilerExecutablePath) throws CoreException {
-		List<HelpDocument> helpDocuments = getHelpDocuments(compilerExecutablePath);
+		List<HelpDocument> helpDocuments = getInstalledHelpDocuments(compilerExecutablePath);
 
 		String localeLanguage = Locale.getDefault().getLanguage();
 
@@ -376,6 +382,11 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 		}
 		return result;
 
+	}
+
+	public List<CompilerPath> getDefaultPaths() {
+		CompilerPaths compilerPaths = new CompilerPaths();
+		return compilerPaths.getCompilerPaths(language, id);
 	}
 
 	/**

@@ -55,6 +55,7 @@ import com.wudsn.ide.lng.TargetUtility;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerHelp.HelpDocument;
+import com.wudsn.ide.lng.compiler.CompilerPaths.CompilerPath;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntaxUtility;
@@ -106,6 +107,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 	public static final String SCHEMA_TARGET = "target/";
 
 	private static final String ICONS_PATH = "/help/topic/com.wudsn.ide.lng/icons/";
+	private static final String HARDWARE_ICONS_PATH = "/help/topic/com.wudsn.ide.base/icons/";
 
 	@Override
 	public InputStream getInputStream(String pluginID, String href, Locale locale) {
@@ -310,19 +312,10 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 			LanguagePreferences languagePreferences = languagePlugin.getLanguagePreferences(language);
 			CompilerPreferences compilerPreferences = languagePreferences.getCompilerPreferences(compilerDefinition,
 					Hardware.GENERIC);
-			String compilerExecutablePath = compilerPreferences.getCompilerExecutablePath();
-			if (StringUtility.isEmpty(compilerExecutablePath)) {
-				// ERROR: Help for the '{0}' compiler cannot be
-				// displayed because the path to the compiler executable
-				// is not set in the preferences.
-				String message = TextUtility.format(Texts.MESSAGE_E130, compilerDefinition.getName());
-				HTMLWriter writer = createHeader();
-				writer.writeText(message);
-				return getInputStream(writer);
-			}
 
 			try {
-				HelpDocument helpDocDocument = compilerDefinition.getHelpForCurrentLocale(compilerExecutablePath);
+				HelpDocument helpDocDocument = compilerDefinition
+						.getHelpForCurrentLocale(compilerPreferences.getCompilerExecutablePathOrDefault());
 				File file = helpDocDocument.file;
 				if (file == null) {
 					throw new RuntimeException(
@@ -380,12 +373,42 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		writer.writeTableRow(Texts.TOC_COMPILER_HOME_PAGE_LABEL,
 				HTMLWriter.getLink(compilerDefinition.getHomePageURL(), compilerDefinition.getHomePageURL()));
 
-		String helpDocumentPaths = compilerDefinition.getHelpDocumentPaths().replace(",", HTMLConstants.BR);
-		writer.writeTableRowCode(Texts.TOC_COMPILER_HELP_DOCUMENTS_LABEL, helpDocumentPaths);
+		List<HelpDocument> helpDocuments = compilerDefinition.getHelpDocuments("");
+		HTMLWriter innerWriter = new HTMLWriter(); // TODO: Breaks layout if there are no paths
+		if (!helpDocuments.isEmpty()) {
+			innerWriter.beginTable(false);
+			for (HelpDocument helpDocument : helpDocuments) {
+				innerWriter.beginTableRow();
+				if (helpDocument.uri != null) {
+					innerWriter.writeTableCell(HTMLWriter.getLink(helpDocument.path, helpDocument.path));
+				} else {
+					innerWriter.writeTableCell(helpDocument.path);
+				}
+				innerWriter.writeTableCell(helpDocument.language);
+				innerWriter.end();
+			}
+			innerWriter.end();
+		}
+		writer.writeTableRowCode(Texts.TOC_COMPILER_HELP_DOCUMENTS_LABEL, innerWriter.toHTML());
+
+		List<CompilerPath> defaultPaths = compilerDefinition.getDefaultPaths();
+		innerWriter = new HTMLWriter(); // TODO: Breaks layout if there are no paths
+		if (!defaultPaths.isEmpty()) {
+			innerWriter.beginTable(false);
+			for (CompilerPath compilerPath : defaultPaths) {
+				innerWriter.beginTableRow();
+				innerWriter.writeTableCell(compilerPath.os);
+				innerWriter.writeTableCell(compilerPath.osArch);
+				innerWriter.writeTableCell(compilerPath.getRelativePath());
+				innerWriter.end();
+
+			}
+			innerWriter.end();
+		}
+		writer.writeTableRowCode(Texts.TOC_COMPILER_DEFAULT_PATHS_LABEL, innerWriter.toHTML());
 
 		Hardware hardware = compilerDefinition.getDefaultHardware();
-		writer.writeTableRow(Texts.TOC_COMPILER_DEFAULT_HARDWARE_LABEL, HTMLWriter
-				.getImage(ICONS_PATH + HardwareUtility.getImagePath(hardware), hardware.name(), hardware.name()));
+		writer.writeTableRow(Texts.TOC_COMPILER_DEFAULT_HARDWARE_LABEL, getHardwareIconImage(hardware));
 
 		List<Target> cpus = compilerDefinition.getSupportedTargets();
 		writer.beginTableRow();
@@ -587,6 +610,14 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		writer.end();
 	}
 
+	private String getHardwareIconImage(Hardware hardware) {
+		if (hardware == null) {
+			throw new IllegalArgumentException("Parameter 'hardware' must not be null.");
+		}
+		return HTMLWriter.getImage(HARDWARE_ICONS_PATH + HardwareUtility.getImagePath(hardware), hardware.name(),
+				hardware.name());
+	}
+
 	private InputStream getHardwareInputStream(String href) {
 		if (href == null) {
 			throw new IllegalArgumentException("Parameter 'href' must not be null.");
@@ -604,8 +635,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		writer.beginTable();
 		writer.writeTableRow(Texts.TOC_HARDWARE_NAME_LABEL, EnumUtility.getText(hardware));
 		writer.writeTableRow(Texts.TOC_HARDWARE_ID_LABEL, hardware.name());
-		writer.writeTableRow(Texts.TOC_HARDWARE_ICON_LABEL,
-				HTMLWriter.getImage(ICONS_PATH + HardwareUtility.getImagePath(hardware), hardware.name(), ""));
+		writer.writeTableRow(Texts.TOC_HARDWARE_ICON_LABEL, getHardwareIconImage(hardware));
 
 		writer.writeTableRow(Texts.TOC_HARDWARE_DEFAULT_FILE_EXTENSION_LABEL,
 				HardwareUtility.getDefaultFileExtension(hardware));

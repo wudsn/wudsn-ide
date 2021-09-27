@@ -56,7 +56,7 @@ public final class LanguageEditorCompilerHelpCommandHandler extends AbstractHand
 
 		CompilerDefinition compilerDefinition = languageEditor.getCompilerDefinition();
 		CompilerPreferences compilerPreferences = languageEditor.getCompilerPreferences();
-		String compilerExecutablePath = compilerPreferences.getCompilerExecutablePath();
+		String compilerExecutablePath = compilerPreferences.getCompilerExecutablePathOrDefault();
 
 		try {
 			HelpDocument helpDocument = compilerDefinition.getHelpForCurrentLocale(compilerExecutablePath);

@@ -270,7 +270,7 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 					.getLanguagePreferences(compilerDefinition.getLanguage());
 			CompilerPreferences compilerPreferences = languagePreferences.getCompilerPreferences(compilerDefinition,
 					Hardware.GENERIC);
-			String compilerExecutablePath = compilerPreferences.getCompilerExecutablePath();
+			String compilerExecutablePath = compilerPreferences.getCompilerExecutablePathOrDefault();
 
 			String icon = "";
 			List<ITopic> manualTopics = new ArrayList<ITopic>();

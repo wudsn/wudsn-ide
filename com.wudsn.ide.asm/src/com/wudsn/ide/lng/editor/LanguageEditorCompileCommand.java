@@ -250,7 +250,7 @@ final class LanguageEditorCompileCommand {
 		String compilerDefinitionText = LanguageUtility.getCompilerTextLower(compilerDefinition.getLanguage());
 		String compilerPreferencesText = LanguageUtility.getCompilerPreferencesText(compilerDefinition.getLanguage());
 
-		String compilerExecutablePath = languageEditor.getCompilerPreferences().getCompilerExecutablePath();
+		String compilerExecutablePath = languageEditor.getCompilerPreferences().getCompilerExecutablePathOrDefault();
 		if (StringUtility.isEmpty(compilerExecutablePath)) {
 			// ERROR: Path to '{0}' {1} executable is not set in the '{2}' preferences.
 			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E100, compilerDefinitionText,

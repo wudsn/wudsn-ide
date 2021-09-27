@@ -19,10 +19,13 @@
 
 package com.wudsn.ide.lng.preferences;
 
+import java.io.File;
+
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.compiler.CompilerOutputFolderMode;
+import com.wudsn.ide.lng.compiler.CompilerPaths;
 import com.wudsn.ide.lng.runner.RunnerId;
 
 /**
@@ -65,13 +68,35 @@ public final class CompilerPreferences {
 	}
 
 	/**
-	 * Gets the executable path for the compiler.
+	 * Gets the configured executable path for the compiler.
 	 * 
 	 * @return The executable path for the runner, may be empty, not
 	 *         <code>null</code>.
 	 */
 	public String getCompilerExecutablePath() {
 		return languagePreferences.getString(LanguagePreferencesConstants.getCompilerExecutablePathName(compilerId));
+	}
+
+	/**
+	 * Gets the executable path for the compiler.
+	 * 
+	 * @return The executable path for the runner, may be empty, not
+	 *         <code>null</code>.
+	 */
+	public String getCompilerExecutablePathOrDefault() {
+		String compilerExecutablePath = getCompilerExecutablePath();
+
+		CompilerPaths compilerPaths = new CompilerPaths();
+		if (StringUtility.isEmpty(compilerExecutablePath)) {
+			File compilerFile = compilerPaths.getAbsoluteFile(languagePreferences.getLanguage(), compilerId);
+			if (compilerFile != null) {
+				if (compilerFile.exists() && compilerFile.isFile() && compilerFile.canExecute()) {
+					compilerExecutablePath = compilerFile.getAbsolutePath();
+				}
+			}
+
+		}
+		return compilerExecutablePath;
 	}
 
 	/**

@@ -39,6 +39,6 @@ final class HTMLConstants {
 			+ NL + HTMLConstants.CONTENT_TYPE + NL + HTMLConstants.STYLE_SHEETS + NL + "</head><body>";
 	public static final String SUFFIX = "</body>" + NL + "</html>";
 
-	public static final String BR = "<br>";
+	public static final String BR = "<br/>";
 
 }
