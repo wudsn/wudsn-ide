@@ -25,13 +25,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.program.Program;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
-
-import com.wudsn.ide.lng.compiler.CompilerDefinition;
-import com.wudsn.ide.lng.compiler.CompilerHelp.HelpDocument;
-import com.wudsn.ide.lng.preferences.CompilerPreferences;
 
 /**
  * Event handler for the "Compiler Help" command.
@@ -42,24 +36,20 @@ public final class LanguageEditorCompilerHelpCommandHandler extends AbstractHand
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		Shell shell;
-		shell = HandlerUtil.getActiveShell(event);
+		var shell = HandlerUtil.getActiveShell(event);
 
-		IEditorPart editor;
-		editor = HandlerUtil.getActiveEditorChecked(event);
+		var editor = HandlerUtil.getActiveEditorChecked(event);
 		if (!(editor instanceof LanguageEditor)) {
 			return null;
 		}
 
-		LanguageEditor languageEditor;
-		languageEditor = (LanguageEditor) editor;
-
-		CompilerDefinition compilerDefinition = languageEditor.getCompilerDefinition();
-		CompilerPreferences compilerPreferences = languageEditor.getCompilerPreferences();
-		String compilerExecutablePath = compilerPreferences.getCompilerExecutablePathOrDefault();
+		var languageEditor = (LanguageEditor) editor;
+		var compilerDefinition = languageEditor.getCompilerDefinition();
+		var compilerPreferences = languageEditor.getCompilerPreferences();
+		var compilerExecutablePath = compilerPreferences.getCompilerExecutablePathOrDefault();
 
 		try {
-			HelpDocument helpDocument = compilerDefinition.getHelpForCurrentLocale(compilerExecutablePath);
+			var helpDocument = compilerDefinition.getInstalledHelpForCurrentLocale(compilerExecutablePath);
 			if (helpDocument.file != null) {
 				Program.launch(helpDocument.file.getPath());
 			} else {

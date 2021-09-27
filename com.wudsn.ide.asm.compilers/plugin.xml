@@ -55,7 +55,6 @@
         class="com.wudsn.ide.lng.asm.compiler.acme.AcmeCompiler"
         defaultHardware="C64"
         defaultParameters="-f cbm -o ${outputFilePath} ${sourceFilePath} "
-        helpDocumentPaths="./docs"
         homePageURL="https://sourceforge.net/projects/acme-crossass"
         id="acme"
         language="ASM"
@@ -73,13 +72,16 @@
      <supportedTarget
            target="MOS65816">
      </supportedTarget>
+     <helpDocument
+           language="*"
+           path="./docs">
+     </helpDocument>
     
   </compiler>
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.asm6.Asm6Compiler"
         defaultHardware="NES"
         defaultParameters=" ${sourceFilePath}  ${outputFilePath}"
-        helpDocumentPaths="./README.TXT"
         homePageURL="http://3dscapture.com/NES/asm6.zip"
         id="asm6"
         language="ASM"
@@ -91,12 +93,15 @@
      <supportedTarget
            target="MOS6502_ILLEGAL">
      </supportedTarget>
+     <helpDocument
+           language="*"
+           path="./README.TXT">
+     </helpDocument>
   </compiler>
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.atasm.AtasmCompiler"
         defaultHardware="ATARI8BIT"
         defaultParameters="-s -o${outputFilePath} -l${outputFilePathWithoutExtension}.lab ${sourceFilePath}"
-        helpDocumentPaths="./docs/atasm.pdf"
         homePageURL="http://atari.miribilist.com/atasm"
         id="atasm"
         language="ASM"
@@ -108,12 +113,15 @@
      <supportedTarget
            target="MOS6502_ILLEGAL">
      </supportedTarget>
+     <helpDocument
+           language="*"
+           path="./docs/atasm.pdf">
+     </helpDocument>
 		</compiler>
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.dasm.DasmCompiler"
         defaultHardware="ATARI2600"
         defaultParameters="${sourceFilePath} -o${outputFilePath} -f3 -v5 -s${outputFilePathWithoutExtension}.sym -l${outputFilePathWithoutExtension}.lst"
-        helpDocumentPaths="../doc/dasm.TXT"
         homePageURL="http://dasm-dillon.sourceforge.net"
         id="dasm"
         language="ASM"
@@ -125,12 +133,15 @@
      <supportedTarget
            target="MOS6502_ILLEGAL">
      </supportedTarget>
+     <helpDocument
+           language="*"
+           path="../doc/DASM.TXT">
+     </helpDocument>
   </compiler>
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.kickass.KickAssCompiler"
         defaultHardware="C64"
         defaultParameters="-o ${outputFilePath} ${sourceFilePath} "
-        helpDocumentPaths="./KickAssembler.pdf"
         homePageURL="http://www.theweb.dk/KickAssembler"
         id="kickass"
         language="ASM"
@@ -145,12 +156,15 @@
      <supportedTarget
            target="MOS6502_DTV">
      </supportedTarget>
+     <helpDocument
+           language="*"
+           path="./KickAssembler.pdf">
+     </helpDocument>
   </compiler>
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.mads.MadsCompiler"
         defaultHardware="ATARI8BIT"
         defaultParameters=" ${sourceFilePath} -o:${outputFilePath} -p -t:${outputFilePathWithoutExtension}.lab -l:${outputFilePathWithoutExtension}.lst "
-        helpDocumentPaths="./doc/mads-eng.html, ./doc/mads-en.html (en), ./doc/mads.html (pl)"
         homePageURL="http://mads.atari8.info"
         id="mads"
         language="ASM"
@@ -165,12 +179,23 @@
      <supportedTarget
            target="MOS65816">
      </supportedTarget>
+     <helpDocument
+           language="*"
+           path="./doc/mads-eng.html">
+     </helpDocument>
+     <helpDocument
+           language="en"
+           path="./doc/mads-en.html">
+     </helpDocument>
+     <helpDocument
+           language="pl"
+           path="./doc/mads.html">
+     </helpDocument>
   </compiler>
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32Compiler"
         defaultHardware="APPLE2"
         defaultParameters="-V  ${sourceFilePath}"
-        helpDocumentPaths="../Documentation/Merlin32.pdf"
         homePageURL="http://www.brutaldeluxe.fr/products/crossdevtools/merlin/index.html"
         id="merlin32"
         language="ASM"
@@ -185,12 +210,15 @@
      <supportedTarget
            target="MOS65816">
      </supportedTarget>
+     <helpDocument
+           language="*"
+           path="../Documentation/Merlin32.pdf">
+     </helpDocument>
   </compiler>
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.tass.TassCompiler"
         defaultHardware="C64"
         defaultParameters="-o ${outputFilePath} ${sourceFilePath} "
-        helpDocumentPaths="./README"
         homePageURL="http://tass64.sourceforge.net"
         id="tass"
         language="ASM"
@@ -205,13 +233,16 @@
      <supportedTarget
            target="MOS65C02">
      </supportedTarget>
+     <helpDocument
+           language="*"
+           path="./README">
+     </helpDocument>
      
   </compiler>
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.xasm.XasmCompiler"
         defaultHardware="ATARI8BIT"
         defaultParameters="/o:${outputFilePath} /p /t:${outputFilePathWithoutExtension}.lab /l:${outputFilePathWithoutExtension}.lst ${sourceFilePath}"
-        helpDocumentPaths="./xasm.html"
         homePageURL="https://github.com/pfusik/xasm"
         id="xasm"
         language="ASM"
@@ -220,6 +251,10 @@
              <supportedTarget
            target="MOS6502">
      </supportedTarget>
+             <helpDocument
+                   language="*"
+                   path="./xasm.html">
+             </helpDocument>
 		</compiler>
 
 	</extension>

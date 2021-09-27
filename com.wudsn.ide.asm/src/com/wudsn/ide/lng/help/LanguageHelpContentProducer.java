@@ -45,7 +45,6 @@ import org.eclipse.help.IHelpContentProducer;
 import com.wudsn.ide.base.common.EnumUtility;
 import com.wudsn.ide.base.common.HexUtility;
 import com.wudsn.ide.base.common.StringUtility;
-import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.base.hardware.HardwareUtility;
 import com.wudsn.ide.lng.Language;
@@ -54,7 +53,6 @@ import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.TargetUtility;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
-import com.wudsn.ide.lng.compiler.CompilerHelp.HelpDocument;
 import com.wudsn.ide.lng.compiler.CompilerPaths.CompilerPath;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
@@ -314,8 +312,8 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 					Hardware.GENERIC);
 
 			try {
-				HelpDocument helpDocDocument = compilerDefinition
-						.getHelpForCurrentLocale(compilerPreferences.getCompilerExecutablePathOrDefault());
+				var helpDocDocument = compilerDefinition
+						.getInstalledHelpForCurrentLocale(compilerPreferences.getCompilerExecutablePathOrDefault());
 				File file = helpDocDocument.file;
 				if (file == null) {
 					throw new RuntimeException(
@@ -373,13 +371,13 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		writer.writeTableRow(Texts.TOC_COMPILER_HOME_PAGE_LABEL,
 				HTMLWriter.getLink(compilerDefinition.getHomePageURL(), compilerDefinition.getHomePageURL()));
 
-		List<HelpDocument> helpDocuments = compilerDefinition.getHelpDocuments("");
+		var helpDocuments = compilerDefinition.getHelpDocuments();
 		HTMLWriter innerWriter = new HTMLWriter(); // TODO: Breaks layout if there are no paths
 		if (!helpDocuments.isEmpty()) {
 			innerWriter.beginTable(false);
-			for (HelpDocument helpDocument : helpDocuments) {
+			for (var helpDocument : helpDocuments) {
 				innerWriter.beginTableRow();
-				if (helpDocument.uri != null) {
+				if (helpDocument.isURL()) {
 					innerWriter.writeTableCell(HTMLWriter.getLink(helpDocument.path, helpDocument.path));
 				} else {
 					innerWriter.writeTableCell(helpDocument.path);

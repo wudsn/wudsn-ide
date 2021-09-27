@@ -24,10 +24,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.StringUtility;
+import com.wudsn.ide.lng.compiler.CompilerDefinition.HelpDocument;
 
 /**
  * Compiler help access.
@@ -37,43 +37,37 @@ import com.wudsn.ide.base.common.StringUtility;
  * @since 1.7.2
  */
 public final class CompilerHelp {
-	
-	public static class HelpDocument {
+
+	public static class InstalledHelpDocument {
 		public String path;
 		public String language;
 		public File file;
 		public URI uri;
 	}
 
-	public static List<HelpDocument> getHelpDocuments(String helpDocumentPaths, String compilerExecutablePath) {
-		List<HelpDocument> helpDocuments = new ArrayList<CompilerHelp.HelpDocument>();
+	public static List<InstalledHelpDocument> getInstalledHelpDocuments(List<HelpDocument> list,
+			String compilerExecutablePath) {
+		var result = new ArrayList<CompilerHelp.InstalledHelpDocument>();
 
-		StringTokenizer tokenizer = new StringTokenizer(helpDocumentPaths, ",");
-		while (tokenizer.hasMoreTokens()) {
-			String helpFilePath = tokenizer.nextToken().trim();
-			String helpFileLanguage = "";
-			int index = helpFilePath.lastIndexOf("(");
-			if (index > 0) {
-				helpFileLanguage = helpFilePath.substring(index + 1, index + 3);
-				helpFilePath = helpFilePath.substring(0, index - 1).trim();
-			}
-			HelpDocument helpDocument = new HelpDocument();
-			helpDocument.path = helpFilePath;
-			helpDocument.language = helpFileLanguage;
+		for (var helpDocument : list) {
+
+			var installeHelpDocument = new InstalledHelpDocument();
+			installeHelpDocument.path = helpDocument.path;
+			installeHelpDocument.language = helpDocument.language;
 
 			// Relative paths are local files.
-			if (helpFilePath.startsWith(".") && StringUtility.isSpecified(compilerExecutablePath)) {
-				helpDocument.file = FileUtility
-						.getCanonicalFile(new File(new File(compilerExecutablePath).getParent(), helpFilePath));
+			if (installeHelpDocument.path.startsWith(".") && StringUtility.isSpecified(compilerExecutablePath)) {
+				installeHelpDocument.file = FileUtility.getCanonicalFile(
+						new File(new File(compilerExecutablePath).getParent(), installeHelpDocument.path));
 			} else {
 				try {
-					helpDocument.uri = new URI(helpFilePath);
+					installeHelpDocument.uri = new URI(installeHelpDocument.path);
 				} catch (URISyntaxException ex) {
-					throw new RuntimeException("Invalid URI for '" + helpFilePath + "' help file path", ex);
+					throw new RuntimeException("Invalid URI for '" + helpDocument.path + "' help file path", ex);
 				}
 			}
-			helpDocuments.add(helpDocument);
+			result.add(installeHelpDocument);
 		}
-		return helpDocuments;
+		return result;
 	}
 }

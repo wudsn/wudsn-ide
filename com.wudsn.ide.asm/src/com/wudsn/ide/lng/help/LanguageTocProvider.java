@@ -45,10 +45,7 @@ import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
-import com.wudsn.ide.lng.compiler.CompilerHelp.HelpDocument;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
-import com.wudsn.ide.lng.preferences.CompilerPreferences;
-import com.wudsn.ide.lng.preferences.LanguagePreferences;
 
 /**
  * Dynamic help content provider. Uses static pages and the meta data from the
@@ -251,31 +248,30 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 		if (compilerDefinitions == null) {
 			throw new IllegalArgumentException("Parameter 'compilerDefinitions' must not be null.");
 		}
-		int size = compilerDefinitions.size();
-		List<ITopic> compilerTopics = new ArrayList<ITopic>(size);
+		var size = compilerDefinitions.size();
+		var compilerTopics = new ArrayList<ITopic>(size);
 
 		for (int i = 0; i < size; i++) {
-			CompilerDefinition compilerDefinition = compilerDefinitions.get(i);
+			var compilerDefinition = compilerDefinitions.get(i);
 
-			String href = LanguageHelpContentProducer.getComplierHref(compilerDefinition,
+			var href = LanguageHelpContentProducer.getComplierHref(compilerDefinition,
 					LanguageHelpContentProducer.SECTION_GENERAL, null);
 
-			ITopic generalTopic = createTopic("", Texts.TOC_COMPILER_GENERAL_TOPIC_LABEL, href, null);
+			var generalTopic = createTopic("", Texts.TOC_COMPILER_GENERAL_TOPIC_LABEL, href, null);
 
 			href = LanguageHelpContentProducer.getComplierHref(compilerDefinition,
 					LanguageHelpContentProducer.SECTION_INSTRUCTIONS, null);
-			ITopic opcodesTopic = createTopic("", Texts.TOC_COMPILER_INSTRUCTIONS_TOPIC_LABEL, href, null);
+			var opcodesTopic = createTopic("", Texts.TOC_COMPILER_INSTRUCTIONS_TOPIC_LABEL, href, null);
 
-			LanguagePreferences languagePreferences = LanguagePlugin.getInstance()
+			var languagePreferences = LanguagePlugin.getInstance()
 					.getLanguagePreferences(compilerDefinition.getLanguage());
-			CompilerPreferences compilerPreferences = languagePreferences.getCompilerPreferences(compilerDefinition,
-					Hardware.GENERIC);
-			String compilerExecutablePath = compilerPreferences.getCompilerExecutablePathOrDefault();
+			var compilerPreferences = languagePreferences.getCompilerPreferences(compilerDefinition, Hardware.GENERIC);
+			var compilerExecutablePath = compilerPreferences.getCompilerExecutablePathOrDefault();
 
-			String icon = "";
-			List<ITopic> manualTopics = new ArrayList<ITopic>();
+			var icon = "";
+			var manualTopics = new ArrayList<ITopic>();
 			try {
-				HelpDocument helpDocument = compilerDefinition.getHelpForCurrentLocale(compilerExecutablePath);
+				var helpDocument = compilerDefinition.getInstalledHelpForCurrentLocale(compilerExecutablePath);
 				if (helpDocument.file != null) {
 					File file = helpDocument.file;
 
@@ -327,7 +323,7 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 						LanguageHelpContentProducer.SECTION_MANUAL, null);
 			}
 
-			ITopic manualTopic = createTopic(icon, Texts.TOC_COMPILER_MANUAL_TOPIC_LABEL, href,
+			var manualTopic = createTopic(icon, Texts.TOC_COMPILER_MANUAL_TOPIC_LABEL, href,
 					createTopicsArray(manualTopics));
 
 			compilerTopics.add(createTopic("", compilerDefinition.getName(), "",

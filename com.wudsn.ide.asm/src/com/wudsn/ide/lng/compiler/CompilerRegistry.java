@@ -36,6 +36,7 @@ import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
+import com.wudsn.ide.lng.compiler.CompilerDefinition.HelpDocument;
 
 /**
  * Registry for compilers, based on the extension points
@@ -97,18 +98,23 @@ public final class CompilerRegistry {
 					compilerDefinition.setId(configurationElement.getAttribute("id"));
 					compilerDefinition.setName(configurationElement.getAttribute("name"));
 					compilerDefinition.setClassName(configurationElement.getAttribute("class"));
-					compilerDefinition.setHelpDocumentPaths(configurationElement.getAttribute("helpDocumentPaths"));
+
+					var helpDocumentsArray = configurationElement.getChildren("helpDocument");
+					var helpDocuments = new ArrayList<HelpDocument>(helpDocumentsArray.length);
+					for (var helpDocument : helpDocumentsArray) {
+						helpDocuments.add(new HelpDocument(helpDocument.getAttribute("path"),
+								helpDocument.getAttribute("language")));
+					}
+					compilerDefinition.setHelpDocuments(Collections.unmodifiableList(helpDocuments));
 					compilerDefinition.setHomePageURL(configurationElement.getAttribute("homePageURL"));
 					compilerDefinition.setDefaultParameters(configurationElement.getAttribute("defaultParameters"));
 
-					IConfigurationElement[] supportedTargetsArray;
-					supportedTargetsArray = configurationElement.getChildren("supportedTarget");
-					List<Target> supportedTargets = new ArrayList<Target>(supportedTargetsArray.length);
-					for (IConfigurationElement supportedTarget : supportedTargetsArray) {
+					var supportedTargetsArray = configurationElement.getChildren("supportedTarget");
+					var supportedTargets = new ArrayList<Target>(supportedTargetsArray.length);
+					for (var supportedTarget : supportedTargetsArray) {
 						supportedTargets.add(Target.valueOf(supportedTarget.getAttribute("target")));
 					}
-					supportedTargets = Collections.unmodifiableList(supportedTargets);
-					compilerDefinition.setSupportedTargets(supportedTargets);
+					compilerDefinition.setSupportedTargets(Collections.unmodifiableList(supportedTargets));
 					compilerDefinition
 							.setDefaultHardware(Hardware.valueOf(configurationElement.getAttribute("defaultHardware")));
 

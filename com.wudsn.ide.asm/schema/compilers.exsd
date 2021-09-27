@@ -2,46 +2,104 @@
 <!-- Schema file written by PDE -->
 <schema targetNamespace="com.wudsn.ide.lng" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
-      <appInfo>
+      <appinfo>
          <meta.schema plugin="com.wudsn.ide.lng" id="compilers" name="Compilers"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          This extension point allows for adding new assemblers and compilers to the WUDSN IDE.
       </documentation>
    </annotation>
 
-   <element name="extension">
-      <annotation>
-         <appInfo>
-            <meta.element />
-         </appInfo>
-      </annotation>
+   <element name="supportedTarget">
       <complexType>
-         <sequence minOccurs="1" maxOccurs="unbounded">
-            <element ref="compiler"/>
-         </sequence>
-         <attribute name="point" type="string" use="required">
+         <attribute name="target" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
             </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="MOS6502">
+                  </enumeration>
+                  <enumeration value="MOS6502_ILLEGAL">
+                  </enumeration>
+                  <enumeration value="MOS65C02">
+                  </enumeration>
+                  <enumeration value="MOS6502_DTV">
+                  </enumeration>
+                  <enumeration value="MOS65816">
+                  </enumeration>
+                  <enumeration value="PASCAL">
+                  </enumeration>
+               </restriction>
+            </simpleType>
          </attribute>
-         <attribute name="id" type="string">
+      </complexType>
+   </element>
+
+   <element name="helpDocument">
+      <complexType>
+         <attribute name="path" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  Relative path of the help document or help folder, relative to the folder of the executables.
+Or absolute URL starting with &quot;http://&quot; or &quot;https://&quot;.
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="name" type="string">
+         <attribute name="language" type="string">
             <annotation>
                <documentation>
-                  
+                  The 2 letter &quot;de&quot; or 5 letter &quot;de_DE&quot; representation of the language of the document.
+Use &quot;*&quot; is the entry is valid for all languages
                </documentation>
-               <appInfo>
-                  <meta.attribute translatable="true"/>
-               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="executable">
+      <complexType>
+         <attribute name="os" use="required">
+            <annotation>
+               <documentation>
+                  OSGI OS value as described in org.eclipse.core.runtime.Platform
+               </documentation>
+            </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="OS_MACOSX">
+                  </enumeration>
+                  <enumeration value="OS_LINUX">
+                  </enumeration>
+                  <enumeration value="OS_WIN32">
+                  </enumeration>
+               </restriction>
+            </simpleType>
+         </attribute>
+         <attribute name="osArch" use="required">
+            <annotation>
+               <documentation>
+                  OSGI OS archiecture value as described in org.eclipse.core.runtime.Platform
+               </documentation>
+            </annotation>
+            <simpleType>
+               <restriction base="string">
+                  <enumeration value="ARCH_X86">
+                  </enumeration>
+                  <enumeration value="ARCH_X86_64">
+                  </enumeration>
+                  <enumeration value="ARCH_PPC">
+                  </enumeration>
+               </restriction>
+            </simpleType>
+         </attribute>
+         <attribute name="path" type="string" use="required">
+            <annotation>
+               <documentation>
+                  Relative path of the executable inside the base folder
+               </documentation>
             </annotation>
          </attribute>
       </complexType>
@@ -54,6 +112,10 @@
                <element ref="supportedTarget" minOccurs="1" maxOccurs="unbounded"/>
             </sequence>
             <sequence>
+               <element ref="helpDocument" minOccurs="0" maxOccurs="unbounded"/>
+            </sequence>
+            <sequence>
+               <element ref="executable" minOccurs="0" maxOccurs="unbounded"/>
             </sequence>
          </choice>
          <attribute name="language" use="required">
@@ -83,9 +145,9 @@
                <documentation>
                   Translatable name of the compiler. Typically contains only upper case letters.
                </documentation>
-               <appInfo>
+               <appinfo>
                   <meta.attribute translatable="true"/>
-               </appInfo>
+               </appinfo>
             </annotation>
          </attribute>
          <attribute name="class" type="string" use="required">
@@ -93,9 +155,9 @@
                <documentation>
                   The name of the compiler class.
                </documentation>
-               <appInfo>
+               <appinfo>
                   <meta.attribute kind="java" basedOn="com.wudsn.ide.lng.compiler.Compiler:"/>
-               </appInfo>
+               </appinfo>
             </annotation>
          </attribute>
          <attribute name="version" type="string" use="required">
@@ -109,17 +171,6 @@
             <annotation>
                <documentation>
                   The absolute URL pointing to the homepage of the compiler where the latest version can be downloaded.
-               </documentation>
-            </annotation>
-         </attribute>
-         <attribute name="helpDocumentPaths" type="string">
-            <annotation>
-               <documentation>
-                  The relative paths to the local help documents. 
-Multiple paths are separated by comma.
-Adding a language constraint in parentheses like &quot;./doc-de.html (de)&quot; acts as filter.
-Each file path is evluated based on the absolute path of the compiler executable in the preferences.
-Alternatively abolute URLs to web sites can be specified. They are used, if not file paths match.
                </documentation>
             </annotation>
          </attribute>
@@ -158,38 +209,47 @@ Alternatively abolute URLs to web sites can be specified. They are used, if not 
       </complexType>
    </element>
 
-   <element name="supportedTarget">
+   <element name="extension">
+      <annotation>
+         <appinfo>
+            <meta.element />
+         </appinfo>
+      </annotation>
       <complexType>
-         <attribute name="target">
+         <sequence minOccurs="1" maxOccurs="unbounded">
+            <element ref="compiler"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
             </annotation>
-            <simpleType>
-               <restriction base="string">
-                  <enumeration value="MOS6502">
-                  </enumeration>
-                  <enumeration value="MOS6502_ILLEGAL">
-                  </enumeration>
-                  <enumeration value="MOS65C02">
-                  </enumeration>
-                  <enumeration value="MOS6502_DTV">
-                  </enumeration>
-                  <enumeration value="MOS65816">
-                  </enumeration>
-                  <enumeration value="PASCAL">
-                  </enumeration>
-               </restriction>
-            </simpleType>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
          </attribute>
       </complexType>
    </element>
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="since"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          WUDSN IDE 1.1.0
       </documentation>
@@ -197,9 +257,9 @@ Alternatively abolute URLs to web sites can be specified. They are used, if not 
 
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="apiinfo"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          To implement this extension point, you have to create a sub-class of com.wudsn.ide.lng.compiler.Compiler, a sub-class of com.wudsn.ide.lng.compiler.parser.CompilerSourceParser and a sub-class of com.wudsn.ide.lng.compiler.CompilerLogParser. In the constructor of the compiler you have to set the source parser instance. In the &quot;createLogParser&quot; method of the compiler you have to create a new instance of the corresponding log parser.
       </documentation>
@@ -207,9 +267,9 @@ Alternatively abolute URLs to web sites can be specified. They are used, if not 
 
 
    <annotation>
-      <appInfo>
+      <appinfo>
          <meta.section type="copyright"/>
-      </appInfo>
+      </appinfo>
       <documentation>
          (c) 2009 Peter Dell
       </documentation>
