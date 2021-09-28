@@ -9,3 +9,4 @@ Require-Bundle: com.wudsn.ide.lng,
  com.wudsn.ide.lng.asm
 Bundle-ActivationPolicy: lazy
 Automatic-Module-Name: com.wudsn.ide.asm.compilers.test
+Bundle-Localization: OSGI-INF/l10n/bundle

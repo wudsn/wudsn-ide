@@ -19,3 +19,4 @@ Bundle-ClassPath: .,
  lib/c64/jsidplay2.jar
 Bundle-Vendor: Peter Dell
 Automatic-Module-Name: com.wudsn.ide.snd
+Bundle-Localization: OSGI-INF/l10n/bundle

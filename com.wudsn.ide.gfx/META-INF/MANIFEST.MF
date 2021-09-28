@@ -20,3 +20,4 @@ Bundle-ClassPath: lib/js.jar,
  lib/recoil.jar,
  .
 Automatic-Module-Name: com.wudsn.ide.gfx
+Bundle-Localization: OSGI-INF/l10n/bundle

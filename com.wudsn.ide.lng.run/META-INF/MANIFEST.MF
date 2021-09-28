@@ -7,3 +7,4 @@ Bundle-Vendor: Peter Dell
 Automatic-Module-Name: com.wudsn.ide.lng.run
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: com.wudsn.ide.lng
+Bundle-Localization: OSGI-INF/l10n/bundle

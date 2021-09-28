@@ -84,3 +84,4 @@ Export-Package: com.wudsn.ide.lng;
    org.eclipse.swt.widgets",
  com.wudsn.ide.lng.runner
 Automatic-Module-Name: com.wudsn.ide.lng
+Bundle-Localization: OSGI-INF/l10n/bundle

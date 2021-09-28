@@ -10,3 +10,4 @@ Require-Bundle: com.wudsn.ide.lng,
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Automatic-Module-Name: com.wudsn.ide.lng.asm
+Bundle-Localization: OSGI-INF/l10n/bundle
