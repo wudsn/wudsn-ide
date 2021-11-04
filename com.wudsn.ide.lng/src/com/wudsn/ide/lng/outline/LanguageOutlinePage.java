@@ -152,12 +152,16 @@ public final class LanguageOutlinePage extends ContentOutlinePage {
 
 	private static final class OutlineViewerComparator extends ViewerComparator {
 		private final OutlineViewerSortAction sortAction;
+		private final boolean identifiersCaseSensitive;
 
 		OutlineViewerComparator(OutlineViewerSortAction sortAction) {
 			if (sortAction == null) {
 				throw new IllegalArgumentException("Parameter 'sortAction' must not be null.");
 			}
 			this.sortAction = sortAction;
+			identifiersCaseSensitive = sortAction.editor.getCompilerDefinition().getSyntax()
+					.areIdentifiersCaseSensitive();
+
 		}
 
 		@Override
@@ -246,8 +250,12 @@ public final class LanguageOutlinePage extends ContentOutlinePage {
 				name2 = "";//$NON-NLS-1$
 			}
 
-			// Use direct comparison as identified are ASCII only.
-			return name1.compareTo(name2);
+			// Use direct comparison as identifier are ASCII only.
+			if (identifiersCaseSensitive) {
+				return name1.compareTo(name2);
+			} else {
+				return name1.compareToIgnoreCase(name2);
+			}
 
 		}
 	}
@@ -282,8 +290,8 @@ public final class LanguageOutlinePage extends ContentOutlinePage {
 		}
 
 		/**
-		 * Triggers a new {@link LanguageOutlineTreeContentProvider#parse} run
-		 * and updates the display.
+		 * Triggers a new {@link LanguageOutlineTreeContentProvider#parse} run and
+		 * updates the display.
 		 */
 		@Override
 		protected void runWithLogging() {
