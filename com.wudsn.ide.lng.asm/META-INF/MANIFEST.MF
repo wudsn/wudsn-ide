@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: WUDSN IDE Assembler Compilers Plug-in
+Bundle-Name: WUDSN IDE Assemblers Plug-in
 Bundle-SymbolicName: com.wudsn.ide.lng.asm;singleton:=true
 Bundle-Version: 1.7.2.qualifier
 Bundle-Vendor: Peter Dell
