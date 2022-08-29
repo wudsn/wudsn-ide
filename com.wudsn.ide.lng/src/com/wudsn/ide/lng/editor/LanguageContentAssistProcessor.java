@@ -395,7 +395,7 @@ final class LanguageContentAssistProcessor implements IContentAssistProcessor {
 				proposal = proposal.replace("\n", "\n\t");
 				newCursorOffset = offset + proposalIndex;
 
-				proposalList.add(new LanguageInstructionCompletionProposal(proposal, offset, region.getLength(),
+				proposalList.add(new LanguagetTextCompletionProposal(proposal, offset, region.getLength(),
 						newCursorOffset, image, displayString, styledDisplayString, null));
 			}
 		}
@@ -458,7 +458,7 @@ final class LanguageContentAssistProcessor implements IContentAssistProcessor {
 
 				int newCursorOffset = regionOffset + proposal.length();
 
-				proposalList.add(new LanguageInstructionCompletionProposal(proposal, regionOffset, regionLength,
+				proposalList.add(new LanguagetTextCompletionProposal(proposal, regionOffset, regionLength,
 						newCursorOffset, image, displayString, styledDisplayString, null));
 			}
 		}

@@ -35,7 +35,7 @@ import org.eclipse.swt.graphics.Point;
  * 
  * @author Peter Dell
  */
-final class LanguageInstructionCompletionProposal implements ICompletionProposal, ICompletionProposalExtension6 {
+final class LanguagetTextCompletionProposal implements ICompletionProposal, ICompletionProposalExtension6 {
 
 	/** The string to be displayed in the completion proposal popup. */
 	private String displayString;
@@ -71,7 +71,7 @@ final class LanguageInstructionCompletionProposal implements ICompletionProposal
 	 * @param contextInformation  The context information associated with this
 	 *                            proposal.
 	 */
-	LanguageInstructionCompletionProposal(String replacementString, int replacementOffset, int replacementLength,
+	LanguagetTextCompletionProposal(String replacementString, int replacementOffset, int replacementLength,
 			int cursorOffset, Image image, String displayString, StyledString styledDisplayString,
 			IContextInformation contextInformation) {
 		Assert.isNotNull(replacementString);
