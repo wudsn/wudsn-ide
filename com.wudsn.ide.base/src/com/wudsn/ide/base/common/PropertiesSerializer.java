@@ -206,5 +206,9 @@ public class PropertiesSerializer {
 			setProperty(prefix + valueKey, valueProperties.getProperty(valueKey));
 		}
 	}
+	
+	public String toString() {
+		return properties.toString();
+	}
 
 }
