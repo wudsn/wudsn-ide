@@ -47,7 +47,7 @@ public class CharMapMultiColorConverter extends CharMapConverter {
 		// 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 3, 0, 1, 4,0 };
 		for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
 			for (int x1 = 0; x1 < data.getParameters().getColumns(); x1++) {
-				int c = data.getSourceFileByte(CHAR_MAP_FILE, offset++) & 127;
+				int c = data.getSourceFileByte(CHAR_MAP_FILE, offset++);
 				if (c < 0) {
 					return true;
 				}
