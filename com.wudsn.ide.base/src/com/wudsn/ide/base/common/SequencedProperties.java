@@ -18,62 +18,14 @@
  */
 package com.wudsn.ide.base.common;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 /**
- * Properties which keep their sequence of keys.
+ * Properties which keep their sequence of keys. TODO This does not work.
+ * Replace the usage of properties all together by JSON
  * 
  * @author Peter Dell
  */
+@SuppressWarnings("serial")
 public final class SequencedProperties extends Properties {
-	/**
-	 * Not used.
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private List<Object> propertyNames;
-
-	public SequencedProperties() {
-		propertyNames = new ArrayList<Object>();
-	}
-
-	@Override
-	public synchronized Object put(Object key, Object value) {
-		if (propertyNames.contains(key)) {
-			throw new IllegalArgumentException("Value for key '" + key + "' already added.");
-		}
-		propertyNames.add(key);
-		return super.put(key, value);
-	}
-
-	/**
-	 * Returns an enumeration of the keys in this hashtable.
-	 * 
-	 * @return an enumeration of the keys in this hashtable.
-	 * @see Enumeration
-	 * @see #elements()
-	 * @see #keySet()
-	 * @see Map
-	 */
-	@Override
-	public synchronized Enumeration<Object> keys() {
-		return Collections.enumeration(propertyNames);
-	}
-
-	@Override
-	public synchronized String toString() {
-		StringBuilder builder = new StringBuilder();
-		for (Object key : propertyNames) {
-
-			builder.append(key).append("=").append(get(key)).append("\n");
-		}
-		return builder.toString();
-
-	}
-
 }
