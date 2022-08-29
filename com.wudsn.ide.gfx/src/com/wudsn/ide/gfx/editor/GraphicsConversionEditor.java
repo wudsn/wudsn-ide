@@ -56,6 +56,7 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.EditorPart;
 
 import com.wudsn.ide.base.BasePlugin;
+import com.wudsn.ide.base.common.MessageQueue;
 import com.wudsn.ide.base.common.NumberUtility;
 import com.wudsn.ide.base.gui.Action;
 import com.wudsn.ide.base.gui.Application;
@@ -279,6 +280,7 @@ public final class GraphicsConversionEditor extends EditorPart
 	// ID of the editor in the plugin manifest.
 	public static final String ID = "com.wudsn.ide.gfx.editor.GraphicsConversionEditor";
 
+	private MessageQueue messageQueue;
 	private MessageManager messageManager;
 	private boolean processing;
 	private boolean closeEditor;
@@ -300,9 +302,10 @@ public final class GraphicsConversionEditor extends EditorPart
 	private MyImageProvider imageProvider;
 
 	public GraphicsConversionEditor() {
-		messageManager = new MessageManager(this);
+		messageQueue = new MessageQueue();
+		messageManager = new MessageManager(messageQueue, this);
 
-		converterDataLogic = new ConverterDataLogic(messageManager);
+		converterDataLogic = new ConverterDataLogic(messageQueue);
 		converterData = converterDataLogic.createData();
 
 		selectionChangedListeners = new ArrayList<ISelectionChangedListener>();

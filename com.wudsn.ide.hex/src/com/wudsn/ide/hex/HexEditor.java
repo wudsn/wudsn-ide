@@ -56,6 +56,7 @@ import com.wudsn.ide.base.BasePlugin;
 import com.wudsn.ide.base.common.ByteArrayUtility;
 import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.HexUtility;
+import com.wudsn.ide.base.common.MessageQueue;
 import com.wudsn.ide.base.common.NumberUtility;
 import com.wudsn.ide.base.common.Profiler;
 import com.wudsn.ide.base.common.TextUtility;
@@ -112,6 +113,7 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
 	private static final String CONTEXT_MENU_ID = "#HexEditorContext";
 	private static final long MAX_FILE_SIZE = 8 * ByteArrayUtility.MB;
 
+	private MessageQueue messageQueue;
 	private MessageManager messageManager;
 	private HexEditorParserComponent parserComponent;
 
@@ -144,7 +146,8 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
 		// Initialize for stand alone usage.
 		new BasePlugin().start(null);
 
-		HexEditorParserComponent parser = new HexEditorParserComponent(new MessageManager(new HexEditor()));
+		HexEditorParserComponent parser = new HexEditorParserComponent(
+				new MessageManager(new MessageQueue(), new HexEditor()));
 		parser.setFileContent(new byte[100000]);
 		parser.determinePossibleFileContentModes();
 
@@ -163,7 +166,8 @@ public final class HexEditor extends EditorPart implements ISelectionProvider, A
 	public HexEditor() {
 		super();
 
-		messageManager = new MessageManager(this);
+		messageQueue = new MessageQueue();
+		messageManager = new MessageManager(messageQueue, this);
 
 		parserComponent = new HexEditorParserComponent(messageManager);
 

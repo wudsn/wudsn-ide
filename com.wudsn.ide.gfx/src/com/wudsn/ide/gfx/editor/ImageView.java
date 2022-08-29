@@ -34,6 +34,7 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
 
+import com.wudsn.ide.base.common.MessageQueue;
 import com.wudsn.ide.base.gui.Action;
 import com.wudsn.ide.base.gui.ActionListener;
 import com.wudsn.ide.base.gui.MessageManager;
@@ -105,6 +106,7 @@ public final class ImageView extends ViewPart implements ISelectionListener {
 	}
 
 	public static final String ID = ImageView.class.getName();
+	MessageQueue messageQueue;
 	MessageManager messageManager;
 
 	private AspectControlContribution aspectControlContribution;
@@ -118,7 +120,8 @@ public final class ImageView extends ViewPart implements ISelectionListener {
 	 * Creation is private.
 	 */
 	public ImageView() {
-		messageManager = new MessageManager(this);
+		messageQueue = new MessageQueue();
+		messageManager = new MessageManager(messageQueue, this);
 	}
 
 	@Override

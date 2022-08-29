@@ -45,7 +45,7 @@ import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.HexUtility;
 import com.wudsn.ide.base.common.IPathUtility;
 import com.wudsn.ide.base.common.StringUtility;
-import com.wudsn.ide.base.gui.MessageManager;
+import com.wudsn.ide.base.common.MessageQueue;
 import com.wudsn.ide.gfx.GraphicsPlugin;
 import com.wudsn.ide.gfx.converter.FilesConverterParameters.SourceFile;
 import com.wudsn.ide.gfx.converter.ImageConverterParameters.TargetFile;
@@ -54,7 +54,7 @@ import com.wudsn.ide.gfx.model.ConverterDirection;
 import com.wudsn.ide.gfx.model.ConverterMode;
 
 public final class ConverterDataLogic {
-	private MessageManager messageManager;
+	private MessageQueue messageQueue;
 	private FilesConverterDataLogic filesConverterDataLogic;
 
 	/**
@@ -95,11 +95,11 @@ public final class ConverterDataLogic {
 		}
 	}
 
-	public ConverterDataLogic(MessageManager messageManager) {
-		if (messageManager == null) {
-			throw new IllegalArgumentException("Parameter 'messageManager' must not be null.");
+	public ConverterDataLogic(MessageQueue messageQueue) {
+		if (messageQueue == null) {
+			throw new IllegalArgumentException("Parameter 'messageQueue' must not be null.");
 		}
-		this.messageManager = messageManager;
+		this.messageQueue = messageQueue;
 		filesConverterDataLogic = new FilesConverterDataLogic();
 	}
 
@@ -130,7 +130,7 @@ public final class ConverterDataLogic {
 				data.getParameters().read(file);
 
 			} catch (CoreException ex) {
-				messageManager.sendMessage(0, ex);
+				messageQueue.sendMessage(0, ex);
 			}
 			loadSources(data, true);
 		} else {
@@ -313,7 +313,7 @@ public final class ConverterDataLogic {
 			data.copyParametersToBackup();
 
 		} catch (CoreException ex) {
-			messageManager.sendMessage(0, ex);
+			messageQueue.sendMessage(0, ex);
 			saveFile = null;
 		}
 		return saveFile;
@@ -358,7 +358,7 @@ public final class ConverterDataLogic {
 				if (!saved) {
 					for (int i = 0; i < minSize; i++) {
 						TargetFile targetFile = imageConverterParameters.getTargetFile(i);
-						messageManager.sendMessage(targetFile.getPathMessageId(), IStatus.ERROR,
+						messageQueue.sendMessage(targetFile.getPathMessageId(), IStatus.ERROR,
 								"No target file with file path and content present");
 					}
 
@@ -388,11 +388,11 @@ public final class ConverterDataLogic {
 		boolean result;
 
 		if (filePath.isEmpty()) {
-			messageManager.sendMessage(messageId, IStatus.WARNING, "No target file path specified");
+			messageQueue.sendMessage(messageId, IStatus.WARNING, "No target file path specified");
 			return false;
 		}
 		if (bytes == null) {
-			messageManager.sendMessage(messageId, IStatus.INFO, "File {0} not saved as there is no data for this file",
+			messageQueue.sendMessage(messageId, IStatus.INFO, "File {0} not saved as there is no data for this file",
 					filePath.toPortableString());
 			return false;
 		}
@@ -416,12 +416,12 @@ public final class ConverterDataLogic {
 			}
 
 		} catch (CoreException ex) {
-			messageManager.sendMessage(0, ex);
+			messageQueue.sendMessage(0, ex);
 			saveFile = null;
 		}
 
 		if (saveFile != null) {
-			messageManager.sendMessage(messageId, IStatus.INFO, "File {0} saved with ${1} bytes",
+			messageQueue.sendMessage(messageId, IStatus.INFO, "File {0} saved with ${1} bytes",
 					filePath.toPortableString(), HexUtility.getLongValueHexString(bytes.length));
 			result = true;
 		}
@@ -433,11 +433,11 @@ public final class ConverterDataLogic {
 			throw new IllegalArgumentException("Parameter 'filePath' must not be null.");
 		}
 		if (filePath.isEmpty()) {
-			messageManager.sendMessage(messageId, IStatus.ERROR, "No image path specified");
+			messageQueue.sendMessage(messageId, IStatus.ERROR, "No image path specified");
 			return;
 		}
 		if (imageData == null) {
-			messageManager.sendMessage(messageId, IStatus.ERROR,
+			messageQueue.sendMessage(messageId, IStatus.ERROR,
 					"Image {0} not saved as there is no data for this image", filePath.toPortableString());
 			return;
 		}
@@ -446,7 +446,7 @@ public final class ConverterDataLogic {
 		imageLoader.data = new ImageData[] { imageData };
 		int format = ImageExtensions.getImageFormat(filePath);
 		if (format == ImageExtensions.UNKNOWN_FORMAT) {
-			messageManager.sendMessage(messageId, IStatus.ERROR,
+			messageQueue.sendMessage(messageId, IStatus.ERROR,
 					"Image {0} not saved as there is the extension cannot be mapped to a supported image format",
 					filePath.toPortableString());
 			return;
@@ -467,13 +467,13 @@ public final class ConverterDataLogic {
 			}
 			success = true;
 		} catch (Exception ex) {
-			messageManager.sendMessage(messageId, IStatus.ERROR, "Image {0} not saved. {1}",
+			messageQueue.sendMessage(messageId, IStatus.ERROR, "Image {0} not saved. {1}",
 					filePath.toPortableString(), ex.getMessage());
 		}
 		// file.refreshLocal(IResource.DEPTH_ZERO, null);
 
 		if (success) {
-			messageManager.sendMessage(messageId, IStatus.INFO, "Image {0} saved", filePath.toPortableString());
+			messageQueue.sendMessage(messageId, IStatus.INFO, "Image {0} saved", filePath.toPortableString());
 		}
 	}
 
@@ -489,7 +489,7 @@ public final class ConverterDataLogic {
 			try {
 				is = file.getContents(true);
 			} catch (CoreException ex) {
-				messageManager.sendMessage(messageId, ex);
+				messageQueue.sendMessage(messageId, ex);
 				is = null;
 			}
 
@@ -499,7 +499,7 @@ public final class ConverterDataLogic {
 						imageData = new ImageData(is);
 
 					} catch (SWTException ex) {
-						messageManager.sendMessage(messageId, IStatus.ERROR,
+						messageQueue.sendMessage(messageId, IStatus.ERROR,
 								"Cannot open image file. " + ex.getMessage());
 
 					}
@@ -529,10 +529,10 @@ public final class ConverterDataLogic {
 
 				result = FileUtility.readBytes(file, FileUtility.MAX_SIZE_1MB, true);
 			} catch (CoreException ex) {
-				messageManager.sendMessage(messageId, ex);
+				messageQueue.sendMessage(messageId, ex);
 				result = null;
 			} catch (IllegalArgumentException ex) {
-				messageManager.sendMessage(messageId, IStatus.ERROR, ex.getMessage());
+				messageQueue.sendMessage(messageId, IStatus.ERROR, ex.getMessage());
 				result = null;
 			}
 
@@ -601,18 +601,18 @@ public final class ConverterDataLogic {
 		Converter converter;
 
 		if (StringUtility.isEmpty(imageConverterParameters.getConverterId())) {
-			messageManager.sendMessage(ConverterCommonParameters.MessageIds.CONVERTER_ID, IStatus.ERROR,
+			messageQueue.sendMessage(ConverterCommonParameters.MessageIds.CONVERTER_ID, IStatus.ERROR,
 					"No converter selected");
 			return false;
 		}
 		converter = imageConverterData.getConverter();
 		if (converter == null) {
-			messageManager.sendMessage(ConverterCommonParameters.MessageIds.CONVERTER_ID, IStatus.ERROR,
+			messageQueue.sendMessage(ConverterCommonParameters.MessageIds.CONVERTER_ID, IStatus.ERROR,
 					"Converter '{0}' is not registered", String.valueOf(imageConverterParameters.getConverterId()));
 			return false;
 		}
 
-		if (messageManager.containsError()) {
+		if (messageQueue.containsError()) {
 			return false;
 		}
 
@@ -621,7 +621,7 @@ public final class ConverterDataLogic {
 			try {
 				imageConverterParameters.setScript(ConverterScript.getScript(converter.getClass()));
 			} catch (CoreException ex) {
-				messageManager.sendMessage(ImageConverterParameters.MessageIds.SCRIPT, ex);
+				messageQueue.sendMessage(ImageConverterParameters.MessageIds.SCRIPT, ex);
 				return false;
 			}
 		}
@@ -636,14 +636,14 @@ public final class ConverterDataLogic {
 
 			ConverterScript.convertToFileData(converter, imageConverterData);
 		} catch (CoreException ex) {
-			messageManager.sendMessage(ConverterCommonParameters.MessageIds.CONVERTER_ID, ex);
+			messageQueue.sendMessage(ConverterCommonParameters.MessageIds.CONVERTER_ID, ex);
 			return false;
 		} catch (RuntimeException ex) {
 			String message = ex.getMessage();
 			if (message == null) {
 				message = ex.getClass().getName();
 			}
-			messageManager.sendMessage(ImageConverterParameters.MessageIds.SCRIPT, IStatus.ERROR, message);
+			messageQueue.sendMessage(ImageConverterParameters.MessageIds.SCRIPT, IStatus.ERROR, message);
 			return false;
 		}
 
@@ -670,18 +670,18 @@ public final class ConverterDataLogic {
 		filesConverterParameters = filesConverterData.getParameters();
 
 		if (filesConverterParameters.getSpacingWidth() < 0) {
-			messageManager.sendMessage(FilesConverterParameters.MessageIds.SPACING_WIDTH, IStatus.ERROR,
+			messageQueue.sendMessage(FilesConverterParameters.MessageIds.SPACING_WIDTH, IStatus.ERROR,
 					"Spacing width must not be negative. Current value is {0}",
 					String.valueOf(filesConverterParameters.getSpacingWidth()));
 		}
 
 		if (filesConverterParameters.getColumns() <= 0) {
-			messageManager.sendMessage(FilesConverterParameters.MessageIds.COLUMNS, IStatus.ERROR,
+			messageQueue.sendMessage(FilesConverterParameters.MessageIds.COLUMNS, IStatus.ERROR,
 					"Columns count must be positive. Current value is {0}",
 					String.valueOf(filesConverterParameters.getColumns()));
 		}
 		if (filesConverterParameters.getRows() <= 0) {
-			messageManager.sendMessage(FilesConverterParameters.MessageIds.ROWS, IStatus.ERROR,
+			messageQueue.sendMessage(FilesConverterParameters.MessageIds.ROWS, IStatus.ERROR,
 					"Rows count must be positive. Current value is {0}",
 					String.valueOf(filesConverterParameters.getRows()));
 		}
@@ -689,28 +689,28 @@ public final class ConverterDataLogic {
 		Converter converter;
 
 		if (StringUtility.isEmpty(filesConverterParameters.getConverterId())) {
-			messageManager.sendMessage(ConverterCommonParameters.MessageIds.CONVERTER_ID, IStatus.ERROR,
+			messageQueue.sendMessage(ConverterCommonParameters.MessageIds.CONVERTER_ID, IStatus.ERROR,
 					"No converter selected");
 			return false;
 		}
 		converter = filesConverterData.getConverter();
 		if (converter == null) {
-			messageManager.sendMessage(ConverterCommonParameters.MessageIds.CONVERTER_ID, IStatus.ERROR,
+			messageQueue.sendMessage(ConverterCommonParameters.MessageIds.CONVERTER_ID, IStatus.ERROR,
 					"Converter '{0}' is not registered", String.valueOf(filesConverterParameters.getConverterId()));
 			return false;
 		}
 
-		if (messageManager.containsError()) {
+		if (messageQueue.containsError()) {
 			return false;
 		}
 		converter.convertToImageDataSize(filesConverterData);
 		if (filesConverterData.getImageDataWidth() <= 0) {
-			messageManager.sendMessage(FilesConverterParameters.MessageIds.COLUMNS, IStatus.ERROR,
+			messageQueue.sendMessage(FilesConverterParameters.MessageIds.COLUMNS, IStatus.ERROR,
 					"Resulting image data with '{0}' is not positive",
 					String.valueOf(filesConverterData.getImageDataWidth()));
 		}
 		if (filesConverterData.getImageDataHeight() <= 0) {
-			messageManager.sendMessage(FilesConverterParameters.MessageIds.ROWS, IStatus.ERROR,
+			messageQueue.sendMessage(FilesConverterParameters.MessageIds.ROWS, IStatus.ERROR,
 					"Resulting image data height '{0}' is not positive",
 					String.valueOf(filesConverterData.getImageDataWidth()));
 		}
@@ -718,12 +718,12 @@ public final class ConverterDataLogic {
 		int MAX_PIXELS = 1000 * 1000;
 		int pixels = filesConverterData.getImageDataWidth() * filesConverterData.getImageDataHeight();
 		if (pixels > MAX_PIXELS) {
-			messageManager.sendMessage(FilesConverterParameters.MessageIds.ROWS, IStatus.ERROR,
+			messageQueue.sendMessage(FilesConverterParameters.MessageIds.ROWS, IStatus.ERROR,
 					"Resulting image would have {0} pixels and exceed the memory limit of {1} pixels",
 					String.valueOf(pixels), String.valueOf(MAX_PIXELS));
 		}
 
-		if (messageManager.containsError()) {
+		if (messageQueue.containsError()) {
 			return false;
 		}
 

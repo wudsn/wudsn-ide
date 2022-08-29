@@ -37,6 +37,7 @@ import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPart;
 
 import com.wudsn.ide.base.BasePlugin;
+import com.wudsn.ide.base.common.MessageQueue;
 import com.wudsn.ide.base.common.TextUtility;
 
 /**
@@ -85,66 +86,28 @@ public final class MessageManager {
 		}
 	}
 
-	private static final class MessageQueueEntry {
-
-		private int messageId;
-		private int severity;
-		private String message;
-		private String[] parameters;
-		private Throwable throwable;
-
-		public MessageQueueEntry(int messageId, int severity, String message, String[] parameters,
-				Throwable throwable) {
-			this.messageId = messageId;
-			this.severity = severity;
-			this.message = message;
-			this.parameters = parameters;
-			this.throwable = throwable;
-		}
-
-		public int getMessageId() {
-			return messageId;
-		}
-
-		public int getSeverity() {
-			return severity;
-		}
-
-		public String getMessage() {
-			return message;
-		}
-
-		public String[] getParameters() {
-			return parameters;
-		}
-
-		public Throwable getThrowable() {
-			return throwable;
-		}
-
-	}
-
 	private IWorkbenchPart workbenchPart;
 
 	private IStatusLineManager statusLineManager;
 
 	private List<FieldRegistryEntry> fieldRegistryEntries;
 
-	private List<MessageQueueEntry> messageQueueEntries;
-	private boolean messageQueueError;
+	private MessageQueue messageQueue;
 
 	private Color yellow;
 	private Color red;
 
-	public MessageManager(IWorkbenchPart workbenchPart) {
+	public MessageManager(MessageQueue messageQueue, IWorkbenchPart workbenchPart) {
+		if (messageQueue == null) {
+			throw new IllegalArgumentException("Parameter 'messageQueue' must not be null.");
+		}
 		if (workbenchPart == null) {
 			throw new IllegalArgumentException("Parameter 'workbenchPart' must not be null.");
 		}
+		this.messageQueue = messageQueue;
 		this.workbenchPart = workbenchPart;
 
 		fieldRegistryEntries = new ArrayList<FieldRegistryEntry>();
-		messageQueueEntries = new ArrayList<MessageQueueEntry>();
-		messageQueueError = false;
 
 		yellow = new Color(Display.getDefault(), 0, 255, 255);
 		red = new Color(Display.getDefault(), 255, 0, 0);
@@ -189,8 +152,7 @@ public final class MessageManager {
 	}
 
 	public void clearMessages() {
-		messageQueueEntries.clear();
-		messageQueueError = false;
+		messageQueue.clear();
 
 		for (FieldRegistryEntry fieldRegistryEntry : fieldRegistryEntries) {
 
@@ -222,9 +184,7 @@ public final class MessageManager {
 		if (message == null) {
 			throw new IllegalArgumentException("Parameter 'message' must not be null.");
 		}
-		MessageQueueEntry messageQueueEntry;
-		messageQueueEntry = new MessageQueueEntry(messageId, severity, message, parameters, null);
-		addMessageQueueEntry(messageQueueEntry);
+		messageQueue.sendMessage(messageId, severity, message, parameters);
 	}
 
 	/**
@@ -239,25 +199,7 @@ public final class MessageManager {
 		if (coreException == null) {
 			throw new IllegalArgumentException("Parameter 'coreException' must not be null.");
 		}
-		MessageQueueEntry messageQueueEntry;
-		messageQueueEntry = new MessageQueueEntry(messageId, coreException.getStatus().getSeverity(),
-				coreException.getStatus().getMessage(), null, coreException);
-		addMessageQueueEntry(messageQueueEntry);
-
-	}
-
-	private void addMessageQueueEntry(MessageQueueEntry messageQueueEntry) {
-		if (messageQueueEntry == null) {
-			throw new IllegalArgumentException("Parameter 'messageQueueEntry' must not be null.");
-		}
-		messageQueueEntries.add(messageQueueEntry);
-		if (messageQueueEntry.getSeverity() == IStatus.ERROR) {
-			messageQueueError = true;
-		}
-	}
-
-	public boolean containsError() {
-		return messageQueueError;
+		messageQueue.sendMessage(messageId, coreException);
 	}
 
 	public void displayMessages() {
@@ -271,7 +213,7 @@ public final class MessageManager {
 				.getImage();
 		Image errorImage = fieldDecorationRegistry.getFieldDecoration(FieldDecorationRegistry.DEC_ERROR).getImage();
 
-		for (MessageQueueEntry messageQueueEntry : messageQueueEntries) {
+		for (MessageQueue.Entry messageQueueEntry : messageQueue.getEntries()) {
 
 			String messageText = TextUtility.format(messageQueueEntry.getMessage(), messageQueueEntry.getParameters());
 

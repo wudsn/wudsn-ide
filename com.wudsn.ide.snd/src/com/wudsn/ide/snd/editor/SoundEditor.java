@@ -54,6 +54,7 @@ import org.eclipse.ui.part.EditorPart;
 
 import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.HexUtility;
+import com.wudsn.ide.base.common.MessageQueue;
 import com.wudsn.ide.base.common.NumberUtility;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.common.TextUtility;
@@ -150,6 +151,7 @@ public final class SoundEditor extends EditorPart implements Application, SoundP
 	// ID of the editor in the plugin manifest.
 	public static final String ID = "com.wudsn.ide.snd.editor.SoundEditor"; //$NON-NLS-1$
 
+	private MessageQueue messageQueue;
 	private MessageManager messageManager;
 	private SoundPlayer player;
 
@@ -184,7 +186,8 @@ public final class SoundEditor extends EditorPart implements Application, SoundP
 
 	public SoundEditor() {
 		super();
-		messageManager = new MessageManager(this);
+		messageQueue = new MessageQueue();
+		messageManager = new MessageManager(messageQueue, this);
 	}
 
 	// @Override
