@@ -79,7 +79,7 @@ final class CompilerSymbolLabelProvider {
 			case CompilerSymbolType.EQUATE_DEFINITION:
 				result = equateDefintionImage;
 				break;
-			case com.wudsn.ide.lng.compiler.CompilerSymbolType.LABEL_DEFINITION:
+			case CompilerSymbolType.LABEL_DEFINITION:
 				result = labelDefinitionImage;
 				break;
 
