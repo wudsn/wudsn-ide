@@ -26,6 +26,7 @@ import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.Token;
 
 import com.wudsn.ide.lng.preferences.LanguagePreferences;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants;
 import com.wudsn.ide.lng.preferences.TextAttributeConverter;
 
 /**
@@ -37,7 +38,6 @@ import com.wudsn.ide.lng.preferences.TextAttributeConverter;
 final class LanguageRuleBasedScanner extends RuleBasedScanner {
 
 	// Key for preference store
-	private LanguagePreferences languagePreferences;
 	private String preferencesKey;
 
 	// Default Token for the text attributes
@@ -47,21 +47,22 @@ final class LanguageRuleBasedScanner extends RuleBasedScanner {
 	 * Creates a new instance. Called by {@link LanguageSourceViewerConfiguration}.
 	 * 
 	 * @param languagePreferences The language preferences, not <code>null</code>.
-	 * @param preferencesKey      The preference key to listen to for text attribute
-	 *                            changes, not <code>null</code>.
+	 * @param textAttributeName   The text attribute name to listen to for text
+	 *                            attribute changes, not <code>null</code>. See
+	 *                            {@link LanguagePreferencesConstants}
 	 */
-	LanguageRuleBasedScanner(LanguagePreferences languagePreferences, String preferencesKey) {
+	LanguageRuleBasedScanner(LanguagePreferences languagePreferences, String textAttributeName) {
 
 		if (languagePreferences == null) {
 			throw new IllegalArgumentException("Parameter 'language' must not be null.");
 		}
-		if (preferencesKey == null) {
-			throw new IllegalArgumentException("Parameter 'preferencesKey' must not be null.");
+		if (textAttributeName == null) {
+			throw new IllegalArgumentException("Parameter 'textAttributeName' must not be null.");
 		}
-		this.languagePreferences = languagePreferences;
-		this.preferencesKey = preferencesKey;
+		this.preferencesKey = LanguagePreferencesConstants.getPreferencesKey(languagePreferences.getLanguage(),
+				textAttributeName);
 
-		defaultToken = new Token(languagePreferences.getEditorTextAttribute(preferencesKey));
+		defaultToken = new Token(languagePreferences.getEditorTextAttribute(textAttributeName));
 
 		super.setDefaultReturnToken(defaultToken);
 	}
@@ -91,10 +92,9 @@ final class LanguageRuleBasedScanner extends RuleBasedScanner {
 			throw new IllegalArgumentException("Parameter 'changedPropertyNames' must not be null.");
 		}
 		boolean refresh = false;
-		if (preferences.getLanguage().equals(languagePreferences.getLanguage())
-				&& changedPropertyNames.contains(preferencesKey)) {
+		if (changedPropertyNames.contains(preferencesKey)) {
 			TextAttributeConverter.dispose((TextAttribute) defaultToken.getData());
-			defaultToken.setData(preferences.getEditorTextAttribute(preferencesKey));
+			defaultToken.setData(preferences.getLanguagesPreferences().getEditorTextAttribute(preferencesKey));
 			refresh = true;
 		}
 		return refresh;

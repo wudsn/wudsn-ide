@@ -40,7 +40,6 @@ public final class LanguagePreferences {
 	 */
 	private LanguagesPreferences languagesPreferences;
 	private Language language;
-	private String languagePrefix;
 
 	/**
 	 * Created by {@link AbstractIDEPlugin} only.
@@ -56,13 +55,16 @@ public final class LanguagePreferences {
 		}
 		this.languagesPreferences = languagesPreferences;
 		this.language = language;
-		this.languagePrefix=language.name().toLowerCase()+".";
+	}
+
+	public LanguagesPreferences getLanguagesPreferences() {
+		return languagesPreferences;
 	}
 
 	public Language getLanguage() {
 		return language;
 	}
-	
+
 	/**
 	 * Gets the default case content assist.
 	 * 
@@ -111,14 +113,16 @@ public final class LanguagePreferences {
 	 * the default value <code>false</code> if there is no preference with the given
 	 * name, or if the current value cannot be treated as a boolean.
 	 * 
-	 * @param name The name of the preference, not <code>null</code>.
+	 * @param preferencesKeySuffix The he preferences key suffix of the preference,
+	 *                             not <code>null</code>.
 	 * @return The preference value.
 	 */
-	boolean getBoolean(String name) {
-		if (name == null) {
-			throw new IllegalArgumentException("Parameter 'name' must not be null.");
+	boolean getBoolean(String preferencesKeySuffix) {
+		if (preferencesKeySuffix == null) {
+			throw new IllegalArgumentException("Parameter 'preferencesKeySuffix' must not be null.");
 		}
-		return languagesPreferences.getBoolean(languagePrefix+ name);
+		return languagesPreferences
+				.getBoolean(LanguagePreferencesConstants.getPreferencesKey(language, preferencesKeySuffix));
 	}
 
 	/**
@@ -127,29 +131,32 @@ public final class LanguagePreferences {
 	 * there is no preference with the given name, or if the current value cannot be
 	 * treated as a string.
 	 * 
-	 * @param name The name of the preference, not <code>null</code>.
+	 * @param preferencesKeySuffix The preferences key suffix of the preference, not
+	 *                             <code>null</code>.
 	 * @return The preference value, may be empty, not <code>null</code>.
 	 */
-	String getString(String name) {
-		if (name == null) {
-			throw new IllegalArgumentException("Parameter 'name' must not be null.");
+	String getString(String preferencesKeySuffix) {
+		if (preferencesKeySuffix == null) {
+			throw new IllegalArgumentException("Parameter 'preferencesKeySuffix' must not be null.");
 		}
-		return languagesPreferences.getString(languagePrefix + name);
+		return languagesPreferences
+				.getString(LanguagePreferencesConstants.getPreferencesKey(language, preferencesKeySuffix));
 	}
 
 	/**
 	 * Gets the text attribute for a token type.
 	 * 
-	 * @param name The name of the preferences for the token type, see
-	 *             {@link LanguagePreferencesConstants}.
+	 * @param textAttributeName The suffix of the preferences for the token type,
+	 *                          see {@link LanguagePreferencesConstants}.
 	 * 
 	 * @return The text attribute, not <code>null</code>.
 	 */
-	public TextAttribute getEditorTextAttribute(String name) {
-		if (name == null) {
-			throw new IllegalArgumentException("Parameter 'name' must not be null.");
+	public TextAttribute getEditorTextAttribute(String textAttributeName) {
+		if (textAttributeName == null) {
+			throw new IllegalArgumentException("Parameter 'textAttributeName' must not be null.");
 		}
-		return languagesPreferences.getEditorTextAttribute(languagePrefix+ name);
+		return languagesPreferences
+				.getEditorTextAttribute(LanguagePreferencesConstants.getPreferencesKey(language, textAttributeName));
 
 	}
 

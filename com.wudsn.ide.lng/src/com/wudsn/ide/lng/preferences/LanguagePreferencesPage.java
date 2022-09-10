@@ -58,8 +58,8 @@ import org.eclipse.ui.model.WorkbenchViewerComparator;
 
 import com.wudsn.ide.base.common.ProcessWithLogs;
 import com.wudsn.ide.base.gui.SWTFactory;
-import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Language;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
@@ -104,7 +104,7 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 	 * The language.
 	 */
 	private Language language;
-	
+
 	/**
 	 * The owning plugin.
 	 */
@@ -120,11 +120,6 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 	 * The id of the compiler to be used as default.
 	 */
 	private String activeCompilerId;
-
-	/**
-	 * The list of all text attributes and the corresponding preferences keys.
-	 */
-	private String[][] textAttributeListItemKeys;
 
 	/**
 	 * List for text attribute items.
@@ -163,37 +158,6 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		plugin = LanguagePlugin.getInstance();
 		setPreferenceStore(plugin.getPreferenceStore());
 		changedPropertyNames = new TreeSet<String>();
-		
-		textAttributeListItemKeys = new String[][] {
-				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_COMMENT_NAME,
-						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT },
-				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_NUMBER_NAME,
-						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_NUMBER },
-				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_STRING_NAME,
-						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_STRING },
-				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_DIRECTIVE,
-						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_DIRECTVE },
-				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_OPCODE_LEGAL_NAME,
-						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL },
-				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_OPCODE_ILLEGAL_NAME,
-						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL },
-				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_OPCODE_PSEUDO_NAME,
-						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO },
-
-				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE,
-						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE },
-				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_LABEL,
-						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LABEL },
-				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION,
-						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION },
-				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION,
-						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION },
-				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION,
-						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION },
-				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION,
-						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION },
-				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION,
-						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION } };
 	}
 
 	@Override
@@ -395,15 +359,11 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 				.getTextAttributeDefinitions(language);
 		textAttributeListItems = new ArrayList<TextAttributeListItem>(textAttributeDefinitions.size());
 
-		for (TextAttributeDefinition textAttributeDefinition: textAttributeDefinitions) {
-			String data;
-			TextAttribute textAttribute;
-			TextAttributeListItem item;
+		for (TextAttributeDefinition textAttributeDefinition : textAttributeDefinitions) {
+			String data = getPreferenceStore().getString(textAttributeDefinition.getPreferencesKey());
+			TextAttribute textAttribute = TextAttributeConverter.fromString(data);
 
-			data = getPreferenceStore().getString(textAttributeDefinition.getPreferencesKey());
-			textAttribute = TextAttributeConverter.fromString(data);
-
-			item = new TextAttributeListItem(textAttributeDefinition);
+			TextAttributeListItem item = new TextAttributeListItem(textAttributeDefinition);
 			item.setTextAttribute(textAttribute);
 			textAttributeListItems.add(item);
 		}
@@ -510,7 +470,10 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 	public boolean performOk() {
 		if (super.performOk()) {
 			saveChanges();
+			plugin.log("Language preferences changed for language '{0}': {1}",
+					new Object[] { language, String.join(",", changedPropertyNames) });
 			plugin.firePreferencesChangeEvent(language, changedPropertyNames);
+
 			return true;
 		}
 		return false;
@@ -527,8 +490,9 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		super.performDefaults();
 
 		IPreferenceStore preferencesStore = getPreferenceStore();
-		for (int i = 0, n = textAttributeListItemKeys.length; i < n; i++) {
-			String key = textAttributeListItemKeys[i][1];
+		for (TextAttributeListItem listItem : textAttributeListItems) {
+
+			String key = listItem.getDefinition().getPreferencesKey();
 			preferencesStore.setValue(key, preferencesStore.getDefaultString(key));
 			addChangedProperty(key);
 		}

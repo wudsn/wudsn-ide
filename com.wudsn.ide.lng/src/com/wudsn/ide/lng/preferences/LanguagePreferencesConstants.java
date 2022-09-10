@@ -27,7 +27,8 @@ import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.Texts;
 
 /**
- * Constants for preferences.
+ * Constants for preferences. The string constants are preferences key suffix
+ * that are not used directly but prefixes with the language.
  * 
  * @author Peter Dell
  */
@@ -122,6 +123,18 @@ public final class LanguagePreferencesConstants {
 	static final String EDITOR_COMPILE_COMMAND_POSITIONING_MODE = "editor.compile.command.positioning.mode"; //$NON-NLS-1$
 
 	/**
+	 * Create the preferences key for a property of a given language.
+	 * 
+	 * @param language             The language, not <code>null</code>
+	 * @param preferencesKeySuffix The suffix as defined by the constants of this
+	 *                             class, not empty, not <code>null</code>
+	 * @return
+	 */
+	public static String getPreferencesKey(Language language, String preferencesKeySuffix) {
+		return language.name().toLowerCase() + "." + preferencesKeySuffix;
+	}
+
+	/**
 	 * Get list of all preferences keys that depend on the global JFact text font
 	 * setting.
 	 */
@@ -133,40 +146,45 @@ public final class LanguagePreferencesConstants {
 		List<TextAttributeDefinition> result = new ArrayList<TextAttributeDefinition>();
 
 		// Comments and literals
-		result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_COMMENT,
+		result.add(new TextAttributeDefinition(getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_COMMENT),
 				Texts.PREFERENCES_TEXT_ATTRIBUTE_COMMENT_NAME));
-		result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_NUMBER,
+		result.add(new TextAttributeDefinition(getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_NUMBER),
 				Texts.PREFERENCES_TEXT_ATTRIBUTE_NUMBER_NAME));
-		result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_STRING,
+		result.add(new TextAttributeDefinition(getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_STRING),
 				Texts.PREFERENCES_TEXT_ATTRIBUTE_STRING_NAME));
 
 		switch (language) {
 		case ASM: {
 
 			// Built-in
-			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_DIRECTVE,
+			result.add(new TextAttributeDefinition(getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_DIRECTVE),
 					Texts.PREFERENCES_TEXT_ATTRIBUTE_DIRECTIVE));
-			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL,
+			result.add(new TextAttributeDefinition(getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL),
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_OPCODE_ILLEGAL_NAME));
+			result.add(new TextAttributeDefinition(getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL),
 					Texts.PREFERENCES_TEXT_ATTRIBUTE_OPCODE_LEGAL_NAME));
-			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL,
-					Texts.PREFERENCES_TEXT_ATTRIBUTE_OPCODE_LEGAL_NAME));
-			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO,
+			result.add(new TextAttributeDefinition(getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO),
 					Texts.PREFERENCES_TEXT_ATTRIBUTE_OPCODE_PSEUDO_NAME));
 
 			// Identifiers
-			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION,
+			result.add(new TextAttributeDefinition(
+					getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION),
 					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION));
-			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE,
+			result.add(new TextAttributeDefinition(getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE),
 					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE));
-			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LABEL,
+			result.add(new TextAttributeDefinition(getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LABEL),
 					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_LABEL));
-			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION,
+			result.add(new TextAttributeDefinition(
+					getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION),
 					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION));
-			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION,
+			result.add(new TextAttributeDefinition(
+					getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION),
 					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION));
-			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION,
+			result.add(new TextAttributeDefinition(
+					getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION),
 					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION));
-			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION,
+			result.add(new TextAttributeDefinition(
+					getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION),
 					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION));
 			break;
 
@@ -175,15 +193,18 @@ public final class LanguagePreferencesConstants {
 		case PAS: {
 
 			// Built-in
-			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_DIRECTVE,
+			result.add(new TextAttributeDefinition(getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_DIRECTVE),
 					Texts.PREFERENCES_TEXT_ATTRIBUTE_DIRECTIVE));
 
 			// Identifiers
-			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION,
+			result.add(new TextAttributeDefinition(
+					getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION),
 					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION));
-			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION,
+			result.add(new TextAttributeDefinition(
+					getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION),
 					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION));
-			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION,
+			result.add(new TextAttributeDefinition(
+					getPreferencesKey(language, EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION),
 					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION));
 			break;
 

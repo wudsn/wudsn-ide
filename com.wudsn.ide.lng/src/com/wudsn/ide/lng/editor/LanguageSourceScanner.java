@@ -220,7 +220,8 @@ final class LanguageSourceScanner extends RuleBasedScanner {
 					}
 				}
 			}
-			System.out.println("" + this + ":" + state.identifierWordTokens.size() + " identifier word tokens set: "+ state.identifierWordTokens); // TODO
+			System.out.println("" + this + ":" + state.identifierWordTokens.size() + " identifier word tokens set: "
+					+ state.identifierWordTokens); // TODO
 		}
 
 		/*
@@ -431,11 +432,11 @@ final class LanguageSourceScanner extends RuleBasedScanner {
 		if (textAttributeName == null) {
 			throw new IllegalArgumentException("Parameter 'textAttributeName' must not be null.");
 		}
-		LanguagePreferences preferences;
-		Token token;
-		preferences = editor.getLanguagePreferences();
-		token = new Token(preferences.getEditorTextAttribute(textAttributeName));
-		tokens.put(textAttributeName, token);
+		LanguagePreferences preferences = editor.getLanguagePreferences();
+		String preferencesKey = LanguagePreferencesConstants.getPreferencesKey(preferences.getLanguage(),
+				textAttributeName);
+		Token token = new Token(preferences.getEditorTextAttribute(textAttributeName));
+		tokens.put(preferencesKey, token);
 		return token;
 	}
 
@@ -498,7 +499,7 @@ final class LanguageSourceScanner extends RuleBasedScanner {
 			Token token = tokens.get(propertyName);
 			if (token != null) {
 				TextAttributeConverter.dispose((TextAttribute) token.getData());
-				token.setData(preferences.getEditorTextAttribute(propertyName));
+				token.setData(preferences.getLanguagesPreferences().getEditorTextAttribute(propertyName));
 				refresh = true;
 
 			} else if (LanguagePreferencesConstants.isCompilerTargetName(propertyName)) {
