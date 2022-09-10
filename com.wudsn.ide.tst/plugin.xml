@@ -10,7 +10,7 @@
             id="com.wudsn.ide.tst.editors.ATASCIIEditor"
             name="%com.wudsn.ide.tst.editors.ATASCIIEditor.name">
          <contentTypeBinding
-               contentTypeId="com.wudsn.ide.tst.editors.ATASCIIFile">
+               contentTypeId="com.wudsn.ide.tst.ATASCIIFile">
          </contentTypeBinding>
       </editor>
    </extension>
