@@ -42,6 +42,7 @@ import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguagePlugin;
+import com.wudsn.ide.lng.LanguageUtility;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
@@ -224,9 +225,9 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 			List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
 
 			List<ITopic> compilerTopics = createCompilersTopics(compilerDefinitions);
-			topics.add(
-					createTopic("", TextUtility.format(Texts.TOC_COMPILERS_TOPIC_LABEL, EnumUtility.getText(language)),
-							"", createTopicsArray(compilerTopics)));
+			topics.add(createTopic("",
+					TextUtility.format(Texts.TOC_COMPILERS_TOPIC_LABEL, LanguageUtility.getText(language)), "",
+					createTopicsArray(compilerTopics)));
 		}
 		return topics;
 	}

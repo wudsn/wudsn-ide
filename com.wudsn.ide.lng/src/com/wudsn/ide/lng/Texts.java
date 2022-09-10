@@ -21,22 +21,6 @@ package com.wudsn.ide.lng;
 
 import org.eclipse.osgi.util.NLS;
 
-// TODO: Make thse constants dynamic per language / compiler vs. assembler
-//COMPILER_HYPERLINK_DETECTOR_OPEN_SOURCE_WITH_LANGUAGE_EDITOR=Öffnen mit {0} Editor
-//LANGUAGE_BREAKPOINT_TOGGLE_TYPE_MENU_TEXT={0} Breakpoints
-//
-//MESSAGE_E100=Path to '{0}' {1} executable is not set in the '{2}' preferences.
-//MESSAGE_E101=The {0} '{1}' does not specify default parameters.
-//MESSAGE_E102=The {1} '{1}' does not specify a help file path.
-//MESSAGE_E103=Path to '{0}' {1} executable in the preferences points to non-existing file '{1}'.
-//MESSAGE_E104=Output file extension must be set in the preferences of {0} '{1}' or via the annotation '{2}'.
-//MESSAGE_E105=Cannot execute {0} process '{1}' in working directory '{2}'. System error: {3}
-//MESSAGE_E127={0} process ended with return code {1}. Check the error messages and the console log.
-//MESSAGE_E130=Help for the '{0}' {1} cannot be displayed because the path to the compiler executable is not set in the preferences.
-//MESSAGE_E131=Help for the '{0}' {1} cannot be displayed because no help file was found in the paths '{2}' relative to the compiler executable path '{3}'.
-//
-// TODO then adapt the German texts
-
 /**
  * Class which holds the localized text constants.
  * 

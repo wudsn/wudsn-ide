@@ -54,6 +54,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import com.wudsn.ide.base.common.Profiler;
 import com.wudsn.ide.base.common.ResourceBundleUtility;
 import com.wudsn.ide.base.hardware.Hardware;
+import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.LanguageProperties;
 import com.wudsn.ide.lng.LanguageProperties.InvalidLanguagePropertyException;
@@ -153,6 +154,15 @@ public abstract class LanguageEditor extends TextEditor {
 		}
 		return plugin;
 	}
+	
+	/**
+	 * Gets the language.
+	 * 
+	 * @return The language, not <code>null</code>.
+	 */
+	public final Language getLanguage() {
+		return getCompilerDefinition().getLanguage();
+	}
 
 	/**
 	 * Gets the language preferences.
@@ -160,7 +170,7 @@ public abstract class LanguageEditor extends TextEditor {
 	 * @return The language preferences, not <code>null</code>.
 	 */
 	public final LanguagePreferences getLanguagePreferences() {
-		return plugin.getLanguagePreferences(getCompilerDefinition().getLanguage());
+		return plugin.getLanguagePreferences(getLanguage());
 	}
 
 	/**

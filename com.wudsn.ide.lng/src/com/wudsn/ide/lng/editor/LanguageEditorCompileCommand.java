@@ -247,22 +247,22 @@ final class LanguageEditorCompileCommand {
 		}
 
 		// Get and check path to compiler executable.
-		String compilerDefinitionText = LanguageUtility.getCompilerTextLower(compilerDefinition.getLanguage());
 		String compilerPreferencesText = LanguageUtility.getCompilerPreferencesText(compilerDefinition.getLanguage());
 
 		String compilerExecutablePath = languageEditor.getCompilerPreferences().getCompilerExecutablePathOrDefault();
 		if (StringUtility.isEmpty(compilerExecutablePath)) {
 			// ERROR: Path to {0} '{1}' executable is not set in the '{2}' preferences.
-			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E100, compilerDefinitionText,
-					compilerDefinition.getName(), compilerPreferencesText);
+			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E100,
+					compilerDefinition.getTextLower(), compilerDefinition.getName(), compilerPreferencesText);
 			return false;
 		}
 		File compilerExecutableFile = new File(compilerExecutablePath);
 		if (!compilerExecutableFile.exists()) {
 			// ERROR: Path to {0} '{1}' executable in the '{2}' preferences points to
 			// non-existing file '{3}'.
-			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E103, compilerDefinitionText,
-					compilerDefinition.getName(), compilerPreferencesText, compilerExecutablePath);
+			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E103,
+					compilerDefinition.getTextLower(), compilerDefinition.getName(), compilerPreferencesText,
+					compilerExecutablePath);
 			return false;
 		}
 
@@ -281,10 +281,9 @@ final class LanguageEditorCompileCommand {
 		compilerParameters = compilerParameters.trim();
 		String compilerParameterArray[] = compilerParameters.split(" ");
 		if (compilerParameterArray.length == 0) {
-			// ERROR: The {0} '{1}' does not specify default
-			// parameters.
-			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E101, compilerDefinitionText,
-					compilerDefinition.getId());
+			// ERROR: The {0} '{1}' does not specify default parameters.
+			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E101,
+					compilerDefinition.getTextLower(), compilerDefinition.getName());
 			return false;
 		}
 
@@ -322,11 +321,11 @@ final class LanguageEditorCompileCommand {
 		try {
 			compilerProcess.exec(System.out, System.err, true);
 		} catch (IOException ex) {
-			// ERROR: Cannot execute compiler process '{0}' in working directory
-			// '{1}'. System error: {2}
+			// ERROR: Cannot execute {0} process '{1}' in working directory '{2}'. System
+			// error: {3}
 			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E105,
-					compilerProcess.getCommandArrayString(), compilerProcess.getWorkingDirectory().getPath(),
-					ex.getMessage());
+					compilerDefinition.getTextLower(), compilerProcess.getCommandArrayString(),
+					compilerProcess.getWorkingDirectory().getPath(), ex.getMessage());
 		}
 
 		// Refresh the output and the symbols file resource.
@@ -402,9 +401,10 @@ final class LanguageEditorCompileCommand {
 		// value is not already contained in the error messages.
 		boolean errorFound = parseLogs(languageEditor, files, compilerProcess);
 		if (!compilerSuccess && !errorFound) {
-			// ERROR: Compiler process ended with error code {0}. Check the
-			// error messages and the console log.
+			// ERROR: {0} process ended with return code {1}. Check the error messages and
+			// the console log.
 			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E127,
+					compilerDefinition.getTextLower(),
 					NumberUtility.getLongValueDecimalString(compilerProcess.getExitValue()));
 		}
 

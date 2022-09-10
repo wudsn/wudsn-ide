@@ -49,6 +49,7 @@ import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.base.hardware.HardwareUtility;
 import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguagePlugin;
+import com.wudsn.ide.lng.LanguageUtility;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.TargetUtility;
 import com.wudsn.ide.lng.Texts;
@@ -689,7 +690,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		writer.beginTable();
 		writer.writeTableRow(Texts.TOC_TARGET_NAME_LABEL, EnumUtility.getText(target));
 		Language language = TargetUtility.getLanguage(target);
-		writer.writeTableRow(Texts.TOC_TARGET_LANGUAGE_LABEL, EnumUtility.getText(language));
+		writer.writeTableRow(Texts.TOC_TARGET_LANGUAGE_LABEL, LanguageUtility.getText(language));
 		writer.end();
 
 		writer.begin("br", null);

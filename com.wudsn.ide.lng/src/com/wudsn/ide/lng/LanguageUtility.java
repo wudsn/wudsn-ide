@@ -18,6 +18,8 @@
  */
 package com.wudsn.ide.lng;
 
+import com.wudsn.ide.base.common.EnumUtility;
+
 /**
  * Utility class for languages
  * 
@@ -32,17 +34,28 @@ public final class LanguageUtility {
 	 */
 	private LanguageUtility() {
 	}
+	
+	/**
+	 * Gets the text for a language.
+	 * 
+	 * @param language The language, not <code>null</code>.
+	 * @return The text, title case, not empty and not <code>null</code>.
+	 */
+	public static String getText(Language language) {
+		return EnumUtility.getText(language);
+	}
 
+	
 	/**
 	 * Gets the text for type of compilers for a language.
 	 * 
 	 * @param language The language, not <code>null</code>.
 	 * @return The text, not empty and not <code>null</code>.
 	 */
-	public static String getCompilerTextLower(Language language) {
+	public static String getCompilerTextLower(Language language) { 
 		switch (language) {
 		case ASM:
-			return "assembler";
+			return "assembler"; // TODO: Have translation, so lower/upper is correct in German
 
 		case PAS:
 			return "compiler";

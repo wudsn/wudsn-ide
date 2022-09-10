@@ -35,10 +35,12 @@ import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IWorkbenchPage;
 
+import com.wudsn.ide.base.common.EnumUtility;
 import com.wudsn.ide.base.common.NumberUtility;
 import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.gfx.editor.GraphicsConversionEditor;
 import com.wudsn.ide.hex.HexEditor;
+import com.wudsn.ide.lng.LanguageUtility;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceFile;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
@@ -206,7 +208,9 @@ public final class LanguageHyperlinkDetector extends AbstractHyperlinkDetector {
 			case CompilerSourceParserFileReferenceType.SOURCE:
 				hyperlinks.add(new LanguageHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri,
 						languageEditor.getClass().getName(), 0, TextUtility
-								.format(Texts.COMPILER_HYPERLINK_DETECTOR_OPEN_SOURCE_WITH_LANGUAGE_EDITOR, "TODO"))); // TODO
+								// INFO: Open with {0} Editor
+								.format(Texts.COMPILER_HYPERLINK_DETECTOR_OPEN_SOURCE_WITH_LANGUAGE_EDITOR,
+										LanguageUtility.getText(languageEditor.getLanguage()))));
 				break;
 			case CompilerSourceParserFileReferenceType.BINARY:
 				hyperlinks.add(new LanguageHyperlink(linkRegion, workbenchPage, absoluteFilePath, uri, HexEditor.ID, 0,

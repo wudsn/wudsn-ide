@@ -19,7 +19,7 @@
 package com.wudsn.ide.lng;
 
 /**
- * Enum for the hardware platforms.
+ * Enum for the language.
  * 
  * @author Peter Dell
  * 

@@ -28,7 +28,10 @@ import org.eclipse.debug.ui.actions.IToggleBreakpointsTargetFactory;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchPart;
 
+import com.wudsn.ide.base.common.EnumUtility;
 import com.wudsn.ide.base.common.TextUtility;
+import com.wudsn.ide.lng.Language;
+import com.wudsn.ide.lng.LanguageUtility;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.editor.LanguageEditor;
 
@@ -41,12 +44,12 @@ import com.wudsn.ide.lng.editor.LanguageEditor;
  */
 public final class LanguageBreakpointAdapterFactory implements IToggleBreakpointsTargetFactory {
 
-	private String TARGET_ID = LanguageBreakpointsTarget.class.getName();
+	private String TARGET_ID_PREFIX = LanguageBreakpointsTarget.class.getName() + ".";
 	private Set<String> defaultSet;
 
 	public LanguageBreakpointAdapterFactory() {
 		defaultSet = new HashSet<String>();
-		defaultSet.add(TARGET_ID);
+		defaultSet.add(TARGET_ID_PREFIX);
 	}
 
 	@Override
@@ -60,14 +63,15 @@ public final class LanguageBreakpointAdapterFactory implements IToggleBreakpoint
 	@Override
 	public String getDefaultToggleTarget(IWorkbenchPart part, ISelection selection) {
 		if (part instanceof LanguageEditor) {
-			return TARGET_ID;
+			LanguageEditor languageEditor = (LanguageEditor) part;
+			return TARGET_ID_PREFIX + languageEditor.getLanguage().name();
 		}
 		return null;
 	}
 
 	@Override
 	public IToggleBreakpointsTarget createToggleTarget(String targetID) {
-		if (TARGET_ID.equals(targetID)) {
+		if (targetID.startsWith(TARGET_ID_PREFIX)) {
 			return new LanguageBreakpointsTarget();
 		}
 		return null;
@@ -75,12 +79,15 @@ public final class LanguageBreakpointAdapterFactory implements IToggleBreakpoint
 
 	@Override
 	public String getToggleTargetName(String targetID) {
-		return TextUtility.format( Texts.LANGUAGE_BREAKPOINT_TOGGLE_TYPE_MENU_TEXT, "TODO: 2121");// TODO
+		String languageName = targetID.substring(TARGET_ID_PREFIX.length());
+		Language language = Language.valueOf(languageName);
+		// INFO: {0} Breakpoints
+		return TextUtility.format(Texts.LANGUAGE_BREAKPOINT_TOGGLE_TYPE_MENU_TEXT, LanguageUtility.getText(language));
 	}
 
 	@Override
 	public String getToggleTargetDescription(String targetID) {
-		return TARGET_ID;
+		return targetID;
 	}
 
 }

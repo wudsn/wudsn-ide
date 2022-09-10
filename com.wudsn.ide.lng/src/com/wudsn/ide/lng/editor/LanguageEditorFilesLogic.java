@@ -38,6 +38,7 @@ import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.LanguageProperties;
+import com.wudsn.ide.lng.LanguageUtility;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.LanguageProperties.LanguageProperty;
 import com.wudsn.ide.lng.LanguageProperties.InvalidLanguagePropertyException;
@@ -300,10 +301,11 @@ public final class LanguageEditorFilesLogic {
 		}
 		CompilerDefinition compilerDefinition = languageEditor.getCompilerDefinition();
 		if (StringUtility.isEmpty(files.outputFileExtension)) {
-			// ERROR: Output file extension must be set in the preferences of
-			// compiler '{0}' or via the annotation '{1}'.
+			// ERROR: Output file extension must be set in the preferences of {0} '{1}' or
+			// via the annotation '{2}'.
 			createMainSourceFileMessage(files, files.outputFileExtensionProperty, IMarker.SEVERITY_ERROR,
-					Texts.MESSAGE_E104, compilerDefinition.getName(), LanguageProperties.OUTPUT_FILE_EXTENSION);
+					Texts.MESSAGE_E104, compilerDefinition.getTextLower(), compilerDefinition.getName(),
+					LanguageProperties.OUTPUT_FILE_EXTENSION);
 
 			return false;
 		}

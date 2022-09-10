@@ -153,6 +153,15 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	}
 
 	/**
+	 * Gets the text for type of compilers for a language.
+	 * 
+	 * @return he text, not empty and not <code>null</code>.
+	 */
+	public final String getTextLower() {
+		return LanguageUtility.getCompilerTextLower(getLanguage());
+	}
+
+	/**
 	 * Sets the id of the compiler. Called by {@link CompilerRegistry} only.
 	 * 
 	 * @param id The id of the compiler, not empty and not <code>null</code>.
@@ -302,18 +311,17 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 		if (compilerExecutablePath == null) {
 			throw new IllegalArgumentException("Parameter 'compilerExecutablePath' must not be null.");
 		}
-		String compilerText = LanguageUtility.getCompilerTextLower(language);
 		if (!hasHelpDocuments()) {
 			// INFO: The {0} '{1}' does not specify help documents.
 			throw new CoreException(new Status(IStatus.INFO, LanguagePlugin.ID,
-					TextUtility.format(Texts.MESSAGE_E102, compilerText, name)));
+					TextUtility.format(Texts.MESSAGE_E102, getTextLower(), getName())));
 		}
 		String compilerPreferencesText = LanguageUtility.getCompilerPreferencesText(language);
 		if (StringUtility.isEmpty(compilerExecutablePath)) {
 			// ERROR: Help for the '{0}' {1} cannot be displayed because the path to the
 			// compiler executable is not set in the {2} preferences.
 			throw new CoreException(new Status(IStatus.ERROR, LanguagePlugin.ID,
-					TextUtility.format(Texts.MESSAGE_E130, name, compilerText, compilerPreferencesText)));
+					TextUtility.format(Texts.MESSAGE_E130, getTextLower(), getName(), compilerPreferencesText)));
 		}
 
 		return CompilerHelp.getInstalledHelpDocuments(getHelpDocuments(), compilerExecutablePath);
@@ -372,10 +380,10 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 		// No local file specified or found and no URIs found.
 		if (result == null) {
 
-			// ERROR: Help for the '{0}' {1} cannot be displayed because no help file was
+			// ERROR: Help for the {0} '{1}' cannot be displayed because no help file was
 			// found in the paths relative to the executable path '{2}'.
-			throw new CoreException(new Status(IStatus.ERROR, LanguagePlugin.ID, TextUtility.format(Texts.MESSAGE_E131,
-					name, LanguageUtility.getCompilerTextLower(language), compilerExecutablePath)));
+			throw new CoreException(new Status(IStatus.ERROR, LanguagePlugin.ID,
+					TextUtility.format(Texts.MESSAGE_E131, getTextLower(), getName(), compilerExecutablePath)));
 		}
 		return result;
 
