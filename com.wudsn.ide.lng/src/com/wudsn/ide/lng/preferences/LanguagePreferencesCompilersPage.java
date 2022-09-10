@@ -20,12 +20,10 @@
 package com.wudsn.ide.lng.preferences;
 
 import java.util.ArrayList;
-import com.wudsn.ide.lng.Language;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.ComboFieldEditor;
@@ -56,6 +54,7 @@ import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.gui.SWTFactory;
 import com.wudsn.ide.base.hardware.Hardware;
+import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.LanguageUtility;
 import com.wudsn.ide.lng.Target;

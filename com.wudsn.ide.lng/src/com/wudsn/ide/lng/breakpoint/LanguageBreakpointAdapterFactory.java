@@ -28,7 +28,6 @@ import org.eclipse.debug.ui.actions.IToggleBreakpointsTargetFactory;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchPart;
 
-import com.wudsn.ide.base.common.EnumUtility;
 import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguageUtility;

@@ -35,7 +35,6 @@ import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IWorkbenchPage;
 
-import com.wudsn.ide.base.common.EnumUtility;
 import com.wudsn.ide.base.common.NumberUtility;
 import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.gfx.editor.GraphicsConversionEditor;
