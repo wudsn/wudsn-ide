@@ -38,6 +38,7 @@ import org.eclipse.jface.text.IDocumentListener;
 //import org.xml.sax.SAXParseException;
 
 /**
+ * TODO No idea why this was created/copied??
  * 
  * @author Peter Dell
  * @since 1.7.1

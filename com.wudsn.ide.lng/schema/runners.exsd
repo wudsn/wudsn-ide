@@ -130,6 +130,14 @@
    </annotation>
 
 
+   <annotation>
+      <appInfo>
+         <meta.section type="apiinfo"/>
+      </appInfo>
+      <documentation>
+         The runners extension point is in the same pluging as the compilers extension point, because the runner have a depedencies to the compiler files of a compiler to (optinally) start with source related break points.
+      </documentation>
+   </annotation>
 
 
    <annotation>

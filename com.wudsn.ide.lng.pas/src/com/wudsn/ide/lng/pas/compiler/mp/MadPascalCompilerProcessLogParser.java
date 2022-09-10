@@ -30,6 +30,7 @@ import com.wudsn.ide.lng.compiler.CompilerSymbol;
 
 /**
  * Process log parser for {@link MadsCompiler}.
+ * TODO: Implement MP log parsing
  * 
  * @author Peter Dell
  */
