@@ -42,8 +42,7 @@ public final class MessageQueue {
 		private String[] parameters;
 		private Throwable throwable;
 
-		public Entry(int messageId, int severity, String message, String[] parameters,
-				Throwable throwable) {
+		public Entry(int messageId, int severity, String message, String[] parameters, Throwable throwable) {
 			this.messageId = messageId;
 			this.severity = severity;
 			this.message = message;
@@ -69,6 +68,12 @@ public final class MessageQueue {
 
 		public Throwable getThrowable() {
 			return throwable;
+		}
+
+		@Override
+		public String toString() {
+			return "messageId=" + messageId + ", severity=" + severity + ", message=" + message + ", parameters"
+					+ parameters + ", throwable=" + (throwable==null?"null":throwable.getMessage());
 		}
 
 	}
