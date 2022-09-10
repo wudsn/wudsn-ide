@@ -45,16 +45,16 @@ import com.wudsn.ide.lng.editor.LanguageEditor;
 public final class LanguageBreakpointAdapterFactory implements IToggleBreakpointsTargetFactory {
 
 	private String TARGET_ID_PREFIX = LanguageBreakpointsTarget.class.getName() + ".";
-	private Set<String> defaultSet;
 
 	public LanguageBreakpointAdapterFactory() {
-		defaultSet = new HashSet<String>();
-		defaultSet.add(TARGET_ID_PREFIX);
+
 	}
 
 	@Override
 	public Set<String> getToggleTargets(IWorkbenchPart part, ISelection selection) {
 		if (part instanceof LanguageEditor) {
+			Set<String> defaultSet = new HashSet<String>();
+			defaultSet.add(getDefaultToggleTarget(part, selection));
 			return defaultSet;
 		}
 		return Collections.emptySet();
