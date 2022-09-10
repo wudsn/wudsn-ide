@@ -12,7 +12,9 @@ Require-Bundle: com.wudsn.ide.base,
  org.eclipse.ui.editors,
  org.eclipse.ui.ide,
  org.eclipse.ui.console,
- org.eclipse.ui.views
+ org.eclipse.ui.views,
+ org.junit,
+ org.junit.jupiter.api
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Bundle-ActivationPolicy: lazy
 Export-Package: com.wudsn.ide.gfx.editor

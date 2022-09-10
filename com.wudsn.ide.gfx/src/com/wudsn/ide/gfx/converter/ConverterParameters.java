@@ -232,7 +232,7 @@ public final class ConverterParameters {
 		serializer.getProperties().putAll(properties);
 		deserialize(serializer);
 
-		GraphicsPlugin.getInstance().log("ConverterParameters.read({0}):{1}",
+		GraphicsPlugin.getInstance().log("ConverterParameters.read(\"{0}\"): {1}",
 				new Object[] { file, serializer.getProperties() });
 
 	}
