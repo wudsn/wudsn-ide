@@ -94,7 +94,7 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 			}
 			updateItem(item);
 			textAttributeListItemsViewer.refresh();
-			addChangedProperty(item.getPreferencesKey());
+			addChangedProperty(item.getDefinition().getPreferencesKey());
 		}
 
 		abstract protected void updateItem(TextAttributeListItem item);
@@ -163,6 +163,7 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		plugin = LanguagePlugin.getInstance();
 		setPreferenceStore(plugin.getPreferenceStore());
 		changedPropertyNames = new TreeSet<String>();
+		
 		textAttributeListItemKeys = new String[][] {
 				{ Texts.PREFERENCES_TEXT_ATTRIBUTE_COMMENT_NAME,
 						LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT },
@@ -390,17 +391,19 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		if (textAttributeListItems != null) {
 			throw new IllegalStateException("Attribute 'textAttributeListItems' must be null.");
 		}
-		textAttributeListItems = new ArrayList<TextAttributeListItem>(textAttributeListItemKeys.length);
+		List<TextAttributeDefinition> textAttributeDefinitions = LanguagePreferencesConstants
+				.getTextAttributeDefinitions(language);
+		textAttributeListItems = new ArrayList<TextAttributeListItem>(textAttributeDefinitions.size());
 
-		for (int i = 0, n = textAttributeListItemKeys.length; i < n; i++) {
+		for (TextAttributeDefinition textAttributeDefinition: textAttributeDefinitions) {
 			String data;
 			TextAttribute textAttribute;
 			TextAttributeListItem item;
 
-			data = getPreferenceStore().getString(textAttributeListItemKeys[i][1]);
+			data = getPreferenceStore().getString(textAttributeDefinition.getPreferencesKey());
 			textAttribute = TextAttributeConverter.fromString(data);
 
-			item = new TextAttributeListItem(textAttributeListItemKeys[i][0], textAttributeListItemKeys[i][1]);
+			item = new TextAttributeListItem(textAttributeDefinition);
 			item.setTextAttribute(textAttribute);
 			textAttributeListItems.add(item);
 		}
@@ -544,7 +547,7 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 
 		for (TextAttributeListItem listItem : textAttributeListItems) {
 			data = TextAttributeConverter.toString(listItem.getTextAttribute());
-			store.setValue(listItem.getPreferencesKey(), data);
+			store.setValue(listItem.getDefinition().getPreferencesKey(), data);
 
 		}
 

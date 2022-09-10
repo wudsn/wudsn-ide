@@ -38,7 +38,7 @@ final class TextAttributeListItemProvider extends LabelProvider implements IColo
 
 	@Override
 	public String getText(Object element) {
-		return ((TextAttributeListItem) element).getDisplayName();
+		return ((TextAttributeListItem) element).getDefinition().getDisplayName();
 	}
 
 	/**

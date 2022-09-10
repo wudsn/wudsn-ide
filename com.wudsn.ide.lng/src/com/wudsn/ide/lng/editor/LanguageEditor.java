@@ -413,21 +413,22 @@ public abstract class LanguageEditor extends TextEditor {
 	public final void updateIdentifiers(CompilerSourceFile compilerSourceFile) {
 		Profiler profiler = new Profiler(this.getClass());
 
-		LanguageSourceViewerConfiguration asvc;
-		LanguageSourceScanner ais;
-		asvc = (LanguageSourceViewerConfiguration) getSourceViewerConfiguration();
-		ais = asvc.getInstructionScanner();
-
 		List<CompilerSourceParserTreeObject> newIdentifiers;
 		if (compilerSourceFile == null) {
 			newIdentifiers = Collections.emptyList();
 		} else {
 			newIdentifiers = compilerSourceFile.getIdentifiers();
 		}
+		
+		LanguageSourceViewerConfiguration asvc;
+		LanguageSourceScanner ais;
+		asvc = (LanguageSourceViewerConfiguration) getSourceViewerConfiguration();
+		ais = asvc.getInstructionScanner();
+
 
 		ais.setIdentifiers(newIdentifiers);
 		profiler.begin("refreshSourceViewer");
-		// refreshSourceViewer();
+		// refreshSourceViewer(); TODO Required?
 		profiler.end("refreshSourceViewer");
 	}
 

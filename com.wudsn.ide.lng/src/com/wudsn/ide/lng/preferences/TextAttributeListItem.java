@@ -29,23 +29,16 @@ import org.eclipse.jface.text.TextAttribute;
 final class TextAttributeListItem {
 
 	/** Display name */
-	private String displayName;
-
-	/** Color preference key */
-	private String preferencesKey;
-
+	private TextAttributeDefinition definition;
+	
 	/** Text attribute */
 	private TextAttribute textAttribute;
 
-	TextAttributeListItem(String displayName, String preferencesKey) {
-		if (displayName == null) {
-			throw new IllegalArgumentException("Parameter 'displayName' must not be null.");
+	TextAttributeListItem(TextAttributeDefinition definition) {
+		if (definition == null) {
+			throw new IllegalArgumentException("Parameter 'definition' must not be null.");
 		}
-		if (preferencesKey == null) {
-			throw new IllegalArgumentException("Parameter 'preferencesKey' must not be null.");
-		}
-		this.displayName = displayName;
-		this.preferencesKey = preferencesKey;
+		this.definition = definition;
 	}
 
 	/**
@@ -53,17 +46,8 @@ final class TextAttributeListItem {
 	 * 
 	 * @return The preferences key, not empty and not <code>null</code>.
 	 */
-	public String getPreferencesKey() {
-		return preferencesKey;
-	}
-
-	/**
-	 * Gets the display name.
-	 * 
-	 * @return The display name, not empty and not <code>null</code>.
-	 */
-	public String getDisplayName() {
-		return displayName;
+	public TextAttributeDefinition getDefinition() {
+		return definition;
 	}
 
 	/**

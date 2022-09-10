@@ -40,6 +40,7 @@ public final class LanguagePreferences {
 	 */
 	private LanguagesPreferences languagesPreferences;
 	private Language language;
+	private String languagePrefix;
 
 	/**
 	 * Created by {@link AbstractIDEPlugin} only.
@@ -55,6 +56,7 @@ public final class LanguagePreferences {
 		}
 		this.languagesPreferences = languagesPreferences;
 		this.language = language;
+		this.languagePrefix=language.name().toLowerCase()+".";
 	}
 
 	public Language getLanguage() {
@@ -116,7 +118,7 @@ public final class LanguagePreferences {
 		if (name == null) {
 			throw new IllegalArgumentException("Parameter 'name' must not be null.");
 		}
-		return languagesPreferences.getBoolean(language.name() + "." + name);
+		return languagesPreferences.getBoolean(languagePrefix+ name);
 	}
 
 	/**
@@ -132,7 +134,7 @@ public final class LanguagePreferences {
 		if (name == null) {
 			throw new IllegalArgumentException("Parameter 'name' must not be null.");
 		}
-		return languagesPreferences.getString(language.name() + "." + name);
+		return languagesPreferences.getString(languagePrefix + name);
 	}
 
 	/**
@@ -147,7 +149,7 @@ public final class LanguagePreferences {
 		if (name == null) {
 			throw new IllegalArgumentException("Parameter 'name' must not be null.");
 		}
-		return languagesPreferences.getEditorTextAttribute(language.name() + "." + name);
+		return languagesPreferences.getEditorTextAttribute(languagePrefix+ name);
 
 	}
 

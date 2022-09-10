@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.ComboFieldEditor;
@@ -56,6 +57,7 @@ import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.gui.SWTFactory;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.LanguagePlugin;
+import com.wudsn.ide.lng.LanguageUtility;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
@@ -437,7 +439,12 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 
 		Composite disabledControl = SWTFactory.createComposite(tabFolder, 1, 1, GridData.FILL_BOTH);
 		label = new Label(disabledControl, SWT.NONE);
-		label.setText(TextUtility.format(Texts.MESSAGE_E100, compilerDefinition.getName()));
+
+		// ERROR: Path to {0} '{1}' executable is not set in the '{2}' preferences.
+		String compilerDefinitionText = LanguageUtility.getCompilerTextLower(compilerDefinition.getLanguage());
+		String compilerPreferencesText = LanguageUtility.getCompilerPreferencesText(compilerDefinition.getLanguage());
+		label.setText(TextUtility.format(Texts.MESSAGE_E100, compilerDefinitionText, compilerDefinition.getName(),
+				compilerPreferencesText));
 		Tab tab = new Tab(compilerDefinition, tabs.size(), tabItem, tabContent, disabledControl, controlDecorations);
 		tabs.put(compilerId, tab);
 
@@ -448,8 +455,6 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 			setTabStatus(tab);
 
 		}
-		// tabFolder.layout();
-		// tabFolder.getParent().getParent().redraw();
 	}
 
 	private void setTabStatus(Tab tab) {

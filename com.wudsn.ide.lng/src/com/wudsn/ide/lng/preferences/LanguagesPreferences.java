@@ -114,11 +114,13 @@ public final class LanguagesPreferences {
 	 *             {@link LanguagePreferencesConstants}.
 	 * 
 	 * @return The text attribute, not <code>null</code>.
+	 * 
 	 */
 	 TextAttribute getEditorTextAttribute(String name) {
 		if (name == null) {
 			throw new IllegalArgumentException("Parameter 'name' must not be null.");
 		}
+	
 		return TextAttributeConverter.fromString(preferenceStore.getString(name));
 	}
 

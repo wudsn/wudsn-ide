@@ -203,7 +203,7 @@ final class LanguageSourceScanner extends RuleBasedScanner {
 						throw new RuntimeException("Unexpected identifier element type " + element.getType() + " - "
 								+ element.getTreePath() + ".");
 					}
-					if (element.getDescription().startsWith("@style=(")) {
+					if (element.getDescription().startsWith("@style=(")) { // TODO: Test and document @style annotation
 						String value = element.getDescription().substring(8);
 						int index = value.indexOf(")");
 						if (index > 0) {
@@ -220,7 +220,7 @@ final class LanguageSourceScanner extends RuleBasedScanner {
 					}
 				}
 			}
-			System.out.println("" + this + ":" + state.identifierWordTokens.size());
+			System.out.println("" + this + ":" + state.identifierWordTokens.size() + " identifier word tokens set: "+ state.identifierWordTokens); // TODO
 		}
 
 		/*

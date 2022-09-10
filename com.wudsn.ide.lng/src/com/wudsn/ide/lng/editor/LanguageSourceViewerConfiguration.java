@@ -208,7 +208,7 @@ final class LanguageSourceViewerConfiguration extends TextSourceViewerConfigurat
 
 		MonoReconciler reconciler = new MonoReconciler(reconcilingStrategy, false);
 		reconciler.setProgressMonitor(new NullProgressMonitor());
-		reconciler.setDelay(500);
+		reconciler.setDelay(500); // TODO Compute delay based on size of content on the source viewer (sourceViewer.getDocument().getLength()) or the fact that the parser is still parsing
 
 		return reconciler;
 	}

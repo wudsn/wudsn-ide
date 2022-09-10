@@ -19,10 +19,12 @@ R * Copyright (C) 2009 - 2021 <a href="https://www.wudsn.com" target="_top">Pete
 
 package com.wudsn.ide.lng.preferences;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.wudsn.ide.base.hardware.Hardware;
+import com.wudsn.ide.lng.Language;
+import com.wudsn.ide.lng.Texts;
 
 /**
  * Constants for preferences.
@@ -108,12 +110,6 @@ public final class LanguagePreferencesConstants {
 	public static final String EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION = "editor.text.attribute.identifier.procedure"; //$NON-NLS-1$
 
 	/**
-	 * Set of all preferences keys that depend on the global JFact text font
-	 * setting.
-	 */
-	public static final Set<String> EDITOR_TEXT_ATTRIBUTES;
-
-	/**
 	 * Preference key for default case for content assist.
 	 */
 	static final String EDITOR_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE = "editor.content.assist.processor.default.case"; //$NON-NLS-1$
@@ -126,24 +122,77 @@ public final class LanguagePreferencesConstants {
 	static final String EDITOR_COMPILE_COMMAND_POSITIONING_MODE = "editor.compile.command.positioning.mode"; //$NON-NLS-1$
 
 	/**
-	 * Static initialization.
+	 * Get list of all preferences keys that depend on the global JFact text font
+	 * setting.
 	 */
-	static {
-		EDITOR_TEXT_ATTRIBUTES = new HashSet<String>();
-		EDITOR_TEXT_ATTRIBUTES.add(EDITOR_TEXT_ATTRIBUTE_DIRECTVE);
-		EDITOR_TEXT_ATTRIBUTES.add(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION);
-		EDITOR_TEXT_ATTRIBUTES.add(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE);
-		EDITOR_TEXT_ATTRIBUTES.add(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LABEL);
-		EDITOR_TEXT_ATTRIBUTES.add(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION);
-		EDITOR_TEXT_ATTRIBUTES.add(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION);
-		EDITOR_TEXT_ATTRIBUTES.add(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION);
-		EDITOR_TEXT_ATTRIBUTES.add(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION);
-		EDITOR_TEXT_ATTRIBUTES.add(EDITOR_TEXT_ATTRIBUTE_NUMBER);
-		EDITOR_TEXT_ATTRIBUTES.add(EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL);
-		EDITOR_TEXT_ATTRIBUTES.add(EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL);
-		EDITOR_TEXT_ATTRIBUTES.add(EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO);
-		EDITOR_TEXT_ATTRIBUTES.add(EDITOR_TEXT_ATTRIBUTE_STRING);
-		EDITOR_TEXT_ATTRIBUTES.add(EDITOR_TEXT_ATTRIBUTE_COMMENT);
+	public static List<TextAttributeDefinition> getTextAttributeDefinitions(Language language) {
+		if (language == null) {
+			throw new IllegalArgumentException("Parameter 'language' must not be null.");
+		}
+
+		List<TextAttributeDefinition> result = new ArrayList<TextAttributeDefinition>();
+
+		// Comments and literals
+		result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_COMMENT,
+				Texts.PREFERENCES_TEXT_ATTRIBUTE_COMMENT_NAME));
+		result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_NUMBER,
+				Texts.PREFERENCES_TEXT_ATTRIBUTE_NUMBER_NAME));
+		result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_STRING,
+				Texts.PREFERENCES_TEXT_ATTRIBUTE_STRING_NAME));
+
+		switch (language) {
+		case ASM: {
+
+			// Built-in
+			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_DIRECTVE,
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_DIRECTIVE));
+			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL,
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_OPCODE_LEGAL_NAME));
+			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL,
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_OPCODE_LEGAL_NAME));
+			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO,
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_OPCODE_PSEUDO_NAME));
+
+			// Identifiers
+			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION,
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION));
+			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE,
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE));
+			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LABEL,
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_LABEL));
+			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION,
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION));
+			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION,
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION));
+			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION,
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION));
+			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION,
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION));
+			break;
+
+		}
+
+		case PAS: {
+
+			// Built-in
+			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_DIRECTVE,
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_DIRECTIVE));
+
+			// Identifiers
+			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION,
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION));
+			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION,
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION));
+			result.add(new TextAttributeDefinition(EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION,
+					Texts.PREFERENCES_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION));
+			break;
+
+		}
+		default:
+			throw new IllegalArgumentException("Unsupported language " + language + ".");
+		}
+
+		return result;
 	}
 
 	/**

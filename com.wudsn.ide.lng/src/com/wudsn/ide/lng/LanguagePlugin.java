@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.eclipse.core.runtime.ListenerList;
 import org.eclipse.core.runtime.QualifiedName;
@@ -41,6 +42,7 @@ import com.wudsn.ide.lng.preferences.LanguagePreferences;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesChangeListener;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants;
 import com.wudsn.ide.lng.preferences.LanguagesPreferences;
+import com.wudsn.ide.lng.preferences.TextAttributeDefinition;
 import com.wudsn.ide.lng.runner.RunnerRegistry;
 
 /**
@@ -143,7 +145,13 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 				if (event.getProperty().equals(JFaceResources.TEXT_FONT)
 						|| event.getProperty().equals(BLOCK_SELECTION_MODE_FONT)) {
 					for (Language language : languages) {
-						firePreferencesChangeEvent(language, LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTES);
+						List<TextAttributeDefinition> textAttributeDefinitions = LanguagePreferencesConstants
+								.getTextAttributeDefinitions(language);
+						Set<String> changedPropertyNames = new TreeSet<String>();
+						for (TextAttributeDefinition textAttributeDefinition : textAttributeDefinitions) {
+							changedPropertyNames.add(textAttributeDefinition.getPreferencesKey());
+						}
+						firePreferencesChangeEvent(language, changedPropertyNames);
 					}
 				}
 
