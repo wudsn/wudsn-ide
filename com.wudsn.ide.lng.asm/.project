@@ -27,11 +27,6 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>binaries/build-compilers-new.bat</name>
-			<type>1</type>
-			<location>C:/jac/wudsn/Tools/WWW/build-compilers-new.bat</location>
-		</link>
-		<link>
 			<name>binaries/build.bat</name>
 			<type>1</type>
 			<location>C:/jac/wudsn/Tools/WWW/build.bat</location>
