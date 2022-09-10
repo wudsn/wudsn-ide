@@ -3,15 +3,15 @@ setlocal
 set PATH=%PATH%;C:\jac\bin\wbin
 cd C:\jac\system\Java\Programming\Repositories\WUDSN-IDE
 
-call :check com.wudsn.ide.asm
-call :check com.wudsn.ide.asm.compilers
-call :check com.wudsn.ide.asm.compilers.test
 call :check com.wudsn.ide.base
 call :check com.wudsn.ide.hex
 call :check com.wudsn.ide.dsk
 call :check com.wudsn.ide.gfx
 call :check com.wudsn.ide.lng
-call :check com.wudsn.ide.pas
+call :check com.wudsn.ide.lng.asm
+call :check com.wudsn.ide.lng.asm.compilers
+call :check com.wudsn.ide.lng.asm.compilers.test
+call :check com.wudsn.ide.lng.pas
 call :check com.wudsn.ide.snd
 
 call :check com.wudsn.ide.base.feature
