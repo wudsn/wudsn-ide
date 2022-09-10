@@ -252,14 +252,14 @@ final class LanguageEditorCompileCommand {
 
 		String compilerExecutablePath = languageEditor.getCompilerPreferences().getCompilerExecutablePathOrDefault();
 		if (StringUtility.isEmpty(compilerExecutablePath)) {
-			// ERROR: Path to '{0}' {1} executable is not set in the '{2}' preferences.
+			// ERROR: Path to {0} '{1}' executable is not set in the '{2}' preferences.
 			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E100, compilerDefinitionText,
 					compilerDefinition.getName(), compilerPreferencesText);
 			return false;
 		}
 		File compilerExecutableFile = new File(compilerExecutablePath);
 		if (!compilerExecutableFile.exists()) {
-			// ERROR: Path to '{0}' {1} executable in the {2} preferences points to
+			// ERROR: Path to {0} '{1}' executable in the '{2}' preferences points to
 			// non-existing file '{3}'.
 			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E103, compilerDefinitionText,
 					compilerDefinition.getName(), compilerPreferencesText, compilerExecutablePath);
