@@ -102,8 +102,7 @@ public final class LanguagePreferencesInitializer extends AbstractPreferenceInit
 				LanguageContentAssistProcessorDefaultCase.LOWER_CASE);
 
 		// Compiling.
-		setDefault(language,
-				LanguagePreferencesConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE,
+		setDefault(language, LanguagePreferencesConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE,
 				LanguageEditorCompileCommandPositioningMode.FIRST_ERROR_OR_WARNING);
 	}
 
@@ -115,25 +114,24 @@ public final class LanguagePreferencesInitializer extends AbstractPreferenceInit
 		CompilerRegistry compilerRegistry = languagePlugin.getCompilerRegistry();
 		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
 		for (CompilerDefinition compilerDefinition : compilerDefinitions) {
-			String compilerId;
+			String compilerId = compilerDefinition.getId();
 			String name;
-			compilerId = compilerDefinition.getId();
 
 			for (Hardware hardware : Hardware.values()) {
 				if (hardware.equals(Hardware.GENERIC)) {
 					continue;
 				}
-				store.setDefault(LanguagePreferencesConstants.getCompilerTargetName(compilerId, hardware),
+				setDefault(language, LanguagePreferencesConstants.getCompilerTargetName(compilerId, hardware),
 						compilerDefinition.getSupportedTargets().get(0).toString());
 
 				name = LanguagePreferencesConstants.getCompilerParametersName(compilerId, hardware);
-				store.setDefault(name, compilerDefinition.getDefaultParameters());
+				setDefault(language, name, compilerDefinition.getDefaultParameters());
 				name = LanguagePreferencesConstants.getCompilerOutputFolderModeName(compilerId, hardware);
-				store.setDefault(name, CompilerOutputFolderMode.TEMP_FOLDER);
+				setDefault(language, name, CompilerOutputFolderMode.TEMP_FOLDER);
 				name = LanguagePreferencesConstants.getCompilerOutputFileExtensionName(compilerId, hardware);
-				store.setDefault(name, HardwareUtility.getDefaultFileExtension(hardware));
+				setDefault(language, name, HardwareUtility.getDefaultFileExtension(hardware));
 				name = LanguagePreferencesConstants.getCompilerRunnerIdName(compilerId, hardware);
-				store.setDefault(name, RunnerId.DEFAULT_APPLICATION);
+				setDefault(language, name, RunnerId.DEFAULT_APPLICATION);
 			}
 
 		}
