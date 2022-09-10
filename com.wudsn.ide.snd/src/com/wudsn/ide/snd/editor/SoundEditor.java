@@ -616,8 +616,11 @@ public final class SoundEditor extends EditorPart implements Application, SoundP
 		}
 
 		int musicAddress = info.getMusicAddress();
-		if (musicAddress >= 0 && selectedFileType.isMusicAddressChangeable()) {
-			String initialValue = HexUtility.getLongValueHexString(musicAddress, 4);
+		if (selectedFileType.isMusicAddressChangeable()) {
+			String initialValue = "";
+			if (musicAddress >= 0) {
+				initialValue = HexUtility.getLongValueHexString(musicAddress, 4);
+			}
 			InputDialog inputDialog = new InputDialog(mainComposite.getShell(),
 					TextUtility.format(Texts.MESSAGE_I507, selectedFileType.getDescription()), Texts.MESSAGE_I508,
 					initialValue, new IInputValidator() {

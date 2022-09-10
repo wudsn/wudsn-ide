@@ -128,7 +128,8 @@ public interface SoundInfo {
 	 * Gets the music address or <code>-1</code> if the module type does not have
 	 * one.
 	 * 
-	 * @return TODO
+	 * @return The music address or <code>-1</code> if the module type does not have
+	 * one.
 	 */
 	public int getMusicAddress();
 

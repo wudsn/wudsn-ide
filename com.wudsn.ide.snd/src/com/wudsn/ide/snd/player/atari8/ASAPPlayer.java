@@ -136,6 +136,7 @@ public final class ASAPPlayer extends SoundPlayer {
 		ASAPInfo asapInfo = asap.getInfo();
 		info.title = asapInfo.getTitleOrFilename();
 		info.author = asapInfo.getAuthor();
+		info.date = asapInfo.getDate();
 
 		// Determine the original file type in the container.
 		// Only if it cannot be determined, the file extension is used.
@@ -185,6 +186,9 @@ public final class ASAPPlayer extends SoundPlayer {
 		info.initFulltime = asapMusicRoutine.isFulltime();
 		info.playerAddress = asapMusicRoutine.getPlayerAddress();
 		info.musicAddress = asapInfo.getMusicAddress();
+		if (info.musicAddress == 0) {
+			info.musicAddress = -1;
+		}
 
 		setLoaded(true);
 
@@ -202,7 +206,6 @@ public final class ASAPPlayer extends SoundPlayer {
 		// The file name must have a least one character before the dot.
 		String asapFile = "DUMMY" + fileType.getExtension().toUpperCase();
 		ASAPInfo asapInfo = asap.getInfo();
-		int oldMusicAddress = asapInfo.getMusicAddress();
 		byte[] output = new byte[MAX_EXPORT_SIZE];
 		ASAPWriter asapWriter = new ASAPWriter();
 		int outputOffset = 0;
@@ -223,10 +226,7 @@ public final class ASAPPlayer extends SoundPlayer {
 		 */
 
 		outputOffset = asapWriter.write(asapFile, asapInfo, module, moduleLen, false);
-		// Change the music address back in case it was changed.
-		if (fileType.isMusicAddressChangeable()) {
-			asapInfo.setMusicAddress(oldMusicAddress);
-		}
+
 		byte[] result = new byte[outputOffset];
 		System.arraycopy(output, 0, result, 0, outputOffset);
 		return result;

@@ -26,14 +26,14 @@ import com.wudsn.ide.base.common.EnumUtility;
  */
 public enum FileType {
 
-	// ATARI file Types, alphabethical order:
+	// ATARI file Types, alphabetical order:
 	// cm3, cmc, cmr, cms, dlt, dmc, fc, mpd, mpt, rmt, tmc, tm2, tm8, sap
 	// XEX is an export only format, not registered in the content type.
 
 	CM3(".cm3"), CMC(".cmc"), CMR(".cmr"), CMS(".cms"), DLT(".dlt"), DMC(".dmc"), FC(".fc"), MPD(".mpd"), MPT(".mpt"),
 	RMT(".rmt"), SAP(".sap"), TM2(".tm2"), TM8(".tm8"), TMC(".tmc"), XEX(".xex"),
 
-	// C64 File Types, alphabethical order:
+	// C64 File Types, alphabetical order:
 	// prg, sid
 	// PRG is an export only format, not registered in the content type.
 
