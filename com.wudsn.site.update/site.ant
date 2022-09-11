@@ -5,7 +5,7 @@
   it to the current main version field and the default update site folder and then triggers "upload_site".
   
   If the stable site as been updated, the zero installation download can be update via "Check for Updates".
-  After the update, the old plugin version should be deleted from the "C:\jac\wudsn\Tools\IDE\Eclipse\4.x.x-win32-x86_64\eclipse\plugins" folder.
+  After the update, the old plugin version should be deleted from the "C:\jac\wudsn\Tools\IDE\Eclipse\eclipse\plugins" folder.
   Then the new zero installation download can be created and updated with the "build_and_upload_zero_installation_download" target.
  -->
 <project name="Site" basedir="." default="build_daily">
