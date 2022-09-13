@@ -158,11 +158,12 @@ public final class SoundEditor extends EditorPart implements Application, SoundP
 	private boolean partControlCreated;
 	private Composite mainComposite;
 	private TextField titleField;
-	private TextField formatField;
-
 	private TextField authorField;
+
 	private TextField dateField;
 	private TextField channelsField;
+
+	private TextField formatField;
 	private DecimalFormat playerFrequencyFieldHertzFormat;
 	private TextField playerFrequencyField;
 
