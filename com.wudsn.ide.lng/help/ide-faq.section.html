@@ -14,7 +14,7 @@
 			<li><a href="#FAQWUDSNInstallationUpdateSiteBlocked">Why do I get "Unable to read repository at ... Read
 					timed out" when accessing the update site?</a></li>
 			<li><a href="#FAQWUDSNInstallationUpdateSiteRequiredItems">Why do I get "Cannot complete the install because
-					one or more required items could no be found" when updating the plugin from the update site?</a>
+					one or more required items could not be found" when updating the plugin from the update site?</a>
 			</li>
 			<li><a href="#FAQEclipseUserGuide">How do I use Eclipse?</a></li>
 			<li><a href="#FAQWUDSNInstallationPreferencesNotVisible">Why is the "Assembler" section not visible in the
@@ -96,7 +96,7 @@
 	</div>
 	<div id="FAQEclipseUserGuide">
 		<h4>How do I use Eclipse at?</h4>
-		<p>Start the build-in help of Eclipse via the menu "Help/Help Content" and read the section "Workbench User
+		<p>Start the built-in help of Eclipse via the menu "Help/Help Content" and read the section "Workbench User
 			Guide".</p>
 		<img src="productions/java/ide/faq/ide-workbench-user-guide.png" alt="Workbench user guide" />
 	</div>
@@ -104,7 +104,7 @@
 		<h4>Why is WUDSN IDE not available via the update site?</h4>
 		<p>Most likely you typed in the wrong update site URL, for example, using "wusdn" instead of "wudsn". The
 			correct URL is "http://www.wudsn.com/update". In addition, you should disable the checkbox "Hide items that
-			are already installed", so you see what really is there. See the section "Installing WUDSN IDE" the tab
+			are already installed", so you see what really is there. See the section "Installing WUDSN IDE" on the tab
 			"Installation" for the required steps.</p>
 		<img src="productions/java/ide/faq/ide-update-site.png" alt="Installation dialog with update site" />
 	</div>
@@ -117,7 +117,7 @@
 			so you are prompted to allow access interactively.</p>
 	</div>
 	<div id="FAQWUDSNInstallationUpdateSiteRequiredItems">
-		<h4>Why do I get "Cannot complete the install because one or more required items could no be found" when
+		<h4>Why do I get "Cannot complete the install because one or more required items could not be found" when
 			updating the plugin from the update site?</h4>
 		<p>This error message indicates that the Eclipse version you are running is too old.
 			Check the <a href="/index.php/ide/releases" target="_blank" rel="noopener noreferrer">releases</a> page for
@@ -160,11 +160,11 @@
 	</div>
 	<h3 id="Editing">Editing</h3>
 	<div id="FAQEclipseSpeed">
-		<h4>Why is editing sometimes slow or even everything is blocked showing the wait cursor?</h4>
+		<h4>Why is editing sometimes slow or even everything blocked showing the wait cursor?</h4>
 		<p>The core of WUDSN IDE uses the Eclipse Platform Runtime only and does not require any additional plugins. It
 			starts and runs very fast with that configuration and I personally used it on daily basis. So if you
 			experience performance problems, try to download and run the zero installation distribution of WUDSN IDE.
-			Performance problem they are very likely caused by additional plugins or themes installed. Often these
+			Performance problems are very likely caused by additional plugins or themes installed. Often these
 			plugins are not only slow but broken. Check the ".metadata/.log" file in the workspace folder. In some
 			Eclipse versions, this is also available via "Window/Show View.../Error Log".</p>
 	</div>
@@ -172,7 +172,7 @@
 		<h4>Is there support for source version control?</h4>
 		<p>Yes, there are several plugins available to connect Eclipse to CVS or subversion. Also, the "Local History"
 			feature is installed by default. You can configure it in the preferences. It automatically records all
-			changes to the source file and lets you compare versions in-place.</p>
+			changes to the source file and lets you compare versions in place.</p>
 		<img src="productions/java/ide/faq/ide-version-control.gif" alt="Source version control" />
 	</div>
 	<div id="FAQBlockSelectionMode">
@@ -250,7 +250,7 @@
 				".asm" upon installation. You are trying to run the code example for version 1.5.0 or before, which is
 				in ATASM format. Therefore you can either</p>
 			<ul>
-				<li>Convert the source to be in MADS format as described in <a href="#FAQATASMtoMADSConversion">How do I
+				<li>Convert the source t MADS format as described in <a href="#FAQATASMtoMADSConversion">How do I
 						convert an ATASM source to MADS format?</a> , this is the recommended way</li>
 				<li>Open the source with the ATASM editor using "Open With..." in the context menu of the Project
 					Explorer</li>
@@ -267,7 +267,7 @@
 				include statement than in the actual file system. For example, you have written "ICL 'example.asm'" for
 				a file named "Example.asm" on the file system. In Eclipse the file names of all resources are treated as
 				case-sensitive, even if the underlying file system is case-insensitive. Therefore the file name issued
-				by the compiler will no match with the file name of the source include. As a fall-back, the IDE assigns
+				by the compiler will not match the file name of the source include. As a fallback, the IDE assigns
 				the error message to the main source file. To fix this, you have to adapt the spelling of the file name
 				in the source include statement.</p>
 		</div>
@@ -312,7 +312,7 @@
 					"plain" mode without a header</li>
 				<li>ATASM: Extend the compiler parameter "-o${outputFilePath}" to " <b>-r</b> -o${outputFilePath}" to
 					switch to "raw" mode without header</li>
-				<li>MADS: Use " <b>OPT h-f+</b> " at the very beginning of the source file disables header and enabled
+				<li>MADS: Use " <b>OPT h-f+</b> " at the very beginning of the source file to disable the COM header and enable
 					"fill" mode, i.e. no segments are created if there are gaps in the object code</li>
 			</ul>
 		</div>
@@ -332,15 +332,15 @@
 				"makefile.bat" to see how the disk image is created and started. Read section <a
 					href="#FAQRunMakefile">How to run a makefile script instead of an emulator?</a> for the details on
 				how to configure the call to "makefile.bat". For productive usage, you should of course put the "hias"
-				folder into a central location and use the most recent version from hias' site. For MacOS X users, the
+				folder into a central location and use the most recent version from hias' website. For MacOS X users, the
 				download also contains a "makefile.sh" script and MacOS X binaries of Matthias Reichl's tools. The
 				binaries have been provided by Fredrick Holst (freetz) and you can find the latest versions on his <a
 					href="http://frederik.hol.st/atari/8-bit/AtariSIO4Mac/" target="_blank"
-					rel="noopener noreferrer">web site</a>.</p>
+					rel="noopener noreferrer">website</a>.</p>
 			<h5>Apple II</h5>
 			<p>For Apple II, WUDSN IDE automatically generates a bootable AppleDos 3.3 disk image with the extension
 				".dsk" if one of the predefined emulators is used for execution. If you want to use another DOS or disk
-				size or if you want to put more files onto the disk after compilation, you can use the command-line
+				size or if you want to put more files onto the disk after compilation, you can use the command line
 				version of <a href="applecommander.cvs.sourceforge.net" target="_blank"
 					rel="noopener noreferrer">AppleCommander</a> to achieve this. Create a makefile script and
 				configured it as described in <a href="#FAQRunMakefile">How to run a makefile script instead of an
@@ -370,14 +370,14 @@
 			<p>Sometimes it is useful to run a makefile script instead of the emulator, for example, if the output file
 				shall be combined with other files into a single ATR file. To execute such a script select "User Defined
 				Application" as the "Default Application to open Output File". Specify the path to the shell as "Path to
-				Application". On the command-line, you can then use the standard variables to start the shell, pass the
+				Application". On the command line, you can then use the standard variables to start the shell, pass the
 				name of the script and pass the file path of the compiled output file. Since the working directory at
 				the time of execution is the output folder of the compiler you must place the script file there or you
 				must specify the script file with its absolute path. If you are using Windows and "cmd.exe" as your
 				shell, you must specify "/c" before the name of the script to prevent "cmd.exe" from remaining as a
 				process after the script has finished. The resulting command line is "${runnerExecutablePath} /c
 				makefile.bat ${outputFilePath}", assuming "makefile.bat" is located in the output folder". See section
-				<a href="#FAQDiskImages">How do I compile into disk images?</a> for the description on how to use this
+				<a href="#FAQDiskImages">How do I compile into disk images?</a> for the description of how to use this
 				for compiling complete disk images.</p>
 			<img src="productions/java/ide/faq/ide-assembler-preferences-compilers-makefile.png"
 				alt="Configure makefile script" />
@@ -385,7 +385,7 @@
 		<h3 id="Emulation">Emulation</h3>
 		<div id="FAQOtherEmulators">
 			<h4>How can I use other emulators?</h4>
-			<p>You can "re-use" the existing tabs and simply specify another emulators' executable. If you use "User
+			<p>You can "re-use" the existing tabs and simply specify another emulator's executable. If you use "User
 				Defined Application", you can specify whatever you want. When using "User Defined Application", no disk
 				image is created or updated. You can use this setting to have your own script which puts the executable
 				file onto a disk image of your choice using additional tools like "dir2atr.exe" or "AppleCommander" for
