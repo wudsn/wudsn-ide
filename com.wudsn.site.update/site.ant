@@ -3,10 +3,6 @@
   The result can then be uploaded to the "/update" folder with "upload_to_site".
   If the daily build is tested and OK, the target "publish_daily_to_stable" copies
   it to the current stable version field and the default update site folder and then triggers "upload_to_site".
-  
-  If the stable site as been updated, the zero installation download can be update via "Check for Updates".
-  After the update, the old plugin version should be deleted from the "C:\jac\wudsn\Tools\IDE\Eclipse\eclipse\plugins" folder.
-  Then the new zero installation download can be created and updated with the "build_and_upload_zero_installation_download" target.
  -->
 <project name="Site" basedir="." default="build_daily">
 
