@@ -5,7 +5,7 @@
       version="1.7.2.qualifier"
       provider-name="WUDSN">
 
-   <description url="http://www.wudsn.com">
+   <description url="https://www.wudsn.com">
       The WUDSN IDE is an Eclipse feature which provides integrated
 an development environment for Apple II, Atari 2600,
 Atari 7800, Atari 8-bit, Commodore 8-bit and Nintendo 8-bit
@@ -13,7 +13,7 @@ computers.
    </description>
 
    <copyright>
-      WUDSN IDE  Copyright (C) 2009 - 2021 Peter Dell
+      WUDSN IDE  Copyright (C) 2009 - 2023 Peter Dell
 66822 Lebach, Germany
 This program is free software: you can redistribute it and/or
 modify it under the terms of the GNU General Public License as
