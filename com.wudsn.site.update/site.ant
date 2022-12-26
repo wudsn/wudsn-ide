@@ -1,8 +1,8 @@
 <!-- 
   The first target is "build_daily". It ends with  manual step.
-  The result can then be uploaded to the "/update" folder with "upload_site".
-  If the daily build is tested and OK, the target "publish_daily_to_stable_and_main" copies
-  it to the current main version field and the default update site folder and then triggers "upload_site".
+  The result can then be uploaded to the "/update" folder with "upload_to_site".
+  If the daily build is tested and OK, the target "publish_daily_to_stable" copies
+  it to the current stable version field and the default update site folder and then triggers "upload_to_site".
   
   If the stable site as been updated, the zero installation download can be update via "Check for Updates".
   After the update, the old plugin version should be deleted from the "C:\jac\wudsn\Tools\IDE\Eclipse\eclipse\plugins" folder.
@@ -10,79 +10,85 @@
  -->
 <project name="Site" basedir="." default="build_daily">
 
+    <target name="_init">
+    	<property file="site.properties"/>
+    	<property name="update_folder" value="${site_folder}\update"/>
+        <property name="daily_folder"  value="${update_folder}\daily"/>
+        <property name="stable_folder" value="${update_folder}\stable"/>
+        <property name="stable_version_folder" value="${update_folder}\${stable_version}"/>
+        <echo>Update folder ${update_folder}</echo>
+    </target>
 
-	<target name="_clean_folder">
-		<echo message="Cleaning ${folder}" />
-		<delete dir="${folder}/features" />
-		<delete dir="${folder}/plugins" />
-		<delete file="${folder}/artifacts.jar" />
-		<delete file="${folder}/content.jar" />
-	</target>
+    <target name="_clean_folder">
+        <echo message="Cleaning ${folder}" />
+        <delete dir="${folder}/features" />
+        <delete dir="${folder}/plugins" />
+        <delete file="${folder}/artifacts.jar" />
+        <delete file="${folder}/content.jar" />
+    </target>
 
-	<target name="_copy_folder">
-		<antcall target="_clean_folder">
-			<param name="folder" value="${target}" />
-		</antcall>
-		<echo message="Copying ${source} to ${target}" />
-		<copy todir="${target}" preservelastmodified="true">
-			<fileset file="${source}/artifacts.jar" />
-			<fileset file="${source}/content.jar" />
-			<fileset file="${source}/site.xml" />
-		</copy>
-		<copy todir="${target}/features" preservelastmodified="true">
-			<fileset file="${source}/features/**" />
-		</copy>
-		<copy todir="${target}/plugins" preservelastmodified="true">
-			<fileset file="${source}/plugins/**" />
-		</copy>
+    <target name="_copy_folder">
+        <antcall target="_clean_folder">
+            <param name="folder" value="${target}" />
+        </antcall>
+        <echo message="Copying ${source} to ${target}" />
+        <copy todir="${target}" preservelastmodified="true">
+            <fileset file="${source}/artifacts.jar" />
+            <fileset file="${source}/content.jar" />
+            <fileset file="${source}/site.xml" />
+        </copy>
+        <copy todir="${target}/features" preservelastmodified="true">
+            <fileset file="${source}/features/**" />
+        </copy>
+        <copy todir="${target}/plugins" preservelastmodified="true">
+            <fileset file="${source}/plugins/**" />
+        </copy>
+    </target>
+    
+    <!-- This checks the bundle versions in the source projects-->
+    <target name="_check_bundle_versions" depends="_init">
+    	<echo>Expecting bundle version ${stable_version}</echo>
+        <exec dir="." executable="cmd.exe">
+            <arg line="/c check-bundle-versions.bat"/>
+         </exec>
+    </target>
+        
+    <!-- This refreshes the daily build for testing -->
+    <target name="build_daily" depends="_init">
+        <antcall target="_check_bundle_versions">
+        </antcall>
+        <antcall target="_clean_folder">
+            <param name="folder" value="${daily_folder}" />
+        </antcall>
+        <copy tofile="${daily_folder}\site.xml" preservelastmodified="true" overwrite="true">
+            <fileset file="site-template.xml" />
+        </copy>
+    	<replace file="${daily_folder}\site.xml" propertyfile="site.properties">
+    	   <replacefilter token="@version@" property="stable_version"/>
+    	</replace>
+    	<echo>Open daily/site.xml and press "Build All". Then run the target "upload_to_site" to upload the daily version.</echo>
+    </target>
 
-	</target>
-	
-	<!-- This refreshes bundle versions in the source projects-->
-	<target name="check_bundle_versions" >
-		  <exec dir="." executable="cmd.exe">
-		        <arg line="/c check-bundle-versions"/>
-		    </exec>
-	</target>
-		
-	<!-- This refreshes the daily build for testing -->
-	<target name="build_daily" >
-		<antcall target="_clean_folder">
-			<param name="folder" value="daily" />
-		</antcall>
-		<copy tofile="daily\site.xml" preservelastmodified="true" overwrite="true">
-			<fileset file="daily/site-template.xml" />
-		</copy>
-		<echo>Open daily/site.xml and press "Build All". Then run the target "upload_site" to upload the daily version.</echo>
-	</target>
+    <!-- This publishes the daily build when testing it was successful -->
+    <target name="publish_daily_to_stable" depends="_init">
 
-	<!-- This publishes the daily build when testing it was successful -->
-	<target name="publish_daily_to_stable_and_main">
-		<echo>Copying daily to stable and main.</echo>
-		<antcall target="_copy_folder">
-			<param name="source" value="daily" />
-			<param name="target" value="1.7.2" />
-		</antcall>
-		<antcall target="_copy_folder">
-			<param name="source" value="daily" />
-			<param name="target" value="." />
-		</antcall>
-		<antcall target="upload_site" />
-		<echo>Done.</echo>
-	</target>
-	
-	<target name="upload_site">
-		<echo>Uploading builds from ${basedir}.</echo>
-		<exec executable="C:\jac\system\Windows\Tools\NET\WinSCP\WinSCP.com" failonerror="true">
-			<arg value="/script=site.scp"/>
-		</exec>
-		<echo>Upload completed.</echo>
-	</target>
-
-	
-	<target name="build_and_upload_zero_installation_download">
-		<exec executable="C:\jac\wudsn\Tools\WWW\build.bat" failonerror="true">
-		</exec>	
-	</target>
-	
+        <echo>Copying daily to ${stable_version} and stable.</echo>
+        <antcall target="_copy_folder">
+            <param name="source" value="${daily_folder}" />
+            <param name="target" value="${stable_folder}" />
+        </antcall>
+        <antcall target="_copy_folder">
+            <param name="source" value="${daily_folder}" />
+            <param name="target" value="${stable_version_folder}" />
+        </antcall>
+        <antcall target="upload_to_site" />
+        <echo>Done.</echo>
+    </target>
+    
+    <target name="upload_to_site" depends="_init">
+        <exec dir="." executable="cmd.exe">
+            <arg line="/c ${site_folder}\productions\www\site\export\upload.bat update"/>
+        </exec>
+        <echo>Upload completed.</echo>
+    </target>
 </project>
