@@ -436,7 +436,8 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 			Composite composite;
 
 			String name;
-			name = LanguagePreferencesConstants.getCompilerExecutablePathName(compilerId);
+			name = LanguagePreferencesConstants.getPreferencesKey(language,
+					LanguagePreferencesConstants.getCompilerExecutablePathName(compilerId));
 
 			// Field: executablePath
 			composite = SWTFactory.createComposite(tabContent, 4, 2, GridData.FILL_HORIZONTAL);

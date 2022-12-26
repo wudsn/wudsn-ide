@@ -109,6 +109,16 @@ public final class LanguagePreferences {
 	}
 
 	/**
+	 * Gets the preferences for the language of these preferences and a suffix.
+	 * 
+	 * @param preferencesKeySuffix The key suffix, not empty and not <code>null</code>.
+	 * @return The language preferences key, not empty and not <code>null</code>.
+	 */
+	public String getPreferencesKey(String preferencesKeySuffix) {
+		return LanguagePreferencesConstants.getPreferencesKey(language, preferencesKeySuffix);
+	}
+	
+	/**
 	 * Gets the current value of the boolean preference with the given name. Returns
 	 * the default value <code>false</code> if there is no preference with the given
 	 * name, or if the current value cannot be treated as a boolean.
@@ -122,8 +132,9 @@ public final class LanguagePreferences {
 			throw new IllegalArgumentException("Parameter 'preferencesKeySuffix' must not be null.");
 		}
 		return languagesPreferences
-				.getBoolean(LanguagePreferencesConstants.getPreferencesKey(language, preferencesKeySuffix));
+				.getBoolean(getPreferencesKey(preferencesKeySuffix));
 	}
+
 
 	/**
 	 * Gets the current value of the string-valued preference with the given name.
@@ -140,7 +151,7 @@ public final class LanguagePreferences {
 			throw new IllegalArgumentException("Parameter 'preferencesKeySuffix' must not be null.");
 		}
 		return languagesPreferences
-				.getString(LanguagePreferencesConstants.getPreferencesKey(language, preferencesKeySuffix));
+				.getString(getPreferencesKey(preferencesKeySuffix));
 	}
 
 	/**
@@ -156,7 +167,7 @@ public final class LanguagePreferences {
 			throw new IllegalArgumentException("Parameter 'textAttributeName' must not be null.");
 		}
 		return languagesPreferences
-				.getEditorTextAttribute(LanguagePreferencesConstants.getPreferencesKey(language, textAttributeName));
+				.getEditorTextAttribute(getPreferencesKey(textAttributeName));
 
 	}
 
