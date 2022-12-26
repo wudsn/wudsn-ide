@@ -50,15 +50,15 @@ public final class LanguageUtility {
 	 * Gets the text for type of compilers for a language.
 	 * 
 	 * @param language The language, not <code>null</code>.
-	 * @return The text, not empty and not <code>null</code>.
+	 * @return The text in sentence case, not empty and not <code>null</code>.
 	 */
-	public static String getCompilerTextLower(Language language) { 
+	public static String getCompilerText(Language language) { 
 		switch (language) {
 		case ASM:
-			return "assembler"; // TODO: Have translation, so lower/upper is correct in German
+			return Texts.LANGUAGE_ASSEMBLER_TEXT;
 
 		case PAS:
-			return "compiler";
+			return Texts.LANGUAGE_COMPILER_TEXT;
 
 		}
 		throw new IllegalArgumentException("Unknown language '" + language + "'.");
@@ -68,10 +68,10 @@ public final class LanguageUtility {
 	public static String getCompilerPreferencesText(Language language) {
 		switch (language) {
 		case ASM:
-			return "Languages/Assemblers";
+			return Texts.LANGUAGES_TITLE_CASE+"/"+Texts.LANGUAGE_ASSEMBLER_TEXT_TITLE_CASE;
 
 		case PAS:
-			return "Languages/Compilers";
+			return Texts.LANGUAGES_TITLE_CASE+"/"+Texts.LANGUAGE_COMPILER_TEXT_TITLE_CASE;
 
 		}
 		throw new IllegalArgumentException("Unknown language '" + language + "'.");

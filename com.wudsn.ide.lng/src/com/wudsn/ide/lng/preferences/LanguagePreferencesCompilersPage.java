@@ -441,7 +441,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 
 		// ERROR: Path to {0} '{1}' executable is not set in the '{2}' preferences.
 		String compilerPreferencesText = LanguageUtility.getCompilerPreferencesText(compilerDefinition.getLanguage());
-		label.setText(TextUtility.format(Texts.MESSAGE_E100, compilerDefinition.getTextLower(), compilerDefinition.getName(),
+		label.setText(TextUtility.format(Texts.MESSAGE_E100, compilerDefinition.getText(), compilerDefinition.getName(),
 				compilerPreferencesText));
 		Tab tab = new Tab(compilerDefinition, tabs.size(), tabItem, tabContent, disabledControl, controlDecorations);
 		tabs.put(compilerId, tab);

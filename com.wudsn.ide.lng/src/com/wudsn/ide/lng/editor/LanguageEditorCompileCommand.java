@@ -253,7 +253,7 @@ final class LanguageEditorCompileCommand {
 		if (StringUtility.isEmpty(compilerExecutablePath)) {
 			// ERROR: Path to {0} '{1}' executable is not set in the '{2}' preferences.
 			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E100,
-					compilerDefinition.getTextLower(), compilerDefinition.getName(), compilerPreferencesText);
+					compilerDefinition.getText(), compilerDefinition.getName(), compilerPreferencesText);
 			return false;
 		}
 		File compilerExecutableFile = new File(compilerExecutablePath);
@@ -261,7 +261,7 @@ final class LanguageEditorCompileCommand {
 			// ERROR: Path to {0} '{1}' executable in the '{2}' preferences points to
 			// non-existing file '{3}'.
 			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E103,
-					compilerDefinition.getTextLower(), compilerDefinition.getName(), compilerPreferencesText,
+					compilerDefinition.getText(), compilerDefinition.getName(), compilerPreferencesText,
 					compilerExecutablePath);
 			return false;
 		}
@@ -283,7 +283,7 @@ final class LanguageEditorCompileCommand {
 		if (compilerParameterArray.length == 0) {
 			// ERROR: The {0} '{1}' does not specify default parameters.
 			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E101,
-					compilerDefinition.getTextLower(), compilerDefinition.getName());
+					compilerDefinition.getText(), compilerDefinition.getName());
 			return false;
 		}
 
@@ -324,7 +324,7 @@ final class LanguageEditorCompileCommand {
 			// ERROR: Cannot execute {0} process '{1}' in working directory '{2}'. System
 			// error: {3}
 			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E105,
-					compilerDefinition.getTextLower(), compilerProcess.getCommandArrayString(),
+					compilerDefinition.getText(), compilerProcess.getCommandArrayString(),
 					compilerProcess.getWorkingDirectory().getPath(), ex.getMessage());
 		}
 
@@ -404,7 +404,7 @@ final class LanguageEditorCompileCommand {
 			// ERROR: {0} process ended with return code {1}. Check the error messages and
 			// the console log.
 			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E127,
-					compilerDefinition.getTextLower(),
+					compilerDefinition.getText(),
 					NumberUtility.getLongValueDecimalString(compilerProcess.getExitValue()));
 		}
 

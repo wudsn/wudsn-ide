@@ -155,10 +155,10 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	/**
 	 * Gets the text for type of compilers for a language.
 	 * 
-	 * @return he text, not empty and not <code>null</code>.
+	 * @return The text in sentence case, not empty and not <code>null</code>.
 	 */
-	public final String getTextLower() {
-		return LanguageUtility.getCompilerTextLower(getLanguage());
+	public final String getText() {
+		return LanguageUtility.getCompilerText(getLanguage());
 	}
 
 	/**
@@ -314,14 +314,14 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 		if (!hasHelpDocuments()) {
 			// INFO: The {0} '{1}' does not specify help documents.
 			throw new CoreException(new Status(IStatus.INFO, LanguagePlugin.ID,
-					TextUtility.format(Texts.MESSAGE_E102, getTextLower(), getName())));
+					TextUtility.format(Texts.MESSAGE_E102, getText(), getName())));
 		}
 		String compilerPreferencesText = LanguageUtility.getCompilerPreferencesText(language);
 		if (StringUtility.isEmpty(compilerExecutablePath)) {
 			// ERROR: Help for the '{0}' {1} cannot be displayed because the path to the
 			// compiler executable is not set in the {2} preferences.
 			throw new CoreException(new Status(IStatus.ERROR, LanguagePlugin.ID,
-					TextUtility.format(Texts.MESSAGE_E130, getTextLower(), getName(), compilerPreferencesText)));
+					TextUtility.format(Texts.MESSAGE_E130, getText(), getName(), compilerPreferencesText)));
 		}
 
 		return CompilerHelp.getInstalledHelpDocuments(getHelpDocuments(), compilerExecutablePath);
@@ -383,7 +383,7 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 			// ERROR: Help for the {0} '{1}' cannot be displayed because no help file was
 			// found in the paths relative to the executable path '{2}'.
 			throw new CoreException(new Status(IStatus.ERROR, LanguagePlugin.ID,
-					TextUtility.format(Texts.MESSAGE_E131, getTextLower(), getName(), compilerExecutablePath)));
+					TextUtility.format(Texts.MESSAGE_E131, getText(), getName(), compilerExecutablePath)));
 		}
 		return result;
 

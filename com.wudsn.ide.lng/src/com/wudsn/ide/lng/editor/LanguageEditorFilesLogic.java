@@ -303,7 +303,7 @@ public final class LanguageEditorFilesLogic {
 			// ERROR: Output file extension must be set in the preferences of {0} '{1}' or
 			// via the annotation '{2}'.
 			createMainSourceFileMessage(files, files.outputFileExtensionProperty, IMarker.SEVERITY_ERROR,
-					Texts.MESSAGE_E104, compilerDefinition.getTextLower(), compilerDefinition.getName(),
+					Texts.MESSAGE_E104, compilerDefinition.getText(), compilerDefinition.getName(),
 					LanguageProperties.OUTPUT_FILE_EXTENSION);
 
 			return false;
