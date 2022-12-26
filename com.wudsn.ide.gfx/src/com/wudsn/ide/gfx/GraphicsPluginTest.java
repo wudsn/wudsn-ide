@@ -1,7 +1,7 @@
 package com.wudsn.ide.gfx;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
+import static com.wudsn.ide.base.common.Assertions.assertFalse;
+import static com.wudsn.ide.base.common.Assertions.fail;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
@@ -9,15 +9,15 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
-import org.junit.jupiter.api.Test;
 
 import com.wudsn.ide.base.common.MessageQueue;
 import com.wudsn.ide.base.common.MessageQueue.Entry;
+import com.wudsn.ide.base.common.Test;
 import com.wudsn.ide.gfx.converter.ConverterData;
 import com.wudsn.ide.gfx.converter.ConverterDataLogic;
 import com.wudsn.ide.gfx.model.ConverterMode;
 
-// TODO Implement unit tests / run as plugin test?
+// TODO Implement unit tests / hwo to run run as plugin test?
 class GraphicsPluginTest {
 	private static void assertContainsNoErrorMessage(MessageQueue messageQueue) {
 		if (messageQueue.containsError()) {
