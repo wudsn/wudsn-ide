@@ -1,1 +1,1 @@
-This "ide" folder is only a symbolic link to the "ide" folder of the web site.
+This "ide" folder is only a junction link to the "ide" folder of the web site to access images from the help files.
