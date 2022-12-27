@@ -164,7 +164,8 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	/**
 	 * Sets the id of the compiler. Called by {@link CompilerRegistry} only.
 	 * 
-	 * @param id The id of the compiler, lower case, not empty and not <code>null</code>.
+	 * @param id The id of the compiler, lower case, not empty and not
+	 *           <code>null</code>.
 	 */
 	final void setId(String id) {
 		if (id == null) {
@@ -173,8 +174,8 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 		if (StringUtility.isEmpty(id)) {
 			throw new IllegalArgumentException("Parameter 'id' must not be empty.");
 		}
-		if (id.equals(id.toLowerCase())) {
-			throw new IllegalArgumentException("Parameter 'id' must not be lower case.");
+		if (!id.equals(id.toLowerCase())) {
+			throw new IllegalArgumentException("Parameter 'id' value " + id + " must be lower case.");
 		}
 		this.id = id;
 	}
@@ -182,7 +183,8 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	/**
 	 * Gets the id of the compiler.
 	 * 
-	 * @return The id of the compiler, lower case, not empty and not <code>null</code>.
+	 * @return The id of the compiler, lower case, not empty and not
+	 *         <code>null</code>.
 	 */
 	public final String getId() {
 		if (id == null) {

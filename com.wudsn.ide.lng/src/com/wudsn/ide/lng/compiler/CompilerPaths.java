@@ -78,7 +78,8 @@ public final class CompilerPaths {
 
 	public CompilerPaths() {
 		compilerPaths = new TreeMap<String, CompilerPath>();
-		// TODO: Complete default compiler paths for all assemblers and compilers and write unit test.
+		// TODO: Complete default compiler paths for all assemblers and compilers and
+		// write unit test.
 		// See https://github.com/peterdell/wudsn-ide-tools
 		add(Language.ASM, "acme", Platform.OS_WIN32, Platform.ARCH_X86, "acme.exe");
 		add(Language.ASM, "asm6", Platform.OS_WIN32, Platform.ARCH_X86, "asm6.exe");
@@ -101,8 +102,8 @@ public final class CompilerPaths {
 	}
 
 	private void add(Language language, String compilerId, String os, String osArch, String executablePath) {
-		if (compilerId.equals(compilerId.toLowerCase())) {
-			throw new IllegalArgumentException("Parameter 'compilerId' must not be lower case.");
+		if (!compilerId.equals(compilerId.toLowerCase())) {
+			throw new IllegalArgumentException("Parameter 'compilerId' value " + compilerId + " must be lower case.");
 		}
 		CompilerPath compilerPath = new CompilerPath(language, compilerId, os, osArch, executablePath);
 		compilerPaths.put(compilerPath.getKey(), compilerPath);
