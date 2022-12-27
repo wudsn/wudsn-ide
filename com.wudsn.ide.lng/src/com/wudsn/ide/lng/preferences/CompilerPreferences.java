@@ -27,6 +27,7 @@ import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.compiler.CompilerOutputFolderMode;
 import com.wudsn.ide.lng.compiler.CompilerPaths;
+import com.wudsn.ide.lng.compiler.CompilerPaths.CompilerPath;
 import com.wudsn.ide.lng.runner.RunnerId;
 
 /**
@@ -89,10 +90,14 @@ public final class CompilerPreferences {
 
 		CompilerPaths compilerPaths = LanguagePlugin.getInstance().getCompilerPaths();
 		if (StringUtility.isEmpty(compilerExecutablePath)) {
-			File compilerFile = compilerPaths.getAbsoluteFileForOSAndArch(languagePreferences.getLanguage(), compilerId);
-			if (compilerFile != null) {
-				if (compilerFile.exists() && compilerFile.isFile() && compilerFile.canExecute()) {
-					compilerExecutablePath = compilerFile.getAbsolutePath();
+			CompilerPath compilerPath = compilerPaths.getDefaultCompilerPath(languagePreferences.getLanguage(),
+					compilerId);
+			if (compilerPath != null) {
+				File compilerFile = compilerPath.getAbsoluteFile();
+				if (compilerFile != null) {
+					if (compilerFile.exists() && compilerFile.isFile() && compilerFile.canExecute()) {
+						compilerExecutablePath = compilerFile.getAbsolutePath();
+					}
 				}
 			}
 

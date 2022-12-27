@@ -398,7 +398,9 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 				innerWriter.beginTableRow();
 				innerWriter.writeTableCell(compilerPath.os);
 				innerWriter.writeTableCell(compilerPath.osArch);
-				innerWriter.writeTableCell(compilerPath.getRelativePath());
+				File file = compilerPath.getAbsoluteFile();
+				// Display absolute path if available.
+				innerWriter.writeTableCell(file != null ? file.getAbsolutePath() : compilerPath.getRelativePath());
 				innerWriter.end();
 
 			}

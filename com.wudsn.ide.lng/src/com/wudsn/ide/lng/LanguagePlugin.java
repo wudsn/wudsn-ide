@@ -19,6 +19,10 @@
 
 package com.wudsn.ide.lng;
 
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -28,6 +32,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.eclipse.core.runtime.ListenerList;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.QualifiedName;
 import org.eclipse.jface.preference.JFacePreferences;
 import org.eclipse.jface.resource.JFaceResources;
@@ -36,6 +41,7 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.osgi.framework.BundleContext;
 
 import com.wudsn.ide.base.common.AbstractIDEPlugin;
+import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.lng.compiler.CompilerConsole;
 import com.wudsn.ide.lng.compiler.CompilerPaths;
 import com.wudsn.ide.lng.compiler.CompilerPathsTest;
@@ -202,6 +208,30 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 		return languages;
 	}
 
+
+	public File getAbsoluteToolsFile(String relativePath) {
+		if (relativePath == null) {
+			return null;
+		}
+		URL eclipseFolderURL = Platform.getInstallLocation().getURL();
+		if (eclipseFolderURL == null) {
+			return null;
+		}
+		URI uri;
+		try {
+
+			uri = eclipseFolderURL.toURI();
+		} catch (URISyntaxException ignore) {
+			return null;
+		}
+		File eclipseFolder = FileUtility.getCanonicalFile(new File(uri));
+		File ideFolder = eclipseFolder.getParentFile();
+		File toolsFolder = ideFolder.getParentFile();
+		File compilerFile = new File(toolsFolder, relativePath);
+		return compilerFile;
+	}
+
+	
 	/**
 	 * Gets the compiler registry for this plugin.
 	 * 

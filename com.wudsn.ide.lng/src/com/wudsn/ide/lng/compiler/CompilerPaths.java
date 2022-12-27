@@ -20,9 +20,6 @@
 package com.wudsn.ide.lng.compiler;
 
 import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +28,6 @@ import java.util.TreeMap;
 
 import org.eclipse.core.runtime.Platform;
 
-import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguagePlugin;
 
@@ -71,6 +67,10 @@ public final class CompilerPaths {
 
 		public String getRelativePath() {
 			return language.name() + "/" + compilerId.toUpperCase() + "/" + executablePath;
+		}
+
+		public File getAbsoluteFile() {
+			return LanguagePlugin.getInstance().getAbsoluteToolsFile(getRelativePath());
 		}
 
 	}
@@ -120,49 +120,20 @@ public final class CompilerPaths {
 		compilerPaths.put(compilerPath.getKey(), compilerPath);
 	}
 
-	private String getRelativePath(Language language, String compilerId) {
+	public CompilerPath getDefaultCompilerPath(Language language, String compilerId) {
 		String os = Platform.getOS();
 		String osArch = Platform.getOSArch();
 		String key = CompilerPath.getKey(language, compilerId, os, osArch);
 		CompilerPath compilerPath = compilerPaths.get(key);
-		if (compilerPath != null) {
-			return compilerPath.getRelativePath();
+		// Default to 32-bit version if 64-bit version not defined?
+		if (compilerPath == null) {
+			if (osArch.equals(Platform.ARCH_X86_64)) {
+				osArch = Platform.ARCH_X86;
+				key = CompilerPath.getKey(language, compilerId, os, osArch);
+				compilerPath = compilerPaths.get(key);
+			}
 		}
-		return null;
-	}
-
-	/**
-	 * Gets the absolute file path the default executable on the current OS and OS
-	 * architecture.
-	 * 
-	 * @param language   The language, not empty and not <code>null</code>.
-	 * @param compilerId The compiler ID, not empty and not <code>null</code>.
-	 * @return The file or <code>null</code> is no file could be determined.
-	 */
-	public File getAbsoluteFileForOSAndArch(Language language, String compilerId) {
-		return getAbsoluteFile(getRelativePath(language, compilerId));
-	}
-
-	public File getAbsoluteFile(String relativePath) {
-		if (relativePath == null) {
-			return null;
-		}
-		URL eclipseFolderURL = Platform.getInstallLocation().getURL();
-		if (eclipseFolderURL == null) {
-			return null;
-		}
-		URI uri;
-		try {
-
-			uri = eclipseFolderURL.toURI();
-		} catch (URISyntaxException ignore) {
-			return null;
-		}
-		File eclipseFolder = FileUtility.getCanonicalFile(new File(uri));
-		File ideFolder = eclipseFolder.getParentFile();
-		File toolsFolder = ideFolder.getParentFile();
-		File compilerFile = new File(toolsFolder, relativePath);
-		return compilerFile;
+		return compilerPath;
 	}
 
 	public List<CompilerPath> getCompilerPaths() {

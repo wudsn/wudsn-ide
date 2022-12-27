@@ -42,8 +42,7 @@ public final class CompilerPathsTest {
 		CompilerPaths compilerPaths = LanguagePlugin.getInstance().getCompilerPaths();
 		List<CompilerPath> compilerPathList = compilerPaths.getCompilerPaths();
 		for (CompilerPath compilerPath : compilerPathList) {
-			String relativePath = compilerPath.getRelativePath();
-			File file = compilerPaths.getAbsoluteFile(relativePath);
+			File file = compilerPath.getAbsoluteFile();
 			String filePath = "";
 			String result = "NOT defined";
 			if (file != null) {
