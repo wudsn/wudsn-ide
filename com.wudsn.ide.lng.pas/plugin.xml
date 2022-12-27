@@ -113,7 +113,7 @@
             defaultHardware="ATARI8BIT"
             defaultParameters="${sourceFilePath} "
             homePageURL="https://github.com/tebe6502/Mad-Pascal/releases"
-            id="MP"
+            id="mp"
             language="PAS"
             name="%com.wudsn.ide.lng.pas.compiler.mp.MadPascalCompiler.name"
             version="1.6.5">
