@@ -34,7 +34,7 @@ public final class PascalPreferencesNESCompilersPage extends LanguagePreferences
 	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
 	 */
 	public PascalPreferencesNESCompilersPage() {
-		super(Language.ASM,Hardware.NES);
+		super(Language.PAS,Hardware.NES);
 
 	}
 

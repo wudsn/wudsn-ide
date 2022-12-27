@@ -34,7 +34,7 @@ public final class PascalPreferencesC64CompilersPage extends LanguagePreferences
 	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
 	 */
 	public PascalPreferencesC64CompilersPage() {
-		super(Language.ASM, Hardware.C64);
+		super(Language.PAS, Hardware.C64);
 
 	}
 

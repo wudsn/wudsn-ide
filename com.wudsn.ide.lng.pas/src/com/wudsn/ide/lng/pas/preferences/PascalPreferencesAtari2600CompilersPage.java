@@ -34,7 +34,7 @@ public final class PascalPreferencesAtari2600CompilersPage extends LanguagePrefe
 	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
 	 */
 	public PascalPreferencesAtari2600CompilersPage() {
-		super(Language.ASM,Hardware.ATARI2600);
+		super(Language.PAS,Hardware.ATARI2600);
 
 	}
 

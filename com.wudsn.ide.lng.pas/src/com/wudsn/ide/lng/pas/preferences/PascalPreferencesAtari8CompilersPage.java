@@ -35,7 +35,7 @@ public final class PascalPreferencesAtari8CompilersPage extends LanguagePreferen
 	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
 	 */
 	public PascalPreferencesAtari8CompilersPage() {
-		super(Language.ASM,Hardware.ATARI8BIT);
+		super(Language.PAS,Hardware.ATARI8BIT);
 
 	}
 

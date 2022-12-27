@@ -34,7 +34,7 @@ public final class PascalPreferencesAtari7800CompilersPage extends LanguagePrefe
 	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".
 	 */
 	public PascalPreferencesAtari7800CompilersPage() {
-		super(Language.ASM, Hardware.ATARI7800);
+		super(Language.PAS, Hardware.ATARI7800);
 
 	}
 
