@@ -395,7 +395,7 @@ public final class CompilerDefinition implements Comparable<CompilerDefinition> 
 	}
 
 	public List<CompilerPath> getDefaultPaths() {
-		CompilerPaths compilerPaths = new CompilerPaths();
+		CompilerPaths compilerPaths = LanguagePlugin.getInstance().getCompilerPaths();
 		return compilerPaths.getCompilerPaths(language, id);
 	}
 

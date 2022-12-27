@@ -33,6 +33,7 @@ import org.eclipse.core.runtime.Platform;
 
 import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.lng.Language;
+import com.wudsn.ide.lng.LanguagePlugin;
 
 /**
  * Computation of default paths for compilers.
@@ -76,10 +77,12 @@ public final class CompilerPaths {
 
 	private Map<String, CompilerPath> compilerPaths;
 
+	/**
+	 * Created by the {@linkplain LanguagePlugin}.
+	 */
 	public CompilerPaths() {
 		compilerPaths = new TreeMap<String, CompilerPath>();
-		// TODO: Complete default compiler paths for all assemblers and compilers and
-		// write unit test.
+		// TODO: Complete default compiler paths for all assemblers and compilers DSAM/KickAss/TASS.
 		// See https://github.com/peterdell/wudsn-ide-tools
 		add(Language.ASM, "acme", Platform.OS_WIN32, Platform.ARCH_X86, "acme.exe");
 		add(Language.ASM, "asm6", Platform.OS_WIN32, Platform.ARCH_X86, "asm6.exe");
@@ -98,7 +101,6 @@ public final class CompilerPaths {
 		add(Language.ASM, "xasm", Platform.OS_WIN32, Platform.ARCH_X86, "xasm.exe");
 		add(Language.PAS, "mp", Platform.OS_MACOSX, Platform.ARCH_X86_64, "mp.macos-x86-64");
 		add(Language.PAS, "mp", Platform.OS_WIN32, Platform.ARCH_X86_64, "mp.exe");
-
 	}
 
 	private void add(Language language, String compilerId, String os, String osArch, String executablePath) {
@@ -109,7 +111,7 @@ public final class CompilerPaths {
 		compilerPaths.put(compilerPath.getKey(), compilerPath);
 	}
 
-	public String getRelativePath(Language language, String compilerId) {
+	private String getRelativePath(Language language, String compilerId) {
 		String os = Platform.getOS();
 		String osArch = Platform.getOSArch();
 		String key = CompilerPath.getKey(language, compilerId, os, osArch);
@@ -120,10 +122,19 @@ public final class CompilerPaths {
 		return null;
 	}
 
-	public File getAbsoluteFile(Language language, String compilerId) {
-		String path = getRelativePath(language, compilerId);
+	/**
+	 * Gets the absolute file path the default executable on the current OS and OS architecture.
+	 * 
+	 * @param language The language, not empty and not <code>null</code>.
+	 * @param compilerId The compiler ID, not empty and not <code>null</code>.
+	 * @return The file or <code>null</code> is no file could be determined.
+	 */
+	public File getAbsoluteFileForOSAndArch(Language language, String compilerId) {
+		return getAbsoluteFile(getRelativePath(language, compilerId));
+	}
 
-		if (path == null) {
+	public File getAbsoluteFile(String relativePath) {
+		if (relativePath == null) {
 			return null;
 		}
 		URL eclipseFolderURL = Platform.getInstallLocation().getURL();
@@ -140,8 +151,12 @@ public final class CompilerPaths {
 		File eclipseFolder = FileUtility.getCanonicalFile(new File(uri));
 		File ideFolder = eclipseFolder.getParentFile();
 		File toolsFolder = ideFolder.getParentFile();
-		File compilerFile = new File(toolsFolder, path);
+		File compilerFile = new File(toolsFolder, relativePath);
 		return compilerFile;
+	}
+
+	public List<CompilerPath> getCompilerPaths() {
+		return Collections.unmodifiableList(new ArrayList<CompilerPath>(compilerPaths.values()));
 	}
 
 	public List<CompilerPath> getCompilerPaths(Language language, String id) {

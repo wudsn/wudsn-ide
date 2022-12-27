@@ -62,6 +62,7 @@ import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
+import com.wudsn.ide.lng.compiler.CompilerPaths;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
 import com.wudsn.ide.lng.editor.LanguageContentAssistProcessorDefaultCase;
 import com.wudsn.ide.lng.editor.LanguageEditor;
@@ -423,7 +424,7 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		// Create the editors for all compilers of the hardware.
 		CompilerRegistry compilerRegistry = plugin.getCompilerRegistry();
 		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
-
+		CompilerPaths compilerPaths = plugin.getCompilerPaths();
 		for (CompilerDefinition compilerDefinition : compilerDefinitions) {
 			String compilerId = compilerDefinition.getId();
 			TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
@@ -443,6 +444,7 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 			composite = SWTFactory.createComposite(tabContent, 4, 2, GridData.FILL_HORIZONTAL);
 			FileFieldDownloadEditor fileFieldEditor = new FileFieldDownloadEditor(name,
 					Texts.PREFERENCES_COMPILER_EXECUTABLE_PATH_LABEL, composite);
+			fileFieldEditor.setFilterPath(compilerPaths.getAbsoluteFileForOSAndArch(language, compilerId));
 			fileFieldEditor.setFileExtensions(ProcessWithLogs.getExecutableExtensions());
 
 			addField(fileFieldEditor);

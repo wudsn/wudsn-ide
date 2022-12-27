@@ -37,6 +37,8 @@ import org.osgi.framework.BundleContext;
 
 import com.wudsn.ide.base.common.AbstractIDEPlugin;
 import com.wudsn.ide.lng.compiler.CompilerConsole;
+import com.wudsn.ide.lng.compiler.CompilerPaths;
+import com.wudsn.ide.lng.compiler.CompilerPathsTest;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
 import com.wudsn.ide.lng.preferences.LanguagePreferences;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesChangeListener;
@@ -76,6 +78,11 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 	private CompilerRegistry compilerRegistry;
 
 	/**
+	 * The compiler paths.
+	 */
+	private CompilerPaths compilerPaths;
+	
+	/**
 	 * The compiler console.
 	 */
 	private CompilerConsole compilerConsole;
@@ -97,6 +104,7 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 		preferences = null;
 		preferencesChangeListeners = new ListenerList<LanguagePreferencesChangeListener>(ListenerList.IDENTITY);
 		compilerRegistry = new CompilerRegistry();
+		compilerPaths = new CompilerPaths();
 		compilerConsole = null;
 		runnerRegistry = new RunnerRegistry();
 		properties = new HashMap<QualifiedName, String>(10);
@@ -157,6 +165,9 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 
 			}
 		});
+		
+		// TODO: Call unit tests
+		CompilerPathsTest.main(new String[0]);
 
 	}
 
@@ -203,6 +214,12 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 		return compilerRegistry;
 	}
 
+	public CompilerPaths getCompilerPaths() {
+		if (compilerPaths == null) {
+			throw new IllegalStateException("Field 'compilerPaths' must not be null.");
+		}
+		return compilerPaths;
+	}
 	/**
 	 * Gets the compiler console for this plugin.
 	 * 

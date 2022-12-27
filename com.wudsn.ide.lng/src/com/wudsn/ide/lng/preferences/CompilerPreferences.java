@@ -23,6 +23,7 @@ import java.io.File;
 
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.compiler.CompilerOutputFolderMode;
 import com.wudsn.ide.lng.compiler.CompilerPaths;
@@ -86,9 +87,9 @@ public final class CompilerPreferences {
 	public String getCompilerExecutablePathOrDefault() {
 		String compilerExecutablePath = getCompilerExecutablePath();
 
-		CompilerPaths compilerPaths = new CompilerPaths();
+		CompilerPaths compilerPaths = LanguagePlugin.getInstance().getCompilerPaths();
 		if (StringUtility.isEmpty(compilerExecutablePath)) {
-			File compilerFile = compilerPaths.getAbsoluteFile(languagePreferences.getLanguage(), compilerId);
+			File compilerFile = compilerPaths.getAbsoluteFileForOSAndArch(languagePreferences.getLanguage(), compilerId);
 			if (compilerFile != null) {
 				if (compilerFile.exists() && compilerFile.isFile() && compilerFile.canExecute()) {
 					compilerExecutablePath = compilerFile.getAbsolutePath();
