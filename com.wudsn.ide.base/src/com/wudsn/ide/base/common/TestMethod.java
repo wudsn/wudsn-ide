@@ -18,12 +18,19 @@
  */
 package com.wudsn.ide.base.common;
 
-public final class Test {
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-	private Test() {
-	}
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-	public static void log(String message) {
-		System.out.println(message);
-	}
+/**
+ * Marker interface for test method to be executed as unit tests
+ * @author Peter Dell
+ *
+ */
+@Retention(RUNTIME)
+@Target(METHOD)
+public @interface TestMethod {
+
 }
