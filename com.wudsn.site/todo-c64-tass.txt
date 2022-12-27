@@ -1,0 +1,11 @@
+  <compiler
+        class="com.wudsn.ide.asm.compiler.c64.acme.AcmeCompiler"
+        defaultParameters="-C -a -B -i ${sourceFilePath} -o ${outputFilePath} "
+        hardware="C64"
+        helpFilePath="./README.html"
+        homePageURL="https://sourceforge.net/projects/tass64/files/latest/download"
+        id="c64.tass"
+        illegalOpcodesSupported="true"
+        name="%com.wudsn.ide.asm.compiler.c64.tass.TassCompiler.name"
+        w65816OpcodesSupported="false">
+  </compiler>
