@@ -191,7 +191,11 @@ final class HTMLWriter {
 		if (text == null) {
 			throw new IllegalArgumentException("Parameter 'text' must not be null.");
 		}
-		return "<a href=\"" + href + "\" >" + text + "</a>";
+		String target ="";
+		if (href.toLowerCase().startsWith("https://")) {
+			target=" target=\"_blank\"";
+		}
+		return "<a href=\"" + href + "\" "+target+">" + text + "</a>";
 	}
 
 	public static String getString(List<String> list) {
