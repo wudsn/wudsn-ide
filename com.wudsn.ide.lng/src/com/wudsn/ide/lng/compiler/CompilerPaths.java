@@ -76,15 +76,34 @@ public final class CompilerPaths {
 
 	private Map<String, CompilerPath> compilerPaths;
 
-	// TODO: Make provide 
 	public CompilerPaths() {
 		compilerPaths = new TreeMap<String, CompilerPath>();
+		// TODO: Complete default compiler paths for all assemblers and compilers and write unit test.
+		// See https://github.com/peterdell/wudsn-ide-tools
+		add(Language.ASM, "acme", Platform.OS_WIN32, Platform.ARCH_X86, "acme.exe");
+		add(Language.ASM, "asm6", Platform.OS_WIN32, Platform.ARCH_X86, "asm6.exe");
+		add(Language.ASM, "atasm", Platform.OS_LINUX, Platform.ARCH_X86, "atasm.linux-i386");
+		add(Language.ASM, "atasm", Platform.OS_LINUX, Platform.ARCH_X86_64, "atasm.linux-x86-64");
+		add(Language.ASM, "atasm", Platform.OS_MACOSX, Platform.ARCH_X86, "atasm.macos-i386");
+		add(Language.ASM, "atasm", Platform.OS_MACOSX, Platform.ARCH_X86_64, "atasm.macos-x86-64");
+		add(Language.ASM, "atasm", Platform.OS_MACOSX, Platform.ARCH_PPC, "atasm.macos-powerpc");
+		add(Language.ASM, "atasm", Platform.OS_WIN32, Platform.ARCH_X86, "atasm.exe");
+		add(Language.ASM, "mads", Platform.OS_MACOSX, Platform.ARCH_X86, "mads.macos-i386");
+		add(Language.ASM, "mads", Platform.OS_MACOSX, Platform.ARCH_X86_64, "mads.macos-x86-64");
+		add(Language.ASM, "mads", Platform.OS_MACOSX, Platform.ARCH_PPC, "mads.macos-powerpc");
 		add(Language.ASM, "mads", Platform.OS_WIN32, Platform.ARCH_X86_64, "mads.exe");
-		add(Language.PAS, "MP", Platform.OS_WIN32, Platform.ARCH_X86_64, "mp.exe"); //TODO make IDs all uppercase?
+		add(Language.ASM, "xasm", Platform.OS_LINUX, Platform.ARCH_X86, "xasm.linux-i386");
+		add(Language.ASM, "xasm", Platform.OS_MACOSX, Platform.ARCH_X86, "xasm.macos-i386");
+		add(Language.ASM, "xasm", Platform.OS_WIN32, Platform.ARCH_X86, "xasm.exe");
+		add(Language.PAS, "mp", Platform.OS_MACOSX, Platform.ARCH_X86_64, "mp.macos-x86-64");
+		add(Language.PAS, "mp", Platform.OS_WIN32, Platform.ARCH_X86_64, "mp.exe");
 
 	}
 
 	private void add(Language language, String compilerId, String os, String osArch, String executablePath) {
+		if (compilerId.equals(compilerId.toLowerCase())) {
+			throw new IllegalArgumentException("Parameter 'compilerId' must not be lower case.");
+		}
 		CompilerPath compilerPath = new CompilerPath(language, compilerId, os, osArch, executablePath);
 		compilerPaths.put(compilerPath.getKey(), compilerPath);
 	}
