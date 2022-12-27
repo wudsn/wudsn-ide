@@ -12,7 +12,7 @@ import org.eclipse.core.runtime.Path;
 
 import com.wudsn.ide.base.common.MessageQueue;
 import com.wudsn.ide.base.common.MessageQueue.Entry;
-import com.wudsn.ide.base.common.Test;
+import com.wudsn.ide.base.common.TestMethod;
 import com.wudsn.ide.gfx.converter.ConverterData;
 import com.wudsn.ide.gfx.converter.ConverterDataLogic;
 import com.wudsn.ide.gfx.model.ConverterMode;
@@ -31,7 +31,7 @@ class GraphicsPluginTest {
 
 	};
 
-	@Test
+	@TestMethod
 	void test() {
 
 		MessageQueue messageQueue = new MessageQueue();
