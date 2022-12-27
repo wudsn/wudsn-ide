@@ -122,7 +122,7 @@
         class="com.wudsn.ide.lng.asm.compiler.dasm.DasmCompiler"
         defaultHardware="ATARI2600"
         defaultParameters="${sourceFilePath} -o${outputFilePath} -f3 -v5 -s${outputFilePathWithoutExtension}.sym -l${outputFilePathWithoutExtension}.lst"
-        homePageURL="http://dasm-dillon.sourceforge.net"
+        homePageURL="https://dasm-assembler.github.io"
         id="dasm"
         language="ASM"
         name="%com.wudsn.ide.lng.asm.compiler.dasm.DasmCompiler.name"
