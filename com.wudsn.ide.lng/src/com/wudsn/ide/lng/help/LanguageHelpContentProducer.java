@@ -391,7 +391,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		writer.writeTableRowCode(Texts.TOC_COMPILER_HELP_DOCUMENTS_LABEL, innerWriter.toHTML());
 
 		List<CompilerPath> defaultPaths = compilerDefinition.getDefaultPaths();
-		innerWriter = new HTMLWriter(); // TODO: Breaks layout if there are no paths
+		innerWriter = new HTMLWriter(); 
 		if (!defaultPaths.isEmpty()) {
 			innerWriter.beginTable(false);
 			for (CompilerPath compilerPath : defaultPaths) {
