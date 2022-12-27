@@ -62,7 +62,7 @@
     	<replace file="${daily_folder}\site.xml" propertyfile="site.properties">
     	   <replacefilter token="@version@" property="stable_version"/>
     	</replace>
-    	<echo>Open daily/site.xml and press "Build All". Then run the target "upload_to_site" to upload the daily version.</echo>
+    	<echo>Open update/daily/site.xml and press "Build All". Then run the target "upload_to_site" to upload the daily version.</echo>
     </target>
 
     <!-- This publishes the daily build when testing it was successful -->
