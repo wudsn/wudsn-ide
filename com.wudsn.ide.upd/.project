@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>com.wudsn.ide.upd</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.pde.UpdateSiteBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.pde.UpdateSiteNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>update</name>
+			<type>2</type>
+			<location>C:/jac/system/WWW/Sites/www.wudsn.com/update</location>
+		</link>
+		<link>
+			<name>wudsn</name>
+			<type>2</type>
+			<location>C:/jac/wudsn</location>
+		</link>
+		<link>
+			<name>www.wudsn.com</name>
+			<type>2</type>
+			<location>C:/jac/system/WWW/Sites/www.wudsn.com</location>
+		</link>
+	</linkedResources>
+</projectDescription>
