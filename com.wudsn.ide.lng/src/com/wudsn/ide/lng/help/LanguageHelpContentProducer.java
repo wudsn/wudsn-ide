@@ -373,7 +373,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 				HTMLWriter.getLink(compilerDefinition.getHomePageURL(), compilerDefinition.getHomePageURL()));
 
 		var helpDocuments = compilerDefinition.getHelpDocuments();
-		HTMLWriter innerWriter = new HTMLWriter(); // TODO: Breaks layout if there are no paths
+		HTMLWriter innerWriter = new HTMLWriter();
 		if (!helpDocuments.isEmpty()) {
 			innerWriter.beginTable(false);
 			for (var helpDocument : helpDocuments) {
@@ -391,7 +391,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		writer.writeTableRowCode(Texts.TOC_COMPILER_HELP_DOCUMENTS_LABEL, innerWriter.toHTML());
 
 		List<CompilerPath> defaultPaths = compilerDefinition.getDefaultPaths();
-		innerWriter = new HTMLWriter(); 
+		innerWriter = new HTMLWriter();
 		if (!defaultPaths.isEmpty()) {
 			innerWriter.beginTable(false);
 			for (CompilerPath compilerPath : defaultPaths) {
