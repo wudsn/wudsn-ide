@@ -1,6 +1,6 @@
 # WUDSN IDE
 
-[WUDSN IDE](https://www.wudsn.com/index.php/ide) is a free integrated Apple II, Atari 2600, Atari 7800, Atari 8-bit, C64 and NES development plugin for Eclipse.
+[WUDSN IDE](https://www.wudsn.com/index.php/ide) is a free integrated Apple II, Atari 2600, Atari 7800, Atari 8-bit, C64 and NES development plugin for Eclipse.</br>
 ![Example](https://www.wudsn.com/productions/java/ide/features/ide-example-source-small-outline.png)
 
 - [WUDSN IDE Installer](https://github.com/peterdell/wudsn-ide-install)
