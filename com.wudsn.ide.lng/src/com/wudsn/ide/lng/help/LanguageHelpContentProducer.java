@@ -393,14 +393,23 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		List<CompilerPath> defaultPaths = compilerDefinition.getDefaultPaths();
 		innerWriter = new HTMLWriter();
 		if (!defaultPaths.isEmpty()) {
-			innerWriter.beginTable(false);
+			innerWriter.beginTable(true);
+			innerWriter.beginTableRow();
+			innerWriter.writeTableHeader(Texts.TOC_COMPILER_DEFAULT_PATHS_OS_LABEL);
+			innerWriter.writeTableHeader(Texts.TOC_COMPILER_DEFAULT_PATHS_ARCHITECTURE_LABEL);
+			innerWriter.writeTableHeader(Texts.TOC_COMPILER_DEFAULT_PATHS_ABSOULTE_PATH_LABEL);
+			innerWriter.writeTableHeader(Texts.TOC_COMPILER_DEFAULT_PATHS_FILE_PRESENT_LABEL);
+			innerWriter.end();
 			for (CompilerPath compilerPath : defaultPaths) {
 				innerWriter.beginTableRow();
 				innerWriter.writeTableCell(compilerPath.os);
 				innerWriter.writeTableCell(compilerPath.osArch);
 				File file = compilerPath.getAbsoluteFile();
-				// Display absolute path if available.
+				boolean exists = (file != null && file.exists());
+				// Display absolute path if available. This should always be the case.
 				innerWriter.writeTableCell(file != null ? file.getAbsolutePath() : compilerPath.getRelativePath());
+				innerWriter.writeTableCell(exists ? Texts.TOC_COMPILER_DEFAULT_PATHS_FILE_PRESENT_YES_LABEL
+						: Texts.TOC_COMPILER_DEFAULT_PATHS_FILE_PRESENT_NO_LABEL);
 				innerWriter.end();
 
 			}
