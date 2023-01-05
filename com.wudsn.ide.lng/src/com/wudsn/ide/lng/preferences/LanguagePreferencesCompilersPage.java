@@ -19,6 +19,7 @@
 
 package com.wudsn.ide.lng.preferences;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -237,8 +238,8 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 	@Override
 	public final void createFieldEditors() {
 
-		Composite parent = getFieldEditorParent();
-		GridData gridData = new GridData();
+		var parent = getFieldEditorParent();
+		var gridData = new GridData();
 		gridData.verticalIndent = 0;
 		gridData.horizontalIndent = 0;
 		parent.setLayoutData(gridData);
@@ -253,8 +254,8 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 		}
 
 		// Create the editors for all compilers of the hardware.
-		CompilerRegistry compilerRegistry = plugin.getCompilerRegistry();
-		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
+		var compilerRegistry = plugin.getCompilerRegistry();
+		var compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
 
 		tabFolder = new TabFolder(parent, SWT.FLAT);
 		for (CompilerDefinition compilerDefinition : compilerDefinitions) {
@@ -299,8 +300,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 			throw new IllegalArgumentException("Parameter 'compilerDefinition' must not be null.");
 		}
 
-		String[][] labelsAndValues;
-		labelsAndValues = new String[][] {
+		var labelsAndValues = new String[][] {
 				{ Texts.PREFERENCES_COMPILER_OUTPUT_FOLDER_MODE_SOURCE_FOLDER_TEXT,
 						CompilerOutputFolderMode.SOURCE_FOLDER },
 				{ Texts.PREFERENCES_COMPILER_OUTPUT_FOLDER_MODE_TEMP_FOLDER_TEXT,
@@ -310,25 +310,22 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 
 		};
 
-		String compilerId = compilerDefinition.getId();
-		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
+		var compilerId = compilerDefinition.getId();
+		var tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText(compilerDefinition.getName());
 
-		Composite tabContent;
-		tabContent = SWTFactory.createComposite(tabFolder, 1, 1, GridData.FILL_BOTH);
+		var tabContent = SWTFactory.createComposite(tabFolder, 1, 1, GridData.FILL_BOTH);
 
 		List<ControlDecoration> controlDecorations;
 		controlDecorations = new ArrayList<ControlDecoration>();
 
-		Composite composite;
-
 		// Field: target
-		composite = SWTFactory.createComposite(tabContent, 2, 3, GridData.FILL_HORIZONTAL);
+		var composite = SWTFactory.createComposite(tabContent, 2, 3, GridData.FILL_HORIZONTAL);
 
 		// Filtering of Target based on hardware is currently not implemented
 		// because expansion boards like a W65816 board might be there/added
 		// for a hardware.
-		List<Target> targets = compilerDefinition.getSupportedTargets();
+		var targets = compilerDefinition.getSupportedTargets();
 		String[][] entryNamesAndValues = new String[targets.size()][];
 		int i = 0;
 		for (Target target : targets) {
@@ -338,23 +335,21 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 			i++;
 		}
 
-		FieldEditor comboFieldEditor = new ComboFieldEditor(
+		var comboFieldEditor = new ComboFieldEditor(
 				LanguagePreferencesConstants.getCompilerTargetName(compilerId, hardware),
 				Texts.PREFERENCES_COMPILER_TARGET_LABEL, entryNamesAndValues, composite);
 		comboFieldEditor.setEnabled(entryNamesAndValues.length > 1, composite);
 		addField(comboFieldEditor);
 
-		String name;
-
 		// Field: defaultParameters
 		composite = SWTFactory.createComposite(tabContent, 2, 2, GridData.FILL_HORIZONTAL);
 
-		Label label = new Label(composite, SWT.LEFT);
+		var label = new Label(composite, SWT.LEFT);
 		label.setText(Texts.PREFERENCES_COMPILER_DEFAULT_PARAMETERS_LABEL);
-		Text textField = new Text(composite, SWT.SINGLE | SWT.BORDER);
+		var textField = new Text(composite, SWT.SINGLE | SWT.BORDER);
 		textField.setEditable(false);
 		textField.setText(compilerDefinition.getDefaultParameters());
-		GridData gd = new GridData();
+		var gd = new GridData();
 		gd.horizontalSpan = 2;
 		gd.horizontalAlignment = GridData.FILL;
 		gd.grabExcessHorizontalSpace = true;
@@ -362,9 +357,9 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 
 		// Field: parameters
 		composite = SWTFactory.createComposite(tabContent, 2, 2, GridData.FILL_HORIZONTAL);
-		StringFieldEditor parametersFieldEditor;
-		name = LanguagePreferencesConstants.getCompilerParametersName(compilerId, hardware);
-		parametersFieldEditor = new StringFieldEditor(name, Texts.PREFERENCES_COMPILER_PARAMETERS_LABEL, tabContent);
+		var name = LanguagePreferencesConstants.getCompilerParametersName(compilerId, hardware);
+		var parametersFieldEditor = new StringFieldEditor(name, Texts.PREFERENCES_COMPILER_PARAMETERS_LABEL,
+				tabContent);
 
 		String compilerParametersHelp = Texts.PREFERENCES_COMPILER_PARAMETERS_HELP + "\n"
 				+ Texts.PREFERENCES_COMPILER_PARAMETERS_VARIABLES;
@@ -388,16 +383,14 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 
 		// Field: outputFolderPath
 		composite = SWTFactory.createComposite(tabContent, 2, 2, GridData.FILL_HORIZONTAL);
-		StringFieldEditor outputFolderPathFieldEditor;
-		outputFolderPathFieldEditor = new DirectoryFieldDownloadEditor(
+		var outputFolderPathFieldEditor = new DirectoryFieldDownloadEditor(
 				LanguagePreferencesConstants.getCompilerOutputFolderPathName(compilerId, hardware),
 				Texts.PREFERENCES_COMPILER_OUTPUT_FOLDER_PATH_LABEL, composite);
 		addField(outputFolderPathFieldEditor);
 
 		// Create a connection between the output mode field and the output
 		// path field.
-		OutputFolderModeChangeListener outputFolderModeChangeListener;
-		outputFolderModeChangeListener = new OutputFolderModeChangeListener(composite, outputFolderPathFieldEditor);
+		var outputFolderModeChangeListener = new OutputFolderModeChangeListener(composite, outputFolderPathFieldEditor);
 		// Set initial status based on current output folder mode.
 		outputFolderModeChangeListener
 				.setOutputFolderMode(getPreferenceStore().getString(outputFolderModeChoiceEditor.getPreferenceName()));
@@ -406,8 +399,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 
 		// Field: outputFileExtension
 		composite = SWTFactory.createComposite(tabContent, 2, 2, GridData.FILL_HORIZONTAL);
-		StringFieldEditor outputFileExtensionFieldEditor;
-		outputFileExtensionFieldEditor = new StringFieldEditor(
+		var outputFileExtensionFieldEditor = new StringFieldEditor(
 				LanguagePreferencesConstants.getCompilerOutputFileExtensionName(compilerId, hardware),
 				Texts.PREFERENCES_COMPILER_OUTPUT_FILE_EXTENSION_LABEL, composite);
 
@@ -419,12 +411,11 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 
 		composite = SWTFactory.createComposite(tabContent, 1, 2, GridData.FILL_HORIZONTAL);
 
-		RunnerRegistry runnerRegistry = plugin.getRunnerRegistry();
-		List<RunnerDefinition> runnerDefinitions;
-		runnerDefinitions = runnerRegistry.getDefinitions(hardware);
+		var runnerRegistry = plugin.getRunnerRegistry();
+		var runnerDefinitions = runnerRegistry.getDefinitions(hardware);
 		entryNamesAndValues = new String[runnerDefinitions.size()][];
 		i = 0;
-		for (RunnerDefinition runnerDefinition : runnerDefinitions) {
+		for (var runnerDefinition : runnerDefinitions) {
 			entryNamesAndValues[i] = new String[2];
 			entryNamesAndValues[i][1] = runnerDefinition.getId();
 			entryNamesAndValues[i][0] = runnerDefinition.getName();
@@ -436,14 +427,14 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 		addField(comboFieldEditor);
 		createRunnerFieldEdiors(compilerId, composite, controlDecorations);
 
-		Composite disabledControl = SWTFactory.createComposite(tabFolder, 1, 1, GridData.FILL_BOTH);
+		var disabledControl = SWTFactory.createComposite(tabFolder, 1, 1, GridData.FILL_BOTH);
 		label = new Label(disabledControl, SWT.NONE);
 
 		// ERROR: Path to {0} '{1}' executable is not set in the '{2}' preferences.
-		String compilerPreferencesText = LanguageUtility.getCompilerPreferencesText(compilerDefinition.getLanguage());
+		var compilerPreferencesText = LanguageUtility.getCompilerPreferencesText(compilerDefinition.getLanguage());
 		label.setText(TextUtility.format(Texts.MESSAGE_E100, compilerDefinition.getText(), compilerDefinition.getName(),
 				compilerPreferencesText));
-		Tab tab = new Tab(compilerDefinition, tabs.size(), tabItem, tabContent, disabledControl, controlDecorations);
+		var tab = new Tab(compilerDefinition, tabs.size(), tabItem, tabContent, disabledControl, controlDecorations);
 		tabs.put(compilerId, tab);
 
 	}
@@ -460,10 +451,9 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 			throw new IllegalArgumentException("Parameter 'tab' must not be null.");
 		}
 
-		LanguagePreferences languagePreferences = plugin.getLanguagePreferences(language);
-		CompilerPreferences compilerPreferences = languagePreferences.getCompilerPreferences(tab.compilerDefinition,
-				hardware);
-		boolean enabled = StringUtility.isSpecified(compilerPreferences.getCompilerExecutablePathOrDefault());
+		var languagePreferences = plugin.getLanguagePreferences(language);
+		var compilerPreferences = languagePreferences.getCompilerPreferences(tab.compilerDefinition, hardware);
+		var enabled = StringUtility.isSpecified(compilerPreferences.getCompilerExecutablePathOrDefault());
 
 		if (!tab.initialized || enabled != tab.enabled) {
 			tab.initialized = true;
@@ -476,8 +466,8 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 			tab.disabledControl.setVisible(!enabled);
 			tab.enabledControl.setVisible(enabled);
 		}
-		boolean tabActive = tab.tabIndex == tabFolder.getSelectionIndex();
-		for (ControlDecoration controlDecoration : tab.controlDecorations) {
+		var tabActive = tab.tabIndex == tabFolder.getSelectionIndex();
+		for (var controlDecoration : tab.controlDecorations) {
 			if (enabled && tabActive) {
 				controlDecoration.show();
 			} else {
@@ -499,44 +489,47 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 			throw new IllegalArgumentException("Parameter 'controlDecorations' must not be null.");
 		}
 
-		TabFolder tabFolder = new TabFolder(parent, SWT.NONE);
+		var tabFolder = new TabFolder(parent, SWT.NONE);
 		TabItem selectedTabItem = null;
-		GridData gd;
 
-		gd = new GridData();
+		var gd = new GridData();
 		gd.horizontalSpan = 1;
 		gd.horizontalAlignment = GridData.FILL;
 		gd.grabExcessHorizontalSpace = true;
 		tabFolder.setLayoutData(gd);
 
-		RunnerRegistry runnerRegistry = plugin.getRunnerRegistry();
-		List<RunnerDefinition> runnerDefinitions;
-		runnerDefinitions = runnerRegistry.getDefinitions(hardware);
+		var runnerRegistry = plugin.getRunnerRegistry();
+		var runnerDefinitions = runnerRegistry.getDefinitions(hardware);
+		var runnerPaths = plugin.getRunnerPaths();
 
-		String runnerCommandLineHelp = Texts.PREFERENCES_COMPILER_RUNNER_COMMAND_LINE_HELP + "\n"
+		var runnerCommandLineHelp = Texts.PREFERENCES_COMPILER_RUNNER_COMMAND_LINE_HELP + "\n"
 				+ Texts.PREFERENCES_COMPILER_RUNNER_COMMAND_LINE_VARIABLES;
 
-		for (RunnerDefinition runnerDefinition : runnerDefinitions) {
+		for (var runnerDefinition : runnerDefinitions) {
 
-			String runnerId = runnerDefinition.getId();
+			var runnerId = runnerDefinition.getId();
 
 			if (runnerId.equals(RunnerId.DEFAULT_APPLICATION)) {
 				continue;
 			}
 
-			TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
+			var tabItem = new TabItem(tabFolder, SWT.NONE);
 			tabItem.setText(runnerDefinition.getName());
 
-			Composite tabContent;
-			tabContent = SWTFactory.createComposite(tabFolder, 2, 1, GridData.FILL_BOTH);
+			var tabContent = SWTFactory.createComposite(tabFolder, 2, 1, GridData.FILL_BOTH);
 
-			String name = LanguagePreferencesConstants.getCompilerRunnerExecutablePathName(compilerId, hardware,
-					runnerId);
+			var name = LanguagePreferencesConstants.getCompilerRunnerExecutablePathName(compilerId, hardware, runnerId);
 
-			Composite composite;
-			composite = SWTFactory.createComposite(tabContent, 4, 2, GridData.FILL_HORIZONTAL);
-			FileFieldDownloadEditor fileFieldEditor = new FileFieldDownloadEditor(name,
+			var composite = SWTFactory.createComposite(tabContent, 4, 2, GridData.FILL_HORIZONTAL);
+			var fileFieldEditor = new FileFieldDownloadEditor(name,
 					Texts.PREFERENCES_COMPILER_RUNNER_EXECUTABLE_PATH_LABEL, composite);
+			var runnerPath = runnerPaths.getDefaultRunnerPath(hardware, runnerId);
+			if (runnerPath != null) {
+				var file = runnerPath.getAbsoluteFile();
+				if (file != null) {
+					fileFieldEditor.setFilterPath(file.getParentFile());
+				}
+			}
 			fileFieldEditor.setFileExtensions(ProcessWithLogs.getExecutableExtensions());
 			fileFieldEditor.setEnabled(runnerDefinition.isRunnerExecutablePathPossible(), composite);
 			addField(fileFieldEditor);
@@ -544,9 +537,9 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 			// Field: defaultEmulatorParameters
 			composite = SWTFactory.createComposite(tabContent, 2, 2, GridData.FILL_HORIZONTAL);
 
-			Label label = new Label(composite, SWT.LEFT);
+			var label = new Label(composite, SWT.LEFT);
 			label.setText(Texts.PREFERENCES_COMPILER_RUNNER_DEFAULT_COMMAND_LINE_LABEL);
-			Text textField = new Text(composite, SWT.SINGLE | SWT.BORDER);
+			var textField = new Text(composite, SWT.SINGLE | SWT.BORDER);
 			textField.setEditable(false);
 			textField.setText(runnerDefinition.getDefaultCommandLine());
 			gd = new GridData();
@@ -557,10 +550,9 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 
 			// Field: parameters
 			composite = SWTFactory.createComposite(tabContent, 2, 2, GridData.FILL_HORIZONTAL);
-			StringFieldEditor commandLineFieldEditor;
 			name = LanguagePreferencesConstants.getCompilerRunnerCommandLineName(compilerId, hardware, runnerId);
-			commandLineFieldEditor = new StringFieldEditor(name, Texts.PREFERENCES_COMPILER_RUNNER_COMMAND_LINE_LABEL,
-					tabContent);
+			var commandLineFieldEditor = new StringFieldEditor(name,
+					Texts.PREFERENCES_COMPILER_RUNNER_COMMAND_LINE_LABEL, tabContent);
 
 			gd = new GridData();
 			gd.horizontalSpan = 1;
@@ -571,7 +563,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 			addField(commandLineFieldEditor);
 
 			controlDecorations.add(createHelpDecoration(commandLineFieldEditor, tabContent, runnerCommandLineHelp));
-			String url = runnerDefinition.getHomePageURL();
+			var url = runnerDefinition.getHomePageURL();
 			fileFieldEditor.setLinkURL(url);
 
 			// Field: illegalOpcodesVisible
@@ -607,8 +599,8 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 		if (text == null) {
 			throw new IllegalArgumentException("Parameter 'text' must not be null.");
 		}
-		Text textControl = parametersFieldEditor.getTextControl(tabContent);
-		ControlDecoration controlDecoration = new ControlDecoration(textControl, SWT.LEFT | SWT.CENTER);
+		var textControl = parametersFieldEditor.getTextControl(tabContent);
+		var controlDecoration = new ControlDecoration(textControl, SWT.LEFT | SWT.CENTER);
 		controlDecoration.hide();
 		controlDecoration.setShowHover(true);
 		controlDecoration.setDescriptionText(text);
