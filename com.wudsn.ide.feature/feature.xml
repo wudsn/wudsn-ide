@@ -389,9 +389,16 @@ POSSIBILITY OF SUCH DAMAGES.
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="com.wudsn.ide.lng.pas"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.wudsn.ide.lng.run"
          download-size="0"
          install-size="0"
          version="0.0.0"
