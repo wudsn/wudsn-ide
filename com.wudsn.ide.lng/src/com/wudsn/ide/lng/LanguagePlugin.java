@@ -51,6 +51,8 @@ import com.wudsn.ide.lng.preferences.LanguagePreferencesChangeListener;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants;
 import com.wudsn.ide.lng.preferences.LanguagesPreferences;
 import com.wudsn.ide.lng.preferences.TextAttributeDefinition;
+import com.wudsn.ide.lng.runner.RunnerPaths;
+import com.wudsn.ide.lng.runner.RunnerPathsTest;
 import com.wudsn.ide.lng.runner.RunnerRegistry;
 
 /**
@@ -97,6 +99,11 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 	 * The runner registry.
 	 */
 	private RunnerRegistry runnerRegistry;
+	
+	/**
+	 * The runner paths.
+	 */
+	private RunnerPaths runnerPaths;
 
 	/**
 	 * The UI properties.
@@ -113,6 +120,7 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 		compilerPaths = new CompilerPaths();
 		compilerConsole = null;
 		runnerRegistry = new RunnerRegistry();
+		runnerPaths = new RunnerPaths();
 		properties = new HashMap<QualifiedName, String>(10);
 		languages = new ArrayList<Language>(2);
 		languages.add(Language.ASM);
@@ -174,6 +182,7 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 		
 		// TODO: Call unit tests
 		CompilerPathsTest.main(new String[0]);
+		RunnerPathsTest.main(new String[0]);
 
 	}
 
@@ -224,9 +233,10 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 		} catch (URISyntaxException ignore) {
 			return null;
 		}
-		File eclipseFolder = FileUtility.getCanonicalFile(new File(uri));
-		File ideFolder = eclipseFolder.getParentFile();
-		File toolsFolder = ideFolder.getParentFile();
+		File eclipseVersionFolder = FileUtility.getCanonicalFile(new File(uri)); // "eclipse"
+		File eclipseFolder = eclipseVersionFolder.getParentFile(); // "Eclipse"
+		File ideFolder = eclipseFolder.getParentFile(); // "IDE"
+		File toolsFolder = ideFolder.getParentFile(); // "Tools
 		File compilerFile = new File(toolsFolder, relativePath);
 		return compilerFile;
 	}
@@ -244,12 +254,18 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 		return compilerRegistry;
 	}
 
+	/**
+	 * Gets the compiler paths for this plugin.
+	 * 
+	 * @return The compiler paths, not <code>null</code>.
+	 */
 	public CompilerPaths getCompilerPaths() {
 		if (compilerPaths == null) {
 			throw new IllegalStateException("Field 'compilerPaths' must not be null.");
 		}
 		return compilerPaths;
 	}
+	
 	/**
 	 * Gets the compiler console for this plugin.
 	 * 
@@ -274,6 +290,18 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 		return runnerRegistry;
 	}
 
+	/**
+	 * Gets the runner paths for this plugin.
+	 * 
+	 * @return The compiler paths, not <code>null</code>.
+	 */
+	public RunnerPaths getRunnerPaths() {
+		if (runnerPaths == null) {
+			throw new IllegalStateException("Field 'runnerPaths' must not be null.");
+		}
+		return runnerPaths;
+	}
+	
 	/**
 	 * Gets the preferences for this plugin.
 	 * 
