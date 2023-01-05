@@ -40,13 +40,11 @@ import org.eclipse.help.IUAElement;
 import com.wudsn.ide.base.common.EnumUtility;
 import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.LanguageUtility;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
-import com.wudsn.ide.lng.compiler.CompilerRegistry;
 
 /**
  * Dynamic help content provider. Uses static pages and the meta data from the
@@ -160,9 +158,8 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 		String label;
 		String key = href;
 		try {
-			Class<LanguageTocProvider> clazz = LanguageTocProvider.class;
-			ResourceBundle resourceBundle;
-			resourceBundle = ResourceBundle.getBundle(clazz.getName().replace('.', '/'), Locale.getDefault(),
+			var clazz = LanguageTocProvider.class;
+			var resourceBundle = ResourceBundle.getBundle(clazz.getName().replace('.', '/'), Locale.getDefault(),
 					clazz.getClassLoader());
 			label = resourceBundle.getString(key);
 		} catch (MissingResourceException ex) {
@@ -176,7 +173,7 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=382599
 	@SuppressWarnings("restriction")
 	private static ITopic createTopic(String icon, String label, String href, ITopic[] subtopics) {
-		org.eclipse.help.internal.Topic result = new org.eclipse.help.internal.Topic();
+		var result = new org.eclipse.help.internal.Topic();
 		result.setAttribute(org.eclipse.help.internal.Topic.ATTRIBUTE_ICON, icon);
 		result.setLabel(label);
 		result.setHref(href);
@@ -191,8 +188,7 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 		if (topics == null) {
 			throw new IllegalArgumentException("Parameter 'topics' must not be null.");
 		}
-		ITopic[] topicsArray;
-		topicsArray = new ITopic[topics.size()];
+		var topicsArray = new ITopic[topics.size()];
 		topics.toArray(topicsArray);
 		return topicsArray;
 	}
@@ -200,31 +196,31 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 	static ITopic[] createTopics() {
 		List<ITopic> topics = new ArrayList<ITopic>();
 
-		LanguagePlugin languagePlugin = LanguagePlugin.getInstance();
+		var languagePlugin = LanguagePlugin.getInstance();
 
-		List<ITopic> ideTopics = createIDETopics();
+		var ideTopics = createIDETopics();
 		topics.add(createTopic("", Texts.TOC_IDE_TOPIC_LABEL, "", createTopicsArray(ideTopics)));
 
-		List<ITopic> languagesTopics = createLanguagesTopics(languagePlugin);
+		var languagesTopics = createLanguagesTopics(languagePlugin);
 		topics.add(createTopic("", Texts.TOC_LANGUAGES_TOPIC_LABEL, "", createTopicsArray(languagesTopics)));
 
-		List<ITopic> hardwareTopics = createHardwareTopics();
+		var hardwareTopics = createHardwareTopics();
 		topics.add(createTopic("", Texts.TOC_HARDWARES_TOPIC_LABEL, "", createTopicsArray(hardwareTopics)));
 
-		List<ITopic> cpuTopics = createTargetTopics();
+		var cpuTopics = createTargetTopics();
 		topics.add(createTopic("", Texts.TOC_TARGETS_TOPIC_LABEL, "", createTopicsArray(cpuTopics)));
 
 		return createTopicsArray(topics);
 	}
 
 	private static List<ITopic> createLanguagesTopics(LanguagePlugin languagePlugin) {
-		CompilerRegistry compilerRegistry = languagePlugin.getCompilerRegistry();
+		var compilerRegistry = languagePlugin.getCompilerRegistry();
 		List<ITopic> topics = new ArrayList<ITopic>();
-		for (Language language : languagePlugin.getLanguages()) {
+		for (var language : languagePlugin.getLanguages()) {
 
-			List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
+			var compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
 
-			List<ITopic> compilerTopics = createCompilersTopics(compilerDefinitions);
+			var compilerTopics = createCompilersTopics(compilerDefinitions);
 			topics.add(createTopic("",
 					TextUtility.format(Texts.TOC_COMPILERS_TOPIC_LABEL, LanguageUtility.getText(language)), "",
 					createTopicsArray(compilerTopics)));
@@ -279,7 +275,7 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 					// Appending the help file path with the correct file
 					// extension allows in-place display for example for ".html"
 					// files.
-					String extension = file.getPath();
+					var extension = file.getPath();
 					int index = extension.lastIndexOf('.');
 					if (index > 0) {
 						extension = extension.substring(index);
@@ -294,9 +290,9 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 							LanguageHelpContentProducer.SECTION_MANUAL, extension);
 
 					if (file.isDirectory()) {
-						File[] files = file.listFiles();
+						var files = file.listFiles();
 						if (files != null) {
-							for (File file2 : files) {
+							for (var file2 : files) {
 								String encodedPath;
 								try {
 									encodedPath = URLEncoder.encode(file2.getName(), "UTF-8");
@@ -336,7 +332,7 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 	private static List<ITopic> createHardwareTopics() {
 		// Build hardware topics
 		List<ITopic> hardwareTopics = new ArrayList<ITopic>(Hardware.values().length - 1);
-		for (Hardware hardware : Hardware.values()) {
+		for (var hardware : Hardware.values()) {
 			if (hardware.equals(Hardware.GENERIC)) {
 				continue;
 			}
@@ -367,7 +363,7 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 				// Nothing available.
 
 			}
-			String href = LanguageHelpContentProducer.SCHEMA_HARDWARE + hardware.name().toLowerCase()
+			var href = LanguageHelpContentProducer.SCHEMA_HARDWARE + hardware.name().toLowerCase()
 					+ LanguageHelpContentProducer.EXTENSION;
 			hardwareTopics.add(createTopic("", EnumUtility.getText(hardware), href, createTopicsArray(chipTopics)));
 		}
@@ -376,8 +372,8 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 
 	private static List<ITopic> createTargetTopics() {
 		List<ITopic> cpuTopics = new ArrayList<ITopic>(Target.values().length - 1);
-		for (Target target : Target.values()) {
-			String href = LanguageHelpContentProducer.SCHEMA_TARGET + target.name().toLowerCase()
+		for (var target : Target.values()) {
+			var href = LanguageHelpContentProducer.SCHEMA_TARGET + target.name().toLowerCase()
 					+ LanguageHelpContentProducer.EXTENSION;
 			cpuTopics.add(createTopic("", EnumUtility.getText(target), href, null));
 		}

@@ -64,7 +64,7 @@ final class HTMLWriter {
 		if (stack.isEmpty()) {
 			throw new RuntimeException("No open tag: " + builder);
 		}
-		String tag = stack.remove(stack.size() - 1);
+		var tag = stack.remove(stack.size() - 1);
 		builder.append("</");
 		builder.append(tag);
 		builder.append(">\n");
@@ -191,7 +191,7 @@ final class HTMLWriter {
 		if (text == null) {
 			throw new IllegalArgumentException("Parameter 'text' must not be null.");
 		}
-		String target ="";
+		var target ="";
 		if (href.toLowerCase().startsWith("https://")) {
 			target=" target=\"_blank\"";
 		}
@@ -202,7 +202,7 @@ final class HTMLWriter {
 		if (list == null) {
 			throw new IllegalArgumentException("Parameter 'list' must not be null.");
 		}
-		StringBuilder builder = new StringBuilder();
+		var builder = new StringBuilder();
 		int size = list.size();
 		for (int i = 0; i < size; i++) {
 			builder.append(list.get(i));

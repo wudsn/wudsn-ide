@@ -19,7 +19,6 @@
 
 package com.wudsn.ide.lng.preferences;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +44,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
@@ -58,15 +56,11 @@ import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.LanguageUtility;
-import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerOutputFolderMode;
-import com.wudsn.ide.lng.compiler.CompilerRegistry;
 import com.wudsn.ide.lng.editor.LanguageEditor;
-import com.wudsn.ide.lng.runner.RunnerDefinition;
 import com.wudsn.ide.lng.runner.RunnerId;
-import com.wudsn.ide.lng.runner.RunnerRegistry;
 
 /**
  * Visual editor page for the language preferences regarding compilers. There is
@@ -161,8 +155,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 		}
 
 		public void setOutputFolderMode(String newValue) {
-			boolean enabled;
-			enabled = CompilerOutputFolderMode.FIXED_FOLDER.equals(newValue);
+			var enabled = CompilerOutputFolderMode.FIXED_FOLDER.equals(newValue);
 			outputFolderPathFieldEditor.setEnabled(enabled, outputFolderPathFieldEditorParent);
 		}
 
@@ -223,7 +216,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 		if (workbench == null) {
 			throw new IllegalArgumentException("Parameter 'workbench' must not be null.");
 		}
-		IEditorPart editor = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		var editor = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		if (editor instanceof LanguageEditor) {
 			LanguageEditor languageEditor;
 			languageEditor = (LanguageEditor) editor;
@@ -258,7 +251,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 		var compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
 
 		tabFolder = new TabFolder(parent, SWT.FLAT);
-		for (CompilerDefinition compilerDefinition : compilerDefinitions) {
+		for (var compilerDefinition : compilerDefinitions) {
 
 			createTabItem(tabFolder, compilerDefinition);
 		}
@@ -266,7 +259,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 		// Default to tab item for active compiler or to first.
 		TabItem selectedTabItem = null;
 		if (activeCompilerId != null) {
-			Tab selectedTab = tabs.get(activeCompilerId);
+			var selectedTab = tabs.get(activeCompilerId);
 			if (selectedTab != null) {
 				selectedTabItem = selectedTab.tabItem;
 			}
@@ -328,7 +321,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 		var targets = compilerDefinition.getSupportedTargets();
 		String[][] entryNamesAndValues = new String[targets.size()][];
 		int i = 0;
-		for (Target target : targets) {
+		for (var target : targets) {
 			entryNamesAndValues[i] = new String[2];
 			entryNamesAndValues[i][1] = target.name();
 			entryNamesAndValues[i][0] = EnumUtility.getText(target);
@@ -361,7 +354,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 		var parametersFieldEditor = new StringFieldEditor(name, Texts.PREFERENCES_COMPILER_PARAMETERS_LABEL,
 				tabContent);
 
-		String compilerParametersHelp = Texts.PREFERENCES_COMPILER_PARAMETERS_HELP + "\n"
+		var compilerParametersHelp = Texts.PREFERENCES_COMPILER_PARAMETERS_HELP + "\n"
 				+ Texts.PREFERENCES_COMPILER_PARAMETERS_VARIABLES;
 		controlDecorations.add(createHelpDecoration(parametersFieldEditor, tabContent, compilerParametersHelp));
 
@@ -376,7 +369,7 @@ public abstract class LanguagePreferencesCompilersPage extends FieldEditorPrefer
 
 		// Field: outputFolderMode
 		composite = SWTFactory.createComposite(tabContent, 2, 2, GridData.FILL_HORIZONTAL);
-		RadioGroupFieldEditorWithAction outputFolderModeChoiceEditor = new RadioGroupFieldEditorWithAction(
+		var outputFolderModeChoiceEditor = new RadioGroupFieldEditorWithAction(
 				LanguagePreferencesConstants.getCompilerOutputFolderModeName(compilerId, hardware),
 				Texts.PREFERENCES_COMPILER_OUTPUT_FOLDER_MODE_LABEL, 3, labelsAndValues, composite);
 		addField(outputFolderModeChoiceEditor);
