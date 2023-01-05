@@ -96,7 +96,7 @@ public final class RunnerPaths {
 		runnerPaths.put(runnerPath.getKey(), runnerPath);
 	}
 
-	public RunnerPath getDefaultRunnerrPath(Hardware hardware, String runnerId) {
+	public RunnerPath getDefaultRunnerPath(Hardware hardware, String runnerId) {
 		String os = Platform.getOS();
 		String osArch = Platform.getOSArch();
 		String key = RunnerPath.getKey(hardware, runnerId, os, osArch);
