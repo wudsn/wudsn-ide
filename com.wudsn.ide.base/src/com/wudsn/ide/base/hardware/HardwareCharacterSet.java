@@ -148,8 +148,9 @@ public enum HardwareCharacterSet {
 						throw new IllegalArgumentException("Unsupported font type " + type + ".");
 					}
 
+					
 					if (fontPath != null) {
-						// Check if temp file is already cached?
+						// Check if temporary file is already cached?
 						result.font = fontMap.get(fontPath);
 						if (result.font == null) {
 							File file = null;
