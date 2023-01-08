@@ -43,30 +43,32 @@ public final class CompilerPaths {
 
 	public static final class CompilerPath {
 		public final Language language;
-		public final String compilerId;
+		public final CompilerDefinition compilerDefinition;
 		public final String os;
 		public final String osArch;
 		public final String executablePath;
 
-		private CompilerPath(Language language, String compilerId, String os, String osArch, String executablePath) {
+		private CompilerPath(Language language, CompilerDefinition compilerDefinition, String os, String osArch,
+				String executablePath) {
 			this.language = language;
-			this.compilerId = compilerId;
+			this.compilerDefinition = compilerDefinition;
 			this.os = os;
 			this.osArch = osArch;
 			this.executablePath = executablePath;
 
 		}
 
-		public static String getKey(Language language, String compilerId, String os, String osArch) {
-			return language.name() + "/" + compilerId + "/" + os + "/" + osArch;
+		public static String getKey(Language language, CompilerDefinition compilerDefinition, String os,
+				String osArch) {
+			return language.name() + "/" + compilerDefinition.getId() + "/" + os + "/" + osArch;
 		}
 
 		public String getKey() {
-			return getKey(language, compilerId, os, osArch);
+			return getKey(language, compilerDefinition, os, osArch);
 		}
 
 		public String getRelativePath() {
-			return language.name() + "/" + compilerId.toUpperCase() + "/" + executablePath;
+			return language.name() + "/" + compilerDefinition.getId().toUpperCase() + "/" + executablePath;
 		}
 
 		public File getAbsoluteFile() {
@@ -81,6 +83,12 @@ public final class CompilerPaths {
 	 * Created by the {@linkplain LanguagePlugin}.
 	 */
 	public CompilerPaths() {
+	}
+	
+	/**
+	 * Initialize the default paths.
+	 */
+	public void init() {
 		compilerPaths = new TreeMap<String, CompilerPath>();
 		// See https://github.com/peterdell/wudsn-ide-tools
 		// TODO: Add MERLIN32
@@ -116,20 +124,27 @@ public final class CompilerPaths {
 		if (!compilerId.equals(compilerId.toLowerCase())) {
 			throw new IllegalArgumentException("Parameter 'compilerId' value " + compilerId + " must be lower case.");
 		}
-		CompilerPath compilerPath = new CompilerPath(language, compilerId, os, osArch, executablePath);
+		var compilerDefinition = LanguagePlugin.getInstance().getCompilerRegistry().getCompilerDefinitionById(language, compilerId);
+		CompilerPath compilerPath = new CompilerPath(language, compilerDefinition, os, osArch, executablePath);
 		compilerPaths.put(compilerPath.getKey(), compilerPath);
 	}
 
-	public CompilerPath getDefaultCompilerPath(Language language, String compilerId) {
+	public CompilerPath getDefaultCompilerPath(Language language, CompilerDefinition compilerDefinition) {
+		if (language == null) {
+			throw new IllegalArgumentException("Parameter 'language' must not be null.");
+		}
+		if (compilerDefinition == null) {
+			throw new IllegalArgumentException("Parameter 'compilerDefinition' must not be null.");
+		}
 		String os = Platform.getOS();
 		String osArch = Platform.getOSArch();
-		String key = CompilerPath.getKey(language, compilerId, os, osArch);
+		String key = CompilerPath.getKey(language, compilerDefinition, os, osArch);
 		CompilerPath compilerPath = compilerPaths.get(key);
 		// Default to 32-bit version if 64-bit version not defined?
 		if (compilerPath == null) {
 			if (osArch.equals(Platform.ARCH_X86_64)) {
 				osArch = Platform.ARCH_X86;
-				key = CompilerPath.getKey(language, compilerId, os, osArch);
+				key = CompilerPath.getKey(language, compilerDefinition, os, osArch);
 				compilerPath = compilerPaths.get(key);
 			}
 		}
@@ -140,16 +155,16 @@ public final class CompilerPaths {
 		return Collections.unmodifiableList(new ArrayList<CompilerPath>(compilerPaths.values()));
 	}
 
-	public List<CompilerPath> getCompilerPaths(Language language, String id) {
+	public List<CompilerPath> getCompilerPaths(Language language, String compilerId) {
 		if (language == null) {
 			throw new IllegalArgumentException("Parameter 'language' must not be null.");
 		}
-		if (id == null) {
-			throw new IllegalArgumentException("Parameter 'id' must not be null.");
+		if (compilerId == null) {
+			throw new IllegalArgumentException("Parameter 'compilerId' must not be null.");
 		}
 		List<CompilerPath> result = new ArrayList<>();
 		for (CompilerPath compilerPath : compilerPaths.values()) {
-			if (compilerPath.language.equals(language) && compilerPath.compilerId.equals(id)) {
+			if (compilerPath.language.equals(language) && compilerPath.compilerDefinition.getId().equals(compilerId)) {
 				result.add(compilerPath);
 			}
 		}

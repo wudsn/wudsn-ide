@@ -20,7 +20,7 @@ package com.wudsn.ide.lng.asm.preferences;
 
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.Language;
-import com.wudsn.ide.lng.preferences.LanguagePreferencesCompilersPage;
+import com.wudsn.ide.lng.preferences.LanguageHardwarePreferencesPage;
 
 /**
  * Visual editor page for the assembler preferences regarding arbitrary
@@ -29,7 +29,7 @@ import com.wudsn.ide.lng.preferences.LanguagePreferencesCompilersPage;
  * @author Peter Dell
  * 
  */
-public final class AssemblerPreferencesTestCompilersPage extends LanguagePreferencesCompilersPage {
+public final class AssemblerPreferencesTestCompilersPage extends LanguageHardwarePreferencesPage {
 
 	/**
 	 * Create is public. Used by extension point "org.eclipse.ui.preferencePages".

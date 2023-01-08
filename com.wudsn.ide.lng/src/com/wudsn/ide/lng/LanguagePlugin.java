@@ -48,13 +48,12 @@ import com.wudsn.ide.lng.compiler.CompilerPathsTest;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
 import com.wudsn.ide.lng.preferences.LanguagePreferences;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesChangeListener;
-import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants;
 import com.wudsn.ide.lng.preferences.LanguagesPreferences;
 import com.wudsn.ide.lng.preferences.TextAttributeDefinition;
 import com.wudsn.ide.lng.runner.RunnerPaths;
 import com.wudsn.ide.lng.runner.RunnerPathsTest;
 import com.wudsn.ide.lng.runner.RunnerRegistry;
-
+import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants.EditorConstants;
 /**
  * The main plugin class to be used in the desktop.
  * 
@@ -150,6 +149,7 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 			logError("Cannot initialize compiler registry", null, ex);
 			throw ex;
 		}
+		compilerPaths.init();
 		compilerConsole = new CompilerConsole();
 		try {
 			runnerRegistry.init();
@@ -167,7 +167,7 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 				if (event.getProperty().equals(JFaceResources.TEXT_FONT)
 						|| event.getProperty().equals(BLOCK_SELECTION_MODE_FONT)) {
 					for (Language language : languages) {
-						List<TextAttributeDefinition> textAttributeDefinitions = LanguagePreferencesConstants
+						List<TextAttributeDefinition> textAttributeDefinitions = EditorConstants
 								.getTextAttributeDefinitions(language);
 						Set<String> changedPropertyNames = new TreeSet<String>();
 						for (TextAttributeDefinition textAttributeDefinition : textAttributeDefinitions) {

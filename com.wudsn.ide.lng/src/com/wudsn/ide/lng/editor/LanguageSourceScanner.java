@@ -41,8 +41,10 @@ import com.wudsn.ide.lng.compiler.syntax.Instruction;
 import com.wudsn.ide.lng.compiler.syntax.InstructionSet;
 import com.wudsn.ide.lng.compiler.syntax.InstructionType;
 import com.wudsn.ide.lng.compiler.syntax.Opcode;
+import com.wudsn.ide.lng.preferences.LanguageHardwareCompilerDefinitionPreferencesConstants;
 import com.wudsn.ide.lng.preferences.LanguagePreferences;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants.EditorConstants;
 import com.wudsn.ide.lng.preferences.TextAttributeConverter;
 
 /**
@@ -397,27 +399,27 @@ final class LanguageSourceScanner extends RuleBasedScanner {
 	private void createTokens() {
 
 		// Numbers
-		numberToken = createToken(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_NUMBER);
+		numberToken = createLanguageToken(EditorConstants.EDITOR_TEXT_ATTRIBUTE_NUMBER);
 
 		// Instructions
-		directiveToken = createToken(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_DIRECTVE);
-		legalOpcodeToken = createToken(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL);
-		illegalOpcodeToken = createToken(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL);
-		pseudoOpcodeToken = createToken(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO);
+		directiveToken = createLanguageToken(EditorConstants.EDITOR_TEXT_ATTRIBUTE_DIRECTVE);
+		legalOpcodeToken = createLanguageToken(EditorConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL);
+		illegalOpcodeToken = createLanguageToken(EditorConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL);
+		pseudoOpcodeToken = createLanguageToken(EditorConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO);
 
 		// Identifiers
-		equateIdentifierToken = createToken(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE);
-		labelIdentifierToken = createToken(LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LABEL);
-		enumDefinitionSectionIdentifierToken = createToken(
-				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION);
-		structureDefinitionSectionIdentifierToken = createToken(
-				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION);
-		localSectionIdentifierToken = createToken(
-				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION);
-		macroDefinitionSectionIdentifierToken = createToken(
-				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION);
-		procedureDefinitionSectionIdentifierToken = createToken(
-				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION);
+		equateIdentifierToken = createLanguageToken(EditorConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE);
+		labelIdentifierToken = createLanguageToken(EditorConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LABEL);
+		enumDefinitionSectionIdentifierToken = createLanguageToken(
+				EditorConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION);
+		structureDefinitionSectionIdentifierToken = createLanguageToken(
+				EditorConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION);
+		localSectionIdentifierToken = createLanguageToken(
+				EditorConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION);
+		macroDefinitionSectionIdentifierToken = createLanguageToken(
+				EditorConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION);
+		procedureDefinitionSectionIdentifierToken = createLanguageToken(
+				EditorConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION);
 
 	}
 
@@ -428,14 +430,13 @@ final class LanguageSourceScanner extends RuleBasedScanner {
 	 *                          <code>null</code>.
 	 * @return The new token, not <code>null</code>.
 	 */
-	private IToken createToken(String textAttributeName) {
+	private IToken createLanguageToken(String textAttributeName) {
 		if (textAttributeName == null) {
 			throw new IllegalArgumentException("Parameter 'textAttributeName' must not be null.");
 		}
-		LanguagePreferences preferences = editor.getLanguagePreferences();
-		String preferencesKey = LanguagePreferencesConstants.getPreferencesKey(preferences.getLanguage(),
-				textAttributeName);
-		Token token = new Token(preferences.getEditorTextAttribute(textAttributeName));
+		var preferences = editor.getLanguagePreferences();
+		var preferencesKey = EditorConstants.getEditorAttributeKey(preferences.getLanguage(), textAttributeName);
+		var token = new Token(preferences.getTextAttribute(preferencesKey));
 		tokens.put(preferencesKey, token);
 		return token;
 	}
@@ -482,27 +483,29 @@ final class LanguageSourceScanner extends RuleBasedScanner {
 	 * {@link LanguageSourceViewerConfiguration}.
 	 * 
 	 * @param preferences          The preferences, not <code>null</code>.
-	 * @param changedPropertyNames The set of changed property names, not
+	 * @param changedPreferencesKeys The set of changed property names, not
 	 *                             <code>null</code>.
 	 * 
 	 * @return <code>true</code> If the editor has to be refreshed.
 	 */
-	final boolean preferencesChanged(LanguagePreferences preferences, Set<String> changedPropertyNames) {
+	final boolean preferencesChanged(LanguagePreferences preferences, Set<String> changedPreferencesKeys) {
 		if (preferences == null) {
 			throw new IllegalArgumentException("Parameter 'preferences' must not be null.");
 		}
-		if (changedPropertyNames == null) {
+		if (changedPreferencesKeys == null) {
 			throw new IllegalArgumentException("Parameter 'changedPropertyNames' must not be null.");
 		}
 		boolean refresh = false;
-		for (String propertyName : changedPropertyNames) {
-			Token token = tokens.get(propertyName);
+		var compilerTargetPreferencesKey = LanguageHardwareCompilerDefinitionPreferencesConstants
+				.getCompilerTargetName(editor.getLanguage(), editor.getHardware(), editor.getCompilerDefinition());
+		for (String preferencesKey : changedPreferencesKeys) {
+			Token token = tokens.get(preferencesKey);
 			if (token != null) {
 				TextAttributeConverter.dispose((TextAttribute) token.getData());
-				token.setData(preferences.getLanguagesPreferences().getEditorTextAttribute(propertyName));
+				token.setData(preferences.getTextAttribute(preferencesKey));
 				refresh = true;
 
-			} else if (LanguagePreferencesConstants.isCompilerTargetName(propertyName)) {
+			} else if (compilerTargetPreferencesKey.equals(preferencesKey)) {
 				CompilerSourceParser compilerSourceParser = editor.createCompilerSourceParser();
 				wordRule.setCompilerSourceParser(compilerSourceParser);
 				wordRule.setInstructions();

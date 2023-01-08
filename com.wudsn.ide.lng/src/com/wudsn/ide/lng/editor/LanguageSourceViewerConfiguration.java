@@ -40,7 +40,7 @@ import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourcePartitionScanner;
 import com.wudsn.ide.lng.preferences.LanguagePreferences;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesChangeListener;
-import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants.EditorConstants;
 
 /**
  * Source configuration for the language editor. Provides syntax highlighting.
@@ -140,7 +140,7 @@ final class LanguageSourceViewerConfiguration extends TextSourceViewerConfigurat
 		if (changedPropertyNames == null) {
 			throw new IllegalArgumentException("Parameter 'changedPropertyNames' must not be null.");
 		}
-		boolean refresh = false;
+		var refresh = false;
 		refresh |= commentSingleScanner.preferencesChanged(preferences, changedPropertyNames);
 		refresh |= commentMultipleScanner.preferencesChanged(preferences, changedPropertyNames);
 		refresh |= stringScanner.preferencesChanged(preferences, changedPropertyNames);
@@ -168,25 +168,26 @@ final class LanguageSourceViewerConfiguration extends TextSourceViewerConfigurat
 		if (sourceViewer == null) {
 			throw new IllegalArgumentException("Parameter 'sourceViewer' must not be null.");
 		}
-		PresentationReconciler reconciler = new PresentationReconciler();
-		DefaultDamagerRepairer dr;
+		var reconciler = new PresentationReconciler();
 
-		LanguagePreferences languagePreferences = editor.getLanguagePreferences();
+		var languagePreferences = editor.getLanguagePreferences();
+		var language = languagePreferences.getLanguage();
 
-		commentSingleScanner = new LanguageRuleBasedScanner(languagePreferences,
-				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT);
-		dr = new DefaultDamagerRepairer(commentSingleScanner);
+		var preferencesKey = EditorConstants.getEditorAttributeKey(language,
+				EditorConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT);
+		commentSingleScanner = new LanguageRuleBasedScanner(languagePreferences, preferencesKey);
+		var dr = new DefaultDamagerRepairer(commentSingleScanner);
 		reconciler.setDamager(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_SINGLE);
 		reconciler.setRepairer(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_SINGLE);
 
-		commentMultipleScanner = new LanguageRuleBasedScanner(languagePreferences,
-				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT);
+		preferencesKey = EditorConstants.getEditorAttributeKey(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT);
+		commentMultipleScanner = new LanguageRuleBasedScanner(languagePreferences, preferencesKey);
 		dr = new DefaultDamagerRepairer(commentMultipleScanner);
 		reconciler.setDamager(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_MULTIPLE);
 		reconciler.setRepairer(dr, CompilerSourcePartitionScanner.PARTITION_COMMENT_MULTIPLE);
 
-		stringScanner = new LanguageRuleBasedScanner(languagePreferences,
-				LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_STRING);
+		preferencesKey = EditorConstants.getEditorAttributeKey(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_STRING);
+		stringScanner = new LanguageRuleBasedScanner(languagePreferences, preferencesKey);
 		dr = new DefaultDamagerRepairer(stringScanner);
 		reconciler.setDamager(dr, CompilerSourcePartitionScanner.PARTITION_STRING);
 		reconciler.setRepairer(dr, CompilerSourcePartitionScanner.PARTITION_STRING);
@@ -206,16 +207,18 @@ final class LanguageSourceViewerConfiguration extends TextSourceViewerConfigurat
 		}
 		IReconcilingStrategy reconcilingStrategy = new LanguageReconcilingStategy(editor);
 
-		MonoReconciler reconciler = new MonoReconciler(reconcilingStrategy, false);
+		var reconciler = new MonoReconciler(reconcilingStrategy, false);
 		reconciler.setProgressMonitor(new NullProgressMonitor());
-		reconciler.setDelay(500); // TODO Compute delay based on size of content on the source viewer (sourceViewer.getDocument().getLength()) or the fact that the parser is still parsing
+		reconciler.setDelay(500); // TODO Compute delay based on size of content on the source viewer
+									// (sourceViewer.getDocument().getLength()) or the fact that the parser is still
+									// parsing
 
 		return reconciler;
 	}
 
 	@Override
 	protected Map<String, IAdaptable> getHyperlinkDetectorTargets(ISourceViewer sourceViewer) {
-		Map<String, IAdaptable> targets = super.getHyperlinkDetectorTargets(sourceViewer);
+		var targets = super.getHyperlinkDetectorTargets(sourceViewer);
 		targets.put(LanguageHyperlinkDetector.TARGET, editor);
 		return targets;
 	}

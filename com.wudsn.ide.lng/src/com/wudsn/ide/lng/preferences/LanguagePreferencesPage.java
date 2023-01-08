@@ -69,6 +69,7 @@ import com.wudsn.ide.lng.compiler.CompilerRegistry;
 import com.wudsn.ide.lng.editor.LanguageContentAssistProcessorDefaultCase;
 import com.wudsn.ide.lng.editor.LanguageEditor;
 import com.wudsn.ide.lng.editor.LanguageEditorCompileCommandPositioningMode;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants.EditorConstants;
 
 /**
  * Visual editor page for the language preferences.
@@ -358,8 +359,7 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		if (textAttributeListItems != null) {
 			throw new IllegalStateException("Attribute 'textAttributeListItems' must be null.");
 		}
-		List<TextAttributeDefinition> textAttributeDefinitions = LanguagePreferencesConstants
-				.getTextAttributeDefinitions(language);
+		List<TextAttributeDefinition> textAttributeDefinitions = EditorConstants.getTextAttributeDefinitions(language);
 		textAttributeListItems = new ArrayList<TextAttributeListItem>(textAttributeDefinitions.size());
 
 		for (TextAttributeDefinition textAttributeDefinition : textAttributeDefinitions) {
@@ -394,7 +394,7 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		};
 
 		FieldEditor choiceFieldEditor = new RadioGroupFieldEditor(
-				LanguagePreferencesConstants.EDITOR_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE,
+				EditorConstants.getEditorContentProcessorDefaultCaseKey(language),
 				Texts.PREFERENCES_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE_LABEL, 2, labelsAndValues, space);
 		addField(choiceFieldEditor);
 
@@ -410,7 +410,7 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		};
 
 		choiceFieldEditor = new RadioGroupFieldEditor(
-				LanguagePreferencesConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE,
+				EditorConstants.getEditorCompileCommandPositioningModeKey(language),
 				Texts.PREFERENCES_COMPILE_COMMAND_POSITIONING_MODE_LABEL, 2, labelsAndValues, space);
 		addField(choiceFieldEditor);
 
@@ -432,21 +432,16 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 			TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 			tabItem.setText(compilerDefinition.getName());
 
-			Composite tabContent;
-			tabContent = SWTFactory.createComposite(tabFolder, 1, 1, GridData.FILL_HORIZONTAL);
+			var tabContent = SWTFactory.createComposite(tabFolder, 1, 1, GridData.FILL_HORIZONTAL);
 			tabItem.setControl(tabContent);
 
-			Composite composite;
-
-			String name;
-			name = LanguagePreferencesConstants.getPreferencesKey(language,
-					LanguagePreferencesConstants.getCompilerExecutablePathName(compilerId));
+			var name = LanguagePreferencesConstants.getCompilerExecutablePathKey(language, compilerDefinition);
 
 			// Field: executablePath
-			composite = SWTFactory.createComposite(tabContent, 4, 2, GridData.FILL_HORIZONTAL);
+			var composite = SWTFactory.createComposite(tabContent, 4, 2, GridData.FILL_HORIZONTAL);
 			FileFieldDownloadEditor fileFieldEditor = new FileFieldDownloadEditor(name,
 					Texts.PREFERENCES_COMPILER_EXECUTABLE_PATH_LABEL, composite);
-			CompilerPath compilerPath = compilerPaths.getDefaultCompilerPath(language, compilerId);
+			CompilerPath compilerPath = compilerPaths.getDefaultCompilerPath(language, compilerDefinition);
 			if (compilerPath != null) {
 				File file = compilerPath.getAbsoluteFile();
 				if (file != null) {

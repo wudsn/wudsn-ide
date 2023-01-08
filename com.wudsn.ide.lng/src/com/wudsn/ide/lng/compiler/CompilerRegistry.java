@@ -244,7 +244,7 @@ public final class CompilerRegistry {
 	 * 
 	 * @return The compiler, not <code>null</code>.
 	 */
-	public Compiler getCompilerByKey(String key) {
+	private Compiler getCompilerByKey(String key) {
 		if (key == null) {
 			throw new IllegalArgumentException("Parameter 'key' must not be null.");
 		}
@@ -258,6 +258,19 @@ public final class CompilerRegistry {
 		}
 
 		return result;
+	}
+
+	/**
+	 * Gets the compiler for a given language and compiler Id
+	 * 
+	 * @param language The language, not <code>null</code>.
+	 * @param compilerId The compiler Id, not empty and not <code>null</code>.
+	 * 
+	 * @return The compiler definition, not <code>null</code>.
+	 */
+	public CompilerDefinition getCompilerDefinitionById(Language language, String compilerId) {
+		var key = CompilerDefinition.getKey(language, compilerId);
+		return getCompilerByKey(key).getDefinition();
 	}
 
 }

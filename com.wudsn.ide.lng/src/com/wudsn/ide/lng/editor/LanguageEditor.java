@@ -66,7 +66,7 @@ import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObject;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourcePartitionScanner;
 import com.wudsn.ide.lng.outline.LanguageOutlinePage;
-import com.wudsn.ide.lng.preferences.CompilerPreferences;
+import com.wudsn.ide.lng.preferences.LanguageHardwareCompilerDefinitionPreferences;
 import com.wudsn.ide.lng.preferences.LanguagePreferences;
 
 /**
@@ -154,7 +154,7 @@ public abstract class LanguageEditor extends TextEditor {
 		}
 		return plugin;
 	}
-	
+
 	/**
 	 * Gets the language.
 	 * 
@@ -178,8 +178,8 @@ public abstract class LanguageEditor extends TextEditor {
 	 * 
 	 * @return The compiler preferences, not <code>null</code>.
 	 */
-	public final CompilerPreferences getCompilerPreferences() {
-		return getLanguagePreferences().getCompilerPreferences(getCompilerDefinition(), getHardware());
+	public final LanguageHardwareCompilerDefinitionPreferences getLanguageHardwareCompilerPreferences() {
+		return getLanguagePreferences().getLanguageHardwareCompilerDefinitionPreferences(getHardware(), getCompilerDefinition());
 	}
 
 	/**
@@ -220,7 +220,7 @@ public abstract class LanguageEditor extends TextEditor {
 		if (compiler == null) {
 			throw new IllegalStateException("Field 'compiler' must not be null.");
 		}
-		target = getCompilerPreferences().getTarget();
+		target = getLanguageHardwareCompilerPreferences().getTarget();
 		result = compiler.createSourceParser();
 		result.init(compiler.getDefinition().getSyntax().getInstructionSet(target));
 		return result;
@@ -429,12 +429,11 @@ public abstract class LanguageEditor extends TextEditor {
 		} else {
 			newIdentifiers = compilerSourceFile.getIdentifiers();
 		}
-		
+
 		LanguageSourceViewerConfiguration asvc;
 		LanguageSourceScanner ais;
 		asvc = (LanguageSourceViewerConfiguration) getSourceViewerConfiguration();
 		ais = asvc.getInstructionScanner();
-
 
 		ais.setIdentifiers(newIdentifiers);
 		profiler.begin("refreshSourceViewer");

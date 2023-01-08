@@ -14,39 +14,39 @@
          point="org.eclipse.ui.preferencePages">
       <page
             category="com.wudsn.ide.lng.pas.preferences.PascalPreferencesPage"
-            class="com.wudsn.ide.lng.pas.preferences.PascalPreferencesApple2CompilersPage"
-            id="com.wudsn.ide.lng.pas.preferences.PascalPreferencesApple2CompilersPage"
-            name="%com.wudsn.ide.lng.pas.preferences.PascalPreferencesApple2CompilersPage.name">
+            class="com.wudsn.ide.lng.pas.preferences.PascalApple2PreferencesPage"
+            id="com.wudsn.ide.lng.pas.preferences.PascalApple2PreferencesPage"
+            name="%com.wudsn.ide.lng.pas.preferences.PascalApple2PreferencesPage.name">
       </page>
       <page
             category="com.wudsn.ide.lng.pas.preferences.PascalPreferencesPage"
-            class="com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari8CompilersPage"
-            id="com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari8CompilersPage"
-            name="%com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari8CompilersPage.name">
+            class="com.wudsn.ide.lng.pas.preferences.PascalAtari8PreferencesPage"
+            id="com.wudsn.ide.lng.pas.preferences.PascalAtari8PreferencesPage"
+            name="%com.wudsn.ide.lng.pas.preferences.PascalAtari8PreferencesPage.name">
       </page>
       <page
             category="com.wudsn.ide.lng.pas.preferences.PascalPreferencesPage"
-            class="com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari2600CompilersPage"
-            id="com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari2600CompilersPage"
-            name="%com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari2600CompilersPage.name">
+            class="com.wudsn.ide.lng.pas.preferences.PascalAtari2600PreferencesPage"
+            id="com.wudsn.ide.lng.pas.preferences.PascalAtari2600PreferencesPage"
+            name="%com.wudsn.ide.lng.pas.preferences.PascalAtari2600PreferencesPage.name">
       </page>
       <page
             category="com.wudsn.ide.lng.pas.preferences.PascalPreferencesPage"
-            class="com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari7800CompilersPage"
-            id="com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtar7800CompilersPage"
-            name="%com.wudsn.ide.lng.pas.preferences.PascalPreferencesAtari7800CompilersPage.name">
+            class="com.wudsn.ide.lng.pas.preferences.PascalAtari7800PreferencesPage"
+            id="com.wudsn.ide.lng.pas.preferences.PascalAtari7800PreferencesPage"
+            name="%com.wudsn.ide.lng.pas.preferences.PascalAtari7800PreferencesPage.name">
       </page>
       <page
             category="com.wudsn.ide.lng.pas.preferences.PascalPreferencesPage"
-            class="com.wudsn.ide.lng.pas.preferences.PascalPreferencesC64CompilersPage"
-            id="com.wudsn.ide.lng.pas.preferences.PascalPreferencesC64CompilersPage"
-            name="%com.wudsn.ide.lng.pas.preferences.PascalPreferencesC64CompilersPage.name">
+            class="com.wudsn.ide.lng.pas.preferences.PascalC64PreferencesPage"
+            id="com.wudsn.ide.lng.pas.preferences.PascalC64PreferencesPag"
+            name="%com.wudsn.ide.lng.pas.preferences.PascalC64PreferencesPage.name">
       </page>
       <page
             category="com.wudsn.ide.lng.pas.preferences.PascalPreferencesPage"
-            class="com.wudsn.ide.lng.pas.preferences.PascalPreferencesNESCompilersPage"
-            id="com.wudsn.ide.lng.pas.preferences.PascalPreferencesNESCompilersPage"
-            name="%com.wudsn.ide.lng.pas.preferences.PascalPreferencesNESCompilersPage.name">
+            class="com.wudsn.ide.lng.pas.preferences.PascalNESPreferencesPage"
+            id="com.wudsn.ide.lng.pas.preferences.PascalNESPreferencesPage"
+            name="%com.wudsn.ide.lng.pas.preferences.PascalNESPreferencesPage.name">
       </page>
    </extension>
 

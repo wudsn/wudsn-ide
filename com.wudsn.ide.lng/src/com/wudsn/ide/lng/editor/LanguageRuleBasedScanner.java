@@ -47,22 +47,21 @@ final class LanguageRuleBasedScanner extends RuleBasedScanner {
 	 * Creates a new instance. Called by {@link LanguageSourceViewerConfiguration}.
 	 * 
 	 * @param languagePreferences The language preferences, not <code>null</code>.
-	 * @param textAttributeName   The text attribute name to listen to for text
+	 * @param preferencesKey      The preferences key to listen to for text
 	 *                            attribute changes, not <code>null</code>. See
 	 *                            {@link LanguagePreferencesConstants}
 	 */
-	LanguageRuleBasedScanner(LanguagePreferences languagePreferences, String textAttributeName) {
+	LanguageRuleBasedScanner(LanguagePreferences languagePreferences, String preferencesKey) {
 
 		if (languagePreferences == null) {
 			throw new IllegalArgumentException("Parameter 'language' must not be null.");
 		}
-		if (textAttributeName == null) {
-			throw new IllegalArgumentException("Parameter 'textAttributeName' must not be null.");
+		if (preferencesKey == null) {
+			throw new IllegalArgumentException("Parameter 'preferencesKey' must not be null.");
 		}
-		this.preferencesKey = LanguagePreferencesConstants.getPreferencesKey(languagePreferences.getLanguage(),
-				textAttributeName);
+		this.preferencesKey = preferencesKey;
 
-		defaultToken = new Token(languagePreferences.getEditorTextAttribute(textAttributeName));
+		defaultToken = new Token(languagePreferences.getTextAttribute(preferencesKey));
 
 		super.setDefaultReturnToken(defaultToken);
 	}
@@ -94,7 +93,7 @@ final class LanguageRuleBasedScanner extends RuleBasedScanner {
 		boolean refresh = false;
 		if (changedPropertyNames.contains(preferencesKey)) {
 			TextAttributeConverter.dispose((TextAttribute) defaultToken.getData());
-			defaultToken.setData(preferences.getLanguagesPreferences().getEditorTextAttribute(preferencesKey));
+			defaultToken.setData(preferences.getTextAttribute(preferencesKey));
 			refresh = true;
 		}
 		return refresh;

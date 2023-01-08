@@ -262,8 +262,7 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 
 			var languagePreferences = LanguagePlugin.getInstance()
 					.getLanguagePreferences(compilerDefinition.getLanguage());
-			var compilerPreferences = languagePreferences.getCompilerPreferences(compilerDefinition, Hardware.GENERIC);
-			var compilerExecutablePath = compilerPreferences.getCompilerExecutablePathOrDefault();
+			var compilerExecutablePath = languagePreferences.getCompilerExecutablePathOrDefault(compilerDefinition);
 
 			var icon = "";
 			var manualTopics = new ArrayList<ITopic>();

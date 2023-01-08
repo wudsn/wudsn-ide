@@ -32,18 +32,18 @@ import com.wudsn.ide.lng.LanguageProperties;
  */
 public final class CompilerRunPreferences {
 
-	private CompilerPreferences compilerPreferences;
+	private LanguageHardwareCompilerDefinitionPreferences languageHardwareCompilerDefinitionPreferences;
 	private LanguageProperties mainSourceFileProperties;
 
-	public CompilerRunPreferences(CompilerPreferences compilerPreferences,
+	public CompilerRunPreferences(LanguageHardwareCompilerDefinitionPreferences languageHardwareCompilerDefinitionPreferences,
 			LanguageProperties mainSourceFileProperties) {
-		if (compilerPreferences == null) {
-			throw new IllegalArgumentException("Parameter 'compilerPreferences' must not be null.");
+		if (languageHardwareCompilerDefinitionPreferences == null) {
+			throw new IllegalArgumentException("Parameter 'languageHardwareCompilerDefinitionPreferences' must not be null.");
 		}
 		if (mainSourceFileProperties == null) {
 			throw new IllegalArgumentException("Parameter 'properties' must not be null.");
 		}
-		this.compilerPreferences = compilerPreferences;
+		this.languageHardwareCompilerDefinitionPreferences = languageHardwareCompilerDefinitionPreferences;
 		this.mainSourceFileProperties = mainSourceFileProperties;
 	}
 
@@ -55,7 +55,7 @@ public final class CompilerRunPreferences {
 	 * @since 1.6.1
 	 */
 	public Hardware getHardware() {
-		return compilerPreferences.getHardware();
+		return languageHardwareCompilerDefinitionPreferences.getHardware();
 	}
 
 	/**
@@ -68,7 +68,7 @@ public final class CompilerRunPreferences {
 
 		String result;
 
-		result = compilerPreferences.getParameters();
+		result = languageHardwareCompilerDefinitionPreferences.getParameters();
 		return result;
 	}
 
@@ -81,7 +81,7 @@ public final class CompilerRunPreferences {
 	public String getRunnerId() {
 		String result;
 
-		result = compilerPreferences.getRunnerId();
+		result = languageHardwareCompilerDefinitionPreferences.getRunnerId();
 		return result;
 	}
 
@@ -103,7 +103,7 @@ public final class CompilerRunPreferences {
 
 		String result;
 
-		result = compilerPreferences.getRunnerExecutablePath(runnerId);
+		result = languageHardwareCompilerDefinitionPreferences.getRunnerExecutablePath(runnerId);
 		return result;
 	}
 
@@ -122,7 +122,7 @@ public final class CompilerRunPreferences {
 			throw new IllegalArgumentException("Parameter 'runnerId' must not be empty.");
 		}
 		String result;
-		result = compilerPreferences.getRunnerCommandLine(runnerId);
+		result = languageHardwareCompilerDefinitionPreferences.getRunnerCommandLine(runnerId);
 		return result;
 	}
 
@@ -144,7 +144,7 @@ public final class CompilerRunPreferences {
 			throw new IllegalArgumentException("Parameter 'runnerId' must not be empty.");
 		}
 		boolean result;
-		result = compilerPreferences.isRunnerWaitForCompletion(runnerId);
+		result = languageHardwareCompilerDefinitionPreferences.isRunnerWaitForCompletion(runnerId);
 		return result;
 	}
 

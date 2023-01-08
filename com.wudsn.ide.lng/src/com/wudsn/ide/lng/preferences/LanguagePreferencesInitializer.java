@@ -19,8 +19,6 @@
 
 package com.wudsn.ide.lng.preferences;
 
-import java.util.List;
-
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.TextAttribute;
@@ -32,11 +30,10 @@ import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.base.hardware.HardwareUtility;
 import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguagePlugin;
-import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerOutputFolderMode;
-import com.wudsn.ide.lng.compiler.CompilerRegistry;
 import com.wudsn.ide.lng.editor.LanguageContentAssistProcessorDefaultCase;
 import com.wudsn.ide.lng.editor.LanguageEditorCompileCommandPositioningMode;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants.EditorConstants;
 import com.wudsn.ide.lng.runner.RunnerId;
 
 /**
@@ -56,15 +53,18 @@ public final class LanguagePreferencesInitializer extends AbstractPreferenceInit
 
 	}
 
-	private void setDefault(Language language, String key, String value) {
-		store.setDefault(language.name().toLowerCase() + "." + key, value);
+	private void setDefault(String key, String value) {
+		store.setDefault(key, value);
 	}
 
-	private void setDefault(Language language, String key, int r, int g, int b, int style) {
+	private void setLanguageTextAttributeDefault(Language language, String textAttributeName, int r, int g, int b,
+			int style) {
 		// Editor.
-		Display display = Display.getCurrent();
-		TextAttribute textAttribute = new TextAttribute(new Color(display, r, g, b), null, style);
-		store.setDefault(language.name().toLowerCase() + "." + key, TextAttributeConverter.toString(textAttribute));
+		var display = Display.getCurrent();
+		var textAttribute = new TextAttribute(new Color(display, r, g, b), null, style);
+		var preferencesKey = LanguagePreferencesConstants.EditorConstants.getEditorAttributeKey(language,
+				textAttributeName);
+		setDefault(preferencesKey, TextAttributeConverter.toString(textAttribute));
 	}
 
 	@Override
@@ -82,56 +82,62 @@ public final class LanguagePreferencesInitializer extends AbstractPreferenceInit
 			throw new IllegalArgumentException("Parameter 'language' must not be null.");
 		}
 		initializeEditorPreferences(language);
-		initializeCompilerPreferences(language);
+		initializeHardwareCompilerDefinitionPreferences(language);
 	}
 
 	private void initializeEditorPreferences(Language language) {
 		if (language == null) {
 			throw new IllegalArgumentException("Parameter 'language' must not be null.");
 		}
-		setDefault(language, LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT, 0, 128, 0, SWT.ITALIC);
-		setDefault(language, LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_DIRECTVE, 128, 64, 0, SWT.BOLD);
-		setDefault(language, LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_NUMBER, 0, 0, 255, SWT.BOLD);
-		setDefault(language, LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL, 0, 0, 128, SWT.BOLD);
-		setDefault(language, LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL, 255, 32, 32, SWT.BOLD);
-		setDefault(language, LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO, 32, 128, 32, SWT.BOLD);
-		setDefault(language, LanguagePreferencesConstants.EDITOR_TEXT_ATTRIBUTE_STRING, 0, 0, 255, SWT.NORMAL);
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT, 0, 128, 0, SWT.ITALIC);
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_DIRECTVE, 128, 64, 0, SWT.BOLD);
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_NUMBER, 0, 0, 255, SWT.BOLD);
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL, 0, 0, 128,
+				SWT.BOLD);
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL, 255, 32, 32,
+				SWT.BOLD);
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO, 32, 128, 32,
+				SWT.BOLD);
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_STRING, 0, 0, 255, SWT.NORMAL);
 
 		// Content assist.
-		setDefault(language, LanguagePreferencesConstants.EDITOR_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE,
-				LanguageContentAssistProcessorDefaultCase.LOWER_CASE);
+		var preferencesKey = EditorConstants.getEditorContentProcessorDefaultCaseKey(language);
+		setDefault(preferencesKey, LanguageContentAssistProcessorDefaultCase.LOWER_CASE);
 
 		// Compiling.
-		setDefault(language, LanguagePreferencesConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE,
-				LanguageEditorCompileCommandPositioningMode.FIRST_ERROR_OR_WARNING);
+		preferencesKey = EditorConstants.getEditorCompileCommandPositioningModeKey(language);
+		setDefault(preferencesKey, LanguageEditorCompileCommandPositioningMode.FIRST_ERROR_OR_WARNING);
 	}
 
-	private void initializeCompilerPreferences(Language language) {
+	private void initializeHardwareCompilerDefinitionPreferences(Language language) {
 		if (language == null) {
 			throw new IllegalArgumentException("Parameter 'language' must not be null.");
 		}
-		LanguagePlugin languagePlugin = LanguagePlugin.getInstance();
-		CompilerRegistry compilerRegistry = languagePlugin.getCompilerRegistry();
-		List<CompilerDefinition> compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
-		for (CompilerDefinition compilerDefinition : compilerDefinitions) {
-			String compilerId = compilerDefinition.getId();
-			String name;
+		var languagePlugin = LanguagePlugin.getInstance();
+		var compilerRegistry = languagePlugin.getCompilerRegistry();
+		var compilerDefinitions = compilerRegistry.getCompilerDefinitions(language);
 
-			for (Hardware hardware : Hardware.values()) {
-				if (hardware.equals(Hardware.GENERIC)) {
-					continue;
-				}
-				setDefault(language, LanguagePreferencesConstants.getCompilerTargetName(compilerId, hardware),
-						compilerDefinition.getSupportedTargets().get(0).toString());
+		for (Hardware hardware : Hardware.values()) {
+			if (hardware.equals(Hardware.GENERIC)) {
+				continue;
+			}
+			for (var compilerDefinition : compilerDefinitions) {
 
-				name = LanguagePreferencesConstants.getCompilerParametersName(compilerId, hardware);
-				setDefault(language, name, compilerDefinition.getDefaultParameters());
-				name = LanguagePreferencesConstants.getCompilerOutputFolderModeName(compilerId, hardware);
-				setDefault(language, name, CompilerOutputFolderMode.TEMP_FOLDER);
-				name = LanguagePreferencesConstants.getCompilerOutputFileExtensionName(compilerId, hardware);
-				setDefault(language, name, HardwareUtility.getDefaultFileExtension(hardware));
-				name = LanguagePreferencesConstants.getCompilerRunnerIdName(compilerId, hardware);
-				setDefault(language, name, RunnerId.DEFAULT_APPLICATION);
+				setDefault(LanguageHardwareCompilerDefinitionPreferencesConstants.getCompilerTargetName(language,
+						hardware, compilerDefinition), compilerDefinition.getSupportedTargets().get(0).toString());
+
+				var preferencesKey = LanguageHardwareCompilerDefinitionPreferencesConstants
+						.getCompilerParametersName(language, hardware, compilerDefinition);
+				setDefault(preferencesKey, compilerDefinition.getDefaultParameters());
+				preferencesKey = LanguageHardwareCompilerDefinitionPreferencesConstants
+						.getCompilerOutputFolderModeName(language, hardware, compilerDefinition);
+				setDefault(preferencesKey, CompilerOutputFolderMode.TEMP_FOLDER);
+				preferencesKey = LanguageHardwareCompilerDefinitionPreferencesConstants
+						.getCompilerOutputFileExtensionName(language, hardware, compilerDefinition);
+				setDefault(preferencesKey, HardwareUtility.getDefaultFileExtension(hardware));
+				preferencesKey = LanguageHardwareCompilerDefinitionPreferencesConstants
+						.getCompilerRunnerIdName(language, hardware, compilerDefinition);
+				setDefault(preferencesKey, RunnerId.DEFAULT_APPLICATION);
 			}
 
 		}

@@ -15,39 +15,39 @@
        point="org.eclipse.ui.preferencePages">
     <page
           category="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesPage"
-          class="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesApple2CompilersPage"
-          id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesApple2CompilersPage"
-          name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesApple2CompilersPage.name">
+          class="com.wudsn.ide.lng.asm.preferences.AssemblerApple2PreferencesPage"
+          id="com.wudsn.ide.lng.asm.preferences.AssemblerApple2PreferencesPage"
+          name="%com.wudsn.ide.lng.asm.preferences.AssemblerApple2PreferencesPage.name">
     </page>
     <page
           category="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesPage"
-          class="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari8CompilersPage"
-          id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari8CompilersPage"
-          name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari8CompilersPage.name">
+          class="com.wudsn.ide.lng.asm.preferences.AssemblerAtari8PreferencesPage"
+          id="com.wudsn.ide.lng.asm.preferences.AssemblerAtari8PreferencesPage"
+          name="%com.wudsn.ide.lng.asm.preferences.AssemblerAtari8PreferencesPage.name">
     </page>
     <page
           category="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesPage"
-          class="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari2600CompilersPage"
-          id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari2600CompilersPage"
-          name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari2600CompilersPage.name">
+          class="com.wudsn.ide.lng.asm.preferences.AssemblerAtari2600PreferencesPage"
+          id="com.wudsn.ide.lng.asm.preferences.AssemblerAtari2600PreferencesPage"
+          name="%com.wudsn.ide.lng.asm.preferences.AssemblerAtari2600PreferencesPage.name">
     </page>
     <page
           category="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesPage"
-          class="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari7800CompilersPage"
-          id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtar7800CompilersPage"
-          name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesAtari7800CompilersPage.name">
+          class="com.wudsn.ide.lng.asm.preferences.AssemblerAtari7800PreferencesPage"
+          id="com.wudsn.ide.lng.asm.preferences.AssemblerAtari7800PreferencesPage"
+          name="%com.wudsn.ide.lng.asm.preferences.AssemblerAtari7800PreferencesPage.name">
     </page>
     <page
           category="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesPage"
-          class="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesC64CompilersPage"
-          id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesC64CompilersPage"
-          name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesC64CompilersPage.name">
+          class="com.wudsn.ide.lng.asm.preferences.AssemblerC64PreferencesPage"
+          id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesPage"
+          name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesPage.name">
     </page>
     <page
           category="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesPage"
-          class="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesNESCompilersPage"
-          id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesNESCompilersPage"
-          name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesNESCompilersPage.name">
+          class="com.wudsn.ide.lng.asm.preferences.AssemblerNESPreferencesPage"
+          id="com.wudsn.ide.lng.asm.preferences.AssemblerNESPreferencesPage"
+          name="%com.wudsn.ide.lng.asm.preferences.AssemblerNESPreferencesPage.name">
     </page>
  </extension>
 	<extension point="com.wudsn.ide.lng.compilers">

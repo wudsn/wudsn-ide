@@ -40,7 +40,7 @@ import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.base.hardware.HardwareUtility;
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Texts;
-import com.wudsn.ide.lng.preferences.CompilerPreferences;
+import com.wudsn.ide.lng.preferences.LanguageHardwareCompilerDefinitionPreferences;
 import com.wudsn.ide.lng.runner.RunnerDefinition;
 import com.wudsn.ide.lng.runner.RunnerId;
 import com.wudsn.ide.lng.runner.RunnerRegistry;
@@ -110,7 +110,7 @@ public final class LanguageEditorCompileCommandDelegate
 		RunnerRegistry runnerRegistry = languagePlugin.getRunnerRegistry();
 		Hardware hardware = languageEditor.getHardware();
 		List<RunnerDefinition> runnerDefinitions = runnerRegistry.getDefinitions(hardware);
-		CompilerPreferences compilerPreferences = languageEditor.getCompilerPreferences();
+		LanguageHardwareCompilerDefinitionPreferences languageHardwareCompilerDefinitionPreferences = languageEditor.getLanguageHardwareCompilerPreferences();
 
 		Menu menu = new Menu(parent);
 		setMenu(menu);
@@ -123,7 +123,7 @@ public final class LanguageEditorCompileCommandDelegate
 			String runnerName = runnerDefinition.getName();
 			// The system default application does not need an executable path.
 			if (!runnerId.equals(RunnerId.DEFAULT_APPLICATION)) {
-				if (StringUtility.isEmpty(compilerPreferences.getRunnerExecutablePath(runnerId))) {
+				if (StringUtility.isEmpty(languageHardwareCompilerDefinitionPreferences.getRunnerExecutablePath(runnerId))) {
 					continue;
 				}
 			}
@@ -131,7 +131,7 @@ public final class LanguageEditorCompileCommandDelegate
 			Action action = new CompileAndRunAction(runnerId);
 			action.setActionDefinitionId(LanguageEditorCompileCommand.COMPILE_AND_RUN_WITH);
 			action.setImageDescriptor(imageDescriptor);
-			if (runnerId.equals(compilerPreferences.getRunnerId())) {
+			if (runnerId.equals(languageHardwareCompilerDefinitionPreferences.getRunnerId())) {
 				runnerName = runnerName + " " + Texts.COMPILER_TOOLBAR_RUN_WITH_DEFAULT_LABEL;
 			}
 			action.setText(runnerName);

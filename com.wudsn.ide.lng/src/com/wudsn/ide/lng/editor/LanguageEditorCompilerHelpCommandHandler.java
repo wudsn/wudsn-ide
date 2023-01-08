@@ -45,8 +45,8 @@ public final class LanguageEditorCompilerHelpCommandHandler extends AbstractHand
 
 		var languageEditor = (LanguageEditor) editor;
 		var compilerDefinition = languageEditor.getCompilerDefinition();
-		var compilerPreferences = languageEditor.getCompilerPreferences();
-		var compilerExecutablePath = compilerPreferences.getCompilerExecutablePathOrDefault();
+		var languagePreferences = languageEditor.getLanguagePreferences();
+		var compilerExecutablePath = languagePreferences.getCompilerExecutablePathOrDefault(compilerDefinition);
 
 		try {
 			var helpDocument = compilerDefinition.getInstalledHelpForCurrentLocale(compilerExecutablePath);

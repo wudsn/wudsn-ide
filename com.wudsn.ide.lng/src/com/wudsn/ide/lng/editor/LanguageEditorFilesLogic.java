@@ -120,7 +120,7 @@ public final class LanguageEditorFilesLogic {
 				}
 			}
 			result = new CompilerFiles(mainSourceIFile, mainSourceFileProperties, sourceIFile, sourceFileProperties,
-					languageEditor.getCompilerPreferences());
+					languageEditor.getLanguageHardwareCompilerPreferences());
 		} else {
 			result = null;
 		}

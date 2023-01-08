@@ -49,7 +49,7 @@ public final class CompilerPathsTest {
 				filePath = file.getAbsolutePath();
 				result = file.exists() ? "found" : "NOT found";
 			}
-			Test.log("Language " + compilerPath.language + ", compiler " + compilerPath.compilerId + ", OS "
+			Test.log("Language " + compilerPath.language.name() + ", compiler " + compilerPath.compilerDefinition.getId() + ", OS "
 					+ compilerPath.os + ", OS architecture " + compilerPath.osArch + ": File " + filePath + " "
 					+ result);
 		}

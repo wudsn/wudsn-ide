@@ -64,7 +64,6 @@ import com.wudsn.ide.lng.compiler.syntax.InstructionSet;
 import com.wudsn.ide.lng.compiler.syntax.InstructionType;
 import com.wudsn.ide.lng.compiler.syntax.Opcode;
 import com.wudsn.ide.lng.compiler.syntax.Opcode.OpcodeAddressingMode;
-import com.wudsn.ide.lng.preferences.CompilerPreferences;
 import com.wudsn.ide.lng.preferences.LanguagePreferences;
 import com.wudsn.ide.lng.runner.RunnerDefinition;
 import com.wudsn.ide.lng.runner.RunnerId;
@@ -301,20 +300,16 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 		CompilerRegistry compilerRegistry = languagePlugin.getCompilerRegistry();
 
 		// Find non-empty compiler executable path.
-		Language language = Language.valueOf(languageString);
-		String compilerKey = CompilerDefinition.getKey(language, compilerId);
-		CompilerDefinition compilerDefinition = compilerRegistry.getCompilerByKey(compilerKey).getDefinition();
-
+		var language = Language.valueOf(languageString);
+		var compilerDefinition = compilerRegistry.getCompilerDefinitionById(language, compilerId);
 		if (section.startsWith(SECTION_GENERAL)) {
 			return getInputStream(getCompilerGeneralSection(compilerDefinition));
 		} else if (section.startsWith(SECTION_MANUAL)) {
 			LanguagePreferences languagePreferences = languagePlugin.getLanguagePreferences(language);
-			CompilerPreferences compilerPreferences = languagePreferences.getCompilerPreferences(compilerDefinition,
-					Hardware.GENERIC);
 
 			try {
-				var helpDocDocument = compilerDefinition
-						.getInstalledHelpForCurrentLocale(compilerPreferences.getCompilerExecutablePathOrDefault());
+				var helpDocDocument = compilerDefinition.getInstalledHelpForCurrentLocale(
+						languagePreferences.getCompilerExecutablePathOrDefault(compilerDefinition));
 				File file = helpDocDocument.file;
 				if (file == null) {
 					throw new RuntimeException(

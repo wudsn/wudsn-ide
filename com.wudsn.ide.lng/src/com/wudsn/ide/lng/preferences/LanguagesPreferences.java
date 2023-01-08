@@ -24,6 +24,7 @@ import org.eclipse.jface.text.TextAttribute;
 
 import com.wudsn.ide.base.common.AbstractIDEPlugin;
 import com.wudsn.ide.lng.Language;
+import com.wudsn.ide.lng.LanguagePlugin;
 
 /**
  * Facade class for typed access to the plugin preferences.
@@ -77,7 +78,9 @@ public final class LanguagesPreferences {
 		if (preferencesKey == null) {
 			throw new IllegalArgumentException("Parameter 'preferencesKey' must not be null.");
 		}
-		return preferenceStore.getBoolean(preferencesKey);
+		var result = preferenceStore.getBoolean(preferencesKey);
+		log(preferencesKey, result ? "true" : "false");
+		return result;
 	}
 
 	/**
@@ -100,7 +103,7 @@ public final class LanguagesPreferences {
 		} else {
 			result = result.trim();
 		}
-
+		log(preferencesKey, result);
 		return result;
 	}
 
@@ -112,12 +115,28 @@ public final class LanguagesPreferences {
 	 * @return The text attribute, not <code>null</code>.
 	 * 
 	 */
-	public TextAttribute getEditorTextAttribute(String preferencesKey) {
+	TextAttribute getEditorTextAttribute(String preferencesKey) {
 		if (preferencesKey == null) {
 			throw new IllegalArgumentException("Parameter 'preferencesKey' must not be null.");
 		}
 
-		return TextAttributeConverter.fromString(preferenceStore.getString(preferencesKey));
+		return TextAttributeConverter.fromString(getString(preferencesKey));
+	}
+
+	/**
+	 * Logs the result of a read access for debugging purposes.
+	 * 
+	 * @param preferencesKey The preferences key, not <code>null</code>
+	 * @param result         The result, not <code>null</code>.
+	 */
+	private void log(String preferencesKey, String result) {
+		if (true) {
+			if (preferencesKey.startsWith("editor")) {
+				LanguagePlugin.getInstance().log("Result of language preferences key '{0}' is '{1}'",
+						new Object[] { preferencesKey, result });
+			}
+		}
+
 	}
 
 }

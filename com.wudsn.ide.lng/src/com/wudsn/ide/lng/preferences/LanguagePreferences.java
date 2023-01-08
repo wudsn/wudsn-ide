@@ -19,12 +19,19 @@
 
 package com.wudsn.ide.lng.preferences;
 
+import java.io.File;
+
 import org.eclipse.jface.text.TextAttribute;
 
 import com.wudsn.ide.base.common.AbstractIDEPlugin;
+import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.Language;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
+import com.wudsn.ide.lng.compiler.CompilerPaths;
+import com.wudsn.ide.lng.compiler.CompilerPaths.CompilerPath;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants.EditorConstants;
 import com.wudsn.ide.lng.editor.LanguageContentAssistProcessorDefaultCase;
 import com.wudsn.ide.lng.editor.LanguageEditorCompileCommandPositioningMode;
 
@@ -72,7 +79,7 @@ public final class LanguagePreferences {
 	 *         See {@link LanguageContentAssistProcessorDefaultCase}.
 	 */
 	public String getEditorContentAssistProcessorDefaultCase() {
-		return getString(LanguagePreferencesConstants.EDITOR_CONTENT_ASSIST_PROCESSOR_DEFAULT_CASE);
+		return getString(EditorConstants.getEditorContentProcessorDefaultCaseKey(language));
 	}
 
 	/**
@@ -83,58 +90,102 @@ public final class LanguagePreferences {
 	 * @since 1.6.1
 	 */
 	public String getEditorCompileCommandPositioningMode() {
-		return getString(LanguagePreferencesConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE);
+		return getString(EditorConstants.getEditorCompileCommandPositioningModeKey(language));
+	}
+
+	/**
+	 * Gets the executable path for the compiler.
+	 * 
+	 * @param compilerDefinition The compiler definition, not <code>null</code>.
+	 * 
+	 * @return The executable path for the runner, may be empty, not
+	 *         <code>null</code>.
+	 */
+	public String getCompilerExecutablePath(CompilerDefinition compilerDefinition) {
+		if (compilerDefinition == null) {
+			throw new IllegalArgumentException("Parameter 'compilerDefinition' must not be null.");
+		}
+		return getString(LanguagePreferencesConstants.getCompilerExecutablePathKey(language, compilerDefinition));
+	}
+
+	/**
+	 * Gets the executable path for the compiler or the default from the
+	 * {@linkplain CompilerPaths}.
+	 * 
+	 * @param compilerDefinition The compiler definition, not <code>null</code>.
+	 * 
+	 * @return The executable path for the runner, may be empty, not
+	 *         <code>null</code>.
+	 */
+	public String getCompilerExecutablePathOrDefault(CompilerDefinition compilerDefinition) {
+		String compilerExecutablePath = getCompilerExecutablePath(compilerDefinition);
+
+		CompilerPaths compilerPaths = LanguagePlugin.getInstance().getCompilerPaths();
+		if (StringUtility.isEmpty(compilerExecutablePath)) {
+			CompilerPath compilerPath = compilerPaths.getDefaultCompilerPath(language, compilerDefinition);
+			if (compilerPath != null) {
+				File compilerFile = compilerPath.getAbsoluteFile();
+				if (compilerFile != null) {
+					if (compilerFile.exists() && compilerFile.isFile() && compilerFile.canExecute()) {
+						compilerExecutablePath = compilerFile.getAbsolutePath();
+					}
+				}
+			}
+
+		}
+		return compilerExecutablePath;
 	}
 
 	/**
 	 * Gets the preferences for a compiler.
 	 * 
-	 * @param compilerDefinition The compiler definition, not empty and not
-	 *                           <code>null</code>.
 	 * @param hardware           The preferences or <code>null</code> if the
 	 *                           compiler is not active for that hardware.
+	 * @param compilerDefinition The compiler definition, not empty and not
+	 *                           <code>null</code>.
 	 * 
 	 * @return The compiler preferences, not <code>null</code>.
 	 */
-	public CompilerPreferences getCompilerPreferences(CompilerDefinition compilerDefinition, Hardware hardware) {
+	public LanguageHardwareCompilerDefinitionPreferences getLanguageHardwareCompilerDefinitionPreferences(
+			Hardware hardware, CompilerDefinition compilerDefinition) {
+		if (hardware == null) {
+			throw new IllegalArgumentException("Parameter 'hardware' must not be null.");
+		}
 		if (compilerDefinition == null) {
 			throw new IllegalArgumentException("Parameter 'compilerDefinition' must not be null.");
 		}
 
-		if (hardware == null) {
-			throw new IllegalArgumentException("Parameter 'hardware' must not be null.");
-		}
-		return new CompilerPreferences(this, compilerDefinition.getId(), hardware);
+		return new LanguageHardwareCompilerDefinitionPreferences(this, hardware, compilerDefinition);
 
 	}
 
 	/**
-	 * Gets the preferences for the language of these preferences and a suffix.
+	 * Create the preferences key for a property of a given language.
 	 * 
-	 * @param preferencesKeySuffix The key suffix, not empty and not <code>null</code>.
-	 * @return The language preferences key, not empty and not <code>null</code>.
+	 * @param language             The language, not <code>null</code>
+	 * @param preferencesKeySuffix The suffix as defined by the constants of this
+	 *                             class, not empty, not <code>null</code>
+	 * @return
 	 */
-	public String getPreferencesKey(String preferencesKeySuffix) {
-		return LanguagePreferencesConstants.getPreferencesKey(language, preferencesKeySuffix);
+	public static String getLanguagePreferencesKey(Language language, String preferencesKeySuffix) {
+		return language.name().toLowerCase() + "." + preferencesKeySuffix;
 	}
-	
+
 	/**
 	 * Gets the current value of the boolean preference with the given name. Returns
 	 * the default value <code>false</code> if there is no preference with the given
 	 * name, or if the current value cannot be treated as a boolean.
 	 * 
-	 * @param preferencesKeySuffix The he preferences key suffix of the preference,
-	 *                             not <code>null</code>.
+	 * @param preferencesKey The key of the preference, not empty and not
+	 *                       <code>null</code>.
 	 * @return The preference value.
 	 */
-	boolean getBoolean(String preferencesKeySuffix) {
-		if (preferencesKeySuffix == null) {
-			throw new IllegalArgumentException("Parameter 'preferencesKeySuffix' must not be null.");
+	boolean getBoolean(String preferencesKey) {
+		if (preferencesKey == null) {
+			throw new IllegalArgumentException("Parameter 'preferencesKey' must not be null.");
 		}
-		return languagesPreferences
-				.getBoolean(getPreferencesKey(preferencesKeySuffix));
+		return languagesPreferences.getBoolean(preferencesKey);
 	}
-
 
 	/**
 	 * Gets the current value of the string-valued preference with the given name.
@@ -142,32 +193,31 @@ public final class LanguagePreferences {
 	 * there is no preference with the given name, or if the current value cannot be
 	 * treated as a string.
 	 * 
-	 * @param preferencesKeySuffix The preferences key suffix of the preference, not
-	 *                             <code>null</code>.
+	 * @param preferencesKey The key of the preference, not empty and not
+	 *                       <code>null</code>.
+	 * 
 	 * @return The preference value, may be empty, not <code>null</code>.
 	 */
-	String getString(String preferencesKeySuffix) {
-		if (preferencesKeySuffix == null) {
-			throw new IllegalArgumentException("Parameter 'preferencesKeySuffix' must not be null.");
+	String getString(String preferencesKey) {
+		if (preferencesKey == null) {
+			throw new IllegalArgumentException("Parameter 'preferencesKey' must not be null.");
 		}
-		return languagesPreferences
-				.getString(getPreferencesKey(preferencesKeySuffix));
+		return languagesPreferences.getString(preferencesKey);
 	}
 
 	/**
 	 * Gets the text attribute for a token type.
 	 * 
-	 * @param textAttributeName The suffix of the preferences for the token type,
-	 *                          see {@link LanguagePreferencesConstants}.
+	 * @param preferencesKey The key of the preference, not empty and not
+	 *                       <code>null</code>.
 	 * 
 	 * @return The text attribute, not <code>null</code>.
 	 */
-	public TextAttribute getEditorTextAttribute(String textAttributeName) {
-		if (textAttributeName == null) {
-			throw new IllegalArgumentException("Parameter 'textAttributeName' must not be null.");
+	public TextAttribute getTextAttribute(String preferencesKey) {
+		if (preferencesKey == null) {
+			throw new IllegalArgumentException("Parameter 'preferencesKey' must not be null.");
 		}
-		return languagesPreferences
-				.getEditorTextAttribute(getPreferencesKey(textAttributeName));
+		return languagesPreferences.getEditorTextAttribute(preferencesKey);
 
 	}
 

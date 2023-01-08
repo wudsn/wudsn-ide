@@ -27,7 +27,7 @@ import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.lng.LanguageProperties;
 import com.wudsn.ide.lng.LanguageProperties.LanguageProperty;
-import com.wudsn.ide.lng.preferences.CompilerPreferences;
+import com.wudsn.ide.lng.preferences.LanguageHardwareCompilerDefinitionPreferences;
 
 /**
  * Container class for the folder, file names and paths of the source file, the
@@ -116,7 +116,7 @@ public final class CompilerFiles {
 
 	public CompilerFiles(IFile mainSourceIFile, LanguageProperties mainSourceFileLanguageProperties,
 			IFile sourceIFile, LanguageProperties sourceFileLanguageProperties,
-			CompilerPreferences compilerPreferences) {
+			LanguageHardwareCompilerDefinitionPreferences languageHardwareCompilerDefinitionPreferences) {
 
 		if (mainSourceIFile == null) {
 			throw new IllegalArgumentException("Parameter 'mainSourceIFile' must not be null.");
@@ -124,7 +124,7 @@ public final class CompilerFiles {
 		if (sourceIFile == null) {
 			throw new IllegalArgumentException("Parameter 'sourceIFile' must not be null.");
 		}
-		if (compilerPreferences == null) {
+		if (languageHardwareCompilerDefinitionPreferences == null) {
 			throw new IllegalArgumentException("Parameter 'compilerPreferences' must not be null.");
 		}
 		this.mainSourceFile = new SourceFile(mainSourceIFile, mainSourceFileLanguageProperties);
@@ -132,9 +132,9 @@ public final class CompilerFiles {
 
 		// Output folder mode
 		// Can be overridden via annotation property in main source file
-		String localOutputFolderPath = compilerPreferences.getOutputFolderPath();
-		String localOutputFolderMode = compilerPreferences.getOutputFolderMode();
-		String localOutputFileExtension = compilerPreferences.getOutputFileExtension();
+		String localOutputFolderPath = languageHardwareCompilerDefinitionPreferences.getOutputFolderPath();
+		String localOutputFolderMode = languageHardwareCompilerDefinitionPreferences.getOutputFolderMode();
+		String localOutputFileExtension = languageHardwareCompilerDefinitionPreferences.getOutputFileExtension();
 
 		// Properties which override the preferences
 		outputFolderModeProperty = mainSourceFileLanguageProperties.get(LanguageProperties.OUTPUT_FOLDER_MODE);
