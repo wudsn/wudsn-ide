@@ -308,5 +308,22 @@
          </command>
       </menuContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.themes">
+      <fontDefinition
+            categoryId="org.eclipse.ui.workbenchMisc"
+            defaultsTo="org.eclipse.jface.textfont"
+            id="com.wudsn.ide.base.hardware.HardwareFont.ATARI8"
+            isEditable="true"
+            label="%com.wudsn.ide.base.hardware.HardwareFont.ATARI8.label">
+      </fontDefinition>
+      <fontDefinition
+            categoryId="org.eclipse.ui.workbenchMisc"
+            defaultsTo="org.eclipse.jface.textfont"
+            id="com.wudsn.ide.base.hardware.HardwareFont.CBM"
+            isEditable="true"
+            label="%com.wudsn.ide.base.hardware.HardwareFont.CBM.label">
+      </fontDefinition>
+   </extension>
 
   </plugin>

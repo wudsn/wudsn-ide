@@ -34,8 +34,7 @@ import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.ResourceUtility;
 
 /**
- * Logical character set with physical font and character mapping. TODO
- * Generalize C64 to CBM ASCII
+ * Logical character set with physical font and character mapping. 
  * 
  * @since 1.7.0
  */
@@ -43,35 +42,34 @@ public enum HardwareCharacterSet {
 	ASCII, ATARI_ATASCII, ATARI_ATASCII_SCREEN_CODE, ATARI_INTERNATIONAL, ATARI_INTERNATIONAL_SCREEN_CODE,
 	CBM_PETSCII_UPPER_CASE, CBM_PETSCII_LOWER_CASE;
 
+	// Atari and C64 font by Mark Simonson, marksim@bitstream.net,
+	// http://www2.bitstream.net/~marksim/atarimac
+	// Font names and file names are kept as they are in the original download.
+	private final static String ATARI_FONT_PATH = "fonts/atari8/AtariClassic-Regular.ttf";
+	private final static String ATARI_FONT_NAME = "Atari Classic";
+	private final static int ATARI_FONT_BASE = 0xe000;
+	private final static int ATARI_INT_FONT_BASE = 0xe100;
+
+	private final static String CBM_FONT_PATH = "fonts/c64/C64Classic-Regular.ttf";
+	private final static String CBM_FONT_NAME = "C64 Classic";
+	private final static int CBM_UPPER_FONT_BASE = 0x0100;
+	private final static int CBM_LOWER_FONT_BASE = 0x0200;
+
+	private static Map<HardwareCharacterSet, CharacterMapping> characterMappingMap;
+	private static Map<String, File> fontNameFileMap;
+	private static Map<String, Font> fontNameAndSizeFontMap;
+
+	static {
+		fontNameFileMap = new TreeMap<String, File>();
+		fontNameAndSizeFontMap = new TreeMap<String, Font>();
+		characterMappingMap = new TreeMap<HardwareCharacterSet, CharacterMapping>();
+	}
+
 	/**
-	 * Data class to encapsulate lazy loading and reuse of SWT fonts.
+	 * CharacterMapping class to encapsulate lazy loading and reuse of SWT fonts.
 	 */
-	private final static class Data {
-
-		// Atari and C64 font by Mark Simonson, marksim@bitstream.net,
-		// http://www2.bitstream.net/~marksim/atarimac
-		private final static String ATARI_FONT_PATH = "fonts/atari8/AtariClassic-Regular.ttf";
-		private final static String ATARI_FONT_NAME = "Atari Classic";
-		private final static int ATARI_FONT_SIZE = 6;
-		private final static int ATARI_FONT_BASE = 0xe000;
-		private final static int ATARI_INT_FONT_BASE = 0xe100;
-
-		private final static String CBM_FONT_PATH = "fonts/c64/C64Classic-Regular.ttf";
-		private final static String CBM_FONT_NAME = "C64 Classic";
-		private final static int CBM_FONT_SIZE = 6;
-		private final static int CBM_UPPER_FONT_BASE = 0x0100;
-		private final static int CBM_LOWER_FONT_BASE = 0x0200;
-
-		private static Map<HardwareCharacterSet, Data> instanceMap;
-		private static Map<String, Font> fontMap;
-
-		Font font;
+	private final static class CharacterMapping {
 		char[] characterMapping;
-
-		static {
-			instanceMap = new TreeMap<HardwareCharacterSet, Data>();
-			fontMap = new TreeMap<String, Font>();
-		}
 
 		/**
 		 * Gets a data instance base on the font type.
@@ -80,22 +78,18 @@ public enum HardwareCharacterSet {
 		 * 
 		 * @return The instance, not <code>null</code>.
 		 */
-		public static Data getInstance(HardwareCharacterSet type) {
+		public static CharacterMapping getInstance(HardwareCharacterSet type) {
 			if (type == null) {
 				throw new IllegalArgumentException("Parameter 'type' must not be null.");
 			}
-			Data result;
-			synchronized (instanceMap) {
-				result = instanceMap.get(type);
+			CharacterMapping result = null;
+			synchronized (characterMappingMap) {
+				result = characterMappingMap.get(type);
 				// Add "|| true" below to disable caching for debugging
 				// purposes.
 				if (result == null) {
-					result = new Data();
-					result.font = null;
+					result = new CharacterMapping();
 					result.characterMapping = new char[256];
-					String fontPath = null;
-					String fontName = "";
-					int fontSize = -1;
 					switch (type) {
 					case ASCII:
 						for (int i = 0; i < 256; i++) {
@@ -109,91 +103,30 @@ public enum HardwareCharacterSet {
 						}
 						break;
 					case ATARI_ATASCII:
-						fontPath = ATARI_FONT_PATH;
-						fontName = ATARI_FONT_NAME;
-						fontSize = ATARI_FONT_SIZE;
 						result.setIdentityMapping(ATARI_FONT_BASE);
 						break;
 					case ATARI_ATASCII_SCREEN_CODE:
-						fontPath = ATARI_FONT_PATH;
-						fontName = ATARI_FONT_NAME;
-						fontSize = ATARI_FONT_SIZE;
 						result.setAtariScreenCodeMapping(ATARI_FONT_BASE);
 						break;
 					case ATARI_INTERNATIONAL:
-						fontPath = ATARI_FONT_PATH;
-						fontName = ATARI_FONT_NAME;
-						fontSize = ATARI_FONT_SIZE;
 						result.setIdentityMapping(ATARI_INT_FONT_BASE);
 						break;
 					case ATARI_INTERNATIONAL_SCREEN_CODE:
-						fontPath = ATARI_FONT_PATH;
-						fontName = ATARI_FONT_NAME;
-						fontSize = ATARI_FONT_SIZE;
 						result.setAtariScreenCodeMapping(ATARI_INT_FONT_BASE);
 						break;
 					case CBM_PETSCII_UPPER_CASE:
-						fontPath = CBM_FONT_PATH;
-						fontName = CBM_FONT_NAME;
-						fontSize = CBM_FONT_SIZE;
 						result.setIdentityMapping(CBM_UPPER_FONT_BASE);
 						break;
 					case CBM_PETSCII_LOWER_CASE:
-						fontPath = CBM_FONT_PATH;
-						fontName = CBM_FONT_NAME;
-						fontSize = CBM_FONT_SIZE;
 						result.setIdentityMapping(CBM_LOWER_FONT_BASE);
 						break;
 					default:
 						throw new IllegalArgumentException("Unsupported font type " + type + ".");
 					}
 
-					
-					if (fontPath != null) {
-						// Check if temporary file is already cached?
-						result.font = fontMap.get(fontPath);
-						if (result.font == null) {
-							File file = null;
-							try {
-								file = File.createTempFile("Data", null);
-								byte[] content = ResourceUtility.loadResourceAsByteArray(fontPath);
-								FileUtility.writeBytes(file, content);
-							} catch (Exception ex) {
-								BasePlugin.getInstance().logError(
-										"Error while copying font data of font '{0}' to temporary file.",
-										new Object[] { fontPath }, ex);
-								if (file != null) {
-									file.delete();
-								}
-								file = null;
-							}
-
-							// If temp file is present,
-							if (file != null) {
-								Device device = Display.getDefault();
-								String absolutePath = file.getAbsolutePath();
-								if (device.loadFont(absolutePath)) {
-									result.font = new Font(device, fontName, fontSize, SWT.NORMAL);
-									// Make sure the file is kept until the
-									// process
-									// ends.
-									file.deleteOnExit();
-									fontMap.put(fontPath, result.font);
-
-								} else {
-									// Loading failed, so no need to keep the
-									// file.
-									file.delete();
-								}
-							}
-						}
-					}
-
-					if (result.font == null) {
-						result.font = JFaceResources.getTextFont();
-					}
-					instanceMap.put(type, result);
 				}
+
+				characterMappingMap.put(type, result);
 			}
 			return result;
 		}
@@ -222,9 +155,92 @@ public enum HardwareCharacterSet {
 		/**
 		 * Creation is private.
 		 */
-		private Data() {
+		private CharacterMapping() {
 		}
 
+	}
+
+	private static Font getFont(HardwareCharacterSet type, int fontHeightPoints) {
+
+		String fontPath = null;
+		String fontName = null;
+		String fontRegistryName = null;
+
+		switch (type) {
+		case ASCII:
+			return null;
+
+		case ATARI_ATASCII:
+		case ATARI_ATASCII_SCREEN_CODE:
+		case ATARI_INTERNATIONAL:
+		case ATARI_INTERNATIONAL_SCREEN_CODE:
+
+			fontPath = ATARI_FONT_PATH;
+			fontName = ATARI_FONT_NAME;
+			fontRegistryName = "com.wudsn.ide.base.hardware.HardwareFont.ATARI8";
+			break;
+
+		case CBM_PETSCII_UPPER_CASE:
+		case CBM_PETSCII_LOWER_CASE:
+
+			fontPath = CBM_FONT_PATH;
+			fontName = CBM_FONT_NAME;
+			fontRegistryName = "com.wudsn.ide.base.hardware.HardwareFont.CBM";
+		}
+
+		// Get preferences based on the extension point "org.eclipse.ui.themes"
+		var fontSize = JFaceResources.getFontDescriptor(fontRegistryName).getFontData()[0].getHeight();
+
+		return getFont(fontPath, fontName, fontSize);
+	}
+
+	private static Font getFont(String fontPath, String fontName, int fontSize) {
+		Font font = null;
+		synchronized (fontNameFileMap) {
+
+			File file = null;
+			if (fontPath != null) {
+				// Check if temporary file is already cached?
+				if (!fontNameFileMap.containsKey(fontName)) {
+					try {
+						file = File.createTempFile("HardwareCharacterSet-"+fontName, null);
+						byte[] content = ResourceUtility.loadResourceAsByteArray(fontPath);
+						FileUtility.writeBytes(file, content);
+						// Make sure the file is kept until the process ends.
+						file.deleteOnExit();
+					} catch (Exception ex) {
+						BasePlugin.getInstance().logError(
+								"Error while copying font data of font '{0}' to temporary file.",
+								new Object[] { fontPath }, ex);
+						if (file != null) {
+							file.delete();
+						}
+						file = null;
+					}
+					// Remember the file, may be null
+					fontNameFileMap.put(fontName, file);
+				}
+			} else {
+				file = fontNameFileMap.get(fontName);
+			}
+
+			// If temporary file is present,try to load the font.
+			if (file != null) {
+				var fontSizeKey = fontName + "/" + fontSize;
+				if (!fontNameAndSizeFontMap.containsKey(fontSizeKey)) {
+					Device device = Display.getDefault();
+					String absolutePath = file.getAbsolutePath();
+					if (device.loadFont(absolutePath)) {
+						font = new Font(device, fontName, fontSize, SWT.NORMAL);
+						fontNameAndSizeFontMap.put(fontSizeKey, font);
+
+					}
+				} else {
+					font = fontNameAndSizeFontMap.get(fontSizeKey);
+				}
+			}
+		}
+		return font;
 	}
 
 	/**
@@ -233,7 +249,12 @@ public enum HardwareCharacterSet {
 	 * @return The SWT font, not <code>null</code>.
 	 */
 	public Font getFont() {
-		return Data.getInstance(this).font;
+		var textFont = JFaceResources.getTextFont();
+		var font = getFont(this, textFont.getFontData()[0].getHeight());
+		if (font == null) {
+			font = textFont;
+		}
+		return font;
 	}
 
 	/**
@@ -243,7 +264,7 @@ public enum HardwareCharacterSet {
 	 *         <code>null</code>.
 	 */
 	public char[] getCharacterMapping() {
-		return Data.getInstance(this).characterMapping;
+		return CharacterMapping.getInstance(this).characterMapping;
 	}
 
 }
