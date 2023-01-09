@@ -25,7 +25,6 @@ import java.util.List;
 import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
-import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants.EditorConstants;
 
 /**
  * Constants for preferences.
