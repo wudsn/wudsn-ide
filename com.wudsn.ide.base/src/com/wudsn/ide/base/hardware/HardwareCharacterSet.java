@@ -21,7 +21,9 @@ package com.wudsn.ide.base.hardware;
 
 import java.io.File;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
@@ -34,7 +36,7 @@ import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.ResourceUtility;
 
 /**
- * Logical character set with physical font and character mapping. 
+ * Logical character set with physical font and character mapping.
  * 
  * @since 1.7.0
  */
@@ -55,13 +57,16 @@ public enum HardwareCharacterSet {
 	private final static int CBM_UPPER_FONT_BASE = 0x0100;
 	private final static int CBM_LOWER_FONT_BASE = 0x0200;
 
-	private static Map<HardwareCharacterSet, CharacterMapping> characterMappingMap;
 	private static Map<String, File> fontNameFileMap;
-	private static Map<String, Font> fontNameAndSizeFontMap;
+	private static Set<String> fontPathSet;
+	private static Map<String, Font> fontNameSizeFontMap;
+	private static Map<HardwareCharacterSet, CharacterMapping> characterMappingMap;
 
 	static {
 		fontNameFileMap = new TreeMap<String, File>();
-		fontNameAndSizeFontMap = new TreeMap<String, Font>();
+		fontPathSet = new TreeSet<String>();
+		fontNameSizeFontMap = new TreeMap<String, Font>();
+
 		characterMappingMap = new TreeMap<HardwareCharacterSet, CharacterMapping>();
 	}
 
@@ -203,7 +208,7 @@ public enum HardwareCharacterSet {
 				// Check if temporary file is already cached?
 				if (!fontNameFileMap.containsKey(fontName)) {
 					try {
-						file = File.createTempFile("HardwareCharacterSet-"+fontName, null);
+						file = File.createTempFile("HardwareCharacterSet-" + fontName, null);
 						byte[] content = ResourceUtility.loadResourceAsByteArray(fontPath);
 						FileUtility.writeBytes(file, content);
 						// Make sure the file is kept until the process ends.
@@ -219,25 +224,31 @@ public enum HardwareCharacterSet {
 					}
 					// Remember the file, may be null
 					fontNameFileMap.put(fontName, file);
+				} else {
+					file = fontNameFileMap.get(fontName);
 				}
-			} else {
-				file = fontNameFileMap.get(fontName);
 			}
 
 			// If temporary file is present,try to load the font.
 			if (file != null) {
-				var fontSizeKey = fontName + "/" + fontSize;
-				if (!fontNameAndSizeFontMap.containsKey(fontSizeKey)) {
-					Device device = Display.getDefault();
+				Device device = Display.getDefault();
+				if (!fontPathSet.contains(fontPath)) {
 					String absolutePath = file.getAbsolutePath();
 					if (device.loadFont(absolutePath)) {
-						font = new Font(device, fontName, fontSize, SWT.NORMAL);
-						fontNameAndSizeFontMap.put(fontSizeKey, font);
+						fontPathSet.add(fontPath);
 
+					} else {
+						throw new RuntimeException(
+								"Cannot load font '" + fontName + "' from file '" + absolutePath + "'");
 					}
-				} else {
-					font = fontNameAndSizeFontMap.get(fontSizeKey);
 				}
+				var fontNameSizeKey = fontName + "/" + fontSize;
+				font = fontNameSizeFontMap.get(fontNameSizeKey);
+				if (font == null) {
+					font = new Font(device, fontName, fontSize, SWT.NORMAL);
+					fontNameSizeFontMap.put(fontNameSizeKey, font);
+				}
+
 			}
 		}
 		return font;
