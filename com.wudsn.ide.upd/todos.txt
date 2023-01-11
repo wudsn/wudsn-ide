@@ -4,7 +4,7 @@ FIXED? Productions images max size/width?
 FIXED? https://search.google.com/search-console/mobile-usability/drilldown?resource_id=https%3A%2F%2Fwww.wudsn.com%2F&item_key=CAk&hl=en
 FIXED? ROM checker HTML: <th style="border-style:solid;border-width:1px;border-collapse:collapse;;white-space:nowrap;">CRC32</th>
 
-
+WUDSN Tools
 =========
 Check symlinks in DASM Tests (https://github.com/peterdell/wudsn-ide-tools/blob/main/ASM/DASM/test/delete_empty_binary.asm)
 "wudsn-ide-tools-main/ASM/DASM/test/cmdline_defs/declare_var_mac.asm: Can't create '\\\\?\\C:\\jac\\wudsn\\daily\\Install\\wudsn-ide-tools-main\\ASM\\DASM\\test\\cmdline_defs\\declare_var_mac.asm'
@@ -12,6 +12,11 @@ wudsn-ide-tools-main/ASM/DASM/test/delete_empty_binary.asm: Can't create '\\\\?\
 wudsn-ide-tools-main/ASM/DASM/test/m_switch_2.asm: Can't create '\\\\?\\C:\\jac\\wudsn\\daily\\Install\\wudsn-ide-tools-main\\ASM\\DASM\\test\\m_switch_2.asm'
 wudsn-ide-tools-main/ASM/DASM/test/m_switch_3.asm: Can't create '\\\\?\\C:\\jac\\wudsn\\daily\\Install\\wudsn-ide-tools-main\\ASM\\DASM\\test\\m_switch_3.asm'
 "
+
+WUDSN Runners
+=============
+Check for "<mainsourcefile.bat/.sh" and have @com.wudsn.ide.lng.RunnerScript= annotation
+All Compiler Variables as Environment variables bevor calling the script with the OS shell.
 
 SillyPacks:
 ===========
@@ -23,7 +28,7 @@ Fujiama
 SnakeIt zip kaputt, kein BIN
 Littel50 hat kein TTT
 
-Löten:
+Lï¿½ten:
 https://shop.wetec.de/wishlist
 
 Trac.com
@@ -33,18 +38,18 @@ https://www.facebook.com/groups/58270054320/posts/10160345040304321/
 
 LED Tags
 ========
-Für Sillyventure
+Fï¿½r Sillyventure
 C:\Users\JAC\Desktop\Atari\LEDBadges
 
 WUDSN-IDE:
 =========
 Symbols automatisch einbleden
-.lst verknüpfen
+.lst verknï¿½pfen
 Contenttypes .pas
 
 ABBUC
 =====
-Geos EPROM über den Shop
+Geos EPROM ï¿½ber den Shop
 Alex Bolloni - Abbuc
 Hansi Richstein Lapis Philosophum
 
@@ -54,7 +59,7 @@ Holger Janz
 Mule geht nicht auf The!Cart
 
 SillyPack: Empty DL before warmstart (G2F)
-Kirschpacman - Video in HD? und dann öffentlich machen? Plus Video Description mit Link
+Kirschpacman - Video in HD? und dann ï¿½ffentlich machen? Plus Video Description mit Link
 load "$",8
 load "*ustr*",8,1
 
@@ -116,7 +121,7 @@ ${runnerExecutablePath} -moncommand ${outputFilePathWithoutExtenstion}.vs ${outp
 Compilers:
 ==========
 
-Add 65C02 Support / Special Instructions for WDC CPU, see Erhard Pütz
+Add 65C02 Support / Special Instructions for WDC CPU, see Erhard Pï¿½tz
 
 ATASM:
 - Verify ATASM 1.07 support
@@ -132,13 +137,13 @@ ACME:
 
 CA65:
 Siehe Screenshot und Beispiel-Sourcen von SvOlli.
-Viele Befürworter aus auf NESDEV
+Viele Befï¿½rworter aus auf NESDEV
 Interessent Luke Coletti, coletti@mbari.org, https://www.facebook.com/jeanpaul.mari.3
 In main file: ip65.s
 Add ICL "include file" for all include files
 
 In include files:
-Add ;	@com.wudsn.ide.asm.mainsourcefile=ip65.s
+Add ;	@com.wudsn.ide.lng.mainsourcefile=ip65.s
 Comment repeated include out
 
 In all files:
@@ -344,8 +349,8 @@ Convert HTML and PHP files to UTF-8:
 C:\Temp>c:\jac\bin\wbin\recode latin1..utf-8 <test1.html >test.utf8
 
 Validation:
-- HTML: http://validator.w3.org/
-- XML: http://www.xmlvalidation.com/index.php?id=1&L=0
+- HTML: https://validator.w3.org/
+- XML: https://www.xmlvalidation.com/index.php?id=1&L=0
 - Browser version: http://netrenderer.de/index.php (esp. IE 7/8)
 
 Testing Run/Debug Arguments:
@@ -356,7 +361,7 @@ Linked Reference Folder:
 C:\jac\system\Java\Programming\Repositories\WUDSN-IDE\com.wudsn.ide.ref
 
 Create Symbolic Link Folders:
-Run script "com.wudsn.ide.asm/help/create-links.bat" as administrator.
+Run script "com.wudsn.ide.lng/help/create-help-links.bat".
 
 Joomla
 Embed youtube videos:
