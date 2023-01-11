@@ -5,10 +5,6 @@ FIXED? https://search.google.com/search-console/mobile-usability/drilldown?resou
 FIXED? ROM checker HTML: <th style="border-style:solid;border-width:1px;border-collapse:collapse;;white-space:nowrap;">CRC32</th>
 
 
-WUDSN IDE
-=========
-Check XAMP running at SITE_URL (curl)
-
 =========
 Check symlinks in DASM Tests (https://github.com/peterdell/wudsn-ide-tools/blob/main/ASM/DASM/test/delete_empty_binary.asm)
 "wudsn-ide-tools-main/ASM/DASM/test/cmdline_defs/declare_var_mac.asm: Can't create '\\\\?\\C:\\jac\\wudsn\\daily\\Install\\wudsn-ide-tools-main\\ASM\\DASM\\test\\cmdline_defs\\declare_var_mac.asm'
