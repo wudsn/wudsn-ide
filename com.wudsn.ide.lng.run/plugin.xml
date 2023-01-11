@@ -40,7 +40,7 @@
     <runner
           defaultCommandLine="${runnerExecutablePath} ${outputFilePath}"
           hardware="ATARI2600"
-          homePageURL="http://stella.sourceforge.net"
+          homePageURL="https://stella-emu.github.io"
           id="stella"
           name="%com.wudsn.ide.lng.run.atari2600.stella.name">
     </runner>
@@ -113,7 +113,7 @@
      <runner
            defaultCommandLine="${runnerExecutablePath} -autostart ${outputFilePath}"
            hardware="C64"
-           homePageURL="http://vice-emu.sourceforge.net"
+           homePageURL="https://vice-emu.sourceforge.io/"
            id="vice"
            name="%com.wudsn.ide.lng.run.c64.vice.name">
      </runner>
