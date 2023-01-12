@@ -90,7 +90,7 @@ public final class LanguageHelpContentProducer implements IHelpContentProducer {
 			+ "<html><head>" + "<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">"
 			+ "<link rel=\"stylesheet\" href=\"../../../content/org.eclipse.platform/book.css\" type=\"text/css\"></link>"
 			+ "<style type=\"text/css\">table,tbody,td,th {border-style:solid;border-width:1px;border-collapse:collapse; "
-			+ "transition-property: background-color;transition-duration: 0.25s;transition-timing-function: linear;transition-delay: 0ms;} "
+			+ "transition-value: background-color;transition-duration: 0.25s;transition-timing-function: linear;transition-delay: 0ms;} "
 			+ "th {background-color:#0074cc;color:#fff } </style>" + "</head><body>";
 	private static final String SECTION_SUFFIX = "</body></html>";
 

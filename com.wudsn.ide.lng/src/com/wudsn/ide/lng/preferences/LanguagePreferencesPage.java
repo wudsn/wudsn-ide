@@ -115,7 +115,7 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 	private LanguagePlugin plugin;
 
 	/**
-	 * The set of property names for which the value was changed since the page was
+	 * The set of value names for which the value was changed since the page was
 	 * opened.
 	 */
 	private Set<String> changedPropertyNames;

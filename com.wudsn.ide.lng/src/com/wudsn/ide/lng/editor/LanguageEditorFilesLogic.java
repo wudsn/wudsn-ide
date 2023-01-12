@@ -37,9 +37,10 @@ import com.wudsn.ide.base.common.MarkerUtility;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.LanguagePlugin;
-import com.wudsn.ide.lng.LanguageProperties;
-import com.wudsn.ide.lng.LanguageProperties.InvalidLanguagePropertyException;
-import com.wudsn.ide.lng.LanguageProperties.LanguageProperty;
+import com.wudsn.ide.lng.LanguageAnnotation;
+import com.wudsn.ide.lng.LanguageAnnotationValues;
+import com.wudsn.ide.lng.LanguageAnnotationValues.InvalidLanguageAnnotationException;
+import com.wudsn.ide.lng.LanguageAnnotationValues.LanguageAnnotationValue;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerFiles;
@@ -87,15 +88,15 @@ public final class LanguageEditorFilesLogic {
 		if (sourceIFile != null) {
 
 			IDocument document = languageEditor.getDocumentProvider().getDocument(languageEditor.getEditorInput());
-			LanguageProperties sourceFileProperties = CompilerSourceParser.getDocumentProperties(document);
+			LanguageAnnotationValues sourceFileProperties = CompilerSourceParser.getDocumentProperties(document);
 
 			IFile mainSourceIFile;
-			LanguageProperties mainSourceFileProperties;
+			LanguageAnnotationValues mainSourceFileProperties;
 
 			mainSourceIFile = sourceIFile;
 			mainSourceFileProperties = sourceFileProperties;
 
-			LanguageProperty property = sourceFileProperties.get(LanguageProperties.MAIN_SOURCE_FILE);
+			LanguageAnnotationValue property = sourceFileProperties.get(LanguageAnnotation.MAIN_SOURCE_FILE);
 			if (property != null) {
 				if (StringUtility.isSpecified(property.value)) {
 					IPath mainSourceFileIPath;
@@ -114,7 +115,7 @@ public final class LanguageEditorFilesLogic {
 
 						plugin.logError("Cannot read main source file '{0'}", new Object[] { mainSourceFile.getPath() },
 								ex);
-						mainSourceFileProperties = new LanguageProperties();
+						mainSourceFileProperties = new LanguageAnnotationValues();
 					}
 
 				}
@@ -143,7 +144,7 @@ public final class LanguageEditorFilesLogic {
 		// the include source file. In all other cases, the main source file
 		// exists and is the main message target.
 		if (!files.mainSourceFile.iFile.exists()) {
-			int lineNumber = files.sourceFile.languageProperties.get(LanguageProperties.MAIN_SOURCE_FILE).lineNumber;
+			int lineNumber = files.sourceFile.languageAnnotationValues.get(LanguageAnnotation.MAIN_SOURCE_FILE).lineNumber;
 
 			// ERROR: Main source file '{0}' does not exist.
 			IMarker marker = MarkerUtility.createMarker(files.sourceFile.iFile, lineNumber, IMarker.SEVERITY_ERROR,
@@ -163,8 +164,8 @@ public final class LanguageEditorFilesLogic {
 	}
 
 	/**
-	 * Determine the hardware defined by the property
-	 * {@link LanguageProperties#HARDWARE}.
+	 * Determine the hardware defined by the value
+	 * {@link LanguageAnnotationValues#HARDWARE}.
 	 * 
 	 * @param iFile      The IFile to which error message will be associated, not
 	 *                   <code>null</code>.
@@ -172,18 +173,18 @@ public final class LanguageEditorFilesLogic {
 	 * 
 	 * @return The hardware or <code>null</code> if is the not defined in the
 	 *         properties.
-	 * @throws InvalidLanguagePropertyException If the hardware is specified but
+	 * @throws InvalidLanguageAnnotationException If the hardware is specified but
 	 *                                          invalid. Error message will be
 	 *                                          assigned to the iFile in this case.
 	 * 
 	 * @since 1.6.1
 	 */
-	Hardware getHardware(IFile iFile, LanguageProperties properties) throws InvalidLanguagePropertyException {
+	Hardware getHardware(IFile iFile, LanguageAnnotationValues properties) throws InvalidLanguageAnnotationException {
 		if (iFile == null) {
 			throw new IllegalArgumentException("Parameter 'iFile' must not be null.");
 		}
 		Hardware hardware = null;
-		LanguageProperty hardwareProperty = properties.get(LanguageProperties.HARDWARE);
+		LanguageAnnotationValue hardwareProperty = properties.get(LanguageAnnotation.HARDWARE);
 		if (hardwareProperty != null) {
 			Map<String, Hardware> allowedValues = new TreeMap<String, Hardware>();
 			StringBuilder allowedValuesBuilder = new StringBuilder();
@@ -209,7 +210,7 @@ public final class LanguageEditorFilesLogic {
 				// following valid values '{0}'.
 				IMarker marker = MarkerUtility.createMarker(iFile, hardwareProperty.lineNumber, IMarker.SEVERITY_ERROR,
 						Texts.MESSAGE_E128, new String[] { allowedValuesBuilder.toString() });
-				throw new InvalidLanguagePropertyException(hardwareProperty, marker);
+				throw new InvalidLanguageAnnotationException(hardwareProperty, marker);
 			}
 			hardware = allowedValues.get(hardwarePropertyValue);
 
@@ -223,7 +224,7 @@ public final class LanguageEditorFilesLogic {
 				// following valid values '{1}'.
 				IMarker marker = MarkerUtility.createMarker(iFile, hardwareProperty.lineNumber, IMarker.SEVERITY_ERROR,
 						Texts.MESSAGE_E124, new String[] { hardwarePropertyValue, allowedValuesBuilder.toString() });
-				throw new InvalidLanguagePropertyException(hardwareProperty, marker);
+				throw new InvalidLanguageAnnotationException(hardwareProperty, marker);
 			}
 
 		}
@@ -247,14 +248,14 @@ public final class LanguageEditorFilesLogic {
 		Hardware mainSourceFileHardware;
 		Hardware sourceFileHardware;
 		try {
-			sourceFileHardware = getHardware(files.sourceFile.iFile, files.sourceFile.languageProperties);
-		} catch (InvalidLanguagePropertyException ex) {
+			sourceFileHardware = getHardware(files.sourceFile.iFile, files.sourceFile.languageAnnotationValues);
+		} catch (InvalidLanguageAnnotationException ex) {
 			MarkerUtility.gotoMarker(languageEditor, ex.marker);
 			return null;
 		}
 		try {
-			mainSourceFileHardware = getHardware(files.mainSourceFile.iFile, files.mainSourceFile.languageProperties);
-		} catch (InvalidLanguagePropertyException ex) {
+			mainSourceFileHardware = getHardware(files.mainSourceFile.iFile, files.mainSourceFile.languageAnnotationValues);
+		} catch (InvalidLanguageAnnotationException ex) {
 			MarkerUtility.gotoMarker(languageEditor, ex.marker);
 			return null;
 		}
@@ -265,14 +266,14 @@ public final class LanguageEditorFilesLogic {
 			sourceFileHardware = defaultHardware;
 			sourceFileLineNumber = 0;
 		} else {
-			sourceFileLineNumber = files.sourceFile.languageProperties.get(LanguageProperties.HARDWARE).lineNumber;
+			sourceFileLineNumber = files.sourceFile.languageAnnotationValues.get(LanguageAnnotation.HARDWARE).lineNumber;
 		}
 		if (mainSourceFileHardware == null) {
 			mainSourceFileHardware = defaultHardware;
 			mainSourceFileLineNumber = 0;
 		} else {
-			mainSourceFileLineNumber = files.mainSourceFile.languageProperties
-					.get(LanguageProperties.HARDWARE).lineNumber;
+			mainSourceFileLineNumber = files.mainSourceFile.languageAnnotationValues
+					.get(LanguageAnnotation.HARDWARE).lineNumber;
 		}
 
 		if (!sourceFileHardware.equals(mainSourceFileHardware)) {
@@ -304,7 +305,7 @@ public final class LanguageEditorFilesLogic {
 			// via the annotation '{2}'.
 			createMainSourceFileMessage(files, files.outputFileExtensionProperty, IMarker.SEVERITY_ERROR,
 					Texts.MESSAGE_E104, compilerDefinition.getText(), compilerDefinition.getName(),
-					LanguageProperties.OUTPUT_FILE_EXTENSION);
+					LanguageAnnotation.OUTPUT_FILE_EXTENSION);
 
 			return false;
 		}
@@ -319,7 +320,7 @@ public final class LanguageEditorFilesLogic {
 			// ERROR: Output folder mode be set in the preferences of
 			// compiler '{0}' or via the annotation '{1}'.
 			createMainSourceFileMessage(files, files.outputFolderModeProperty, IMarker.SEVERITY_ERROR,
-					Texts.MESSAGE_E140, compilerDefinition.getName(), LanguageProperties.OUTPUT_FOLDER_MODE);
+					Texts.MESSAGE_E140, compilerDefinition.getName(), LanguageAnnotation.OUTPUT_FOLDER_MODE);
 
 			return false;
 		}
@@ -338,11 +339,11 @@ public final class LanguageEditorFilesLogic {
 	/**
 	 * Creates a message associated with the main source file of an
 	 * {@link LanguageEditorFilesLogic} instance. The message is is bound to the
-	 * line number number of the property (if available). Also the editor is
+	 * line number number of the value (if available). Also the editor is
 	 * position to the marker.
 	 * 
 	 * @param files      The {@link CompilerFiles} not <code>null</code>.
-	 * @param property   The language property to which the message belongs or
+	 * @param value   The language value to which the message belongs or
 	 *                   <code>null</code>.
 	 * @param severity   The message severity, see {@link IMarker#SEVERITY}
 	 * @param message    The message, may contain parameter "{0}" to "{9}". May be
@@ -350,7 +351,7 @@ public final class LanguageEditorFilesLogic {
 	 * @param parameters The format parameters for the message, may be empty, not
 	 *                   <code>null</code>.
 	 */
-	private void createMainSourceFileMessage(CompilerFiles files, LanguageProperty property, int severity,
+	private void createMainSourceFileMessage(CompilerFiles files, LanguageAnnotationValue property, int severity,
 			String message, String... parameters) {
 		if (files == null) {
 			throw new IllegalArgumentException("Parameter 'files' must not be null.");

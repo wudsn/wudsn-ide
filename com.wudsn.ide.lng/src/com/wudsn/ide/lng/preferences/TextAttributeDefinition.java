@@ -20,7 +20,7 @@
 package com.wudsn.ide.lng.preferences;
 
 /**
- * A property key with it's label
+ * A value key with it's label
  * 
  * @author Peter Dell
  */

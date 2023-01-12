@@ -109,7 +109,7 @@ final class LanguageSourceViewerConfiguration extends TextSourceViewerConfigurat
 	}
 
 	/**
-	 * Remove all rule scanners from property change listener. Used by
+	 * Remove all rule scanners from value change listener. Used by
 	 * {@link LanguageEditor#dispose()}.
 	 */
 	final void dispose() {

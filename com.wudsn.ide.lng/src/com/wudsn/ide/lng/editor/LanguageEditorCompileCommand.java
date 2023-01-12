@@ -56,8 +56,10 @@ import com.wudsn.ide.base.common.MarkerUtility;
 import com.wudsn.ide.base.common.NumberUtility;
 import com.wudsn.ide.base.common.ProcessWithLogs;
 import com.wudsn.ide.base.common.StringUtility;
+import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.HardwareUtility;
+import com.wudsn.ide.lng.LanguageAnnotation;
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.LanguageUtility;
 import com.wudsn.ide.lng.Texts;
@@ -67,6 +69,7 @@ import com.wudsn.ide.lng.compiler.CompilerConsole;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerFileWriter;
 import com.wudsn.ide.lng.compiler.CompilerFiles;
+import com.wudsn.ide.lng.compiler.CompilerFiles.SourceFile;
 import com.wudsn.ide.lng.compiler.CompilerProcessLogParser;
 import com.wudsn.ide.lng.compiler.CompilerProcessLogParser.Marker;
 import com.wudsn.ide.lng.compiler.CompilerSymbol;
@@ -204,6 +207,12 @@ final class LanguageEditorCompileCommand {
 			return false;
 		}
 
+		// Check annotations
+		checkAnnotations(files.mainSourceFile);
+		if (!files.sourceFile.filePath.equals(files.mainSourceFile.filePath)) {
+			checkAnnotations(files.sourceFile);
+		}
+
 		// Determine and check hardware.
 		Hardware hardware = languageEditorFilesLogic.getHardware(files);
 		if (hardware == null) {
@@ -218,7 +227,7 @@ final class LanguageEditorCompileCommand {
 		// Create wrapper for run properties.
 		CompilerDefinition compilerDefinition = languageEditor.getCompilerDefinition();
 		CompilerRunPreferences compilerRunPreferences = new CompilerRunPreferences(
-				languageEditor.getLanguageHardwareCompilerPreferences(), files.mainSourceFile.languageProperties);
+				languageEditor.getLanguageHardwareCompilerPreferences(), files.mainSourceFile.languageAnnotationValues);
 
 		// Check if output file is modifiable in case it already exists.
 		long outputFileLastModified = -1;
@@ -407,6 +416,32 @@ final class LanguageEditorCompileCommand {
 		}
 
 		return true;
+	}
+
+	private void checkAnnotations(SourceFile sourceFile) {
+		if (sourceFile == null) {
+			throw new IllegalArgumentException("Parameter 'sourceFile' must not be null.");
+		}
+
+		var annotationValues = sourceFile.languageAnnotationValues;
+		var annotations = LanguageAnnotation.getAnnotations();
+		for (String key : annotationValues.keySet()) {
+			var value = annotationValues.get(key);
+			if (key.startsWith(LanguageAnnotation.OLD_PREFIX)) {
+				var newKey = LanguageAnnotation.PREFIX + key.substring(LanguageAnnotation.OLD_PREFIX.length());
+				// WARNING: Use annotation '{0}' instead of the deprecated annotation '{1}'.
+				MarkerUtility.createMarker(sourceFile.iFile, value.lineNumber, IMarker.SEVERITY_WARNING,
+						Texts.MESSAGE_W144, new String[] { newKey, key });
+				annotationValues.put(newKey, value.value, value.lineNumber);
+				key = newKey;
+			}
+			if (!annotations.contains(key)) {
+				// ERROR: Annotation '{0}' is unknown.
+				MarkerUtility.createMarker(sourceFile.iFile, value.lineNumber, IMarker.SEVERITY_WARNING,
+						Texts.MESSAGE_E145, new String[] { key });
+			}
+		}
+
 	}
 
 	/**

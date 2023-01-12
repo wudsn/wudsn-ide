@@ -269,7 +269,7 @@ public final class LanguagePreferencesConstants {
 	}
 
 	/**
-	 * Create the preferences key for a property of a given language.
+	 * Create the preferences key for a value of a given language.
 	 * 
 	 * @param language             The language, not <code>null</code>
 	 * @param preferencesKeySuffix The suffix as defined by the constants of this

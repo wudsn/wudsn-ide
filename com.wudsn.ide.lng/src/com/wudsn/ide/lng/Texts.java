@@ -300,6 +300,9 @@ public final class Texts extends NLS {
 	public static String MESSAGE_E141;
 	public static String MESSAGE_E142;
 	public static String MESSAGE_S143;
+	public static String MESSAGE_W144;
+	public static String MESSAGE_E145;
+
 	/**
 	 * Initializes the constants.
 	 */

@@ -56,8 +56,8 @@ import com.wudsn.ide.base.common.ResourceBundleUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguagePlugin;
-import com.wudsn.ide.lng.LanguageProperties;
-import com.wudsn.ide.lng.LanguageProperties.InvalidLanguagePropertyException;
+import com.wudsn.ide.lng.LanguageAnnotationValues;
+import com.wudsn.ide.lng.LanguageAnnotationValues.InvalidLanguageAnnotationException;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.compiler.Compiler;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
@@ -244,13 +244,13 @@ public abstract class LanguageEditor extends TextEditor {
 					compiler.getDefinition().getSyntax());
 			partitionScanner.createDocumentPartitioner(document);
 
-			LanguageProperties properties = CompilerSourceParser.getDocumentProperties(document);
+			LanguageAnnotationValues properties = CompilerSourceParser.getDocumentProperties(document);
 
 			IFile iFile = getCurrentIFile();
 			if (iFile != null) {
 				try {
 					hardware = filesLogic.getHardware(iFile, properties);
-				} catch (InvalidLanguagePropertyException ex) {
+				} catch (InvalidLanguageAnnotationException ex) {
 					// Do not use MarkerUtility.gotoMarker to make sure this
 					// editor instance is used.
 					IDE.gotoMarker(this, ex.marker);

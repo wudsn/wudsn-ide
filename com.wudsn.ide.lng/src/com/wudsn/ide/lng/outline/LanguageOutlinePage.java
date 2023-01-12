@@ -128,7 +128,7 @@ public final class LanguageOutlinePage extends ContentOutlinePage {
 			boolean checked = isChecked();
 			setChecked(checked);
 
-			// Store the property.
+			// Store the value.
 			String checkedProperty = Boolean.toString(checked);
 			try {
 				IFile iFile = editor.getCurrentIFile();
@@ -136,7 +136,7 @@ public final class LanguageOutlinePage extends ContentOutlinePage {
 					iFile.setPersistentProperty(CHECKED, checkedProperty);
 				}
 			} catch (CoreException ex) {
-				editor.getPlugin().logError("Cannot set property {0}", new Object[] { CHECKED }, ex);
+				editor.getPlugin().logError("Cannot set value {0}", new Object[] { CHECKED }, ex);
 			}
 			editor.getPlugin().setProperty(CHECKED, checkedProperty);
 

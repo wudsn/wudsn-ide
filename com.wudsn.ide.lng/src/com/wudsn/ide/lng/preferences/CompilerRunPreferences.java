@@ -21,7 +21,7 @@ package com.wudsn.ide.lng.preferences;
 
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.LanguageProperties;
+import com.wudsn.ide.lng.LanguageAnnotationValues;
 
 /**
  * Facade class to mix compiler run specific preferences into the global
@@ -33,10 +33,10 @@ import com.wudsn.ide.lng.LanguageProperties;
 public final class CompilerRunPreferences {
 
 	private LanguageHardwareCompilerDefinitionPreferences languageHardwareCompilerDefinitionPreferences;
-	private LanguageProperties mainSourceFileProperties;
+	private LanguageAnnotationValues mainSourceFileProperties;
 
 	public CompilerRunPreferences(LanguageHardwareCompilerDefinitionPreferences languageHardwareCompilerDefinitionPreferences,
-			LanguageProperties mainSourceFileProperties) {
+			LanguageAnnotationValues mainSourceFileProperties) {
 		if (languageHardwareCompilerDefinitionPreferences == null) {
 			throw new IllegalArgumentException("Parameter 'languageHardwareCompilerDefinitionPreferences' must not be null.");
 		}

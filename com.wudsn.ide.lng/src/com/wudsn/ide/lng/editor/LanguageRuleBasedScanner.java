@@ -78,7 +78,7 @@ final class LanguageRuleBasedScanner extends RuleBasedScanner {
 	 * {@link LanguageSourceViewerConfiguration}.
 	 * 
 	 * @param preferences          The preferences, not <code>null</code>.
-	 * @param changedPropertyNames The set of changed property names, not
+	 * @param changedPropertyNames The set of changed value names, not
 	 *                             <code>null</code>.
 	 * 
 	 * @return <code>true</code> If the editor has to be refreshed.

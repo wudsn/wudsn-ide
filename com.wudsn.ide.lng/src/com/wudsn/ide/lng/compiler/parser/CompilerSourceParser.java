@@ -35,7 +35,8 @@ import com.wudsn.ide.base.BasePlugin;
 import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.lng.LanguagePlugin;
-import com.wudsn.ide.lng.LanguageProperties;
+import com.wudsn.ide.lng.LanguageAnnotation;
+import com.wudsn.ide.lng.LanguageAnnotationValues;
 import com.wudsn.ide.lng.compiler.Compiler;
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
 import com.wudsn.ide.lng.compiler.syntax.Instruction;
@@ -81,44 +82,64 @@ public abstract class CompilerSourceParser {
 	private boolean logEnabled = false;
 
 	/**
-	 * Extract all {@link LanguageProperties} properties from a document.
+	 * Extract all {@link LanguageAnnotationValues} properties from a document.
 	 * 
 	 * @param document The document, not <code>null</code>.
 	 * @return The properties, may be empty, not <code>null</code>.
 	 */
-	public static LanguageProperties getDocumentProperties(IDocument document) {
+	public static LanguageAnnotationValues getDocumentProperties(IDocument document) {
 		if (document == null) {
 			throw new IllegalArgumentException("Parameter 'document' must not be null.");
 		}
 		String content = document.get();
-		LanguageProperties properties = new LanguageProperties();
+		LanguageAnnotationValues properties = new LanguageAnnotationValues();
 
-		int index1 = content.indexOf(LanguageProperties.PREFIX);
-		while (index1 >= 0) {
+		int index = getMinIndex(content.indexOf(LanguageAnnotation.PREFIX),
+				content.indexOf(LanguageAnnotation.OLD_PREFIX));
+		while (index >= 0) {
 
-			int indexEqualSign = content.indexOf('=', index1);
-			int indexNewLine = content.indexOf('\n', index1);
+			int indexEqualSign = content.indexOf('=', index);
+			int indexNewLine = content.indexOf('\n', index);
 			if (indexNewLine < 0) {
-				indexNewLine = content.indexOf('\r', index1);
+				indexNewLine = content.indexOf('\r', index);
 			}
 			if (indexNewLine < 0) {
 				indexNewLine = content.length();
 			}
 
 			if (indexEqualSign >= 0 && indexEqualSign < indexNewLine) {
-				String key = content.substring(index1, indexEqualSign).trim();
+				String key = content.substring(index, indexEqualSign).trim();
 				String value = content.substring(indexEqualSign + 1, indexNewLine).trim();
 				int lineNumber;
 				try {
-					lineNumber = document.getLineOfOffset(index1) + 1;
+					lineNumber = document.getLineOfOffset(index) + 1;
 				} catch (BadLocationException ex) {
 					lineNumber = 0;
 				}
 				properties.put(key, value, lineNumber);
 			}
-			index1 = content.indexOf(LanguageProperties.PREFIX, indexNewLine);
+			index = getMinIndex(content.indexOf(LanguageAnnotation.PREFIX, indexNewLine),
+					content.indexOf(LanguageAnnotation.OLD_PREFIX, indexNewLine));
 		}
 		return properties;
+	}
+
+	/**
+	 * Gets the smaller of two string indexes. Values less than 0 indicate "not
+	 * found" and are ignored.
+	 * 
+	 * @param index1 The first index
+	 * @param index2 The second index
+	 * @return The smaller index or a value less than 0 if no index is valid.
+	 */
+	private static int getMinIndex(int index1, int index2) {
+		if (index1 < 0) {
+			return index2;
+		}
+		if (index2 < 0) {
+			return index1;
+		}
+		return Math.min(index1, index2);
 	}
 
 	/**

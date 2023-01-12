@@ -514,12 +514,14 @@
 		different output formats (".XEX" and ".BIN") with the same compiler it may become cumbersome to change the
 		preferences every time. Therefore WUDSN IDE offers annotations that you can put into the source code files.
 		These annotations override the defaults and the preferences.</li>
-	<li>All annotations start with the prefix "@com.wudsn.ide.asm." followed by the lower case name of the annotation,
-		an equals sign, and the unquoted value. Example: "@com.wudsn.ide.asm.hardware=ATARI8BIT"</li>
+	<li>All language annotations start with the prefix "@com.wudsn.ide.lng." followed by the lower case name of the annotation,
+		an equals sign, and the unquoted value. Example: "@com.wudsn.ide.lng.hardware=ATARI8BIT"</li>
+    <li>In earlier versions of WUDSN, language annotations started with the prefix "@com.wudsn.ide.asm.".
+        While they are still evaluated, it is strongly recommended to adapt to the new prefix.</li>
 	<li>All annotations can be placed in comment lines at the beginning of a source file. Some of the annotations are
 		only relevant for the main source file, some are only relevant in include source files, some are relevant for
 		all source files.</li>
-	<li>@com.wudsn.ide.asm.hardware
+	<li>@com.wudsn.ide.lng.hardware
 		<ul>
 			<li>Defines the target hardware for which the preferences shall be evaluated, in particular, which emulator
 				is used to run the output file.</li>
@@ -527,63 +529,66 @@
 			<li>This annotation is relevant for all source files.</li>
 			<li>This annotation is only evaluated when a file is opened. So if you add this annotation or change its
 				value, you have to close and re-open the file once.</li>
-			<li>Example: @com.wudsn.ide.asm.hardware=ATARI8BIT</li>
+			<li>Example: @com.wudsn.ide.lng.hardware=ATARI8BIT</li>
 		</ul>
 	</li>
-	<li>@com.wudsn.ide.asm.mainsourcefile
+	<li>@com.wudsn.ide.lng.mainsourcefile
 		<ul>
 			<li>Defines the main source file to which the current include source file belongs. When the "Compile" action
 				is executed, the main source file is compiler instead of the current file.</li>
 			<li>Allowed values are file paths relative to the folder of the current include source file and absolute
 				file paths.</li>
 			<li>This annotation is only relevant in include source files.</li>
-			<li>Example: @com.wudsn.ide.asm.mainsourcefile=ExampleMain.asm</li>
+			<li>Example: @com.wudsn.ide.lng.mainsourcefile=ExampleMain.asm</li>
 		</ul>
 	</li>
-	<li>@com.wudsn.ide.asm.outputfoldermode (planned for 1.7.0)
+	<li>@com.wudsn.ide.lng.outputfoldermode
 		<ul>
 			<li>Overrides the "Output Folder Mode" from the preferences.</li>
 			<li>Allowed values are "SOURCE_FOLDER", "TEMP_FOLDER", "FIXED_FOLDER".</li>
 			<li>This annotation is only relevant in the main source file.</li>
-			<li>Example: @com.wudsn.ide.asm.outputfoldermode=SOURCE_FOLDER</li>
+			<li>Example: @com.wudsn.ide.lng.outputfoldermode=SOURCE_FOLDER</li>
 		</ul>
 	</li>
-	<li>@com.wudsn.ide.asm.outputfolder (planned for 1.7.0)
+	<li>@com.wudsn.ide.lng.outputfolder
 		<ul>
-			<li>Overrides the "Output Folder" from the preferences and the "@com.wudsn.ide.asm.outputfoldermode"
+			<li>Overrides the "Output Folder" from the preferences and the "@com.wudsn.ide.lng.outputfoldermode"
 				annotation.</li>
 			<li>Allowed values are file paths relative to the folder of the main source file and absolute file paths.
 			</li>
 			<li>This annotation is only relevant in the main source file.</li>
-			<li>Example: @com.wudsn.ide.asm.outputfolder=..\out</li>
+			<li>Example: @com.wudsn.ide.lng.outputfolder=..\out</li>
 		</ul>
 	</li>
-	<li>@com.wudsn.ide.asm.outputfileextension (planned for 1.7.0)
+	<li>@com.wudsn.ide.lng.outputfileextension
 		<ul>
 			<li>Overrides the "Output File Extension" from the preferences.</li>
 			<li>Allowed values have to start with a period.</li>
 			<li>This annotation is only relevant in the main source file.</li>
-			<li>Example: @com.wudsn.ide.asm.outputfileextension=.bin</li>
+			<li>Example: @com.wudsn.ide.lng.outputfileextension=.bin</li>
 		</ul>
 	</li>
-	<li>@com.wudsn.ide.asm.outputfile (planned for 1.7.0)
+	<li>@com.wudsn.ide.lng.outputfile
 		<ul>
 			<li>Overrides the "Output Folder", "Output File Extension" from the preferences and the automatic
 				computation of the out file name based on the main source file name.</li>
 			<li>Allowed values are file paths relative to the folder of the main source file and absolute file paths.
 			</li>
 			<li>This annotation is only relevant in the main source file.</li>
-			<li>Example: @com.wudsn.ide.asm.outputfile=..\out\output.bin</li>
+			<li>Example: @com.wudsn.ide.lng.outputfile=..\out\output.bin</li>
 		</ul>
 	</li>
 </ul>
 <h5 id="KnownBugs">Known bugs   <a href="#ide_features">» top</a></h5>
 <p>Open bugs:</p>
 <ul>
-	<li>If you find any, please contact me</li>
+	<li>If you find any, please report them on <a href="https://github.com/peterdell/wudsn-ide/issues" target="_blank">github</a> or contact me directly</li>
 </ul>
 <p>Fixed bugs:</p>
 <ul>
+    <li>1.7.2 and newer</br>
+        See <a href="https://github.com/peterdell/wudsn-ide/issues" target="_blank">github</a>.
+    <li>
 	<li>1.6.5 <br />
 		<ul>
 			<li>Automatic creation of ".DSK" disk images for Apple II now works correctly</li>

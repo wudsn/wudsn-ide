@@ -352,7 +352,7 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 	 * 
 	 * @param language
 	 * 
-	 * @param changedPropertyNames The set of property changed property names, not
+	 * @param changedPropertyNames The set of value changed value names, not
 	 *                             <code>null</code>.
 	 * 
 	 * @since 1.6.3
@@ -371,11 +371,11 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 	}
 
 	/**
-	 * Gets a UI property.
+	 * Gets a UI value.
 	 * 
-	 * @param key The property key, not <code>null</code>.
+	 * @param key The value key, not <code>null</code>.
 	 * 
-	 * @return The UI property, may be empty, not <code>null</code>.
+	 * @return The UI value, may be empty, not <code>null</code>.
 	 */
 	public String getProperty(QualifiedName key) {
 		if (key == null) {
@@ -393,11 +393,11 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 	}
 
 	/**
-	 * Set a UI property.
+	 * Set a UI value.
 	 * 
-	 * @param key   The property key, not <code>null</code>.
+	 * @param key   The value key, not <code>null</code>.
 	 * 
-	 * @param value The UI property, may be empty, not <code>null</code>.
+	 * @param value The UI value, may be empty, not <code>null</code>.
 	 */
 	public void setProperty(QualifiedName key, String value) {
 		if (key == null) {

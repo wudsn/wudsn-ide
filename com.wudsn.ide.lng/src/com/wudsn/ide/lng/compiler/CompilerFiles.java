@@ -25,8 +25,9 @@ import org.eclipse.core.resources.IFile;
 
 import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.StringUtility;
-import com.wudsn.ide.lng.LanguageProperties;
-import com.wudsn.ide.lng.LanguageProperties.LanguageProperty;
+import com.wudsn.ide.lng.LanguageAnnotation;
+import com.wudsn.ide.lng.LanguageAnnotationValues;
+import com.wudsn.ide.lng.LanguageAnnotationValues.LanguageAnnotationValue;
 import com.wudsn.ide.lng.preferences.LanguageHardwareCompilerDefinitionPreferences;
 
 /**
@@ -50,19 +51,19 @@ public final class CompilerFiles {
 		public final String fileName;
 		public final String fileNameWithoutExtension;
 
-		public final LanguageProperties languageProperties;
+		public final LanguageAnnotationValues languageAnnotationValues;
 
-		SourceFile(IFile iFile, LanguageProperties languageProperties) {
+		SourceFile(IFile iFile, LanguageAnnotationValues languageAnnotationValues) {
 
 			if (iFile == null) {
 				throw new IllegalArgumentException("Parameter 'iFile' must not be null.");
 			}
-			if (languageProperties == null) {
-				throw new IllegalArgumentException("Parameter 'languageProperties' must not be null.");
+			if (languageAnnotationValues == null) {
+				throw new IllegalArgumentException("Parameter 'languageAnnotationValues' must not be null.");
 			}
 
 			this.iFile = iFile;
-			this.languageProperties = languageProperties;
+			this.languageAnnotationValues = languageAnnotationValues;
 
 			// Source file.
 			filePath = iFile.getLocation().toOSString();
@@ -88,14 +89,14 @@ public final class CompilerFiles {
 
 	/**
 	 * The main source file which is either the current file or the file indicated
-	 * by the property "@com.wudsn.ide.lng.editor.MainSourceFile".
+	 * by the value "@com.wudsn.ide.lng.editor.MainSourceFile".
 	 */
 	public final SourceFile mainSourceFile;
 
-	public final LanguageProperty outputFolderModeProperty;
+	public final LanguageAnnotationValue outputFolderModeProperty;
 	public final String outputFolderMode;
 
-	public final LanguageProperty outputFolderProperty;
+	public final LanguageAnnotationValue outputFolderProperty;
 	public final File outputFolder;
 	public final String outputFolderPath;
 
@@ -103,10 +104,10 @@ public final class CompilerFiles {
 	public final String outputFilePath;
 	public final String outputFilePathWithoutExtension;
 
-	public final LanguageProperty outputFileProperty;
+	public final LanguageAnnotationValue outputFileProperty;
 	public final String outputFileName;
 	public final String outputFileNameWithoutExtension;
-	public final LanguageProperty outputFileExtensionProperty;
+	public final LanguageAnnotationValue outputFileExtensionProperty;
 	public final String outputFileExtension;
 	public final String outputFileNameShortWithoutExtension;
 
@@ -114,8 +115,8 @@ public final class CompilerFiles {
 	public final String symbolsFilePath;
 	public final String symbolsFileName;
 
-	public CompilerFiles(IFile mainSourceIFile, LanguageProperties mainSourceFileLanguageProperties,
-			IFile sourceIFile, LanguageProperties sourceFileLanguageProperties,
+	public CompilerFiles(IFile mainSourceIFile, LanguageAnnotationValues mainSourceFileLanguageProperties,
+			IFile sourceIFile, LanguageAnnotationValues sourceFileLanguageProperties,
 			LanguageHardwareCompilerDefinitionPreferences languageHardwareCompilerDefinitionPreferences) {
 
 		if (mainSourceIFile == null) {
@@ -131,16 +132,16 @@ public final class CompilerFiles {
 		this.sourceFile = new SourceFile(sourceIFile, sourceFileLanguageProperties);
 
 		// Output folder mode
-		// Can be overridden via annotation property in main source file
+		// Can be overridden via annotation value in main source file
 		String localOutputFolderPath = languageHardwareCompilerDefinitionPreferences.getOutputFolderPath();
 		String localOutputFolderMode = languageHardwareCompilerDefinitionPreferences.getOutputFolderMode();
 		String localOutputFileExtension = languageHardwareCompilerDefinitionPreferences.getOutputFileExtension();
 
 		// Properties which override the preferences
-		outputFolderModeProperty = mainSourceFileLanguageProperties.get(LanguageProperties.OUTPUT_FOLDER_MODE);
-		outputFolderProperty = mainSourceFileLanguageProperties.get(LanguageProperties.OUTPUT_FOLDER);
-		outputFileExtensionProperty = mainSourceFileLanguageProperties.get(LanguageProperties.OUTPUT_FILE_EXTENSION);
-		outputFileProperty = mainSourceFileLanguageProperties.get(LanguageProperties.OUTPUT_FILE);
+		outputFolderModeProperty = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FOLDER_MODE);
+		outputFolderProperty = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FOLDER);
+		outputFileExtensionProperty = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FILE_EXTENSION);
+		outputFileProperty = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FILE);
 
 		// The following sequence sets the instance fields "outputFolder" and
 		// "outputFileNameWithoutExtension" as well as the
