@@ -537,8 +537,8 @@
           category="org.eclipse.debug.ui"
           class="com.wudsn.ide.lng.symbol.CompilerSymbolsView"
           icon="icons/outline-label-definition-16x16.gif"
-          id="com.wudsn.ide.lng.editor.CompilerSymbolsView"
-          name="%com.wudsn.ide.lng.editor.CompilerSymbolsView.name"
+          id="com.wudsn.ide.lng.symbol.CompilerSymbolsView"
+          name="%com.wudsn.ide.lng.symbol.CompilerSymbolsView.name"
           restorable="true">
     </view>
  </extension> 

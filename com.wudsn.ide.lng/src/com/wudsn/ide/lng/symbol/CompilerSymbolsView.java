@@ -54,7 +54,7 @@ import com.wudsn.ide.lng.compiler.CompilerSymbolType;
 // TODO Add column sorting
 public final class CompilerSymbolsView extends ViewPart {
 
-	public static final String ID = "com.wudsn.ide.lng.editor.CompilerSymbolsView";
+	public static final String ID = "com.wudsn.ide.lng.symbol.CompilerSymbolsView";
 
 	// Model
 	private CompilerFiles compilerFiles;
