@@ -87,59 +87,13 @@ public abstract class CompilerSourceParser {
 	 * @param document The document, not <code>null</code>.
 	 * @return The properties, may be empty, not <code>null</code>.
 	 */
-	public static LanguageAnnotationValues getDocumentProperties(IDocument document) {
+	public static LanguageAnnotationValues getAnnotationValues(IDocument document) {
 		if (document == null) {
 			throw new IllegalArgumentException("Parameter 'document' must not be null.");
 		}
-		String content = document.get();
-		LanguageAnnotationValues properties = new LanguageAnnotationValues();
-
-		int index = getMinIndex(content.indexOf(LanguageAnnotation.PREFIX),
-				content.indexOf(LanguageAnnotation.OLD_PREFIX));
-		while (index >= 0) {
-
-			int indexEqualSign = content.indexOf('=', index);
-			int indexNewLine = content.indexOf('\n', index);
-			if (indexNewLine < 0) {
-				indexNewLine = content.indexOf('\r', index);
-			}
-			if (indexNewLine < 0) {
-				indexNewLine = content.length();
-			}
-
-			if (indexEqualSign >= 0 && indexEqualSign < indexNewLine) {
-				String key = content.substring(index, indexEqualSign).trim();
-				String value = content.substring(indexEqualSign + 1, indexNewLine).trim();
-				int lineNumber;
-				try {
-					lineNumber = document.getLineOfOffset(index) + 1;
-				} catch (BadLocationException ex) {
-					lineNumber = 0;
-				}
-				properties.put(key, value, lineNumber);
-			}
-			index = getMinIndex(content.indexOf(LanguageAnnotation.PREFIX, indexNewLine),
-					content.indexOf(LanguageAnnotation.OLD_PREFIX, indexNewLine));
-		}
-		return properties;
-	}
-
-	/**
-	 * Gets the smaller of two string indexes. Values less than 0 indicate "not
-	 * found" and are ignored.
-	 * 
-	 * @param index1 The first index
-	 * @param index2 The second index
-	 * @return The smaller index or a value less than 0 if no index is valid.
-	 */
-	private static int getMinIndex(int index1, int index2) {
-		if (index1 < 0) {
-			return index2;
-		}
-		if (index2 < 0) {
-			return index1;
-		}
-		return Math.min(index1, index2);
+		var result = LanguageAnnotationValues.parseDocument(document);
+		System.out.println("TEST:" + result);
+		return result;
 	}
 
 	/**

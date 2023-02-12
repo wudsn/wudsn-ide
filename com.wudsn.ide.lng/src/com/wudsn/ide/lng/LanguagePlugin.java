@@ -183,6 +183,7 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 		// TODO: Call unit tests
 		CompilerPathsTest.main(new String[0]);
 		RunnerPathsTest.main(new String[0]);
+		LanguageAnnotationValuesTest.main(new String[0]);
 
 	}
 

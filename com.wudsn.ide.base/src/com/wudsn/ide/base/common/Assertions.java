@@ -20,9 +20,25 @@
 package com.wudsn.ide.base.common;
 
 public class Assertions {
-	
+
 	public static void assertFalse(boolean actual) {
 		throw new RuntimeException("Actual values is not false");
+	}
+
+	public static void assertEquals(Object actual, Object expected) {
+		if (actual == expected) {
+			return;
+		}
+		if (actual == null && expected != null) {
+			fail("Actual value is null");
+		}
+		if (actual != null && expected == null) {
+			fail("Actual value " + actual + " is not null");
+		}
+		if (!actual.equals(expected)) {
+			fail("Actual value " + actual + " is not equal to expected value " + expected + "");
+
+		}
 	}
 
 	public static void fail(String message) {

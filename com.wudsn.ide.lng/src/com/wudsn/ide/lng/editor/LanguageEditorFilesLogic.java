@@ -88,19 +88,19 @@ public final class LanguageEditorFilesLogic {
 		if (sourceIFile != null) {
 
 			IDocument document = languageEditor.getDocumentProvider().getDocument(languageEditor.getEditorInput());
-			LanguageAnnotationValues sourceFileProperties = CompilerSourceParser.getDocumentProperties(document);
+			LanguageAnnotationValues annotationValues = CompilerSourceParser.getAnnotationValues(document);
 
 			IFile mainSourceIFile;
 			LanguageAnnotationValues mainSourceFileProperties;
 
 			mainSourceIFile = sourceIFile;
-			mainSourceFileProperties = sourceFileProperties;
+			mainSourceFileProperties = annotationValues;
 
-			LanguageAnnotationValue property = sourceFileProperties.get(LanguageAnnotation.MAIN_SOURCE_FILE);
-			if (property != null) {
-				if (StringUtility.isSpecified(property.value)) {
+			LanguageAnnotationValue annotationValue = annotationValues.get(LanguageAnnotation.MAIN_SOURCE_FILE);
+			if (annotationValue != null) {
+				if (StringUtility.isSpecified(annotationValue.value)) {
 					IPath mainSourceFileIPath;
-					mainSourceFileIPath = sourceIFile.getFullPath().removeLastSegments(1).append(property.value);
+					mainSourceFileIPath = sourceIFile.getFullPath().removeLastSegments(1).append(annotationValue.value);
 					mainSourceIFile = ResourcesPlugin.getWorkspace().getRoot().getFile(mainSourceFileIPath);
 					File mainSourceFile = new File(mainSourceIFile.getLocation().toOSString());
 
@@ -109,7 +109,7 @@ public final class LanguageEditorFilesLogic {
 
 						mainSource = FileUtility.readString(mainSourceFile, FileUtility.MAX_SIZE_UNLIMITED);
 						document = new Document(mainSource);
-						mainSourceFileProperties = CompilerSourceParser.getDocumentProperties(document);
+						mainSourceFileProperties = CompilerSourceParser.getAnnotationValues(document);
 					} catch (CoreException ex) {
 						LanguagePlugin plugin = LanguagePlugin.getInstance();
 
@@ -120,7 +120,7 @@ public final class LanguageEditorFilesLogic {
 
 				}
 			}
-			result = new CompilerFiles(mainSourceIFile, mainSourceFileProperties, sourceIFile, sourceFileProperties,
+			result = new CompilerFiles(mainSourceIFile, mainSourceFileProperties, sourceIFile, annotationValues,
 					languageEditor.getLanguageHardwareCompilerPreferences());
 		} else {
 			result = null;
@@ -169,7 +169,7 @@ public final class LanguageEditorFilesLogic {
 	 * 
 	 * @param iFile      The IFile to which error message will be associated, not
 	 *                   <code>null</code>.
-	 * @param properties The language properties, not <code>null</code>.
+	 * @param annotationValues The annotation values, not <code>null</code>.
 	 * 
 	 * @return The hardware or <code>null</code> if is the not defined in the
 	 *         properties.
@@ -179,13 +179,13 @@ public final class LanguageEditorFilesLogic {
 	 * 
 	 * @since 1.6.1
 	 */
-	Hardware getHardware(IFile iFile, LanguageAnnotationValues properties) throws InvalidLanguageAnnotationException {
+	Hardware getHardware(IFile iFile, LanguageAnnotationValues annotationValues) throws InvalidLanguageAnnotationException {
 		if (iFile == null) {
 			throw new IllegalArgumentException("Parameter 'iFile' must not be null.");
 		}
 		Hardware hardware = null;
-		LanguageAnnotationValue hardwareProperty = properties.get(LanguageAnnotation.HARDWARE);
-		if (hardwareProperty != null) {
+		LanguageAnnotationValue hardwareAnnotationValue = annotationValues.get(LanguageAnnotation.HARDWARE);
+		if (hardwareAnnotationValue != null) {
 			Map<String, Hardware> allowedValues = new TreeMap<String, Hardware>();
 			StringBuilder allowedValuesBuilder = new StringBuilder();
 			for (Hardware value : Hardware.values()) {
@@ -199,8 +199,8 @@ public final class LanguageEditorFilesLogic {
 				}
 			}
 
-			String hardwarePropertyValue = hardwareProperty.value.toUpperCase();
-			if (StringUtility.isEmpty(hardwarePropertyValue)) {
+			String hardwareValue = hardwareAnnotationValue.value.toUpperCase();
+			if (StringUtility.isEmpty(hardwareValue)) {
 				try {
 					iFile.deleteMarkers(IMarker.PROBLEM, true, IResource.DEPTH_ZERO);
 				} catch (CoreException ex) {
@@ -208,11 +208,11 @@ public final class LanguageEditorFilesLogic {
 				}
 				// ERROR: Hardware not specified. Specify one of the
 				// following valid values '{0}'.
-				IMarker marker = MarkerUtility.createMarker(iFile, hardwareProperty.lineNumber, IMarker.SEVERITY_ERROR,
+				IMarker marker = MarkerUtility.createMarker(iFile, hardwareAnnotationValue.lineNumber, IMarker.SEVERITY_ERROR,
 						Texts.MESSAGE_E128, new String[] { allowedValuesBuilder.toString() });
-				throw new InvalidLanguageAnnotationException(hardwareProperty, marker);
+				throw new InvalidLanguageAnnotationException(hardwareAnnotationValue, marker);
 			}
-			hardware = allowedValues.get(hardwarePropertyValue);
+			hardware = allowedValues.get(hardwareValue);
 
 			if (hardware == null) {
 				try {
@@ -222,9 +222,9 @@ public final class LanguageEditorFilesLogic {
 				}
 				// ERROR: Unknown hardware {0}. Specify one of the
 				// following valid values '{1}'.
-				IMarker marker = MarkerUtility.createMarker(iFile, hardwareProperty.lineNumber, IMarker.SEVERITY_ERROR,
-						Texts.MESSAGE_E124, new String[] { hardwarePropertyValue, allowedValuesBuilder.toString() });
-				throw new InvalidLanguageAnnotationException(hardwareProperty, marker);
+				IMarker marker = MarkerUtility.createMarker(iFile, hardwareAnnotationValue.lineNumber, IMarker.SEVERITY_ERROR,
+						Texts.MESSAGE_E124, new String[] { hardwareValue, allowedValuesBuilder.toString() });
+				throw new InvalidLanguageAnnotationException(hardwareAnnotationValue, marker);
 			}
 
 		}

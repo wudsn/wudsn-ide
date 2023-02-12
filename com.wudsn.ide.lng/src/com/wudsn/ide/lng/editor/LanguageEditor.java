@@ -244,12 +244,11 @@ public abstract class LanguageEditor extends TextEditor {
 					compiler.getDefinition().getSyntax());
 			partitionScanner.createDocumentPartitioner(document);
 
-			LanguageAnnotationValues properties = CompilerSourceParser.getDocumentProperties(document);
-
-			IFile iFile = getCurrentIFile();
+			var iFile = getCurrentIFile();
 			if (iFile != null) {
 				try {
-					hardware = filesLogic.getHardware(iFile, properties);
+					var annotationValues = CompilerSourceParser.getAnnotationValues(document);
+					hardware = filesLogic.getHardware(iFile, annotationValues);
 				} catch (InvalidLanguageAnnotationException ex) {
 					// Do not use MarkerUtility.gotoMarker to make sure this
 					// editor instance is used.

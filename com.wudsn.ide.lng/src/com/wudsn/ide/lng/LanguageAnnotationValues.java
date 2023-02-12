@@ -25,6 +25,8 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.IDocument;
 
 import com.wudsn.ide.base.common.StringUtility;
 
@@ -44,6 +46,23 @@ public final class LanguageAnnotationValues {
 			this.key = key;
 			this.value = value;
 			this.lineNumber = lineNumber;
+		}
+
+		public boolean equals(Object other) {
+			if (other instanceof LanguageAnnotationValue) {
+				LanguageAnnotationValue otherObject = (LanguageAnnotationValue) other;
+				if (!this.key.equals(otherObject.key)) {
+					return false;
+				}
+				if (!this.value.equals(otherObject.value)) {
+					return false;
+				}
+				if (this.lineNumber != (otherObject.lineNumber)) {
+					return false;
+				}
+				return true;
+			}
+			return false;
 		}
 
 		@Override
@@ -132,4 +151,58 @@ public final class LanguageAnnotationValues {
 		return properties.toString();
 	}
 
+	public static LanguageAnnotationValues parseDocument(IDocument document) {
+		if (document == null) {
+			throw new IllegalArgumentException("Parameter 'document' must not be null.");
+		}
+		String content = document.get();
+		LanguageAnnotationValues result = new LanguageAnnotationValues();
+
+		int index = getMinIndex(content.indexOf(LanguageAnnotation.PREFIX),
+				content.indexOf(LanguageAnnotation.OLD_PREFIX));
+		while (index >= 0) {
+
+			int indexEqualSign = content.indexOf('=', index);
+			int indexNewLine = content.indexOf('\n', index);
+			if (indexNewLine < 0) {
+				indexNewLine = content.indexOf('\r', index);
+			}
+			if (indexNewLine < 0) {
+				indexNewLine = content.length();
+			}
+
+			if (indexEqualSign >= 0 && indexEqualSign < indexNewLine) {
+				String key = content.substring(index, indexEqualSign).trim();
+				String value = content.substring(indexEqualSign + 1, indexNewLine).trim();
+				int lineNumber;
+				try {
+					lineNumber = document.getLineOfOffset(index) + 1;
+				} catch (BadLocationException ex) {
+					lineNumber = 0;
+				}
+				result.put(key, value, lineNumber);
+			}
+			index = getMinIndex(content.indexOf(LanguageAnnotation.PREFIX, indexNewLine),
+					content.indexOf(LanguageAnnotation.OLD_PREFIX, indexNewLine));
+		}
+		return result;
+	}
+
+	/**
+	 * Gets the smaller of two string indexes. Values less than 0 indicate "not
+	 * found" and are ignored.
+	 * 
+	 * @param index1 The first index
+	 * @param index2 The second index
+	 * @return The smaller index or a value less than 0 if no index is valid.
+	 */
+	private static int getMinIndex(int index1, int index2) {
+		if (index1 < 0) {
+			return index2;
+		}
+		if (index2 < 0) {
+			return index1;
+		}
+		return Math.min(index1, index2);
+	}
 }
