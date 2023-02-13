@@ -303,7 +303,7 @@ public final class LanguageEditorFilesLogic {
 		if (StringUtility.isEmpty(files.outputFileExtension)) {
 			// ERROR: Output file extension must be set in the preferences of {0} '{1}' or
 			// via the annotation '{2}'.
-			createMainSourceFileMessage(files, files.outputFileExtensionProperty, IMarker.SEVERITY_ERROR,
+			createMainSourceFileMessage(files, files.outputFileExtensionAnnotationValue, IMarker.SEVERITY_ERROR,
 					Texts.MESSAGE_E104, compilerDefinition.getText(), compilerDefinition.getName(),
 					LanguageAnnotation.OUTPUT_FILE_EXTENSION);
 
@@ -311,7 +311,7 @@ public final class LanguageEditorFilesLogic {
 		}
 		if (!files.outputFileExtension.startsWith(".")) {
 			// ERROR: Output file extension {0} must start with ".".
-			createMainSourceFileMessage(files, files.outputFileExtensionProperty, IMarker.SEVERITY_ERROR,
+			createMainSourceFileMessage(files, files.outputFileExtensionAnnotationValue, IMarker.SEVERITY_ERROR,
 					Texts.MESSAGE_E139, files.outputFileExtension);
 			return false;
 		}
@@ -319,7 +319,7 @@ public final class LanguageEditorFilesLogic {
 		if (StringUtility.isEmpty(files.outputFolderMode)) {
 			// ERROR: Output folder mode be set in the preferences of
 			// compiler '{0}' or via the annotation '{1}'.
-			createMainSourceFileMessage(files, files.outputFolderModeProperty, IMarker.SEVERITY_ERROR,
+			createMainSourceFileMessage(files, files.outputFolderModeAnnotationValue, IMarker.SEVERITY_ERROR,
 					Texts.MESSAGE_E140, compilerDefinition.getName(), LanguageAnnotation.OUTPUT_FOLDER_MODE);
 
 			return false;
@@ -327,7 +327,7 @@ public final class LanguageEditorFilesLogic {
 		if (!CompilerOutputFolderMode.isDefined(files.outputFolderMode)) {
 			// ERROR: Unknown output folder mode {0}. Specify one of the
 			// following valid values '{1}'.
-			createMainSourceFileMessage(files, files.outputFolderModeProperty, IMarker.SEVERITY_ERROR,
+			createMainSourceFileMessage(files, files.outputFolderModeAnnotationValue, IMarker.SEVERITY_ERROR,
 					Texts.MESSAGE_E141, files.outputFolderMode, CompilerOutputFolderMode.getAllowedValues());
 			return false;
 

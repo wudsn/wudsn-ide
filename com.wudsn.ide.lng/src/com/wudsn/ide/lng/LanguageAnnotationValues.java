@@ -19,16 +19,23 @@
 
 package com.wudsn.ide.lng;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 
+import com.wudsn.ide.base.common.MarkerUtility;
 import com.wudsn.ide.base.common.StringUtility;
+import com.wudsn.ide.base.common.TextUtility;
+import com.wudsn.ide.lng.compiler.CompilerFiles.SourceFile;
 
 public final class LanguageAnnotationValues {
 
@@ -41,11 +48,13 @@ public final class LanguageAnnotationValues {
 		public final String key;
 		public final String value;
 		public final int lineNumber;
+		public final List<IStatus> statusList;
 
 		LanguageAnnotationValue(String key, String value, int lineNumber) {
 			this.key = key;
 			this.value = value;
 			this.lineNumber = lineNumber;
+			this.statusList = new ArrayList<IStatus>(1);
 		}
 
 		public boolean equals(Object other) {
@@ -185,6 +194,8 @@ public final class LanguageAnnotationValues {
 			index = getMinIndex(content.indexOf(LanguageAnnotation.PREFIX, indexNewLine),
 					content.indexOf(LanguageAnnotation.OLD_PREFIX, indexNewLine));
 		}
+
+		checkAnnotations(result);
 		return result;
 	}
 
@@ -204,5 +215,33 @@ public final class LanguageAnnotationValues {
 			return index1;
 		}
 		return Math.min(index1, index2);
+	}
+
+	private static void checkAnnotations(LanguageAnnotationValues annotationValues) {
+		if (annotationValues == null) {
+			throw new IllegalArgumentException("Parameter 'annotationValues' must not be null.");
+		}
+
+		var annotations = LanguageAnnotation.getAnnotations();
+		for (String key : annotationValues.keySet()) {
+			var value = annotationValues.get(key);
+			if (key.startsWith(LanguageAnnotation.OLD_PREFIX)) {
+				var newKey = LanguageAnnotation.PREFIX + key.substring(LanguageAnnotation.OLD_PREFIX.length());
+				// WARNING: Use annotation '{0}' instead of the deprecated annotation '{1}'.
+				value.statusList.add(new Status(IStatus.WARNING, LanguagePlugin.ID,
+						TextUtility.format(Texts.MESSAGE_W144, new String[] { newKey, key })));
+				// New annotations take precedence if they are already present.
+				if (!annotationValues.keySet().contains(newKey)) {
+					annotationValues.put(newKey, value.value, value.lineNumber);
+				}
+				key = newKey;
+			}
+			if (!annotations.contains(key)) {
+				// ERROR: Annotation '{0}' is unknown.
+				value.statusList.add(new Status(IStatus.WARNING, LanguagePlugin.ID,
+						TextUtility.format(Texts.MESSAGE_E145, new String[] { key })));
+			}
+		}
+
 	}
 }

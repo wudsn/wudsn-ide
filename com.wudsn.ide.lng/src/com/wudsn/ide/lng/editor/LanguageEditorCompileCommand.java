@@ -37,6 +37,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IBreakpointManager;
 import org.eclipse.debug.core.model.IBreakpoint;
@@ -418,27 +419,34 @@ final class LanguageEditorCompileCommand {
 		return true;
 	}
 
+	/**
+	 * Check the status message attached to annotation values and create markers for
+	 * them.
+	 * 
+	 * @param sourceFile The source file, not <code>null</code>.
+	 */
 	private void checkAnnotations(SourceFile sourceFile) {
 		if (sourceFile == null) {
 			throw new IllegalArgumentException("Parameter 'sourceFile' must not be null.");
 		}
 
 		var annotationValues = sourceFile.languageAnnotationValues;
-		var annotations = LanguageAnnotation.getAnnotations();
 		for (String key : annotationValues.keySet()) {
 			var value = annotationValues.get(key);
-			if (key.startsWith(LanguageAnnotation.OLD_PREFIX)) {
-				var newKey = LanguageAnnotation.PREFIX + key.substring(LanguageAnnotation.OLD_PREFIX.length());
-				// WARNING: Use annotation '{0}' instead of the deprecated annotation '{1}'.
-				MarkerUtility.createMarker(sourceFile.iFile, value.lineNumber, IMarker.SEVERITY_WARNING,
-						Texts.MESSAGE_W144, new String[] { newKey, key });
-				annotationValues.put(newKey, value.value, value.lineNumber);
-				key = newKey;
-			}
-			if (!annotations.contains(key)) {
-				// ERROR: Annotation '{0}' is unknown.
-				MarkerUtility.createMarker(sourceFile.iFile, value.lineNumber, IMarker.SEVERITY_WARNING,
-						Texts.MESSAGE_E145, new String[] { key });
+			int markerSeverity;
+			for (var status : value.statusList) {
+				switch (status.getSeverity()) {
+				case IStatus.WARNING:
+					markerSeverity = IMarker.SEVERITY_WARNING;
+					break;
+				case IStatus.ERROR:
+					markerSeverity = IMarker.SEVERITY_ERROR;
+					break;
+				default:
+					throw new IllegalStateException("Unsupported severity " + status.getSeverity());
+				}
+				MarkerUtility.createMarker(sourceFile.iFile, value.lineNumber, markerSeverity, "{0}",
+						status.getMessage());
 			}
 		}
 

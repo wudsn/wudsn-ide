@@ -93,10 +93,10 @@ public final class CompilerFiles {
 	 */
 	public final SourceFile mainSourceFile;
 
-	public final LanguageAnnotationValue outputFolderModeProperty;
+	public final LanguageAnnotationValue outputFolderModeAnnotationValue;
 	public final String outputFolderMode;
 
-	public final LanguageAnnotationValue outputFolderProperty;
+	public final LanguageAnnotationValue outputFolderAnnotationValue;
 	public final File outputFolder;
 	public final String outputFolderPath;
 
@@ -104,10 +104,10 @@ public final class CompilerFiles {
 	public final String outputFilePath;
 	public final String outputFilePathWithoutExtension;
 
-	public final LanguageAnnotationValue outputFileProperty;
+	public final LanguageAnnotationValue outputFileAnnotationValue;
 	public final String outputFileName;
 	public final String outputFileNameWithoutExtension;
-	public final LanguageAnnotationValue outputFileExtensionProperty;
+	public final LanguageAnnotationValue outputFileExtensionAnnotationValue;
 	public final String outputFileExtension;
 	public final String outputFileNameShortWithoutExtension;
 
@@ -138,20 +138,20 @@ public final class CompilerFiles {
 		String localOutputFileExtension = languageHardwareCompilerDefinitionPreferences.getOutputFileExtension();
 
 		// Properties which override the preferences
-		outputFolderModeProperty = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FOLDER_MODE);
-		outputFolderProperty = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FOLDER);
-		outputFileExtensionProperty = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FILE_EXTENSION);
-		outputFileProperty = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FILE);
+		outputFolderModeAnnotationValue = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FOLDER_MODE);
+		outputFolderAnnotationValue = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FOLDER);
+		outputFileExtensionAnnotationValue = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FILE_EXTENSION);
+		outputFileAnnotationValue = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FILE);
 
 		// The following sequence sets the instance fields "outputFolder" and
 		// "outputFileNameWithoutExtension" as well as the
 		// "outputFileNameWithoutExtension".
 		// If the output file is specified explicitly, it overrides all output
 		// properties.
-		if (outputFileProperty != null) {
+		if (outputFileAnnotationValue != null) {
 
 			// Make the file an absolute file.
-			File file = new File(outputFileProperty.value);
+			File file = new File(outputFileAnnotationValue.value);
 			if (!file.isAbsolute()) {
 				file = new File(mainSourceFile.file.getParentFile(), file.getPath());
 			}
@@ -172,21 +172,21 @@ public final class CompilerFiles {
 			}
 		} else {
 			// The output file extension is independent of the rest.
-			if (outputFileExtensionProperty != null) {
-				localOutputFileExtension = outputFileExtensionProperty.value;
+			if (outputFileExtensionAnnotationValue != null) {
+				localOutputFileExtension = outputFileExtensionAnnotationValue.value;
 			}
 			// If the output folder mode is specified explicitly, it overrides
 			// the output
 			// folder mode preferences.
-			if (outputFolderModeProperty != null) {
-				localOutputFolderMode = outputFolderModeProperty.value;
+			if (outputFolderModeAnnotationValue != null) {
+				localOutputFolderMode = outputFolderModeAnnotationValue.value;
 			}
 
 			// If the output folder is specified explicitly, it overrides the
 			// output folder mode and folder preferences.
-			if (outputFolderProperty != null) {
+			if (outputFolderAnnotationValue != null) {
 				localOutputFolderMode = CompilerOutputFolderMode.FIXED_FOLDER;
-				localOutputFolderPath = outputFolderProperty.value;
+				localOutputFolderPath = outputFolderAnnotationValue.value;
 			}
 
 			if (localOutputFolderMode.equals(CompilerOutputFolderMode.SOURCE_FOLDER)) {

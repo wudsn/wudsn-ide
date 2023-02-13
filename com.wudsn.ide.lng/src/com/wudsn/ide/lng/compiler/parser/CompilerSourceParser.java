@@ -92,7 +92,6 @@ public abstract class CompilerSourceParser {
 			throw new IllegalArgumentException("Parameter 'document' must not be null.");
 		}
 		var result = LanguageAnnotationValues.parseDocument(document);
-		System.out.println("TEST:" + result);
 		return result;
 	}
 
