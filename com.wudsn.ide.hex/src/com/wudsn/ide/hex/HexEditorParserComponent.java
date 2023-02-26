@@ -41,6 +41,7 @@ import com.wudsn.ide.hex.parser.AtariDiskImageKFileParser;
 import com.wudsn.ide.hex.parser.AtariMADSParser;
 import com.wudsn.ide.hex.parser.AtariParser;
 import com.wudsn.ide.hex.parser.AtariSDXParser;
+import com.wudsn.ide.hex.parser.IFFParser;
 
 final class HexEditorParserComponent {
 
@@ -256,16 +257,22 @@ final class HexEditorParserComponent {
 
 		// IFF files always have an even number of bytes
 		if (fileContent.getLength() > 8 && (fileContent.getLength() & 0x1) == 0) {
-			possibleFileContentModes.add(HexEditorFileContentMode.IFF_FILE);
 			char[] id = new char[4];
+			int offset = 0;
 			id[0] = (char) fileContent.getByte(0);
 			id[1] = (char) fileContent.getByte(1);
 			id[2] = (char) fileContent.getByte(2);
 			id[3] = (char) fileContent.getByte(3);
-			String chunk = String.copyValueOf(id);
-			boolean iff = chunk.equals("FORM") || chunk.equals("LIST") || chunk.equals("CAT ");
-			if (result.equals(HexEditorFileContentMode.BINARY) && iff) {
-				result = HexEditorFileContentMode.IFF_FILE;
+			String chunkName = String.copyValueOf(id);
+			offset += 4;
+			var chunkLength = fileContent.getDoubleWordBigEndian(4);
+			offset += 4;
+			if (IFFParser.isValidChunkName(chunkName) && offset + chunkLength <= fileContent.getLength()) {
+				possibleFileContentModes.add(HexEditorFileContentMode.IFF_FILE);
+				boolean iff = chunkName.equals("FORM") || chunkName.equals("LIST") || chunkName.equals("CAT ");
+				if (result.equals(HexEditorFileContentMode.BINARY) && iff) {
+					result = HexEditorFileContentMode.IFF_FILE;
+				}
 			}
 		}
 		return result;

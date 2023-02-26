@@ -30,6 +30,22 @@ import com.wudsn.ide.hex.Texts;
 
 public final class IFFParser extends HexEditorParser {
 
+	public static boolean isValidChunkName(String chunkName) {
+		if (chunkName == null) {
+			throw new IllegalArgumentException("Parameter 'chunkName' must not be null.");
+		}
+		if (chunkName.length() != 4) {
+			return false;
+		}
+		for (int i = 0; i < chunkName.length(); i++) {
+			char c = chunkName.charAt(i);
+			if (c < 'A' || c > 'Z') {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	@Override
 	public final boolean parse(StyledString contentBuilder) {
 		if (contentBuilder == null) {
@@ -45,19 +61,23 @@ public final class IFFParser extends HexEditorParser {
 	private boolean parse(StyledString contentBuilder, long offset, long fileContentLength,
 			HexEditorContentOutlineTreeObject treeObject) {
 		boolean error;
-
+		String chunkName = null;
 		error = (fileContentLength - offset) < 8;
 		if (!error) {
 			while ((fileContentLength - offset) >= 8 && !error) {
 				long headerLength = 8;
-				String chunkName = getChunkName(offset);
-				long chunkLength = fileContent.getDoubleWordBigEndian(offset + 4);
+				chunkName = getChunkName(offset);
+				if (!isValidChunkName(chunkName)) {
+					error = true; // Non ASCII chunk name
+					break;
+				}
+				var chunkLength = fileContent.getDoubleWordBigEndian(offset + 4);
 				String headerText;
 				String formTypeName = "";
 				boolean hasInnerChunks = false;
 				if (chunkName.equals("FORM")) {
 					if (chunkLength >= 4) {
-						formTypeName = getChunkName(offset + 8);
+						formTypeName = getChunkName(offset);
 						headerText = TextUtility.format(Texts.HEX_EDITOR_IFF_FORM_CHUNK, chunkName, formTypeName,
 								HexUtility.getLongValueHexString(chunkLength),
 								NumberUtility.getLongValueDecimalString(chunkLength));
@@ -75,6 +95,7 @@ public final class IFFParser extends HexEditorParser {
 					headerText = TextUtility.format(Texts.HEX_EDITOR_IFF_CHUNK, chunkName,
 							HexUtility.getLongValueHexString(chunkLength),
 							NumberUtility.getLongValueDecimalString(chunkLength));
+
 				}
 
 				if (!error) {
@@ -98,11 +119,10 @@ public final class IFFParser extends HexEditorParser {
 					if ((offset & 0x1) == 1) {
 						offset++;
 					}
-
 				}
 			}
-
 		}
+
 		if (error) {
 			printBlockWithError(contentBuilder, Texts.HEX_EDITOR_IFF_FILE_ERROR, fileContentLength, offset);
 		}
