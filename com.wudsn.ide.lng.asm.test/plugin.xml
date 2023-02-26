@@ -55,7 +55,7 @@
 	<extension point="org.eclipse.ui.editors">
 		<editor class="com.wudsn.ide.lng.asm.compiler.test.TestEditor"
 			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-			default="false" extensions="asm" icon="icons/editor-test-16x16.gif"
+			default="false" extensions="asm" icon="icons/editor-test-16x16.png"
 			id="com.wudsn.ide.lng.asm.compiler.test.TestEditor" name="%com.wudsn.ide.lng.asm.compiler.test.TestEditor.name">
 			<contentTypeBinding contentTypeId="com.wudsn.ide.lng.asm.compiler.test.TestSourceFile">
 			</contentTypeBinding>
