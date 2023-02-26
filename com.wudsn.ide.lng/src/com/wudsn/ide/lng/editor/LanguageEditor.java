@@ -55,9 +55,8 @@ import com.wudsn.ide.base.common.Profiler;
 import com.wudsn.ide.base.common.ResourceBundleUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.Language;
-import com.wudsn.ide.lng.LanguagePlugin;
-import com.wudsn.ide.lng.LanguageAnnotationValues;
 import com.wudsn.ide.lng.LanguageAnnotationValues.InvalidLanguageAnnotationException;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.compiler.Compiler;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
@@ -257,7 +256,6 @@ public abstract class LanguageEditor extends TextEditor {
 				}
 			}
 		}
-
 	}
 
 	@Override

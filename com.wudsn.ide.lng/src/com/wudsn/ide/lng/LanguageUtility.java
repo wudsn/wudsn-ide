@@ -34,7 +34,7 @@ public final class LanguageUtility {
 	 */
 	private LanguageUtility() {
 	}
-	
+
 	/**
 	 * Gets the text for a language.
 	 * 
@@ -45,14 +45,13 @@ public final class LanguageUtility {
 		return EnumUtility.getText(language);
 	}
 
-	
 	/**
 	 * Gets the text for type of compilers for a language.
 	 * 
 	 * @param language The language, not <code>null</code>.
 	 * @return The text in sentence case, not empty and not <code>null</code>.
 	 */
-	public static String getCompilerText(Language language) { 
+	public static String getCompilerText(Language language) {
 		switch (language) {
 		case ASM:
 			return Texts.LANGUAGE_ASSEMBLER_TEXT;
@@ -64,14 +63,14 @@ public final class LanguageUtility {
 		throw new IllegalArgumentException("Unknown language '" + language + "'.");
 
 	}
-	
+
 	public static String getCompilerPreferencesText(Language language) {
 		switch (language) {
 		case ASM:
-			return Texts.LANGUAGES_TITLE_CASE+"/"+Texts.LANGUAGE_ASSEMBLER_TEXT_TITLE_CASE;
+			return Texts.LANGUAGES_TITLE_CASE + "/" + Texts.LANGUAGE_ASSEMBLER_TEXT_TITLE_CASE;
 
 		case PAS:
-			return Texts.LANGUAGES_TITLE_CASE+"/"+Texts.LANGUAGE_COMPILER_TEXT_TITLE_CASE;
+			return Texts.LANGUAGES_TITLE_CASE + "/" + Texts.LANGUAGE_COMPILER_TEXT_TITLE_CASE;
 
 		}
 		throw new IllegalArgumentException("Unknown language '" + language + "'.");
