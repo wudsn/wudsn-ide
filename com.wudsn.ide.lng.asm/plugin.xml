@@ -335,7 +335,7 @@
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="true"
           extensions="a"
-          icon="icons/editor-acme-16x16.gif"
+          icon="icons/editor-acme-16x16.png"
           id="com.wudsn.ide.lng.asm.compiler.acme.AcmeEditor"
           name="%com.wudsn.ide.lng.asm.compiler.acme.AcmeEditor.name">
        <contentTypeBinding
@@ -347,7 +347,7 @@
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="false"
           extensions="asm"
-          icon="icons/editor-asm6-16x16.gif"
+          icon="icons/editor-asm6-16x16.png"
           id="com.wudsn.ide.lng.asm.compiler.asm6.Asm6Editor"
           name="%com.wudsn.ide.lng.asm.compiler.asm6.Asm6Editor.name">
        <contentTypeBinding
@@ -359,7 +359,7 @@
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="false"
           extensions="asm"
-          icon="icons/editor-atasm-16x16.gif"
+          icon="icons/editor-atasm-16x16.png"
           id="com.wudsn.ide.lng.asm.compiler.atasm.AtasmEditor"
           name="%com.wudsn.ide.lng.asm.compiler.atasm.AtasmEditor.name">
        <contentTypeBinding
@@ -371,7 +371,7 @@
         contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
         default="false"
         extensions="asm"
-        icon="icons/editor-dasm-16x16.gif"
+        icon="icons/editor-dasm-16x16.png"
         id="com.wudsn.ide.lng.asm.compiler.dasm.DasmEditor"
         name="%com.wudsn.ide.lng.asm.compiler.dasm.DasmEditor.name">
      <contentTypeBinding
@@ -383,7 +383,7 @@
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="true"
           extensions="asm"
-          icon="icons/editor-kickass-16x16.gif"
+          icon="icons/editor-kickass-16x16.png"
           id="com.wudsn.ide.lng.asm.compiler.kickass.KickAssEditor"
           name="%com.wudsn.ide.lng.asm.compiler.kickass.KickAssEditor.name">
        <contentTypeBinding
@@ -395,7 +395,7 @@
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="true"
           extensions="asm"
-          icon="icons/editor-mads-16x16.gif"
+          icon="icons/editor-mads-16x16.png"
           id="com.wudsn.ide.lng.asm.compiler.mads.MadsEditor"
           name="%com.wudsn.ide.lng.asm.compiler.mads.MadsEditor.name">
        <contentTypeBinding
@@ -407,7 +407,7 @@
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="false"
           extensions="s"
-          icon="icons/editor-merlin32-16x16.gif"
+          icon="icons/editor-merlin32-16x16.png"
           id="com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32Editor"
           name="%com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32Editor.name">
        <contentTypeBinding
@@ -419,7 +419,7 @@
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="false"
           extensions="asm"
-          icon="icons/editor-tass-16x16.gif"
+          icon="icons/editor-tass-16x16.png"
           id="com.wudsn.ide.lng.asm.compiler.tass.TassEditor"
           name="%com.wudsn.ide.lng.asm.compiler.tass.TassEditor.name">
        <contentTypeBinding
@@ -431,7 +431,7 @@
           contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
           default="true"
           extensions="asx"
-          icon="icons/editor-xasm-16x16.gif"
+          icon="icons/editor-xasm-16x16.png"
           id="com.wudsn.ide.lng.asm.compiler.xasm.XasmEditor"
           name="%com.wudsn.ide.lng.asm.compiler.xasm.XasmEditor.name">
        <contentTypeBinding
