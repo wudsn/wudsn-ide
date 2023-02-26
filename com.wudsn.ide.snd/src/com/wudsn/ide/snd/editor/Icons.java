@@ -33,9 +33,9 @@ final class Icons {
 
 	static {
 		AbstractIDEPlugin plugin = SoundPlugin.getInstance();
-		PLAY = plugin.getImage("player-play-16x16.gif");
-		PAUSE = plugin.getImage("player-pause-16x16.gif");
-		STOP = plugin.getImage("player-stop-16x16.gif");
-		EXPORT = plugin.getImage("player-export-16x16.gif");
+		PLAY = plugin.getImage("player-play-16x16.png");
+		PAUSE = plugin.getImage("player-pause-16x16.png");
+		STOP = plugin.getImage("player-stop-16x16.png");
+		EXPORT = plugin.getImage("player-export-16x16.png");
 	}
 }
