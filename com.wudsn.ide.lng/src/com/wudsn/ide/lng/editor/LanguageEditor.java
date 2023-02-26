@@ -47,7 +47,6 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.FileEditorInput;
-import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
@@ -57,7 +56,6 @@ import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguageAnnotationValues.InvalidLanguageAnnotationException;
 import com.wudsn.ide.lng.LanguagePlugin;
-import com.wudsn.ide.lng.Target;
 import com.wudsn.ide.lng.compiler.Compiler;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceFile;
@@ -74,7 +72,7 @@ import com.wudsn.ide.lng.preferences.LanguagePreferences;
  * @author Peter Dell
  * @author Andy Reek
  */
-public abstract class LanguageEditor extends TextEditor {
+public abstract class LanguageEditor extends TextEditor implements ILanguageEditor {
 
 	private static final class Actions {
 
@@ -102,13 +100,46 @@ public abstract class LanguageEditor extends TextEditor {
 		filesLogic = LanguageEditorFilesLogic.createInstance(this);
 	}
 
-	/**
-	 * Gets the files logic associated with this editor.
-	 * 
-	 * @return The files logic, not <code>null</code>.
-	 */
-	public LanguageEditorFilesLogic getFilesLogic() {
-		return filesLogic;
+	@Override
+	protected final void initializeEditor() {
+		super.initializeEditor();
+
+		plugin = LanguagePlugin.getInstance();
+		compiler = plugin.getCompilerRegistry().getCompilerByEditorClassName(getClass().getName());
+
+		setSourceViewerConfiguration(new LanguageSourceViewerConfiguration(this, getPreferenceStore()));
+
+	}
+
+	@Override
+	public final LanguagePlugin getPlugin() {
+		if (plugin == null) {
+			throw new IllegalStateException("Field 'plugin' must not be null.");
+		}
+		return plugin;
+	}
+
+	@Override
+	public final Language getLanguage() {
+		return getCompilerDefinition().getLanguage();
+	}
+
+	@Override
+	public final LanguagePreferences getLanguagePreferences() {
+		return getPlugin().getLanguagePreferences(getLanguage());
+	}
+
+	@Override
+	public final Compiler getCompiler() {
+		if (compiler == null) {
+			throw new IllegalStateException("Field 'compiler' must not be null.");
+		}
+		return compiler;
+	}
+
+	@Override
+	public final CompilerDefinition getCompilerDefinition() {
+		return getCompiler().getDefinition();
 	}
 
 	/**
@@ -122,125 +153,46 @@ public abstract class LanguageEditor extends TextEditor {
 		if (hardware != null) {
 			return hardware;
 		}
-		return compiler.getDefinition().getDefaultHardware();
+		return getCompilerDefinition().getDefaultHardware();
 	}
-
-	/**
-	 * Gets the compiler id for this editor.
-	 * 
-	 * @return The compiler id for this editor, not empty and not <code>null</code>.
-	 */
 
 	@Override
-	protected final void initializeEditor() {
-		super.initializeEditor();
-
-		plugin = LanguagePlugin.getInstance();
-		compiler = plugin.getCompilerRegistry().getCompilerByEditorClassName(getClass().getName());
-
-		setSourceViewerConfiguration(new LanguageSourceViewerConfiguration(this, getPreferenceStore()));
-
-	}
-
-	/**
-	 * Gets the plugin this compiler instance belongs to.
-	 * 
-	 * @return The plugin this compiler instance belongs to, not <code>null</code>.
-	 */
-	public final LanguagePlugin getPlugin() {
-		if (plugin == null) {
-			throw new IllegalStateException("Field 'plugin' must not be null.");
-		}
-		return plugin;
-	}
-
-	/**
-	 * Gets the language.
-	 * 
-	 * @return The language, not <code>null</code>.
-	 */
-	public final Language getLanguage() {
-		return getCompilerDefinition().getLanguage();
-	}
-
-	/**
-	 * Gets the language preferences.
-	 * 
-	 * @return The language preferences, not <code>null</code>.
-	 */
-	public final LanguagePreferences getLanguagePreferences() {
-		return plugin.getLanguagePreferences(getLanguage());
-	}
-
-	/**
-	 * Gets the compiler preferences.
-	 * 
-	 * @return The compiler preferences, not <code>null</code>.
-	 */
 	public final LanguageHardwareCompilerDefinitionPreferences getLanguageHardwareCompilerPreferences() {
-		return getLanguagePreferences().getLanguageHardwareCompilerDefinitionPreferences(getHardware(), getCompilerDefinition());
+		return getLanguagePreferences().getLanguageHardwareCompilerDefinitionPreferences(getHardware(),
+				getCompilerDefinition());
 	}
 
 	/**
-	 * Gets the compiler for this editor.
-	 * 
-	 * @return The compiler for this editor, not <code>null</code>.
-	 */
-	public final Compiler getCompiler() {
-		if (compiler == null) {
-			throw new IllegalStateException("Field 'compiler' must not be null.");
-		}
-		return compiler;
-	}
-
-	/**
-	 * Gets the compiler definition for this editor.
-	 * 
-	 * @return The compiler definition for this editor, not <code>null</code>.
-	 * 
-	 * @sine 1.6.1
-	 */
-	public final CompilerDefinition getCompilerDefinition() {
-		if (compiler == null) {
-			throw new IllegalStateException("Field 'compiler' must not be null.");
-		}
-		return compiler.getDefinition();
-	}
-
-	/**
-	 * Gets the compiler source parser for this editor and the currently selected
+	 * Creates a compiler source parser for this editor and the currently selected
 	 * instruction set.
 	 * 
 	 * @return The compiler source parser for this editor, not <code>null</code> .
 	 */
-	public final CompilerSourceParser createCompilerSourceParser() {
-		Target target;
-		CompilerSourceParser result;
-		if (compiler == null) {
-			throw new IllegalStateException("Field 'compiler' must not be null.");
+	public static CompilerSourceParser createCompilerSourceParser(ILanguageEditor languageEditor) {
+		if (languageEditor == null) {
+			throw new IllegalArgumentException("Parameter 'languageEditor' must not be null.");
 		}
-		target = getLanguageHardwareCompilerPreferences().getTarget();
-		result = compiler.createSourceParser();
+		var compiler = languageEditor.getCompiler();
+		var target = languageEditor.getLanguageHardwareCompilerPreferences().getTarget();
+		var result = compiler.createSourceParser();
 		result.init(compiler.getDefinition().getSyntax().getInstructionSet(target));
 		return result;
 	}
 
-	/**
-	 * This method is called whenever the input changes, i.e. after loading and
-	 * after saving as new file.
-	 * 
-	 * @param input The new input, may be <code>null</code>
-	 */
+	@Override
+	public final CompilerSourceParser createCompilerSourceParser() {
+		return createCompilerSourceParser(this);
+	}
+
 	@Override
 	protected final void doSetInput(IEditorInput input) throws CoreException {
 		super.doSetInput(input);
 
 		hardware = null;
 		if (input != null) {
-			IDocument document = getDocumentProvider().getDocument(getEditorInput());
+			var document = getDocument();
 
-			CompilerSourcePartitionScanner partitionScanner = new CompilerSourcePartitionScanner(
-					compiler.getDefinition().getSyntax());
+			var partitionScanner = new CompilerSourcePartitionScanner(getCompilerDefinition().getSyntax());
 			partitionScanner.createDocumentPartitioner(document);
 
 			var iFile = getCurrentIFile();
@@ -256,6 +208,11 @@ public abstract class LanguageEditor extends TextEditor {
 				}
 			}
 		}
+	}
+
+	@Override
+	public IDocument getDocument() {
+		return getDocumentProvider().getDocument(getEditorInput());
 	}
 
 	@Override
@@ -286,8 +243,7 @@ public abstract class LanguageEditor extends TextEditor {
 		actionDefintionId = LanguageEditorActionDefinitionIds.ToggleBreakpoint;
 		actionId = Actions.RulerDoubleClick;
 		action.setActionDefinitionId(actionId);
-		toggleBreakpointAction = new ToggleBreakpointAction(this, getDocumentProvider().getDocument(getEditorInput()),
-				getVerticalRuler());
+		toggleBreakpointAction = new ToggleBreakpointAction(this, getDocument(), getVerticalRuler());
 		toggleBreakpointAction.setId(actionId);
 		setAction(actionId, toggleBreakpointAction);
 		markAsStateDependentAction(actionId, true);
@@ -392,16 +348,16 @@ public abstract class LanguageEditor extends TextEditor {
 		if (ruler == null) {
 			throw new IllegalArgumentException("Parameter 'ruler' must not be null.");
 		}
-		ISourceViewer viewer = new ProjectionViewer(parent, ruler, getOverviewRuler(), isOverviewRulerVisible(),
+		var viewer = new ProjectionViewer(parent, ruler, getOverviewRuler(), isOverviewRulerVisible(),
 				styles);
 
 		// Ensure decoration support has been created and configured.
 		getSourceViewerDecorationSupport(viewer);
 
 		// The first single line comment delimiter is used as the default.
-		List<String> singleLineCommentDelimiters = compiler.getDefinition().getSyntax()
+		List<String> singleLineCommentDelimiters = getCompilerDefinition().getSyntax()
 				.getSingleLineCommentDelimiters();
-		String[] array = singleLineCommentDelimiters.toArray(new String[singleLineCommentDelimiters.size()]);
+		var array = singleLineCommentDelimiters.toArray(new String[singleLineCommentDelimiters.size()]);
 		viewer.setDefaultPrefixes(array, IDocument.DEFAULT_CONTENT_TYPE);
 		viewer.setDefaultPrefixes(array, CompilerSourcePartitionScanner.PARTITION_COMMENT_SINGLE);
 
@@ -479,11 +435,11 @@ public abstract class LanguageEditor extends TextEditor {
 
 		}
 
-		Annotation[] removeAnnotations = deletions.toArray(new Annotation[deletions.size()]);
+		var removeAnnotations = deletions.toArray(new Annotation[deletions.size()]);
 
 		// This will hold the new annotations along
 		// with their corresponding folding positions.
-		HashMap<ProjectionAnnotation, Position> newAnnotations = new HashMap<ProjectionAnnotation, Position>();
+		var newAnnotations = new HashMap<ProjectionAnnotation, Position>();
 
 		for (int i = 0; i < foldingPositions.size(); i++) {
 			annotation = new ProjectionAnnotation();
@@ -499,30 +455,26 @@ public abstract class LanguageEditor extends TextEditor {
 		annotationModel.modifyAnnotations(removeAnnotations, newAnnotations, new Annotation[] {});
 	}
 
-	/**
-	 * Gets the directory of the current file.
-	 * 
-	 * @return The directory of the current file or <code>null</code>.
-	 */
-	public final File getCurrentDirectory() {
-		File result;
-		result = getCurrentFile();
-		if (result != null) {
-			result = result.getParentFile();
+	@Override
+	public final IFile getCurrentIFile() {
+		IFile result;
+		var editorInput = getEditorInput();
+		if (editorInput instanceof FileEditorInput) {
+			var fileEditorInput = (FileEditorInput) editorInput;
+			result = fileEditorInput.getFile();
+
+		} else {
+			result = null;
 		}
 		return result;
 	}
 
-	/**
-	 * Gets the the current file.
-	 * 
-	 * @return The current file or <code>null</code>.
-	 */
+	@Override
 	public final File getCurrentFile() {
 		File result;
-		IEditorInput editorInput = getEditorInput();
+		var editorInput = getEditorInput();
 		if (editorInput instanceof FileEditorInput) {
-			FileEditorInput fileEditorInput = (FileEditorInput) editorInput;
+			var fileEditorInput = (FileEditorInput) editorInput;
 			result = new File(fileEditorInput.getPath().toOSString());
 		} else {
 			result = null;
@@ -530,20 +482,11 @@ public abstract class LanguageEditor extends TextEditor {
 		return result;
 	}
 
-	/**
-	 * Gets the the current file.
-	 * 
-	 * @return The current file or <code>null</code>.
-	 */
-	public final IFile getCurrentIFile() {
-		IFile result;
-		IEditorInput editorInput = getEditorInput();
-		if (editorInput instanceof FileEditorInput) {
-			FileEditorInput fileEditorInput = (FileEditorInput) editorInput;
-			result = fileEditorInput.getFile();
-
-		} else {
-			result = null;
+	@Override
+	public final File getCurrentDirectory() {
+		var result = getCurrentFile();
+		if (result != null) {
+			result = result.getParentFile();
 		}
 		return result;
 	}
@@ -559,8 +502,7 @@ public abstract class LanguageEditor extends TextEditor {
 		if (line < 1) {
 			throw new IllegalArgumentException("Parameter 'line' must be positive. Specified value is " + line + ".");
 		}
-		IDocumentProvider provider = getDocumentProvider();
-		IDocument document = provider.getDocument(getEditorInput());
+		var document = getDocument();
 		boolean result = false;
 		try {
 			int startOffset = document.getLineOffset(line - 1);
@@ -571,7 +513,7 @@ public abstract class LanguageEditor extends TextEditor {
 			selectAndReveal(startOffset, lineLength);
 			result = true;
 		} catch (BadLocationException ex) {
-			plugin.logError("Cannot position to line {0}.", new Object[] { String.valueOf(line) }, ex);
+			getPlugin().logError("Cannot position to line {0}.", new Object[] { String.valueOf(line) }, ex);
 			result = false;
 		}
 		return result;

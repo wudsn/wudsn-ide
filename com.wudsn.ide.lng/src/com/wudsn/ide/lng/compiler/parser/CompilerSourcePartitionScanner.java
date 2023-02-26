@@ -32,6 +32,7 @@ import org.eclipse.jface.text.rules.MultiLineRule;
 import org.eclipse.jface.text.rules.RuleBasedPartitionScanner;
 import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
+import org.eclipse.ui.IEditorInput;
 
 import com.wudsn.ide.lng.compiler.syntax.CompilerSyntax;
 import com.wudsn.ide.lng.editor.LanguageEditor;
@@ -63,7 +64,7 @@ public final class CompilerSourcePartitionScanner extends RuleBasedPartitionScan
 	 * Creates a new instance.
 	 * 
 	 * Called by
-	 * {@link LanguageEditor#init(org.eclipse.ui.IEditorSite, org.eclipse.ui.IEditorInput)}
+	 * {@link LanguageEditor#doSetInput(IEditorInput input) 
 	 * .
 	 * 
 	 * @param compilerSyntax The compiler syntax, not <code>null</code>.

@@ -57,10 +57,8 @@ import com.wudsn.ide.base.common.MarkerUtility;
 import com.wudsn.ide.base.common.NumberUtility;
 import com.wudsn.ide.base.common.ProcessWithLogs;
 import com.wudsn.ide.base.common.StringUtility;
-import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.base.hardware.Hardware;
 import com.wudsn.ide.lng.HardwareUtility;
-import com.wudsn.ide.lng.LanguageAnnotation;
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.LanguageUtility;
 import com.wudsn.ide.lng.Texts;
@@ -137,7 +135,7 @@ final class LanguageEditorCompileCommand {
 	 * 
 	 * @throws RuntimeException
 	 */
-	public static void execute(LanguageEditor languageEditor, CompilerFiles files, String commandId, String runnerId)
+	public static void execute(ILanguageEditor languageEditor, CompilerFiles files, String commandId, String runnerId)
 			throws RuntimeException {
 
 		if (languageEditor == null) {
@@ -188,7 +186,7 @@ final class LanguageEditorCompileCommand {
 		}
 	}
 
-	private boolean executeInternal(LanguageEditor languageEditor, CompilerFiles files, String commandId,
+	private boolean executeInternal(ILanguageEditor languageEditor, CompilerFiles files, String commandId,
 			String runnerId) {
 
 		if (languageEditor == null) {
@@ -461,7 +459,7 @@ final class LanguageEditorCompileCommand {
 	 * 
 	 * @since 1.6.1
 	 */
-	private void createBreakpointsFile(LanguageEditor languageEditor, CompilerFiles files, Runner runner) {
+	private void createBreakpointsFile(ILanguageEditor languageEditor, CompilerFiles files, Runner runner) {
 		if (languageEditor == null) {
 			throw new IllegalArgumentException("Parameter 'languageEditor' must not be null.");
 		}
@@ -520,7 +518,7 @@ final class LanguageEditorCompileCommand {
 		}
 	}
 
-	private void openOutputFile(LanguageEditor languageEditor, CompilerFiles files,
+	private void openOutputFile(ILanguageEditor languageEditor, CompilerFiles files,
 			CompilerRunPreferences compilerRunPreferences, CompilerConsole compilerConsole, String runnerId) {
 
 		if (languageEditor == null) {
@@ -678,7 +676,7 @@ final class LanguageEditorCompileCommand {
 		return parameter;
 	}
 
-	private boolean parseLogs(LanguageEditor languageEditor, CompilerFiles files, ProcessWithLogs compileProcess) {
+	private boolean parseLogs(ILanguageEditor languageEditor, CompilerFiles files, ProcessWithLogs compileProcess) {
 
 		if (languageEditor == null) {
 			throw new IllegalArgumentException("Parameter 'languageEditor' must not be null.");
@@ -738,7 +736,7 @@ final class LanguageEditorCompileCommand {
 	 *                       <code>null</code>.
 	 * @return <code>true</code> if an error was found.
 	 */
-	private boolean positionToFirstErrorOrWarning(LanguageEditor languageEditor, List<IMarker> markers) {
+	private boolean positionToFirstErrorOrWarning(ILanguageEditor languageEditor, List<IMarker> markers) {
 
 		if (languageEditor == null) {
 			throw new IllegalArgumentException("Parameter 'languageEditor' must not be null.");
@@ -796,7 +794,7 @@ final class LanguageEditorCompileCommand {
 		return firstErrorMarker != null;
 	}
 
-	private void parseCompilerSymbols(LanguageEditor languageEditor, CompilerFiles files,
+	private void parseCompilerSymbols(ILanguageEditor languageEditor, CompilerFiles files,
 			CompilerProcessLogParser logParser) {
 
 		if (languageEditor == null)

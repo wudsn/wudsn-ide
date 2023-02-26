@@ -39,7 +39,6 @@ import org.eclipse.swt.graphics.TextStyle;
 
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.lng.LanguagePlugin;
-import com.wudsn.ide.lng.compiler.CompilerFiles;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceFile;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserLineCallback;
@@ -146,7 +145,7 @@ final class LanguageContentAssistProcessor implements IContentAssistProcessor {
 		}
 	}
 
-	private LanguageEditor editor;
+	private ILanguageEditor editor;
 
 	private Image directiveImage;
 	private Image legalOpcodeImage;
@@ -165,7 +164,7 @@ final class LanguageContentAssistProcessor implements IContentAssistProcessor {
 	 * @param editor The language editor for which this instance is created, not
 	 *               <code>null</code>.
 	 */
-	LanguageContentAssistProcessor(LanguageEditor editor) {
+	LanguageContentAssistProcessor(ILanguageEditor editor) {
 		if (editor == null) {
 			throw new IllegalArgumentException("Parameter 'editor' must not be null.");
 		}
@@ -189,7 +188,7 @@ final class LanguageContentAssistProcessor implements IContentAssistProcessor {
 		if (viewer == null) {
 			throw new IllegalArgumentException("Parameter 'viewer' must not be null.");
 		}
-		ITextSelection selection = (ITextSelection) viewer.getSelectionProvider().getSelection();
+		var selection = (ITextSelection) viewer.getSelectionProvider().getSelection();
 
 		int selectionOffset = offset;
 
@@ -212,13 +211,13 @@ final class LanguageContentAssistProcessor implements IContentAssistProcessor {
 
 		// Parse the current compiler file and try to find the line in the
 		// correct source file.
-		CompilerFiles files = LanguageEditorFilesLogic.createInstance(editor).createCompilerFiles();
+		var files = LanguageEditorFilesLogic.createInstance(editor).createCompilerFiles();
 		if (files == null) {
 			return null;
 		}
-		SourceParserCallback compilerSourceCallback = new SourceParserCallback(files.sourceFile.filePath, lineNumber);
-		CompilerSourceParser compilerSourceParser = editor.createCompilerSourceParser();
-		CompilerSourceFile compilerSourceFile = compilerSourceParser.createCompilerSourceFile(files.sourceFile.file,
+		var compilerSourceCallback = new SourceParserCallback(files.sourceFile.filePath, lineNumber);
+		var compilerSourceParser = editor.createCompilerSourceParser();
+		var compilerSourceFile = compilerSourceParser.createCompilerSourceFile(files.sourceFile.file,
 				viewer.getDocument());
 		compilerSourceParser.parse(compilerSourceFile, compilerSourceCallback);
 

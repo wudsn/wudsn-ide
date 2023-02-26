@@ -57,6 +57,7 @@ import com.wudsn.ide.lng.compiler.parser.CompilerSourceFile;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObject;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObjectLabelProvider;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObjectType;
+import com.wudsn.ide.lng.editor.ILanguageEditor;
 import com.wudsn.ide.lng.editor.LanguageEditor;
 
 /**
@@ -76,7 +77,7 @@ public final class LanguageOutlinePage extends ContentOutlinePage {
 	private static final class OutlineViewerSortAction extends Action {
 		private static final QualifiedName CHECKED = new QualifiedName("OutlineViewerSortAction", "Checked");
 
-		final LanguageEditor editor;
+		final ILanguageEditor editor;
 		final TreeViewer treeViewer;
 
 		/**
@@ -86,7 +87,7 @@ public final class LanguageOutlinePage extends ContentOutlinePage {
 		 *                   <code>null</code>.
 		 * @param treeViewer The tree viewer which displays the outline.
 		 */
-		public OutlineViewerSortAction(LanguageEditor editor, TreeViewer treeViewer) {
+		public OutlineViewerSortAction(ILanguageEditor editor, TreeViewer treeViewer) {
 			super("", AS_CHECK_BOX);
 			if (editor == null) {
 				throw new IllegalArgumentException("Parameter 'editor' must not be null.");
@@ -131,7 +132,7 @@ public final class LanguageOutlinePage extends ContentOutlinePage {
 			// Store the value.
 			String checkedProperty = Boolean.toString(checked);
 			try {
-				IFile iFile = editor.getCurrentIFile();
+				var iFile = editor.getCurrentIFile();
 				if (iFile != null) {
 					iFile.setPersistentProperty(CHECKED, checkedProperty);
 				}
@@ -550,9 +551,8 @@ public final class LanguageOutlinePage extends ContentOutlinePage {
 	 *         <code>null</code>.
 	 */
 	public final CompilerSourceFile getCompilerSourceFile() {
-		LanguageOutlineTreeContentProvider contentProvider;
-		contentProvider = (LanguageOutlineTreeContentProvider) getTreeViewer().getContentProvider();
-		CompilerSourceFile compilerSourceFile = contentProvider.getCompilerSourceFile();
+		var contentProvider = (LanguageOutlineTreeContentProvider) getTreeViewer().getContentProvider();
+		var compilerSourceFile = contentProvider.getCompilerSourceFile();
 		return compilerSourceFile;
 	}
 

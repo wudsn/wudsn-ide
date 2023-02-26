@@ -40,7 +40,7 @@ public final class LanguageEditorCompileCommandHandler extends LanguageEditorFil
 	}
 
 	@Override
-	protected void execute(ExecutionEvent event, LanguageEditor languageEditor, CompilerFiles files)
+	protected void execute(ExecutionEvent event, ILanguageEditor languageEditor, CompilerFiles files)
 			throws ExecutionException {
 		if (event == null) {
 			throw new IllegalArgumentException("Parameter 'event' must not be null.");

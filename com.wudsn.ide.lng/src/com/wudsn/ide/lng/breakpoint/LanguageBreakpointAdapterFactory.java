@@ -32,7 +32,7 @@ import com.wudsn.ide.base.common.TextUtility;
 import com.wudsn.ide.lng.Language;
 import com.wudsn.ide.lng.LanguageUtility;
 import com.wudsn.ide.lng.Texts;
-import com.wudsn.ide.lng.editor.LanguageEditor;
+import com.wudsn.ide.lng.editor.ILanguageEditor;
 
 /**
  * Factory for {@LanguageBreakpointsTarget} instances. Used by extension
@@ -51,7 +51,7 @@ public final class LanguageBreakpointAdapterFactory implements IToggleBreakpoint
 
 	@Override
 	public Set<String> getToggleTargets(IWorkbenchPart part, ISelection selection) {
-		if (part instanceof LanguageEditor) {
+		if (part instanceof ILanguageEditor) {
 			Set<String> defaultSet = new HashSet<String>();
 			defaultSet.add(getDefaultToggleTarget(part, selection));
 			return defaultSet;
@@ -61,8 +61,8 @@ public final class LanguageBreakpointAdapterFactory implements IToggleBreakpoint
 
 	@Override
 	public String getDefaultToggleTarget(IWorkbenchPart part, ISelection selection) {
-		if (part instanceof LanguageEditor) {
-			LanguageEditor languageEditor = (LanguageEditor) part;
+		if (part instanceof ILanguageEditor) {
+			var languageEditor = (ILanguageEditor) part;
 			return TARGET_ID_PREFIX + languageEditor.getLanguage().name();
 		}
 		return null;

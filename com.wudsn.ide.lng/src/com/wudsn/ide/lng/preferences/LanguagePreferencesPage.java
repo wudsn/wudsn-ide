@@ -68,8 +68,8 @@ import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerPaths;
 import com.wudsn.ide.lng.compiler.CompilerPaths.CompilerPath;
 import com.wudsn.ide.lng.compiler.CompilerRegistry;
+import com.wudsn.ide.lng.editor.ILanguageEditor;
 import com.wudsn.ide.lng.editor.LanguageContentAssistProcessorDefaultCase;
-import com.wudsn.ide.lng.editor.LanguageEditor;
 import com.wudsn.ide.lng.editor.LanguageEditorCompileCommandPositioningMode;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants.EditorConstants;
 
@@ -169,9 +169,8 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 	@Override
 	public void init(IWorkbench workbench) {
 		IEditorPart editor = workbench.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-		if (editor instanceof LanguageEditor) {
-			LanguageEditor languageEditor;
-			languageEditor = (LanguageEditor) editor;
+		if (editor instanceof ILanguageEditor) {
+			var languageEditor = (ILanguageEditor) editor;
 			activeCompilerId = languageEditor.getCompilerDefinition().getId();
 
 		}

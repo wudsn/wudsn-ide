@@ -170,8 +170,7 @@ final class LanguageHyperlink implements IHyperlink {
 					return;
 				}
 			}
-			IEditorPart editorPart;
-			editorPart = null;
+			IEditorPart editorPart = null;
 			if (editorId.equals(DEFAULT_EDITOR)) {
 
 				if (fileToOpen.exists() && fileToOpen.isFile()) {

@@ -21,7 +21,6 @@ package com.wudsn.ide.lng.outline;
 
 import java.util.List;
 
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.ui.IEditorInput;
@@ -30,7 +29,6 @@ import com.wudsn.ide.base.common.Profiler;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceFile;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserTreeObject;
-import com.wudsn.ide.lng.editor.LanguageEditor;
 
 /**
  * Tree content provider to {@link LanguageOutlinePage}.
@@ -159,8 +157,8 @@ final class LanguageOutlineTreeContentProvider implements ITreeContentProvider {
 	 */
 	private void parse() {
 
-		LanguageEditor editor = this.languageOutlinePage.editor;
-		IDocument document = editor.getDocumentProvider().getDocument(editor.getEditorInput());
+		var editor = this.languageOutlinePage.editor;
+		var document = editor.getDocument();
 
 		if (document != null) {
 			CompilerSourceParser parser = editor.createCompilerSourceParser();

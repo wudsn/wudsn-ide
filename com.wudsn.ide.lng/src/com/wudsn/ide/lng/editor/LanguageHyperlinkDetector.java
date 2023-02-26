@@ -41,7 +41,6 @@ import com.wudsn.ide.gfx.editor.GraphicsConversionEditor;
 import com.wudsn.ide.hex.HexEditor;
 import com.wudsn.ide.lng.LanguageUtility;
 import com.wudsn.ide.lng.Texts;
-import com.wudsn.ide.lng.compiler.parser.CompilerSourceFile;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserFileReference;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParserFileReferenceType;
@@ -124,7 +123,7 @@ public final class LanguageHyperlinkDetector extends AbstractHyperlinkDetector {
 
 	}
 
-	final static void detectHyperlinks(LanguageEditor languageEditor, IDocument document, int offset,
+	final static void detectHyperlinks(ILanguageEditor languageEditor, IDocument document, int offset,
 			boolean canShowMultipleHyperlinks, List<LanguageHyperlink> hyperlinks) {
 		IRegion lineInfo;
 		int lineNumber;
@@ -149,7 +148,7 @@ public final class LanguageHyperlinkDetector extends AbstractHyperlinkDetector {
 		}
 	}
 
-	private static void detectInclude(LanguageEditor languageEditor, IRegion lineInfo, int lineNumber, String line,
+	private static void detectInclude(ILanguageEditor languageEditor, IRegion lineInfo, int lineNumber, String line,
 			int offsetInLine, boolean canShowMultipleHyperlinks, List<LanguageHyperlink> hyperlinks) {
 		// Try to detect binary or source includes
 		CompilerSourceParser compilerSourceParser = languageEditor.createCompilerSourceParser();
@@ -185,15 +184,14 @@ public final class LanguageHyperlinkDetector extends AbstractHyperlinkDetector {
 
 			// Perform resolution of relative paths and compiler specific
 			// default extension.
-			File currentDirectory = languageEditor.getCurrentDirectory();
+			var currentDirectory = languageEditor.getCurrentDirectory();
 			String absoluteFilePath = compilerSourceParser.getIncludeAbsoluteFilePath(fileReference.getType(),
 					currentDirectory, filePath);
 			if (absoluteFilePath == null) {
 				return;
 			}
 
-			URI uri;
-			uri = new File(absoluteFilePath).toURI();
+			var uri = new File(absoluteFilePath).toURI();
 
 			IRegion linkRegion = new Region(lineInfo.getOffset() + startQuoteOffset + 1, filePath.length());
 
@@ -233,10 +231,10 @@ public final class LanguageHyperlinkDetector extends AbstractHyperlinkDetector {
 		}
 	}
 
-	private static void detectIdentifier(LanguageEditor languageEditor, IRegion lineInfo, int lineNumber, String line,
+	private static void detectIdentifier(ILanguageEditor languageEditor, IRegion lineInfo, int lineNumber, String line,
 			int offsetInLine, boolean canShowMultipleHyperlinks, List<LanguageHyperlink> hyperlinks) {
 
-		CompilerSyntax compilerSyntax = languageEditor.createCompilerSourceParser().getCompilerSyntax();
+		var compilerSyntax = languageEditor.createCompilerSourceParser().getCompilerSyntax();
 
 		int startIdentifierOffset = offsetInLine;
 		int endIdentifierOffset = offsetInLine;
@@ -260,7 +258,8 @@ public final class LanguageHyperlinkDetector extends AbstractHyperlinkDetector {
 			endIdentifierOffset++;
 		}
 		String identifier = line.substring(startIdentifierOffset, endIdentifierOffset);
-		CompilerSourceFile compilerSourceFile = languageEditor.getCompilerSourceFile();
+		// TODO: Hard cast to LanguageEditor
+		var compilerSourceFile = ((LanguageEditor) languageEditor).getCompilerSourceFile();
 		if (compilerSourceFile == null) {
 			return;
 		}

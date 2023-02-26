@@ -25,9 +25,7 @@ import java.util.List;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 /**
@@ -41,18 +39,16 @@ public final class LanguageEditorOpenDeclarationCommandHandler extends AbstractH
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IEditorPart editor;
-		editor = HandlerUtil.getActiveEditorChecked(event);
-		if (!(editor instanceof LanguageEditor)) {
+		var editor = HandlerUtil.getActiveEditorChecked(event);
+		if (!(editor instanceof ILanguageEditor)) {
 			return null;
 		}
 
-		LanguageEditor languageEditor;
-		languageEditor = (LanguageEditor) editor;
+		var languageEditor = (ILanguageEditor) editor;
 		ITextSelection textSelection = (ITextSelection) languageEditor.getSite().getSelectionProvider().getSelection();
 		if (textSelection != null) {
-			IDocument document = languageEditor.getDocumentProvider().getDocument(languageEditor.getEditorInput());
-			int offset = textSelection.getOffset();
+			var document = languageEditor.getDocument();
+			var offset = textSelection.getOffset();
 			List<LanguageHyperlink> hyperlinks = new ArrayList<LanguageHyperlink>();
 			LanguageHyperlinkDetector.detectHyperlinks(languageEditor, document, offset, false, hyperlinks);
 			if (!hyperlinks.isEmpty()) {

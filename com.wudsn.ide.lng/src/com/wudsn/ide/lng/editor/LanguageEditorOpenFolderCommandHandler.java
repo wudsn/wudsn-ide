@@ -36,7 +36,7 @@ public final class LanguageEditorOpenFolderCommandHandler extends LanguageEditor
 	public static final String OPEN_OUTPUT_FOLDER = "com.wudsn.ide.lng.editor.LanguageEditorOpenOutputFolderCommand";
 
 	@Override
-	protected void execute(ExecutionEvent event, LanguageEditor languageEditor, CompilerFiles files)
+	protected void execute(ExecutionEvent event, ILanguageEditor languageEditor, CompilerFiles files)
 			throws ExecutionException {
 
 		if (event == null) {

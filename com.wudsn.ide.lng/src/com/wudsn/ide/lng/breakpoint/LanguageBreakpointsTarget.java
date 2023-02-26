@@ -26,15 +26,13 @@ import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.ILineBreakpoint;
 import org.eclipse.debug.ui.actions.IToggleBreakpointsTarget;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.texteditor.IDocumentProvider;
 
 import com.wudsn.ide.base.common.StringUtility;
-import com.wudsn.ide.lng.editor.LanguageEditor;
+import com.wudsn.ide.lng.editor.ILanguageEditor;
 
 /**
  * Target which creates {@link LanguageBreakpoint} instances. Used by
@@ -50,7 +48,7 @@ public final class LanguageBreakpointsTarget implements IToggleBreakpointsTarget
 	 */
 	@Override
 	public void toggleLineBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
-		LanguageEditor languageEditor = getEditor(part);
+		var languageEditor = getEditor(part);
 		if (languageEditor != null) {
 			IBreakpointManager breakPointManager = DebugPlugin.getDefault().getBreakpointManager();
 			String editorId = languageEditor.getClass().getName();
@@ -71,8 +69,7 @@ public final class LanguageBreakpointsTarget implements IToggleBreakpointsTarget
 			}
 			// Create line breakpoint (doc line numbers start at 0)
 			String description;
-			IDocumentProvider provider = languageEditor.getDocumentProvider();
-			IDocument document = provider.getDocument(languageEditor.getEditorInput());
+			var document = languageEditor.getDocument();
 			try {
 				int startOffset = document.getLineOffset(lineNumber);
 				int lineLength = document.getLineLength(lineNumber);
@@ -156,9 +153,9 @@ public final class LanguageBreakpointsTarget implements IToggleBreakpointsTarget
 	 * @param part The editor part or <code>null</code>.
 	 * @return The language editor or <code>null</code>.
 	 */
-	private LanguageEditor getEditor(IWorkbenchPart part) {
-		if (part instanceof LanguageEditor) {
-			LanguageEditor languageEditor = (LanguageEditor) part;
+	private ILanguageEditor getEditor(IWorkbenchPart part) {
+		if (part instanceof ILanguageEditor) {
+			var languageEditor = (ILanguageEditor) part;
 			if (languageEditor.getCurrentFile() != null) {
 				return languageEditor;
 			}

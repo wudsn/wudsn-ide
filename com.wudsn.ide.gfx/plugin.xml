@@ -95,7 +95,7 @@
             contributorClass="org.eclipse.ui.part.EditorActionBarContributor"
             default="true"
             extensions="bmp, ico, gif, jpg, png, cnv"
-            icon="icons/graphics-editor.png"
+            icon="icons/graphics-editor-16x16.png"
             id="com.wudsn.ide.gfx.editor.GraphicsConversionEditor"
             name="%com.wudsn.ide.gfx.editor.GraphicsConversionEditor.name">
          <contentTypeBinding

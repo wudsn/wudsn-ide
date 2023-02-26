@@ -112,7 +112,7 @@
             <with
                   variable="activeEditor">
                <instanceof
-                     value="com.wudsn.ide.lng.editor.LanguageEditor">
+                     value="com.wudsn.ide.lng.editor.ILanguageEditor">
                </instanceof>
             </with></activeWhen>
       </handler>
@@ -123,60 +123,8 @@
             <with
                   variable="activeEditor">
                <instanceof
-                     value="com.wudsn.ide.lng.editor.LanguageEditor">
+                     value="com.wudsn.ide.lng.editor.ILanguageEditor">
                </instanceof>
-            </with>
-         </activeWhen>
-      </handler>
-      <handler
-            class="com.wudsn.ide.lng.editor.LanguageEditorCompileCommandHandler"
-            commandId="com.wudsn.ide.lng.editor.LanguageEditorAssembleCommand">
-         <activeWhen>
-            <with
-                  variable="activeEditor">
-               <test
-                     property="com.wudsn.ide.lng.IsLanguageEditor"
-                     value="true">
-               </test>
-            </with>
-         </activeWhen>
-      </handler>
-      <handler
-            class="com.wudsn.ide.lng.editor.LanguageEditorCompileCommandHandler"
-            commandId="com.wudsn.ide.lng.editor.LanguageEditorAssembleAndRunCommand">
-         <activeWhen>
-            <with
-                  variable="activeEditor">
-               <test
-                     property="com.wudsn.ide.lng.IsLanguageEditor"
-                     value="true">
-               </test>
-            </with>
-         </activeWhen>
-      </handler>
-      <handler
-            class="com.wudsn.ide.lng.editor.LanguageEditorCompileCommandHandler"
-            commandId="com.wudsn.ide.lng.editor.LanguageEditorAssembleAndRunWithCommand">
-         <activeWhen>
-            <with
-                  variable="activeEditor">
-               <test
-                     property="com.wudsn.ide.lng.IsLanguageEditor"
-                     value="true">
-               </test>
-            </with>
-         </activeWhen>
-      </handler>
-      <handler
-            class="com.wudsn.ide.lng.editor.LanguageEditorCompilerHelpCommandHandler"
-            commandId="com.wudsn.ide.lng.editor.LanguageEditorAssemblerHelpCommand">
-         <activeWhen>
-            <with
-                  variable="activeEditor">
-               <test
-                     property="com.wudsn.ide.lng.IsLanguageEditor"
-                     value="true">
-               </test>
             </with>
          </activeWhen>
       </handler>
@@ -239,7 +187,7 @@
             <with
                   variable="activeEditor">
                <instanceof
-                     value="com.wudsn.ide.lng.editor.LanguageEditor">
+                     value="com.wudsn.ide.lng.editor.ILanguageEditor">
                </instanceof>
             </with>
          </activeWhen>

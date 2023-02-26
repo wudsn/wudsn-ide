@@ -43,7 +43,7 @@ final class LanguageEditorToggleCommentAction extends TextEditorAction {
 	/**
 	 * The owning editor.
 	 */
-	private final LanguageEditor editor;
+	private final ILanguageEditor editor;
 
 	/**
 	 * The editor's source viewer.

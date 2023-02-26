@@ -43,7 +43,6 @@ import com.wudsn.ide.lng.compiler.syntax.InstructionType;
 import com.wudsn.ide.lng.compiler.syntax.Opcode;
 import com.wudsn.ide.lng.preferences.LanguageHardwareCompilerDefinitionPreferencesConstants;
 import com.wudsn.ide.lng.preferences.LanguagePreferences;
-import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants;
 import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants.EditorConstants;
 import com.wudsn.ide.lng.preferences.TextAttributeConverter;
 

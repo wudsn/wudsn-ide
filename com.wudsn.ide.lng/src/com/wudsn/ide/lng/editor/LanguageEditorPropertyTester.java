@@ -23,9 +23,21 @@ import org.eclipse.core.expressions.PropertyTester;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.ui.editors.text.TextEditor;
 
-import com.wudsn.ide.lng.Language;
-
 public class LanguageEditorPropertyTester extends PropertyTester {
+
+	static boolean isPascalEditor(Object receiver) {
+		if (receiver instanceof TextEditor) {
+
+			var editor = (TextEditor) receiver;
+			var input = editor.getEditorInput();
+			var file = input.getAdapter(IFile.class);
+			if (file != null && file.getName().toLowerCase().endsWith(".pas")) {
+				return true;
+			}
+		}
+		return false;
+
+	}
 
 	public LanguageEditorPropertyTester() {
 	}
@@ -35,18 +47,11 @@ public class LanguageEditorPropertyTester extends PropertyTester {
 
 		if (property.equals("IsLanguageEditor")) {
 
-			if (receiver instanceof LanguageEditor) {
+			if (receiver instanceof ILanguageEditor) {
 				return true;
 			}
-			if (receiver instanceof TextEditor) {
-
-				var editor = (TextEditor) receiver;
-				var input = editor.getEditorInput();
-				var file = input.getAdapter(IFile.class);
-				if (file != null && file.getName().toLowerCase().endsWith(".pas")) {
-					return true;
-				}
-
+			if (isPascalEditor(receiver)) {
+				return true;
 			}
 		}
 		return false;

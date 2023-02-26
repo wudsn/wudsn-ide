@@ -30,17 +30,16 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.text.Document;
-import org.eclipse.jface.text.IDocument;
 
 import com.wudsn.ide.base.common.FileUtility;
 import com.wudsn.ide.base.common.MarkerUtility;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.hardware.Hardware;
-import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.LanguageAnnotation;
 import com.wudsn.ide.lng.LanguageAnnotationValues;
 import com.wudsn.ide.lng.LanguageAnnotationValues.InvalidLanguageAnnotationException;
 import com.wudsn.ide.lng.LanguageAnnotationValues.LanguageAnnotationValue;
+import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerFiles;
@@ -56,7 +55,7 @@ import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
  */
 public final class LanguageEditorFilesLogic {
 
-	private LanguageEditor languageEditor;
+	private ILanguageEditor languageEditor;
 
 	/**
 	 * Create a new instance of the logic.
@@ -65,7 +64,7 @@ public final class LanguageEditorFilesLogic {
 	 * 
 	 * @return The new instance, not <code>null</code>.
 	 */
-	static LanguageEditorFilesLogic createInstance(LanguageEditor languageEditor) {
+	static LanguageEditorFilesLogic createInstance(ILanguageEditor languageEditor) {
 		if (languageEditor == null) {
 			throw new IllegalArgumentException("Parameter 'languageEditor' must not be null.");
 		}
@@ -87,7 +86,7 @@ public final class LanguageEditorFilesLogic {
 		sourceIFile = languageEditor.getCurrentIFile();
 		if (sourceIFile != null) {
 
-			IDocument document = languageEditor.getDocumentProvider().getDocument(languageEditor.getEditorInput());
+			var document = languageEditor.getDocument();
 			LanguageAnnotationValues annotationValues = CompilerSourceParser.getAnnotationValues(document);
 
 			IFile mainSourceIFile;

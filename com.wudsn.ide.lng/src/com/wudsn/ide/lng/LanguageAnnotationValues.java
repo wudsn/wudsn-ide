@@ -32,10 +32,8 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 
-import com.wudsn.ide.base.common.MarkerUtility;
 import com.wudsn.ide.base.common.StringUtility;
 import com.wudsn.ide.base.common.TextUtility;
-import com.wudsn.ide.lng.compiler.CompilerFiles.SourceFile;
 
 public final class LanguageAnnotationValues {
 
