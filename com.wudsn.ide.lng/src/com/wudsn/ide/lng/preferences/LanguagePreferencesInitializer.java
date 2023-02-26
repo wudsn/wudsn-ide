@@ -57,13 +57,23 @@ public final class LanguagePreferencesInitializer extends AbstractPreferenceInit
 		store.setDefault(key, value);
 	}
 
-	private void setLanguageTextAttributeDefault(Language language, String textAttributeName, int r, int g, int b,
+	private void setLanguageTextAttributeDefault(Language language, String textAttributeName, int rgb, int rgbDarkTheme,
 			int style) {
+		setLanguageTextAttributeDefault(language, false, textAttributeName, rgb, style);
+		setLanguageTextAttributeDefault(language, true, textAttributeName, rgbDarkTheme, style);
+	}
+
+	private void setLanguageTextAttributeDefault(Language language, boolean darkTheme, String textAttributeName,
+			int rgb, int style) {
 		// Editor.
 		var display = Display.getCurrent();
+		int b = (rgb) & 0xFF;
+		int g = (rgb >> 8) & 0xFF;
+		int r = (rgb >> 16) & 0xFF;
 		var textAttribute = new TextAttribute(new Color(display, r, g, b), null, style);
 		var preferencesKey = LanguagePreferencesConstants.EditorConstants.getEditorAttributeKey(language,
 				textAttributeName);
+		preferencesKey = LanguagesPreferences.getThemeTextAttributePreferencesKey(darkTheme, preferencesKey);
 		setDefault(preferencesKey, TextAttributeConverter.toString(textAttribute));
 	}
 
@@ -89,16 +99,41 @@ public final class LanguagePreferencesInitializer extends AbstractPreferenceInit
 		if (language == null) {
 			throw new IllegalArgumentException("Parameter 'language' must not be null.");
 		}
-		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT, 0, 128, 0, SWT.ITALIC);
-		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_DIRECTVE, 128, 64, 0, SWT.BOLD);
-		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_NUMBER, 0, 0, 255, SWT.BOLD);
-		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL, 0, 0, 128,
+		final int black = 0x00000;
+		final int white = 0xffffff;
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_COMMENT, 0x008000, 0x80ff80,
+				SWT.ITALIC);
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_DIRECTVE, 0x804000, 0xffc080,
 				SWT.BOLD);
-		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL, 255, 32, 32,
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_NUMBER, 0x0000ff, 0x0080c0,
 				SWT.BOLD);
-		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO, 32, 128, 32,
-				SWT.BOLD);
-		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_STRING, 0, 0, 255, SWT.NORMAL);
+
+		// Identifiers
+		setLanguageTextAttributeDefault(language,
+				EditorConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_ENUM_DEFINITION_SECTION, black, white, SWT.NORMAL);
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_EQUATE, black, white,
+				SWT.NORMAL);
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LABEL, black, white,
+				SWT.NORMAL);
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_LOCAL_SECTION, black,
+				white, SWT.NORMAL);
+		setLanguageTextAttributeDefault(language,
+				EditorConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_MACRO_DEFINITION_SECTION, black, white, SWT.NORMAL);
+		setLanguageTextAttributeDefault(language,
+				EditorConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION, black, white,
+				SWT.NORMAL);
+		setLanguageTextAttributeDefault(language,
+				EditorConstants.EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_STRUCTURE_DEFINITION_SECTION, black, white,
+				SWT.NORMAL);
+
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_LEGAL, 0x000080,
+				0x8080ff, SWT.BOLD);
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_ILLEGAL, 0xff2020,
+				0xd00000, SWT.BOLD);
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_OPCODE_PSEUDO, 0x208020,
+				0xc0ffc0, SWT.BOLD);
+		setLanguageTextAttributeDefault(language, EditorConstants.EDITOR_TEXT_ATTRIBUTE_STRING, 0x0000ff, 0x00ff40,
+				SWT.NORMAL);
 
 		// Content assist.
 		var preferencesKey = EditorConstants.getEditorContentProcessorDefaultCaseKey(language);

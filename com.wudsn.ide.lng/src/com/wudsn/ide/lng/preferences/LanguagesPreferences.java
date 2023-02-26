@@ -19,8 +19,12 @@
 
 package com.wudsn.ide.lng.preferences;
 
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.TextAttribute;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.preferences.ScopedPreferenceStore;
 
 import com.wudsn.ide.base.common.AbstractIDEPlugin;
 import com.wudsn.ide.lng.Language;
@@ -32,6 +36,11 @@ import com.wudsn.ide.lng.LanguagePlugin;
  * @author Peter Dell
  */
 public final class LanguagesPreferences {
+
+	/**
+	 * Cached theme ID.
+	 */
+	static String themeID = null;
 
 	/**
 	 * The preference store to which all calls are delegated.
@@ -108,6 +117,40 @@ public final class LanguagesPreferences {
 	}
 
 	/**
+	 * Returns <code>true</code> if the current OS theme has a dark appearance, else
+	 * returns <code>false</code>.
+	 */
+	static boolean isDarkThemeActive() {
+		if (themeID == null) {
+			var store = new ScopedPreferenceStore(InstanceScope.INSTANCE, "org.eclipse.e4.ui.css.swt.theme");
+			themeID = store.getString("themeid");
+			if (themeID == null) {
+				themeID = "undefined";
+			}
+		}
+		return themeID.equals("org.eclipse.e4.ui.css.theme.e4_dark");
+	}
+
+	/**
+	 * Gets the text attribute preferences key based on the current theme. Dark
+	 * themes have a separate set of color.
+	 * 
+	 * @param textAttributeDefinition The text attribute definition, not
+	 *                                <code>null</code>.
+	 * @return The theme specific key of the preference, not <code>null</code>.
+	 */
+	static String getThemeTextAttributePreferencesKey(TextAttributeDefinition textAttributeDefinition) {
+		return getThemeTextAttributePreferencesKey(isDarkThemeActive(), textAttributeDefinition.getPreferencesKey());
+	}
+
+	static String getThemeTextAttributePreferencesKey(boolean darkTheme, String preferencesKey) {
+		if (darkTheme) {
+			preferencesKey += ".darkTheme";
+		}
+		return preferencesKey;
+	}
+
+	/**
 	 * Gets the text attribute for a token type.
 	 * 
 	 * @param preferencesKey The key of the preference, not <code>null</code>.
@@ -120,6 +163,7 @@ public final class LanguagesPreferences {
 			throw new IllegalArgumentException("Parameter 'preferencesKey' must not be null.");
 		}
 
+		preferencesKey = getThemeTextAttributePreferencesKey(isDarkThemeActive(), preferencesKey);
 		return TextAttributeConverter.fromString(getString(preferencesKey));
 	}
 

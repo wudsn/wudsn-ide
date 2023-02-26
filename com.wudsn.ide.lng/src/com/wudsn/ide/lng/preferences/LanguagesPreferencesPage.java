@@ -24,7 +24,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
 /**
- * Structural page
+ * Structural page without editors.
  * 
  * @author Peter Dell
  */
@@ -32,13 +32,11 @@ public final class LanguagesPreferencesPage extends FieldEditorPreferencePage im
 
 	@Override
 	public void init(IWorkbench workbench) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void createFieldEditors() {
-		// TODO Auto-generated method stub
 		
 	}
 

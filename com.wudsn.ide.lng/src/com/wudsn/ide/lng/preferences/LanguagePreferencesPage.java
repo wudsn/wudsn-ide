@@ -31,6 +31,7 @@ import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.RadioGroupFieldEditor;
 import org.eclipse.jface.text.TextAttribute;
+import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -57,6 +58,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.model.WorkbenchViewerComparator;
 
+import com.wudsn.ide.base.common.HexUtility;
 import com.wudsn.ide.base.common.ProcessWithLogs;
 import com.wudsn.ide.base.gui.SWTFactory;
 import com.wudsn.ide.lng.Language;
@@ -211,8 +213,12 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		if (parent == null) {
 			throw new IllegalArgumentException("Parameter 'parent' must not be null.");
 		}
-		Group group = SWTFactory.createGroup(parent, Texts.PREFERENCES_SYNTAX_HIGHLIGHTING_GROUP_TITLE, 2, 1,
-				GridData.FILL_HORIZONTAL);
+		var title = Texts.PREFERENCES_SYNTAX_HIGHLIGHTING_GROUP_TITLE;
+		if (LanguagesPreferences.isDarkThemeActive()) {
+			title = Texts.PREFERENCES_SYNTAX_HIGHLIGHTING_GROUP_DARK_THEME_TITLE;
+		}
+
+		Group group = SWTFactory.createGroup(parent, title, 2, 1, GridData.FILL_HORIZONTAL);
 		Label label;
 		GridLayout layout;
 		GridData gd;
@@ -245,9 +251,19 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		label.setLayoutData(gd);
 
 		textAttributeForegroundColorSelector = new ColorSelector(stylesComposite);
-		Button foregroundColorButton = textAttributeForegroundColorSelector.getButton();
+		final var foregroundColorButton = textAttributeForegroundColorSelector.getButton();
 		gd = new GridData(GridData.HORIZONTAL_ALIGN_BEGINNING);
 		foregroundColorButton.setLayoutData(gd);
+		textAttributeForegroundColorSelector.addListener(new IPropertyChangeListener() {
+
+			@Override
+			public void propertyChange(PropertyChangeEvent event) {
+				if (event.getProperty().equals(ColorSelector.PROP_COLORCHANGE)) {
+					updatetextAttributeForegroundColor();
+				}
+
+			}
+		});
 
 		textAttributeBoldCheckBox = new Button(stylesComposite, SWT.CHECK);
 		textAttributeBoldCheckBox.setText(Texts.PREFERENCES_BOLD_LABEL);
@@ -362,8 +378,9 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		List<TextAttributeDefinition> textAttributeDefinitions = EditorConstants.getTextAttributeDefinitions(language);
 		textAttributeListItems = new ArrayList<TextAttributeListItem>(textAttributeDefinitions.size());
 
-		for (TextAttributeDefinition textAttributeDefinition : textAttributeDefinitions) {
-			String data = getPreferenceStore().getString(textAttributeDefinition.getPreferencesKey());
+		for (var textAttributeDefinition : textAttributeDefinitions) {
+			var preferencesKey = LanguagesPreferences.getThemeTextAttributePreferencesKey(textAttributeDefinition);
+			String data = getPreferenceStore().getString(preferencesKey);
 			TextAttribute textAttribute = TextAttributeConverter.fromString(data);
 
 			TextAttributeListItem item = new TextAttributeListItem(textAttributeDefinition);
@@ -376,10 +393,10 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		if (parent == null) {
 			throw new IllegalArgumentException("Parameter 'parent' must not be null.");
 		}
-		Group group = SWTFactory.createGroup(parent, Texts.PREFERENCES_EDITOR_GROUP_TITLE, 1, 1,
+		var group = SWTFactory.createGroup(parent, Texts.PREFERENCES_EDITOR_GROUP_TITLE, 1, 1,
 				GridData.FILL_HORIZONTAL);
 
-		Composite space = SWTFactory.createComposite(group, 2, 1, GridData.FILL_HORIZONTAL);
+		var space = SWTFactory.createComposite(group, 2, 1, GridData.FILL_HORIZONTAL);
 
 		String[][] labelsAndValues;
 		labelsAndValues = new String[][] { {
@@ -498,9 +515,9 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		IPreferenceStore preferencesStore = getPreferenceStore();
 		for (TextAttributeListItem listItem : textAttributeListItems) {
 
-			String key = listItem.getDefinition().getPreferencesKey();
-			preferencesStore.setValue(key, preferencesStore.getDefaultString(key));
-			addChangedProperty(key);
+			String preferencesKey = LanguagesPreferences.getThemeTextAttributePreferencesKey(listItem.getDefinition());
+			preferencesStore.setValue(preferencesKey, preferencesStore.getDefaultString(preferencesKey));
+			addChangedProperty(preferencesKey);
 		}
 
 		disposeTextAttributesList();
@@ -512,12 +529,12 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 	 * Saves all changes to the {@link IPreferenceStore}.
 	 */
 	private void saveChanges() {
-		String data;
-		IPreferenceStore store = getPreferenceStore();
+		var store = getPreferenceStore();
 
 		for (TextAttributeListItem listItem : textAttributeListItems) {
-			data = TextAttributeConverter.toString(listItem.getTextAttribute());
-			store.setValue(listItem.getDefinition().getPreferencesKey(), data);
+			var data = TextAttributeConverter.toString(listItem.getTextAttribute());
+			var preferencesKey = LanguagesPreferences.getThemeTextAttributePreferencesKey(listItem.getDefinition());
+			store.setValue(preferencesKey, data);
 
 		}
 
@@ -554,12 +571,21 @@ public abstract class LanguagePreferencesPage extends FieldEditorPreferencePage 
 		italic = (textAttribute.getStyle() & SWT.ITALIC) == SWT.ITALIC;
 
 		textAttributeForegroundColorSelector.setColorValue(color.getRGB());
+		updatetextAttributeForegroundColor();
 		textAttributeBoldCheckBox.setSelection(bold);
 		textAttributeItalicCheckBox.setSelection(italic);
 
 		textAttributeForegroundColorSelector.getButton().setEnabled(true);
 		textAttributeBoldCheckBox.setEnabled(true);
 		textAttributeItalicCheckBox.setEnabled(true);
+	}
+
+	private void updatetextAttributeForegroundColor() {
+		var rgb = textAttributeForegroundColorSelector.getColorValue();
+		String rgbString = ("0x" + HexUtility.getLongValueHexString(rgb.red)
+				+ HexUtility.getLongValueHexString(rgb.green) + HexUtility.getLongValueHexString(rgb.blue))
+				.toLowerCase();
+		textAttributeForegroundColorSelector.getButton().setToolTipText(rgbString);
 	}
 
 	/**

@@ -31,9 +31,9 @@ import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.compiler.CompilerDefinition;
 import com.wudsn.ide.lng.compiler.CompilerPaths;
 import com.wudsn.ide.lng.compiler.CompilerPaths.CompilerPath;
-import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants.EditorConstants;
 import com.wudsn.ide.lng.editor.LanguageContentAssistProcessorDefaultCase;
 import com.wudsn.ide.lng.editor.LanguageEditorCompileCommandPositioningMode;
+import com.wudsn.ide.lng.preferences.LanguagePreferencesConstants.EditorConstants;
 
 /**
  * Facade class for typed access to the plugin preferences.

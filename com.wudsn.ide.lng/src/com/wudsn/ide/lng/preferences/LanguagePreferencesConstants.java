@@ -109,7 +109,6 @@ public final class LanguagePreferencesConstants {
 		 */
 		public static final String EDITOR_TEXT_ATTRIBUTE_IDENTIFIER_PROCEDURE_DEFINITION_SECTION = "editor.text.attribute.identifier.procedure"; //$NON-NLS-1$
 
-
 		/**
 		 * Preference key for positioning for for compiling.
 		 * 
@@ -120,16 +119,17 @@ public final class LanguagePreferencesConstants {
 		/**
 		 * Gets preference key name for a editor attribute.
 		 * 
-		 * @param language The language <code>null</code>.
+		 * @param language The language, not <code>null</code>.
+		 * @attributeName The attribute name, not <code>null</code>.
 		 * 
 		 * @return The preference key name for the compiler executable path, not empty
 		 *         and not <code>null</code>.
 		 */
-		public static String getEditorAttributeKey(Language language, String textAttributeName) {
+		public static String getEditorAttributeKey(Language language, String attributeName) {
 			if (language == null) {
 				throw new IllegalArgumentException("Parameter 'language' must not be null.");
 			}
-			String preferencesKey = getLanguagePreferencesKey(language, textAttributeName);
+			String preferencesKey = getLanguagePreferencesKey(language, attributeName);
 			return preferencesKey;
 		}
 
@@ -148,7 +148,7 @@ public final class LanguagePreferencesConstants {
 
 			return getEditorAttributeKey(language, EditorConstants.EDITOR_COMPILE_COMMAND_POSITIONING_MODE);
 		}
-		
+
 		/**
 		 * Gets the list of all preferences keys that depend on the global JFact text
 		 * font setting.

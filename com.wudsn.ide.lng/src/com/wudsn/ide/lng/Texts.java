@@ -121,6 +121,7 @@ public final class Texts extends NLS {
 	 * Preferences: syntax highlighting.
 	 */
 	public static String PREFERENCES_SYNTAX_HIGHLIGHTING_GROUP_TITLE;
+	public static String PREFERENCES_SYNTAX_HIGHLIGHTING_GROUP_DARK_THEME_TITLE;
 
 	public static String PREFERENCES_TEXT_ATTRIBUTE_COMMENT_NAME;
 	public static String PREFERENCES_TEXT_ATTRIBUTE_STRING_NAME;
@@ -237,7 +238,7 @@ public final class Texts extends NLS {
 	public static String TOC_COMPILER_SYNTAX_SINGLE_LINE_COMMENT_DELIMITERS;
 	public static String TOC_COMPILER_SYNTAX_SOURCE_INCLUDE_DEFAULT_EXTENSION;
 	public static String TOC_COMPILER_SYNTAX_STRING_DELIMITERS;
-	
+
 	public static String TOC_HARDWARES_TOPIC_LABEL;
 	public static String TOC_HARDWARE_NAME_LABEL;
 	public static String TOC_HARDWARE_ID_LABEL;
