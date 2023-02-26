@@ -57,15 +57,15 @@ final class CompilerSymbolLabelProvider {
 	CompilerSymbolLabelProvider() {
 		LanguagePlugin plugin;
 		plugin = LanguagePlugin.getInstance();
-		defaultImage = plugin.getImage("outline-default-16x16.gif");
+		defaultImage = plugin.getImage("outline-default-16x16.png");
 
-		equateDefintionImage = plugin.getImage("outline-equate-definition-16x16.gif");
-		labelDefinitionImage = plugin.getImage("outline-label-definition-16x16.gif");
+		equateDefintionImage = plugin.getImage("outline-equate-definition-16x16.png");
+		labelDefinitionImage = plugin.getImage("outline-label-definition-16x16.png");
 
-		enumDefinitionSectionImage = plugin.getImage("outline-enum-definition-section-16x16.gif");
-		structureDefinitionSectionImage = plugin.getImage("outline-structure-definition-section-16x16.gif");
-		localSectionImage = plugin.getImage("outline-local-section-16x16.gif");
-		procedureDefinitionSectionImage = plugin.getImage("outline-procedure-definition-section-16x16.gif");
+		enumDefinitionSectionImage = plugin.getImage("outline-enum-definition-section-16x16.png");
+		structureDefinitionSectionImage = plugin.getImage("outline-structure-definition-section-16x16.png");
+		localSectionImage = plugin.getImage("outline-local-section-16x16.png");
+		procedureDefinitionSectionImage = plugin.getImage("outline-procedure-definition-section-16x16.png");
 
 	}
 

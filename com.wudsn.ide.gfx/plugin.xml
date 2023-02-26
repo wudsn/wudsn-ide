@@ -95,7 +95,7 @@
             contributorClass="org.eclipse.ui.part.EditorActionBarContributor"
             default="true"
             extensions="bmp, ico, gif, jpg, png, cnv"
-            icon="icons/graphics-editor-16x16.gif"
+            icon="icons/graphics-editor.png"
             id="com.wudsn.ide.gfx.editor.GraphicsConversionEditor"
             name="%com.wudsn.ide.gfx.editor.GraphicsConversionEditor.name">
          <contentTypeBinding
@@ -116,7 +116,7 @@
             allowMultiple="false"
             category="com.wudsn.ide.gfx.editor.GraphicsCategory"
             class="com.wudsn.ide.gfx.editor.ImageView"
-            icon="icons/graphics-editor-16x16.gif"
+            icon="icons/graphics-editor-16x16.png"
             id="com.wudsn.ide.gfx.editor.ImageView"
             name="%com.wudsn.ide.gfx.editor.ImageView.name"
             restorable="true">
@@ -125,7 +125,7 @@
             allowMultiple="false"
             category="com.wudsn.ide.gfx.editor.GraphicsCategory"
             class="com.wudsn.ide.gfx.editor.ImagePaletteView"
-            icon="icons/graphics-editor-16x16.gif"
+            icon="icons/graphics-editor-16x16.png"
             id="com.wudsn.ide.gfx.editor.ImagePaletteView"
             name="%com.wudsn.ide.gfx.editor.ImagePaletteView.name"
             restorable="true">

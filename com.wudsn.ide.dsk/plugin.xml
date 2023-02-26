@@ -15,7 +15,7 @@
    <editor
           class="com.wudsn.ide.dsk.apple2.Apple2DiskImageEditor"
           default="false"
-          icon="icons/editor-apple2-disk-image.gif"
+          icon="icons/editor-apple2-disk-image.png"
           id="com.wudsn.ide.dsk.apple2.Apple2DiskImageEditor"
           name="%com.wudsn.ide.dsk.apple2.Apple2DiskImageEditor.name">
        <contentTypeBinding

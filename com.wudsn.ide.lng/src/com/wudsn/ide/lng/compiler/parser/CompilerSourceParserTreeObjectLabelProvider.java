@@ -111,24 +111,24 @@ public final class CompilerSourceParserTreeObjectLabelProvider extends Delegatin
 		super(new StyledLabelProvider());
 		LanguagePlugin plugin;
 		plugin = LanguagePlugin.getInstance();
-		defaultImage = plugin.getImage("outline-default-16x16.gif");
-		definitionSectionImage = plugin.getImage("outline-definition-section-16x16.gif");
-		implementationSectionImage = plugin.getImage("outline-implementation-section-16x16.gif");
+		defaultImage = plugin.getImage("outline-default-16x16.png");
+		definitionSectionImage = plugin.getImage("outline-definition-section-16x16.png");
+		implementationSectionImage = plugin.getImage("outline-implementation-section-16x16.png");
 
-		equateDefintionImage = plugin.getImage("outline-equate-definition-16x16.gif");
-		labelDefinitionImage = plugin.getImage("outline-label-definition-16x16.gif");
+		equateDefintionImage = plugin.getImage("outline-equate-definition-16x16.png");
+		labelDefinitionImage = plugin.getImage("outline-label-definition-16x16.png");
 
-		enumDefinitionSectionImage = plugin.getImage("outline-enum-definition-section-16x16.gif");
-		structureDefinitionSectionImage = plugin.getImage("outline-structure-definition-section-16x16.gif");
-		localSectionImage = plugin.getImage("outline-local-section-16x16.gif");
-		macroDefinitionSectionImage = plugin.getImage("outline-macro-definition-section-16x16.gif");
-		pagesSectionImage = plugin.getImage("outline-pages-section-16x16.gif");
-		procedureDefinitionSectionImage = plugin.getImage("outline-procedure-definition-section-16x16.gif");
-		repeatSectionImage = plugin.getImage("outline-repeat-section-16x16.gif");
+		enumDefinitionSectionImage = plugin.getImage("outline-enum-definition-section-16x16.png");
+		structureDefinitionSectionImage = plugin.getImage("outline-structure-definition-section-16x16.png");
+		localSectionImage = plugin.getImage("outline-local-section-16x16.png");
+		macroDefinitionSectionImage = plugin.getImage("outline-macro-definition-section-16x16.png");
+		pagesSectionImage = plugin.getImage("outline-pages-section-16x16.png");
+		procedureDefinitionSectionImage = plugin.getImage("outline-procedure-definition-section-16x16.png");
+		repeatSectionImage = plugin.getImage("outline-repeat-section-16x16.png");
 
-		sourceIncludeImage = plugin.getImage("outline-source-include-16x16.gif");
-		binaryIncludeImage = plugin.getImage("outline-binary-include-16x16.gif");
-		binaryOutputImage = plugin.getImage("outline-binary-output-16x16.gif");
+		sourceIncludeImage = plugin.getImage("outline-source-include-16x16.png");
+		binaryIncludeImage = plugin.getImage("outline-binary-include-16x16.png");
+		binaryOutputImage = plugin.getImage("outline-binary-output-16x16.png");
 	}
 
 	@Override

@@ -34,10 +34,10 @@ final class Icons {
 
 	static {
 		AbstractIDEPlugin plugin = GraphicsPlugin.getInstance();
-		FIND_DEFAULT_CONVERTER = plugin.getImage("searchm_obj.gif");
-		CREATE_CONVERSION = plugin.getImage("graphics-editor-16x16.gif");
-		REFRESH = plugin.getImage("refresh.gif");
-		SAVE_IMAGE = plugin.getImage("save_edit.gif");
-		SAVE_FILES = plugin.getImage("save_edit.gif");
+		FIND_DEFAULT_CONVERTER = plugin.getImage("searchm_obj.png");
+		CREATE_CONVERSION = plugin.getImage("graphics-editor-16x16.png");
+		REFRESH = plugin.getImage("refresh.png");
+		SAVE_IMAGE = plugin.getImage("save_edit.png");
+		SAVE_FILES = plugin.getImage("saveall_edit.png");
 	}
 }

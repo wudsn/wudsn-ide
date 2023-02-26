@@ -431,7 +431,7 @@
       </tocProvider>
       <tocIcon
             id="pdf"
-            openIcon="icons/help-topic-pdf-small.gif">
+            openIcon="icons/help-topic-pdf-small.png">
       </tocIcon>
    </extension>
    <extension
@@ -450,7 +450,7 @@
        <action
              class="com.wudsn.ide.lng.editor.LanguageEditorCompileCommandDelegate"
              definitionId="com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunCommand"
-             icon="icons/hardware-generic-16x16.gif"
+             icon="icons/hardware-generic-16x16.png"
              id="com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunAction"
              label="%com.wudsn.ide.lng.editor.LanguageEditorCompileAndRunCommand.name"
              style="pulldown"
@@ -520,7 +520,7 @@
  <extension
        point="org.eclipse.ui.preferenceTransfer">
     <transfer
-          icon="icons/hardware-generic-16x16.gif"
+          icon="icons/hardware-generic-16x16.png"
           id="com.wudsn.ide.lng.preferences.LanguagesPreferences"
           name="%com.wudsn.ide.lng.preferences.LanguagesPreferences.name">
        <mapping
@@ -536,7 +536,7 @@
     <view
           category="org.eclipse.debug.ui"
           class="com.wudsn.ide.lng.symbol.CompilerSymbolsView"
-          icon="icons/outline-label-definition-16x16.gif"
+          icon="icons/outline-label-definition-16x16.png"
           id="com.wudsn.ide.lng.symbol.CompilerSymbolsView"
           name="%com.wudsn.ide.lng.symbol.CompilerSymbolsView.name"
           restorable="true">

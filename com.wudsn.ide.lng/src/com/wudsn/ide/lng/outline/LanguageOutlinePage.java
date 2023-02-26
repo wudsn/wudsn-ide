@@ -96,7 +96,7 @@ public final class LanguageOutlinePage extends ContentOutlinePage {
 			}
 			setToolTipText(Texts.COMPILER_CONTENT_OUTLINE_SORT_BUTTON_TOOL_TIP);
 			ImageDescriptor imageDescriptor = AbstractUIPlugin.imageDescriptorFromPlugin(LanguagePlugin.ID,
-					"icons/outline-sort.gif");
+					"icons/outline-sort.png");
 			setImageDescriptor(imageDescriptor);
 			this.editor = editor;
 			this.treeViewer = treeViewer;

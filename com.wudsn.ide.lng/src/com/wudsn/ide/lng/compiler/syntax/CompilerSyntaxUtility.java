@@ -50,18 +50,18 @@ public final class CompilerSyntaxUtility {
 		String path;
 
 		if (instruction instanceof Directive) {
-			path = "instruction-type-directive-16x16.gif";
+			path = "instruction-type-directive-16x16.png";
 		} else {
 			Opcode opcode = (Opcode) instruction;
 			switch (opcode.getType()) {
 			case InstructionType.LEGAL_OPCODE:
-				path = "instruction-type-legal-opcode-16x16.gif";
+				path = "instruction-type-legal-opcode-16x16.png";
 				break;
 			case InstructionType.ILLEGAL_OPCODE:
-				path = "instruction-type-illegal-opcode-16x16.gif";
+				path = "instruction-type-illegal-opcode-16x16.png";
 				break;
 			case InstructionType.PSEUDO_OPCODE:
-				path = "instruction-type-pseudo-opcode-16x16.gif";
+				path = "instruction-type-pseudo-opcode-16x16.png";
 				break;
 			default:
 				throw new IllegalStateException("Unknown opcode type " + opcode.getType() + ".");

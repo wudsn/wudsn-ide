@@ -91,28 +91,28 @@ public final class HardwareUtility {
 		String path;
 		switch (hardware) {
 		case GENERIC:
-			path = "hardware-generic-16x16.gif";
+			path = "hardware-generic-16x16.png";
 			break;
 		case APPLE2:
-			path = "hardware-apple2-16x16.gif";
+			path = "hardware-apple2-16x16.png";
 			break;
 		case ATARI2600:
-			path = "hardware-atari2600-16x16.gif";
+			path = "hardware-atari2600-16x16.png";
 			break;
 		case ATARI7800:
-			path = "hardware-atari7800-16x16.gif";
+			path = "hardware-atari7800-16x16.png";
 			break;
 		case ATARI8BIT:
-			path = "hardware-atari8bit-16x16.gif";
+			path = "hardware-atari8bit-16x16.png";
 			break;
 		case C64:
-			path = "hardware-c64-16x16.gif";
+			path = "hardware-c64-16x16.png";
 			break;
 		case NES:
-			path = "hardware-nes-16x16.gif";
+			path = "hardware-nes-16x16.png";
 			break;
 		case TEST:
-			path = "hardware-test-16x16.gif";
+			path = "hardware-test-16x16.png";
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown hardware " + hardware + ".");

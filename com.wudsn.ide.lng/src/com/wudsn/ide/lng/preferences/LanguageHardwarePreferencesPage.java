@@ -600,7 +600,7 @@ public abstract class LanguageHardwarePreferencesPage extends FieldEditorPrefere
 		controlDecoration.setShowHover(true);
 		controlDecoration.setDescriptionText(text);
 
-		controlDecoration.setImage(LanguagePlugin.getInstance().getImage("help-16x16.gif"));
+		controlDecoration.setImage(LanguagePlugin.getInstance().getImage("help-16x16.png"));
 
 		return controlDecoration;
 	}

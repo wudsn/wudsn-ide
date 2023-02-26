@@ -65,7 +65,7 @@ final class HexEditorContentOutlineLabelProvider extends DelegatingStyledCellLab
 		super(new HexEditorStyledLabelProvider());
 		HexPlugin plugin;
 		plugin = HexPlugin.getInstance();
-		segmentImage = plugin.getImage("hex-editor-segment-16x16.gif");
+		segmentImage = plugin.getImage("hex-editor-segment-16x16.png");
 	}
 
 	@Override

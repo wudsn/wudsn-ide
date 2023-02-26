@@ -173,10 +173,10 @@ final class LanguageContentAssistProcessor implements IContentAssistProcessor {
 		this.editor = editor;
 
 		LanguagePlugin plugin = editor.getPlugin();
-		directiveImage = plugin.getImage("instruction-type-directive-16x16.gif");
-		legalOpcodeImage = plugin.getImage("instruction-type-legal-opcode-16x16.gif");
-		illegalOpcodeImage = plugin.getImage("instruction-type-illegal-opcode-16x16.gif");
-		pseudoOpcodeImage = plugin.getImage("instruction-type-pseudo-opcode-16x16.gif");
+		directiveImage = plugin.getImage("instruction-type-directive-16x16.png");
+		legalOpcodeImage = plugin.getImage("instruction-type-legal-opcode-16x16.png");
+		illegalOpcodeImage = plugin.getImage("instruction-type-illegal-opcode-16x16.png");
+		pseudoOpcodeImage = plugin.getImage("instruction-type-pseudo-opcode-16x16.png");
 		instructionStyler = new InstructionStyler();
 		highlightStyler = new HighlightStyler();
 	}

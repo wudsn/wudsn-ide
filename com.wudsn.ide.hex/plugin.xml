@@ -161,8 +161,8 @@
             locationURI="popup:#HexEditorContext">
          <command
                commandId="com.wudsn.ide.hex.HexEditorCopyToClipboardCommand"
-               disabledIcon="icons/copy-disabled.gif"
-               icon="icons/copy-enabled.gif"
+               disabledIcon="icons/copy-disabled.png"
+               icon="icons/copy-enabled.png"
                id="com.wudsn.ide.hex.HexEditorCopyToClipboardCommand"
                style="push">
          </command>
@@ -191,15 +191,15 @@
          </menu>
          <command
                commandId="com.wudsn.ide.hex.HexEditorPasteFromClipboardCommand"
-               icon="icons/paste-enabled.gif"
+               icon="icons/paste-enabled.png"
                id="%com.wudsn.ide.hex.HexEditorPasteFromClipboardCommand.name"
                label="%com.wudsn.ide.hex.HexEditorPasteFromClipboardCommand.name"
                style="push">
          </command>
          <command
                commandId="com.wudsn.ide.hex.HexEditorSaveSelectionAsCommand"
-               disabledIcon="icons/save-as-disabled.gif"
-               icon="icons/save-as-enabled.gif"
+               disabledIcon="icons/save-as-disabled.png"
+               icon="icons/save-as-enabled.png"
                label="%com.wudsn.ide.hex.HexEditorSaveSelectionAsCommand.name"
                style="push">
          </command>
@@ -212,7 +212,7 @@
       <editor
             class="com.wudsn.ide.hex.HexEditor"
             default="true"
-            icon="icons/hex-editor-16x16.gif"
+            icon="icons/hex-editor-16x16.png"
             id="com.wudsn.ide.hex.HexEditor"
             name="%com.wudsn.ide.hex.HexEditor.name">
       </editor>
