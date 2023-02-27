@@ -50,6 +50,16 @@
           name="%com.wudsn.ide.lng.asm.preferences.AssemblerNESPreferencesPage.name">
     </page>
  </extension>
+ <extension
+       id="Atari 2600 content types"
+       point="org.eclipse.core.contenttype.contentTypes">
+    <content-type
+          base-type="org.eclipse.core.runtime.text"
+          id="com.wudsn.ide.lng.asm.compiler.AssemblerSourceFile"
+          name="%com.wudsn.ide.lng.asm.compiler.AssemblerSourceFile.name"
+          priority="normal">
+    </content-type>
+ </extension>
 	<extension point="com.wudsn.ide.lng.compilers">
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.acme.AcmeCompiler"
@@ -306,7 +316,7 @@
     </content-type>
   <content-type
         base-type="com.wudsn.ide.lng.asm.compiler.AssemblerSourceFile"
-        file-extensions="asm"
+        file-extensions="asm, a65"
         id="com.wudsn.ide.lng.asm.compiler.mads.MadsSourceFile"
         name="%com.wudsn.ide.lng.asm.compiler.mads.MadsSourceFile.name"
         priority="high">
