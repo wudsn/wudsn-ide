@@ -24,6 +24,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.ui.texteditor.ITextEditor;
 
 import com.wudsn.ide.lng.LanguagePlugin;
 import com.wudsn.ide.lng.compiler.CompilerFiles;
@@ -46,115 +47,14 @@ public abstract class LanguageEditorFilesCommandHandler extends AbstractHandler 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		var editor = HandlerUtil.getActiveEditorChecked(event);
 		if (!(editor instanceof ILanguageEditor)) {
-			if (!LanguageEditorPropertyTester.isPascalEditor(editor)) {
-				return null;
+			if (LanguageEditorPropertyTester.isPascalEditor(editor)) {
 
+				editor = new LanguageEditorWrapper((ITextEditor) editor,
+						"com.wudsn.ide.lng.pas.compiler.mp.MadPascalEditor");
+			} else {
+				return null;
 			}
-//			editor=new ILanguageEditor() {
-//
-//			/**
-//			 * Gets the compiler id for this editor.
-//			 * 
-//			 * @return The compiler id for this editor, not empty and not <code>null</code>.
-//			 */
-//
-//			@Override
-//			protected final void initializeEditor() {
-//				super.initializeEditor();
-//
-//				plugin = LanguagePlugin.getInstance();
-//				compiler = plugin.getCompilerRegistry().getCompilerByEditorClassName(getEditorClassName());
-//
-//				setSourceViewerConfiguration(new LanguageSourceViewerConfiguration(this, getPreferenceStore()));
-//
-//			}
-//
-//			// TODO
-//			protected String getEditorClassName() {
-//				return getClass().getName();
-//			}
-//
-//			/**
-//			 * Gets the plugin this compiler instance belongs to.
-//			 * 
-//			 * @return The plugin this compiler instance belongs to, not <code>null</code>.
-//			 */
-//			public final LanguagePlugin getPlugin() {
-//				if (plugin == null) {
-//					throw new IllegalStateException("Field 'plugin' must not be null.");
-//				}
-//				return plugin;
-//			}
-//
-//			/**
-//			 * Gets the language.
-//			 * 
-//			 * @return The language, not <code>null</code>.
-//			 */
-//			public final Language getLanguage() {
-//				return getCompilerDefinition().getLanguage();
-//			}
-//
-//			/**
-//			 * Gets the language preferences.
-//			 * 
-//			 * @return The language preferences, not <code>null</code>.
-//			 */
-//			public final LanguagePreferences getLanguagePreferences() {
-//				return getPlugin().getLanguagePreferences(getLanguage());
-//			}
-//
-//			/**
-//			 * Gets the compiler for this editor.
-//			 * 
-//			 * @return The compiler for this editor, not <code>null</code>.
-//			 */
-//			public final Compiler getCompiler() {
-//				if (compiler == null) {
-//					throw new IllegalStateException("Field 'compiler' must not be null.");
-//				}
-//				return compiler;
-//			}
-//
-//			/**
-//			 * Gets the compiler definition for this editor.
-//			 * 
-//			 * @return The compiler definition for this editor, not <code>null</code>.
-//			 * 
-//			 * @sine 1.6.1
-//			 */
-//			public final CompilerDefinition getCompilerDefinition() {
-//				if (compiler == null) {
-//					throw new IllegalStateException("Field 'compiler' must not be null.");
-//				}
-//				return compiler.getDefinition();
-//			}
-//
-//			/**
-//			 * Gets the default hardware for this editor.
-//			 * 
-//			 * @return The hardware for this editor, not <code>null</code>.
-//			 * 
-//			 * @since 1.6.1
-//			 */
-//			protected final Hardware getHardware() {
-//				if (hardware != null) {
-//					return hardware;
-//				}
-//				return getCompilerDefinition().getDefaultHardware();
-//			}
-//
-//
-//			/**
-//			 * Gets the compiler preferences.
-//			 * 
-//			 * @return The compiler preferences, not <code>null</code>.
-//			 */
-//			public final LanguageHardwareCompilerDefinitionPreferences getLanguageHardwareCompilerPreferences() {
-//				return getLanguagePreferences().getLanguageHardwareCompilerDefinitionPreferences(getHardware(),
-//						getCompilerDefinition());
-//			}
-//
+
 		}
 
 		var languageEditor = (ILanguageEditor) editor;
