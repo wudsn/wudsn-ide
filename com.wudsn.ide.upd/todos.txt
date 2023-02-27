@@ -1,3 +1,9 @@
+Use %COMSPEC%
+
+Installer
+=========
+https://www.battoexeconverter.com/Advanced-Commands/#Hideself
+
 WebSite
 =======
 FIXED? Productions images max size/width?
