@@ -47,7 +47,7 @@ import com.wudsn.ide.lng.compiler.CompilerOutputFolderMode;
 import com.wudsn.ide.lng.compiler.parser.CompilerSourceParser;
 
 /**
- * Logic to handle the {@link CompilerFiles} of an {@link LanguageEditor}
+ * Logic to handle the {@link CompilerFiles} of a {@link LanguageEditor}
  * 
  * @author Peter Dell
  * 
@@ -87,15 +87,12 @@ public final class LanguageEditorFilesLogic {
 		if (sourceIFile != null) {
 
 			var document = languageEditor.getDocument();
-			LanguageAnnotationValues annotationValues = CompilerSourceParser.getAnnotationValues(document);
+			var sourceFileLanguageAnnotationValues = CompilerSourceParser.getAnnotationValues(document);
 
-			IFile mainSourceIFile;
-			LanguageAnnotationValues mainSourceFileProperties;
+			var mainSourceIFile = sourceIFile;
+			var mainSourceFileLanguageAnnotationValues = sourceFileLanguageAnnotationValues;
 
-			mainSourceIFile = sourceIFile;
-			mainSourceFileProperties = annotationValues;
-
-			LanguageAnnotationValue annotationValue = annotationValues.get(LanguageAnnotation.MAIN_SOURCE_FILE);
+			LanguageAnnotationValue annotationValue = sourceFileLanguageAnnotationValues.get(LanguageAnnotation.MAIN_SOURCE_FILE);
 			if (annotationValue != null) {
 				if (StringUtility.isSpecified(annotationValue.value)) {
 					IPath mainSourceFileIPath;
@@ -108,18 +105,18 @@ public final class LanguageEditorFilesLogic {
 
 						mainSource = FileUtility.readString(mainSourceFile, FileUtility.MAX_SIZE_UNLIMITED);
 						document = new Document(mainSource);
-						mainSourceFileProperties = CompilerSourceParser.getAnnotationValues(document);
+						mainSourceFileLanguageAnnotationValues = CompilerSourceParser.getAnnotationValues(document);
 					} catch (CoreException ex) {
 						LanguagePlugin plugin = LanguagePlugin.getInstance();
 
 						plugin.logError("Cannot read main source file '{0'}", new Object[] { mainSourceFile.getPath() },
 								ex);
-						mainSourceFileProperties = new LanguageAnnotationValues();
+						mainSourceFileLanguageAnnotationValues = new LanguageAnnotationValues();
 					}
 
 				}
 			}
-			result = new CompilerFiles(mainSourceIFile, mainSourceFileProperties, sourceIFile, annotationValues,
+			result = new CompilerFiles(mainSourceIFile, mainSourceFileLanguageAnnotationValues, sourceIFile, sourceFileLanguageAnnotationValues,
 					languageEditor.getLanguageHardwareCompilerPreferences());
 		} else {
 			result = null;

@@ -115,8 +115,8 @@ public final class CompilerFiles {
 	public final String symbolsFilePath;
 	public final String symbolsFileName;
 
-	public CompilerFiles(IFile mainSourceIFile, LanguageAnnotationValues mainSourceFileLanguageProperties,
-			IFile sourceIFile, LanguageAnnotationValues sourceFileLanguageProperties,
+	public CompilerFiles(IFile mainSourceIFile, LanguageAnnotationValues mainSourceFileLanguageAnnotationValues,
+			IFile sourceIFile, LanguageAnnotationValues sourceFileLanguageAnnotationValues,
 			LanguageHardwareCompilerDefinitionPreferences languageHardwareCompilerDefinitionPreferences) {
 
 		if (mainSourceIFile == null) {
@@ -128,8 +128,8 @@ public final class CompilerFiles {
 		if (languageHardwareCompilerDefinitionPreferences == null) {
 			throw new IllegalArgumentException("Parameter 'compilerPreferences' must not be null.");
 		}
-		this.mainSourceFile = new SourceFile(mainSourceIFile, mainSourceFileLanguageProperties);
-		this.sourceFile = new SourceFile(sourceIFile, sourceFileLanguageProperties);
+		this.mainSourceFile = new SourceFile(mainSourceIFile, mainSourceFileLanguageAnnotationValues);
+		this.sourceFile = new SourceFile(sourceIFile, sourceFileLanguageAnnotationValues);
 
 		// Output folder mode
 		// Can be overridden via annotation value in main source file
@@ -138,10 +138,10 @@ public final class CompilerFiles {
 		String localOutputFileExtension = languageHardwareCompilerDefinitionPreferences.getOutputFileExtension();
 
 		// Properties which override the preferences
-		outputFolderModeAnnotationValue = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FOLDER_MODE);
-		outputFolderAnnotationValue = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FOLDER);
-		outputFileExtensionAnnotationValue = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FILE_EXTENSION);
-		outputFileAnnotationValue = mainSourceFileLanguageProperties.get(LanguageAnnotation.OUTPUT_FILE);
+		outputFolderModeAnnotationValue = mainSourceFileLanguageAnnotationValues.get(LanguageAnnotation.OUTPUT_FOLDER_MODE);
+		outputFolderAnnotationValue = mainSourceFileLanguageAnnotationValues.get(LanguageAnnotation.OUTPUT_FOLDER);
+		outputFileExtensionAnnotationValue = mainSourceFileLanguageAnnotationValues.get(LanguageAnnotation.OUTPUT_FILE_EXTENSION);
+		outputFileAnnotationValue = mainSourceFileLanguageAnnotationValues.get(LanguageAnnotation.OUTPUT_FILE);
 
 		// The following sequence sets the instance fields "outputFolder" and
 		// "outputFileNameWithoutExtension" as well as the
