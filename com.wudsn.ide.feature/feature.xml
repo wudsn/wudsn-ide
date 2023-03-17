@@ -323,7 +323,7 @@ POSSIBILITY OF SUCH DAMAGES.
    </license>
 
    <url>
-      <update label="WUDSN Eclipse Update Site" url="https://www.wudsn.com/update"/>
+      <update label="WUDSN Eclipse Update Site" url="https://www.wudsn.com/update/stable"/>
       <discovery label="WUDSN IDE Home Page" url="https://www.wudsn.com/index.php/ide"/>
    </url>
 
