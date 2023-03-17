@@ -235,6 +235,10 @@ public final class LanguagePlugin extends AbstractIDEPlugin {
 			return null;
 		}
 		File eclipseVersionFolder = FileUtility.getCanonicalFile(new File(uri)); // "eclipse"
+		if ( Platform.getOS().equals(Platform.OS_MACOSX)){
+			// Skip inner folders of the bundle on macOS
+			eclipseVersionFolder = eclipseVersionFolder.getParentFile().getParentFile();
+		}
 		File eclipseFolder = eclipseVersionFolder.getParentFile(); // "Eclipse"
 		File ideFolder = eclipseFolder.getParentFile(); // "IDE"
 		File toolsFolder = ideFolder.getParentFile(); // "Tools
