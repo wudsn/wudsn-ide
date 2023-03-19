@@ -108,6 +108,8 @@ public final class CompilerPaths {
 		add(Language.ASM, "kickass", Platform.OS_LINUX, Platform.ARCH_X86, "KickAss.jar");
 		add(Language.ASM, "kickass", Platform.OS_MACOSX, Platform.ARCH_X86, "KickAss.jar");
 		add(Language.ASM, "kickass", Platform.OS_WIN32, Platform.ARCH_X86, "KickAss.jar");
+		add(Language.ASM, "mads", Platform.OS_LINUX, Platform.ARCH_X86, "mads.linux-x86");
+		add(Language.ASM, "mads", Platform.OS_LINUX, Platform.ARCH_X86_64, "mads.linux-x86-64");
 		add(Language.ASM, "mads", Platform.OS_MACOSX, Platform.ARCH_X86, "mads.macos-i386");
 		add(Language.ASM, "mads", Platform.OS_MACOSX, Platform.ARCH_X86_64, "mads.macos-x86-64");
 		add(Language.ASM, "mads", Platform.OS_MACOSX, Platform.ARCH_PPC, "mads.macos-powerpc");
