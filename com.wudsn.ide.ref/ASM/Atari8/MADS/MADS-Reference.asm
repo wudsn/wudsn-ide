@@ -174,12 +174,11 @@
 	.ALIGN
 	.AND
 	.ARRAY
+	.BI
 	.BY
 	.BYTE
-	.DB
 	.DEF
 	.DS
-	.DW
 	.DWORD
 	.ECHO
 	.EEND

@@ -352,6 +352,12 @@
 		title="Define _a_r_r_a_y"
 		type="BEGIN_FOLDING_BLOCK_DIRECTIVE"
 		proposal=".ARRAY _\n.ENDA"/>
+    <directive
+        targets="*"
+        name=".BI"
+        title="Define _b_inary bytes"
+        type="DIRECTIVE"
+        proposal=".BI _"/>
 	<directive
 		targets="*"
 		name=".BY"
@@ -366,12 +372,6 @@
 		proposal=".BYTE _"/>
 	<directive
 		targets="*"
-		name=".DB"
-		title="_Define _bytes"
-		type="DIRECTIVE"
-		proposal=".DB _"/>
-	<directive
-		targets="*"
 		name=".DEF"
 		title="_D_e_fine label"
 		type="DIRECTIVE"
@@ -382,12 +382,6 @@
 		title="_Define _space"
 		type="DIRECTIVE"
 		proposal=".DS _"/>
-	<directive
-		targets="*"
-		name=".DW"
-		title="_Define _words"
-		type="DIRECTIVE"
-		proposal=".DW _"/>
 	<directive
 		targets="*"
 		name=".DWORD"
