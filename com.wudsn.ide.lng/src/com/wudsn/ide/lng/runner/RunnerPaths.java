@@ -83,8 +83,10 @@ public final class RunnerPaths {
 	public RunnerPaths() {
 		runnerPaths = new TreeMap<String, RunnerPath>();
 		// See https://github.com/peterdell/wudsn-ide-tools
-		add(Hardware.ATARI8BIT, "altirra", Platform.WS_WIN32,Platform.ARCH_X86, "Altirra/Altirra.exe");
-		add(Hardware.ATARI8BIT, "altirra", Platform.WS_WIN32, Platform.ARCH_X86_64, "Altirra/Altirra64.exe");
+		add(Hardware.ATARI8BIT, "altirra", Platform.OS_LINUX,Platform.ARCH_X86_64, "Altirra/Altirra.sh");
+		add(Hardware.ATARI8BIT, "altirra", Platform.OS_MACOSX, Platform.ARCH_X86_64, "Altirra/Altirra.sh");
+		add(Hardware.ATARI8BIT, "altirra", Platform.OS_WIN32,Platform.ARCH_X86, "Altirra/Altirra.exe");
+		add(Hardware.ATARI8BIT, "altirra", Platform.OS_WIN32, Platform.ARCH_X86_64, "Altirra/Altirra64.exe");
 
 	}
 
