@@ -1,4 +1,6 @@
-Use %COMSPEC%
+Maintain The!Cart Studio change list
+
+Use %COMSPEC% in links?
 
 Installer
 =========
@@ -194,6 +196,7 @@ MADS:
 - examples/test65816.asm =>BRL	W	;$82 is new/changed
 - .var: Make new instruction type like equate and label, handle fully in the base class not in MadsCompilerSourceParser
 - MADS english documentation thread link http://www.atariage.com/forums/topic/118976-mads-assembler-english-documentation-project/
+  C:\jac\system\Atari800\Programming\Repositories\mad-assembler-mkdocs-en
 - MADS & Linux, http://atariage.com/forums/topic/145386-wudsn-ide-the-free-integrated-atari-8-bit-development-plugin-for-eclipse/page-21#entry3140118
 
 KICKASS:
