@@ -1,3 +1,10 @@
 eclipse.preferences.version=1
 encoding//help/create-help-links.bat=ISO-8859-1
-encoding/help=UTF-8
+encoding//help/ide-credits.section.html=UTF-8
+encoding//help/ide-faq.section.html=UTF-8
+encoding//help/ide-features.section.html=UTF-8
+encoding//help/ide-installation.section.html=UTF-8
+encoding//help/ide-releases.section.html=UTF-8
+encoding//help/ide-tutorials-videos.html=UTF-8
+encoding//help/ide-tutorials.section.html=UTF-8
+encoding/<project>=UTF-8
