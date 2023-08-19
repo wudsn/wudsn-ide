@@ -21,3 +21,5 @@ Know Issues
   Status: Reopened, to be verified
 - https://github.com/eclipse/lsp4e/issues/38 - Conflicting keybinding for Open Type
   Status: Open
+- https://sourceforge.net/p/atasm/bugs/5/ - ATASM: Hias' test suite results
+  Status: Open
