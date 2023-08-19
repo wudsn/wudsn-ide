@@ -24,4 +24,6 @@ Know Issues
 - https://sourceforge.net/p/atasm/bugs/5/ - ATASM: Hias' test suite results
   Status: Open
 - https://www.eclipse.org/forums/index.php/m/1833428/#msg_1833428 - Searching for Help in replacing actionSet with Commands/Menu 
-  Status: Open
+  Status: Open Stable.
+- https://www.eclipse.org/forums/index.php/m/1839987/#msg_1839987 - How to Trigger "Build All" for site.xml via ANT task 
+  Status: Open. Stale.
