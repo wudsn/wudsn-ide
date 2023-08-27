@@ -8,7 +8,7 @@
 <li><a href="#HexEditor">Hex Editor</a></li>
 <li><a href="#GraphicsConversionEditor">Graphics Conversion Editor</a></li>
 <li><a href="#PreferencesForEditing">Preferences for Editing</a></li>
-<li><a href="#PreferenesForBuidingAndRunning">Preferences for Building and Running</a></li>
+<li><a href="#PreferenesForBuildingAndRunning">Preferences for Building and Running</a></li>
 <li><a href="#AnnotationsForBuilding">Annotations for Building</a></li>
 <li><a href="#PlannedFeatures">Planned Features</a></li>
 <li><a href="#KnownBugs">Known Bugs</a></li>
@@ -181,7 +181,7 @@ This is very helpful to turn parts of a file into source code. The possibility t
 <li>Files with a block structure get an outline in the outline view.</li>
 <li>Files with a corrupted block structure are detected and displayed as well as possible.<br /><img src="productions/java/ide/features/ide-hex-editor-outline.png" alt="Hex Editor outline view" /> <br /><img src="productions/java/ide/features/ide-hex-editor-atari-com-file.png" alt="Hex Editor with corrupted Atari COM file " /></li>
 </ul>
-<h5 id="GraphicsConversionEditor">Graphics Conversion Editor</a></h5>
+<h5 id="GraphicsConversionEditor">Graphics Conversion Editor</h5>
 <p>The Graphics Conversion Editor views and converts many binary and image file formats. It has the following features.</p>
 <ul>
 <li>Viewer for binary files and 8-bit image files. <br />The most suitable supported converter and the corresponding default parameters are computed based on the file content, size, and extension. <br />The converters for the Atari standard image formats are based on <a href="https://sourceforge.net/projects/recoil" target="_blank" rel="noopener noreferrer">RECOIL fka. FAIL</a> is the excellent First Atari Image Library created by Piotr Fusik and Adrian Matoga. <br />
@@ -351,7 +351,7 @@ This is very helpful to turn parts of a file into source code. The possibility t
 <li>For non-unique identifiers, the syntax highlighting will try to be the best guess.</li>
 <li>Configuration of default case in content assistance.<br /><img src="productions/java/ide/features/ide-assembler-preferences-editor.png" alt="Preferences for compilers" /></li>
 </ul>
-<h5 id="PreferencesForBuidingAndRunning">Preferences for Building and Running</h5>
+<h5 id="PreferenesForBuildingAndRunning">Preferences for Building and Running</h5>
 <p>The build process of WUDSN IDE is configurable via language and assembler/compiler-specific preferences. They are available via the entry "Preferences" from the menu "Window" (under Windows and Linux) or the menu "Eclipse" (under macOS)</p>
 <ul>
 <li>Download links, configurable paths, and default parameters are provided for all assemblers and compilers.</li>
@@ -410,7 +410,7 @@ Make sure that you don't remove parameters when you specify your values.<br />If
 </ul>
 </li>
 </ul>
-<h5 id="AnnotationsForBuiding">Annotations for Building</h5>
+<h5 id="AnnotationsForBuilding">Annotations for Building</h5>
 <ul>
 <li>For most use cases, the defaults provided for the compilers and in the preferences are sufficient. But suppose you want to develop in parallel in multiple projects for different platforms (e.g., Apple II and Atari 8-bit) or various output formats (".XEX" and ".BIN") with the same assembler/compiler. In that case, changing the preferences every time may become cumbersome. Therefore, WUDSN IDE offers annotations to put into the source code files. These annotations override the defaults and the settings from the preferences.</li>
 <li>All language annotations start with the prefix "@com.wudsn.ide.lng." followed by the lower-case name of the annotation, an equals sign, and the unquoted value. Example: "@com.wudsn.ide.lng.hardware=ATARI8BIT"</li>
@@ -472,70 +472,70 @@ Make sure that you don't remove parameters when you specify your values.<br />If
 <li>The table below shows the current core feature set that depends on the compiler. <br />Features not supported by the compiler itself and hence cannot be supported by the IDE are marked as "n/a". <br />
 <table>
 <tbody>
-<tr style="height: 48px;">
-<th style="width: 4.81912%; height: 48px;">Compiler</th>
-<th style="width: 9.14503%; height: 48px;">Default Hardware</th>
-<th style="width: 14.66%; height: 48px;">Auto-Completion Activation</th>
-<th style="width: 12.0473%; height: 48px;">Single-Line Comments</th>
-<th style="width: 9.08325%; height: 48px;">Block Comments</th>
-<th style="width: 3.83079%; height: 48px;">Strings</th>
-<th style="width: 4.75832%; height: 48px;">Opcodes</th>
-<th style="width: 5.31619%; height: 48px;">Directives</th>
-<th style="width: 11.1208%; height: 48px;">Compile Log Parsing</th>
-<th style="width: 8.33815%; height: 48px;">Content Outline</th>
-<th style="width: 14.6408%; height: 48px;">Label Definition File Format</th>
+<tr>
+<th>Compiler</th>
+<th>Default Hardware</th>
+<th>Auto-Completion Activation</th>
+<th>Single-Line Comments</th>
+<th>Block Comments</th>
+<th>Strings</th>
+<th>Opcodes</th>
+<th>Directives</th>
+<th>Compile Log Parsing</th>
+<th>Content Outline</th>
+<th>Label Definition File Format</th>
 </tr>
-<tr style="height: 24px;">
-<td style="width: 4.81912%; height: 24px;">ACME</td>
-<td style="width: 9.14503%; height: 24px;">C64</td>
-<td style="width: 14.66%; height: 24px;">Yes: !</td>
-<td style="width: 12.0473%; height: 24px;">Yes: ;|</td>
-<td style="width: 9.08325%; height: 24px;">n/a</td>
-<td style="width: 3.83079%; height: 24px;">Yes: "</td>
-<td style="width: 4.75832%; height: 24px;">Yes</td>
-<td style="width: 5.31619%; height: 24px;"><i>Partly</i></td>
-<td style="width: 11.1208%; height: 24px;">Yes</td>
-<td style="width: 8.33815%; height: 24px;"><i>Partly</i></td>
-<td style="width: 14.6408%; height: 24px;">ACME</td>
+<tr>
+<td>ACME</td>
+<td>C64</td>
+<td>Yes: !</td>
+<td>Yes: ;|</td>
+<td>n/a</td>
+<td>Yes: "</td>
+<td>Yes</td>
+<td><i>Partly</i></td>
+<td>Yes</td>
+<td><i>Partly</i></td>
+<td>ACME</td>
 </tr>
-<tr style="height: 24px;">
-<td style="width: 4.81912%; height: 24px;">ATASM</td>
-<td style="width: 9.14503%; height: 24px;">Atari 8-bit</td>
-<td style="width: 14.66%; height: 24px;">Yes: .</td>
-<td style="width: 12.0473%; height: 24px;">Yes: ;</td>
-<td style="width: 9.08325%; height: 24px;">n/a</td>
-<td style="width: 3.83079%; height: 24px;">Yes: "</td>
-<td style="width: 4.75832%; height: 24px;">Yes</td>
-<td style="width: 5.31619%; height: 24px;">Yes</td>
-<td style="width: 11.1208%; height: 24px;">Yes</td>
-<td style="width: 8.33815%; height: 24px;">Yes</td>
-<td style="width: 14.6408%; height: 24px;">XASM 3.0.1</td>
+<tr>
+<td>ATASM</td>
+<td>Atari 8-bit</td>
+<td>Yes: .</td>
+<td>Yes: ;</td>
+<td>n/a</td>
+<td>Yes: "</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>XASM 3.0.1</td>
 </tr>
-<tr style="height: 24px;">
-<td style="width: 4.81912%; height: 24px;">MADS</td>
-<td style="width: 9.14503%; height: 24px;">Atari 8-bit</td>
-<td style="width: 14.66%; height: 24px;">Yes: . #</td>
-<td style="width: 12.0473%; height: 24px;">Yes: ; * //</td>
-<td style="width: 9.08325%; height: 24px;">Yes</td>
-<td style="width: 3.83079%; height: 24px;">Yes: ' "</td>
-<td style="width: 4.75832%; height: 24px;">Yes</td>
-<td style="width: 5.31619%; height: 24px;">Yes</td>
-<td style="width: 11.1208%; height: 24px;">Yes</td>
-<td style="width: 8.33815%; height: 24px;">Yes</td>
-<td style="width: 14.6408%; height: 24px;">MADS</td>
+<tr>
+<td>MADS</td>
+<td>Atari 8-bit</td>
+<td>Yes: . #</td>
+<td>Yes: ; * //</td>
+<td>Yes</td>
+<td>Yes: ' "</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>MADS</td>
 </tr>
-<tr style="height: 24px;">
-<td style="width: 4.81912%; height: 24px;">XASM</td>
-<td style="width: 9.14503%; height: 24px;">Atari 8-bit</td>
-<td style="width: 14.66%; height: 24px;">n/a</td>
-<td style="width: 12.0473%; height: 24px;">Yes: ; * |</td>
-<td style="width: 9.08325%; height: 24px;">n/a</td>
-<td style="width: 3.83079%; height: 24px;">Yes: ' "</td>
-<td style="width: 4.75832%; height: 24px;">Yes</td>
-<td style="width: 5.31619%; height: 24px;">Yes</td>
-<td style="width: 11.1208%; height: 24px;">Yes</td>
-<td style="width: 8.33815%; height: 24px;">Yes</td>
-<td style="width: 14.6408%; height: 24px;">XASM 3.0.1</td>
+<tr>
+<td>XASM</td>
+<td>Atari 8-bit</td>
+<td>n/a</td>
+<td>Yes: ; * |</td>
+<td>n/a</td>
+<td>Yes: ' "</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>XASM 3.0.1</td>
 </tr>
 </tbody>
 </table>
@@ -543,128 +543,4 @@ Make sure that you don't remove parameters when you specify your values.<br />If
 </li>
 </ul>
 <h5 id="KnownBugs">Known Bugs</h5>
-<p>Open bugs:</p>
-<ul>
-<li>If you find any, please report them on <a href="https://github.com/peterdell/wudsn-ide/issues" target="_blank" rel="noopener">GitHub</a> or contact me directly</li>
-</ul>
-<p>Fixed bugs per release:</p>
-<ul>
-<li style="list-style-type: none;">
-<ul>
-<li>1.7.2 and newer can be found on <a href="https://github.com/peterdell/wudsn-ide/issues" target="_blank" rel="noopener">GitHub</a>.</li>
-<li>1.6.5 <br />
-<ul>
-<li>Automatic creation of ".DSK" disk images for Apple II works correctly.</li>
-<li>The dirty indicator in Graphics Editor is now updated correctly.</li>
-</ul>
-</li>
-<li>1.6.4 <br />
-<ul>
-<li>The toolbar icons now work correctly with newer Eclipse versions.</li>
-<li>Atari 8-bit Graphics 12 Converter works again.</li>
-<li>The graphics editor now correctly closes the input stream for image files.</li>
-<li>Empty selection and too large numbers no longer lead to exceptions when opening the context menu for "Convert...".</li>
-<li>Pressing refresh in the graphics converter now always updates the image pane correctly, not only if the size has changed.</li>
-<li>Inline repeats like ":64" in MADS are no longer detected as labels.</li>
-<li>Hex Editor now correctly detects erroneous COM files if the segment length exceeds the file length (by one).</li>
-<li>Disk images (for Apple II) are now updated if only "Build" instead of "Build and Run" is used.</li>
-<li>Apple Commander integration is now part of the installation, as it should have been with 1.6.3.</li>
-<li>The HELLO program generated for the auto-start disk images of Apple II now displays a title and uses "BLOAD/CALL" instead of "BRUN" because of this <a href="http://www.textfiles.com/apple/ANATOMY/cmd.brun.bload.txt">bug in Apple DOS</a>.
-<pre>10 PRINT "Loading &lt;title&gt;" : PRINT CHR$(4);"BRUN WORLD" : CALL &lt;address&gt;</pre>
-</li>
-</ul>
-</li>
-<li>1.6.3 <br />
-<ul>
-<li>The first character of numbers is now correctly highlighted in "#123".</li>
-<li>Source files included via "INCSRC" are now correctly detected for ASM6.</li>
-</ul>
-</li>
-<li>1.6.2 <br />
-<ul>
-<li>Typing a "." to trigger the automatic content assistance no longer locks up.</li>
-<li>The default color for illegal opcodes changed to red as it was intended.</li>
-<li>German localization for the graphics editor is finally completed.</li>
-<li>The sorting of applications in the preferences now is "Default, A...Z, User Defined" in non-English localizations.</li>
-</ul>
-</li>
-<li>1.6.1 <br />
-<ul>
-<li>Clicking in the outline always positions the cursor correctly in the source, not only the first time.</li>
-<li>All names of content types are now translated correctly in the preferences.</li>
-<li>The "Open Folder" command now works for objects that can be adapted to resources or files - for example, project explorer entries for Java classes.</li>
-</ul>
-</li>
-<li>1.6.0 <br />
-<ul>
-<li>Hyperlink navigation now works for labels containing an underscore.</li>
-<li>The key binding for the "Compile" menu is now "Shift-Ctrl-9" because it turned out that "Ctrl-0" is not available in all cases.</li>
-<li>The HexEditor also detects that the first block of a COM file is incorrect and displays this correctly.</li>
-<li>Content assistance now correctly inserts new lines when inserting "#IF", "#WHILE", or ".TEST".</li>
-<li>Fonts and color resources are disposed of correctly now.</li>
-<li>Resetting to default syntax colors in the preferences works now.</li>
-<li>Elements of ".ENUM" definitions are also recognized as equates if they do not start at position 0.</li>
-<li>Elements of ".STRUCT" definitions are also recognized as labels if they do not start at position 0.</li>
-<li>The cursor is now positioned to the first character of an equate or label if it is not defined starting at position 0.</li>
-<li>The cursor is now positioned to the first character of an equate or label if it is not defined starting at position 0.</li>
-</ul>
-</li>
-<li>1.5.0 <br />
-<ul>
-<li>Syntax highlighting remains active now also after "Save as...".</li>
-<li>The cursor is now placed correctly by content assistance.</li>
-<li>The key binding for the "Compile" menu is now "Ctrl-0" instead of "Ctrl-Alt-0", so entering "}" is now possible again.</li>
-<li>XASM editor now correctly detects the "ORG" directive.</li>
-<li>The assembler editor toolbar contribution now also displays the label "Assembler" in the customizing dialog for the perspective.</li>
-</ul>
-</li>
-<li>1.4.4 <br />
-<ul>
-<li>The ".LOCAL" in ATASM does not start a folding section, while in MADS, it is a folding section from ".LOCAL" to ".ENDL".</li>
-<li>"SIN()" and "RND()" in MADS are now recognized correctly, even if there are no spaces before or after the directive.</li>
-<li>".EN" and ."END" in MADS are now recognized correctly.</li>
-<li>Labels in "ORG" lines are now recognized correctly and rendered as separate tree entries.</li>
-<li>Preferences for lower-case/upper-case instructions in content assistance are now evaluated for directives that do not start with letters like ".end".</li>
-<li>When opening a file from outside the workspace, the actions to open folders and compile the file do nothing and will not cause exceptions. They will also be disabled once the new Eclipse version is mandatory.</li>
-<li>A space now separates the 16 bytes per row in the hex editor.</li>
-</ul>
-</li>
-<li>1.4.3 <br />
-<ul>
-<li>The output file is not opened anymore in case it has been there before but was not updated by the compiler due to errors.</li>
-<li>The editor's scroll bar and cursor are now stable when the latest user input changes the outline.</li>
-<li>The hex editor gets the focus correctly when clicking on already-opened files.</li>
-</ul>
-</li>
-<li>1.4.2 <br />
-<ul>
-<li>The folder containing the output and symbols files is refreshed automatically after compiling to ensure that the Eclipse resource cache is in sync with the file system.</li>
-<li>Line end comments are now used as a description for source and binary include nodes in the content outline.</li>
-<li>The "Open Folder" context menu entry works again. This fixes a bug introduced in version 1.4.0.</li>
-</ul>
-</li>
-<li>1.4.0 <br />
-<ul>
-<li>The "Assembler" menu is only visible if an Assembler editor is active. The contained entries and shortcuts are now disabled if no Assembler editor is active.</li>
-<li>The output file is not deleted before the compiler is started. Instead, it is only checked for being writeable. This allows for direct compilation into an existing ATR image.</li>
-<li>The application name used to open the output file is now included in the info message.</li>
-</ul>
-</li>
-<li>1.3.2 <br />
-<ul>
-<li>The content outline sometimes only finds the first macro definition.</li>
-<li>Folding did not show up in all situations.</li>
-<li>Under macOS, the file select dialog can now choose an "*.app" folder because apps like "Atari800MacX.app" are folders. The solution is a workaround to the general Eclipse problem under macOS. See <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=82155">BUG 82155.</a></li>
-</ul>
-</li>
-<li>Before 1.3.2 <br />
-<ul>
-<li>The "OK" and "Apply" buttons in the preferences are now always enabled, irrespective of the specified compiler and emulator paths.</li>
-<li>The focus is not back in the editor window after compiling.</li>
-<li>The syntax highlighting of illegal opcodes fixed now also uses the preferences setting.</li>
-<li>The properties for the correct locale are now found on German operating systems.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<p>You can find all known bugs on <a href="https://github.com/peterdell/wudsn-ide/issues" target="_blank" rel="noopener">GitHub</a>. If you find new bugs, please report them on Github or contact me directly.</p>
