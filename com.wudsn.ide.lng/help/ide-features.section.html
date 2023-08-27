@@ -13,7 +13,7 @@
 <li><a href="#PlannedFeatures">Planned Features</a></li>
 <li><a href="#KnownBugs">Known Bugs</a></li>
 </ul>
-<h5 id="IDE">General IDE Enhancements   <a href="#ide_features">» top</a></h5>
+<h5 id="IDE">General IDE Enhancements</h5>
 <ul>
 <li>The "Open Folder" context menu is available for all folders and files.</li>
 <li>The "Sort" context menu with sub-menu is available for all text files, including <br />
@@ -49,7 +49,7 @@
 </ul>
 <br /><img src="productions/java/ide/features/ide-help.gif" alt="Integrated Help" /></li>
 </ul>
-<h5 id="Editor">Fully Integrated Assembler Editor   <a href="#ide_features">» top</a></h5>
+<h5 id="Editor">Fully Integrated Assembler Editor</h5>
 <ul>
 <li>The Eclipse platform contains editors like, for example, the generic text editor. Editors can support one or more content types identified by file extensions. One editor can be the default for a specific file extension. WUDSN IDE provides an assembler editor and a corresponding content type for every compiler. Every assembler editor has an associated default compiler, which defines via the preferences which application is used to run the output file. <br /><img src="productions/java/ide/features/ide-editor-content-types.png" alt="IDE editors, content types and file associations" /></li>
 <li>Content types and file associations for Atari 2600 compilers 
@@ -98,7 +98,7 @@
 </li>
 <li>The console view with compiler output opens automatically in the background after compiling, which is helpful in cases where the plugin is incomplete. The "Console" window is automatically brought to the front when the assembler/compiler starts. This prevents the compiler output from being hidden behind other consoles in the console view.<br /><img src="productions/java/ide/features/ide-compiler-console.png" alt="IDE compiler console view" /></li>
 </ul>
-<h5 id="ContentOutline">Content Outline and Source Folding   <a href="#ide_features">» top</a></h5>
+<h5 id="ContentOutline">Content Outline and Source Folding</h5>
 <p>The content outline and the folder of source code sections are two of the most helpful features of WUDSN IDE. They help you navigate and manage even huge source files efficiently. The standard menu "Window / Show View / Outline" activates the content outline. Source folding requires the content outline to be active. The content outline has the following features.</p>
 <ul>
 <li>Nesting.</li>
@@ -133,7 +133,7 @@
 <li>Folding is nested with a tooltip for folded sections.</li>
 <li>Folding is supported for if/else/endif blocks. <br /><img src="productions/java/ide/features/ide-content-folding.gif" alt="IDE content folding" /></li>
 </ul>
-<h5 id="ContentAssistance">Content Assistance and Code Completion   <a href="#ide_features">» top</a></h5>
+<h5 id="ContentAssistance">Content Assistance and Code Completion</h5>
 <p>Content assistance provides proposals as you type and lets you enter code more efficiently. Content assistance is activated by pressing "CTRL-Space" or automatically by typing special characters. The content assistance has the following features.</p>
 <ul>
 <li>Content assistance for directives, legal, illegal, and pseudo-opcodes.</li>
@@ -145,7 +145,7 @@
 <li>Configurable default case (lower-case, upper-case) via preferences. <br /><img src="productions/java/ide/features/ide-content-assist.gif" alt="IDE content assist" /></li>
 <li>Multi-line content completion and explicit cursor positioning, for example, ".MA" becomes "<code>.MACRO &lt;cursor is here&gt; &lt;newline&gt;.ENDM</code>".<br /><img src="productions/java/ide/features/ide-content-completion-instruction.gif" alt="Muli-line content completion and cursor positioning" /></li>
 </ul>
-<h5 id="Hyperlinks">Hyperlink Navigation   <a href="#ide_features">» top</a></h5>
+<h5 id="Hyperlinks">Hyperlink Navigation</h5>
 <p>The source code editor provides detection for different types of links in the source code. You can navigate to other parts of the file, other files, or websites via these links. You activate the hyperlink navigation by pressing "CTRL". The hyperlink navigation has the following features.</p>
 <ul>
 <li>Hyperlink navigation via CTRL-click to source includes and binary includes.</li>
@@ -162,7 +162,7 @@
 </li>
 <li>Hyperlink navigation via CTRL-click to labels equates, local definitions, macro definitions, and procedure definitions. In case there is only one target, direct navigation takes place. In case there is more than one possible target, the type and line number of the target are displayed in a hyperlink popup. All included source files are also considered, like in the content outline. If targets are from different files, the file name is also displayed as a differentiator in the hyperlink popup. <br /><br /><img src="productions/java/ide/features/ide-hyperlink-navigation-source.png" alt="IDE navigation to source file" /> <br /><img src="productions/java/ide/features/ide-hyperlink-navigation-binary.png" alt="IDE navigation to binary file" /> <br /><img src="productions/java/ide/features/ide-hyperlink-navigation-identifier.png" alt="IDE navigation to labels, equates, local definitions, macro definitions and procedure definitions" /></li>
 </ul>
-<h5 id="HexEditor">Hex Editor   <a href="#ide_features">» top</a></h5>
+<h5 id="HexEditor">Hex Editor</h5>
 <p>The Hex Editor allows inspection of arbitrary files on the binary level. It has the following features.</p>
 <ul>
 <li>It is available via the context menu, including a multi-file selection to open several files simultaneously.<br /><img src="productions/java/ide/features/ide-common-context-menu-open-with-hex-editor.png" alt="Open With Hex Editor" /></li>
@@ -181,7 +181,7 @@ This is very helpful to turn parts of a file into source code. The possibility t
 <li>Files with a block structure get an outline in the outline view.</li>
 <li>Files with a corrupted block structure are detected and displayed as well as possible.<br /><img src="productions/java/ide/features/ide-hex-editor-outline.png" alt="Hex Editor outline view" /> <br /><img src="productions/java/ide/features/ide-hex-editor-atari-com-file.png" alt="Hex Editor with corrupted Atari COM file " /></li>
 </ul>
-<h5 id="GraphicsConversionEditor">Graphics Conversion Editor   <a href="#ide_features">»</a></h5>
+<h5 id="GraphicsConversionEditor">Graphics Conversion Editor</a></h5>
 <p>The Graphics Conversion Editor views and converts many binary and image file formats. It has the following features.</p>
 <ul>
 <li>Viewer for binary files and 8-bit image files. <br />The most suitable supported converter and the corresponding default parameters are computed based on the file content, size, and extension. <br />The converters for the Atari standard image formats are based on <a href="https://sourceforge.net/projects/recoil" target="_blank" rel="noopener noreferrer">RECOIL fka. FAIL</a> is the excellent First Atari Image Library created by Piotr Fusik and Adrian Matoga. <br />
@@ -344,14 +344,14 @@ This is very helpful to turn parts of a file into source code. The possibility t
 <li>Conversion files with the extension ".cnv" save the conversion direction and parameters.</li>
 <li>Support for relative file paths. If the file path is in the same folder as the ".cnv" file, it is automatically converted to a relative file path when the file name is defaulted or picked from the file browser dialog. This allows us to move the ".cnv" and referenced source files together without breaking the saved paths.</li>
 </ul>
-<h5 id="PreferencesForEditing">Preferences for Editing   <a href="#ide_features">» top</a></h5>
+<h5 id="PreferencesForEditing">Preferences for Editing</h5>
 <p>The WUDSN IDE editor is configurable via language-specific preferences. They are a<span style="font-size: 1rem;">vailable via the entry "Preferences" from the menu "Window" (under Windows and Linux) or the menu "Eclipse" (under macOS) and include the following.</span></p>
 <ul>
 <li>Configuration of syntax highlighting colors and styles for comments, directives, all types of identifiers, legal opcodes, illegal opcodes, numbers, pseudo opcodes, and strings.</li>
 <li>For non-unique identifiers, the syntax highlighting will try to be the best guess.</li>
 <li>Configuration of default case in content assistance.<br /><img src="productions/java/ide/features/ide-assembler-preferences-editor.png" alt="Preferences for compilers" /></li>
 </ul>
-<h5 id="PreferencesForBuidingAndRunning">Preferences for Building and Running   <a href="#ide_features">» top</a></h5>
+<h5 id="PreferencesForBuidingAndRunning">Preferences for Building and Running</h5>
 <p>The build process of WUDSN IDE is configurable via language and assembler/compiler-specific preferences. They are available via the entry "Preferences" from the menu "Window" (under Windows and Linux) or the menu "Eclipse" (under macOS)</p>
 <ul>
 <li>Download links, configurable paths, and default parameters are provided for all assemblers and compilers.</li>
@@ -410,7 +410,7 @@ Make sure that you don't remove parameters when you specify your values.<br />If
 </ul>
 </li>
 </ul>
-<h5 id="AnnotationsForBuiding">Annotations for Building   <a href="#ide_features">» top</a></h5>
+<h5 id="AnnotationsForBuiding">Annotations for Building</h5>
 <ul>
 <li>For most use cases, the defaults provided for the compilers and in the preferences are sufficient. But suppose you want to develop in parallel in multiple projects for different platforms (e.g., Apple II and Atari 8-bit) or various output formats (".XEX" and ".BIN") with the same assembler/compiler. In that case, changing the preferences every time may become cumbersome. Therefore, WUDSN IDE offers annotations to put into the source code files. These annotations override the defaults and the settings from the preferences.</li>
 <li>All language annotations start with the prefix "@com.wudsn.ide.lng." followed by the lower-case name of the annotation, an equals sign, and the unquoted value. Example: "@com.wudsn.ide.lng.hardware=ATARI8BIT"</li>
@@ -466,7 +466,7 @@ Make sure that you don't remove parameters when you specify your values.<br />If
 </ul>
 </li>
 </ul>
-<h5 id="PlannedFeatures">Planned Features   <a href="#ide_features">» top</a></h5>
+<h5 id="PlannedFeatures">Planned Features</h5>
 <ul>
 <li>Planned features are listed as issues of category "enhancement" on <a href="https://github.com/wudsn/wudsn-ide/issues" target="_blank" rel="noopener">GitHub</a>. There, you can also request new features.</li>
 <li>The table below shows the current core feature set that depends on the compiler. <br />Features not supported by the compiler itself and hence cannot be supported by the IDE are marked as "n/a". <br />
@@ -542,7 +542,7 @@ Make sure that you don't remove parameters when you specify your values.<br />If
 <h5 id="KnownBugs"></h5>
 </li>
 </ul>
-<h5 id="KnownBugs">Known Bugs   <a href="#ide_features">» top</a></h5>
+<h5 id="KnownBugs">Known Bugs</h5>
 <p>Open bugs:</p>
 <ul>
 <li>If you find any, please report them on <a href="https://github.com/peterdell/wudsn-ide/issues" target="_blank" rel="noopener">GitHub</a> or contact me directly</li>
