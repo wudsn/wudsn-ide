@@ -1,241 +1,358 @@
 <p id="ide_installation">
-The recommended way to install WUDSN IDE, is the <a href="https://github.com/peterdell/wudsn-ide-install#readme" target="_blank"
-rel="noopener noreferrer">WUDSN IDE Installer</a>. It is currently available for Window 64-bit, version for macOS and Linux are planned.</p>
-<p>
-If you use another operating system or want to use the an older version of WUDSN or want to install assemblers,
-compilers and emulators more selectively, read the descriptions of the installation steps below.
-In case something is not correct or not working, please contact me.</p>
+	The recommended way to install WUDSN IDE is the <a
+		href="https://github.com/peterdell/wudsn-ide-install#readme"
+		target="_blank" rel="noopener noreferrer">WUDSN IDE Installer</a>. It
+	is available for Windows 64-bit, macOS and Linux.
+</p>
+<p>If you use another operating system, want to use an older version
+	of WUDSN, or wish to install assemblers, compilers, and emulators more
+	selectively, read the descriptions of the installation steps below. In
+	case something is not correct or not working, please get in touch with
+	me.</p>
 <ul>
-    <li><a href="#InstallingEclipse">Installing Eclipse</a></li>
-    <li><a href="#InstallingWUDSNIDE">Installing WUDSN IDE</a></li>
-    <li><a href="#InstallingAssemblersAndCompilers">Installing assemblers and compilers like ATASM, MADS, XASM...</a></li>
-    <li><a href="#InstallingEmulators">Installing Altirra, Atari800 and other emulators</a></li>
-    <li><a href="#CreatingExampleProject">Creating and compiling an example project</a></li>
-    <li><a href="#FurtherAssemblerProgrammingInformation">Further information on assembler programming</a></li>
+	<li><a href="#InstallingEclipse">Installing Eclipse</a></li>
+	<li><a href="#InstallingWUDSNIDE">Installing WUDSN IDE</a></li>
+	<li><a href="#InstallingAssemblersAndCompilers">Installing
+			assemblers and compilers like ATASM, MADS, XASM...</a></li>
+	<li><a href="#InstallingEmulators">Installing Altirra,
+			Atari800, and other emulators</a></li>
+	<li><a href="#CreatingExampleProject">Creating and compiling
+			an example project</a></li>
+	<li><a href="#FurtherAssemblerProgrammingInformation">Further
+			information on assembler programming</a></li>
 </ul>
-<h5 id="InstallingEclipse">Installing Eclipse   <a href="#ide_installation">» top</a></h5>
+<h5 id="InstallingEclipse">
+	Installing Eclipse   <a href="#ide_installation">» top</a>
+</h5>
 <ul>
-    <li>Download Eclipse from <a href="https://www.eclipse.org/downloads" target="_blank"
-            rel="noopener noreferrer">https://www.eclipse.org/downloads</a>.</li>
-    <li>If you don't know which version to take, use <a
-            href="https://archive.eclipse.org/eclipse/downloads/drops4/R-4.12-201906051800/#PlatformRuntime"
-            target="_blank" rel="noopener noreferrer">Eclipse 4.12 Platform Runtime Binary (81 MB)</a> for WUDSN IDE
-        1.7.1 and newer. <a
-            href="https://archive.eclipse.org/eclipse/downloads/drops4/R-4.3.2-201402211700/#PlatformRuntime"
-            target="_blank" rel="noopener noreferrer">Eclipse 4.3.2 Platform Runtime Binary (61 MB)</a> for WUDSN IDE
-        1.7.0 and older. <br /> This is a minimum size installation that does not include the
-        <a href="https://jdk.java.net/" target="_blank">Java Development Toolkit (JDT)</a>.
-        WUDSN IDE has no dependency on the JDT but of course on the Java Runtime Environment (JRE). Make sure you
-        also have the 64-bit version of the JRE installed if you want to use the 64-bit version of Eclipse.</li>
-    <li>Unzip the downloaded archive file and store the contained folder "eclipse" where you want Eclipse to be located
-        on your local hard drive.</li>
-    <li>Start the Eclipse executable from that folder.</li>
-    <li>Upon the first start, you are prompted to specify the folder where the workspace shall be located.</li>
-    <li>Normally a start link a created to this end. You can use the parameter "-nl" to specify the locale if you want.
-        Use "en_US" for English or "de_DE" for German. Example: "C:\Program Files\Eclipse\4.12\eclipse\eclipse.exe"
-        -Xmx512M -nl en_US"</li>
-    <li>It is recommended to create the workspace folder in your home directory.</li>
-    <li>After you have read the welcome page and got familiar with the Eclipse UI, just switch to the Resource
-        perspective.</li>
-    <li>Open the view "Problems" via the menu "Window/Show View/Problems" and then click the entry "Configure
-        Contents..." from its view menu. <br /> <img src="productions/java/ide/installation/ide-problems-view-01.png"
-            alt="Open configuration of the problems view" /></li>
-    <li>Select the configuration "All Errors", the radio button "On selected element and its children" and the
-        checkboxes "Error", "Warning" and "Info". <br /> <img
-            src="productions/java/ide/installation/ide-problems-view-02.png" alt="Configuration of the problems view" />
-    </li>
-    <li>Now Eclipse itself is ready and you can proceed with step <a href="#InstallingWUDSNIDE">Installing WUDSN
-            IDE</a>.</li>
+	<li>Download Eclipse from <a
+		href="https://www.eclipse.org/downloads" target="_blank"
+		rel="noopener noreferrer">https://www.eclipse.org/downloads</a>.
+	</li>
+	<li>If you don't know which version to take, use <a
+		href="https://archive.eclipse.org/eclipse/downloads/drops4/R-4.12-201906051800/#PlatformRuntime"
+		target="_blank" rel="noopener noreferrer">Eclipse 4.12 Platform
+			Runtime Binary (81 MB)</a> for WUDSN IDE 1.7.1 and newer. Use <a
+		href="https://archive.eclipse.org/eclipse/downloads/drops4/R-4.3.2-201402211700/#PlatformRuntime"
+		target="_blank" rel="noopener noreferrer">Eclipse 4.3.2 Platform
+			Runtime Binary (61 MB)</a> for WUDSN IDE 1.7.0 and older. <br />This
+		minimum-size installation does not include the <a
+		href="https://jdk.java.net/" target="_blank" rel="noopener">Java
+			Development Toolkit (JDT)</a>. WUDSN IDE does not depend on the JDT but
+		on the Java Runtime Environment (JRE). Ensure you also have the 64-bit
+		version of the JRE installed if you want to use the 64-bit version of
+		Eclipse.
+	</li>
+	<li>Unzip the downloaded archive file and store the " eclipse "
+		folder where you want Eclipse to be located on your local hard drive.</li>
+	<li>Start the Eclipse executable from that folder.</li>
+	<li>Upon the first start, you are prompted to specify the folder
+		where the workspace shall be located.</li>
+	<li>Normally, a start link is created to this end. You can use the
+		parameter "-nl" to specify the locale. Use "en_US" for English or
+		"de_DE" for German. Example: "C:\Program
+		Files\Eclipse\4.12\eclipse\eclipse.exe" -Xmx512M -nl en_US"</li>
+	<li>Creating the workspace folder in your home directory is
+		recommended.</li>
+	<li>After you have read the welcome page and got familiar with the
+		Eclipse UI, switch to the Resource perspective.</li>
+	<li>Open the view "Problems" via the menu "Window/Show
+		View/Problems" and then click the entry "Configure Contents..." from
+		its view menu. <br />
+	<img src="productions/java/ide/installation/ide-problems-view-01.png"
+		alt="Open configuration of the problems view" />
+	</li>
+	<li>Select the configuration "All Errors", the radio button "On
+		selected element and its children", and the checkboxes "Error",
+		"Warning", and "Info". <br />
+	<img src="productions/java/ide/installation/ide-problems-view-02.png"
+		alt="Configuration of the problems view" />
+	</li>
+	<li>Now Eclipse is ready, and you can proceed with <a
+		href="#InstallingWUDSNIDE">Installing WUDSN IDE</a>.
+	</li>
 </ul>
-<h5 id="InstallingWUDSNIDE">Installing WUDSN IDE   <a href="#ide_installation">» top</a></h5>
+<h5 id="InstallingWUDSNIDE">
+	Installing WUDSN IDE   <a href="#ide_installation">» top</a>
+</h5>
 <ul>
-    <li>Start Eclipse</li>
-    <li>Select the entry "Install New Software..." from the menu "Help".</li>
-    <li>Enter "https://www.wudsn.com/update/stable" in the "Work with" field and press ENTER.</li>
-    <li>Select the latest version of the feature "WUDSN IDE" for in and press the button "Next". <br /> You don't need
-        to install the "General Eclipse Enhancements" feature as it is already included in the "WUDSN IDE" feature".
-    </li>
-    <li>Review the installation details and press the button "Next".</li>
-    <li>Read the license agreement, choose the option "I accept..." and press the button "Finish".</li>
-    <li>In case you get a security warning that the content is unsigned, confirm the warning by pressing the button
-        "OK".</li>
-    <li>When you are prompted to restart Eclipse now, press the button "Yes".</li>
-    <li>As always with updates, it may happen that the update fails for whatever reason or the installed version turns
-        out to have severe issues. For example, the required Java version might not be available on your machine. In
-        this case, you can uninstall it via the link "What is already installed" in the "Install New Software..." dialog
-        and restart the IDE. Then you can reinstall the latest version from "https://www.wudsn.com/update/stable" or previously
-        released versions from the locations listed on the <a href="https://www.wudsn.com/index.php/ide/releases">Releases</a> page. <br /> <img
-            src="productions/java/ide/installation/ide-installation-steps.gif" alt="IDE installation steps" /></li>
+	<li>Start Eclipse</li>
+	<li>Select the entry "Install New Software..." from the menu
+		"Help".</li>
+	<li>Enter "https://www.wudsn.com/update/stable" in the "Work with"
+		field and press ENTER.</li>
+	<li>Select the latest version of the feature "WUDSN IDE" for in
+		and press "Next". <br />You don't need to install the "General
+		Eclipse Enhancements" feature as it is already included in the "WUDSN
+		IDE" feature".
+	</li>
+	<li>Review the installation details and press the button "Next".</li>
+	<li>Read the license agreement, choose "I accept..." and press the
+		" Finish " button.</li>
+	<li>If you get a security warning that the content is unsigned,
+		confirm the alert by pressing the " OK " button.</li>
+	<li>When prompted to restart Eclipse now, press the " Yes "
+		button.</li>
+	<li>As always, with updates, the update may fail for whatever
+		reason, or the installed version has severe issues. For example, the
+		required Java version might not be available on your machine. In this
+		case, uninstall it via the link "What is already installed" in the
+		"Install New Software..." dialog and restart the IDE. Then, you can
+		reinstall the latest version from
+		"https://www.wudsn.com/update/stable" or previously released versions
+		from the locations listed on the <a
+		href="https://www.wudsn.com/index.php/ide/releases">Releases</a> page.
+		<br />
+	<img src="productions/java/ide/installation/ide-installation-steps.gif"
+		alt="IDE installation steps" />
+	</li>
 </ul>
-<h5 id="InstallingAssemblersAndCompilers">Installing assemblers and compilers like ATASM, MADS, XASM...   <a href="#ide_installation">» top</a></h5>
+<h5 id="InstallingAssemblersAndCompilers">
+	Installing assemblers and compilers like ATASM, MADS, XASM...   <a
+		href="#ide_installation">» top</a>
+</h5>
 <ul>
-    <li>Start Eclipse</li>
-    <li>Select the entry "Preferences" from the menu "Window" (in Windows and Linux) or the menu "Eclipse" (in Mac OS X)
-    </li>
-    <li>Open the preferences page "Languages/Assembler/Atari 8-bit Assemblers" or the respective page for your platform.</li>
-    <li>Select the tab for the assembler or compiler of your choice. The following assemblers and compilers are or will be supported: <br />
-        <table>
-            <tbody>
-                <tr>
-                    <th>Language</th>
-                    <th>Tool</th>
-                    <th>Default Target Platform</th>
-                </tr>
-                <tr>
-                    <td>Assembler</td>                
-                    <td>ACME</td>
-                    <td>C64</td>
-                </tr>
-                <tr>
-                    <td>Assembler</td>                
-                    <td>ASM6</td>
-                    <td>NES</td>
-                </tr>
-                <tr>
-                    <td>Assembler</td>                
-                    <td>ATASM</td>
-                    <td>Atari 8-bit</td>
-                </tr>
-                <tr>
-                    <td>Assembler</td>                
-                    <td>DASM</td>
-                    <td>Atari 2600</td>
-                </tr>
-                <tr>
-                    <td>Assembler</td>                
-                    <td>KickAss</td>
-                    <td>C64</td>
-                </tr>
-                <tr>
-                    <td>Assembler</td>                
-                    <td>MADS</td>
-                    <td>Atari 8-bit</td>
-                </tr>
-                <tr>
-                    <td>Assembler</td>                
-                    <td>XASM</td>
-                    <td>Atari 8-bit</td>
-                </tr>
-                <tr>
-                    <td>Assembler</td>                
-                    <td>TASS</td>
-                    <td>C64 (in preparation)</td>
-                </tr>
-                <tr>
-                    <td>Pascal</td>                              
-                    <td>MadPascal</td>
-                    <td>Atari 8-bit</td>
-                </tr>
-            </tbody>
-        </table>
-    </li>
-    <li>There are 3 ways to download the assemblers / compilers:
-      <ul>
-            <li>Option 1: Download the <a  
-                href="https://github.com/peterdell/wudsn-ide-tools/archive/refs/heads/main.zip" target="_blank"
-                rel="noopener noreferrer">complete assemblers / compilers / emulators package for WUDSN IDE</a>
-                including the Windows, Linux and macOS X versions where available.
-                This is the simplest way to get all of them for many operating systems.
-                The archive contains a readme file with the date of the last update and the included program versions.</li>
-            <li>Option 2: Download single assemblers / compilers from <a href="https://github.com/peterdell/wudsn-ide-tools"  target="_blank"
-                rel="noopener noreferrer">https://github.com/peterdell/wudsn-ide-tools<a>. Use this option if you prefer to only download what you actually need.</li>
-        <li>Option 3: Click the "Download" link to open the home page of the assembler / compiler. Use this option, if you need the most recent version of the assembler / compiler.</li>
-          </ul>
-    </li>
-    <li>Follow the instruction on the download site to install the assembler / compiler to the folder of your choice.</li>
-    <li>In the section "Browse..." button for the field "Path to Compiler" to locate the executable.</li>
-    <li>If no explicit assembler / compiler parameters are specified, the default parameters are used.</li>
-    <li>If explicit assembler / compiler parameters are specified, the default parameters are ignored.</li>
-    <li>The variable "${sourceFilePath}" is replaced by the absolute path to the source file. <br /> The variable
-        "${outputFilePath}" is replaced by the absolute path to the output file. <br /> For more variables see section
-        "Preferences for assembling and compiling" on the "Features" page.</a></li>
-    <li>Choose if you want to use the source folder or the temporary folder as the output folder.</li>
-    <li>Choose the file extension for the output file, for example, ".xex" or ".bin"</li>
-    <li>Press the button "OK".</li>
-    <li>Using the button "Restore Defaults" all values are reset, except for the paths to the assembler / compilers. <br /> <br />
-        <img src="productions/java/ide/features/ide-assembler-preferences-compilers.gif"
-            alt="Configuration of aseembler / compiler executable path" /></li>
-    <li>Using the button "Default" in the "File Associations" preferences you can set the default editor for a file
-        extension, for example, "MADS" for "*.asm". <br /> <img
-            src="productions/java/ide/features/ide-editor-file-associations.gif" alt="IDE file associations" /></li>
+	<li>Start Eclipse</li>
+	<li>Select the entry "Preferences" from the menu "Window" (in
+		Windows and Linux) or the menu "Eclipse" (in Mac OS X)</li>
+	<li>Open the preferences page "Languages/Assembler/Atari 8-bit
+		Assemblers" or the respective page for your platform.</li>
+	<li>Select the tab for the assembler or compiler of your choice.
+		The following assemblers and compilers are or will be supported: <br />
+		<table>
+			<tbody>
+				<tr>
+					<th>Language</th>
+					<th>Tool</th>
+					<th>Default Target Platform</th>
+				</tr>
+				<tr>
+					<td>Assembler</td>
+					<td>ACME</td>
+					<td>C64</td>
+				</tr>
+				<tr>
+					<td>Assembler</td>
+					<td>ASM6</td>
+					<td>NES</td>
+				</tr>
+				<tr>
+					<td>Assembler</td>
+					<td>ATASM</td>
+					<td>Atari 8-bit</td>
+				</tr>
+				<tr>
+					<td>Assembler</td>
+					<td>DASM</td>
+					<td>Atari 2600</td>
+				</tr>
+				<tr>
+					<td>Assembler</td>
+					<td>KickAss</td>
+					<td>C64</td>
+				</tr>
+				<tr>
+					<td>Assembler</td>
+					<td>MADS</td>
+					<td>Atari 8-bit</td>
+				</tr>
+				<tr>
+					<td>Assembler</td>
+					<td>XASM</td>
+					<td>Atari 8-bit</td>
+				</tr>
+				<tr>
+					<td>Assembler</td>
+					<td>TASS</td>
+					<td>C64 (in preparation)</td>
+				</tr>
+				<tr>
+					<td>Pascal</td>
+					<td>MadPascal</td>
+					<td>Atari 8-bit</td>
+				</tr>
+			</tbody>
+		</table>
+	</li>
+	<li>There are three ways to download the assemblers/compilers:
+		<ul>
+			<li>Option 1: Download the <a
+				href="https://github.com/peterdell/wudsn-ide-tools/archive/refs/heads/main.zip"
+				target="_blank" rel="noopener noreferrer">complete
+					assemblers/compilers/emulators package for WUDSN IDE</a>, including the
+				Windows, Linux, and macOS X versions where available. This is the
+				simplest way to get all of them for many operating systems. The
+				archive contains a readme file with the date of the last update and
+				the included program versions.
+			</li>
+			<li>Option 2: Download single assemblers/compilers from <a
+				href="https://github.com/peterdell/wudsn-ide-tools" target="_blank"
+				rel="noopener noreferrer">https://github.com/peterdell/wudsn-ide-tools</a><a>.
+					Use this option if you prefer only to download what you need.</a></li>
+			<li>Option 3: Click the "Download" link to open the home page of
+				the assembler/compiler. Use this option if you need the most recent
+				version of the assembler/compiler.</li>
+		</ul>
+	</li>
+	<li>Follow the instructions on the download site to install the
+		assembler/compiler in the folder of your choice.</li>
+	<li>In the section "Browse..." button for the field "Path to
+		Compiler" to locate the executable.</li>
+	<li>The default parameters are used if no explicit
+		assembler/compiler parameters are specified.</li>
+	<li>The default parameters are ignored if explicit
+		assembler/compiler parameters are specified.</li>
+	<li>The absolute path to the source file replaces the variable
+		"${sourceFilePath}". <br />The absolute path to the output file
+		replaces the variable "${outputFilePath}". <br />For more variables,
+		see the "Preferences for assembling and compiling" section on the
+		"Features" page.
+	</li>
+	<li>Choose if you want to use the source or temporary folders as
+		the output folder.</li>
+	<li>Choose the file extension for the output file, for example,
+		".xex" or ".bin".</li>
+	<li>Press the button "OK".</li>
+	<li>All values are reset using the "Restore Defaults" button,
+		except for the paths to the assembler/compilers. <br />
+	<br />
+	<img
+		src="productions/java/ide/features/ide-assembler-preferences-compilers.gif"
+		alt="Configuration of aseembler / compiler executable path" />
+	</li>
+	<li>Using the button "Default" in the "File Associations"
+		preferences, you can set the default editor for a file extension, for
+		example, "MADS" for "*.asm". <br />
+	<img
+		src="productions/java/ide/features/ide-editor-file-associations.gif"
+		alt="IDE file associations" />
+	</li>
 </ul>
-<h5 id="InstallingEmulators">Installing Altirra, Atari800 and other emulators   <a href="#ide_installation">» top</a></h5>
+<h5 id="InstallingEmulators">
+	Installing Altirra, Atari800, and other emulators   <a
+		href="#ide_installation">» top</a>
+</h5>
 <ul>
-    <li>Start Eclipse.</li>
-    <li>Select the entry "Preferences" from the menu "Window" (for Windows and Linux) or "Eclipse" (for Mac OS X).</li>
-    <li>Open the preferences page "Languages/Assembler/Atari 8-bit Assemblers" and select to tab for your assembler.</li>
-    <li>The field "Default Application to open Output File" is defaulted to "Operating System Default Application".
-        <ul>
-            <li>If you have the emulator registered as the default application for the extension of the output file, for
-                example, "Altirra", "Atari800" or "Atari800MacX" for ".xex", you don't need to configure anything in addition
-                and can skip the steps below.</li>
-            <li>If your operating system, like for example Linux, does not support default applications or if you need a
-                special output file extension and special parameters to open the output file in the emulator you can
-                choose the emulator in the field "Application to open Output File" and configure the command line on the
-                corresponding tab.</li>
-            <li>You can also use the "User Defined Application" to open the output file with an arbitrary application
-                like a script, linker, or whatever.</li>
-        </ul>
-    </li>
-    <li>If you have not yet downloaded the corresponding emulator, you can use the download link on the tab of the
-        emulator and follow the instructions on the download site to install the emulator.</li>
-    <li>Use the "Browse..." button for the field "Path to Application" to locate the executable. If required you can
-        specify your own command-line based on the default command line displayed.<br />Note: Under Mac OS-X, you must
-        specify the path to the actual executable inside the ".app" folder. To see this path you have to select "Show
-        Package Contents" in the context menu of the ".app" folder. For the "Stella" emulator installed in the
-        "/Applications/Stella.app" folder this means "/Applications/Stella.app/Contents/MacOS/Stella".</li>
-    <li>If no explicit command line is specified, the default command line is used.</li>
-    <li>If an explicit command line is specified, the default command line is ignored.</li>
-    <li>The variable "${runnerExecutablePath}" is replaced by the path to the application executable. <br /> The
-        variable "${outputFilePath}" is replaced by the absolute path to the output file. <br /> For more variables see section
-        "Preferences for assembling and compiling" on the "Features" page.</li>
-    <li>Press the button "OK".</li>
-    <li>In case you also need the Atari ROM files, you can find them in the file <a
-            href="http://www.emulators.com/freefile/pcxf380.zip" target="_blank"
-            rel="noopener noreferrer">PCXF380.ZIP</a> which is available at <a
-            href="http://www.emulators.com/download.htm" target="_blank"
-            rel="noopener noreferrer">http://www.emulators.com</a>.</li>
-    <li><img src="productions/java/ide/features/ide-assembler-preferences-compilers.gif"
-            alt="Configuration of emulator executable path" /></li>
+	<li>Start Eclipse.</li>
+	<li>Select the entry "Preferences" from the menu "Window" (for
+		Windows and Linux) or "Eclipse" (for Mac OS X).</li>
+	<li>Open the preferences page "Languages/Assembler/Atari 8-bit
+		Assemblers" and select the tab for your assembler.</li>
+	<li>The field "Default Application to open Output File" is
+		defaulted to "Operating System Default Application".
+		<ul>
+			<li>Suppose you have the emulator registered as the default
+				application for the extension of the output file, for example,
+				"Altirra", "Atari800," or "Atari800MacX" for ".xex". In that case,
+				you don't need to configure anything in addition and can skip the
+				steps below.</li>
+			<li>If your operating system, like, for example, Linux, does not
+				support default applications or if you need a particular output file
+				extension and particular parameters to open the output file in the
+				emulator, you can choose the emulator in the field "Application to
+				open Output File" and configure the command line on the
+				corresponding tab.</li>
+			<li>You can also use the "User Defined Application" to open the
+				output file with an arbitrary application like a script, linker, or
+				whatever.</li>
+		</ul>
+	</li>
+	<li>Suppose you have not yet downloaded the corresponding
+		emulator. In that case, you can use the download link on the tab of
+		the emulator and follow the instructions on the download site to
+		install the emulator.</li>
+	<li>Use the "Browse..." button for the "Path to Application" field
+		to locate the executable. Specify your command line based on the
+		default command line displayed.<br />Note: Under Mac OS-X, you must
+		specify the path to the actual executable inside the ".app" folder. To
+		see this path, select "Show Package Contents" in the context menu of
+		the ".app" folder. For the "Stella" emulator installed in the
+		"/Applications/Stella.app" folder, this means
+		"/Applications/Stella.app/Contents/MacOS/Stella".
+	</li>
+	<li>The default command line is used if no explicit command line
+		is specified.</li>
+	<li>If an explicit command line is specified, the default command
+		line is ignored.</li>
+	<li>The variable "${runnerExecutablePath}" is replaced by the path
+		to the application executable. <br />The absolute path to the output
+		file replaces the variable "${outputFilePath}". <br />For more
+		variables, see the "Preferences for assembling and compiling" section
+		on the "Features" page.
+	</li>
+	<li>Press the button "OK".</li>
+	<li>If you also need the Atari ROM files, you can find them in the
+		file <a href="http://www.emulators.com/freefile/pcxf380.zip"
+		target="_blank" rel="noopener noreferrer">PCXF380.ZIP</a>, which is
+		available at <a href="http://www.emulators.com/download.htm"
+		target="_blank" rel="noopener noreferrer">http://www.emulators.com</a>.
+	</li>
+	<li><img
+		src="productions/java/ide/features/ide-assembler-preferences-compilers.gif"
+		alt="Configuration of emulator executable path" /></li>
 </ul>
-<h5 id="CreatingExampleProject">Creating and compiling an example project   <a href="#ide_installation">» top</a></h5>
+<h5 id="CreatingExampleProject">
+	Creating and compiling an example project   <a href="#ide_installation">»
+		top</a>
+</h5>
 <ul>
-    <li>Start Eclipse.</li>
-    <li>Select the entry "New/Project" from the menu "File".</li>
-    <li>Select the wizard "General/Project" and press the button "Next".</li>
-    <li>Enter the project name "Atari800" and press the button "Finish".</li>
-    <li>The new project will appear in the "Project Explorer".</li>
-    <li>Select the newly created project and open its context menu.</li>
-    <li>Select the entry "New/File", enter the file name "Example.asm" and press the button "Finish".</li>
-    <li>The new empty file will now be opened in the MADS editor.</li>
-    <li>Copy the following source text and paste it into the file: <br />
-        <div style="font-family: courier, monospace; font-size: 13px;"><br /> ; WUDSN IDE Atari Rainbow Example - MADS
-            syntax <br /> <br />       org $4000 ;Start of code <br /> <br /> start lda #0 ;Disable screen DMA <br />
-                  sta 559 <br /> loop  lda $d40b ;Load VCOUNT <br />       clc <br />       adc 20 ;Add counter <br />
-                  sta $d40a <br />       sta $d01a ;Change background color <br />       jmp loop <br /> <br />
-                  run start ;Define run address</div>
-    </li>
-    <li>Select the entry "Build and run" from the menu "Language" or press "SHIFT-CTRL-9".</li>
-    <li>Enjoy your famous first rainbow effect.</li>
-    <li>In case of problems, open the view "Problems" and the output of the view "Console" for details and post a
-        message with the screenshots in the <a
-            href="https://www.atariage.com/forums/index.php?showtopic=145386&amp;view=getnewpost" target="_blank"
-            rel="noopener noreferrer">English AtariAge forum</a> if you get stuck: <br /> <br /> <img
-            src="productions/java/ide/installation/ide-project-example.gif"
-            alt="Congratulations, when you did everything correctly - this is your first rainbow effect" /></li>
+	<li>Start Eclipse.</li>
+	<li>Select the entry "New/Project" from the menu "File".</li>
+	<li>Select the wizard "General/Project" and press the button
+		"Next".</li>
+	<li>Enter the project name "Atari800" and press "Finish".</li>
+	<li>The new project will appear in the "Project Explorer".</li>
+	<li>Select the newly created project and open its context menu.</li>
+	<li>Select the entry "New/File", enter the file name
+		"Example.asm", and press the button "Finish".</li>
+	<li>The new empty file will now be opened in the MADS editor.</li>
+	<li>Copy the following source text and paste it into the file: <br />
+		<div style="font-family: courier, monospace; font-size: 13px;">
+			<br />; WUDSN IDE Atari Rainbow Example - MADS syntax <br />
+			<br />      org $4000 ;Start of code <br />
+			<br />start lda #0 ;Disable screen DMA <br />      sta 559 <br />loop  lda
+			$d40b ;Load VCOUNT <br />      clc <br />      adc 20 ;Add counter
+			<br />      sta $d40a <br />      sta $d01a ;Change background
+			color <br />      jmp loop <br />
+			<br />      run start ;Define run address
+		</div>
+	</li>
+	<li>Select the entry "Build and run" from the menu "Language" or
+		press "SHIFT-CTRL-9".</li>
+	<li>Enjoy your famous first rainbow effect.</li>
+	<li>In case of problems, open the view "Problems" and the output
+		of the "Console" view for details and post a message with the
+		screenshots in the <a
+		href="https://www.atariage.com/forums/index.php?showtopic=145386&amp;view=getnewpost"
+		target="_blank" rel="noopener noreferrer">English AtariAge forum</a>
+		if you get stuck: <br />
+	<br />
+	<img src="productions/java/ide/installation/ide-project-example.gif"
+		alt="Congratulations, when you did everything correctly - this is your first rainbow effect" />
+	</li>
 </ul>
-<h5 id="FurtherAssemblerProgrammingInformation">Further information on assembler programming   <a
-        href="#ide_installation">» top</a></h5>
+<h5 id="FurtherAssemblerProgrammingInformation">
+	Further information on assembler programming   <a
+		href="#ide_installation">» top</a>
+</h5>
 <ul>
-    <li>The source includes containing the equates for hardware registers and operating system for <a
-            href="productions/atari800/ide/SystemEquates.asm" target="_blank" rel="noopener noreferrer">Atari 8-bit</a>
-        and <a href="productions/atari2600/ide/VCS.asm" target="_blank" rel="noopener noreferrer">Atari VCS</a> in MADS
-        format.</li>
-    <li><a href="https://www.atariarchives.org/agagd/" target="_blank" rel="noopener noreferrer">Atari Graphics &amp;
-            Arcade Game Design</a>, <a href="https://www.atariarchives.org/dere/" target="_blank"
-            rel="noopener noreferrer">DeRe Atari</a>, and <a href="https://www.atariarchives.org/mapping/"
-            target="_blank" rel="noopener noreferrer">Mapping the Atari</a> at <a href="https://www.atariarchives.org/"
-            target="_blank" rel="noopener noreferrer">AtariArchives.org</a></li>
-    <li>AtariAge forum for <a href="https://atariage.com/forums/forum/51-atari-5200-8-bit-programming" target="_blank"
-            rel="noopener noreferrer">Atari 5200 / 8-bit Programming</a></li>
+	<li>The source code files contain the equates for hardware
+		registers and operating systems for <a
+		href="productions/atari800/ide/SystemEquates.asm" target="_blank"
+		rel="noopener noreferrer">Atari 8-bit</a> and <a
+		href="productions/atari2600/ide/VCS.asm" target="_blank"
+		rel="noopener noreferrer">Atari VCS</a> in MADS format.
+	</li>
+	<li><a href="https://www.atariarchives.org/agagd/" target="_blank"
+		rel="noopener noreferrer">Atari Graphics &amp; Arcade Game Design</a>,
+		<a href="https://www.atariarchives.org/dere/" target="_blank"
+		rel="noopener noreferrer">DeRe Atari</a>, and <a
+		href="https://www.atariarchives.org/mapping/" target="_blank"
+		rel="noopener noreferrer">Mapping the Atari</a> at <a
+		href="https://www.atariarchives.org/" target="_blank"
+		rel="noopener noreferrer">AtariArchives.org</a></li>
+	<li>AtariAge forum for <a
+		href="https://atariage.com/forums/forum/51-atari-5200-8-bit-programming"
+		target="_blank" rel="noopener noreferrer">Atari 5200 / 8-bit
+			Programming</a></li>
 </ul>
