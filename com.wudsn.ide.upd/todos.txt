@@ -1,5 +1,3 @@
-Use %COMSPEC% in links?
-
 Installer
 =========
 https://www.battoexeconverter.com/Advanced-Commands/#Hideself
@@ -23,6 +21,7 @@ wudsn-ide-tools-main/ASM/DASM/test/m_switch_3.asm: Can't create '\\\\?\\C:\\jac\
 
 WUDSN Runners
 =============
+https://github.com/wudsn/wudsn-ide/issues/19 - Path
 Check for "<mainsourcefile.bat/.sh" and have @com.wudsn.ide.lng.RunnerScript= annotation
 All Compiler Variables as Environment variables bevor calling the script with the OS shell.
 
