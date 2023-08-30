@@ -24,6 +24,7 @@
 </ul>
 <h5 id="InstallingWUDSNIDE">Installing WUDSN IDE</h5>
 <ul>
+<ul>
 <li>Start Eclipse</li>
 <li>Select the entry "Install New Software..." from the menu "Help".</li>
 <li>Enter "https://www.wudsn.com/update/stable" in the "Work with" field and press ENTER.</li>
@@ -32,8 +33,14 @@
 <li>Read the license agreement, choose "I accept..." and press the " Finish " button.</li>
 <li>If you get a security warning that the content is unsigned, confirm the alert by pressing the " OK " button.</li>
 <li>When prompted to restart Eclipse now, press the " Yes " button.</li>
-<li>As always, with updates, the update may fail for whatever reason, or the installed version has severe issues. For example, the required Java version might not be available on your machine. In this case, uninstall it via the link "What is already installed" in the "Install New Software..." dialog and restart the IDE. Then, you can reinstall the latest version from "https://www.wudsn.com/update/stable" or previously released versions from the locations listed on the <a href="https://www.wudsn.com/index.php/ide/releases">Releases</a> page. <br /><img src="productions/java/ide/installation/ide-installation-steps.gif" alt="IDE installation steps" /></li>
+<li>Updates may fail for whatever reason, or the installed version has severe issues. For example, the required Java version might not be available on your machine. In this case, uninstall it via the link "What is already installed" in the "Install New Software..." dialog and restart the IDE. Then, you can reinstall the latest version from "https://www.wudsn.com/update/stable" or previously released versions from the locations listed on the <a href="https://www.wudsn.com/index.php/ide/releases">Releases</a> page. <br /><img src="productions/java/ide/installation/ide-installation-steps.gif" alt="IDE installation steps" /></li>
 </ul>
+</ul>
+<h5 id="InstallingAssemblersAndCompilers">Installing Language Packs</h5>
+<ul>
+<ul>The Eclipse runtime is, by default, installed with the English language pack. Additional language packs can be downloaded from</ul>
+</ul>
+<p><a target="_blank&gt;">. The WUDSN IDE plugin contains English and German translations. The WUDSN IDE installer automatically installs the German Language Pack for Eclipse. This way, English and German translations are always complete in an installation.</a></p>
 <h5 id="InstallingAssemblersAndCompilers">Installing Assemblers and Compilers like ATASM, MADS, XASM...</h5>
 <ul>
 <li>Start Eclipse</li>
@@ -107,10 +114,10 @@
 <li>The default parameters are used if no explicit assembler/compiler parameters are specified.</li>
 <li>The default parameters are ignored if explicit assembler/compiler parameters are specified.</li>
 <li>The absolute path to the source file replaces the variable "${sourceFilePath}". <br />The absolute path to the output file replaces the variable "${outputFilePath}". <br />For more variables, see the "Preferences for assembling and compiling" section on the "Features" page.</li>
-<li>Choose to use the source or temporary folders as the output folder.</li>
+<li>Choose the source or temporary folders as the output folder.</li>
 <li>Choose the file extension for the output file, for example, ".xex" or ".bin".</li>
 <li>Press the button "OK".</li>
-<li>All values are reset using the "Restore Defaults" button, except for the paths to the assembler/compilers. <br /><br /><img src="productions/java/ide/features/ide-assembler-preferences-compilers.gif" alt="Configuration of aseembler / compiler executable path" /></li>
+<li>All values are reset using the "Restore Defaults" button, except for the paths to the assembler/compilers. <br /><br /><img src="productions/java/ide/features/ide-assembler-preferences-compilers.gif" alt="Configuration of assembler / compiler executable path" /></li>
 <li>Using the button "Default" in the "File Associations" preferences, you can set the default editor for a file extension, for example, "MADS" for "*.asm". <br /><img src="productions/java/ide/features/ide-editor-file-associations.gif" alt="IDE file associations" /></li>
 </ul>
 <h5 id="InstallingEmulators">Installing Altirra, Atari800, and other emulators</h5>
@@ -133,7 +140,7 @@
 <li>Press the button "OK".</li>
 <li>If you also need the Atari ROM files, you can find them in the file <a href="http://www.emulators.com/freefile/pcxf380.zip" target="_blank" rel="noopener noreferrer">PCXF380.ZIP</a>, which is available at <a href="http://www.emulators.com/download.htm" target="_blank" rel="noopener noreferrer">http://www.emulators.com</a>.<img src="productions/java/ide/features/ide-assembler-preferences-compilers.gif" alt="Configuration of emulator executable path" /></li>
 </ul>
-<h5 id="CreatingExampleProject">Creating and Building the Example project</h5>
+<h5 id="CreatingExampleProject">Creating and Building the Example Project</h5>
 <ul>
 <li>Start Eclipse.</li>
 <li>Select the entry "New/Project" from the menu "File".</li>

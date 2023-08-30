@@ -11,6 +11,7 @@
 <li><a href="#FAQWUDSNInstallationUpdateSiteRequiredItems">Why do I get "Cannot complete the install because one or more required items could not be found" when updating the plugin from the update site?</a></li>
 <li><a href="#FAQEclipseUserGuide">How do I use Eclipse?</a></li>
 <li><a href="#FAQWUDSNInstallationPreferencesNotVisible">Why is the "Assembler" section not visible in the preferences?</a></li>
+<li><a href="#FAQWUDSNSelectTranslation">How do I select the translation for the menus and messages?</a></li>
 </ul>
 </li>
 <li><a href="#Configuration">Configuration</a>
@@ -86,6 +87,10 @@
 <h4>Why is the "Assembler" section not visible in the preferences?</h4>
 <p>If the WUDSN IDE sections and features are not visible after a successful installation, you probably use an outdated Java version. For example, Java 1.6 has been <a href="http://www.oracle.com/technetwork/java/eol-135779.html" target="_blank" rel="noopener noreferrer">out of maintenance since 2013/02</a>. This seems to be a common problem on Mac OS X, even in Mavericks (10.9), which still uses Java 1.6 by default. Ensure you have at least the Java version mentioned in the installation section for the IDE installed and that Eclipse has started using that version.</p>
 </div>
+<div id="FAQWUDSNSelectTranslation">
+<h4>How do I select the translation for the menus and messages?</h4>
+<p>The WUDSN IDE installer installs English and German translations for Eclipse and WUDSN IDE by default. When you start WUDSN IDE, the translation for the primary language of your operating system is used. Use can override this selection by setting the environment variable "WUDSN_LANGUAGE" to "en" "de".</p>
+</div>
 <h3 id="Configuration">Configuration</h3>
 <div id="FAQProblemsView">
 <h4>Why do I see wrong messages in the "Problems" view?</h4>
@@ -99,7 +104,6 @@
 <h4>Why must I put ";@com.wudsn.ide.lng.hardware=..." in the source file?</h4>
 <p>The association with the file extension with your compiler's editor (done in the preferences; see before) does not determine which platform you want to create output. Therefore, this additional annotation in the main source file must tell the IDE, which is the target platform. It is used to find the correct compiler and emulator settings, which can differ per platform. Every compiler has a default platform (see the online help in the IDE), but it can also be used on every other platform. Therefore, you must specify the target platform in the main source file if you use a non-default platform.</p>
 </div>
-
 <h3 id="Editing">Editing</h3>
 <div id="FAQEclipseSpeed">
 <h4>Why is editing sometimes slow, or is everything blocked, showing the wait cursor?</h4>
@@ -149,7 +153,7 @@
 <h3 id="Building">Building</h3>
 <div id="FAQPrimaryAssembler">
 <h4>Why is MADS the primary assembler?</h4>
-<p>When I started with WUDSN IDE, ATASM was the first supported compiler. The reason was simple: 90% of my sources are in ATASM format. ATASM is very comprehensive and fast. Its capabilities to define constants and byte sequences are extensive (".BYTE", ".WORD", ".DBYTE", ".FLOAT", ".SBYTE" for ATASCII, ".CBYTE" for terminated strings, separate offset for all constants). Over time, additional platform compilers have been added, and their support will be completed step by step. When the support for MADS was relatively complete, I found it the most powerful compiler I have ever seen and used. The support for ".PROC/.ENDPROC" has revolutionized how I write assembler code. It allows logical structuring and visibility control without any runtime overhead. At the same time, MADS is compatible with MAC/65 and XASM, and even ATASM sources can be adapted to MADS with a few minor changes described below. Therefore, MADS has been the primary compiler since WUDSN IDE version 1.6.0.</p>
+<p>When I started with WUDSN IDE, ATASM was the first supported compiler. The reason was simple: 90% of my sources are in ATASM format. ATASM is very comprehensive and fast. Its capabilities to define constants and byte sequences are extensive (".BYTE", ".WORD", ".DBYTE", ".FLOAT", ".SBYTE" for ATASCII, ".CBYTE" for terminated strings, separate offset for all constants). Over time, additional platform compilers have been added, and their support will be completed step by step. When the support for MADS was relatively complete, I found it the most potent compiler I have ever seen and used. The support for ".PROC/.ENDPROC" has revolutionized how I write assembler code. It allows logical structuring and visibility control without any runtime overhead. At the same time, MADS is compatible with MAC/65 and XASM, and even ATASM sources can be adapted to MADS with a few minor changes described below. Therefore, MADS has been the primary compiler since WUDSN IDE version 1.6.0.</p>
 </div>
 <div id="FAQPrimaryAssemblerExample">
 <h4>Why do I get the error "No ORG defined" when compiling the example from the tutorial?</h4>
@@ -215,4 +219,3 @@
 <h4>How can I use other emulators?</h4>
 <p>You can "re-use" the existing tabs and specify another emulator's executable. Using "User Defined Application", you can select whatever you want. When using "User Defined Application", no disk image is created or updated. You can use this setting to have your script, which puts the executable file onto a disk image of your choice, using additional tools like "dir2atr.exe" or "AppleCommander," for example.</p>
 </div>
-
