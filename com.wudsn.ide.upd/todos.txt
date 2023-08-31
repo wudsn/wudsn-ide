@@ -4,10 +4,9 @@ https://www.battoexeconverter.com/Advanced-Commands/#Hideself
 
 WebSite
 =======
-FIXED? Productions images max size/width?
 FIXED? https://search.google.com/search-console/mobile-usability/drilldown?resource_id=https%3A%2F%2Fwww.wudsn.com%2F&item_key=CAk&hl=en
 FIXED? ROM checker HTML: <th style="border-style:solid;border-width:1px;border-collapse:collapse;;white-space:nowrap;">CRC32</th>
-Complete: RGBA article, add link to gameer suprise video, http://localhost:8080/administrator/index.php?option=com_content&view=article&layout=edit&id=23
+Complete: RGBA article, http://localhost:8080/administrator/index.php?option=com_content&view=article&layout=edit&id=23
 Why is editing sometimes slow, or is everything blocked, showing the wait cursor?
 
 WUDSN Tools
@@ -56,7 +55,7 @@ Contenttypes .pas
 
 ABBUC
 =====
-Geos EPROM �ber den Shop
+Geos EPROM über den Shop
 Alex Bolloni - Abbuc
 Hansi Richstein Lapis Philosophum
 
