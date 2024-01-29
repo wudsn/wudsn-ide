@@ -22,7 +22,7 @@
     <runner
           defaultCommandLine="${runnerExecutablePath} ${outputFilePathWithoutExtension}.dsk"
           hardware="APPLE2"
-          homePageURL="http://virtu.codeplex.com"
+          homePageURL="https://github.com/digital-jellyfish/Virtu"
           id="virtu"
           name="%com.wudsn.ide.lng.run.apple2.virtu.name">
     </runner>
@@ -34,6 +34,7 @@
           name="%com.wudsn.ide.lng.run.apple2.virtualii.name">
     </runner>
  </extension>
+
  <extension
        id="Atari 2600 runners"
        point="com.wudsn.ide.lng.runners">
@@ -45,6 +46,7 @@
           name="%com.wudsn.ide.lng.run.atari2600.stella.name">
     </runner>
  </extension>
+
  <extension
        id="Atari 8-bit runners"
        point="com.wudsn.ide.lng.runners">
@@ -52,14 +54,14 @@
           class="com.wudsn.ide.lng.run.atari8.Altirra"
           defaultCommandLine="${runnerExecutablePath} /singleinstance ${outputFilePath}"
           hardware="ATARI8BIT"
-          homePageURL="http://www.virtualdub.org/altirra.html"
+          homePageURL="https://www.virtualdub.org/altirra.html"
           id="altirra"
           name="%com.wudsn.ide.lng.run.atari8.altirra.name">
     </runner>
     <runner
           defaultCommandLine="xterm -iconic -e atari800 -run ${outputFilePath}"
           hardware="ATARI8BIT"
-          homePageURL="http://atari800.sourceforge.net"
+          homePageURL="https://atari800.github.io"
           id="atari800"
           name="%com.wudsn.ide.lng.run.atari8.atari800.name">
     </runner>
@@ -74,7 +76,7 @@
     <runner
           defaultCommandLine="open -a ${runnerExecutablePath} ${outputFilePath}"
           hardware="ATARI8BIT"
-          homePageURL="http://www.atarimac.com/atari800macx.php"
+          homePageURL="https://www.atarimac.com/atari800macx.php"
           id="atari800_macx"
           name="%com.wudsn.ide.lng.run.atari8.atari800_macx.name">
     </runner>
@@ -86,20 +88,19 @@
           name="%com.wudsn.ide.lng.run.atari8.atari_plus_plus.name">
     </runner>
  </extension>
+
  <extension
        id="Atari7800 runners"
        point="com.wudsn.ide.lng.runners">
     <runner
           defaultCommandLine="${runnerExecutablePath} ${outputFilePath}"
           hardware="ATARI7800"
-          homePageURL="http://emu7800.sourceforge.net"
+          homePageURL="https://emu7800.github.io/"
           id="emu7800"
           name="%com.wudsn.ide.lng.run.atari7800.emu7800.name">
     </runner>
  </extension>
-
-
-
+ 
  <extension
        id="C64 runners"
        point="com.wudsn.ide.lng.runners">
@@ -113,32 +114,33 @@
      <runner
            defaultCommandLine="${runnerExecutablePath} -autostart ${outputFilePath}"
            hardware="C64"
-           homePageURL="https://vice-emu.sourceforge.io/"
+           homePageURL="https://vice-emu.sourceforge.io"
            id="vice"
            name="%com.wudsn.ide.lng.run.c64.vice.name">
      </runner>
     </extension>
+
  <extension
        id="NES runners"
        point="com.wudsn.ide.lng.runners">
     <runner
           defaultCommandLine="${runnerExecutablePath} ${outputFilePath}"
           hardware="NES"
-          homePageURL="http://www.byuu.org/bsnes"
+          homePageURL="https://github.com/bsnes-emu/bsnes"
           id="bsnes"
           name="%com.wudsn.ide.lng.run.nes.bsnes.name">
     </runner>
     <runner
           defaultCommandLine="${runnerExecutablePath} ${outputFilePath}"
           hardware="NES"
-          homePageURL="http://www.fceux.comux"
+          homePageURL="https://fceux.com"
           id="fceux"
           name="%com.wudsn.ide.lng.run.nes.fceux.name">
     </runner>
     <runner
           defaultCommandLine="${runnerExecutablePath} ${outputFilePath}"
           hardware="NES"
-          homePageURL="http://www.qmtpro.com/~nes/nintendulator"
+          homePageURL="https://www.qmtpro.com/~nes/nintendulator"
           id="nintendulator"
           name="%com.wudsn.ide.lng.run.nes.nintendulator.name">
     </runner>
