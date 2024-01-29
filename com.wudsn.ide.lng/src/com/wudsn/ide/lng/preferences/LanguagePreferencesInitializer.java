@@ -166,7 +166,7 @@ public final class LanguagePreferencesInitializer extends AbstractPreferenceInit
 				setDefault(preferencesKey, compilerDefinition.getDefaultParameters());
 				preferencesKey = LanguageHardwareCompilerDefinitionPreferencesConstants
 						.getCompilerOutputFolderModeName(language, hardware, compilerDefinition);
-				setDefault(preferencesKey, CompilerOutputFolderMode.TEMP_FOLDER);
+				setDefault(preferencesKey, CompilerOutputFolderMode.SOURCE_FOLDER);
 				preferencesKey = LanguageHardwareCompilerDefinitionPreferencesConstants
 						.getCompilerOutputFileExtensionName(language, hardware, compilerDefinition);
 				setDefault(preferencesKey, HardwareUtility.getDefaultFileExtension(hardware));

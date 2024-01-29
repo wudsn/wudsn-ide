@@ -77,6 +77,7 @@ import com.wudsn.ide.lng.preferences.CompilerRunPreferences;
 import com.wudsn.ide.lng.runner.Runner;
 import com.wudsn.ide.lng.runner.RunnerDefinition;
 import com.wudsn.ide.lng.runner.RunnerId;
+import com.wudsn.ide.lng.runner.RunnerPaths.RunnerPath;
 import com.wudsn.ide.lng.symbol.CompilerSymbolsView;
 
 /**
@@ -605,11 +606,15 @@ final class LanguageEditorCompileCommand {
 				}
 			}
 		}
-		// Execution type: pre-defined or USER_DEFINED_APPLICATION
+		// Execution type: predefined or USER_DEFINED_APPLICATION
 		else {
 			boolean error = false;
 
 			String runnerExecutablePath = compilerRunPreferences.getRunnerExecutablePath(runnerId);
+			if (StringUtility.isEmpty(runnerExecutablePath)) {
+				runnerExecutablePath = plugin.getRunnerPaths().getDefaultRunnerAbsolutePath(hardware, runnerId);
+			}
+
 			if (runnerCommandLine.contains(RunnerDefinition.RUNNER_EXECUTABLE_PATH)) {
 				if (StringUtility.isEmpty(runnerExecutablePath)) {
 					// ERROR: Path to application executable is not

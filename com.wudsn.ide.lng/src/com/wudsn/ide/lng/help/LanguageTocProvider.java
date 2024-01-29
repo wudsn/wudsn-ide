@@ -341,7 +341,7 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 			case ATARI2600:
 				chipTopics.add(createTopic("help/www.qotile.net/minidig/docs/sizes.txt"));
 				chipTopics.add(createTopic("help/www.qotile.net/minidig/docs/2600_mem_map.txt"));
-				chipTopics.add(createTopic("help/www.qotile.net/minidig/docs/stella.pdf"));
+				chipTopics.add(createTopic("help/forums.atariage.com/dionoid/Stella_Programmers_Guide.pdf"));
 				chipTopics.add(createTopic("help/www.qotile.net/minidig/docs/2600_advanced_prog_guide.txt"));
 				chipTopics.add(createTopic("help/www.qotile.net/minidig/docs/tia_color.html"));
 				chipTopics.add(createTopic("help/www.qotile.net/minidig/docs/2600_tia_map.txt"));
@@ -353,6 +353,11 @@ public final class LanguageTocProvider extends AbstractTocProvider {
 				chipTopics.add(createTopic("help/www.oxyron.de/html/registers_gtia.html"));
 				chipTopics.add(createTopic("help/www.oxyron.de/html/registers_pokey.html"));
 				break;
+
+			case ATARI7800:
+				chipTopics.add(createTopic("help/7800.8bitdev.org/index.html"));
+				break;
+
 			case C64:
 				chipTopics.add(createTopic("help/www.oxyron.de/html/registers_rec.html"));
 				chipTopics.add(createTopic("help/www.oxyron.de/html/registers_sid.html"));

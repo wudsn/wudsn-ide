@@ -1,5 +1,2 @@
-The file  "asap.jar"  and tis "asap-4.0.0-java-src.zipp" were provided by Fox.
+The files "asap.jar" and "asap-6.0.1-java-src.zip" were provided by Fox.
 The source is not included in the build.properties to keep the size at the minimum.
-
-Note: On 2019-01-02 the files were replaced by a by a Java 1.6 compliant version provided by Fox.
-

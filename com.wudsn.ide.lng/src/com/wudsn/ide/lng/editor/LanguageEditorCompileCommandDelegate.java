@@ -43,6 +43,7 @@ import com.wudsn.ide.lng.Texts;
 import com.wudsn.ide.lng.preferences.LanguageHardwareCompilerDefinitionPreferences;
 import com.wudsn.ide.lng.runner.RunnerDefinition;
 import com.wudsn.ide.lng.runner.RunnerId;
+import com.wudsn.ide.lng.runner.RunnerPaths.RunnerPath;
 import com.wudsn.ide.lng.runner.RunnerRegistry;
 
 /**
@@ -52,8 +53,7 @@ import com.wudsn.ide.lng.runner.RunnerRegistry;
  * @author Peter Dell
  * 
  */
-public final class LanguageEditorCompileCommandDelegate
-		implements IActionDelegate2, IWorkbenchWindowPulldownDelegate2 {
+public final class LanguageEditorCompileCommandDelegate implements IActionDelegate2, IWorkbenchWindowPulldownDelegate2 {
 
 	private IWorkbenchWindow window;
 	private Menu menu;
@@ -110,7 +110,8 @@ public final class LanguageEditorCompileCommandDelegate
 		RunnerRegistry runnerRegistry = languagePlugin.getRunnerRegistry();
 		Hardware hardware = languageEditor.getHardware();
 		List<RunnerDefinition> runnerDefinitions = runnerRegistry.getDefinitions(hardware);
-		LanguageHardwareCompilerDefinitionPreferences languageHardwareCompilerDefinitionPreferences = languageEditor.getLanguageHardwareCompilerPreferences();
+		LanguageHardwareCompilerDefinitionPreferences languageHardwareCompilerDefinitionPreferences = languageEditor
+				.getLanguageHardwareCompilerPreferences();
 
 		Menu menu = new Menu(parent);
 		setMenu(menu);
@@ -123,8 +124,15 @@ public final class LanguageEditorCompileCommandDelegate
 			String runnerName = runnerDefinition.getName();
 			// The system default application does not need an executable path.
 			if (!runnerId.equals(RunnerId.DEFAULT_APPLICATION)) {
-				if (StringUtility.isEmpty(languageHardwareCompilerDefinitionPreferences.getRunnerExecutablePath(runnerId))) {
-					continue;
+				// Explicit path configured?
+				if (StringUtility
+						.isEmpty(languageHardwareCompilerDefinitionPreferences.getRunnerExecutablePath(runnerId))) {
+					// Executable present in default path?
+					String executablePath = languagePlugin.getRunnerPaths().getDefaultRunnerAbsolutePath(hardware,
+							runnerId);
+					if (StringUtility.isEmpty(executablePath)) {
+						continue;
+					}
 				}
 			}
 

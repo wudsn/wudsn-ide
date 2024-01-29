@@ -1,14 +1,10 @@
-Use %COMSPEC%
-
 Installer
 =========
 https://www.battoexeconverter.com/Advanced-Commands/#Hideself
 
 WebSite
 =======
-FIXED? Productions images max size/width?
-FIXED? https://search.google.com/search-console/mobile-usability/drilldown?resource_id=https%3A%2F%2Fwww.wudsn.com%2F&item_key=CAk&hl=en
-FIXED? ROM checker HTML: <th style="border-style:solid;border-width:1px;border-collapse:collapse;;white-space:nowrap;">CRC32</th>
+Complete: RGBA article, http://localhost:8080/administrator/index.php?option=com_content&view=article&layout=edit&id=23
 
 WUDSN Tools
 =========
@@ -21,41 +17,37 @@ wudsn-ide-tools-main/ASM/DASM/test/m_switch_3.asm: Can't create '\\\\?\\C:\\jac\
 
 WUDSN Runners
 =============
+https://github.com/wudsn/wudsn-ide/issues/19 - Path - Default paths to assemblers/runners and runners if not specified in preferences
 Check for "<mainsourcefile.bat/.sh" and have @com.wudsn.ide.lng.RunnerScript= annotation
-All Compiler Variables as Environment variables bevor calling the script with the OS shell.
+All Compiler Variables as Environment variables before calling the script with the OS shell.
 
 SillyPacks:
 ===========
 Traq: Asked for COVIDEMO final on fb on 2022-12-18
 JHusak: Test his fixed Axel F
 
-Fujiama
+Loeten:
 =======
-SnakeIt zip kaputt, kein BIN
-Littel50 hat kein TTT
-
-L�ten:
 https://shop.wetec.de/wishlist
 
 Trac.com
 Auf https://www.stcarchiv.de/?
-https://www.facebook.com/groups/58270054320
+Atari ST Demoscreene https://www.facebook.com/groups/58270054320
 https://www.facebook.com/groups/58270054320/posts/10160345040304321/
 
 LED Tags
 ========
-F�r Sillyventure
+For Sillyventure
 C:\Users\JAC\Desktop\Atari\LEDBadges
 
 WUDSN-IDE:
 =========
 Symbols automatisch einbleden
-.lst verkn�pfen
+.lst verknuepfen
 Contenttypes .pas
 
 ABBUC
 =====
-Geos EPROM �ber den Shop
 Alex Bolloni - Abbuc
 Hansi Richstein Lapis Philosophum
 
@@ -194,6 +186,7 @@ MADS:
 - examples/test65816.asm =>BRL	W	;$82 is new/changed
 - .var: Make new instruction type like equate and label, handle fully in the base class not in MadsCompilerSourceParser
 - MADS english documentation thread link http://www.atariage.com/forums/topic/118976-mads-assembler-english-documentation-project/
+  C:\jac\system\Atari800\Programming\Repositories\mad-assembler-mkdocs-en
 - MADS & Linux, http://atariage.com/forums/topic/145386-wudsn-ide-the-free-integrated-atari-8-bit-development-plugin-for-eclipse/page-21#entry3140118
 
 KICKASS:
