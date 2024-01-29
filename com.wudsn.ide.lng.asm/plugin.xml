@@ -91,8 +91,8 @@
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.asm6.Asm6Compiler"
         defaultHardware="NES"
-        defaultParameters=" ${sourceFilePath}  ${outputFilePath}"
-        homePageURL="http://3dscapture.com/NES/asm6.zip"
+        defaultParameters=" ${sourceFilePath} ${outputFilePath}"
+        homePageURL="https://github.com/freem/asm6f"
         id="asm6"
         language="ASM"
         name="%com.wudsn.ide.lng.asm.compiler.asm6.Asm6Compiler.name"
@@ -112,7 +112,7 @@
         class="com.wudsn.ide.lng.asm.compiler.atasm.AtasmCompiler"
         defaultHardware="ATARI8BIT"
         defaultParameters="-s -o${outputFilePath} -l${outputFilePathWithoutExtension}.lab ${sourceFilePath}"
-        homePageURL="http://atari.miribilist.com/atasm"
+        homePageURL="https://atari.miribilist.com/atasm/"
         id="atasm"
         language="ASM"
         name="%com.wudsn.ide.lng.asm.compiler.atasm.AtasmCompiler.name"
@@ -205,7 +205,7 @@
   <compiler
         class="com.wudsn.ide.lng.asm.compiler.merlin32.Merlin32Compiler"
         defaultHardware="APPLE2"
-        defaultParameters="-V  ${sourceFilePath}"
+        defaultParameters="-V ${sourceFilePath}"
         homePageURL="http://www.brutaldeluxe.fr/products/crossdevtools/merlin/index.html"
         id="merlin32"
         language="ASM"
