@@ -186,6 +186,18 @@ final class LanguageEditorCompileCommand {
 			throw new RuntimeException("Cannot show view.", ex);
 		}
 	}
+	
+	/**
+	 * Splits a string a one or more spaces, unless they are quoted.
+	 * @param commandLine The command line to be split, not <code>null</code>.
+	 * @return The array of string, may be empty, not <code>null</code>.
+	 */
+	private static String[] splitAtSpaces(String commandLine) {
+		if (commandLine == null) {
+			throw new IllegalArgumentException("Parameter 'commandLine' must not be null.");
+		}
+		return commandLine.split("\s+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+	}
 
 	private boolean executeInternal(ILanguageEditor languageEditor, CompilerFiles files, String commandId,
 			String runnerId) {
@@ -280,14 +292,16 @@ final class LanguageEditorCompileCommand {
 			compilerParameters = compilerDefinition.getDefaultParameters();
 		}
 
-		// The parameters are first split and then substituted.
+		// The parameters are first split at spaces (unless they are quotes) and then
+		// substituted.
 		// This allows for parameters and file paths inner spaces to be used.
 		// In some case addition quotes must be places around parameters, for
 		// example for the "${sourceFilePath}". This can be used to avoid
 		// problems with absolute file path under Unix starting with "/" or path
 		// containing white spaces.
 		compilerParameters = compilerParameters.trim();
-		String compilerParameterArray[] = compilerParameters.split(" ");
+		String compilerParameterArray[] = splitAtSpaces(compilerParameters);
+
 		if (compilerParameterArray.length == 0) {
 			// ERROR: The {0} '{1}' does not specify default parameters.
 			createMainSourceFileMessage(files, IMarker.SEVERITY_ERROR, Texts.MESSAGE_E101, compilerDefinition.getText(),
@@ -570,8 +584,7 @@ final class LanguageEditorCompileCommand {
 		// parameters, for example for the "${outputFilePath}" for
 		// MADS. Otherwise using absolute file path under Unix starting
 		// "/" may cause conflicts.
-		String[] commandLineArray;
-		commandLineArray = runnerCommandLine.split(" ");
+		String[] commandLineArray = splitAtSpaces(runnerCommandLine);
 
 		// Execution type: DEFAULT_APPLICATION
 		if (runnerId.equals(RunnerId.DEFAULT_APPLICATION)) {
