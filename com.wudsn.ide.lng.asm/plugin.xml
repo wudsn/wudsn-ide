@@ -105,7 +105,7 @@
      </supportedTarget>
      <helpDocument
            language="*"
-           path="./README.TXT">
+           path="./readme.txt">
      </helpDocument>
   </compiler>
   <compiler
