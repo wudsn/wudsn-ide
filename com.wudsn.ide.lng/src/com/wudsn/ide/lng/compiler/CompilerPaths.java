@@ -88,6 +88,7 @@ public final class CompilerPaths {
 	/**
 	 * Initialize the default paths.
 	 */
+	@SuppressWarnings("deprecation")
 	public void init() {
 		compilerPaths = new TreeMap<String, CompilerPath>();
 		// See https://github.com/peterdell/wudsn-ide-tools
