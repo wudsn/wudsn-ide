@@ -41,7 +41,7 @@
           category="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesPage"
           class="com.wudsn.ide.lng.asm.preferences.AssemblerC64PreferencesPage"
           id="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesPage"
-          name="%com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesPage.name">
+          name="%com.wudsn.ide.lng.asm.preferences.AssemblerC64PreferencesPage.name">
     </page>
     <page
           category="com.wudsn.ide.lng.asm.preferences.AssemblerPreferencesPage"
