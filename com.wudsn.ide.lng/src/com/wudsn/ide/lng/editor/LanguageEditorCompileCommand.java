@@ -186,9 +186,10 @@ final class LanguageEditorCompileCommand {
 			throw new RuntimeException("Cannot show view.", ex);
 		}
 	}
-	
+
 	/**
 	 * Splits a string a one or more spaces, unless they are quoted.
+	 * 
 	 * @param commandLine The command line to be split, not <code>null</code>.
 	 * @return The array of string, may be empty, not <code>null</code>.
 	 */
@@ -196,7 +197,11 @@ final class LanguageEditorCompileCommand {
 		if (commandLine == null) {
 			throw new IllegalArgumentException("Parameter 'commandLine' must not be null.");
 		}
-		return commandLine.split("\s+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+		return commandLine.split("\\s+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+	}
+
+	public static void main(String[] args) {
+		System.out.println(java.util.Arrays.toString(splitAtSpaces("\"a b\"  \"c d\"   e")));
 	}
 
 	private boolean executeInternal(ILanguageEditor languageEditor, CompilerFiles files, String commandId,
