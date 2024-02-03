@@ -1,1 +1,2 @@
 From https://forums.atariage.com/topic/278499-stella-programmers-guide-reprinted-book/
+"Stella_Programmers_Guide.pdf" was created directly from "Stella_Programmers_Guide.docx" via "Save as PDF".
