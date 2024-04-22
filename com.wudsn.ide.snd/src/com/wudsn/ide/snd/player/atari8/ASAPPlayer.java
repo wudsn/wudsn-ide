@@ -123,7 +123,7 @@ public final class ASAPPlayer extends SoundPlayer {
 		try {
 			asap.load(fileName, module, moduleLen);
 			asapMusicRoutine = new ASAPMusicRoutine(fileName, module, moduleLen);
-		} catch (Exception ex) {
+		} catch (ASAPFormatException|ASAPConversionException ex) {
 			// ERROR: Cannot load sound file '{0}'. {1}
 			IStatus status = new Status(IStatus.ERROR, SoundPlugin.ID,
 					TextUtility.format(Texts.MESSAGE_E502, fileName, ex.getMessage()));
@@ -149,8 +149,8 @@ public final class ASAPPlayer extends SoundPlayer {
 		// Translate the file type to a human readable text.
 		try {
 			info.moduleTypeDescription = ASAPInfo.getExtDescription(info.moduleFileType);
-		} catch (Exception unknownExtensionException) {
-			info.moduleTypeDescription = unknownExtensionException.getMessage();
+		} catch (ASAPFormatException ex) {
+			info.moduleTypeDescription = ex.getMessage();
 		}
 
 		final List<FileType> supportedExportFileTypes = new ArrayList<FileType>();
@@ -241,7 +241,7 @@ public final class ASAPPlayer extends SoundPlayer {
 		try {
 			info = asap.getInfo();
 			asap.playSong(song, info.getLoop(song) ? -1 : info.getDuration(song));
-		} catch (Exception ex) {
+		} catch (ASAPArgumentException|ASAPFormatException ex) {
 			// ERROR: Cannot play song number {0}. {1}
 			IStatus status = new Status(IStatus.ERROR, SoundPlugin.ID, TextUtility.format(Texts.MESSAGE_E503,
 					NumberUtility.getLongValueDecimalString(song), ex.getMessage()));
@@ -283,7 +283,7 @@ public final class ASAPPlayer extends SoundPlayer {
 				listenerUpdatedPosition = position;
 				listener.playerUpdated(SoundPlayerListener.POSITION);
 			}
-		} catch (Exception ex) {
+		} catch (ASAPFormatException ex) {
 			throw new RuntimeException("Cannot seeek to position " + position, ex);
 		}
 	}
