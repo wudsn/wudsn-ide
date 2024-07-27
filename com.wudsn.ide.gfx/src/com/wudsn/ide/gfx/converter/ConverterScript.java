@@ -79,7 +79,8 @@ public final class ConverterScript {
 
 			// Set global variables.
 			ConverterConsole converterConsole = GraphicsPlugin.getInstance().getConverterConsole();
-			scope.put("Console", scope, Context.toObject(converterConsole, scope));
+			scope.put("console", scope, Context.toObject(converterConsole, scope));
+			scope.put("converter", scope, Context.toObject(converter, scope));
 
 			// Call function
 			converterScriptData.setErrorLineNumber(-1);
