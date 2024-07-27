@@ -359,16 +359,6 @@
                         </sourceFile>
                      </converter>
                      <converter
-                           id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapGHGConverter"
-                           name="Atari 8-bit - GHG"
-                           sourceFileExtensions="ghg"
-                           targetImageDisplayAspect="1x1"
-                           targetImagePaletteSize="2">
-                        <sourceFile
-                              label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
-                        </sourceFile>
-                     </converter>
-                     <converter
                            id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapGraphics8Converter"
                            name="Atari 8-bit - Graphics 8"
                            sourceFileExtensions="gr8"
@@ -541,6 +531,29 @@
             targetImagePaletteSize="4">
          <sourceFile
                label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+         </sourceFile>
+      </converter>
+                     <converter
+                           id="com.wudsn.ide.gfx.converter.atari8bit.LinearBitMapGHGConverter"
+                           name="Atari 8-bit - GHG"
+                           sourceFileExtensions="ghg"
+                           targetImageDisplayAspect="1x1"
+                           targetImagePaletteSize="2">
+                        <sourceFile
+                              label="%com.wudsn.ide.gfx.converter.generic.BitMapConverter.BIT_MAP_FILE">
+                        </sourceFile>
+                     </converter>
+      <converter
+            id="com.wudsn.ide.gfx.converter.atari8bit.CharMapGraphics0Converter"
+            name="Atari 8-bit - Graphics 0"
+            sourceFileExtensions="gr0"
+            targetImageDisplayAspect="1x1"
+            targetImagePaletteSize="2">
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharMapConverter.CHAR_SET_FILE">
+         </sourceFile>
+         <sourceFile
+               label="%com.wudsn.ide.gfx.converter.generic.CharMapConverter.CHAR_MAP_FILE">
          </sourceFile>
       </converter>
             </converterGroup>
