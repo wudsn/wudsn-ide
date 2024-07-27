@@ -44,7 +44,7 @@ public class CharMapHiresConverter extends CharMapConverter {
 
 		for (int y1 = 0; y1 < data.getParameters().getRows(); y1++) {
 			for (int x1 = 0; x1 < data.getParameters().getColumns(); x1++) {
-				int c = data.getSourceFileByte(CHAR_MAP_FILE, offset++) & 127;
+				int c = data.getSourceFileByte(CHAR_MAP_FILE, offset++);
 				if (c < 0) {
 					return true;
 				}
