@@ -121,11 +121,17 @@
 <img src="productions/java/ide/faq/ide-editor-block-selection-mode-toolbar.gif" alt="Toggle block selection mode" /></div>
 <div id="FAQContentAssist">
 <h4>Why does "CTRL-Space" not open content assist?</h4>
-<p>There is a known keyboard assignment conflict when using Messenger Plus Live! v4.85.0.386 with Microsoft Messenger 2009 on Windows 7 Ultimate. This may also occur in other versions, of course. Justin Payne has provided the following description of the solution.</p>
+<p>The default key combination to open content assist is "CTRL-Space". If this does not work, you typically have a key binding conflict with another application. In this case you can either disable the key binding in the other application or configure a different key combination as key binding.</p>
+<p>On macOS, there is a known key binding conflict with the input source selection search. The solution is disable the binding for the input source selection via "System Settings/Keyboard/Keyboard Shortcuts/Input Sources".<br />
+<img width="50%" src="productions/java/ide/faq/ide-editor-content-assist-key-conflict-macos.png" alt="Disable input source selection on macOS" /><br>
+Alternatively you can configure "Option-Space" instead via the "General/Keys/Content Assist" setting in the preferences.<br>
+<img width="50%" src="productions/java/ide/faq/ide-editor-content-assist-key-binding-macos.png" alt="Configure alterative key binding on macOS" />
+</p>
+<p>On Windows, there is a known key binding conflict when using Messenger Plus Live! v4.85.0.386 with Microsoft Messenger 2009 on Windows 7 Ultimate. This may also occur in other versions, of course. Justin Payne has provided the following description of the solution.</p>
 <ol>
 <li>Startup and log into MS Messenger.</li>
 <li>From the main window, hit the ALT key to bring up the main menu and select "Plus! | Preferences &amp; Options".</li>
-<li>From the Preferences windows, Select the Messenger tab and uncheck "Activate Messenger Lock with a system-wide shortcut" OR change the value in its text box to something other than "CTRL + Space".</li>
+<li>From the Preferences windows, Select the Messenger tab and uncheck "Activate Messenger Lock with a system-wide shortcut" OR change the value in its text box to something other than "CTRL-Space".</li>
 <li>Press the "OK" button.</li>
 </ol>
 </div>
@@ -138,7 +144,7 @@
 <li>Select the "Keyboard and Languages" tab and "Change Keyboards...".</li>
 <li>In the "Text Services and Input Languages" windows, select "Advanced Key Settings".</li>
 <li>In the "Hot Keys for input languages" list box, select "Between input languages" and then select "Change Key Sequence..."</li>
-<li>In the "Change Key Sequence" window, choose another radio button other than the one next to CTRL+Shift. At best, you choose "(None)".</li>
+<li>In the "Change Key Sequence" window, choose another radio button other than the one next to CTRL-Shift. At best, you choose "(None)".</li>
 <li>Click OK until you close all popup windows.</li>
 </ol>
 <p>Windows 10</p>
