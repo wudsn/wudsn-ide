@@ -16,6 +16,12 @@
 
 	<directive
 		targets="*"
+		name="ALN"
+		title="_A_lig_n origin"
+		type="DIRECTIVE"
+		proposal="ALN _"/>
+	<directive
+		targets="*"
 		name="DTA"
 		title="Define _da_t_a"
 		type="DIRECTIVE"
